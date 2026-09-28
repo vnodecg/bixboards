@@ -1,0 +1,73 @@
+{
+  "$schema": "../schema/foundation.schema.json",
+  "scale": "1",
+  "fluid": {
+    "min": "0.875rem",
+    "max": "1.125rem",
+    "preferred": "0.8125rem + 0.25vi"
+  },
+  "unit": "calc(clamp({fluid.min}, {fluid.preferred}, {fluid.max}) * {scale})",
+  "target": { "min": "1.5rem" },
+  "space": {
+    "2xs": "calc({unit} * 0.25)",
+    "xs": "calc({unit} * 0.5)",
+    "s": "calc({unit} * 0.75)",
+    "m": "{unit}",
+    "l": "calc({unit} * 1.5)",
+    "xl": "calc({unit} * 2)",
+    "2xl": "calc({unit} * 3)"
+  },
+  "font": {
+    "family": {
+      "sans": "system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+      "mono": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+    },
+    "xs": "calc({unit} * 0.75)",
+    "s": "calc({unit} * 0.875)",
+    "m": "{unit}",
+    "l": "calc({unit} * 1.125)",
+    "xl": "calc({unit} * 1.25)",
+    "2xl": "calc({unit} * 1.5)",
+    "3xl": "calc({unit} * 2)",
+    "weight": {
+      "regular": "400",
+      "medium": "500",
+      "semibold": "600",
+      "bold": "700"
+    },
+    "leading": { "tight": "1.25", "normal": "1.5" }
+  },
+  "radius": {
+    "s": "calc({unit} * 0.25)",
+    "m": "calc({unit} * 0.375)",
+    "l": "calc({unit} * 0.625)",
+    "pill": "9999px"
+  },
+  "control": {
+    "height": {
+      "s": "calc({unit} * 1.75)",
+      "m": "calc({unit} * 2.25)",
+      "l": "calc({unit} * 2.75)"
+    }
+  },
+  "border": { "width": "1px", "width-strong": "2px" },
+  "shadow": {
+    "s": "0 1px 2px rgba(20, 26, 45, 0.12)",
+    "m": "0 4px 12px rgba(20, 26, 45, 0.16)",
+    "l": "0 12px 32px rgba(20, 26, 45, 0.24)"
+  },
+  "motion": {
+    "duration": { "fast": "120ms", "base": "200ms", "slow": "320ms" },
+    "easing": { "standard": "cubic-bezier(0.2, 0, 0, 1)" }
+  },
+  "z": {
+    "dropdown": "1000",
+    "sticky": "1100",
+    "overlay": "1200",
+    "modal": "1300",
+    "tooltip": "1400"
+  },
+  "$coarse": {
+    "target": { "min": "2.75rem" }
+  }
+}

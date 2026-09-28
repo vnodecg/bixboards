@@ -1,0 +1,48 @@
+{
+  "name": "design-system",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/design-system/src",
+  "targets": {
+    "test": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": ["default", "^default"],
+      "options": {
+        "command": "node --test \"src/**/*.test.ts\"",
+        "cwd": "packages/design-system"
+      }
+    },
+    "tokens": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": [
+        "{projectRoot}/data/**/*",
+        "{projectRoot}/src/**/*.ts",
+        "{projectRoot}/examples/**/*"
+      ],
+      "outputs": ["{projectRoot}/dist/generated"],
+      "options": {
+        "command": "node src/bin.ts build --strict",
+        "cwd": "packages/design-system"
+      }
+    },
+    "validate": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": [
+        "{projectRoot}/data/**/*",
+        "{projectRoot}/src/**/*.ts",
+        "{projectRoot}/examples/**/*"
+      ],
+      "options": {
+        "commands": [
+          "node src/bin.ts validate --strict",
+          "node src/bin.ts validate --strict --theme examples/acme.json --theme examples/acme-dark.json --theme examples/sharp-compact.json"
+        ],
+        "parallel": false,
+        "cwd": "packages/design-system"
+      }
+    }
+  }
+}

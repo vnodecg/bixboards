@@ -1,0 +1,45 @@
+/* Layout helpers for the stories only. Nothing here styles a component: the design system is tokens
+   and theming, and every color, size and font below comes from a --bx-* token. */
+.sb-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--bx-space-s);
+  align-items: center;
+  margin-block-end: var(--bx-space-s);
+}
+.sb-label {
+  width: 7rem;
+  flex: none;
+  font-size: var(--bx-font-xs);
+  color: var(--bx-text-hint);
+}
+.sb-h {
+  margin: var(--bx-space-l) 0 var(--bx-space-s);
+  font-size: var(--bx-font-l);
+  font-weight: var(--bx-font-weight-semibold);
+}
+.sb-table {
+  border-collapse: collapse;
+  font-size: var(--bx-font-s);
+  width: 100%;
+  max-width: 60rem;
+}
+.sb-table th,
+.sb-table td {
+  padding: var(--bx-space-xs) var(--bx-space-s);
+  text-align: start;
+  border-block-end: 1px solid var(--bx-border-subtle);
+}
+.sb-table code {
+  font-size: var(--bx-font-xs);
+}
+.sb-pass,
+.sb-fail {
+  font-weight: var(--bx-font-weight-semibold);
+}
+.sb-pass {
+  color: var(--bx-role-success-fg);
+}
+.sb-fail {
+  color: var(--bx-role-danger-fg);
+}

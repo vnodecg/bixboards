@@ -1,0 +1,32 @@
+{
+  "name": "@org/source",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "test": "nx run-many -t test",
+    "typecheck": "nx run-many -t typecheck",
+    "build": "nx run-many -t build tokens build-storybook",
+    "validate": "nx run-many -t validate",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "pnpm format:check && nx run-many -t typecheck test validate build tokens build-storybook",
+    "storybook": "pnpm --dir packages/storybook run storybook",
+    "build-storybook": "pnpm --dir packages/storybook run build-storybook"
+  },
+  "private": true,
+  "devDependencies": {
+    "@nx/js": "23.2.0",
+    "@swc-node/register": "1.11.1",
+    "@swc/core": "1.15.8",
+    "@swc/helpers": "0.5.18",
+    "@types/node": "^24.19.0",
+    "nx": "23.2.0",
+    "prettier": "^3.8.1",
+    "tslib": "^2.3.0",
+    "typescript": "~6.0.3"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "packageManager": "pnpm@12.4.1"
+}

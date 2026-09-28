@@ -1,0 +1,117 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://bixant.dev/schema/theme.schema.json",
+  "title": "Bixant theme",
+  "type": "object",
+  "required": ["name"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$"
+    },
+    "extends": {
+      "description": "Theme name or list of names. Later entries override earlier ones; this theme overrides all of them.",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      ]
+    },
+    "colorScheme": {
+      "enum": ["light", "dark"]
+    },
+    "default": {
+      "type": "boolean",
+      "description": "Applied to :root. Exactly one theme is default; a user theme with default:true replaces the built-in one."
+    },
+    "auto": {
+      "type": "boolean",
+      "description": "Also applied under prefers-color-scheme matching colorScheme when <html> has no data-theme."
+    },
+    "seeds": {
+      "type": "object",
+      "description": "Seed colors. Each becomes a 9-step palette (100–900, seed = 500), transparent.100–600 and contrast-derived roles (role.<name>.solid, .fg, .border, …). A new palette name must be added to the default theme; other themes then fall back to that seed.",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
+      }
+    },
+    "palette": {
+      "type": "object",
+      "description": "Lightness curve for generated palettes (percent).",
+      "additionalProperties": false,
+      "properties": {
+        "lightest": {
+          "type": "number",
+          "minimum": 50,
+          "maximum": 100,
+          "description": "Lightness of shade 100 (default 96)."
+        },
+        "darkest": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 50,
+          "description": "Lightness of shade 900 (default 18)."
+        }
+      }
+    },
+    "shades": {
+      "type": "object",
+      "description": "Explicit hex overrides per palette and step, e.g. { \"brand\": { \"600\": \"#123456\" } }.",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string",
+          "pattern": "^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
+        }
+      }
+    },
+    "tokens": {
+      "type": "object",
+      "description": "Semantic tokens (nested). Values are literals or references such as {color.neutral.900}. Role tokens (role.<palette>.solid|fg|border|…) are derived automatically from seeds and surfaces; set one here to override it."
+    },
+    "foundation": {
+      "type": "object",
+      "description": "Overrides for foundation tokens (scale, radius, font, space, shadow, motion, …), same shape as foundation.json. Keys must already exist there. $coarse overrides apply under (pointer: coarse). Setting scale re-declares every derived token in the theme's scope."
+    },
+    "contrast": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["fg", "bg"],
+        "additionalProperties": false,
+        "properties": {
+          "fg": {
+            "type": "string"
+          },
+          "bg": {
+            "type": "string"
+          },
+          "min": {
+            "type": "number",
+            "default": 4.5
+          }
+        }
+      },
+      "description": "Extra contrast rules (fg/bg are token paths). Built-in rules for text, borders, focus and every palette role always run."
+    },
+    "$deprecated": {
+      "type": "object",
+      "description": "Deprecated token paths mapped to a migration note. The build warns while a theme or foundation override still references them.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  }
+}

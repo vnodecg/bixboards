@@ -1,0 +1,49 @@
+{
+  "name": "@bixant/design-system",
+  "version": "0.0.0",
+  "description": "Design tokens and theming for Bixant: JSON themes and foundation tokens compiled to CSS custom properties, with a contrast-checked runtime API.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "bixant-ds": "./dist/bin.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./runtime": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./build": {
+      "types": "./dist/build/index.d.ts",
+      "default": "./dist/build/index.js"
+    },
+    "./tokens.css": "./dist/generated/tokens.css",
+    "./tokens.dtcg.json": "./dist/generated/tokens.dtcg.json",
+    "./tokens.figma.json": "./dist/generated/tokens.figma.json",
+    "./themes/*": "./dist/generated/themes/*",
+    "./schema/*": "./schema/*",
+    "./data/*": "./data/*",
+    "./contrast.json": "./dist/generated/contrast.json"
+  },
+  "files": [
+    "dist",
+    "data",
+    "schema",
+    "examples"
+  ],
+  "scripts": {
+    "prepack": "tsc -p tsconfig.lib.json && node dist/bin.js build --strict"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0"
+  }
+}

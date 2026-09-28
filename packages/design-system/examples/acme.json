@@ -1,0 +1,28 @@
+{
+  "$schema": "../schema/theme.schema.json",
+  "name": "acme",
+  "extends": "light",
+  "seeds": {
+    "brand": "#0a7d6b",
+    "warning": "#f08c00"
+  },
+  "palette": {
+    "lightest": 97,
+    "darkest": 14
+  },
+  "foundation": {
+    "font": {
+      "family": {
+        "sans": "Georgia, 'Times New Roman', serif"
+      },
+      "weight": {
+        "semibold": "700"
+      }
+    },
+    "radius": {
+      "s": "calc({unit} * 0.5)",
+      "m": "calc({unit} * 0.75)",
+      "l": "calc({unit} * 1.25)"
+    }
+  }
+}

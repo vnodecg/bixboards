@@ -1,0 +1,14 @@
+{
+  "$schema": "../schema/theme.schema.json",
+  "name": "sharp-compact",
+  "extends": "light",
+  "foundation": {
+    "scale": "0.9",
+    "radius": {
+      "s": "0px",
+      "m": "0px",
+      "l": "0px",
+      "pill": "0px"
+    }
+  }
+}

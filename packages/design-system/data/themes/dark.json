@@ -1,0 +1,29 @@
+{
+  "$schema": "../../schema/theme.schema.json",
+  "name": "dark",
+  "extends": "light",
+  "colorScheme": "dark",
+  "auto": true,
+  "tokens": {
+    "surface": {
+      "base": "{color.neutral.900}",
+      "subtle": "{color.neutral.800}",
+      "muted": "{color.neutral.700}",
+      "inverse": "{color.neutral.100}",
+      "overlay": "rgba(0, 0, 0, 0.64)"
+    },
+    "text": {
+      "primary": "#ffffff",
+      "secondary": "{color.neutral.200}",
+      "hint": "{color.neutral.400}",
+      "disabled": "{color.neutral.600}",
+      "inverse": "{color.neutral.900}"
+    },
+    "border": {
+      "subtle": "{color.neutral.800}",
+      "base": "{color.neutral.500}",
+      "strong": "{color.neutral.400}",
+      "disabled": "{color.neutral.800}"
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "$schema": "../schema/theme.schema.json",
+  "name": "acme-dark",
+  "extends": ["acme", "dark"]
+}

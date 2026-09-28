@@ -1,0 +1,58 @@
+{
+  "name": "storybook",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "implicitDependencies": ["design-system"],
+  "targets": {
+    "storybook": {
+      "executor": "nx:run-commands",
+      "continuous": true,
+      "options": {
+        "command": "pnpm run storybook",
+        "cwd": "packages/storybook"
+      }
+    },
+    "build-storybook": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": [
+        "default",
+        "{projectRoot}/../design-system/data/**/*",
+        "{projectRoot}/../design-system/src/**/*.ts",
+        "{projectRoot}/../design-system/examples/**/*"
+      ],
+      "outputs": ["{projectRoot}/dist"],
+      "options": {
+        "command": "pnpm run build-storybook",
+        "cwd": "packages/storybook"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": [
+        "default",
+        "{projectRoot}/../design-system/data/**/*",
+        "{projectRoot}/../design-system/src/**/*.ts"
+      ],
+      "options": {
+        "command": "pnpm run test",
+        "cwd": "packages/storybook"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": [
+        "default",
+        "{projectRoot}/../design-system/data/**/*",
+        "{projectRoot}/../design-system/src/**/*.ts"
+      ],
+      "options": {
+        "command": "pnpm run typecheck",
+        "cwd": "packages/storybook"
+      },
+      "dependsOn": ["^build"]
+    }
+  }
+}

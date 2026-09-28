@@ -1,0 +1,16 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "storybook",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "packages/storybook",
+        "run",
+        "storybook:ci"
+      ],
+      "port": 6006
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction" />
+
+# Bixant design system
+
+Design tokens and theming: fluid, contrast-checked tokens and themes, defined as JSON and compiled to CSS custom properties. Components are built separately, on top of these tokens.
+
+## How to use this Storybook
+
+- **Toolbar**: switch **theme** (light, dark, and the example custom themes) and **`--bx-scale`** (0.85–1.5).
+- **Foundation / Tokens**: palettes, per-theme roles, semantic colors, spacing, radius, elevation, typography.
+- **Foundation / Contrast**: WCAG contrast of every documented token pair for the selected theme (the same data the build enforces).
+- **Theming / Playground**: runtime theming from seed colors, with generated CSS.
+
+## Token tiers
+
+| Tier         | Examples                                                        | Who uses it                         |
+| ------------ | --------------------------------------------------------------- | ----------------------------------- |
+| 1. Primitive | `color.brand.500`, `--bx-unit`, `space.m`                       | Themes; rarely components           |
+| 2. Semantic  | `surface.base`, `text.secondary`, `role.brand.fg`, `focus.ring` | Themes and components               |
+| Component    | `--bx-button-bg`, …                                             | Defined by each component, not here |
+
+## Principles (in priority order)
+
+1. Accessible by default
+2. Adapts to its space (container, not viewport)
+3. Correct at scale
+4. Tokens, not values
+5. One way to do it
+6. Themeable, not forkable
+7. Native first
+8. Small and predictable
+
+Full documentation lives in the repository under `docs/design-system` (principles, foundations, theming, governance).
+
+## Design tokens for Figma
+
+`@bixant/design-system/tokens.dtcg.json` exports all tokens in the Design Tokens Community Group format, organized as `foundation`, `light` and `dark` sets, ready for Tokens Studio or a Figma variables importer. `tokens.figma.json` has the fluid dimensions evaluated to pixels.

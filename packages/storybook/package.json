@@ -1,0 +1,22 @@
+{
+  "name": "@bixant/storybook",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "tokens": "node ../design-system/src/bin.ts build --strict --theme ../design-system/examples/acme.json --theme ../design-system/examples/acme-dark.json --theme ../design-system/examples/sharp-compact.json --out .storybook/generated",
+    "storybook": "pnpm run tokens && storybook dev -p 6006",
+    "storybook:ci": "pnpm run tokens && storybook dev -p 6006 --no-open --ci",
+    "build-storybook": "pnpm run tokens && storybook build -o dist",
+    "test": "pnpm run tokens && node --test \"tests/**/*.test.ts\"",
+    "typecheck": "pnpm run tokens && tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@bixant/design-system": "workspace:*",
+    "@storybook/addon-docs": "^10.6.0",
+    "@storybook/web-components-vite": "^10.6.0",
+    "lit": "^3.3.3",
+    "storybook": "^10.6.0",
+    "vite": "^8.3.1"
+  }
+}
