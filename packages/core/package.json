@@ -309,6 +309,38 @@
     "./tree-item/define": {
       "types": "./dist/tree-item/define.d.ts",
       "default": "./dist/tree-item/define.js"
+    },
+    "./option": {
+      "types": "./dist/option/index.d.ts",
+      "default": "./dist/option/index.js"
+    },
+    "./option/define": {
+      "types": "./dist/option/define.d.ts",
+      "default": "./dist/option/define.js"
+    },
+    "./format-bytes": {
+      "types": "./dist/format-bytes/index.d.ts",
+      "default": "./dist/format-bytes/index.js"
+    },
+    "./format-bytes/define": {
+      "types": "./dist/format-bytes/define.d.ts",
+      "default": "./dist/format-bytes/define.js"
+    },
+    "./format-date": {
+      "types": "./dist/format-date/index.d.ts",
+      "default": "./dist/format-date/index.js"
+    },
+    "./format-date/define": {
+      "types": "./dist/format-date/define.d.ts",
+      "default": "./dist/format-date/define.js"
+    },
+    "./format-number": {
+      "types": "./dist/format-number/index.d.ts",
+      "default": "./dist/format-number/index.js"
+    },
+    "./format-number/define": {
+      "types": "./dist/format-number/define.d.ts",
+      "default": "./dist/format-number/define.js"
     }
   },
   "files": [

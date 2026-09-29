@@ -2,7 +2,7 @@
 
 Tracks build status for all 61 components across `@bixant/core`, `@bixant/data-table` and `@bixant/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 30 / 61 done.**
+**Progress: 34 / 61 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -63,10 +63,10 @@ No dependency on any other unbuilt `bx-*` component.
 - [x] [`bx-tab`](core/tab.md) (adds a `close-button` CSS part for `closable`, not in the spec's own CSS parts table, same precedent as `bx-badge`'s `remove-button`) — `packages/core/src/tab`
 - [x] [`bx-tab-panel`](core/tab-panel.md) — `packages/core/src/tab-panel`
 - [x] [`bx-tree-item`](core/tree-item.md) (adds a `children` slot, plus `loading`/`lazy-error`/`with-checkbox`, none in the spec's own tables — see the component's own doc comment for the lazy-load event contract) — `packages/core/src/tree-item`
-- [ ] [`bx-option`](core/option.md)
-- [ ] [`bx-format-bytes`](core/format-bytes.md)
-- [ ] [`bx-format-date`](core/format-date.md)
-- [ ] [`bx-format-number`](core/format-number.md)
+- [x] [`bx-option`](core/option.md) (state owned by parent per FR-OPTION-01: no listeners of its own — see the component's own doc comment) — `packages/core/src/option`
+- [x] [`bx-format-bytes`](core/format-bytes.md) — `packages/core/src/format-bytes`
+- [x] [`bx-format-date`](core/format-date.md) — `packages/core/src/format-date`
+- [x] [`bx-format-number`](core/format-number.md) (renders in light DOM, no shadow root, per FR-FORMAT-NUMBER-02 — see the component's own doc comment) — `packages/core/src/format-number`
 - [ ] [`bx-relative-time`](core/relative-time.md)
 - [ ] [`bx-include`](core/include.md)
 - [ ] [`bx-intersection-observer`](core/intersection-observer.md)
