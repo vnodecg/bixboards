@@ -5,7 +5,8 @@
   "license": "MIT",
   "type": "module",
   "sideEffects": [
-    "./dist/*/index.js"
+    "./dist/*/index.js",
+    "./dist/*/presets/*.js"
   ],
   "engines": {
     "node": ">=20"
@@ -24,6 +25,66 @@
     "./animated-image/define": {
       "types": "./dist/animated-image/define.d.ts",
       "default": "./dist/animated-image/define.js"
+    },
+    "./animation": {
+      "types": "./dist/animation/index.d.ts",
+      "default": "./dist/animation/index.js"
+    },
+    "./animation/define": {
+      "types": "./dist/animation/define.d.ts",
+      "default": "./dist/animation/define.js"
+    },
+    "./animation/presets/bounce": {
+      "types": "./dist/animation/presets/bounce.d.ts",
+      "default": "./dist/animation/presets/bounce.js"
+    },
+    "./animation/presets/fade-in": {
+      "types": "./dist/animation/presets/fade-in.d.ts",
+      "default": "./dist/animation/presets/fade-in.js"
+    },
+    "./animation/presets/fade-out": {
+      "types": "./dist/animation/presets/fade-out.d.ts",
+      "default": "./dist/animation/presets/fade-out.js"
+    },
+    "./animation/presets/pulse": {
+      "types": "./dist/animation/presets/pulse.d.ts",
+      "default": "./dist/animation/presets/pulse.js"
+    },
+    "./animation/presets/shake": {
+      "types": "./dist/animation/presets/shake.d.ts",
+      "default": "./dist/animation/presets/shake.js"
+    },
+    "./animation/presets/spin": {
+      "types": "./dist/animation/presets/spin.d.ts",
+      "default": "./dist/animation/presets/spin.js"
+    },
+    "./animation/presets/zoom-in": {
+      "types": "./dist/animation/presets/zoom-in.d.ts",
+      "default": "./dist/animation/presets/zoom-in.js"
+    },
+    "./animation/presets/zoom-out": {
+      "types": "./dist/animation/presets/zoom-out.d.ts",
+      "default": "./dist/animation/presets/zoom-out.js"
+    },
+    "./animation/presets/slide-in-up": {
+      "types": "./dist/animation/presets/slide-in-up.d.ts",
+      "default": "./dist/animation/presets/slide-in-up.js"
+    },
+    "./animation/presets/slide-in-down": {
+      "types": "./dist/animation/presets/slide-in-down.d.ts",
+      "default": "./dist/animation/presets/slide-in-down.js"
+    },
+    "./animation/presets/slide-in-left": {
+      "types": "./dist/animation/presets/slide-in-left.d.ts",
+      "default": "./dist/animation/presets/slide-in-left.js"
+    },
+    "./animation/presets/slide-in-right": {
+      "types": "./dist/animation/presets/slide-in-right.d.ts",
+      "default": "./dist/animation/presets/slide-in-right.js"
+    },
+    "./animation/presets/flip": {
+      "types": "./dist/animation/presets/flip.d.ts",
+      "default": "./dist/animation/presets/flip.js"
     }
   },
   "files": [

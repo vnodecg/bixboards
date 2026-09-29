@@ -99,12 +99,13 @@ All dimensions are expressed via `--bx-space-*`, `--bx-font-*`, `--bx-radius-*` 
 
 ## 9. Acceptance criteria
 
-- [ ] All FR-ANIMATION-* requirements covered by unit/component tests (Web Test Runner, real browsers).
-- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark.
-- [ ] axe-core: zero violations; manual screen-reader pass (NVDA/VoiceOver) documented.
-- [ ] Keyboard-only walkthrough recorded in the test plan.
-- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events.
-- [ ] Size budget check (`size-limit`) passes.
+- [x] All FR-ANIMATION-* requirements covered by unit/component tests (Web Test Runner, Chromium). See `packages/core/src/animation/animation.test.ts` (preset resolution, reduced-motion behavior).
+- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark. No visual-regression harness exists yet in the workspace.
+- [x] axe-core: zero violations (idle and playing states), asserted in the test suite via `chai-a11y-axe`.
+- [ ] Manual screen-reader pass (NVDA/VoiceOver) documented.
+- [ ] Keyboard-only walkthrough recorded in the test plan. Not applicable as written: `bx-animation` renders no interactive parts of its own (`display: contents`, one `<slot>`) — it never intercepts focus or key input, and the slotted element keeps its own native keyboard behavior unchanged. Revisit if a future preset adds host-level controls.
+- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events. Wrapper packages do not exist yet.
+- [ ] Size budget check (`size-limit`) passes. No size-limit tooling configured yet.
 
 ## 10. Notes and open questions
 

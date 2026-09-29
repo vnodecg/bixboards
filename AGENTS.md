@@ -30,6 +30,35 @@ Components live in `@bixant/core` (plus `@bixant/data-table`, `@bixant/data-list
 - Implement it fully (element, styles, forms/a11y/virtualization as applicable per the conventions doc) and land it before starting the next component.
 - Add a detailed Storybook example for it alongside the implementation (see below).
 
+## File layout per component
+
+Follow `packages/core/src/animated-image/` as the template for a new component `<name>`:
+
+- `<name>/<name>.ts` — the `BixElement` subclass. All logic and styles live here; keep it a single file unless it genuinely outgrows one (a sub-part like a shared item component, e.g. `tree-item`, is its own component/tag, not a file split).
+- `<name>/index.ts` — the side-effecting entry point: imports `define.ts` and calls it once, then re-exports the class and the `define...` function. This is what `@bixant/core/<name>` resolves to.
+- `<name>/define.ts` — a named `export function define<PascalName>(tagName?: string): void` wrapping `MyComponent.define(tagName)`. This is what `@bixant/core/<name>/define` resolves to (no eager registration).
+- `<name>/<name>.test.ts` — Web Test Runner + `@open-wc/testing`, real browsers. See "Required tests per component" below.
+- `<name>/fixtures/` — any binary/data fixtures the tests need (keep them tiny; the animated-image fixture is a 37-byte GIF).
+- Add both entries to `packages/core/package.json`'s `exports` map (`./<name>` and `./<name>/define`, each with `types`/`default`) and to `sideEffects` if not already covered by the `dist/*/index.js` glob.
+
+## Naming
+
+- Tag: `bx-<name>`. Events: `bx-<verb>` (`bx-load`, `bx-error`), `bubbles: true, composed: true`.
+- CSS parts use short, undecorated names (`frame`, `control-box`) — `::part()` is already scoped by the element it's called on, so no component prefix is needed.
+- CSS custom properties ARE prefixed with the component name: `--bx-<name>-<part>-<property>` (e.g. `--bx-animated-image-control-box-bg`), matching every other component's feature doc. This is easy to get wrong by shortening it to `--bx-<part>-<property>` — don't; grep the feature docs under `docs/features/` if unsure which pattern a sibling component uses.
+- Every custom property has a token-backed fallback: `var(--bx-<name>-<part>-<property>, <design-system-token>)`.
+
+## Keeping docs in sync
+
+A component is not done when the code and tests pass — the docs describing it must match, or the next person (human or agent) works from a stale spec. When you implement or change a component, update in the same change:
+
+- The feature doc (`docs/features/<package>/<name>.md`): `Status` field, the API tables (properties, slots, events, **CSS parts**, **CSS custom properties** — every part/prop in the JSDoc must appear here and vice versa), and check off the acceptance criteria that are genuinely met (leave the rest unchecked with a one-line reason, don't check something that isn't true).
+- `docs/features/README.md`'s intro paragraph if it makes a claim that's no longer true (e.g. "components that do not exist yet").
+- Root `README.md`: the status callout and the `@bixant/core` row's implemented-count.
+- This `AGENTS.md` file, if the change introduces or changes a shared convention (a new `BixElement` member, a new required test category, a naming rule) — not for a change scoped to one component.
+
+Before finishing, grep for the old name/value if you renamed or removed something (a CSS custom property, a token, a file path) across `docs/`, `AGENTS.md`, `README.md` and `packages/*/src` — a rename that only touches the implementation is exactly the kind of drift this section exists to prevent.
+
 ## Base class
 
 Every component class extends `BixElement` (`packages/core/src/bix-element.ts`), never `LitElement` directly. It is intentionally thin — a shared `box-sizing: border-box` reset (`BixElement.baseStyles`, composed into the subclass's own `static styles` array, not applied automatically), the `static tagName` + `static define(tagName?)` registration pattern (a component's `index.ts` calls `MyComponent.define()`; its `define.ts` wraps that in a named `defineMyComponent(tagName?)` function per docs/features/_conventions.md §1), and a `protected get prefersReducedMotion` for anything that autoplays. Add to `BixElement` only once a second component needs the same thing — don't pre-build abstractions for components that don't exist yet.
@@ -42,7 +71,7 @@ Default appearance should read like shadcn/ui, not material design: neutral surf
 
 Components must be easy to reskin without forking them, the way shadcn components are easy to edit because you own the code:
 
-- Every themeable visual surface (background, border, color, size — not just size) is its own CSS custom property, namespaced `--bx-<component>-<part>-<property>`, with a token-backed default via the `var(--bx-x, fallback)` pattern, e.g. `background: var(--bx-animated-image-control-box-bg, var(--bx-surface-base));`. List every one in a `@cssprop` JSDoc block on the class and in the feature doc's "CSS custom properties" table.
+- Every themeable visual surface (background, border, color, size — not just size) is its own CSS custom property with a token-backed default (see "Naming" above for the exact pattern). List every one in a `@cssprop` JSDoc block on the class and in the feature doc's "CSS custom properties" table.
 - Every meaningful internal element gets a `part="..."` attribute and a matching `@csspart` JSDoc entry, per docs/features/_conventions.md §7 ("Component-level hooks are CSS custom properties and `::part()`; no internal class names are public API").
 - Slots are the first extension point for content/icons (see the animated-image `play-icon`/`pause-icon` slots); CSS custom properties and parts are for everything visual on top of that.
 
@@ -65,3 +94,18 @@ Every component's test suite must include, at minimum (per the [testing contract
 - **Theming tests** — verify the component renders correctly across light/dark/auto (`color-scheme`, `light-dark()`), each semantic role (`brand`, `neutral`, `success`, `warning`, `danger`), and forced-colors/high-contrast mode.
 
 Do not mark a component done without both test categories passing.
+
+## Verifying a component locally
+
+```sh
+pnpm nx run core:typecheck          # tsc --build, includes design-system's build as a dependency
+pnpm nx run core:test               # web-test-runner: Chromium, Firefox, Webkit
+TEST_BROWSERS=chromium pnpm nx run core:test   # scope to installed browsers only (see below)
+pnpm nx run storybook:typecheck     # also compiles every story
+pnpm nx run storybook:build-storybook
+npx prettier --check .              # run --write to fix
+```
+
+If Firefox/WebKit aren't installed (`npx playwright install` needs network access to `playwright.download.prss.microsoft.com` and its mirrors, which some sandboxes block), set `TEST_BROWSERS=chromium` — `packages/core/web-test-runner.config.mjs` reads it and CI still runs the full set. Don't quietly drop a browser from the config to make a local run pass.
+
+After any design-system token change, regenerate before checking a component against it: `pnpm nx run design-system:tokens` (or `pnpm nx run-many -t tokens` to also refresh Storybook's copy).
