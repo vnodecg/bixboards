@@ -40,7 +40,6 @@ export class BxComparison extends BixElement {
         display: block;
         position: relative;
         overflow: hidden;
-        container-type: inline-size;
         inline-size: 100%;
         block-size: 100%;
         aspect-ratio: var(--bx-comparison-aspect-ratio, 16 / 9);
@@ -76,7 +75,7 @@ export class BxComparison extends BixElement {
         inset-inline-start: var(--bx-comparison-position, 50%);
         translate: -50% 0;
         inline-size: var(--divider-width, var(--bx-border-width-strong));
-        background: var(--bx-surface);
+        background: var(--bx-surface-base);
         box-shadow: 0 0 0 1px var(--bx-color-neutral-transparent-300, rgba(0, 0, 0, 0.16));
         cursor: ew-resize;
       }
@@ -100,13 +99,20 @@ export class BxComparison extends BixElement {
       .handle::before {
         content: '';
         position: absolute;
-        inset: 0;
+        /* "inset: 0" + "margin: auto" centering doesn't reliably split evenly when the sized
+           properties are logical (inline-size/block-size) but the position is physical (inset) —
+           observed in this project's pinned Chromium: it collapsed one margin to 0 and put the
+           entire overflow on the other side instead of splitting it, visibly off-center. The
+           top/left-50%-plus-translate technique is physical throughout and doesn't have that
+           ambiguity. */
+        inset-block-start: 50%;
+        inset-inline-start: 50%;
+        translate: -50% -50%;
         box-sizing: border-box;
         inline-size: var(--handle-size, calc(var(--bx-unit) * 2));
         block-size: var(--handle-size, calc(var(--bx-unit) * 2));
-        margin: auto;
         border-radius: 50%;
-        background: var(--bx-surface);
+        background: var(--bx-surface-base);
         border: var(--bx-border-width) solid var(--bx-border-strong);
         box-shadow: var(--bx-shadow-s, 0 1px 3px rgba(0, 0, 0, 0.24));
       }

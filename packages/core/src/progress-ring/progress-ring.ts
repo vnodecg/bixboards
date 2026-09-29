@@ -69,7 +69,7 @@ export class BxProgressRing extends BixElement {
           var(--bx-ring-track-width, 2)
         );
         stroke-linecap: round;
-        transition: stroke-dashoffset var(--bx-motion-duration-normal, 0.3s)
+        transition: stroke-dashoffset var(--bx-motion-duration-base, 0.3s)
           var(--bx-motion-easing-standard, ease);
       }
 

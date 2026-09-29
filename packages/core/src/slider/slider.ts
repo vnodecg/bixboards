@@ -82,12 +82,12 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
       .label {
         color: var(--bx-text-primary);
         font-weight: var(--bx-font-weight-medium);
-        font-size: var(--bx-font-size-s);
+        font-size: var(--bx-font-s);
       }
 
       .hint {
         color: var(--bx-text-secondary);
-        font-size: var(--bx-font-size-s);
+        font-size: var(--bx-font-s);
       }
 
       .slider {
@@ -114,7 +114,7 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
         position: relative;
         inline-size: 100%;
         block-size: var(--bx-track-size, var(--bx-space-xs));
-        border-radius: var(--bx-radius-full, 999px);
+        border-radius: var(--bx-radius-pill, 999px);
         background: var(--bx-surface-subtle);
       }
 
@@ -199,7 +199,7 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
         block-size: var(--bx-thumb-size, calc(var(--bx-unit) * 1.25));
         border-radius: 50%;
         border: var(--bx-border-width-strong) solid var(--bx-role-accent);
-        background: var(--bx-surface);
+        background: var(--bx-surface-base);
       }
 
       :host([size='small']) .thumb {
@@ -230,8 +230,8 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
         padding: var(--bx-space-2xs) var(--bx-space-xs);
         border-radius: var(--bx-radius-s);
         background: var(--bx-surface-inverse, var(--bx-text-primary));
-        color: var(--bx-on-accent, var(--bx-surface));
-        font-size: var(--bx-font-size-xs);
+        color: var(--bx-on-accent, var(--bx-surface-base));
+        font-size: var(--bx-font-xs);
         white-space: nowrap;
         pointer-events: none;
       }

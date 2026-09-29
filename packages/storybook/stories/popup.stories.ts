@@ -59,7 +59,15 @@ const meta = {
   },
   render: (args) => html`
     <div style="padding: 6rem; display: flex; justify-content: center">
+      <!-- Anchored via the "anchor" attribute (an id), not the slot="anchor" fallback: bx-popup
+           itself becomes position:absolute/fixed on activation, and anything slotted into its
+           own "anchor" slot moves along with it (it's rendered inside the same positioned host) —
+           the anchor id/property pattern below is the one that keeps the anchor in its original
+           document position, and is what every consumer in this package (bx-tooltip, bx-dialog,
+           bx-color-picker) actually uses. -->
+      <button id="popup-story-anchor" type="button">Anchor</button>
       <bx-popup
+        anchor="popup-story-anchor"
         placement=${args.placement}
         ?active=${args.active}
         distance=${args.distance}
@@ -67,9 +75,8 @@ const meta = {
         ?flip=${args.flip}
         ?shift=${args.shift}
       >
-        <button slot="anchor" type="button">Anchor</button>
         <div
-          style="padding: 0.75rem 1rem; border-radius: var(--bx-radius-m); background: var(--bx-surface); border: 1px solid var(--bx-border-subtle); box-shadow: var(--bx-shadow-s)"
+          style="padding: 0.75rem 1rem; border-radius: var(--bx-radius-m); background: var(--bx-surface-base); border: 1px solid var(--bx-border-subtle); box-shadow: var(--bx-shadow-s)"
         >
           Popup content
         </div>
@@ -105,7 +112,7 @@ export const Placements: Story = {
           <bx-popup placement=${placement} active arrow>
             <button slot="anchor" type="button">${placement}</button>
             <div
-              style="padding: 0.5rem 0.75rem; border-radius: var(--bx-radius-m); background: var(--bx-surface); border: 1px solid var(--bx-border-subtle); box-shadow: var(--bx-shadow-s); font-size: var(--bx-font-size-s)"
+              style="padding: 0.5rem 0.75rem; border-radius: var(--bx-radius-m); background: var(--bx-surface-base); border: 1px solid var(--bx-border-subtle); box-shadow: var(--bx-shadow-s); font-size: var(--bx-font-s)"
             >
               ${placement}
             </div>
@@ -125,7 +132,7 @@ export const FlipAndShift: Story = {
       <bx-popup placement="right" active flip shift arrow>
         <button slot="anchor" type="button">Near edge</button>
         <div
-          style="padding: 0.75rem 1rem; inline-size: 12rem; border-radius: var(--bx-radius-m); background: var(--bx-surface); border: 1px solid var(--bx-border-subtle); box-shadow: var(--bx-shadow-s)"
+          style="padding: 0.75rem 1rem; inline-size: 12rem; border-radius: var(--bx-radius-m); background: var(--bx-surface-base); border: 1px solid var(--bx-border-subtle); box-shadow: var(--bx-shadow-s)"
         >
           Flips to the left when there's no room on the right.
         </div>

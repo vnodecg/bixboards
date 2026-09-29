@@ -95,8 +95,8 @@ export class BxZoomableFrame extends BixElement {
         align-items: center;
         gap: var(--bx-space-2xs);
         padding: var(--bx-space-2xs);
-        border-radius: var(--bx-radius-full, 999px);
-        background: var(--bx-surface);
+        border-radius: var(--bx-radius-pill, 999px);
+        background: var(--bx-surface-base);
         border: var(--bx-border-width) solid var(--bx-border-subtle);
         box-shadow: var(--bx-shadow-s);
       }
@@ -134,7 +134,7 @@ export class BxZoomableFrame extends BixElement {
         position: absolute;
         inset-block-end: var(--bx-space-s);
         inset-inline-end: var(--bx-space-s);
-        background: var(--bx-surface);
+        background: var(--bx-surface-base);
         border: var(--bx-border-width) solid var(--bx-border-subtle);
         box-shadow: var(--bx-shadow-s);
       }
@@ -162,7 +162,7 @@ export class BxZoomableFrame extends BixElement {
       .zoom-label {
         min-inline-size: 3.5ch;
         text-align: center;
-        font-size: var(--bx-font-size-s);
+        font-size: var(--bx-font-s);
         color: var(--bx-text-secondary);
       }
 

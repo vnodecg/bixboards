@@ -12,6 +12,13 @@ let nextId = 0;
  * top-layer stacking for free (FR-DIALOG-01) — this component only adds the header/footer
  * chrome, light-dismiss, `data-dialog="close"` delegation and focus-return bookkeeping on top.
  *
+ * The default close button is a real `<bx-button>` (styled via `::part(base)` into its round
+ * icon-button shape) rather than a bespoke `<button>` — this makes `bx-dialog` a Tier 1 component
+ * that depends on a Tier 2 one (docs/features/IMPLEMENTATION.md), a deliberate exception to the
+ * usual build-order layering now that `bx-button` exists, so every dialog's close control gets
+ * `bx-button`'s own disabled/hover/focus/forced-colors handling for free instead of a second,
+ * separately-maintained implementation of the same thing.
+ *
  * Sizing intentionally uses `vi` (viewport-inline), not a container query: a top-layer element has
  * no ancestor that provides an `inline-size` containment context to query against — its size
  * decision is inherently relative to the viewport, which is the one legitimate exception to
@@ -63,13 +70,13 @@ export class BxDialog extends BixElement {
         padding: 0;
         border: var(--bx-border-width) solid var(--bx-border-subtle);
         border-radius: var(--bx-radius-l);
-        background: var(--bx-surface-raised, Canvas);
+        background: var(--bx-surface-base, Canvas);
         color: var(--bx-text-primary);
         font-family: var(--bx-font-family-sans);
       }
 
       dialog::backdrop {
-        background: var(--bx-overlay-scrim, rgb(0 0 0 / 0.4));
+        background: var(--bx-surface-overlay, rgb(0 0 0 / 0.4));
       }
 
       dialog[open] {
@@ -103,7 +110,7 @@ export class BxDialog extends BixElement {
       .title {
         flex: 1;
         min-inline-size: 0;
-        font-size: var(--bx-font-size-l);
+        font-size: var(--bx-font-l);
         font-weight: var(--bx-font-weight-semibold);
       }
 
@@ -113,26 +120,18 @@ export class BxDialog extends BixElement {
         gap: var(--bx-space-xs);
       }
 
-      .close-button {
-        all: unset;
-        box-sizing: border-box;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+      /* bx-button's own base part is styled directly (rather than reaching for a bespoke
+         close-button look) so this uses the same control every other composite in the package
+         does, per docs/features/_conventions.md's spirit of one canonical trigger element. */
+      .close-button::part(base) {
         inline-size: var(--bx-target-min, 2.75rem);
-        block-size: var(--bx-target-min, 2.75rem);
-        border-radius: var(--bx-radius-full, 50%);
-        cursor: pointer;
+        padding-inline: 0;
+        border-radius: var(--bx-radius-pill, 50%);
         color: var(--bx-text-secondary);
       }
 
-      .close-button:hover {
+      .close-button::part(base):hover {
         background: var(--bx-surface-subtle);
-      }
-
-      .close-button:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
       }
 
       .close-button svg {
@@ -303,10 +302,10 @@ export class BxDialog extends BixElement {
                 </div>
                 <div class="header-actions" part="header-actions">
                   <slot name="header-actions"></slot>
-                  <button
-                    type="button"
+                  <bx-button
                     class="close-button"
                     part="close-button"
+                    appearance="plain"
                     aria-label="Close"
                     data-dialog="close"
                   >
@@ -315,7 +314,7 @@ export class BxDialog extends BixElement {
                         d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"
                       ></path>
                     </svg>
-                  </button>
+                  </bx-button>
                 </div>
               </div>
             `}

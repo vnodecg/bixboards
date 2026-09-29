@@ -86,7 +86,7 @@ export class BxTextarea extends FormAssociatedMixin(BixElement) {
         flex-direction: column;
         border-radius: var(--bx-radius-m);
         border: var(--bx-border-width) solid var(--bx-border-subtle);
-        background: var(--bx-surface);
+        background: var(--bx-surface-base);
       }
 
       :host([appearance~='filled']) .base {
@@ -105,7 +105,7 @@ export class BxTextarea extends FormAssociatedMixin(BixElement) {
       }
 
       .base:has(.textarea[data-user-invalid]) {
-        border-color: var(--bx-role-danger);
+        border-color: var(--bx-role-danger-border);
       }
 
       .textarea {
@@ -145,7 +145,7 @@ export class BxTextarea extends FormAssociatedMixin(BixElement) {
       }
 
       .count[data-over-limit] {
-        color: var(--bx-role-danger);
+        color: var(--bx-role-danger-fg);
       }
 
       .announcement {
@@ -166,7 +166,7 @@ export class BxTextarea extends FormAssociatedMixin(BixElement) {
       }
 
       .hint[data-user-invalid] {
-        color: var(--bx-role-danger);
+        color: var(--bx-role-danger-fg);
       }
 
       @media (forced-colors: active) {

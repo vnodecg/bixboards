@@ -35,7 +35,7 @@ const meta = {
           Drag the bottom-right corner to resize.
         </div>
       </bx-resize-observer>
-      <div style="margin-block-start: 0.5rem; font-size: var(--bx-font-size-s)">
+      <div style="margin-block-start: 0.5rem; font-size: var(--bx-font-s)">
         Size: <span id="ro-size">—</span>
       </div>
     `;

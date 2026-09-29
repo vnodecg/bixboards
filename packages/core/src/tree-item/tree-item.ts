@@ -4,6 +4,10 @@ import { BixElement } from '../bix-element.ts';
 // Vendored from packages/core/src/icon/default-library.ts (Phosphor Icons, regular/fill, MIT).
 const CHEVRON_RIGHT_PATH =
   'M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z';
+// This glyph's own ink isn't centered in the usual 256x256 canvas (bbox roughly x:72-228,
+// y:100-207) — rendered below with viewBox="48 76 204 155" (centered on that bbox) instead of
+// "0 0 256 256", so preserveAspectRatio's default centers it in the icon's square box. See
+// packages/core/src/checkbox/checkbox.ts's own copy of this constant for the full note.
 const CHECK_PATH =
   'M225.86,102.82c-3.77-3.94-10-4.1-13.94-.34l-83.6,80.13-38.86-40.14a10,10,0,0,0-14.34,13.94l45.7,47.24a10,10,0,0,0,7.17,3.05,10,10,0,0,0,6.94-2.79l90.6-86.85C229.46,113,229.63,106.75,225.86,102.82Z';
 // Vendored from packages/core/src/checkbox/checkbox.ts's own MINUS_PATH.
@@ -180,7 +184,7 @@ export class BxTreeItem extends BixElement {
         block-size: calc(var(--bx-unit) * 1.25);
         border: var(--bx-border-width-strong) solid var(--bx-border-strong);
         border-radius: var(--bx-radius-s);
-        background: var(--bx-surface);
+        background: var(--bx-surface-base);
         cursor: pointer;
       }
 
@@ -441,7 +445,7 @@ export class BxTreeItem extends BixElement {
               ${this.indeterminate
                 ? svg`<svg viewBox="0 0 256 256"><path d=${MINUS_PATH}></path></svg>`
                 : this.selected
-                  ? svg`<svg viewBox="0 0 256 256"><path d=${CHECK_PATH}></path></svg>`
+                  ? svg`<svg viewBox="48 76 204 155"><path d=${CHECK_PATH}></path></svg>`
                   : nothing}
             </span>`
           : nothing}

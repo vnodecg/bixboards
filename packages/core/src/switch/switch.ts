@@ -73,7 +73,7 @@ export class BxSwitch extends FormAssociatedMixin(BixElement) {
             2
         );
         border: var(--bx-border-width-strong) solid var(--bx-border-strong);
-        border-radius: var(--bx-radius-full, 999px);
+        border-radius: var(--bx-radius-pill, 999px);
         background: var(--bx-surface-subtle);
         transition:
           background var(--bx-motion-duration-fast, 0.12s) ease,
@@ -117,7 +117,7 @@ export class BxSwitch extends FormAssociatedMixin(BixElement) {
           calc(var(--bx-switch-height, calc(var(--bx-unit) * 1.5)) - 6px)
         );
         border-radius: 50%;
-        background: var(--bx-surface);
+        background: var(--bx-surface-base);
         transform: translateY(-50%);
         transition: transform var(--bx-motion-duration-fast, 0.12s) ease;
       }
@@ -163,7 +163,7 @@ export class BxSwitch extends FormAssociatedMixin(BixElement) {
             var(--bx-space-xs)
         );
         color: var(--bx-text-secondary);
-        font-size: var(--bx-font-size-s);
+        font-size: var(--bx-font-s);
       }
 
       .hint:empty {

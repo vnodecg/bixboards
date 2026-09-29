@@ -29,6 +29,14 @@ function groupMembers(name: string): BxRadio[] {
  * `bx-radio-group` exists — see that spec's §10 "confirm final property names during
  * implementation", and `bx-details`'s `lazy` attribute for the same kind of gap.
  *
+ * `:host` deliberately has no `container-type` — a radio doesn't use `@container` for anything,
+ * and, as a flex item inside a `flex-direction: column` group (`bx-radio-group`'s own layout, or
+ * a consumer's), `container-type: inline-size` measurably changed the host's own block-size by
+ * about 1px depending on `checked` (the checked-icon's presence changing containment's
+ * remembered-size bookkeeping), which read as the whole group visibly shifting by a pixel on
+ * every selection change. Removed for exactly that reason — don't re-add it without a real
+ * `@container` query to justify it.
+ *
  * @fires input - Value changed by user (bubbles, composed).
  * @fires change - Committed change (bubbles, composed).
  * @fires bx-invalid - Constraint validation failed.
@@ -48,7 +56,6 @@ export class BxRadio extends FormAssociatedMixin(BixElement) {
     css`
       :host {
         display: inline-block;
-        container-type: inline-size;
         font-family: var(--bx-font-family-sans);
       }
 
@@ -83,7 +90,7 @@ export class BxRadio extends FormAssociatedMixin(BixElement) {
         );
         border: var(--bx-border-width-strong) solid var(--bx-border-strong);
         border-radius: 50%;
-        background: var(--bx-surface);
+        background: var(--bx-surface-base);
       }
 
       :host([size='small']) .control {

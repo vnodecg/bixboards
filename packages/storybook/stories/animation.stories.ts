@@ -78,7 +78,7 @@ export const Presets: Story = {
               >${BOX}</bx-animation
             >
             <div
-              style="font-size: var(--bx-font-size-s); margin-top: var(--bx-space-xs)"
+              style="font-size: var(--bx-font-s); margin-top: var(--bx-space-xs)"
             >
               ${name}
             </div>

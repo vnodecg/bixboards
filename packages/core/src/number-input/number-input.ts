@@ -127,7 +127,7 @@ export class BxNumberInput extends FormAssociatedMixin(BixElement) {
         padding-inline: var(--bx-input-padding-inline, var(--bx-space-m));
         border-radius: var(--bx-radius-m);
         border: var(--bx-border-width) solid var(--bx-border-subtle);
-        background: var(--bx-surface);
+        background: var(--bx-surface-base);
       }
 
       :host([size='small']) .base {
@@ -153,7 +153,7 @@ export class BxNumberInput extends FormAssociatedMixin(BixElement) {
       }
 
       .base:has(.input[data-user-invalid]) {
-        border-color: var(--bx-role-danger);
+        border-color: var(--bx-role-danger-border);
       }
 
       .input {
@@ -235,7 +235,7 @@ export class BxNumberInput extends FormAssociatedMixin(BixElement) {
       }
 
       .hint[data-user-invalid] {
-        color: var(--bx-role-danger);
+        color: var(--bx-role-danger-fg);
       }
 
       @media (forced-colors: active) {

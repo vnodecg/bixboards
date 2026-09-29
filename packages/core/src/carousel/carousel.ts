@@ -161,7 +161,7 @@ export class BxCarousel extends BixElement {
         inline-size: var(--bx-carousel-nav-size, calc(var(--bx-unit) * 2.25));
         block-size: var(--bx-carousel-nav-size, calc(var(--bx-unit) * 2.25));
         border-radius: var(--bx-radius-pill);
-        background: var(--bx-surface);
+        background: var(--bx-surface-base);
         color: var(--bx-text-primary);
         border: var(--bx-border-width) solid var(--bx-border-subtle);
         box-shadow: var(--bx-shadow-s, 0 1px 3px rgba(0, 0, 0, 0.24));

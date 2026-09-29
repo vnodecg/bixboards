@@ -98,7 +98,7 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
       .label {
         color: var(--bx-text-primary);
         font-weight: var(--bx-font-weight-medium);
-        font-size: var(--bx-font-size-s);
+        font-size: var(--bx-font-s);
       }
 
       .label:empty {
@@ -114,7 +114,7 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
         padding-inline: var(--bx-input-padding-inline, var(--bx-space-m));
         border-radius: var(--bx-radius-m);
         border: var(--bx-border-width) solid var(--bx-border-subtle);
-        background: var(--bx-surface);
+        background: var(--bx-surface-base);
         flex: 1;
         min-inline-size: 0;
       }
@@ -132,7 +132,7 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
       }
 
       :host([pill]) .base {
-        border-radius: var(--bx-radius-full, 999px);
+        border-radius: var(--bx-radius-pill, 999px);
       }
 
       .base:has(.input:focus-visible) {
@@ -146,7 +146,7 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
       }
 
       .base:has(.input[data-user-invalid]) {
-        border-color: var(--bx-role-danger);
+        border-color: var(--bx-role-danger-border);
       }
 
       .input {
@@ -155,7 +155,7 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
         flex: 1;
         min-inline-size: 0;
         font: inherit;
-        font-size: max(1rem, var(--bx-font-size-m));
+        font-size: max(1rem, var(--bx-font-m));
         color: inherit;
       }
 
@@ -186,7 +186,7 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
         justify-content: center;
         inline-size: 1.5em;
         block-size: 1.5em;
-        border-radius: var(--bx-radius-full, 50%);
+        border-radius: var(--bx-radius-pill, 50%);
         color: var(--bx-text-secondary);
         cursor: pointer;
       }
@@ -211,7 +211,7 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
 
       .hint {
         color: var(--bx-text-secondary);
-        font-size: var(--bx-font-size-s);
+        font-size: var(--bx-font-s);
       }
 
       .hint:empty {
@@ -219,7 +219,7 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
       }
 
       .hint[data-user-invalid] {
-        color: var(--bx-role-danger);
+        color: var(--bx-role-danger-fg);
       }
 
       @media (forced-colors: active) {

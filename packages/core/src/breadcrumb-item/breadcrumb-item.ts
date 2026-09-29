@@ -33,7 +33,7 @@ export class BxBreadcrumbItem extends BixElement {
         align-items: center;
         gap: var(--bx-space-2xs);
         font-family: var(--bx-font-family-sans);
-        font-size: var(--bx-font-size-s);
+        font-size: var(--bx-font-s);
       }
 
       /* Author styles beat the UA stylesheet's [hidden] at equal specificity, so :host's own

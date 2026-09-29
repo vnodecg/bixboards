@@ -297,7 +297,7 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
         position: relative;
         inline-size: 100%;
         block-size: var(--bx-space-m);
-        border-radius: var(--bx-radius-full, 999px);
+        border-radius: var(--bx-radius-pill, 999px);
         touch-action: none;
       }
 

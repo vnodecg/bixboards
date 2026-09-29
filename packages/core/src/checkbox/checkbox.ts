@@ -4,6 +4,12 @@ import { FormAssociatedMixin } from '../internal/form-associated.ts';
 
 type Size = 'small' | 'medium' | 'large';
 
+// This check glyph's own ink isn't centered in the usual 256x256 Phosphor canvas (its bounding
+// box is roughly x:72-228, y:100-207) — rendered with `viewBox="0 0 256 256"` it visibly sits
+// low and to the right. Every `<svg>` using it below sets `viewBox="48 76 204 155"` instead: a
+// crop centered on that bounding box, which `preserveAspectRatio`'s default (`xMid xMid meet`)
+// then centers within the icon's square box. `MINUS_PATH` doesn't need this — its own bbox is
+// already centered at (128, 128).
 const CHECK_PATH =
   'M225.86,102.82c-3.77-3.94-10-4.1-13.94-.34l-83.6,80.13-38.86-40.14a10,10,0,0,0-14.34,13.94l45.7,47.24a10,10,0,0,0,7.17,3.05,10,10,0,0,0,6.94-2.79l90.6-86.85C229.46,113,229.63,106.75,225.86,102.82Z';
 const MINUS_PATH =
@@ -82,7 +88,7 @@ export class BxCheckbox extends FormAssociatedMixin(BixElement) {
         );
         border: var(--bx-border-width-strong) solid var(--bx-border-strong);
         border-radius: var(--bx-radius-s);
-        background: var(--bx-surface);
+        background: var(--bx-surface-base);
       }
 
       :host([size='small']) .control {
@@ -129,7 +135,7 @@ export class BxCheckbox extends FormAssociatedMixin(BixElement) {
             var(--bx-space-xs)
         );
         color: var(--bx-text-secondary);
-        font-size: var(--bx-font-size-s);
+        font-size: var(--bx-font-s);
       }
 
       .hint:empty {
@@ -274,7 +280,7 @@ export class BxCheckbox extends FormAssociatedMixin(BixElement) {
                   <path d=${MINUS_PATH}></path>
                 </svg>`
               : this.checked
-                ? html`<svg part="checked-icon" viewBox="0 0 256 256">
+                ? html`<svg part="checked-icon" viewBox="48 76 204 155">
                     <path d=${CHECK_PATH}></path>
                   </svg>`
                 : nothing

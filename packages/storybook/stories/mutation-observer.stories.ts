@@ -85,7 +85,7 @@ export const ChildListDemo: Story = {
       </button>
       <pre
         id="mo-log"
-        style="margin-block-start: 0.5rem; font-size: var(--bx-font-size-s)"
+        style="margin-block-start: 0.5rem; font-size: var(--bx-font-s)"
       ></pre>
     `;
   },

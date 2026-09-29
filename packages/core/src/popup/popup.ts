@@ -61,6 +61,19 @@ interface ComputedPlacement extends Coords {
  * containing block (no transformed ancestor between the popup and the document) — `strategy="fixed"`
  * has no such assumption and is the more robust choice when that isn't guaranteed.
  *
+ * The `anchor` slot fallback (used when the `anchor` property/attribute is unset) has a real
+ * layout limitation worth knowing before reaching for it: `reposition()` makes the *host itself*
+ * `position: absolute`/`fixed` (not an internal wrapper), so anything slotted into `anchor` is
+ * inside that same moving box and gets dragged along with the popup instead of staying at its
+ * original document position — visually, the "anchor" ends up glued above the popup content
+ * rather than acting as a separate, fixed trigger. Every consumer in this package (`bx-tooltip`,
+ * `bx-dialog`'s reuse of `bx-button`, `bx-color-picker`) sidesteps this by always resolving a real
+ * external element themselves and passing it through the `anchor` *property*, which has none of
+ * this problem — prefer that over the slot fallback. Restructuring `reposition()` to position an
+ * inner wrapper instead of the host would fix this properly, but changes this component's public
+ * geometry contract (`popup.getBoundingClientRect()` is relied on directly, including by this
+ * component's own tests) enough that it's being left as a known gap rather than risked here.
+ *
  * @fires bx-reposition - The popup finished (re)computing its position.
  *
  * @slot (default) - Popup content.
@@ -85,7 +98,7 @@ export class BxPopup extends BixElement {
     css`
       :host {
         display: none;
-        z-index: var(--bx-z-popup, 1000);
+        z-index: var(--bx-z-dropdown, 1000);
         inline-size: max-content;
       }
 
@@ -101,7 +114,7 @@ export class BxPopup extends BixElement {
         position: absolute;
         inline-size: var(--arrow-size, calc(var(--bx-unit) * 0.75));
         block-size: var(--arrow-size, calc(var(--bx-unit) * 0.75));
-        background: var(--arrow-color, var(--bx-surface));
+        background: var(--arrow-color, var(--bx-surface-base));
         rotate: 45deg;
         z-index: -1;
       }

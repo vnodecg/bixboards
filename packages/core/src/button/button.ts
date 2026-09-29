@@ -40,6 +40,12 @@ const CARET_DOWN_PATH =
  * FR-BUTTON-02's link-mode behavior — added the same way `bx-radio`'s `name`/`checked` fill an
  * analogous gap in that component's own spec.
  *
+ * `aria-label`/`aria-labelledby` set on the host are forwarded onto the inner `<button>`/`<a>`
+ * in `updated()` (`aria-labelledby` via `ariaLabelledByElements`, the same cross-shadow-root
+ * element-reference reflection `bx-tab-group` uses): the host itself isn't the accessible,
+ * interactive element, so those attributes have no effect left where an author would naturally
+ * put them otherwise — FR-BUTTON-04's icon-only case is exactly this.
+ *
  * @fires click - Native; suppressed when `disabled`/`loading`.
  * @fires bx-invalid - The associated form failed constraint validation on a `submit`-type click.
  *
@@ -171,7 +177,7 @@ export class BxButton extends BixElement {
       }
 
       :host([pill]) .base {
-        border-radius: var(--bx-radius-full, 999px);
+        border-radius: var(--bx-radius-pill, 999px);
       }
 
       .base:hover {
@@ -313,6 +319,29 @@ export class BxButton extends BixElement {
       console.warn(
         '<bx-button>: icon-only buttons need an aria-label (or aria-labelledby) for an accessible name.',
       );
+
+    // An `aria-label`/`aria-labelledby` set on the host has no effect on its own: the actually
+    // interactive, accessible element is the inner `<button>`/`<a>` (this.#baseRef), and setting
+    // ARIA attributes on a non-interactive shadow-hosting wrapper doesn't project them onto its
+    // shadow content — axe's `button-name` rule (rightly) still flags an icon-only inner control
+    // as nameless even with a host-level `aria-label`. Forward both explicitly.
+    const base = this.#baseRef.value;
+    if (!base) return;
+
+    const label = this.getAttribute('aria-label');
+    if (label) base.setAttribute('aria-label', label);
+    else base.removeAttribute('aria-label');
+
+    const labelledBy = this.getAttribute('aria-labelledby');
+    if (labelledBy) {
+      const elements = labelledBy
+        .split(/\s+/)
+        .map((id) => document.getElementById(id))
+        .filter((element): element is HTMLElement => element !== null);
+      base.ariaLabelledByElements = elements.length ? elements : null;
+    } else {
+      base.ariaLabelledByElements = null;
+    }
   }
 
   get #associatedForm(): HTMLFormElement | null {

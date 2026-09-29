@@ -77,7 +77,7 @@ export class BxTooltip extends BixElement {
       }
 
       bx-popup {
-        --arrow-color: var(--bx-tooltip-bg, var(--bx-inverse-surface, #1a1a1a));
+        --arrow-color: var(--bx-tooltip-bg, var(--bx-surface-inverse, #1a1a1a));
       }
 
       .body {
@@ -86,8 +86,8 @@ export class BxTooltip extends BixElement {
         padding-block: var(--bx-space-xs);
         padding-inline: var(--bx-space-s);
         border-radius: var(--bx-radius-s);
-        background: var(--bx-tooltip-bg, var(--bx-inverse-surface, #1a1a1a));
-        color: var(--bx-tooltip-fg, var(--bx-inverse-on-surface, #fff));
+        background: var(--bx-tooltip-bg, var(--bx-surface-inverse, #1a1a1a));
+        color: var(--bx-tooltip-fg, var(--bx-text-inverse, #fff));
         font-family: var(--bx-font-family-sans);
         font-size: var(--bx-font-s);
         line-height: var(--bx-font-leading-tight, 1.25);

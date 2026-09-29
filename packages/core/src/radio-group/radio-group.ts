@@ -81,7 +81,7 @@ export class BxRadioGroup extends FormAssociatedMixin(BixElement) {
       .hint {
         margin-block-start: var(--bx-space-xs);
         color: var(--bx-text-secondary);
-        font-size: var(--bx-font-size-s);
+        font-size: var(--bx-font-s);
       }
 
       .hint:empty {
@@ -89,7 +89,7 @@ export class BxRadioGroup extends FormAssociatedMixin(BixElement) {
       }
 
       .hint[data-user-invalid] {
-        color: var(--bx-role-danger);
+        color: var(--bx-role-danger-fg);
       }
     `,
   ];
