@@ -245,6 +245,70 @@
     "./zoomable-frame/define": {
       "types": "./dist/zoomable-frame/define.d.ts",
       "default": "./dist/zoomable-frame/define.js"
+    },
+    "./comparison": {
+      "types": "./dist/comparison/index.d.ts",
+      "default": "./dist/comparison/index.js"
+    },
+    "./comparison/define": {
+      "types": "./dist/comparison/define.d.ts",
+      "default": "./dist/comparison/define.js"
+    },
+    "./popup": {
+      "types": "./dist/popup/index.d.ts",
+      "default": "./dist/popup/index.js"
+    },
+    "./popup/define": {
+      "types": "./dist/popup/define.d.ts",
+      "default": "./dist/popup/define.js"
+    },
+    "./breadcrumb-item": {
+      "types": "./dist/breadcrumb-item/index.d.ts",
+      "default": "./dist/breadcrumb-item/index.js"
+    },
+    "./breadcrumb-item/define": {
+      "types": "./dist/breadcrumb-item/define.d.ts",
+      "default": "./dist/breadcrumb-item/define.js"
+    },
+    "./carousel-item": {
+      "types": "./dist/carousel-item/index.d.ts",
+      "default": "./dist/carousel-item/index.js"
+    },
+    "./carousel-item/define": {
+      "types": "./dist/carousel-item/define.d.ts",
+      "default": "./dist/carousel-item/define.js"
+    },
+    "./dropdown-item": {
+      "types": "./dist/dropdown-item/index.d.ts",
+      "default": "./dist/dropdown-item/index.js"
+    },
+    "./dropdown-item/define": {
+      "types": "./dist/dropdown-item/define.d.ts",
+      "default": "./dist/dropdown-item/define.js"
+    },
+    "./tab": {
+      "types": "./dist/tab/index.d.ts",
+      "default": "./dist/tab/index.js"
+    },
+    "./tab/define": {
+      "types": "./dist/tab/define.d.ts",
+      "default": "./dist/tab/define.js"
+    },
+    "./tab-panel": {
+      "types": "./dist/tab-panel/index.d.ts",
+      "default": "./dist/tab-panel/index.js"
+    },
+    "./tab-panel/define": {
+      "types": "./dist/tab-panel/define.d.ts",
+      "default": "./dist/tab-panel/define.js"
+    },
+    "./tree-item": {
+      "types": "./dist/tree-item/index.d.ts",
+      "default": "./dist/tree-item/index.js"
+    },
+    "./tree-item/define": {
+      "types": "./dist/tree-item/define.d.ts",
+      "default": "./dist/tree-item/define.js"
     }
   },
   "files": [

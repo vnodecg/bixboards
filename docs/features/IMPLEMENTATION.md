@@ -2,7 +2,7 @@
 
 Tracks build status for all 61 components across `@bixant/core`, `@bixant/data-table` and `@bixant/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 22 / 61 done.**
+**Progress: 30 / 61 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -55,14 +55,14 @@ No dependency on any other unbuilt `bx-*` component.
 - [x] [`bx-slider`](core/slider.md) (single and range modes; range submits as a `${name}-min`/`${name}-max` `FormData` pair) — `packages/core/src/slider`
 - [x] [`bx-rating`](core/rating.md) (hover preview and RTL fill are one `clip-path` overlay, not per-symbol state) — `packages/core/src/rating`
 - [x] [`bx-zoomable-frame`](core/zoomable-frame.md) (sandbox defaults to `""`, the most restrictive value; controls collapse into a menu button under `@container`) — `packages/core/src/zoomable-frame`
-- [ ] [`bx-comparison`](core/comparison.md)
-- [ ] [`bx-popup`](core/popup.md) — positioning primitive; needed by Tier 2/3 overlays
-- [ ] [`bx-breadcrumb-item`](core/breadcrumb-item.md)
-- [ ] [`bx-carousel-item`](core/carousel-item.md)
-- [ ] [`bx-dropdown-item`](core/dropdown-item.md)
-- [ ] [`bx-tab`](core/tab.md)
-- [ ] [`bx-tab-panel`](core/tab-panel.md)
-- [ ] [`bx-tree-item`](core/tree-item.md)
+- [x] [`bx-comparison`](core/comparison.md) — `packages/core/src/comparison`
+- [x] [`bx-popup`](core/popup.md) (JS Floating-UI-style computation path only, no native CSS Anchor Positioning fast path yet — noted in the component's own doc comment) — `packages/core/src/popup`
+- [x] [`bx-breadcrumb-item`](core/breadcrumb-item.md) (adds a `current` boolean, not in the spec's own properties table, so the not-yet-built `bx-breadcrumb` parent has a way to mark the last crumb per §6's "aria-current on last" — see the component's own doc comment) — `packages/core/src/breadcrumb-item`
+- [x] [`bx-carousel-item`](core/carousel-item.md) — `packages/core/src/carousel-item`
+- [x] [`bx-dropdown-item`](core/dropdown-item.md) (checkmark-gutter reservation is a peer-group pattern keyed by parent element, same as `bx-details`'/`bx-radio`'s groups — see the component's own doc comment) — `packages/core/src/dropdown-item`
+- [x] [`bx-tab`](core/tab.md) (adds a `close-button` CSS part for `closable`, not in the spec's own CSS parts table, same precedent as `bx-badge`'s `remove-button`) — `packages/core/src/tab`
+- [x] [`bx-tab-panel`](core/tab-panel.md) — `packages/core/src/tab-panel`
+- [x] [`bx-tree-item`](core/tree-item.md) (adds a `children` slot, plus `loading`/`lazy-error`/`with-checkbox`, none in the spec's own tables — see the component's own doc comment for the lazy-load event contract) — `packages/core/src/tree-item`
 - [ ] [`bx-option`](core/option.md)
 - [ ] [`bx-format-bytes`](core/format-bytes.md)
 - [ ] [`bx-format-date`](core/format-date.md)
