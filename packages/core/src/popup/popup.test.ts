@@ -97,4 +97,18 @@ describe('bx-popup', () => {
     await popup.updateComplete;
     await expect(popup).to.be.accessible();
   });
+
+  // Regression: `updated()` repositions on every update while active, and used to call an
+  // unconditional `requestUpdate()` from inside the arrow-offset calculation, re-triggering
+  // `updated()` forever whenever `arrow` and `active` were both set (found via `bx-tooltip`,
+  // which renders exactly that combination by default).
+  it('settles instead of looping when arrow and active are both set', async () => {
+    const { popup } = await withAnchor();
+    popup.arrow = true;
+    popup.active = true;
+    await popup.updateComplete;
+    // If this hangs, the update loop regressed.
+    await popup.updateComplete;
+    expect(getComputedStyle(popup).display).to.equal('block');
+  });
 });

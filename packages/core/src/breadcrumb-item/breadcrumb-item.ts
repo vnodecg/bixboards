@@ -36,6 +36,14 @@ export class BxBreadcrumbItem extends BixElement {
         font-size: var(--bx-font-size-s);
       }
 
+      /* Author styles beat the UA stylesheet's [hidden] at equal specificity, so :host's own
+         display above would otherwise silently win over the native hidden attribute (the same
+         gotcha bx-tab-panel's own :host([hidden]) rule exists for) — relevant once
+         bx-breadcrumb's overflow collapse (FR-BREADCRUMB-01) starts toggling it. */
+      :host([hidden]) {
+        display: none;
+      }
+
       .label {
         display: inline-flex;
         align-items: center;

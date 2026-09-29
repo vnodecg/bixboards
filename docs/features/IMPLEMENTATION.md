@@ -2,7 +2,7 @@
 
 Tracks build status for all 61 components across `@bixant/core`, `@bixant/data-table` and `@bixant/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 39 / 61 done.**
+**Progress: 49 / 61 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -77,16 +77,16 @@ No dependency on any other unbuilt `bx-*` component.
 
 Depend only on Tier 1 components.
 
-- [ ] [`bx-button`](core/button.md) — depends on `bx-spinner` (loading state)
-- [ ] [`bx-tooltip`](core/tooltip.md) — depends on `bx-popup`
-- [ ] [`bx-radio-group`](core/radio-group.md) — depends on `bx-radio`
-- [ ] [`bx-tab-group`](core/tab-group.md) — depends on `bx-tab`, `bx-tab-panel`
-- [ ] [`bx-breadcrumb`](core/breadcrumb.md) — depends on `bx-breadcrumb-item`
-- [ ] [`bx-carousel`](core/carousel.md) — depends on `bx-carousel-item`
-- [ ] [`bx-tree`](core/tree.md) — depends on `bx-tree-item`
-- [ ] [`bx-number-input`](core/number-input.md) (shares patterns with `bx-input`)
-- [ ] [`bx-textarea`](core/textarea.md) (shares patterns with `bx-input`)
-- [ ] [`bx-color-picker`](core/color-picker.md) (shares patterns with `bx-slider`)
+- [x] [`bx-button`](core/button.md) (spec's own header/FR-01 disagree on form-association — resolved by finding the form and calling `requestSubmit()`/`reset()` directly rather than `FormAssociatedMixin`, see the component's own doc comment; `disabled` never becomes the inner control's native `disabled` attribute, per FR-BUTTON-06) — depends on `bx-spinner` (loading state) — `packages/core/src/button`
+- [x] [`bx-tooltip`](core/tooltip.md) (§6 "anchor gets aria-describedby" is unimplemented — verified that this package's pinned Chromium doesn't resolve a light-DOM-to-shadow-internal `ariaDescribedByElements` reference, the reverse direction of the one `bx-tab-group` relies on, see the component's own doc comment; fixed a latent `bx-popup` bug along the way — `arrow` + `active` together looped forever re-triggering `updated()`, only ever exercised once a real consumer combined them) — depends on `bx-popup` — `packages/core/src/tooltip`
+- [x] [`bx-radio-group`](core/radio-group.md) (owns form participation for its members; `bx-radio` skips its own `setFormValue` when nested inside one — see that component's own doc comment; Home/End live here, arrow keys stay peer-to-peer in `bx-radio`) — depends on `bx-radio` — `packages/core/src/radio-group`
+- [x] [`bx-tab-group`](core/tab-group.md) (FR-TAB-GROUP-02 "lazy" deferred — no `<template>`-based content model to defer into yet, see the component's own doc comment; `bx-tab`/`bx-tab-panel` gained `tab-stop`/`controlsElement`/`tabElement` and `ariaLabelledByElements` wiring respectively so `aria-controls`/`aria-labelledby` can cross their separate shadow roots) — depends on `bx-tab`, `bx-tab-panel` — `packages/core/src/tab-group`
+- [x] [`bx-breadcrumb`](core/breadcrumb.md) (FR-BREADCRUMB-01's "ellipsis dropdown" is an inline expand, not a floating popover menu — `bx-dropdown` is Tier 4/`VirtualizerController`-gated, see the component's own doc comment; `bx-breadcrumb-item` gained a `:host([hidden])` rule so collapse can actually hide items) — depends on `bx-breadcrumb-item` — `packages/core/src/breadcrumb`
+- [x] [`bx-carousel`](core/carousel.md) — depends on `bx-carousel-item` — `packages/core/src/carousel`
+- [x] [`bx-tree`](core/tree.md) (checkbox-tree tri-state deviates from APG's own pattern — `bx-tree-item` keeps its real nested checkbox rather than moving to `aria-checked`-only on the treeitem, see the component's own doc comment; `bx-tree-item` gained `indeterminate` and a `roving` tab-stop-suppression property, mirroring `bx-tab`'s `tab-stop`) — depends on `bx-tree-item` — `packages/core/src/tree`
+- [x] [`bx-number-input`](core/number-input.md) (shares patterns with `bx-input`; native control is `type="text" inputmode="decimal"`, not `type="number"`, so it can show a locale-formatted display string while editing shows the raw parseable one, see the component's own doc comment) — `packages/core/src/number-input`
+- [x] [`bx-textarea`](core/textarea.md) (shares patterns with `bx-input`; `resize="auto"` prefers `field-sizing: content`, falling back to an rAF-batched `scrollHeight` measurement only when unsupported) — `packages/core/src/textarea`
+- [x] [`bx-color-picker`](core/color-picker.md) (canonical internal state is HSV + alpha, not the `format`-displayed string — every representation is a pure derivation per FR-COLOR-PICKER-06, see the component's own doc comment; non-`inline` mode's trigger→panel uses `bx-popup`, the same primitive `bx-tooltip` builds on) — depends on `bx-popup` — `packages/core/src/color-picker`
 
 ## Tier 3 — Higher composites
 

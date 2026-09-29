@@ -16,11 +16,23 @@ describe('bx-tab', () => {
     );
   });
 
-  it('sets aria-controls from panel', async () => {
+  it('does not render a plain aria-controls attribute (it cannot resolve cross-shadow-root)', async () => {
     const el = await fixture<BxTab>(html`<bx-tab panel="details">Tab</bx-tab>`);
-    expect(el.shadowRoot!.querySelector('[role="tab"]')!.getAttribute('aria-controls')).to.equal(
-      'details',
+    expect(
+      el.shadowRoot!.querySelector('[role="tab"]')!.hasAttribute('aria-controls'),
+    ).to.be.false;
+  });
+
+  it('controlsElement wires ariaControlsElements on the role=tab element', async () => {
+    const wrapper = await fixture<HTMLDivElement>(
+      html`<div><bx-tab panel="details">Tab</bx-tab><div id="panel"></div></div>`,
     );
+    const el = wrapper.querySelector('bx-tab') as BxTab;
+    const panel = wrapper.querySelector('#panel') as HTMLDivElement;
+    el.controlsElement = panel;
+    await el.updateComplete;
+    const base = el.shadowRoot!.querySelector('[role="tab"]') as HTMLElement;
+    expect([...(base.ariaControlsElements ?? [])]).to.deep.equal([panel]);
   });
 
   it('is not a tab stop when disabled', async () => {

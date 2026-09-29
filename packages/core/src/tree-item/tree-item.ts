@@ -6,6 +6,9 @@ const CHEVRON_RIGHT_PATH =
   'M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z';
 const CHECK_PATH =
   'M225.86,102.82c-3.77-3.94-10-4.1-13.94-.34l-83.6,80.13-38.86-40.14a10,10,0,0,0-14.34,13.94l45.7,47.24a10,10,0,0,0,7.17,3.05,10,10,0,0,0,6.94-2.79l90.6-86.85C229.46,113,229.63,106.75,225.86,102.82Z';
+// Vendored from packages/core/src/checkbox/checkbox.ts's own MINUS_PATH.
+const MINUS_PATH =
+  'M208,128a12,12,0,0,1-12,12H60a12,12,0,0,1,0-24H196A12,12,0,0,1,208,128Z';
 
 /**
  * `<bx-tree-item>` — a node in `bx-tree`, with lazy children.
@@ -30,6 +33,12 @@ const CHECK_PATH =
  * to that transition by firing `bx-lazy-change` and, on success, actually expanding. A failed load
  * leaves `hasLoadedOnce` false, so clicking expand again simply retries.
  *
+ * `indeterminate` and the checkbox's own `change` event exist for `bx-tree`'s tri-state parent
+ * selection (FR-TREE-01): the expand-button and checkbox clicks both already `stopPropagation()`
+ * on the originating `click`, so a bubbled `change` — dispatched separately, unaffected by that —
+ * is `bx-tree`'s only signal that the checkbox (as opposed to the row, which it delegates itself)
+ * changed this item's `selected`.
+ *
  * @fires bx-expand - The item is expanding (fires before `expanded` takes visual effect).
  * @fires bx-after-expand - The item finished expanding.
  * @fires bx-collapse - The item is collapsing.
@@ -37,6 +46,7 @@ const CHECK_PATH =
  * @fires bx-lazy-load - A `lazy` item that hasn't loaded is expanding for the first time.
  *   Cancelable: call `preventDefault()` to keep it collapsed. `detail: {}`.
  * @fires bx-lazy-change - `loading` finished. `detail: { loading: false, error: boolean }`.
+ * @fires change - The checkbox (when `with-checkbox`) toggled `selected` (bubbles, composed).
  *
  * @slot (default) - Label content.
  * @slot expand-icon - Overrides the default chevron shown while collapsed.
@@ -174,7 +184,8 @@ export class BxTreeItem extends BixElement {
         cursor: pointer;
       }
 
-      :host([selected]) .checkbox {
+      :host([selected]) .checkbox,
+      :host([indeterminate]) .checkbox {
         border-color: var(--bx-role-accent);
         background: var(--bx-role-accent);
       }
@@ -218,7 +229,8 @@ export class BxTreeItem extends BixElement {
           forced-color-adjust: none;
           border-color: CanvasText;
         }
-        :host([selected]) .checkbox {
+        :host([selected]) .checkbox,
+        :host([indeterminate]) .checkbox {
           background: Highlight;
           border-color: Highlight;
         }
@@ -234,6 +246,8 @@ export class BxTreeItem extends BixElement {
     loading: { type: Boolean, reflect: true },
     lazyError: { type: Boolean, reflect: true, attribute: 'lazy-error' },
     withCheckbox: { type: Boolean, reflect: true, attribute: 'with-checkbox' },
+    indeterminate: { type: Boolean, reflect: true },
+    roving: { type: Boolean, reflect: true },
     _hasChildren: { state: true },
   };
 
@@ -244,6 +258,15 @@ export class BxTreeItem extends BixElement {
   declare loading: boolean;
   declare lazyError: boolean;
   declare withCheckbox: boolean;
+  /** Tri-state selection visual, driven by `bx-tree` in multiple-selection mode (FR-TREE-01) —
+   *  not in the spec's own properties table, the same kind of parent-owned addition `tab-stop`
+   *  is on `bx-tab` for `bx-tab-group`. */
+  declare indeterminate: boolean;
+  /** Set by `bx-tree`: the expand-button and checkbox stop being their own tab stop, so the
+   *  host's own roving `tabIndex` (which `bx-tree` manages directly, not through a property here)
+   *  is the row's only tab stop, per APG's tree pattern. Standalone, both stay individually
+   *  focusable — this class's doc comment explains why. */
+  declare roving: boolean;
   /** @internal */
   declare _hasChildren: boolean;
 
@@ -258,6 +281,8 @@ export class BxTreeItem extends BixElement {
     this.loading = false;
     this.lazyError = false;
     this.withCheckbox = false;
+    this.indeterminate = false;
+    this.roving = false;
     this._hasChildren = false;
   }
 
@@ -345,10 +370,20 @@ export class BxTreeItem extends BixElement {
     this.#toggleExpanded();
   };
 
+  #toggleSelected(): void {
+    this.selected = !this.selected;
+    this.indeterminate = false;
+    // The click/keydown that triggered this is `stopPropagation`-ed below (so `bx-tree`'s
+    // delegated row-click handling doesn't also see it), so this is dispatched separately —
+    // mirroring `bx-checkbox`'s own `change` event — as the only signal `bx-tree` gets that
+    // selection changed via the checkbox rather than the row.
+    this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+  }
+
   #handleCheckboxClick = (event: MouseEvent): void => {
     event.stopPropagation();
     if (this.disabled) return;
-    this.selected = !this.selected;
+    this.#toggleSelected();
   };
 
   #handleCheckboxKeydown = (event: KeyboardEvent): void => {
@@ -356,7 +391,7 @@ export class BxTreeItem extends BixElement {
     event.preventDefault();
     event.stopPropagation();
     if (this.disabled) return;
-    this.selected = !this.selected;
+    this.#toggleSelected();
   };
 
   protected override render() {
@@ -370,7 +405,7 @@ export class BxTreeItem extends BixElement {
           type="button"
           class="expand-button ${showExpandButton ? '' : 'placeholder'}"
           part="expand-button"
-          tabindex=${showExpandButton && !this.disabled ? 0 : -1}
+          tabindex=${this.roving ? -1 : showExpandButton && !this.disabled ? 0 : -1}
           aria-hidden=${showExpandButton ? nothing : 'true'}
           aria-label=${this.expanded ? 'Collapse' : 'Expand'}
           aria-expanded=${showExpandButton ? this.expanded : nothing}
@@ -396,16 +431,18 @@ export class BxTreeItem extends BixElement {
               class="checkbox"
               part="checkbox"
               role="checkbox"
-              tabindex=${this.disabled ? -1 : 0}
-              aria-checked=${this.selected}
+              tabindex=${this.roving ? -1 : this.disabled ? -1 : 0}
+              aria-checked=${this.indeterminate ? 'mixed' : this.selected}
               aria-disabled=${this.disabled}
               aria-label="Select"
               @click=${this.#handleCheckboxClick}
               @keydown=${this.#handleCheckboxKeydown}
             >
-              ${this.selected
-                ? svg`<svg viewBox="0 0 256 256"><path d=${CHECK_PATH}></path></svg>`
-                : nothing}
+              ${this.indeterminate
+                ? svg`<svg viewBox="0 0 256 256"><path d=${MINUS_PATH}></path></svg>`
+                : this.selected
+                  ? svg`<svg viewBox="0 0 256 256"><path d=${CHECK_PATH}></path></svg>`
+                  : nothing}
             </span>`
           : nothing}
         <span class="label" part="label"><slot></slot></span>

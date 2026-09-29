@@ -1,4 +1,5 @@
 import { css, html, nothing } from 'lit';
+import { createRef, ref } from 'lit/directives/ref.js';
 import { BixElement } from '../bix-element.ts';
 
 // Vendored from packages/core/src/icon/default-library.ts (Phosphor Icons, regular, MIT).
@@ -8,13 +9,20 @@ const X_PATH =
 /**
  * `<bx-tab>` — a tab button.
  *
- * `aria-controls` is set directly from `panel` (docs/features/core/tab.md §2's "Panel name"),
- * assuming the future `bx-tab-group` keeps a tab's `panel` value equal to its matching
- * `bx-tab-panel`'s `id` — the same direct-value approach `bx-breadcrumb-item` takes for
- * `aria-current`, standing in until that parent exists to coordinate ids itself. Roving tabindex
- * across a set of tabs (only the active or, once one has focus, the most recently focused tab is a
- * tab stop) is also `bx-tab-group`'s job; standalone, a tab is a tab stop whenever it's `active` or
- * not yet part of any group, so it's still independently keyboard-testable.
+ * `panel` (docs/features/core/tab.md §2's "Panel name") is *not* rendered as a plain
+ * `aria-controls="<panel>"` string attribute: `role="tab"` lives on an element inside this
+ * component's own shadow root, and a plain IDREF attribute only resolves within the referencing
+ * element's own root — it can never reach a `bx-tab-panel` host out in the light DOM, and shipping
+ * one anyway is an `aria-valid-attr-value` violation waiting to happen (a real one surfaced in
+ * `bx-tab-group`'s own tests). `controlsElement` below sets the real relationship across that
+ * boundary via `ariaControlsElements` (the cross-root-capable ARIA element-reference reflection),
+ * which `bx-tab-group` drives; standalone, nothing sets it, so a lone tab simply has no
+ * `aria-controls` relationship, which is correct — there is nothing to control.
+ *
+ * Roving tabindex across a set of tabs (only the active or, once one has focus, the most recently
+ * focused tab is a tab stop) is driven through `tab-stop` below, which `bx-tab-group` sets per
+ * APG's roving-tabindex pattern; standalone, a tab defaults to `tab-stop`, so it's still
+ * independently keyboard-testable without a group.
  *
  * @fires bx-close - The close button (present when `closable`) was activated, by click or by
  *   Backspace/Delete on the focused tab. Not fired when `disabled`.
@@ -62,8 +70,9 @@ export class BxTab extends BixElement {
       }
 
       :host([active]) .base {
-        color: var(--bx-role-accent);
-        box-shadow: inset 0 calc(var(--bx-border-width-strong) * -1) 0 0 var(--bx-role-accent);
+        color: var(--indicator-color, var(--bx-role-accent));
+        box-shadow: inset 0 calc(var(--bx-border-width-strong) * -1) 0 0
+          var(--indicator-color, var(--bx-role-accent));
       }
 
       .base:focus-visible {
@@ -121,12 +130,19 @@ export class BxTab extends BixElement {
     active: { type: Boolean, reflect: true },
     disabled: { type: Boolean, reflect: true },
     closable: { type: Boolean, reflect: true },
+    tabStop: { type: Boolean, attribute: 'tab-stop' },
   };
 
   declare panel: string;
   declare active: boolean;
   declare disabled: boolean;
   declare closable: boolean;
+  /** Roving-tabindex hook, driven by `bx-tab-group`; not in the spec's own properties table (see
+   *  this class's doc comment). Defaults to `true` so a standalone tab stays a tab stop. */
+  declare tabStop: boolean;
+
+  #baseRef = createRef<HTMLDivElement>();
+  #controlsElement: Element | null = null;
 
   constructor() {
     super();
@@ -134,6 +150,37 @@ export class BxTab extends BixElement {
     this.active = false;
     this.disabled = false;
     this.closable = false;
+    this.tabStop = true;
+  }
+
+  /** The tab's own `role="tab"` element, for `bx-tab-group` to reference from the matching
+   *  panel's `ariaLabelledByElements` (the other half of the `controlsElement` relationship). */
+  get tabElement(): Element | null {
+    return this.#baseRef.value ?? null;
+  }
+
+  /** The element this tab controls (its matching `bx-tab-panel`), wired via `ariaControlsElements`
+   *  rather than a plain `aria-controls` string — see this class's doc comment. Not in the spec's
+   *  own properties table: it's an element reference, not a serializable attribute. */
+  get controlsElement(): Element | null {
+    return this.#controlsElement;
+  }
+
+  set controlsElement(element: Element | null) {
+    this.#controlsElement = element;
+    this.#applyControlsElement();
+  }
+
+  #applyControlsElement(): void {
+    const base = this.#baseRef.value;
+    if (!base) return;
+    base.ariaControlsElements = this.#controlsElement
+      ? [this.#controlsElement]
+      : null;
+  }
+
+  protected override firstUpdated(): void {
+    this.#applyControlsElement();
   }
 
   #close(): void {
@@ -162,12 +209,12 @@ export class BxTab extends BixElement {
   protected override render() {
     return html`
       <div
+        ${ref(this.#baseRef)}
         class="base"
         part="base"
         role="tab"
-        tabindex=${this.disabled ? -1 : 0}
+        tabindex=${this.disabled || !this.tabStop ? -1 : 0}
         aria-selected=${this.active}
-        aria-controls=${this.panel || nothing}
         aria-disabled=${this.disabled}
         @keydown=${this.#handleBaseKeydown}
       >

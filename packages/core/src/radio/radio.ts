@@ -265,7 +265,11 @@ export class BxRadio extends FormAssociatedMixin(BixElement) {
   }
 
   #syncFormState(): void {
-    this.internals.setFormValue(this.checked ? this.value : null);
+    // A `bx-radio-group` ancestor (docs/features/core/radio-group.md) owns form participation for
+    // its members — it tracks the checked child's value itself, so a radio inside one skips
+    // `setFormValue` to avoid two `FormData` entries under the same `name`.
+    if (!this.closest('bx-radio-group'))
+      this.internals.setFormValue(this.checked ? this.value : null);
     if (this.checked) this.#uncheckGroupSiblings();
 
     if (this.#hasInteracted) {

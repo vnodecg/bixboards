@@ -336,6 +336,11 @@ export class BxPopup extends BixElement {
         offset = anchorCenter;
     }
     offset = Math.min(Math.max(offset, this.arrowPadding), Math.max(this.arrowPadding, popupSize - this.arrowPadding));
+    // `updated()` calls `reposition()` on every update while `active` (below), and this render's
+    // arrow position off `#lastArrowOffset` — an unconditional `requestUpdate()` here would
+    // re-trigger `updated()` -> `reposition()` -> here, forever. Only schedule a re-render when
+    // the offset actually changed.
+    if (offset === this.#lastArrowOffset) return;
     this.#lastArrowOffset = offset;
     this.requestUpdate();
   }
