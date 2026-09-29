@@ -7,7 +7,7 @@
 | **Package**         | `@bixant/core` |
 | **Category**        | Feedback       |
 | **Tag**             | `bx-badge`     |
-| **Status**          | Planned        |
+| **Status**          | Implemented    |
 | **Form-associated** | No             |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
@@ -106,14 +106,18 @@ Text truncates when the container is narrower than the content; there is no othe
 
 ## 9. Acceptance criteria
 
-- [ ] All FR-BADGE-\* requirements covered by unit/component tests (Web Test Runner, real browsers).
-- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark, every appearance × variant.
-- [ ] axe-core: zero violations; manual screen-reader pass documented.
-- [ ] Keyboard-only walkthrough for the removable variant.
-- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events.
-- [ ] Size budget check (`size-limit`) passes.
+- [x] All FR-BADGE-\* requirements covered by unit/component tests (Web Test Runner, real browsers: Chromium; Firefox/WebKit run in CI). See `packages/core/src/badge/badge.test.ts`.
+- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark, every appearance × variant. No visual-regression harness exists yet in the workspace.
+- [x] axe-core: zero violations (plain and removable), asserted in the test suite via `chai-a11y-axe`.
+- [ ] Manual screen-reader pass documented.
+- [x] Keyboard-only walkthrough for the removable variant (Backspace/Delete on a focused chip, `badge.test.ts`).
+- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events. Wrapper packages do not exist yet.
+- [ ] Size budget check (`size-limit`) passes. No size-limit tooling configured yet.
 
 ## 10. Notes and open questions
 
 - Badge and tag are one component (decision: they were visually and functionally near-identical). A chip is `<bx-badge with-remove>`; a status or count is a plain `<bx-badge>`.
+- Implemented in `@bixant/core` (`src/badge/`). `appearance="filled outlined"` (the default) is a space-separated pair of tokens read with CSS `~=` attribute selectors, so `filled` and `outlined` apply independently and compose; `accent` is its own single value.
+- Numeric-overflow detection (`max`) and truncation (`--bx-badge-max-width`) both key off the default slot's assigned text via `slotchange`, not a rendered prop, so arbitrary slotted markup (an icon plus text) still works — only a slot whose flattened text is purely numeric gets the `max+` treatment.
 - Open: whether a selectable (toggle) chip is needed; if so it should be a separate `bx-chip` built on this visual, not a return of `bx-tag`.
+- Open: confirm final property names against the custom-elements manifest once the CEM generation pipeline exists.

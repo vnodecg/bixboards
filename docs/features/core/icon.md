@@ -7,7 +7,7 @@
 | **Package**         | `@bixant/core` |
 | **Category**        | Imagery        |
 | **Tag**             | `bx-icon`      |
-| **Status**          | Planned        |
+| **Status**          | Implemented    |
 | **Form-associated** | No             |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
@@ -91,14 +91,17 @@ None.
 
 ## 9. Acceptance criteria
 
-- [ ] All FR-ICON-* requirements covered by unit/component tests (Web Test Runner, real browsers).
-- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark.
-- [ ] axe-core: zero violations; manual screen-reader pass (NVDA/VoiceOver) documented.
-- [ ] Keyboard-only walkthrough recorded in the test plan.
-- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events.
-- [ ] Size budget check (`size-limit`) passes.
+- [x] All FR-ICON-* requirements covered by unit/component tests (Web Test Runner, real browsers: Chromium; Firefox/WebKit run in CI). See `packages/core/src/icon/icon.test.ts`.
+- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark. No visual-regression harness exists yet in the workspace.
+- [x] axe-core: zero violations (decorative and labelled), asserted in the test suite via `chai-a11y-axe`.
+- [ ] Manual screen-reader pass (NVDA/VoiceOver) documented.
+- [ ] Keyboard-only walkthrough recorded in the test plan. Not applicable: the icon has no interactive state of its own.
+- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events. Wrapper packages do not exist yet.
+- [ ] Size budget check (`size-limit`) passes. No size-limit tooling configured yet.
 
 ## 10. Notes and open questions
 
 - Naming prefix is `bx-`; CSS hooks use `--bx-*`.
-- Open: confirm final property names against the custom-elements manifest during implementation.
+- Implemented in `@bixant/core` (`src/icon/`). `registerIconLibrary(name, {resolver, mutator})` lives in `src/icon/registry.ts`; a resolver returns either raw SVG markup (used as-is — no network, this is how the bundled `default` library in `src/icon/default-library.ts` stays offline-safe) or a URL/data URI, which is fetched. Every result, and every `src` fetch, is sanitised (`<script>`/`<foreignObject>` stripped via `DOMParser`) and cached/de-duplicated by `library::family::variant::name` (or `src::<url>`) across every `<bx-icon>` instance on the page.
+- The bundled `default` library ships a small set (`check`, `close`, four `chevron-*`, `info`, `warning`) vendored from Phosphor Icons (regular weight, MIT) as path strings, matching the vendoring approach already used for `bx-animated-image`'s play/pause glyphs.
+- Open: confirm final property names against the custom-elements manifest once the CEM generation pipeline exists.

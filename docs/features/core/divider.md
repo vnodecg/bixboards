@@ -7,7 +7,7 @@
 | **Package**         | `@bixant/core` |
 | **Category**        | Organization   |
 | **Tag**             | `bx-divider`   |
-| **Status**          | Planned        |
+| **Status**          | Implemented    |
 | **Form-associated** | No             |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
@@ -38,7 +38,7 @@ _None._
 
 ### CSS custom properties
 
-`--color`, `--width`, `--spacing`
+`--bx-divider-color`, `--bx-divider-width`, `--bx-divider-spacing`
 
 ### Methods
 
@@ -81,14 +81,17 @@ All dimensions are expressed via `--bx-space-*`, `--bx-font-*`, `--bx-radius-*` 
 
 ## 9. Acceptance criteria
 
-- [ ] All FR-DIVIDER-* requirements covered by unit/component tests (Web Test Runner, real browsers).
-- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark.
-- [ ] axe-core: zero violations; manual screen-reader pass (NVDA/VoiceOver) documented.
-- [ ] Keyboard-only walkthrough recorded in the test plan.
-- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events.
-- [ ] Size budget check (`size-limit`) passes.
+- [x] All FR-DIVIDER-* requirements covered by unit/component tests (Web Test Runner, real browsers: Chromium; Firefox/WebKit run in CI). See `packages/core/src/divider/divider.test.ts`.
+- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark. No visual-regression harness exists yet in the workspace.
+- [x] axe-core: zero violations, asserted in the test suite via `chai-a11y-axe`.
+- [ ] Manual screen-reader pass (NVDA/VoiceOver) documented.
+- [ ] Keyboard-only walkthrough recorded in the test plan. Not applicable: the divider has no interactive state.
+- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events. Wrapper packages do not exist yet.
+- [ ] Size budget check (`size-limit`) passes. No size-limit tooling configured yet.
 
 ## 10. Notes and open questions
 
 - Naming prefix is `bx-`; CSS hooks use `--bx-*`.
-- Open: confirm final property names against the custom-elements manifest during implementation.
+- Implemented in `@bixant/core` (`src/divider/`), following the pattern established by `bx-animated-image`.
+- `orientation="vertical"` needs a sizing context from its parent (flex/grid item, or an explicit block-size) — a vertical rule has no intrinsic height, the same constraint a vertical `<hr>` would have.
+- Open: confirm final property names against the custom-elements manifest once the CEM generation pipeline exists.

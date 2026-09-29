@@ -2,7 +2,7 @@
 
 Tracks build status for all 61 components across `@bixant/core`, `@bixant/data-table` and `@bixant/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 2 / 61 done.**
+**Progress: 6 / 61 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -35,10 +35,10 @@ No dependency on any other unbuilt `bx-*` component.
 
 - [x] [`bx-animated-image`](core/animated-image.md) — `packages/core/src/animated-image`
 - [x] [`bx-animation`](core/animation.md) — `packages/core/src/animation`
-- [ ] [`bx-icon`](core/icon.md)
-- [ ] [`bx-divider`](core/divider.md)
-- [ ] [`bx-badge`](core/badge.md)
-- [ ] [`bx-avatar`](core/avatar.md) (covers avatar-group layout itself, FR-AVATAR-02)
+- [x] [`bx-icon`](core/icon.md) — `packages/core/src/icon`
+- [x] [`bx-divider`](core/divider.md) — `packages/core/src/divider`
+- [x] [`bx-badge`](core/badge.md) — `packages/core/src/badge`
+- [x] [`bx-avatar`](core/avatar.md) (covers avatar-group layout itself, FR-AVATAR-02) — `packages/core/src/avatar`
 - [ ] [`bx-progress-bar`](core/progress-bar.md)
 - [ ] [`bx-progress-ring`](core/progress-ring.md)
 - [ ] [`bx-skeleton`](core/skeleton.md)

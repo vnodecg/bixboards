@@ -7,7 +7,7 @@
 | **Package**         | `@bixant/core` |
 | **Category**        | Imagery        |
 | **Tag**             | `bx-avatar`    |
-| **Status**          | Planned        |
+| **Status**          | Implemented    |
 | **Form-associated** | No             |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
@@ -91,14 +91,17 @@ Group collapses to "+N" by measured width.
 
 ## 9. Acceptance criteria
 
-- [ ] All FR-AVATAR-* requirements covered by unit/component tests (Web Test Runner, real browsers).
-- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark.
-- [ ] axe-core: zero violations; manual screen-reader pass (NVDA/VoiceOver) documented.
-- [ ] Keyboard-only walkthrough recorded in the test plan.
-- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events.
-- [ ] Size budget check (`size-limit`) passes.
+- [x] All FR-AVATAR-* requirements covered by unit/component tests (Web Test Runner, real browsers: Chromium; Firefox/WebKit run in CI). See `packages/core/src/avatar/avatar.test.ts`.
+- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark. No visual-regression harness exists yet in the workspace.
+- [x] axe-core: zero violations, asserted in the test suite via `chai-a11y-axe`.
+- [ ] Manual screen-reader pass (NVDA/VoiceOver) documented.
+- [ ] Keyboard-only walkthrough recorded in the test plan. Not applicable: the avatar has no interactive state of its own.
+- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events. Wrapper packages do not exist yet.
+- [ ] Size budget check (`size-limit`) passes. No size-limit tooling configured yet.
 
 ## 10. Notes and open questions
 
-- Adds overflow group.
-- Open: confirm final property names against the custom-elements manifest during implementation.
+- Implemented in `@bixant/core` (`src/avatar/`), as `BxAvatar` plus a separate `BxAvatarGroup` (tag `bx-avatar-group`) for FR-AVATAR-02.
+- The default slot takes priority over image/initials/icon when it has assigned content, for fully custom avatar contents; `image` failing to load dispatches `bx-error` and falls back to `initials`, then the `icon` slot.
+- `bx-avatar-group`'s overflow ("+N") is driven by a `max` attribute over slotted children rather than a `ResizeObserver` measuring container width — deterministic under SSR and in tests, at the cost of not reflowing automatically when the container shrinks. A measured version can replace this later without changing the public API (`max`, `(default)` slot, `overflow` part).
+- Open: confirm final property names against the custom-elements manifest once the CEM generation pipeline exists.

@@ -85,6 +85,38 @@
     "./animation/presets/flip": {
       "types": "./dist/animation/presets/flip.d.ts",
       "default": "./dist/animation/presets/flip.js"
+    },
+    "./icon": {
+      "types": "./dist/icon/index.d.ts",
+      "default": "./dist/icon/index.js"
+    },
+    "./icon/define": {
+      "types": "./dist/icon/define.d.ts",
+      "default": "./dist/icon/define.js"
+    },
+    "./divider": {
+      "types": "./dist/divider/index.d.ts",
+      "default": "./dist/divider/index.js"
+    },
+    "./divider/define": {
+      "types": "./dist/divider/define.d.ts",
+      "default": "./dist/divider/define.js"
+    },
+    "./badge": {
+      "types": "./dist/badge/index.d.ts",
+      "default": "./dist/badge/index.js"
+    },
+    "./badge/define": {
+      "types": "./dist/badge/define.d.ts",
+      "default": "./dist/badge/define.js"
+    },
+    "./avatar": {
+      "types": "./dist/avatar/index.d.ts",
+      "default": "./dist/avatar/index.js"
+    },
+    "./avatar/define": {
+      "types": "./dist/avatar/define.d.ts",
+      "default": "./dist/avatar/define.js"
     }
   },
   "files": [
