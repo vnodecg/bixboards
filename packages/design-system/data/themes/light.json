@@ -32,6 +32,13 @@
       "strong": "{color.neutral.600}",
       "disabled": "{color.neutral.300}"
     },
-    "focus": { "ring": "{role.brand.border}" }
+    "focus": { "ring": "{role.brand.border}" },
+    "role": {
+      "accent": "{role.brand.solid}",
+      "accent-fg": "{role.brand.fg}",
+      "accent-subtle": "{role.brand.subtle}",
+      "accent-border": "{role.brand.border}"
+    },
+    "on": { "accent": "{role.brand.on-solid}" }
   }
 }

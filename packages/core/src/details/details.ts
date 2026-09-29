@@ -129,14 +129,14 @@ export class BxDetails extends BixElement {
 
       .body-wrapper {
         display: grid;
-        grid-template-rows: 0fr;
+        grid-template-rows: minmax(0, 0fr);
         transition: grid-template-rows
           var(--bx-details-hide-duration, var(--bx-motion-duration-fast, 0.12s))
           var(--bx-motion-easing-standard, ease);
       }
 
       :host([open]) .body-wrapper {
-        grid-template-rows: 1fr;
+        grid-template-rows: minmax(0, 1fr);
         transition: grid-template-rows
           var(--bx-details-show-duration, var(--bx-motion-duration-base, 0.2s))
           var(--bx-motion-easing-standard, ease);
@@ -145,6 +145,9 @@ export class BxDetails extends BixElement {
       .content {
         overflow: hidden;
         min-block-size: 0;
+      }
+
+      .content-inner {
         padding: 0 var(--bx-details-spacing, var(--bx-space-m))
           var(--bx-details-spacing, var(--bx-space-m));
       }
@@ -322,7 +325,9 @@ export class BxDetails extends BixElement {
         </button>
         <div class="body-wrapper">
           <div class="content" part="content" id=${this.#contentId}>
-            ${this.lazy && !this.#hasOpenedOnce ? nothing : html`<slot></slot>`}
+            <div class="content-inner">
+              ${this.lazy && !this.#hasOpenedOnce ? nothing : html`<slot></slot>`}
+            </div>
           </div>
         </div>
       </div>

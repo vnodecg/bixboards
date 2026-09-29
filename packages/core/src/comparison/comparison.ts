@@ -77,6 +77,7 @@ export class BxComparison extends BixElement {
         translate: -50% 0;
         inline-size: var(--divider-width, var(--bx-border-width-strong));
         background: var(--bx-surface);
+        box-shadow: 0 0 0 1px var(--bx-color-neutral-transparent-300, rgba(0, 0, 0, 0.16));
         cursor: ew-resize;
       }
 
@@ -98,12 +99,31 @@ export class BxComparison extends BixElement {
 
       .handle::before {
         content: '';
+        position: absolute;
+        inset: 0;
         box-sizing: border-box;
         inline-size: var(--handle-size, calc(var(--bx-unit) * 2));
         block-size: var(--handle-size, calc(var(--bx-unit) * 2));
+        margin: auto;
         border-radius: 50%;
         background: var(--bx-surface);
         border: var(--bx-border-width) solid var(--bx-border-strong);
+        box-shadow: var(--bx-shadow-s, 0 1px 3px rgba(0, 0, 0, 0.24));
+      }
+
+      .handle svg {
+        position: relative;
+        inline-size: 0.85em;
+        block-size: 0.85em;
+        fill: var(--bx-text-secondary);
+      }
+
+      .handle svg:first-of-type {
+        margin-inline-end: -0.15em;
+      }
+
+      .handle svg:last-of-type {
+        margin-inline-start: -0.15em;
       }
 
       .divider:focus-visible .handle::before {
@@ -250,7 +270,20 @@ export class BxComparison extends BixElement {
         @pointercancel=${this.#handlePointerUp}
         @keydown=${this.#handleKeydown}
       >
-        <div class="handle" part="handle"><slot name="handle"></slot></div>
+        <div class="handle" part="handle">
+          <slot name="handle">
+            <svg viewBox="0 0 256 256" aria-hidden="true">
+              <path
+                d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"
+              ></path>
+            </svg>
+            <svg viewBox="0 0 256 256" aria-hidden="true">
+              <path
+                d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"
+              ></path>
+            </svg>
+          </slot>
+        </div>
       </div>
     `;
   }

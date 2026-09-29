@@ -270,6 +270,14 @@
       "types": "./dist/breadcrumb-item/define.d.ts",
       "default": "./dist/breadcrumb-item/define.js"
     },
+    "./carousel": {
+      "types": "./dist/carousel/index.d.ts",
+      "default": "./dist/carousel/index.js"
+    },
+    "./carousel/define": {
+      "types": "./dist/carousel/define.d.ts",
+      "default": "./dist/carousel/define.js"
+    },
     "./carousel-item": {
       "types": "./dist/carousel-item/index.d.ts",
       "default": "./dist/carousel-item/index.js"

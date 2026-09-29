@@ -74,6 +74,8 @@ export class BxBreadcrumbItem extends BixElement {
       }
 
       .separator {
+        display: inline-flex;
+        margin-inline-end: var(--bx-space-2xs);
         color: var(--bx-text-secondary);
         user-select: none;
       }

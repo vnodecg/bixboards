@@ -150,6 +150,10 @@ export class BxBadge extends BixElement {
         max-inline-size: 100%;
       }
 
+      :host([with-remove]) .base {
+        padding-inline-end: var(--bx-badge-gap, var(--bx-space-2xs));
+      }
+
       :host([pill]) .base {
         border-radius: var(--bx-radius-pill);
       }
@@ -211,16 +215,24 @@ export class BxBadge extends BixElement {
 
       .remove-button {
         all: unset;
+        position: relative;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        inline-size: 1em;
-        block-size: 1em;
-        min-inline-size: var(--bx-target-min);
-        min-block-size: var(--bx-target-min);
-        margin-inline: calc(var(--bx-space-2xs) * -1) 0;
+        inline-size: 1.4em;
+        block-size: 1.4em;
         border-radius: var(--bx-radius-pill);
         cursor: pointer;
+      }
+
+      .remove-button::before {
+        content: '';
+        position: absolute;
+        inset-block-start: 50%;
+        inset-inline-start: 50%;
+        translate: -50% -50%;
+        inline-size: max(100%, var(--bx-target-min));
+        block-size: max(100%, var(--bx-target-min));
       }
 
       .remove-button:hover {
@@ -233,8 +245,8 @@ export class BxBadge extends BixElement {
       }
 
       .remove-button svg {
-        inline-size: 0.65em;
-        block-size: 0.65em;
+        inline-size: 0.85em;
+        block-size: 0.85em;
       }
 
       :host([attention='pulse']) .base {

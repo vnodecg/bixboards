@@ -130,6 +130,11 @@ export function themeVars(
   if (seeds['brand']) {
     vars['--bx-focus-ring'] = 'var(--bx-role-brand-border)';
     vars['--bx-text-link'] = 'var(--bx-role-brand-fg)';
+    vars['--bx-role-accent'] = 'var(--bx-role-brand-solid)';
+    vars['--bx-role-accent-fg'] = 'var(--bx-role-brand-fg)';
+    vars['--bx-role-accent-subtle'] = 'var(--bx-role-brand-subtle)';
+    vars['--bx-role-accent-border'] = 'var(--bx-role-brand-border)';
+    vars['--bx-on-accent'] = 'var(--bx-role-brand-on-solid)';
   }
   for (const extra of [options.foundation, options.tokens]) {
     for (const [k, v] of Object.entries(extra ?? {})) {
