@@ -149,6 +149,70 @@
     "./spinner/define": {
       "types": "./dist/spinner/define.d.ts",
       "default": "./dist/spinner/define.js"
+    },
+    "./callout": {
+      "types": "./dist/callout/index.d.ts",
+      "default": "./dist/callout/index.js"
+    },
+    "./callout/define": {
+      "types": "./dist/callout/define.d.ts",
+      "default": "./dist/callout/define.js"
+    },
+    "./card": {
+      "types": "./dist/card/index.d.ts",
+      "default": "./dist/card/index.js"
+    },
+    "./card/define": {
+      "types": "./dist/card/define.d.ts",
+      "default": "./dist/card/define.js"
+    },
+    "./scroller": {
+      "types": "./dist/scroller/index.d.ts",
+      "default": "./dist/scroller/index.js"
+    },
+    "./scroller/define": {
+      "types": "./dist/scroller/define.d.ts",
+      "default": "./dist/scroller/define.js"
+    },
+    "./details": {
+      "types": "./dist/details/index.d.ts",
+      "default": "./dist/details/index.js"
+    },
+    "./details/define": {
+      "types": "./dist/details/define.d.ts",
+      "default": "./dist/details/define.js"
+    },
+    "./dialog": {
+      "types": "./dist/dialog/index.d.ts",
+      "default": "./dist/dialog/index.js"
+    },
+    "./dialog/define": {
+      "types": "./dist/dialog/define.d.ts",
+      "default": "./dist/dialog/define.js"
+    },
+    "./input": {
+      "types": "./dist/input/index.d.ts",
+      "default": "./dist/input/index.js"
+    },
+    "./input/define": {
+      "types": "./dist/input/define.d.ts",
+      "default": "./dist/input/define.js"
+    },
+    "./checkbox": {
+      "types": "./dist/checkbox/index.d.ts",
+      "default": "./dist/checkbox/index.js"
+    },
+    "./checkbox/define": {
+      "types": "./dist/checkbox/define.d.ts",
+      "default": "./dist/checkbox/define.js"
+    },
+    "./switch": {
+      "types": "./dist/switch/index.d.ts",
+      "default": "./dist/switch/index.js"
+    },
+    "./switch/define": {
+      "types": "./dist/switch/define.d.ts",
+      "default": "./dist/switch/define.js"
     }
   },
   "files": [

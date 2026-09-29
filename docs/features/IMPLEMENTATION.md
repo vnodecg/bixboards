@@ -2,7 +2,7 @@
 
 Tracks build status for all 61 components across `@bixant/core`, `@bixant/data-table` and `@bixant/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 6 / 61 done.**
+**Progress: 18 / 61 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -39,18 +39,18 @@ No dependency on any other unbuilt `bx-*` component.
 - [x] [`bx-divider`](core/divider.md) — `packages/core/src/divider`
 - [x] [`bx-badge`](core/badge.md) — `packages/core/src/badge`
 - [x] [`bx-avatar`](core/avatar.md) (covers avatar-group layout itself, FR-AVATAR-02) — `packages/core/src/avatar`
-- [ ] [`bx-progress-bar`](core/progress-bar.md)
-- [ ] [`bx-progress-ring`](core/progress-ring.md)
-- [ ] [`bx-skeleton`](core/skeleton.md)
-- [ ] [`bx-spinner`](core/spinner.md)
-- [ ] [`bx-callout`](core/callout.md)
-- [ ] [`bx-card`](core/card.md)
-- [ ] [`bx-scroller`](core/scroller.md)
-- [ ] [`bx-details`](core/details.md) (accordion grouping via `name` attribute is peer coordination, no child component needed)
-- [ ] [`bx-dialog`](core/dialog.md) (built on native `<dialog>`)
-- [ ] [`bx-input`](core/input.md)
-- [ ] [`bx-checkbox`](core/checkbox.md)
-- [ ] [`bx-switch`](core/switch.md)
+- [x] [`bx-progress-bar`](core/progress-bar.md) — `packages/core/src/progress-bar`
+- [x] [`bx-progress-ring`](core/progress-ring.md) — `packages/core/src/progress-ring`
+- [x] [`bx-skeleton`](core/skeleton.md) — `packages/core/src/skeleton`
+- [x] [`bx-spinner`](core/spinner.md) — `packages/core/src/spinner`
+- [x] [`bx-callout`](core/callout.md) — `packages/core/src/callout`
+- [x] [`bx-card`](core/card.md) — `packages/core/src/card`
+- [x] [`bx-scroller`](core/scroller.md) — `packages/core/src/scroller`; edge shadows use the JS scroll-listener fallback path only, not the scroll-driven-animation alternative (noted in the component's own doc comment)
+- [x] [`bx-details`](core/details.md) (accordion grouping via `name` attribute is peer coordination, no child component needed) — `packages/core/src/details`
+- [x] [`bx-dialog`](core/dialog.md) (built on native `<dialog>`) — `packages/core/src/dialog`
+- [x] [`bx-input`](core/input.md) — `packages/core/src/input`
+- [x] [`bx-checkbox`](core/checkbox.md) (lite render path for `bx-data-table` selection deferred until that package exists) — `packages/core/src/checkbox`
+- [x] [`bx-switch`](core/switch.md) — `packages/core/src/switch`
 - [ ] [`bx-radio`](core/radio.md) (works standalone; grouped by `bx-radio-group` in Tier 2)
 - [ ] [`bx-slider`](core/slider.md)
 - [ ] [`bx-rating`](core/rating.md)

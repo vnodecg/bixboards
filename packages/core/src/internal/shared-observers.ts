@@ -52,3 +52,33 @@ export function observeIntersection(
     entry.callbacks.delete(target);
   };
 }
+
+type ResizeCallback = (entry: ResizeObserverEntry) => void;
+
+let sharedResizeObserver: ResizeObserver | undefined;
+const resizeCallbacks = new Map<Element, ResizeCallback>();
+
+/**
+ * Observes `target` on one shared `ResizeObserver` for the whole page, invoking `callback` on
+ * every size change. Returns a function that stops observing `target`.
+ *
+ * Returns a no-op unobserve function when `ResizeObserver` is unavailable (SSR).
+ */
+export function observeResize(
+  target: Element,
+  callback: ResizeCallback,
+): () => void {
+  if (typeof ResizeObserver === 'undefined') return () => {};
+
+  sharedResizeObserver ??= new ResizeObserver((entries) => {
+    for (const entry of entries) resizeCallbacks.get(entry.target)?.(entry);
+  });
+
+  resizeCallbacks.set(target, callback);
+  sharedResizeObserver.observe(target);
+
+  return () => {
+    sharedResizeObserver?.unobserve(target);
+    resizeCallbacks.delete(target);
+  };
+}
