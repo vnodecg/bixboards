@@ -341,6 +341,46 @@
     "./format-number/define": {
       "types": "./dist/format-number/define.d.ts",
       "default": "./dist/format-number/define.js"
+    },
+    "./relative-time": {
+      "types": "./dist/relative-time/index.d.ts",
+      "default": "./dist/relative-time/index.js"
+    },
+    "./relative-time/define": {
+      "types": "./dist/relative-time/define.d.ts",
+      "default": "./dist/relative-time/define.js"
+    },
+    "./include": {
+      "types": "./dist/include/index.d.ts",
+      "default": "./dist/include/index.js"
+    },
+    "./include/define": {
+      "types": "./dist/include/define.d.ts",
+      "default": "./dist/include/define.js"
+    },
+    "./intersection-observer": {
+      "types": "./dist/intersection-observer/index.d.ts",
+      "default": "./dist/intersection-observer/index.js"
+    },
+    "./intersection-observer/define": {
+      "types": "./dist/intersection-observer/define.d.ts",
+      "default": "./dist/intersection-observer/define.js"
+    },
+    "./mutation-observer": {
+      "types": "./dist/mutation-observer/index.d.ts",
+      "default": "./dist/mutation-observer/index.js"
+    },
+    "./mutation-observer/define": {
+      "types": "./dist/mutation-observer/define.d.ts",
+      "default": "./dist/mutation-observer/define.js"
+    },
+    "./resize-observer": {
+      "types": "./dist/resize-observer/index.d.ts",
+      "default": "./dist/resize-observer/index.js"
+    },
+    "./resize-observer/define": {
+      "types": "./dist/resize-observer/define.d.ts",
+      "default": "./dist/resize-observer/define.js"
     }
   },
   "files": [

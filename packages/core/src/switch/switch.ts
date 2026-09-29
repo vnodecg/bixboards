@@ -64,12 +64,19 @@ export class BxSwitch extends FormAssociatedMixin(BixElement) {
         inline-size: var(--bx-switch-width, calc(var(--bx-unit) * 2.75));
         block-size: var(--bx-switch-height, calc(var(--bx-unit) * 1.5));
         margin: calc(
-          (var(--bx-target-min, 2.75rem) - var(--bx-switch-height, calc(var(--bx-unit) * 1.5))) / 2
+          (
+              var(--bx-target-min, 2.75rem) - var(
+                  --bx-switch-height,
+                  calc(var(--bx-unit) * 1.5)
+                )
+            ) /
+            2
         );
         border: var(--bx-border-width-strong) solid var(--bx-border-strong);
         border-radius: var(--bx-radius-full, 999px);
         background: var(--bx-surface-subtle);
-        transition: background var(--bx-motion-duration-fast, 0.12s) ease,
+        transition:
+          background var(--bx-motion-duration-fast, 0.12s) ease,
           border-color var(--bx-motion-duration-fast, 0.12s) ease;
       }
 
@@ -101,8 +108,14 @@ export class BxSwitch extends FormAssociatedMixin(BixElement) {
         position: absolute;
         inset-block-start: 50%;
         inset-inline-start: 2px;
-        inline-size: var(--bx-thumb-size, calc(var(--bx-switch-height, calc(var(--bx-unit) * 1.5)) - 6px));
-        block-size: var(--bx-thumb-size, calc(var(--bx-switch-height, calc(var(--bx-unit) * 1.5)) - 6px));
+        inline-size: var(
+          --bx-thumb-size,
+          calc(var(--bx-switch-height, calc(var(--bx-unit) * 1.5)) - 6px)
+        );
+        block-size: var(
+          --bx-thumb-size,
+          calc(var(--bx-switch-height, calc(var(--bx-unit) * 1.5)) - 6px)
+        );
         border-radius: 50%;
         background: var(--bx-surface);
         transform: translateY(-50%);
@@ -113,8 +126,13 @@ export class BxSwitch extends FormAssociatedMixin(BixElement) {
         transform: translateY(-50%)
           translateX(
             calc(
-              var(--bx-switch-width, calc(var(--bx-unit) * 2.75)) -
-                var(--bx-thumb-size, calc(var(--bx-switch-height, calc(var(--bx-unit) * 1.5)) - 6px)) - 4px
+              var(--bx-switch-width, calc(var(--bx-unit) * 2.75)) - var(
+                  --bx-thumb-size,
+                  calc(
+                    var(--bx-switch-height, calc(var(--bx-unit) * 1.5)) - 6px
+                  )
+                ) -
+                4px
             )
           );
       }
@@ -141,7 +159,8 @@ export class BxSwitch extends FormAssociatedMixin(BixElement) {
 
       .hint {
         margin-inline-start: calc(
-          var(--bx-switch-width, calc(var(--bx-unit) * 2.75)) + var(--bx-space-xs)
+          var(--bx-switch-width, calc(var(--bx-unit) * 2.75)) +
+            var(--bx-space-xs)
         );
         color: var(--bx-text-secondary);
         font-size: var(--bx-font-size-s);
@@ -205,12 +224,14 @@ export class BxSwitch extends FormAssociatedMixin(BixElement) {
     this.addEventListener('pointerdown', this.#handlePointerDown);
   }
 
-  protected override createRenderRoot() {
-    return this.attachShadow({ mode: 'open', delegatesFocus: true });
-  }
+  static override shadowRootOptions: ShadowRootInit = {
+    ...BixElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
 
   protected override willUpdate(changed: PropertyValues<this>): void {
-    if (changed.has('checked') || changed.has('required')) this.#syncFormState();
+    if (changed.has('checked') || changed.has('required'))
+      this.#syncFormState();
   }
 
   #syncFormState(): void {
@@ -248,7 +269,9 @@ export class BxSwitch extends FormAssociatedMixin(BixElement) {
     this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
 
     if (!this.internals.checkValidity())
-      this.dispatchEvent(new CustomEvent('bx-invalid', { bubbles: true, composed: true }));
+      this.dispatchEvent(
+        new CustomEvent('bx-invalid', { bubbles: true, composed: true }),
+      );
   }
 
   #handleClick = (): void => {
@@ -270,7 +293,8 @@ export class BxSwitch extends FormAssociatedMixin(BixElement) {
     this.#dragStartX = event.clientX;
     this.#dragging = false;
 
-    const controlWidth = this.shadowRoot!.querySelector('.control')!.getBoundingClientRect().width;
+    const controlWidth =
+      this.shadowRoot!.querySelector('.control')!.getBoundingClientRect().width;
 
     const handleMove = (moveEvent: PointerEvent): void => {
       const delta = moveEvent.clientX - this.#dragStartX;
@@ -306,7 +330,9 @@ export class BxSwitch extends FormAssociatedMixin(BixElement) {
         >
           <span class="thumb" part="thumb"></span>
         </span>
-        <span class="label" part="label" id=${this.#labelId}><slot></slot></span>
+        <span class="label" part="label" id=${this.#labelId}
+          ><slot></slot
+        ></span>
       </div>
       <div class="hint" part="hint"><slot name="hint">${this.hint}</slot></div>
     `;

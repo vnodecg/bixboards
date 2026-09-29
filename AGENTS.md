@@ -28,7 +28,7 @@ Components live in `@bixant/core` (plus `@bixant/data-table`, `@bixant/data-list
 
 - Pick a single component from [docs/features/README.md](docs/features/README.md); read its feature doc plus [docs/features/_conventions.md](docs/features/_conventions.md) before writing it.
 - Implement it fully (element, styles, forms/a11y/virtualization as applicable per the conventions doc) and land it before starting the next component.
-- Add a detailed Storybook example for it alongside the implementation (see below).
+- **Add its Storybook story in the same change, every time — this is not optional.** A component is not done without one; do not defer it, do not batch it for later, do not skip it because the component "is simple." See "Required Storybook example per component" below for what it must cover. Before marking IMPLEMENTATION.md's checkbox, confirm `packages/storybook/stories/<name>.stories.ts` exists and that `pnpm nx run storybook:build-storybook` succeeds — a missing or broken story is a blocking gap, not a follow-up task. (This rule exists because a backlog of ~30 shipped components with no story accumulated silently — Storybook coverage had drifted far behind IMPLEMENTATION.md's checkmarks, and one of those missing stories is what surfaced the `createRenderRoot`/`shadowRootOptions` bug documented below. Writing the story is also the actual verification step: several components looked correct in isolation but only revealed layout bugs once rendered live.)
 
 ## File layout per component
 
@@ -62,6 +62,14 @@ Before finishing, grep for the old name/value if you renamed or removed somethin
 ## Base class
 
 Every component class extends `BixElement` (`packages/core/src/bix-element.ts`), never `LitElement` directly. It is intentionally thin — a shared `box-sizing: border-box` reset (`BixElement.baseStyles`, composed into the subclass's own `static styles` array, not applied automatically), the `static tagName` + `static define(tagName?)` registration pattern (a component's `index.ts` calls `MyComponent.define()`; its `define.ts` wraps that in a named `defineMyComponent(tagName?)` function per docs/features/_conventions.md §1), and a `protected get prefersReducedMotion` for anything that autoplays. Add to `BixElement` only once a second component needs the same thing — don't pre-build abstractions for components that don't exist yet.
+
+**Never override `createRenderRoot()` to call `this.attachShadow(...)` directly** — this was a real, shipped bug (found 2026-09-29, via the first Storybook story several `delegatesFocus` components had ever gotten — see the note above on why stories aren't optional): Lit's own `createRenderRoot()` attaches the shadow root *and* adopts `static styles` onto it via `adoptedStyleSheets`; replacing it with a raw `attachShadow()` call attaches the shadow root but silently skips style adoption, so the component renders with zero CSS applied in a real browser (existing DOM/state tests don't catch this — they don't check computed layout). `bx-checkbox`, `bx-switch`, `bx-radio`, `bx-slider`, `bx-rating`, `bx-input` and `bx-comparison` all had this bug for `delegatesFocus`. To customize shadow root options (e.g. `delegatesFocus`), override the **static** `shadowRootOptions` property instead and let the inherited `createRenderRoot()` do the rest:
+```ts
+static override shadowRootOptions: ShadowRootInit = {
+  ...BixElement.shadowRootOptions,
+  delegatesFocus: true,
+};
+```
 
 ## Visual language: shadcn-inspired
 

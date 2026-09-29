@@ -141,9 +141,10 @@ export class BxComparison extends BixElement {
     this.position = 50;
   }
 
-  protected override createRenderRoot() {
-    return this.attachShadow({ mode: 'open', delegatesFocus: true });
-  }
+  static override shadowRootOptions: ShadowRootInit = {
+    ...BixElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
 
   protected override willUpdate(changed: PropertyValues<this>): void {
     if (changed.has('position')) this.position = clamp(this.position, 0, 100);
@@ -212,7 +213,10 @@ export class BxComparison extends BixElement {
       default:
         return;
     }
-    if (event.shiftKey && (event.key === 'ArrowRight' || event.key === 'ArrowLeft'))
+    if (
+      event.shiftKey &&
+      (event.key === 'ArrowRight' || event.key === 'ArrowLeft')
+    )
       delta *= ARROW_STEP_LARGE;
     event.preventDefault();
     this.#commit(clamp(this.position + delta, 0, 100));
@@ -221,7 +225,11 @@ export class BxComparison extends BixElement {
   protected override render() {
     return html`
       <div class="after" part="after"><slot name="after"></slot></div>
-      <div class="before" part="before" style="--bx-comparison-position: ${this.position}%">
+      <div
+        class="before"
+        part="before"
+        style="--bx-comparison-position: ${this.position}%"
+      >
         <slot name="before"></slot>
       </div>
       <div

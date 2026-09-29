@@ -73,7 +73,13 @@ export class BxRadio extends FormAssociatedMixin(BixElement) {
         inline-size: var(--bx-radio-size, calc(var(--bx-unit) * 1.25));
         block-size: var(--bx-radio-size, calc(var(--bx-unit) * 1.25));
         margin: calc(
-          (var(--bx-target-min, 2.75rem) - var(--bx-radio-size, calc(var(--bx-unit) * 1.25))) / 2
+          (
+              var(--bx-target-min, 2.75rem) - var(
+                  --bx-radio-size,
+                  calc(var(--bx-unit) * 1.25)
+                )
+            ) /
+            2
         );
         border: var(--bx-border-width-strong) solid var(--bx-border-strong);
         border-radius: 50%;
@@ -212,9 +218,10 @@ export class BxRadio extends FormAssociatedMixin(BixElement) {
     this.addEventListener('keydown', this.#handleKeydown);
   }
 
-  protected override createRenderRoot() {
-    return this.attachShadow({ mode: 'open', delegatesFocus: true });
-  }
+  static override shadowRootOptions: ShadowRootInit = {
+    ...BixElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
 
   override connectedCallback(): void {
     super.connectedCallback();
@@ -244,7 +251,8 @@ export class BxRadio extends FormAssociatedMixin(BixElement) {
 
   #uncheckGroupSiblings(): void {
     if (!this.name) return;
-    for (const other of groupMembers(this.name)) if (other !== this) other.checked = false;
+    for (const other of groupMembers(this.name))
+      if (other !== this) other.checked = false;
   }
 
   protected override willUpdate(changed: PropertyValues<this>): void {
@@ -286,7 +294,9 @@ export class BxRadio extends FormAssociatedMixin(BixElement) {
     this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
 
     if (!this.internals.checkValidity())
-      this.dispatchEvent(new CustomEvent('bx-invalid', { bubbles: true, composed: true }));
+      this.dispatchEvent(
+        new CustomEvent('bx-invalid', { bubbles: true, composed: true }),
+      );
   }
 
   #handleActivate = (): void => this.#select();
@@ -307,7 +317,9 @@ export class BxRadio extends FormAssociatedMixin(BixElement) {
     if (!forward && !backward) return;
     event.preventDefault();
 
-    const members = groupMembers(this.name).filter((member) => !member.disabled);
+    const members = groupMembers(this.name).filter(
+      (member) => !member.disabled,
+    );
     if (members.length < 2) return;
     const index = members.indexOf(this);
     if (index === -1) return;
@@ -324,7 +336,8 @@ export class BxRadio extends FormAssociatedMixin(BixElement) {
     // enabled member of the group is, so an empty group is still keyboard-discoverable.
     const members = this.name ? groupMembers(this.name) : [];
     const isTabStop =
-      this.checked || (!members.some((member) => member.checked) && members[0] === this);
+      this.checked ||
+      (!members.some((member) => member.checked) && members[0] === this);
 
     return html`
       <div class="base" part="base">
@@ -339,7 +352,9 @@ export class BxRadio extends FormAssociatedMixin(BixElement) {
         >
           ${this.checked ? html`<span class="checked-icon" part="checked-icon"></span>` : nothing}
         </span>
-        <span class="label" part="label" id=${this.#labelId}><slot></slot></span>
+        <span class="label" part="label" id=${this.#labelId}
+          ><slot></slot
+        ></span>
       </div>
     `;
   }

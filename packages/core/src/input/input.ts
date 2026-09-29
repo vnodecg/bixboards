@@ -334,9 +334,10 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
     this.labelPosition = 'auto';
   }
 
-  protected override createRenderRoot() {
-    return this.attachShadow({ mode: 'open', delegatesFocus: true });
-  }
+  static override shadowRootOptions: ShadowRootInit = {
+    ...BixElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
 
   protected override firstUpdated(): void {
     // Captured here, not the constructor: the initial `value` attribute is applied by Lit after
@@ -369,20 +370,32 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
   // input's own value has drifted from the property (i.e. the assignment came from outside).
   #syncExternalValue(previous: string | undefined): void {
     const inputEl = this.#inputEl;
-    if (!inputEl || inputEl.value === this.value || previous === undefined) return;
+    if (!inputEl || inputEl.value === this.value || previous === undefined)
+      return;
     const selectionStart = inputEl.selectionStart;
     const selectionEnd = inputEl.selectionEnd;
     inputEl.value = this.value;
-    if (document.activeElement === this && selectionStart !== null && selectionEnd !== null) {
+    if (
+      document.activeElement === this &&
+      selectionStart !== null &&
+      selectionEnd !== null
+    ) {
       const max = this.value.length;
-      inputEl.setSelectionRange(Math.min(selectionStart, max), Math.min(selectionEnd, max));
+      inputEl.setSelectionRange(
+        Math.min(selectionStart, max),
+        Math.min(selectionEnd, max),
+      );
     }
   }
 
   #syncValidity(hasInteracted = this.#hasInteracted): void {
     const inputEl = this.#inputEl;
     if (!inputEl) return;
-    this.internals.setValidity(inputEl.validity, inputEl.validationMessage, inputEl);
+    this.internals.setValidity(
+      inputEl.validity,
+      inputEl.validationMessage,
+      inputEl,
+    );
     if (hasInteracted) {
       this.toggleAttribute('data-user-valid', inputEl.validity.valid);
       this.toggleAttribute('data-user-invalid', !inputEl.validity.valid);
@@ -408,7 +421,10 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
 
     if (this.debounce && this.debounce > 0) {
       clearTimeout(this.#debounceTimer);
-      this.#debounceTimer = setTimeout(() => this.#dispatchInput(), this.debounce);
+      this.#debounceTimer = setTimeout(
+        () => this.#dispatchInput(),
+        this.debounce,
+      );
     } else {
       this.#dispatchInput();
     }
@@ -423,7 +439,9 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
     this.#syncValidity();
     this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
     if (!this.internals.checkValidity())
-      this.dispatchEvent(new CustomEvent('bx-invalid', { bubbles: true, composed: true }));
+      this.dispatchEvent(
+        new CustomEvent('bx-invalid', { bubbles: true, composed: true }),
+      );
   };
 
   #handleInvalid = (event: Event): void => {
@@ -437,7 +455,9 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
     this.#hasInteracted = true;
     this.#syncValidity();
     this.#inputEl.focus();
-    this.dispatchEvent(new CustomEvent('bx-clear', { bubbles: true, composed: true }));
+    this.dispatchEvent(
+      new CustomEvent('bx-clear', { bubbles: true, composed: true }),
+    );
     this.#dispatchInput();
     this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
   };
@@ -462,7 +482,11 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
     this.#inputEl?.select();
   }
 
-  setSelectionRange(start: number | null, end: number | null, direction?: 'forward' | 'backward' | 'none'): void {
+  setSelectionRange(
+    start: number | null,
+    end: number | null,
+    direction?: 'forward' | 'backward' | 'none',
+  ): void {
     this.#inputEl?.setSelectionRange(start, end, direction);
   }
 
@@ -488,17 +512,21 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
   protected override render() {
     const showLabel = this.withLabel || this.label.length > 0;
     const showHint = this.withHint || this.hint.length > 0;
-    const showClear = this.clearable && !!this.value && !this.disabled && !this.readonly;
+    const showClear =
+      this.clearable && !!this.value && !this.disabled && !this.readonly;
     const showPasswordToggle = this.passwordToggle && this.type === 'password';
-    const effectiveType = showPasswordToggle && this.#revealed ? 'text' : this.type;
+    const effectiveType =
+      showPasswordToggle && this.#revealed ? 'text' : this.type;
 
     return html`
       <div class="form-control" part="form-control">
-        ${showLabel
-          ? html`<label class="label" part="label" for=${this.#inputId}
-              ><slot name="label">${this.label}</slot></label
-            >`
-          : nothing}
+        ${
+          showLabel
+            ? html`<label class="label" part="label" for=${this.#inputId}
+                ><slot name="label">${this.label}</slot></label
+              >`
+            : nothing
+        }
         <div class="base" part="base">
           <span class="start" part="start"><slot name="start"></slot></span>
           <input
@@ -526,48 +554,59 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
             @change=${this.#handleChange}
             @invalid=${this.#handleInvalid}
           />
-          ${showClear
-            ? html`
-                <button
-                  type="button"
-                  class="clear-button"
-                  part="clear-button"
-                  aria-label="Clear"
-                  @click=${this.#handleClear}
-                >
-                  <slot name="clear-icon"
-                    ><svg viewBox="0 0 256 256"><path d=${CLEAR_PATH}></path></svg></slot
+          ${
+            showClear
+              ? html`
+                  <button
+                    type="button"
+                    class="clear-button"
+                    part="clear-button"
+                    aria-label="Clear"
+                    @click=${this.#handleClear}
                   >
-                </button>
-              `
-            : nothing}
-          ${showPasswordToggle
-            ? html`
-                <button
-                  type="button"
-                  class="password-toggle-button"
-                  part="password-toggle-button"
-                  aria-label=${this.#revealed ? 'Hide password' : 'Show password'}
-                  aria-pressed=${this.#revealed}
-                  @click=${this.#handleTogglePassword}
-                >
-                  ${this.#revealed
-                    ? html`<slot name="hide-password-icon"
-                        ><svg viewBox="0 0 256 256"><path d=${EYE_SLASH_PATH}></path></svg></slot
-                      >`
-                    : html`<slot name="show-password-icon"
-                        ><svg viewBox="0 0 256 256"><path d=${EYE_PATH}></path></svg></slot
-                      >`}
-                </button>
-              `
-            : nothing}
+                    <slot name="clear-icon"
+                      ><svg viewBox="0 0 256 256">
+                        <path d=${CLEAR_PATH}></path></svg
+                    ></slot>
+                  </button>
+                `
+              : nothing
+          }
+          ${
+            showPasswordToggle
+              ? html`
+                  <button
+                    type="button"
+                    class="password-toggle-button"
+                    part="password-toggle-button"
+                    aria-label=${this.#revealed ? 'Hide password' : 'Show password'}
+                    aria-pressed=${this.#revealed}
+                    @click=${this.#handleTogglePassword}
+                  >
+                    ${
+                      this.#revealed
+                        ? html`<slot name="hide-password-icon"
+                            ><svg viewBox="0 0 256 256">
+                              <path d=${EYE_SLASH_PATH}></path></svg
+                          ></slot>`
+                        : html`<slot name="show-password-icon"
+                            ><svg viewBox="0 0 256 256">
+                              <path d=${EYE_PATH}></path></svg
+                          ></slot>`
+                    }
+                  </button>
+                `
+              : nothing
+          }
           <span class="end" part="end"><slot name="end"></slot></span>
         </div>
-        ${showHint
-          ? html`<div class="hint" part="hint" id=${this.#hintId}>
-              <slot name="hint">${this.hint}</slot>
-            </div>`
-          : nothing}
+        ${
+          showHint
+            ? html`<div class="hint" part="hint" id=${this.#hintId}>
+                <slot name="hint">${this.hint}</slot>
+              </div>`
+            : nothing
+        }
       </div>
     `;
   }

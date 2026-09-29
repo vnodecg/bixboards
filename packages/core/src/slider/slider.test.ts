@@ -12,7 +12,9 @@ describe('bx-slider', () => {
   });
 
   it('renders role=slider with aria-value* attributes', async () => {
-    const el = await fixture<BxSlider>(html`<bx-slider value="30"></bx-slider>`);
+    const el = await fixture<BxSlider>(
+      html`<bx-slider value="30"></bx-slider>`,
+    );
     const thumb = el.shadowRoot!.querySelector('[role="slider"]')!;
     expect(thumb.getAttribute('aria-valuemin')).to.equal('0');
     expect(thumb.getAttribute('aria-valuemax')).to.equal('100');
@@ -20,39 +22,65 @@ describe('bx-slider', () => {
   });
 
   it('increments value on ArrowRight and fires input/change', async () => {
-    const el = await fixture<BxSlider>(html`<bx-slider value="10" step="5"></bx-slider>`);
-    const thumb = el.shadowRoot!.querySelector('[role="slider"]') as HTMLElement;
+    const el = await fixture<BxSlider>(
+      html`<bx-slider value="10" step="5"></bx-slider>`,
+    );
+    const thumb = el.shadowRoot!.querySelector(
+      '[role="slider"]',
+    ) as HTMLElement;
     const inputPromise = oneEvent(el, 'input');
     const changePromise = oneEvent(el, 'change');
-    thumb.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+    thumb.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }),
+    );
     await inputPromise;
     await changePromise;
     expect(el.value).to.equal(15);
   });
 
   it('PageUp steps by 10x', async () => {
-    const el = await fixture<BxSlider>(html`<bx-slider value="10" step="1"></bx-slider>`);
-    const thumb = el.shadowRoot!.querySelector('[role="slider"]') as HTMLElement;
-    thumb.dispatchEvent(new KeyboardEvent('keydown', { key: 'PageUp', bubbles: true }));
+    const el = await fixture<BxSlider>(
+      html`<bx-slider value="10" step="1"></bx-slider>`,
+    );
+    const thumb = el.shadowRoot!.querySelector(
+      '[role="slider"]',
+    ) as HTMLElement;
+    thumb.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'PageUp', bubbles: true }),
+    );
     await el.updateComplete;
     expect(el.value).to.equal(20);
   });
 
   it('Home/End jump to min/max', async () => {
-    const el = await fixture<BxSlider>(html`<bx-slider value="50"></bx-slider>`);
-    const thumb = el.shadowRoot!.querySelector('[role="slider"]') as HTMLElement;
-    thumb.dispatchEvent(new KeyboardEvent('keydown', { key: 'End', bubbles: true }));
+    const el = await fixture<BxSlider>(
+      html`<bx-slider value="50"></bx-slider>`,
+    );
+    const thumb = el.shadowRoot!.querySelector(
+      '[role="slider"]',
+    ) as HTMLElement;
+    thumb.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'End', bubbles: true }),
+    );
     await el.updateComplete;
     expect(el.value).to.equal(100);
-    thumb.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home', bubbles: true }));
+    thumb.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Home', bubbles: true }),
+    );
     await el.updateComplete;
     expect(el.value).to.equal(0);
   });
 
   it('does not move when disabled', async () => {
-    const el = await fixture<BxSlider>(html`<bx-slider value="10" disabled></bx-slider>`);
-    const thumb = el.shadowRoot!.querySelector('[role="slider"]') as HTMLElement;
-    thumb.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+    const el = await fixture<BxSlider>(
+      html`<bx-slider value="10" disabled></bx-slider>`,
+    );
+    const thumb = el.shadowRoot!.querySelector(
+      '[role="slider"]',
+    ) as HTMLElement;
+    thumb.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }),
+    );
     await el.updateComplete;
     expect(el.value).to.equal(10);
   });
@@ -61,14 +89,20 @@ describe('bx-slider', () => {
     const el = await fixture<BxSlider>(
       html`<bx-slider range min-value="40" max-value="60"></bx-slider>`,
     );
-    const [minThumb, maxThumb] = [...el.shadowRoot!.querySelectorAll('[role="slider"]')] as HTMLElement[];
+    const [minThumb, maxThumb] = [
+      ...el.shadowRoot!.querySelectorAll('[role="slider"]'),
+    ] as HTMLElement[];
     for (let i = 0; i < 30; i++)
-      minThumb!.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+      minThumb!.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }),
+      );
     await el.updateComplete;
     expect(el.minValue).to.equal(el.maxValue);
 
     for (let i = 0; i < 30; i++)
-      maxThumb!.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
+      maxThumb!.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }),
+      );
     await el.updateComplete;
     expect(el.maxValue).to.equal(el.minValue);
   });
@@ -93,7 +127,9 @@ describe('bx-slider', () => {
   });
 
   it('has no axe violations', async () => {
-    const el = await fixture<BxSlider>(html`<bx-slider value="20"></bx-slider>`);
+    const el = await fixture<BxSlider>(
+      html`<bx-slider value="20"></bx-slider>`,
+    );
     await expect(el).to.be.accessible();
   });
 

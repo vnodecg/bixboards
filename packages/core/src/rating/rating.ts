@@ -197,12 +197,14 @@ export class BxRating extends FormAssociatedMixin(BixElement) {
     this.size = 'medium';
   }
 
-  protected override createRenderRoot() {
-    return this.attachShadow({ mode: 'open', delegatesFocus: true });
-  }
+  static override shadowRootOptions: ShadowRootInit = {
+    ...BixElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
 
   protected override willUpdate(changed: PropertyValues<this>): void {
-    if (changed.has('value') || changed.has('max')) this.value = clamp(this.value, 0, this.max);
+    if (changed.has('value') || changed.has('max'))
+      this.value = clamp(this.value, 0, this.max);
     if (changed.has('value')) this.#syncFormState();
   }
 
@@ -236,7 +238,10 @@ export class BxRating extends FormAssociatedMixin(BixElement) {
   }
 
   #setFillPercent(value: number): void {
-    this.#fillEl?.style.setProperty('--bx-rating-fill', `${(value / this.max) * 100}%`);
+    this.#fillEl?.style.setProperty(
+      '--bx-rating-fill',
+      `${(value / this.max) * 100}%`,
+    );
   }
 
   #handlePointerMove = (event: PointerEvent): void => {
@@ -247,7 +252,10 @@ export class BxRating extends FormAssociatedMixin(BixElement) {
       new CustomEvent('bx-hover', {
         bubbles: true,
         composed: true,
-        detail: { phase: this.#hovering ? 'move' : 'enter', value: previewValue },
+        detail: {
+          phase: this.#hovering ? 'move' : 'enter',
+          value: previewValue,
+        },
       }),
     );
     this.#hovering = true;
@@ -273,7 +281,9 @@ export class BxRating extends FormAssociatedMixin(BixElement) {
     this.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
     this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
     if (!this.internals.checkValidity())
-      this.dispatchEvent(new CustomEvent('bx-invalid', { bubbles: true, composed: true }));
+      this.dispatchEvent(
+        new CustomEvent('bx-invalid', { bubbles: true, composed: true }),
+      );
   }
 
   #handleClick = (event: MouseEvent): void => {
@@ -306,16 +316,21 @@ export class BxRating extends FormAssociatedMixin(BixElement) {
   };
 
   protected override updated(changed: PropertyValues<this>): void {
-    if (changed.has('value') && !this.#hovering) this.#setFillPercent(this.value);
+    if (changed.has('value') && !this.#hovering)
+      this.#setFillPercent(this.value);
   }
 
   #renderSymbol(index: number) {
     const custom = this.getSymbol?.(index + 1);
     return html`
       <span class="symbol" part="symbol">
-        ${custom
-          ? html`<span>${custom}</span>`
-          : html`<svg viewBox="0 0 256 256"><path d=${STAR_PATH}></path></svg>`}
+        ${
+          custom
+            ? html`<span>${custom}</span>`
+            : html`<svg viewBox="0 0 256 256">
+                <path d=${STAR_PATH}></path>
+              </svg>`
+        }
       </span>
     `;
   }
@@ -344,7 +359,9 @@ export class BxRating extends FormAssociatedMixin(BixElement) {
         @pointerleave=${this.#handlePointerLeave}
       >
         <span class="track">${symbols.map((i) => this.#renderSymbol(i))}</span>
-        <span class="fill" part="symbol-partial">${symbols.map((i) => this.#renderSymbol(i))}</span>
+        <span class="fill" part="symbol-partial"
+          >${symbols.map((i) => this.#renderSymbol(i))}</span
+        >
       </div>
       ${this.label ? nothing : html`<span id=${this.#labelId} hidden>Rating</span>`}
     `;

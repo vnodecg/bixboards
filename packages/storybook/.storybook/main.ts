@@ -6,20 +6,45 @@ const config: StorybookConfig = {
   stories: ['../stories/**/*.mdx', '../stories/**/*.stories.ts'],
   addons: ['@storybook/addon-docs'],
   viteFinal: (viteConfig) => {
-    // Use the design-system sources directly so no build step is needed while developing.
+    // Use the design-system and core sources directly so no build step is needed while
+    // developing. A plain string alias for '@bixant/core' would also prefix-match every subpath
+    // import (rollup-plugin-alias's matching rule), rewriting e.g. '@bixant/core/avatar' to
+    // '<core/src/index.ts>/avatar' — an invalid path. The regexes below rewrite each subpath to
+    // its own source entry instead, and only fall back to the bare '@bixant/core' alias for the
+    // package root import.
+    const coreSrc = fileURLToPath(new URL('../../core/src/', import.meta.url));
     viteConfig.resolve ??= {};
-    viteConfig.resolve.alias = {
-      ...(viteConfig.resolve.alias as Record<string, string> | undefined),
-      '@bixant/design-system': fileURLToPath(
-        new URL('../../design-system/src/index.ts', import.meta.url),
-      ),
-      '@bixant/core/animated-image': fileURLToPath(
-        new URL('../../core/src/animated-image/index.ts', import.meta.url),
-      ),
-      '@bixant/core': fileURLToPath(
-        new URL('../../core/src/index.ts', import.meta.url),
-      ),
-    };
+    viteConfig.resolve.alias = [
+      ...(Array.isArray(viteConfig.resolve.alias)
+        ? viteConfig.resolve.alias
+        : Object.entries(viteConfig.resolve.alias ?? {}).map(
+            ([find, replacement]) => ({ find, replacement }),
+          )),
+      {
+        find: '@bixant/design-system',
+        replacement: fileURLToPath(
+          new URL('../../design-system/src/index.ts', import.meta.url),
+        ),
+      },
+      {
+        // Multi-segment leaves that are plain files, not `<name>/index.ts` directories, e.g.
+        // '@bixant/core/animation/presets/spin' -> 'animation/presets/spin.ts'.
+        find: /^@bixant\/core\/(animation\/presets\/[^/]+)$/,
+        replacement: `${coreSrc}$1.ts`,
+      },
+      {
+        find: /^@bixant\/core\/([^/]+)\/define$/,
+        replacement: `${coreSrc}$1/define.ts`,
+      },
+      {
+        find: /^@bixant\/core\/([^/]+)$/,
+        replacement: `${coreSrc}$1/index.ts`,
+      },
+      {
+        find: '@bixant/core',
+        replacement: `${coreSrc}index.ts`,
+      },
+    ];
     return viteConfig;
   },
 };

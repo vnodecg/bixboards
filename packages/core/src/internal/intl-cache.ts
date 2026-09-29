@@ -28,3 +28,8 @@ export const getDateTimeFormatter = createCache<
   Intl.DateTimeFormat,
   Intl.DateTimeFormatOptions
 >(Intl.DateTimeFormat);
+
+export const getRelativeTimeFormatter = createCache<
+  Intl.RelativeTimeFormat,
+  Intl.RelativeTimeFormatOptions
+>(Intl.RelativeTimeFormat);

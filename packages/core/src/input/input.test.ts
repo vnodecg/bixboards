@@ -30,7 +30,9 @@ describe('bx-input', () => {
       html`<bx-input clearable value="hello"></bx-input>`,
     );
     await el.updateComplete;
-    const clearButton = el.shadowRoot!.querySelector('.clear-button') as HTMLButtonElement;
+    const clearButton = el.shadowRoot!.querySelector(
+      '.clear-button',
+    ) as HTMLButtonElement;
     expect(clearButton).to.exist;
 
     const clearPromise = oneEvent(el, 'bx-clear');
@@ -41,13 +43,19 @@ describe('bx-input', () => {
 
   it('toggles password visibility without persisting it to an attribute', async () => {
     const el = await fixture<BxInput>(
-      html`<bx-input type="password" password-toggle value="secret"></bx-input>`,
+      html`<bx-input
+        type="password"
+        password-toggle
+        value="secret"
+      ></bx-input>`,
     );
     await el.updateComplete;
     const inputEl = el.shadowRoot!.querySelector('input')!;
     expect(inputEl.type).to.equal('password');
 
-    const toggle = el.shadowRoot!.querySelector('.password-toggle-button') as HTMLButtonElement;
+    const toggle = el.shadowRoot!.querySelector(
+      '.password-toggle-button',
+    ) as HTMLButtonElement;
     toggle.click();
     await el.updateComplete;
     expect(inputEl.type).to.equal('text');
@@ -78,7 +86,9 @@ describe('bx-input', () => {
   });
 
   it('debounces the forwarded input event when debounce is set', async () => {
-    const el = await fixture<BxInput>(html`<bx-input debounce="20"></bx-input>`);
+    const el = await fixture<BxInput>(
+      html`<bx-input debounce="20"></bx-input>`,
+    );
     const inputEl = el.shadowRoot!.querySelector('input')!;
 
     let fired = 0;
@@ -96,7 +106,9 @@ describe('bx-input', () => {
   });
 
   it('has no axe violations, empty and with label/hint', async () => {
-    const el = await fixture<BxInput>(html`<bx-input label="Email" hint="We won't spam you."></bx-input>`);
+    const el = await fixture<BxInput>(
+      html`<bx-input label="Email" hint="We won't spam you."></bx-input>`,
+    );
     await expect(el).to.be.accessible();
   });
 });

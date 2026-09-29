@@ -336,17 +336,29 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
     this.size = 'medium';
   }
 
-  protected override createRenderRoot() {
-    return this.attachShadow({ mode: 'open', delegatesFocus: true });
-  }
+  static override shadowRootOptions: ShadowRootInit = {
+    ...BixElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
 
   protected override willUpdate(changed: PropertyValues<this>): void {
-    if (changed.has('value')) this.value = clamp(this.value, this.min, this.max);
-    if (changed.has('minValue') || changed.has('maxValue') || changed.has('min') || changed.has('max')) {
+    if (changed.has('value'))
+      this.value = clamp(this.value, this.min, this.max);
+    if (
+      changed.has('minValue') ||
+      changed.has('maxValue') ||
+      changed.has('min') ||
+      changed.has('max')
+    ) {
       this.minValue = clamp(this.minValue, this.min, this.max);
       this.maxValue = clamp(this.maxValue, this.minValue, this.max);
     }
-    if (changed.has('value') || changed.has('minValue') || changed.has('maxValue') || changed.has('range'))
+    if (
+      changed.has('value') ||
+      changed.has('minValue') ||
+      changed.has('maxValue') ||
+      changed.has('range')
+    )
       this.#syncFormState();
   }
 
@@ -380,7 +392,8 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
   }
 
   #snap(raw: number): number {
-    const stepped = Math.round((raw - this.min) / this.step) * this.step + this.min;
+    const stepped =
+      Math.round((raw - this.min) / this.step) * this.step + this.min;
     return clamp(Number(stepped.toFixed(10)), this.min, this.max);
   }
 
@@ -398,7 +411,10 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
 
   #commit(dispatchChange: boolean): void {
     this.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
-    if (dispatchChange) this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+    if (dispatchChange)
+      this.dispatchEvent(
+        new Event('change', { bubbles: true, composed: true }),
+      );
   }
 
   #setSingle(next: number, dispatchChange: boolean): void {
@@ -421,49 +437,57 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
     this.#commit(dispatchChange);
   }
 
-  #handleThumbKeydown = (thumb: Thumb) => (event: KeyboardEvent): void => {
-    if (this.disabled || this.readonly) return;
-    let delta = 0;
-    switch (event.key) {
-      case 'ArrowRight':
-      case 'ArrowUp':
-        delta = this.step;
-        break;
-      case 'ArrowLeft':
-      case 'ArrowDown':
-        delta = -this.step;
-        break;
-      case 'PageUp':
-        delta = this.step * PAGE_STEP_MULTIPLIER;
-        break;
-      case 'PageDown':
-        delta = -this.step * PAGE_STEP_MULTIPLIER;
-        break;
-      case 'Home':
-        delta = -Infinity;
-        break;
-      case 'End':
-        delta = Infinity;
-        break;
-      default:
-        return;
-    }
-    event.preventDefault();
-    this.#activeThumb = thumb;
-    const current = this.range ? (thumb === 'min' ? this.minValue : this.maxValue) : this.value;
-    const next = this.#snap(clamp(current + delta, this.min, this.max));
-    if (this.range) this.#setRange(thumb, next, true);
-    else this.#setSingle(next, true);
-  };
+  #handleThumbKeydown =
+    (thumb: Thumb) =>
+    (event: KeyboardEvent): void => {
+      if (this.disabled || this.readonly) return;
+      let delta = 0;
+      switch (event.key) {
+        case 'ArrowRight':
+        case 'ArrowUp':
+          delta = this.step;
+          break;
+        case 'ArrowLeft':
+        case 'ArrowDown':
+          delta = -this.step;
+          break;
+        case 'PageUp':
+          delta = this.step * PAGE_STEP_MULTIPLIER;
+          break;
+        case 'PageDown':
+          delta = -this.step * PAGE_STEP_MULTIPLIER;
+          break;
+        case 'Home':
+          delta = -Infinity;
+          break;
+        case 'End':
+          delta = Infinity;
+          break;
+        default:
+          return;
+      }
+      event.preventDefault();
+      this.#activeThumb = thumb;
+      const current = this.range
+        ? thumb === 'min'
+          ? this.minValue
+          : this.maxValue
+        : this.value;
+      const next = this.#snap(clamp(current + delta, this.min, this.max));
+      if (this.range) this.#setRange(thumb, next, true);
+      else this.#setSingle(next, true);
+    };
 
-  #handleThumbPointerDown = (thumb: Thumb) => (event: PointerEvent): void => {
-    if (this.disabled || this.readonly) return;
-    this.#activeThumb = thumb;
-    this.#dragThumb = thumb;
-    this.#showTooltipFor = thumb;
-    (event.target as HTMLElement).setPointerCapture(event.pointerId);
-    this.requestUpdate();
-  };
+  #handleThumbPointerDown =
+    (thumb: Thumb) =>
+    (event: PointerEvent): void => {
+      if (this.disabled || this.readonly) return;
+      this.#activeThumb = thumb;
+      this.#dragThumb = thumb;
+      this.#showTooltipFor = thumb;
+      (event.target as HTMLElement).setPointerCapture(event.pointerId);
+      this.requestUpdate();
+    };
 
   #handleThumbPointerMove = (event: PointerEvent): void => {
     if (!this.#dragThumb) return;
@@ -483,11 +507,14 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
   #handleThumbBlur = (): void => this.requestUpdate();
 
   #handleTrackPointerDown = (event: PointerEvent): void => {
-    if (this.disabled || this.readonly || event.target !== event.currentTarget) return;
+    if (this.disabled || this.readonly || event.target !== event.currentTarget)
+      return;
     const next = this.#valueFromPointer(event.clientX, event.clientY);
     if (this.range) {
       const thumb: Thumb =
-        Math.abs(next - this.minValue) <= Math.abs(next - this.maxValue) ? 'min' : 'max';
+        Math.abs(next - this.minValue) <= Math.abs(next - this.maxValue)
+          ? 'min'
+          : 'max';
       this.#activeThumb = thumb;
       this.#setRange(thumb, next, true);
     } else {
@@ -510,7 +537,8 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
 
   stepUp(): void {
     if (this.range) {
-      const current = this.#activeThumb === 'min' ? this.minValue : this.maxValue;
+      const current =
+        this.#activeThumb === 'min' ? this.minValue : this.maxValue;
       this.#setRange(this.#activeThumb, this.#snap(current + this.step), true);
     } else {
       this.#setSingle(this.#snap(this.value + this.step), true);
@@ -519,7 +547,8 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
 
   stepDown(): void {
     if (this.range) {
-      const current = this.#activeThumb === 'min' ? this.minValue : this.maxValue;
+      const current =
+        this.#activeThumb === 'min' ? this.minValue : this.maxValue;
       this.#setRange(this.#activeThumb, this.#snap(current - this.step), true);
     } else {
       this.#setSingle(this.#snap(this.value - this.step), true);
@@ -530,7 +559,10 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
     if (!this.withMarkers || this.step <= 0) return nothing;
     const count = Math.floor((this.max - this.min) / this.step);
     if (!Number.isFinite(count) || count > 100) return nothing;
-    const marks = Array.from({ length: count + 1 }, (_, i) => this.min + i * this.step);
+    const marks = Array.from(
+      { length: count + 1 },
+      (_, i) => this.min + i * this.step,
+    );
     return html`
       <div class="markers" part="markers">
         ${marks.map(
@@ -549,8 +581,10 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
   #renderThumb(thumb: Thumb, value: number, ariaLabel: string) {
     const isFocused =
       typeof document !== 'undefined' &&
-      document.activeElement === this.shadowRoot?.querySelector(`[data-thumb="${thumb}"]`);
-    const showTooltip = this.withTooltip && (this.#showTooltipFor === thumb || isFocused);
+      document.activeElement ===
+        this.shadowRoot?.querySelector(`[data-thumb="${thumb}"]`);
+    const showTooltip =
+      this.withTooltip && (this.#showTooltipFor === thumb || isFocused);
     return html`
       <div
         class="thumb"
@@ -575,21 +609,29 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
         @focus=${this.#handleThumbFocus}
         @blur=${this.#handleThumbBlur}
       >
-        ${showTooltip
-          ? html`<span class="tooltip" part="tooltip">${value}</span>`
-          : nothing}
+        ${
+          showTooltip
+            ? html`<span class="tooltip" part="tooltip">${value}</span>`
+            : nothing
+        }
       </div>
     `;
   }
 
   protected override render() {
     const offset = this.indicatorOffset ?? this.min;
-    const fillStart = this.range ? this.#percent(this.minValue) : this.#percent(Math.min(offset, this.value));
-    const fillEnd = this.range ? this.#percent(this.maxValue) : this.#percent(Math.max(offset, this.value));
+    const fillStart = this.range
+      ? this.#percent(this.minValue)
+      : this.#percent(Math.min(offset, this.value));
+    const fillEnd = this.range
+      ? this.#percent(this.maxValue)
+      : this.#percent(Math.max(offset, this.value));
 
     return html`
       <div class="form-control" part="form-control">
-        <div class="label" part="label" id=${this.#labelId}><slot name="label"></slot></div>
+        <div class="label" part="label" id=${this.#labelId}>
+          <slot name="label"></slot>
+        </div>
         <div
           class="slider"
           part="slider"
@@ -603,12 +645,16 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
             <div class="indicator" part="indicator"></div>
             ${this.#renderMarkers()}
           </div>
-          ${this.range
-            ? html`${this.#renderThumb('min', this.minValue, 'Minimum value')}
+          ${
+            this.range
+              ? html`${this.#renderThumb('min', this.minValue, 'Minimum value')}
                 ${this.#renderThumb('max', this.maxValue, 'Maximum value')}`
-            : this.#renderThumb('max', this.value, 'Value')}
+              : this.#renderThumb('max', this.value, 'Value')
+          }
         </div>
-        <div class="hint" part="hint" id=${this.#hintId}><slot name="hint"></slot></div>
+        <div class="hint" part="hint" id=${this.#hintId}>
+          <slot name="hint"></slot>
+        </div>
       </div>
     `;
   }

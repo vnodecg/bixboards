@@ -35,14 +35,21 @@ describe('bx-switch', () => {
     const el = await fixture<BxSwitch>(html`<bx-switch>Label</bx-switch>`);
     const control = el.shadowRoot!.querySelector('.control')!;
     control.dispatchEvent(
-      new KeyboardEvent('keydown', { key: ' ', bubbles: true, composed: true, cancelable: true }),
+      new KeyboardEvent('keydown', {
+        key: ' ',
+        bubbles: true,
+        composed: true,
+        cancelable: true,
+      }),
     );
     await el.updateComplete;
     expect(el.checked).to.be.true;
   });
 
   it('does not toggle when disabled', async () => {
-    const el = await fixture<BxSwitch>(html`<bx-switch disabled>Label</bx-switch>`);
+    const el = await fixture<BxSwitch>(
+      html`<bx-switch disabled>Label</bx-switch>`,
+    );
     el.click();
     await el.updateComplete;
     expect(el.checked).to.be.false;
@@ -67,7 +74,9 @@ describe('bx-switch', () => {
   });
 
   it('reports required as invalid until checked', async () => {
-    const el = await fixture<BxSwitch>(html`<bx-switch required>Enable</bx-switch>`);
+    const el = await fixture<BxSwitch>(
+      html`<bx-switch required>Enable</bx-switch>`,
+    );
     expect(el.checkValidity()).to.be.false;
     el.click();
     await el.updateComplete;

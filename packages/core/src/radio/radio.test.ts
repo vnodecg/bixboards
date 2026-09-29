@@ -32,7 +32,9 @@ describe('bx-radio', () => {
   });
 
   it('does not select when disabled', async () => {
-    const el = await fixture<BxRadio>(html`<bx-radio disabled>Label</bx-radio>`);
+    const el = await fixture<BxRadio>(
+      html`<bx-radio disabled>Label</bx-radio>`,
+    );
     el.click();
     await el.updateComplete;
     expect(el.checked).to.be.false;
@@ -45,7 +47,9 @@ describe('bx-radio', () => {
         <bx-radio name="fruit" value="pear">Pear</bx-radio>
       </div>
     `);
-    const [apple, pear] = [...wrapper.querySelectorAll('bx-radio')] as BxRadio[];
+    const [apple, pear] = [
+      ...wrapper.querySelectorAll('bx-radio'),
+    ] as BxRadio[];
     apple!.click();
     await apple!.updateComplete;
     expect(apple!.checked).to.be.true;
@@ -66,7 +70,9 @@ describe('bx-radio', () => {
     `);
     const [s, m] = [...wrapper.querySelectorAll('bx-radio')] as BxRadio[];
     s!.focus();
-    s!.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+    s!.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }),
+    );
     await Promise.all([s!.updateComplete, m!.updateComplete]);
     expect(m!.checked).to.be.true;
     expect(document.activeElement).to.equal(m);

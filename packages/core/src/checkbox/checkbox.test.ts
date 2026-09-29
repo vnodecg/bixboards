@@ -4,14 +4,18 @@ import './index.ts';
 
 describe('bx-checkbox', () => {
   it('registers the tag unchecked by default', async () => {
-    const el = await fixture<BxCheckbox>(html`<bx-checkbox>Label</bx-checkbox>`);
+    const el = await fixture<BxCheckbox>(
+      html`<bx-checkbox>Label</bx-checkbox>`,
+    );
     expect(el).to.be.instanceOf(customElements.get('bx-checkbox')!);
     expect(el.checked).to.be.false;
     expect(el.value).to.equal('on');
   });
 
   it('renders role=checkbox with aria-checked reflecting state', async () => {
-    const el = await fixture<BxCheckbox>(html`<bx-checkbox>Label</bx-checkbox>`);
+    const el = await fixture<BxCheckbox>(
+      html`<bx-checkbox>Label</bx-checkbox>`,
+    );
     const control = el.shadowRoot!.querySelector('.control')!;
     expect(control.getAttribute('role')).to.equal('checkbox');
     expect(control.getAttribute('aria-checked')).to.equal('false');
@@ -80,7 +84,9 @@ describe('bx-checkbox', () => {
   });
 
   it('has no axe violations, unchecked, checked and indeterminate', async () => {
-    const el = await fixture<BxCheckbox>(html`<bx-checkbox>Label</bx-checkbox>`);
+    const el = await fixture<BxCheckbox>(
+      html`<bx-checkbox>Label</bx-checkbox>`,
+    );
     await expect(el).to.be.accessible();
 
     el.checked = true;
