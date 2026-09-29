@@ -92,7 +92,15 @@ Semi-transparent colors are composited on the surface first. The full matrix is 
 <section class="bx-scale" style="--bx-scale: 0.85">…</section>
 ```
 
-Derived tokens hold `var()` references and resolve where they are declared, so a region opts in with `.bx-scale` (or `data-bx-scale`) for its own `--bx-scale` to take effect. A theme that sets `foundation.scale` re-declares every derived token in its own scope, so it works on any element, not just `<html>`. Touch targets: `--bx-target-min` is 1.5rem, and 2.75rem under `pointer: coarse`.
+Derived tokens hold `var()` references and resolve where they are declared, so a region opts in with `.bx-scale` (or `data-bx-scale`) for its own `--bx-scale` to take effect. A theme that sets `foundation.scale` re-declares every derived token in its own scope, so it works on any element, not just `<html>`. Touch targets: `--bx-target-min` is 1.5rem, and 2.75rem under `pointer: coarse` — 44pt, [Apple HIG's minimum tap target](https://developer.apple.com/design/human-interface-guidelines/layout).
+
+### Safe areas
+
+`--bx-safe-area-inset-{top,right,bottom,left}` wrap `env(safe-area-inset-*, 0px)` (the notch/Dynamic Island/home-indicator insets Apple's HIG requires edge-to-edge content to respect on iOS/iPadOS Safari and installed web apps; `0px` elsewhere). They are theme-independent literals, not derived from `--bx-unit`. Full-bleed components (a future `page`, `dialog`, `sheet`, `toast`) should pad with `max(<normal-space>, var(--bx-safe-area-inset-*))` rather than the space token alone, so the safe inset only grows the padding, never shrinks it below the design spacing:
+
+```css
+padding-block-start: max(var(--bx-space-m), var(--bx-safe-area-inset-top));
+```
 
 ## Themes
 

@@ -92,3 +92,26 @@ WCAG 2.2 AA minimum; ARIA Authoring Practices patterns for widgets; reduced moti
 ## 11. Testing contract
 
 Unit/component tests in real browsers (Chromium, Firefox, WebKit), axe-core, visual regression across scale × container width × theme, keyboard walkthroughs, wrapper smoke tests, and for data components benchmark suites with regression gates.
+
+## 12. Apple Human Interface Guidelines alignment
+
+WCAG 2.2 AA (§10) is the accessibility floor for every platform; this section is the delta that makes the system also feel native and correct on Apple platforms (Safari/iOS/iPadOS/macOS, and installed web apps). It is a checklist for what a component must already satisfy, not a separate visual style — no component should look "Apple-themed" by default.
+
+**Already satisfied by the tokens/conventions above, called out explicitly so it isn't lost in a rewrite:**
+
+- **Tap targets**: `--bx-target-min` is 2.75rem (44px) under `pointer: coarse` (§2), exactly [HIG's minimum hit target](https://developer.apple.com/design/human-interface-guidelines/layout).
+- **Dark mode**: `light-dark()` / `prefers-color-scheme` (§7) — HIG requires both appearances to be considered, not just supported.
+- **Reduced motion**: every autoplaying/looping animation checks `prefers-reduced-motion` (§9, `BixElement.prefersReducedMotion`) — maps to iOS's Reduce Motion setting.
+- **Dynamic Type**: sizing is `rem`/fluid-unit based, never fixed `px` for type (§2) — the nearest web equivalent of Dynamic Type is "respects the browser/OS base font size and zoom," which a `rem` root satisfies; a hardcoded `px` font-size would not.
+- **Legible contrast**: WCAG 4.5:1 text contrast (`@bixant/design-system` role guarantees) meets or exceeds anything HIG asks for.
+- **System font**: `--bx-font-family-sans` leads with `system-ui, -apple-system`, i.e. San Francisco on Apple platforms, not a hardcoded web font.
+
+**Gaps this section closes:**
+
+- **Safe areas**: `--bx-safe-area-inset-{top,right,bottom,left}` (`@bixant/design-system`, wrapping `env(safe-area-inset-*, 0px)`) exist so edge-to-edge components (a future `page`, `dialog`, `sheet`, `toast`) can keep content clear of the notch/Dynamic Island/home indicator, per [HIG's layout guidance](https://developer.apple.com/design/human-interface-guidelines/layout#Platform-considerations). Pad with `max(<space token>, var(--bx-safe-area-inset-*))`, never the inset alone, so the design spacing is a floor. See `@bixant/design-system` README "Safe areas".
+
+**Explicitly out of scope** (native-platform behavior a web component cannot reproduce, and should not fake):
+
+- SF Symbols — components use plain SVG (currently vendored Phosphor paths); an app targeting only Apple platforms may swap icon slots for SF Symbols itself, but the library does not ship or require them.
+- Haptics, native share sheets, system gesture navigation, spring-based physical motion tied to touch velocity — these require native APIs with no DOM equivalent.
+- Continuous corner ("squircle") curvature — CSS has no shipped, interoperable primitive for it (the `corner-shape` proposal is not yet stable across browsers); components use ordinary circular `border-radius` and a theme may only approximate the Apple look, not reproduce it exactly.

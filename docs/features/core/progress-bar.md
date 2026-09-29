@@ -7,7 +7,7 @@
 | **Package**         | `@bixant/core`    |
 | **Category**        | Feedback          |
 | **Tag**             | `bx-progress-bar` |
-| **Status**          | Planned           |
+| **Status**          | Implemented       |
 | **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).

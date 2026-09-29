@@ -117,6 +117,38 @@
     "./avatar/define": {
       "types": "./dist/avatar/define.d.ts",
       "default": "./dist/avatar/define.js"
+    },
+    "./progress-bar": {
+      "types": "./dist/progress-bar/index.d.ts",
+      "default": "./dist/progress-bar/index.js"
+    },
+    "./progress-bar/define": {
+      "types": "./dist/progress-bar/define.d.ts",
+      "default": "./dist/progress-bar/define.js"
+    },
+    "./progress-ring": {
+      "types": "./dist/progress-ring/index.d.ts",
+      "default": "./dist/progress-ring/index.js"
+    },
+    "./progress-ring/define": {
+      "types": "./dist/progress-ring/define.d.ts",
+      "default": "./dist/progress-ring/define.js"
+    },
+    "./skeleton": {
+      "types": "./dist/skeleton/index.d.ts",
+      "default": "./dist/skeleton/index.js"
+    },
+    "./skeleton/define": {
+      "types": "./dist/skeleton/define.d.ts",
+      "default": "./dist/skeleton/define.js"
+    },
+    "./spinner": {
+      "types": "./dist/spinner/index.d.ts",
+      "default": "./dist/spinner/index.js"
+    },
+    "./spinner/define": {
+      "types": "./dist/spinner/define.d.ts",
+      "default": "./dist/spinner/define.js"
     }
   },
   "files": [
