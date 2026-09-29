@@ -62,7 +62,9 @@ Two or three pairs with pictures (Storybook stories).
 
 **Behavior.** Space/Enter activate; loading keeps width; disabled buttons are removed from the tab order and explained nearby when the reason is not obvious.
 
-**Accessibility.** Focus ring `focus.ring`, 2 px; touch target ≥ 44 px on coarse pointers; contrast of `role.<variant>.on-solid` on `role.<variant>.solid` (and its hover/active steps) ≥ 4.5:1 in every theme (guaranteed by the design system's build-time checks, provided the component uses roles).
+**Accessibility.** Focus ring color `focus.ring`, offset `focus.ring-offset`; touch target ≥ 44 px on coarse pointers; contrast of `role.<variant>.on-solid` on `role.<variant>.solid` (and its hover/active steps) ≥ 4.5:1 in every theme (guaranteed by the design system's build-time checks, provided the component uses roles).
+
+**Look.** `outlined`/`plain` (bordered or borderless, no fill) read as shadcn-style secondary/ghost buttons and should be reached for over `filled` by default; reserve `accent`/`filled` for the one primary action per region. `radius.m` by default; a shadow only if the button visually floats (rare).
 
 ## Definition of done for a component
 

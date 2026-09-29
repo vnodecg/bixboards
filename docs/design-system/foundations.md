@@ -15,7 +15,7 @@ Values below are the defaults from `packages/design-system/data/foundation.json`
 |         | `role.<palette>.fg`, `.border`                                          | Colored text/icons and outlines on the page                |
 |         | `role.<palette>.subtle`, `.subtle-hover`, `.subtle-active`, `.tint`     | Translucent backgrounds                                    |
 | Border  | `border.subtle`, `.base`, `.strong`, `.disabled`                        | Dividers, controls (`base` ≥ 3:1), emphasis                |
-| Focus   | `focus.ring`                                                            | Focus indicator                                            |
+| Focus   | `focus.ring`, `focus.ring-offset`                                       | Focus indicator color and gap from the element             |
 
 Status colors always come with a second cue (icon, text, shape). Roles are derived per theme by contrast search: for example `warning` gets dark text on its solid fill, and `brand.fg` is a darker step in light and a lighter step in dark.
 
@@ -55,9 +55,13 @@ The matrix for every theme is in `contrast.json` and Storybook → Foundation �
 
 `radius.s` (0.25u), `radius.m` (0.375u, default for controls), `radius.l` (0.625u, containers), `radius.pill`.
 
+## Look: bordered, not shadowed
+
+The default look is closer to shadcn/ui than to a material/elevation-driven system: a visible 1px `border.subtle`/`border.base` does the work a shadow would do elsewhere, color is reserved for semantic meaning (status, the one accent action per region) rather than decoration, and `radius.m` ("rounded-md") is the default corner for controls and containers — reach for `radius.pill` only when the shape is genuinely circular (an avatar, a status dot), not as a default button/card shape. This is a default, not a constraint: a theme can still raise shadow opacity or drop borders if a brand needs it (`foundation.shadow`, `tokens.border`), but components should not need heavier elevation to read correctly.
+
 ## Elevation
 
-`shadow.s` (resting cards), `shadow.m` (popovers, tooltips, dropdowns), `shadow.l` (dialogs, drawers). In dark themes prefer surface tint and borders over heavier shadows. Stacking order comes from `z.*` tokens (`dropdown` < `sticky` < `overlay` < `modal` < `tooltip`); never hardcode z-index.
+`shadow.s` (resting cards), `shadow.m` (popovers, tooltips, dropdowns), `shadow.l` (dialogs, drawers) — all intentionally subtle (`shadow.s` is barely visible) so a border carries most of a surface's definition; shadow adds depth only where a surface genuinely floats above the page (an overlay, not a card). Prefer surface tint and borders over heavier shadows, especially in dark themes where shadows read poorly. Stacking order comes from `z.*` tokens (`dropdown` < `sticky` < `overlay` < `modal` < `tooltip`); never hardcode z-index.
 
 ## Motion
 
@@ -69,7 +73,7 @@ The matrix for every theme is in `contrast.json` and Storybook → Foundation �
 
 Baseline for every component (WCAG 2.2 AA):
 
-- Fully keyboard operable with visible `:focus-visible` indicator (3:1 against adjacent colors, 2 px, offset 2 px).
+- Fully keyboard operable with visible `:focus-visible` indicator (3:1 against adjacent colors, width `border.width-strong`, gap `focus.ring-offset`).
 - Correct role, name, state and value exposed; APG patterns for widgets (tabs, tree, combobox, dialog, menu).
 - Target size per above; 200% zoom and text-spacing overrides without content loss.
 - `prefers-reduced-motion`, `forced-colors` and RTL/logical properties supported.

@@ -123,7 +123,7 @@ export class BxAnimatedImage extends BixElement {
 
       .control-box:focus-visible {
         outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: 2px;
+        outline-offset: var(--bx-focus-ring-offset);
       }
 
       ::slotted(*) {
