@@ -2,7 +2,7 @@
 
 Tracks build status for all 61 components across `@bixant/core`, `@bixant/data-table` and `@bixant/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 18 / 61 done.**
+**Progress: 22 / 61 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -51,10 +51,10 @@ No dependency on any other unbuilt `bx-*` component.
 - [x] [`bx-input`](core/input.md) — `packages/core/src/input`
 - [x] [`bx-checkbox`](core/checkbox.md) (lite render path for `bx-data-table` selection deferred until that package exists) — `packages/core/src/checkbox`
 - [x] [`bx-switch`](core/switch.md) — `packages/core/src/switch`
-- [ ] [`bx-radio`](core/radio.md) (works standalone; grouped by `bx-radio-group` in Tier 2)
-- [ ] [`bx-slider`](core/slider.md)
-- [ ] [`bx-rating`](core/rating.md)
-- [ ] [`bx-zoomable-frame`](core/zoomable-frame.md)
+- [x] [`bx-radio`](core/radio.md) (self-coordinates mutual exclusion + roving tabindex by `name` until `bx-radio-group` exists, same peer-group pattern as `bx-details`) — `packages/core/src/radio`
+- [x] [`bx-slider`](core/slider.md) (single and range modes; range submits as a `${name}-min`/`${name}-max` `FormData` pair) — `packages/core/src/slider`
+- [x] [`bx-rating`](core/rating.md) (hover preview and RTL fill are one `clip-path` overlay, not per-symbol state) — `packages/core/src/rating`
+- [x] [`bx-zoomable-frame`](core/zoomable-frame.md) (sandbox defaults to `""`, the most restrictive value; controls collapse into a menu button under `@container`) — `packages/core/src/zoomable-frame`
 - [ ] [`bx-comparison`](core/comparison.md)
 - [ ] [`bx-popup`](core/popup.md) — positioning primitive; needed by Tier 2/3 overlays
 - [ ] [`bx-breadcrumb-item`](core/breadcrumb-item.md)
@@ -72,7 +72,6 @@ No dependency on any other unbuilt `bx-*` component.
 - [ ] [`bx-intersection-observer`](core/intersection-observer.md)
 - [ ] [`bx-mutation-observer`](core/mutation-observer.md)
 - [ ] [`bx-resize-observer`](core/resize-observer.md)
-- [ ] [`bx-qr-code`](core/qr-code.md)
 
 ## Tier 2 — Simple composites
 

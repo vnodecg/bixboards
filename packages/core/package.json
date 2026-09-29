@@ -213,6 +213,38 @@
     "./switch/define": {
       "types": "./dist/switch/define.d.ts",
       "default": "./dist/switch/define.js"
+    },
+    "./radio": {
+      "types": "./dist/radio/index.d.ts",
+      "default": "./dist/radio/index.js"
+    },
+    "./radio/define": {
+      "types": "./dist/radio/define.d.ts",
+      "default": "./dist/radio/define.js"
+    },
+    "./slider": {
+      "types": "./dist/slider/index.d.ts",
+      "default": "./dist/slider/index.js"
+    },
+    "./slider/define": {
+      "types": "./dist/slider/define.d.ts",
+      "default": "./dist/slider/define.js"
+    },
+    "./rating": {
+      "types": "./dist/rating/index.d.ts",
+      "default": "./dist/rating/index.js"
+    },
+    "./rating/define": {
+      "types": "./dist/rating/define.d.ts",
+      "default": "./dist/rating/define.js"
+    },
+    "./zoomable-frame": {
+      "types": "./dist/zoomable-frame/index.d.ts",
+      "default": "./dist/zoomable-frame/index.js"
+    },
+    "./zoomable-frame/define": {
+      "types": "./dist/zoomable-frame/define.d.ts",
+      "default": "./dist/zoomable-frame/define.js"
     }
   },
   "files": [
