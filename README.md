@@ -57,7 +57,7 @@ pnpm storybook          # dev server on http://localhost:6006
 pnpm build-storybook    # static build to packages/storybook/dist
 ```
 
-This builds the tokens (design system plus the example themes) and starts Storybook on port 6006. The toolbar switches theme and `--bx-scale`. Stories show tokens, per-theme roles, the contrast matrix and a runtime-theming playground; there are no component stories until components exist. A test fails if a story references a token the design system does not generate.
+This builds the tokens (design system plus the example themes) and starts Storybook on port 6006. The toolbar switches theme and `--bx-scale`. Stories show tokens, per-theme roles, the contrast matrix, a runtime-theming playground, and (as components are implemented) the components themselves — currently `bx-animated-image`. A test fails if a story references a token the design system does not generate.
 
 ## Development
 
@@ -65,7 +65,7 @@ The workspace is TypeScript (Node 24, pnpm). Everything runs through Nx:
 
 ```sh
 pnpm check                         # format:check + typecheck, test, validate, build, tokens, build-storybook
-pnpm test                          # design-system unit tests + Storybook token-reference tests
+pnpm test                          # design-system + core unit/component tests (real browsers) + Storybook token-reference tests
 pnpm typecheck
 pnpm nx run design-system:tokens   # regenerate CSS/token files (strict)
 pnpm nx graph
@@ -76,10 +76,10 @@ If Nx hangs on your machine, set `NX_DAEMON=false` (CI does).
 
 `pnpm-workspace.yaml` allows install scripts for `@swc/core`, `nx` and `esbuild` (required by Nx and Storybook); review it before adding more.
 
-Generate a package (example):
+Generate a package (example, for one that doesn't exist yet):
 
 ```sh
-pnpm nx g @nx/js:lib packages/core --publishable --importPath=@bixant/core
+pnpm nx g @nx/js:lib packages/data-table --publishable --importPath=@bixant/data-table
 ```
 
 See the [Nx docs](https://nx.dev/docs) for more.

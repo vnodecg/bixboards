@@ -25,12 +25,12 @@ const LAZY_LOAD_ROOT_MARGIN = '200px';
  * @slot play-icon - Custom icon shown on the toggle while paused.
  * @slot pause-icon - Custom icon shown on the toggle while playing.
  *
- * @cssprop --bx-control-box-size - Toggle button diameter. Default `max(control-height-m, target-min)`.
- * @cssprop --bx-control-box-bg - Toggle button background. Default `--bx-surface-base` (translucent).
- * @cssprop --bx-control-box-color - Toggle button icon/text color. Default `--bx-text-primary`.
- * @cssprop --bx-control-box-border-color - Toggle button border. Default `--bx-border-base`.
- * @cssprop --bx-frame-border-color - Border around the image area. Default `--bx-border-subtle`.
- * @cssprop --bx-frame-radius - Corner radius of the image area. Default `--bx-radius-m`.
+ * @cssprop --bx-animated-image-control-box-size - Toggle button diameter. Default `max(control-height-m, target-min)`.
+ * @cssprop --bx-animated-image-control-box-bg - Toggle button background. Default `--bx-surface-base` (translucent).
+ * @cssprop --bx-animated-image-control-box-color - Toggle button icon/text color. Default `--bx-text-primary`.
+ * @cssprop --bx-animated-image-control-box-border-color - Toggle button border. Default `--bx-border-base`.
+ * @cssprop --bx-animated-image-frame-border-color - Border around the image area. Default `--bx-border-subtle`.
+ * @cssprop --bx-animated-image-frame-radius - Corner radius of the image area. Default `--bx-radius-m`.
  */
 export class BxAnimatedImage extends BixElement {
   static override tagName = 'bx-animated-image';
@@ -44,7 +44,7 @@ export class BxAnimatedImage extends BixElement {
         line-height: 0;
         width: 100%;
         height: 100%;
-        --bx-control-box-size: max(
+        --bx-animated-image-control-box-size: max(
           var(--bx-control-height-m),
           var(--bx-target-min)
         );
@@ -56,8 +56,11 @@ export class BxAnimatedImage extends BixElement {
         block-size: 100%;
         overflow: hidden;
         border: var(--bx-border-width) solid
-          var(--bx-frame-border-color, var(--bx-border-subtle));
-        border-radius: var(--bx-frame-radius, var(--bx-radius-m));
+          var(--bx-animated-image-frame-border-color, var(--bx-border-subtle));
+        border-radius: var(
+          --bx-animated-image-frame-radius,
+          var(--bx-radius-m)
+        );
         background: var(--bx-surface-muted);
       }
 
@@ -90,21 +93,27 @@ export class BxAnimatedImage extends BixElement {
         position: absolute;
         inset-block-end: var(--bx-space-xs);
         inset-inline-end: var(--bx-space-xs);
-        inline-size: var(--bx-control-box-size);
-        block-size: var(--bx-control-box-size);
+        inline-size: var(--bx-animated-image-control-box-size);
+        block-size: var(--bx-animated-image-control-box-size);
         display: grid;
         place-items: center;
         border: var(--bx-border-width) solid
-          var(--bx-control-box-border-color, var(--bx-border-base));
+          var(
+            --bx-animated-image-control-box-border-color,
+            var(--bx-border-base)
+          );
         border-radius: var(--bx-radius-m);
         background: var(
-          --bx-control-box-bg,
+          --bx-animated-image-control-box-bg,
           color-mix(in srgb, var(--bx-surface-base) 85%, transparent)
         );
-        color: var(--bx-control-box-color, var(--bx-text-primary));
+        color: var(
+          --bx-animated-image-control-box-color,
+          var(--bx-text-primary)
+        );
         padding: 0;
         cursor: pointer;
-        font-size: calc(var(--bx-control-box-size) * 0.45);
+        font-size: calc(var(--bx-animated-image-control-box-size) * 0.45);
         transition:
           background-color var(--bx-motion-duration-fast)
             var(--bx-motion-easing-standard),

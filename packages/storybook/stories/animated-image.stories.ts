@@ -63,7 +63,7 @@ export const CustomIcons: Story = {
     docs: {
       description: {
         story:
-          'The `play-icon`/`pause-icon` slots override the default toggle glyph. Anything slotted is sized to `1em` by the component; give the toggle a larger `font-size` via `--bx-control-box-size` if you want bigger custom icons.',
+          'The `play-icon`/`pause-icon` slots override the default toggle glyph. Anything slotted is sized to `1em` by the component; give the toggle a larger `font-size` via `--bx-animated-image-control-box-size` if you want bigger custom icons.',
       },
     },
   },

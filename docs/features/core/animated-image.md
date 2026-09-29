@@ -42,11 +42,11 @@ Play/pause control for GIF and animated WebP. Specified for the Bixant token sys
 
 ### CSS parts
 
-`control-box`, `play-icon`, `pause-icon`
+`frame`, `control-box`, `play-icon`, `pause-icon`
 
 ### CSS custom properties
 
-`--bx-control-box-size`, `--bx-control-box-bg`, `--bx-control-box-color`, `--bx-control-box-border-color`, `--bx-frame-border-color`, `--bx-frame-radius`
+`--bx-animated-image-control-box-size`, `--bx-animated-image-control-box-bg`, `--bx-animated-image-control-box-color`, `--bx-animated-image-control-box-border-color`, `--bx-animated-image-frame-border-color`, `--bx-animated-image-frame-radius`
 
 ### Methods
 
@@ -102,7 +102,7 @@ Image fits container (object-fit contain).
 
 - Naming prefix is `bx-`; CSS hooks use `--bx-*`.
 - Implemented in `@bixant/core` (`src/animated-image/`). Default play/pause glyphs are vendored from Phosphor Icons (regular weight, MIT), as two path strings rather than the whole icon package, to stay inside the incremental-JS budget; either icon is replaceable via the `play-icon`/`pause-icon` slots.
-- `--bx-control-box-size` defaults to `max(--bx-control-height-m, --bx-target-min)`, so the toggle scales with `--bx-scale` but never drops below the accessible touch-target floor.
+- `--bx-animated-image-control-box-size` defaults to `max(--bx-control-height-m, --bx-target-min)`, so the toggle scales with `--bx-scale` but never drops below the accessible touch-target floor.
 - This is the first component built in `@bixant/core`; it also introduces `BixElement` (`src/bix-element.ts`, every component's base class — `box-sizing` reset, `tagName`/`define()` registration, `prefersReducedMotion`), the shared `IntersectionObserver` pool (`src/internal/shared-observers.ts`) and the `defineCustomElement` helper (`src/internal/register.ts`), all of which later components should reuse rather than duplicating.
 - Visual language follows AGENTS.md's shadcn-inspired direction: a 1px bordered frame instead of a shadow, a bordered ghost-style toggle instead of a solid dark scrim, `--bx-radius-m` instead of a pill. Every visual surface on the toggle and frame is its own CSS custom property (see above) so it can be reskinned without forking the component.
 - Open: confirm final property names against the custom-elements manifest once the CEM generation pipeline exists.

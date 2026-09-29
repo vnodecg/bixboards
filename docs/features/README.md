@@ -4,7 +4,7 @@ One detailed feature document per component. Shared rules live in [_conventions.
 
 **61 components** across 3 packages.
 
-> **Status: proposals, hand-maintained.** These documents are the specification for components that do not exist yet. API shapes are design proposals and have **not** been validated against real usage; confirm names and behavior when implementing each component. Appearance, variant and size options are defined here, per component, and are implemented later on top of the design-system tokens (colors from roles, sizes from the fluid scale). The design system itself contains no component definitions. Conventions: appearance names use spaces (`filled outlined`), variants are the design-system palettes, and component CSS hooks are `--bx-<component>-<parameter>`.
+> **Status: proposals, hand-maintained.** These documents are the specification for each component. One is implemented ([`bx-animated-image`](core/animated-image.md)); the rest do not exist yet. API shapes for the unimplemented components are design proposals and have **not** been validated against real usage; confirm names and behavior when implementing each. Appearance, variant and size options are defined here, per component, and are implemented on top of the design-system tokens (colors from roles, sizes from the fluid scale) — the design system itself contains no component definitions. Conventions: appearance names use spaces (`filled outlined`), variants are the design-system palettes, and component CSS hooks are `--bx-<component>-<parameter>` (parts use short names; only custom properties carry the component prefix).
 
 ## `@bixant/core`
 
