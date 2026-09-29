@@ -13,6 +13,12 @@ const config: StorybookConfig = {
       '@bixant/design-system': fileURLToPath(
         new URL('../../design-system/src/index.ts', import.meta.url),
       ),
+      '@bixant/core/animated-image': fileURLToPath(
+        new URL('../../core/src/animated-image/index.ts', import.meta.url),
+      ),
+      '@bixant/core': fileURLToPath(
+        new URL('../../core/src/index.ts', import.meta.url),
+      ),
     };
     return viteConfig;
   },

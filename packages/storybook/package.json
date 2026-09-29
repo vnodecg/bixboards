@@ -12,6 +12,7 @@
     "typecheck": "pnpm run tokens && tsc -p tsconfig.json"
   },
   "devDependencies": {
+    "@bixant/core": "workspace:*",
     "@bixant/design-system": "workspace:*",
     "@storybook/addon-docs": "^10.6.0",
     "@storybook/web-components-vite": "^10.6.0",

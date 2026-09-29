@@ -7,7 +7,7 @@
 | **Package**         | `@bixant/core`      |
 | **Category**        | Imagery             |
 | **Tag**             | `bx-animated-image` |
-| **Status**          | Planned             |
+| **Status**          | Implemented         |
 | **Form-associated** | No                  |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
@@ -46,7 +46,7 @@ Play/pause control for GIF and animated WebP. Specified for the Bixant token sys
 
 ### CSS custom properties
 
-`--bx-control-box-size`
+`--bx-control-box-size`, `--bx-control-box-bg`, `--bx-control-box-color`, `--bx-control-box-border-color`, `--bx-frame-border-color`, `--bx-frame-radius`
 
 ### Methods
 
@@ -90,14 +90,19 @@ Image fits container (object-fit contain).
 
 ## 9. Acceptance criteria
 
-- [ ] All FR-ANIMATED-IMAGE-* requirements covered by unit/component tests (Web Test Runner, real browsers).
-- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark.
-- [ ] axe-core: zero violations; manual screen-reader pass (NVDA/VoiceOver) documented.
-- [ ] Keyboard-only walkthrough recorded in the test plan.
-- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events.
-- [ ] Size budget check (`size-limit`) passes.
+- [x] All FR-ANIMATED-IMAGE-* requirements covered by unit/component tests (Web Test Runner, real browsers: Chromium, Firefox, WebKit). See `packages/core/src/animated-image/animated-image.test.ts`.
+- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark. No visual-regression harness exists yet in the workspace.
+- [x] axe-core: zero violations (paused, playing and error states), asserted in the test suite via `chai-a11y-axe`.
+- [ ] Manual screen-reader pass (NVDA/VoiceOver) documented.
+- [x] Keyboard-only walkthrough recorded in the test plan (Enter/Space toggle, `animated-image.test.ts`).
+- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events. Wrapper packages do not exist yet.
+- [ ] Size budget check (`size-limit`) passes. No size-limit tooling configured yet.
 
 ## 10. Notes and open questions
 
 - Naming prefix is `bx-`; CSS hooks use `--bx-*`.
-- Open: confirm final property names against the custom-elements manifest during implementation.
+- Implemented in `@bixant/core` (`src/animated-image/`). Default play/pause glyphs are vendored from Phosphor Icons (regular weight, MIT), as two path strings rather than the whole icon package, to stay inside the incremental-JS budget; either icon is replaceable via the `play-icon`/`pause-icon` slots.
+- `--bx-control-box-size` defaults to `max(--bx-control-height-m, --bx-target-min)`, so the toggle scales with `--bx-scale` but never drops below the accessible touch-target floor.
+- This is the first component built in `@bixant/core`; it also introduces `BixElement` (`src/bix-element.ts`, every component's base class — `box-sizing` reset, `tagName`/`define()` registration, `prefersReducedMotion`), the shared `IntersectionObserver` pool (`src/internal/shared-observers.ts`) and the `defineCustomElement` helper (`src/internal/register.ts`), all of which later components should reuse rather than duplicating.
+- Visual language follows AGENTS.md's shadcn-inspired direction: a 1px bordered frame instead of a shadow, a bordered ghost-style toggle instead of a solid dark scrim, `--bx-radius-m` instead of a pill. Every visual surface on the toggle and frame is its own CSS custom property (see above) so it can be reskinned without forking the component.
+- Open: confirm final property names against the custom-elements manifest once the CEM generation pipeline exists.

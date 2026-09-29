@@ -22,6 +22,9 @@
   "references": [
     {
       "path": "../design-system"
+    },
+    {
+      "path": "../core"
     }
   ]
 }

@@ -5,6 +5,9 @@
   "references": [
     {
       "path": "./packages/design-system"
+    },
+    {
+      "path": "./packages/core"
     }
   ],
   "compilerOptions": {}

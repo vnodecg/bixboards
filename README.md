@@ -8,14 +8,14 @@ A Lit-based web component library that **scales automatically**.
 - **Modular** — a `core` package plus optional data modules, so apps only pay for what they import.
 - **Framework-friendly** — native custom elements with thin React, Angular and Svelte adapters (no reimplementations).
 
-> Status: early. Implemented: the [design system](packages/design-system/README.md) (tokens and theming: TypeScript compiler, themes, contrast checks, runtime API) and a Storybook of the tokens. **The design system is being finished first; component work starts after that.** Planned, not started: the components themselves (`core`, `data-table`, `data-list`) and the framework wrappers. See the [PRD](docs/PRD.md), the [feature documents](docs/features/README.md) and the [code review](docs/code-review-2026-09-28.md).
+> Status: early. Implemented: the [design system](packages/design-system/README.md) (tokens and theming: TypeScript compiler, themes, contrast checks, runtime API), a Storybook of the tokens, and the first `@bixant/core` component, [`bx-animated-image`](docs/features/core/animated-image.md). **Components are being built one at a time on top of the design system.** Not started: the other 60 components, `data-table`, `data-list` and the framework wrappers. See the [PRD](docs/PRD.md), the [feature documents](docs/features/README.md) and the [code review](docs/code-review-2026-09-28.md).
 
 ## Packages
 
 | Package                                                     | Purpose                                                                                               |
 | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | [`@bixant/design-system`](packages/design-system/README.md) | Design tokens and theming: JSON themes and foundation compiled to CSS custom properties (implemented) |
-| `@bixant/core`                                              | `VirtualizerController`, 58 general components                                                        |
+| `@bixant/core`                                              | `VirtualizerController`, 58 general components (1 implemented: `bx-animated-image`)                   |
 | `@bixant/data-table`                                        | Virtualized enterprise data table                                                                     |
 | `@bixant/data-list`                                         | Virtualized list/grid and tree                                                                        |
 | `@bixant/react` · `@bixant/angular` · `@bixant/svelte`      | Generated wrappers over the custom elements                                                           |

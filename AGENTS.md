@@ -21,3 +21,47 @@
 - The `nx-generate` skill handles generator discovery internally - don't call nx_docs just to look up generator syntax
 
 <!-- nx configuration end-->
+
+# Component workflow
+
+Components live in `@bixant/core` (plus `@bixant/data-table`, `@bixant/data-list` for the data components), built on `@bixant/design-system` tokens. Build components **one at a time**, not in batch:
+
+- Pick a single component from [docs/features/README.md](docs/features/README.md); read its feature doc plus [docs/features/_conventions.md](docs/features/_conventions.md) before writing it.
+- Implement it fully (element, styles, forms/a11y/virtualization as applicable per the conventions doc) and land it before starting the next component.
+- Add a detailed Storybook example for it alongside the implementation (see below).
+
+## Base class
+
+Every component class extends `BixElement` (`packages/core/src/bix-element.ts`), never `LitElement` directly. It is intentionally thin — a shared `box-sizing: border-box` reset (`BixElement.baseStyles`, composed into the subclass's own `static styles` array, not applied automatically), the `static tagName` + `static define(tagName?)` registration pattern (a component's `index.ts` calls `MyComponent.define()`; its `define.ts` wraps that in a named `defineMyComponent(tagName?)` function per docs/features/_conventions.md §1), and a `protected get prefersReducedMotion` for anything that autoplays. Add to `BixElement` only once a second component needs the same thing — don't pre-build abstractions for components that don't exist yet.
+
+## Visual language: shadcn-inspired
+
+Default appearance should read like shadcn/ui, not material design: neutral surfaces, a visible but subtle 1px border (`var(--bx-border-subtle)`/`var(--bx-border-base)`) instead of heavy drop shadows or dark scrims, restrained color (semantic role colors only where they carry meaning — status, brand actions — not decoration), consistently `var(--bx-radius-m)` ("rounded-md") rather than pill/fully-round unless the element is genuinely circular (an avatar, a dot), and a crisp `:focus-visible` ring (`outline: var(--bx-border-width-strong) solid var(--bx-focus-ring); outline-offset: 2px;`). Prefer ghost/outline-style interactive elements (transparent or near-transparent background, border, a subtle hover fill from `--bx-role-neutral-subtle-hover`) over solid, saturated fills for anything that isn't a primary action.
+
+## Extendability
+
+Components must be easy to reskin without forking them, the way shadcn components are easy to edit because you own the code:
+
+- Every themeable visual surface (background, border, color, size — not just size) is its own CSS custom property with a token-backed default via the `var(--bx-x, fallback)` pattern, e.g. `background: var(--bx-control-box-bg, var(--bx-surface-base));`. List every one in a `@cssprop` JSDoc block on the class and in the feature doc's "CSS custom properties" table.
+- Every meaningful internal element gets a `part="..."` attribute and a matching `@csspart` JSDoc entry, per docs/features/_conventions.md §7 ("Component-level hooks are CSS custom properties and `::part()`; no internal class names are public API").
+- Slots are the first extension point for content/icons (see the animated-image `play-icon`/`pause-icon` slots); CSS custom properties and parts are for everything visual on top of that.
+
+## Required Storybook example per component
+
+Every component needs a detailed Storybook story covering, at minimum:
+
+- **All variants/appearances/sizes** defined in its feature doc, shown together (not just the default).
+- **All states** — disabled, loading, error/invalid, focus, etc. where applicable.
+- **Interactive controls (`argTypes`)** for every public property/attribute so props can be toggled live.
+- **Theme + scale toolbar compatibility** — the story must render correctly against the existing theme switcher and `--bx-scale` toolbar controls.
+- **A11y and keyboard usage** demonstrated (e.g. a story exercising keyboard navigation for interactive components).
+- For data-bearing/virtualized components, a story using a large dataset (see scaling tests below), not just a handful of rows.
+
+## Required tests per component
+
+Every component's test suite must include, at minimum (per the [testing contract](docs/features/_conventions.md#11-testing-contract)):
+
+- **Scaling tests** — verify the component holds up under large data volumes: for data-bearing/virtualized components (`select`, `dropdown`, `tree`, `virtual-tree`, `data-list`, `data-table`), benchmark with realistic large datasets (10k/100k/1M+ items per the component's target range) and assert against regression gates (render time, scroll frame time, memory) per the [performance contract](docs/features/_conventions.md#9-performance-and-reliability-contract). For non-data components, verify behavior under many instances/large content (e.g. long lists of slotted children, many open popovers) where relevant.
+- **Theming tests** — verify the component renders correctly across light/dark/auto (`color-scheme`, `light-dark()`), each semantic role (`brand`, `neutral`, `success`, `warning`, `danger`), and forced-colors/high-contrast mode.
+
+Do not mark a component done without both test categories passing.
