@@ -99,6 +99,7 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
         color: var(--bx-text-primary);
         font-weight: var(--bx-font-weight-medium);
         font-size: var(--bx-font-s);
+        line-height: var(--bx-font-leading-tight);
       }
 
       .label:empty {
@@ -114,18 +115,33 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
           --bx-input-height,
           max(var(--bx-control-height-m), var(--bx-target-min, 1.5rem))
         );
-        padding-inline: var(--bx-input-padding-inline, var(--bx-space-m));
+        padding-inline: var(--bx-input-padding-inline, var(--bx-space-s));
         border-radius: var(--bx-radius-m);
         border: var(--bx-border-width) solid var(--bx-border-subtle);
         background: var(--bx-surface-base);
         flex: 1;
         min-inline-size: 0;
-        transition: border-color var(--bx-motion-duration-fast)
-          var(--bx-motion-easing-standard);
+        cursor: text;
+        transition:
+          border-color var(--bx-motion-duration-fast)
+            var(--bx-motion-easing-standard),
+          box-shadow var(--bx-motion-duration-fast)
+            var(--bx-motion-easing-standard),
+          background-color var(--bx-motion-duration-fast)
+            var(--bx-motion-easing-standard);
       }
 
       .base:hover {
-        border-color: var(--bx-border-base);
+        border-color: var(--bx-border-strong);
+      }
+
+      /* Focus: a crisp brand border plus a soft halo instead of a hard outline. The transparent
+         outline keeps a visible ring in forced-colors mode. */
+      .base:focus-within {
+        border-color: var(--bx-focus-ring);
+        box-shadow: 0 0 0 3px
+          color-mix(in srgb, var(--bx-focus-ring) 22%, transparent);
+        outline: var(--bx-border-width-strong) solid transparent;
       }
 
       :host([size='small']) .base {
@@ -145,23 +161,31 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
         background: var(--bx-surface-subtle);
         border-color: transparent;
       }
+      :host([appearance='filled']) .base:hover {
+        background: var(--bx-surface-muted);
+      }
+      :host([appearance~='filled']) .base:focus-within {
+        background: var(--bx-surface-base);
+        border-color: var(--bx-focus-ring);
+      }
 
       :host([pill]) .base {
         border-radius: var(--bx-radius-pill, 999px);
       }
 
-      .base:has(.input:focus-visible) {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
-      }
-
       :host([disabled]) .base {
         background: var(--bx-surface-subtle);
+        border-color: var(--bx-border-subtle);
         color: var(--bx-text-disabled);
+        cursor: not-allowed;
       }
 
       .base:has(.input[data-user-invalid]) {
         border-color: var(--bx-role-danger-border);
+      }
+      .base:has(.input[data-user-invalid]):focus-within {
+        box-shadow: 0 0 0 3px
+          color-mix(in srgb, var(--bx-role-danger-border) 22%, transparent);
       }
 
       .input {
@@ -170,12 +194,22 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
         flex: 1;
         min-inline-size: 0;
         font: inherit;
-        font-size: max(1rem, var(--bx-font-m));
+        font-size: var(--bx-font-m);
+        line-height: var(--bx-font-leading-tight);
         color: inherit;
+        cursor: inherit;
+      }
+
+      /* Touch browsers zoom the page on focus for text under 16px; keep the floor there only. */
+      @media (pointer: coarse) {
+        .input {
+          font-size: max(1rem, var(--bx-font-m));
+        }
       }
 
       .input::placeholder {
-        color: var(--bx-text-secondary);
+        color: var(--bx-text-hint);
+        opacity: 1;
       }
 
       .start,
@@ -183,12 +217,22 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
         display: inline-flex;
         align-items: center;
         flex-shrink: 0;
-        color: var(--bx-text-secondary);
+        color: var(--bx-text-hint);
       }
 
-      .start:empty,
-      .end:empty {
+      /* Hidden until something is slotted, so an unused adornment adds no gap or indent. */
+      .start[hidden],
+      .end[hidden] {
         display: none;
+      }
+
+      .start ::slotted(*),
+      .end ::slotted(*) {
+        font-size: 1.125em;
+      }
+
+      .base:focus-within .start {
+        color: var(--bx-text-secondary);
       }
 
       .clear-button,
@@ -202,13 +246,15 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
         inline-size: 1.5em;
         block-size: 1.5em;
         border-radius: var(--bx-radius-pill, 50%);
-        color: var(--bx-text-secondary);
+        color: var(--bx-text-hint);
         cursor: pointer;
+        transition: color var(--bx-motion-duration-fast)
+          var(--bx-motion-easing-standard);
       }
 
       .clear-button:hover,
       .password-toggle-button:hover {
-        background: var(--bx-surface-subtle);
+        color: var(--bx-text-primary);
       }
 
       .clear-button:focus-visible,
@@ -283,6 +329,8 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
       attribute: 'label-position',
     },
     debounce: { type: Number },
+    _hasStart: { state: true },
+    _hasEnd: { state: true },
   };
 
   declare name: string;
@@ -312,6 +360,10 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
   declare pill: boolean;
   declare labelPosition: LabelPosition;
   declare debounce?: number;
+  /** @internal */
+  declare _hasStart: boolean;
+  /** @internal */
+  declare _hasEnd: boolean;
 
   #inputId = `bx-input-${nextId++}`;
   #hintId = `bx-input-hint-${nextId++}`;
@@ -347,6 +399,8 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
     this.appearance = 'outlined';
     this.pill = false;
     this.labelPosition = 'auto';
+    this._hasStart = false;
+    this._hasEnd = false;
   }
 
   static override shadowRootOptions: ShadowRootInit = {
@@ -465,6 +519,13 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
     this.#syncValidity();
   };
 
+  #handleAdornmentSlotChange = (event: Event): void => {
+    const slot = event.target as HTMLSlotElement;
+    const has = slot.assignedNodes({ flatten: true }).length > 0;
+    if (slot.name === 'start') this._hasStart = has;
+    else this._hasEnd = has;
+  };
+
   #handleClear = (): void => {
     this.value = '';
     this.#hasInteracted = true;
@@ -543,7 +604,12 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
             : nothing
         }
         <div class="base" part="base">
-          <span class="start" part="start"><slot name="start"></slot></span>
+          <span class="start" part="start" ?hidden=${!this._hasStart}
+            ><slot
+              name="start"
+              @slotchange=${this.#handleAdornmentSlotChange}
+            ></slot
+          ></span>
           <input
             class="input"
             part="input"
@@ -613,7 +679,12 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
                 `
               : nothing
           }
-          <span class="end" part="end"><slot name="end"></slot></span>
+          <span class="end" part="end" ?hidden=${!this._hasEnd}
+            ><slot
+              name="end"
+              @slotchange=${this.#handleAdornmentSlotChange}
+            ></slot
+          ></span>
         </div>
         ${
           showHint
