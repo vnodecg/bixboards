@@ -17,6 +17,8 @@ type Status = 'idle' | 'loading' | 'ready' | 'error';
  * @fires bx-load - The icon resolved and rendered.
  * @fires bx-error - The icon failed to resolve (unknown name, fetch failure, invalid markup).
  *
+ * When resolution fails, a dashed "?" placeholder is drawn in place of the icon (and `bx-error` fires).
+ *
  * @csspart svg - The wrapper around the inlined `<svg>`.
  *
  * @cssprop --bx-icon-size - Width/height. Default `1em`, so the icon follows fluid type.
@@ -44,6 +46,13 @@ export class BxIcon extends BixElement {
 
       .svg svg {
         fill: currentColor;
+      }
+
+      /* Placeholder shown when the icon can't be resolved, so a bad name is visible. */
+      .svg .fallback {
+        fill: none;
+        stroke: currentColor;
+        opacity: 0.6;
       }
     `,
   ];
@@ -132,6 +141,23 @@ export class BxIcon extends BixElement {
     }
   }
 
+  #renderFallback() {
+    const reason = this.name || this.src;
+    return html`<svg
+      class="fallback"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      data-fallback
+    >
+      <title>Unknown icon${reason ? `: ${reason}` : ''}</title>
+      <rect x="3" y="3" width="18" height="18" rx="4" stroke-dasharray="3 3" />
+      <path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5" />
+      <path d="M12 16.5h.01" stroke-width="2" />
+    </svg>`;
+  }
+
   protected override render() {
     return html`
       <span
@@ -141,7 +167,13 @@ export class BxIcon extends BixElement {
         aria-label=${this.label || nothing}
         aria-hidden=${this.label ? nothing : 'true'}
       >
-        ${this._status === 'ready' && this._markup ? unsafeSVG(this._markup) : nothing}
+        ${
+          this._status === 'ready' && this._markup
+            ? unsafeSVG(this._markup)
+            : this._status === 'error'
+              ? this.#renderFallback()
+              : nothing
+        }
       </span>
     `;
   }

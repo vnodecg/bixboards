@@ -62,7 +62,12 @@ describe('bx-icon', () => {
     mounted.push(el);
     const event = await errorPromise;
     expect(event).to.exist;
-    expect(el.shadowRoot!.querySelector('svg')).to.be.null;
+    await el.updateComplete;
+    const fallback = el.shadowRoot!.querySelector('svg[data-fallback]');
+    expect(fallback).to.exist;
+    expect(fallback!.querySelector('title')!.textContent).to.contain(
+      'does-not-exist',
+    );
   });
 
   it('resolves through a custom registered library', async () => {

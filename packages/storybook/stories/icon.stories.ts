@@ -78,7 +78,7 @@ export const UnknownIcon: Story = {
     docs: {
       description: {
         story:
-          'An unregistered icon name dispatches `bx-error` and renders nothing rather than a broken image.',
+          'An unregistered icon name dispatches `bx-error` and renders a dashed "?" placeholder rather than nothing or a broken image.',
       },
     },
   },
