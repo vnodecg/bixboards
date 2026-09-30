@@ -53,6 +53,10 @@ export class BxCard extends BixElement {
         border: var(--bx-border-width) solid transparent;
       }
 
+      :host([appearance~='outlined']) .base {
+        box-shadow: var(--bx-shadow-s);
+      }
+
       :host([appearance~='filled']) .base {
         background: var(--bx-surface-subtle);
       }

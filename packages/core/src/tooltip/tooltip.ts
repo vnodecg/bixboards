@@ -86,6 +86,7 @@ export class BxTooltip extends BixElement {
         padding-block: var(--bx-space-xs);
         padding-inline: var(--bx-space-s);
         border-radius: var(--bx-radius-s);
+        box-shadow: var(--bx-shadow-m);
         background: var(--bx-tooltip-bg, var(--bx-surface-inverse, #1a1a1a));
         color: var(--bx-tooltip-fg, var(--bx-text-inverse, #fff));
         font-family: var(--bx-font-family-sans);

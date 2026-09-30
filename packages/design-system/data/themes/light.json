@@ -4,11 +4,11 @@
   "colorScheme": "light",
   "default": true,
   "seeds": {
-    "neutral": "#7a869f",
-    "brand": "#3366ff",
-    "success": "#00a86b",
-    "warning": "#ffaa00",
-    "danger": "#d91e48"
+    "neutral": "#737a99",
+    "brand": "#4f46e5",
+    "success": "#0f9d70",
+    "warning": "#f5a20a",
+    "danger": "#d92d54"
   },
   "tokens": {
     "surface": {
@@ -16,7 +16,7 @@
       "subtle": "{color.neutral.100}",
       "muted": "{color.neutral.200}",
       "inverse": "{color.neutral.900}",
-      "overlay": "rgba(20, 26, 45, 0.48)"
+      "overlay": "rgba(23, 25, 60, 0.48)"
     },
     "text": {
       "primary": "{color.neutral.900}",

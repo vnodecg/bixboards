@@ -38,14 +38,14 @@ The matrix for every theme is in `contrast.json` and Storybook → Foundation �
 
 `--bx-unit = clamp(min, preferred, max) × --bx-scale`. All space, type, radius and control sizes are unit multiples.
 
-| Token              | ×unit | Typical use                        |
-| ------------------ | ----- | ---------------------------------- |
-| `space.2xs`        | 0.25  | Icon-to-text, tight stacks         |
-| `space.xs`         | 0.5   | Inline gaps, control padding-block |
-| `space.s`          | 0.75  | Control padding-inline, list gaps  |
-| `space.m`          | 1     | Default gap and padding            |
-| `space.l`          | 1.5   | Section padding                    |
-| `space.xl` / `2xl` | 2 / 3 | Page regions                       |
+| Token                      | ×unit     | Typical use                        |
+| -------------------------- | --------- | ---------------------------------- |
+| `space.2xs`                | 0.25      | Icon-to-text, tight stacks         |
+| `space.xs`                 | 0.5       | Inline gaps, control padding-block |
+| `space.s`                  | 0.75      | Control padding-inline, list gaps  |
+| `space.m`                  | 1         | Default gap and padding            |
+| `space.l`                  | 1.5       | Section padding                    |
+| `space.xl` / `2xl` / `3xl` | 2 / 3 / 4 | Page regions, hero spacing         |
 
 - Scale a region with `class="bx-scale"` and `--bx-scale`.
 - Layout reflow uses container queries with thresholds in fluid units.
@@ -53,19 +53,19 @@ The matrix for every theme is in `contrast.json` and Storybook → Foundation �
 
 ## Radius
 
-`radius.s` (0.25u), `radius.m` (0.375u, default for controls), `radius.l` (0.625u, containers), `radius.pill`.
+`radius.s` (0.375u), `radius.m` (0.5u, default for controls), `radius.l` (0.75u, containers), `radius.pill`.
 
-## Look: bordered, not shadowed
+## Look: refined and calm
 
-The default look is closer to shadcn/ui than to a material/elevation-driven system: a visible 1px `border.subtle`/`border.base` does the work a shadow would do elsewhere, color is reserved for semantic meaning (status, the one accent action per region) rather than decoration, and `radius.m` ("rounded-md") is the default corner for controls and containers — reach for `radius.pill` only when the shape is genuinely circular (an avatar, a status dot), not as a default button/card shape. This is a default, not a constraint: a theme can still raise shadow opacity or drop borders if a brand needs it (`foundation.shadow`, `tokens.border`), but components should not need heavier elevation to read correctly.
+The default look is elegant and enterprise-grade: an indigo brand (`#4f46e5`) on cool slate neutrals, Inter-first typography with a system fallback, and rounded-but-not-bubbly corners (`radius.m` = 0.5u). A hairline `border.subtle` defines surfaces and a soft, indigo-tinted shadow adds depth where a surface sits above the page. Color is reserved for semantic meaning (status, the one accent action per region) rather than decoration, and `radius.pill` is for genuinely circular shapes (avatars, status dots), not a default button shape. This is a default, not a constraint: a theme can tighten radii, flatten shadows or swap the brand seed (`foundation.radius`, `foundation.shadow`, `seeds`) without touching components.
 
 ## Elevation
 
-`shadow.s` (resting cards), `shadow.m` (popovers, tooltips, dropdowns), `shadow.l` (dialogs, drawers) — all intentionally subtle (`shadow.s` is barely visible) so a border carries most of a surface's definition; shadow adds depth only where a surface genuinely floats above the page (an overlay, not a card). Prefer surface tint and borders over heavier shadows, especially in dark themes where shadows read poorly. Stacking order comes from `z.*` tokens (`dropdown` < `sticky` < `overlay` < `modal` < `tooltip`); never hardcode z-index.
+`shadow.s` (resting cards), `shadow.m` (popovers, tooltips, dropdowns), `shadow.l` (dialogs, drawers). Each is two layers, a tight contact shadow plus a wide ambient one, tinted toward the brand hue so they look natural on both light and tinted surfaces. Pair them with a hairline border; use surface tint rather than shadow in dark themes, where shadows read poorly. Stacking order comes from `z.*` tokens (`dropdown` < `sticky` < `overlay` < `modal` < `tooltip`); never hardcode z-index.
 
 ## Motion
 
-- Durations: `fast` 120 ms (state changes), `base` 200 ms (enter/exit), `slow` 320 ms (layout/large surfaces). Easing: `motion.easing.standard`.
+- Durations: `fast` 120 ms (state changes), `base` 200 ms (enter/exit), `slow` 360 ms (layout/large surfaces). Easing: `motion.easing.standard`.
 - Animate `transform` and `opacity`; avoid animating layout properties.
 - Under `prefers-reduced-motion: reduce`, replace movement with fades or nothing. No information is conveyed by animation alone.
 

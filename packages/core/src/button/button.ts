@@ -140,18 +140,18 @@ export class BxButton extends BixElement {
 
       /* Size steps. */
       :host([size='small']) {
-        --bx-button-computed-min-height: calc(var(--bx-target-min, 2.75rem) * 0.8);
+        --bx-button-computed-min-height: max(var(--bx-control-height-s), var(--bx-target-min, 1.5rem));
         --bx-button-computed-padding-inline: var(--bx-space-s);
         --bx-button-computed-font-size: var(--bx-font-s);
       }
       :host([size='medium']),
       :host(:not([size])) {
-        --bx-button-computed-min-height: var(--bx-target-min, 2.75rem);
+        --bx-button-computed-min-height: max(var(--bx-control-height-m), var(--bx-target-min, 1.5rem));
         --bx-button-computed-padding-inline: var(--bx-space-m);
         --bx-button-computed-font-size: var(--bx-font-m);
       }
       :host([size='large']) {
-        --bx-button-computed-min-height: calc(var(--bx-target-min, 2.75rem) * 1.2);
+        --bx-button-computed-min-height: max(var(--bx-control-height-l), var(--bx-target-min, 1.5rem));
         --bx-button-computed-padding-inline: var(--bx-space-l);
         --bx-button-computed-font-size: var(--bx-font-l);
       }
@@ -174,6 +174,15 @@ export class BxButton extends BixElement {
         font-weight: var(--bx-font-weight-medium);
         text-decoration: none;
         cursor: pointer;
+        transition:
+          filter var(--bx-motion-duration-fast) var(--bx-motion-easing-standard),
+          box-shadow var(--bx-motion-duration-base) var(--bx-motion-easing-standard),
+          transform var(--bx-motion-duration-fast) var(--bx-motion-easing-standard);
+      }
+
+      :host(:not([appearance])) .base:not([aria-disabled='true']),
+      :host([appearance='accent']) .base:not([aria-disabled='true']) {
+        box-shadow: var(--bx-shadow-s);
       }
 
       :host([pill]) .base {
@@ -182,6 +191,11 @@ export class BxButton extends BixElement {
 
       .base:hover {
         filter: brightness(0.95);
+      }
+
+      .base:active:not([aria-disabled='true']) {
+        filter: brightness(0.9);
+        transform: translateY(1px);
       }
 
       .base:focus-visible {
@@ -236,8 +250,18 @@ export class BxButton extends BixElement {
         font-size: 1.1em;
       }
 
+      @media (prefers-reduced-motion: reduce) {
+        .base {
+          transition: none;
+        }
+        .base:active {
+          transform: none;
+        }
+      }
+
       @media (forced-colors: active) {
         .base {
+          box-shadow: none;
           forced-color-adjust: none;
           border-color: ButtonText;
           background: ButtonFace;

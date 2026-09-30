@@ -10,7 +10,7 @@ Ordered by priority. When two conflict, the earlier one wins.
 6. **Themeable, not forkable.** Brands change seeds and semantic tokens. If a brand needs to change a component's structure, that is a component feature, not a theme.
 7. **Native first.** Use platform features (`<dialog>`, Popover API, container queries, `ElementInternals`, `:focus-visible`) and degrade gracefully where support is partial.
 8. **Small and predictable.** Tree-shakable per component, no work at import, no hidden global side effects.
-9. **Restrained by default.** The default look is closer to shadcn/ui than to material design: a visible border does the work a shadow would elsewhere, color is reserved for semantic meaning rather than decoration, and `radius.m` ("rounded-md") is the default shape. See [foundations.md](foundations.md#look-bordered-not-shadowed). This is the lowest-priority principle â€” accessibility, tokens and scale always win when they conflict with it.
+9. **Refined and calm.** The default look is elegant and quiet: an indigo brand used sparingly, cool slate neutrals, Inter-first type, generous corners (`radius.m` is 0.5u), and soft layered shadows paired with hairline borders so surfaces feel lifted, not boxed. Color is reserved for meaning and the one primary action per region. See [foundations.md](foundations.md#look-refined-and-calm). This is the lowest-priority principle — accessibility, tokens and scale always win when they conflict with it.
 
 ## Voice and content
 

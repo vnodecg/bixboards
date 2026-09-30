@@ -70,6 +70,7 @@ export class BxDialog extends BixElement {
         padding: 0;
         border: var(--bx-border-width) solid var(--bx-border-subtle);
         border-radius: var(--bx-radius-l);
+        box-shadow: var(--bx-shadow-l);
         background: var(--bx-surface-base, Canvas);
         color: var(--bx-text-primary);
         font-family: var(--bx-font-family-sans);

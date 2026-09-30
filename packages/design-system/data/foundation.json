@@ -15,11 +15,12 @@
     "m": "{unit}",
     "l": "calc({unit} * 1.5)",
     "xl": "calc({unit} * 2)",
-    "2xl": "calc({unit} * 3)"
+    "2xl": "calc({unit} * 3)",
+    "3xl": "calc({unit} * 4)"
   },
   "font": {
     "family": {
-      "sans": "system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+      "sans": "'Inter Variable', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
       "mono": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
     },
     "xs": "calc({unit} * 0.75)",
@@ -35,31 +36,31 @@
       "semibold": "600",
       "bold": "700"
     },
-    "leading": { "tight": "1.25", "normal": "1.5" }
+    "leading": { "tight": "1.25", "normal": "1.55" }
   },
   "radius": {
-    "s": "calc({unit} * 0.25)",
-    "m": "calc({unit} * 0.375)",
-    "l": "calc({unit} * 0.625)",
+    "s": "calc({unit} * 0.375)",
+    "m": "calc({unit} * 0.5)",
+    "l": "calc({unit} * 0.75)",
     "pill": "9999px"
   },
   "control": {
     "height": {
-      "s": "calc({unit} * 1.75)",
-      "m": "calc({unit} * 2.25)",
-      "l": "calc({unit} * 2.75)"
+      "s": "calc({unit} * 2)",
+      "m": "calc({unit} * 2.5)",
+      "l": "calc({unit} * 3)"
     }
   },
   "border": { "width": "1px", "width-strong": "2px" },
   "focus": { "ring-offset": "2px" },
   "shadow": {
-    "s": "0 1px 2px rgba(20, 26, 45, 0.06)",
-    "m": "0 4px 12px rgba(20, 26, 45, 0.1)",
-    "l": "0 12px 32px rgba(20, 26, 45, 0.16)"
+    "s": "0 1px 2px rgba(23, 25, 60, 0.05), 0 1px 3px rgba(23, 25, 60, 0.04)",
+    "m": "0 2px 4px rgba(23, 25, 60, 0.04), 0 8px 20px rgba(23, 25, 60, 0.08)",
+    "l": "0 4px 8px rgba(23, 25, 60, 0.05), 0 20px 48px rgba(23, 25, 60, 0.14)"
   },
   "motion": {
-    "duration": { "fast": "120ms", "base": "200ms", "slow": "320ms" },
-    "easing": { "standard": "cubic-bezier(0.2, 0, 0, 1)" }
+    "duration": { "fast": "120ms", "base": "200ms", "slow": "360ms" },
+    "easing": { "standard": "cubic-bezier(0.22, 1, 0.36, 1)" }
   },
   "z": {
     "dropdown": "1000",
