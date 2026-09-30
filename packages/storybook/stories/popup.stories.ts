@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 import '@bixant/core/popup';
+import '@bixant/core/button';
 
 interface Args {
   placement:
@@ -65,7 +66,12 @@ const meta = {
            the anchor id/property pattern below is the one that keeps the anchor in its original
            document position, and is what every consumer in this package (bx-tooltip, bx-dialog,
            bx-color-picker) actually uses. -->
-      <button id="popup-story-anchor" type="button">Anchor</button>
+      <bx-button
+        id="popup-story-anchor"
+        variant="secondary"
+        appearance="outlined"
+        >Anchor</bx-button
+      >
       <bx-popup
         anchor="popup-story-anchor"
         placement=${args.placement}
@@ -110,7 +116,9 @@ export const Placements: Story = {
       ).map(
         (placement) => html`
           <bx-popup placement=${placement} active arrow>
-            <button slot="anchor" type="button">${placement}</button>
+            <bx-button slot="anchor" variant="secondary" appearance="outlined"
+              >${placement}</bx-button
+            >
             <div
               style="padding: 0.5rem 0.75rem; border-radius: var(--bx-radius-m); background: var(--bx-surface-base); border: 1px solid var(--bx-border-subtle); box-shadow: var(--bx-shadow-s); font-size: var(--bx-font-s)"
             >
@@ -130,7 +138,9 @@ export const FlipAndShift: Story = {
       style="display: flex; justify-content: flex-end; padding-inline-end: 1rem"
     >
       <bx-popup placement="right" active flip shift arrow>
-        <button slot="anchor" type="button">Near edge</button>
+        <bx-button slot="anchor" variant="secondary" appearance="outlined"
+          >Near edge</bx-button
+        >
         <div
           style="padding: 0.75rem 1rem; inline-size: 12rem; border-radius: var(--bx-radius-m); background: var(--bx-surface-base); border: 1px solid var(--bx-border-subtle); box-shadow: var(--bx-shadow-s)"
         >

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 import '@bixant/core/checkbox';
+import '@bixant/core/button';
 
 interface Args {
   checked: boolean;
@@ -91,7 +92,7 @@ export const RequiredWithHint: Story = {
       <bx-checkbox name="terms" required hint="You must accept to continue">
         I agree to the terms of service
       </bx-checkbox>
-      <button type="submit">Submit</button>
+      <bx-button type="submit">Submit</bx-button>
     </form>
   `,
   parameters: {

@@ -2,7 +2,7 @@
 
 Tracks build status for all 61 components across `@bixant/core`, `@bixant/data-table` and `@bixant/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 49 / 61 done.**
+**Progress: 53 / 61 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -92,10 +92,10 @@ Depend only on Tier 1 components.
 
 Depend on Tier 2 components.
 
-- [ ] [`bx-popover`](core/popover.md) — depends on `bx-popup`
-- [ ] [`bx-drawer`](core/drawer.md) — (shares dialog semantics/focus-trap with `bx-dialog`)
-- [ ] [`bx-copy-button`](core/copy-button.md) — depends on `bx-tooltip`, `bx-icon`
-- [ ] [`bx-button-group`](core/button-group.md) — depends on `bx-button`
+- [x] [`bx-popover`](core/popover.md) (`bx-popup` positioning only, no native Popover API path; adds `label` and an `anchor` slot; `sheet-narrow` not implemented; the anchor gets `aria-expanded`/`aria-haspopup` but not `aria-controls` — see the component's own doc comment) — depends on `bx-popup` — `packages/core/src/popover`
+- [x] [`bx-drawer`](core/drawer.md) (native `<dialog>`, parallel to `bx-dialog` rather than a shared base; `contained` opens non-modally and needs a positioned parent; close control is a `bx-button` + `bx-icon`) — (shares dialog semantics/focus-trap with `bx-dialog`) — `packages/core/src/drawer`
+- [x] [`bx-copy-button`](core/copy-button.md) (composes `bx-button` + `bx-tooltip` + `bx-icon`; adds `variant`/`appearance`/`size` passthrough; success/error color props renamed `--bx-copy-button-*`; `execCommand` fallback untested) — depends on `bx-tooltip`, `bx-icon` — `packages/core/src/copy-button`
+- [x] [`bx-button-group`](core/button-group.md) (corners shaped via `bx-button`'s new `--bx-button-radius`, inherited into wrappers like `bx-copy-button`/`bx-tooltip`; `overflow="menu"`, `stack-narrow` and `toolbar` not implemented) — depends on `bx-button` — `packages/core/src/button-group`
 
 ## Tier 4 — Virtualization infra + virtualized pickers
 

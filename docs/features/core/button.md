@@ -56,7 +56,7 @@ Triggers an action or navigates. Supports variants, appearances, sizes, loading 
 
 ### CSS custom properties
 
-`--bx-button-bg`, `--bx-button-fg`, `--bx-button-border`, `--bx-button-min-height`, `--bx-button-padding-inline`
+`--bx-button-bg`, `--bx-button-fg`, `--bx-button-border`, `--bx-button-min-height`, `--bx-button-padding-inline`, `--bx-button-radius` (added; lets `bx-button-group` square inner corners)
 
 ### Methods
 

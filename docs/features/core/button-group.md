@@ -7,7 +7,7 @@
 | **Package**         | `@bixant/core`    |
 | **Category**        | Actions           |
 | **Tag**             | `bx-button-group` |
-| **Status**          | Planned           |
+| **Status**          | Implemented       |
 | **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
@@ -20,12 +20,12 @@ Groups related buttons into a single segmented control with shared borders and r
 
 ### Properties / attributes
 
-| Name          | Type                       | Default      | Description                           |
-| ------------- | -------------------------- | ------------ | ------------------------------------- |
-| `label`       | string                     | ""           | Accessible label for the group        |
-| `orientation` | "horizontal" \| "vertical" | "horizontal" | Layout axis                           |
-| `variant`     | inherited                  | -            | Optionally forces variant on children |
-| `size`        | inherited                  | -            | Optionally forces size on children    |
+| Name          | Type                       | Default      | Description                                                       |
+| ------------- | -------------------------- | ------------ | ----------------------------------------------------------------- |
+| `label`       | string                     | ""           | Accessible label for the group                                    |
+| `orientation` | "horizontal" \| "vertical" | "horizontal" | Layout axis                                                       |
+| `variant`     | string                     | ""           | When set, forced on every descendant `bx-button`/`bx-copy-button` |
+| `size`        | string                     | ""           | When set, forced on every descendant `bx-button`/`bx-copy-button` |
 
 ### Slots
 
@@ -45,7 +45,7 @@ Groups related buttons into a single segmented control with shared borders and r
 
 ### CSS custom properties
 
-`--bx-group-gap`, `--bx-group-radius`
+`--bx-button-group-gap` (default `-1 × --bx-border-width`, the shared seam), `--bx-button-group-radius` (both renamed from the spec's `--bx-group-*` to follow the component-prefix rule). Corner shaping goes through `bx-button`'s `--bx-button-radius`.
 
 ### Methods
 
@@ -91,14 +91,15 @@ Switches to vertical stack below `--bx-group-stack-at` when `stack-narrow` is se
 
 ## 9. Acceptance criteria
 
-- [ ] All FR-BUTTON-GROUP-* requirements covered by unit/component tests (Web Test Runner, real browsers).
-- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark.
-- [ ] axe-core: zero violations; manual screen-reader pass (NVDA/VoiceOver) documented.
-- [ ] Keyboard-only walkthrough recorded in the test plan.
-- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events.
-- [ ] Size budget check (`size-limit`) passes.
+- [ ] All FR-BUTTON-GROUP-* requirements covered by unit/component tests (Web Test Runner, real browsers). FR-01 (incl. tooltip and `bx-copy-button` items, RTL, vertical), FR-02 and FR-03 are covered; FR-04's `overflow="menu"` is not implemented (needs `bx-dropdown`, Tier 4), nor are §5's `stack-narrow` or §6's `toolbar` mode.
+- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark. No visual-regression tooling configured yet.
+- [ ] axe-core: zero violations (default group, asserted in the component's test file); manual screen-reader pass (NVDA/VoiceOver) not done yet.
+- [ ] Keyboard-only walkthrough recorded in the test plan. Keyboard behavior is covered by tests and the Storybook story; no recorded walkthrough yet.
+- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events. No wrapper generation yet.
+- [ ] Size budget check (`size-limit`) passes. No size-limit tooling configured yet.
 
 ## 10. Notes and open questions
 
-- Adds overflow-to-menu mode.
+- Adds overflow-to-menu mode (not yet implemented, see §9).
+- Hovered/focused items are raised with `z-index` on the flex item, deliberately without `position: relative`, which would make the item the containing block for a descendant tooltip's popup.
 - Open: confirm final property names against the custom-elements manifest during implementation.

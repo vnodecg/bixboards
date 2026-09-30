@@ -7,7 +7,7 @@
 | **Package**         | `@bixant/core`   |
 | **Category**        | Actions          |
 | **Tag**             | `bx-copy-button` |
-| **Status**          | Planned          |
+| **Status**          | Implemented      |
 | **Form-associated** | No               |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
@@ -20,31 +20,34 @@ One-click copy of text, a property, or another element's content to the clipboar
 
 ### Properties / attributes
 
-| Name                | Type      | Default  | Description                                          |
-| ------------------- | --------- | -------- | ---------------------------------------------------- |
-| `value`             | string    | ""       | Text to copy                                         |
-| `from`              | string    | ""       | `id`, `id[attr]` or `id.prop` reference to copy from |
-| `disabled`          | boolean   | false    | -                                                    |
-| `copy-label`        | string    | "Copy"   | Tooltip text                                         |
-| `success-label`     | string    | "Copied" | -                                                    |
-| `error-label`       | string    | "Error"  | -                                                    |
-| `feedback-duration` | number    | 1000     | ms to show feedback                                  |
-| `tooltip-placement` | Placement | "top"    | -                                                    |
+| Name                | Type      | Default     | Description                                          |
+| ------------------- | --------- | ----------- | ---------------------------------------------------- |
+| `value`             | string    | ""          | Text to copy                                         |
+| `from`              | string    | ""          | `id`, `id[attr]` or `id.prop` reference to copy from |
+| `disabled`          | boolean   | false       | -                                                    |
+| `variant`           | string    | "secondary" | Passed to the inner `bx-button` (added)              |
+| `appearance`        | string    | "plain"     | Passed to the inner `bx-button` (added)              |
+| `size`              | string    | "medium"    | Passed to the inner `bx-button` (added)              |
+| `copy-label`        | string    | "Copy"      | Tooltip text                                         |
+| `success-label`     | string    | "Copied"    | -                                                    |
+| `error-label`       | string    | "Error"     | -                                                    |
+| `feedback-duration` | number    | 1000        | ms to show feedback                                  |
+| `tooltip-placement` | Placement | "top"       | -                                                    |
 
 ### Slots
 
-| Slot           | Description |
-| -------------- | ----------- |
-| `copy-icon`    | -           |
-| `success-icon` | -           |
-| `error-icon`   | -           |
+| Slot           | Description                       |
+| -------------- | --------------------------------- |
+| `copy-icon`    | Default: `bx-icon name="copy"`    |
+| `success-icon` | Default: `bx-icon name="check"`   |
+| `error-icon`   | Default: `bx-icon name="warning"` |
 
 ### Events
 
-| Event      | Detail / notes |
-| ---------- | -------------- |
-| `bx-copy`  | detail.value   |
-| `bx-error` | detail.reason  |
+| Event      | Detail / notes                                                                      |
+| ---------- | ----------------------------------------------------------------------------------- |
+| `bx-copy`  | detail.value                                                                        |
+| `bx-error` | detail.reason (unresolvable `from`, nothing to copy, or a rejected clipboard write) |
 
 ### CSS parts
 
@@ -52,7 +55,7 @@ One-click copy of text, a property, or another element's content to the clipboar
 
 ### CSS custom properties
 
-`--bx-success-color`, `--bx-error-color`
+`--bx-copy-button-success-color`, `--bx-copy-button-error-color` (renamed from the spec's `--bx-success-color`/`--bx-error-color` to follow the package's component-prefix rule; defaults are `--bx-role-success-fg`/`--bx-role-danger-fg`)
 
 ### Methods
 
@@ -97,14 +100,15 @@ None beyond inherited button behavior.
 
 ## 9. Acceptance criteria
 
-- [ ] All FR-COPY-BUTTON-* requirements covered by unit/component tests (Web Test Runner, real browsers).
-- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark.
-- [ ] axe-core: zero violations; manual screen-reader pass (NVDA/VoiceOver) documented.
-- [ ] Keyboard-only walkthrough recorded in the test plan.
-- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events.
-- [ ] Size budget check (`size-limit`) passes.
+- [ ] All FR-COPY-BUTTON-* requirements covered by unit/component tests (Web Test Runner, real browsers). FR-02, FR-03 and the async Clipboard path are covered; the `execCommand` fallback (FR-01) is implemented but not exercised, since the test browsers are secure contexts.
+- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark. No visual-regression tooling configured yet.
+- [ ] axe-core: zero violations (at rest and after copying, asserted in the component's test file); manual screen-reader pass (NVDA/VoiceOver) not done yet.
+- [ ] Keyboard-only walkthrough recorded in the test plan. Keyboard behavior is covered by tests and the Storybook story; no recorded walkthrough yet.
+- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events. No wrapper generation yet.
+- [ ] Size budget check (`size-limit`) passes. No size-limit tooling configured yet.
 
 ## 10. Notes and open questions
 
 - Naming prefix is `bx-`; CSS hooks use `--bx-*`.
+- A composite of `bx-button` + `bx-tooltip` + `bx-icon`; the tooltip doubles as feedback and a visually hidden `role="status"` live region announces it. The inner `bx-button`'s `aria-label` tracks the current label.
 - Open: confirm final property names against the custom-elements manifest during implementation.

@@ -7,7 +7,7 @@
 | **Package**         | `@bixant/core` |
 | **Category**        | Overlays       |
 | **Tag**             | `bx-popover`   |
-| **Status**          | Planned        |
+| **Status**          | Implemented    |
 | **Form-associated** | No             |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
@@ -20,29 +20,31 @@ Rich, interactive floating panel anchored to an element. Specified for the Bixan
 
 ### Properties / attributes
 
-| Name            | Type      | Default | Description |
-| --------------- | --------- | ------- | ----------- |
-| `for`           | string    | ""      | Anchor id   |
-| `placement`     | Placement | "top"   | -           |
-| `open`          | boolean   | false   | -           |
-| `distance`      | number    | 8       | -           |
-| `skidding`      | number    | 0       | -           |
-| `without-arrow` | boolean   | false   | -           |
+| Name            | Type      | Default | Description                                                                                           |
+| --------------- | --------- | ------- | ----------------------------------------------------------------------------------------------------- |
+| `for`           | string    | ""      | Anchor id, resolved in this element's own root (works inside shadow trees). Unset: a slotted `anchor` |
+| `label`         | string    | ""      | Accessible name for the `role="dialog"` popup (added; not in the original spec)                       |
+| `placement`     | Placement | "top"   | -                                                                                                     |
+| `open`          | boolean   | false   | -                                                                                                     |
+| `distance`      | number    | 8       | -                                                                                                     |
+| `skidding`      | number    | 0       | -                                                                                                     |
+| `without-arrow` | boolean   | false   | -                                                                                                     |
 
 ### Slots
 
-| Slot        | Description |
-| ----------- | ----------- |
-| `(default)` | -           |
+| Slot        | Description                                          |
+| ----------- | ---------------------------------------------------- |
+| `(default)` | Popover content                                      |
+| `anchor`    | The anchor element, used when `for` is unset (added) |
 
 ### Events
 
-| Event           | Detail / notes |
-| --------------- | -------------- |
-| `bx-show`       | -              |
-| `bx-after-show` | -              |
-| `bx-hide`       | -              |
-| `bx-after-hide` | -              |
+| Event           | Detail / notes                                                                       |
+| --------------- | ------------------------------------------------------------------------------------ |
+| `bx-show`       | Cancelable; canceling keeps it closed                                                |
+| `bx-after-show` | Opened and focus moved in                                                            |
+| `bx-hide`       | Cancelable; `detail.source`: `'anchor' \| 'light-dismiss' \| 'keyboard' \| 'method'` |
+| `bx-after-hide` | Closed                                                                               |
 
 ### CSS parts
 
@@ -50,7 +52,7 @@ Rich, interactive floating panel anchored to an element. Specified for the Bixan
 
 ### CSS custom properties
 
-`--bx-popover-arrow-size`, `--bx-popover-max-width`
+`--bx-popover-arrow-size`, `--bx-popover-max-width`, `--bx-popover-bg` (added)
 
 ### Methods
 
@@ -94,14 +96,16 @@ Converts to bottom sheet on narrow containers when `sheet-narrow` set.
 
 ## 9. Acceptance criteria
 
-- [ ] All FR-POPOVER-* requirements covered by unit/component tests (Web Test Runner, real browsers).
-- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark.
-- [ ] axe-core: zero violations; manual screen-reader pass (NVDA/VoiceOver) documented.
-- [ ] Keyboard-only walkthrough recorded in the test plan.
-- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events.
-- [ ] Size budget check (`size-limit`) passes.
+- [ ] All FR-POPOVER-* requirements covered by unit/component tests (Web Test Runner, real browsers). FR-POPOVER-02 is covered; FR-POPOVER-01's native Popover API path is not implemented (always `bx-popup` positioning), and §5's `sheet-narrow` bottom sheet is not implemented.
+- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark. No visual-regression tooling configured yet.
+- [ ] axe-core: zero violations (open state, asserted in the component's test file); manual screen-reader pass (NVDA/VoiceOver) not done yet.
+- [ ] Keyboard-only walkthrough recorded in the test plan. Keyboard behavior is covered by tests and the Storybook story; no recorded walkthrough yet.
+- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events. No wrapper generation yet.
+- [ ] Size budget check (`size-limit`) passes. No size-limit tooling configured yet.
 
 ## 10. Notes and open questions
 
 - Naming prefix is `bx-`; CSS hooks use `--bx-*`.
+- The anchor gets `aria-expanded` and `aria-haspopup="dialog"`; `aria-controls` is not set because the popup body lives in this element's shadow root, where the anchor's ID reference cannot resolve (same cross-root limitation as `bx-tooltip`'s `aria-describedby`).
+- Focus moves to the first interactive element in the content on open (the slotted anchor is skipped); Escape returns it to the anchor. There is no focus trap: it is a non-modal dialog.
 - Open: confirm final property names against the custom-elements manifest during implementation.

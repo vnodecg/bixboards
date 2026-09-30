@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 import '@bixant/core/dialog';
+import '@bixant/core/button';
 
 interface Args {
   label: string;
@@ -37,9 +38,7 @@ const meta = {
     lightDismiss: true,
   },
   render: (args) => html`
-    <button type="button" @click=${openDialog('story-dialog')}>
-      Open dialog
-    </button>
+    <bx-button @click=${openDialog('story-dialog')}>Open dialog</bx-button>
     <bx-dialog
       id="story-dialog"
       label=${args.label}
@@ -48,8 +47,16 @@ const meta = {
     >
       This action cannot be undone. All project data will be permanently
       removed.
-      <button slot="footer" type="button" data-dialog="close">Cancel</button>
-      <button slot="footer" type="button" data-dialog="close">Delete</button>
+      <bx-button
+        slot="footer"
+        variant="secondary"
+        appearance="outlined"
+        data-dialog="close"
+        >Cancel</bx-button
+      >
+      <bx-button slot="footer" variant="error" data-dialog="close"
+        >Delete</bx-button
+      >
     </bx-dialog>
   `,
 } satisfies Meta<Args>;
@@ -72,11 +79,11 @@ export const NoLightDismiss: Story = {
 export const KeyboardAndFocus: Story = {
   name: 'Keyboard & focus return',
   render: (args) => html`
-    <button type="button" @click=${openDialog('kb-dialog')}>Open dialog</button>
+    <bx-button @click=${openDialog('kb-dialog')}>Open dialog</bx-button>
     <bx-dialog id="kb-dialog" label=${args.label}>
       Press <kbd>Escape</kbd> to close, or Tab through the footer buttons —
       focus is trapped inside while open and returns to the opener on close.
-      <button slot="footer" type="button" data-dialog="close">Close</button>
+      <bx-button slot="footer" data-dialog="close">Close</bx-button>
     </bx-dialog>
   `,
   parameters: {

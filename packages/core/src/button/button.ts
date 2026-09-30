@@ -66,6 +66,7 @@ const CARET_DOWN_PATH =
  * @cssprop --bx-button-border - Border color. Defaults to a role/appearance combination.
  * @cssprop --bx-button-min-height - Control height. Default derived from `size`.
  * @cssprop --bx-button-padding-inline - Horizontal padding. Default derived from `size`.
+ * @cssprop --bx-button-radius - Corner radius (any `border-radius` value). Used by `bx-button-group` to square inner corners.
  * @cssprop --bx-button-truncate - Label `white-space` value; set to `nowrap` to truncate.
  */
 export class BxButton extends BixElement {
@@ -183,7 +184,7 @@ export class BxButton extends BixElement {
         );
         border: var(--bx-border-width) solid
           var(--bx-button-border, var(--bx-button-computed-border));
-        border-radius: var(--bx-radius-m);
+        border-radius: var(--bx-button-radius, var(--bx-radius-m));
         background: var(--bx-button-bg, var(--bx-button-computed-bg));
         color: var(--bx-button-fg, var(--bx-button-computed-fg));
         font: inherit;
@@ -205,7 +206,7 @@ export class BxButton extends BixElement {
       }
 
       :host([pill]) .base {
-        border-radius: var(--bx-radius-pill, 999px);
+        border-radius: var(--bx-button-radius, var(--bx-radius-pill, 999px));
       }
 
       .base:hover {

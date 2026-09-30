@@ -7,7 +7,7 @@
 | **Package**         | `@bixant/core` |
 | **Category**        | Overlays       |
 | **Tag**             | `bx-drawer`    |
-| **Status**          | Planned        |
+| **Status**          | Implemented    |
 | **Form-associated** | No             |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
@@ -20,36 +20,36 @@ Edge-anchored panel (top/end/bottom/start), modal or contained to a parent. Spec
 
 ### Properties / attributes
 
-| Name             | Type                                  | Default | Description                             |
-| ---------------- | ------------------------------------- | ------- | --------------------------------------- |
-| `open`           | boolean                               | false   | -                                       |
-| `label`          | string                                | ""      | -                                       |
-| `placement`      | "top" \| "end" \| "bottom" \| "start" | "end"   | -                                       |
-| `contained`      | boolean                               | false   | Constrain to parent instead of viewport |
-| `without-header` | boolean                               | false   | -                                       |
-| `light-dismiss`  | boolean                               | true    | -                                       |
+| Name             | Type                                  | Default | Description                                                                                           |
+| ---------------- | ------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------- |
+| `open`           | boolean                               | false   | -                                                                                                     |
+| `label`          | string                                | ""      | Title text (the `label` slot overrides)                                                               |
+| `placement`      | "top" \| "end" \| "bottom" \| "start" | "end"   | -                                                                                                     |
+| `contained`      | boolean                               | false   | Constrain to parent instead of viewport. Opens non-modally; **the parent needs `position: relative`** |
+| `without-header` | boolean                               | false   | -                                                                                                     |
+| `light-dismiss`  | boolean                               | true    | -                                                                                                     |
 
 ### Slots
 
-| Slot             | Description |
-| ---------------- | ----------- |
-| `(default)`      | -           |
-| `label`          | -           |
-| `header-actions` | -           |
-| `footer`         | -           |
+| Slot             | Description                                  |
+| ---------------- | -------------------------------------------- |
+| `(default)`      | Body content                                 |
+| `label`          | Overrides the `label` attribute as the title |
+| `header-actions` | Actions before the close button              |
+| `footer`         | Footer content (typically buttons)           |
 
 ### Events
 
-| Event           | Detail / notes |
-| --------------- | -------------- |
-| `bx-show`       | -              |
-| `bx-after-show` | -              |
-| `bx-hide`       | -              |
-| `bx-after-hide` | -              |
+| Event           | Detail / notes                                                                             |
+| --------------- | ------------------------------------------------------------------------------------------ |
+| `bx-show`       | Cancelable; canceling keeps it closed                                                      |
+| `bx-after-show` | Opened                                                                                     |
+| `bx-hide`       | Cancelable; `detail.source`: `'close-button' \| 'light-dismiss' \| 'keyboard' \| 'method'` |
+| `bx-after-hide` | Closed and focus returned to the opener                                                    |
 
 ### CSS parts
 
-`dialog`, `overlay`, `header`, `title`, `header-actions`, `close-button`, `body`, `footer`
+`dialog`, `overlay` (only rendered when `contained`; a modal drawer uses `::backdrop`), `header`, `title`, `header-actions`, `close-button`, `body`, `footer`
 
 ### CSS custom properties
 
@@ -98,14 +98,15 @@ Fills the container on narrow widths.
 
 ## 9. Acceptance criteria
 
-- [ ] All FR-DRAWER-* requirements covered by unit/component tests (Web Test Runner, real browsers).
-- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark.
-- [ ] axe-core: zero violations; manual screen-reader pass (NVDA/VoiceOver) documented.
-- [ ] Keyboard-only walkthrough recorded in the test plan.
-- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events.
-- [ ] Size budget check (`size-limit`) passes.
+- [ ] All FR-DRAWER-* requirements covered by unit/component tests (Web Test Runner, real browsers). FR-DRAWER-02 (contained, non-modal, no trap) and FR-DRAWER-03 (RTL placements) are covered; FR-DRAWER-01's slide is CSS-only and its `prefers-reduced-motion` opt-out is not asserted in a test.
+- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark. No visual-regression tooling configured yet.
+- [ ] axe-core: zero violations (modal and contained, open, asserted in the component's test file); manual screen-reader pass (NVDA/VoiceOver) not done yet.
+- [ ] Keyboard-only walkthrough recorded in the test plan. Keyboard behavior is covered by tests and the Storybook story; no recorded walkthrough yet.
+- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events. No wrapper generation yet.
+- [ ] Size budget check (`size-limit`) passes. No size-limit tooling configured yet.
 
 ## 10. Notes and open questions
 
 - Naming prefix is `bx-`; CSS hooks use `--bx-*`.
+- Same dialog semantics as `bx-dialog`, as a parallel implementation rather than a shared base (only the open/close bookkeeping overlaps). The close control is a `bx-button` with a `bx-icon`. No close animation, matching `bx-dialog`.
 - Open: confirm final property names against the custom-elements manifest during implementation.

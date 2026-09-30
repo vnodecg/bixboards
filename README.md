@@ -15,7 +15,7 @@ A Lit-based web component library that **scales automatically**.
 | Package                                                     | Purpose                                                                                               |
 | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | [`@bixant/design-system`](packages/design-system/README.md) | Design tokens and theming: JSON themes and foundation compiled to CSS custom properties (implemented) |
-| `@bixant/core`                                              | `VirtualizerController`, 58 general components (1 implemented: `bx-animated-image`)                   |
+| `@bixant/core`                                              | `VirtualizerController`, 58 general components (53 implemented, see the tracker)                      |
 | `@bixant/data-table`                                        | Virtualized enterprise data table                                                                     |
 | `@bixant/data-list`                                         | Virtualized list/grid and tree                                                                        |
 | `@bixant/react` · `@bixant/angular` · `@bixant/svelte`      | Generated wrappers over the custom elements                                                           |
@@ -57,7 +57,7 @@ pnpm storybook          # dev server on http://localhost:6006
 pnpm build-storybook    # static build to packages/storybook/dist
 ```
 
-This builds the tokens (design system plus the example themes) and starts Storybook on port 6006. The toolbar switches theme and `--bx-scale`. Stories show tokens, per-theme roles, the contrast matrix, a runtime-theming playground, and (as components are implemented) the components themselves — currently `bx-animated-image`. A test fails if a story references a token the design system does not generate.
+This builds the tokens (design system plus the example themes) and starts Storybook on port 6006. The toolbar switches theme and `--bx-scale`. Stories show tokens, per-theme roles, the contrast matrix, a runtime-theming playground, and (as components are implemented) the components themselves — every implemented component has one. A test fails if a story references a token the design system does not generate.
 
 ## Development
 

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 import '@bixant/core/mutation-observer';
+import '@bixant/core/button';
 
 interface Args {
   attr: string;
@@ -76,13 +77,14 @@ export const ChildListDemo: Story = {
       <bx-mutation-observer child-list @bx-mutation=${handleMutation}>
         <p id="mo-target">Watched paragraph</p>
       </bx-mutation-observer>
-      <button
-        type="button"
+      <bx-button
+        variant="secondary"
+        appearance="outlined"
         style="margin-block-start: 0.5rem"
         @click=${addChild}
       >
         Append a child
-      </button>
+      </bx-button>
       <pre
         id="mo-log"
         style="margin-block-start: 0.5rem; font-size: var(--bx-font-s)"
