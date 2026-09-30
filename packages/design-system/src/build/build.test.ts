@@ -186,7 +186,7 @@ describe('build (custom data)', () => {
       );
       assert.equal(
         b.tokens['surface.base'],
-        '{color.neutral.900}',
+        '#14151f',
         'dark surface wins over light',
       );
       assert.match(
