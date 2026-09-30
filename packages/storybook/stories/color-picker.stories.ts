@@ -5,7 +5,8 @@ import '@bixant/core/color-picker';
 interface Args {
   value: string;
   format: 'hex' | 'rgb' | 'hsl' | 'hsv';
-  opacity: boolean;
+  noOpacity: boolean;
+  presets: string[];
   uppercase: boolean;
   inline: boolean;
   disabled: boolean;
@@ -18,14 +19,15 @@ const meta = {
     docs: {
       description: {
         component:
-          '`<bx-color-picker>`: color selection with a saturation/value grid, hue/alpha sliders, swatches, eyedropper and format switching, form-associated via `ElementInternals`. Spec: docs/features/core/color-picker.md.',
+          '`<bx-color-picker>`: color selection with a saturation/value grid, preset swatches (`presets`), a custom picker, hue/opacity sliders, format selector, form-associated via `ElementInternals`. Spec: docs/features/core/color-picker.md.',
       },
     },
   },
   argTypes: {
     value: { control: 'text' },
     format: { control: 'select', options: ['hex', 'rgb', 'hsl', 'hsv'] },
-    opacity: { control: 'boolean' },
+    noOpacity: { control: 'boolean' },
+    presets: { control: 'object' },
     uppercase: { control: 'boolean' },
     inline: { control: 'boolean' },
     disabled: { control: 'boolean' },
@@ -34,7 +36,17 @@ const meta = {
   args: {
     value: '#3b82f6',
     format: 'hex',
-    opacity: false,
+    noOpacity: false,
+    presets: [
+      '#ef4444',
+      '#f97316',
+      '#eab308',
+      '#22c55e',
+      '#3b82f6',
+      '#8b5cf6',
+      '#000000',
+      '#ffffff',
+    ],
     uppercase: false,
     inline: false,
     disabled: false,
@@ -44,12 +56,12 @@ const meta = {
     <bx-color-picker
       value=${args.value}
       format=${args.format}
-      ?opacity=${args.opacity}
+      ?no-opacity=${args.noOpacity}
       ?uppercase=${args.uppercase}
       ?inline=${args.inline}
       ?disabled=${args.disabled}
       ?no-format-toggle=${args.noFormatToggle}
-      .swatches=${['#ef4444', '#f97316', '#eab308', '#22c55e', '#3b82f6', '#8b5cf6']}
+      .presets=${args.presets}
     ></bx-color-picker>
   `,
 } satisfies Meta<Args>;
@@ -64,7 +76,19 @@ export const Inline: Story = {
 };
 
 export const WithOpacity: Story = {
-  args: { opacity: true, inline: true },
+  args: { value: 'rgba(59, 130, 246, 0.5)', format: 'rgb', inline: true },
+};
+
+export const NoOpacity: Story = {
+  args: { noOpacity: true, inline: true },
+};
+
+export const CustomPresets: Story = {
+  args: { inline: true, presets: ['#0f172a', '#334155', '#94a3b8', '#e2e8f0'] },
+};
+
+export const NoPresets: Story = {
+  args: { inline: true, presets: [] },
 };
 
 export const Disabled: Story = {

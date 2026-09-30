@@ -1,5 +1,5 @@
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
-import type { BxColorPicker } from './color-picker.ts';
+import { DEFAULT_COLOR_PRESETS, type BxColorPicker } from './color-picker.ts';
 import './index.ts';
 
 describe('bx-color-picker', () => {
@@ -47,7 +47,7 @@ describe('bx-color-picker', () => {
     const el = await fixture<BxColorPicker>(
       html`<bx-color-picker
         inline
-        .swatches=${['#00ff00', '#0000ff']}
+        .presets=${['#00ff00', '#0000ff']}
       ></bx-color-picker>`,
     );
     const swatch = el.shadowRoot!.querySelectorAll(
@@ -61,7 +61,11 @@ describe('bx-color-picker', () => {
 
   it('arrow keys on the hue slider adjust hue and commit', async () => {
     const el = await fixture<BxColorPicker>(
-      html`<bx-color-picker inline value="#ff0000"></bx-color-picker>`,
+      html`<bx-color-picker
+        inline
+        .presets=${[]}
+        value="#ff0000"
+      ></bx-color-picker>`,
     );
     const hueSlider = el.shadowRoot!.querySelector(
       '.hue-slider',
@@ -113,7 +117,12 @@ describe('bx-color-picker', () => {
   it('participates in form submission and resets to the default value', async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
-        <bx-color-picker inline name="color" value="#ff0000"></bx-color-picker>
+        <bx-color-picker
+          inline
+          .presets=${[]}
+          name="color"
+          value="#ff0000"
+        ></bx-color-picker>
       </form>
     `);
     const el = form.querySelector('bx-color-picker') as BxColorPicker;
@@ -134,6 +143,62 @@ describe('bx-color-picker', () => {
       html`<bx-color-picker inline required></bx-color-picker>`,
     );
     expect(el.checkValidity()).to.be.false;
+  });
+
+  it('renders the default presets and a custom toggle, with the custom picker collapsed', async () => {
+    const el = await fixture<BxColorPicker>(
+      html`<bx-color-picker inline></bx-color-picker>`,
+    );
+    const root = el.shadowRoot!;
+    expect(
+      root.querySelectorAll('.swatch:not(.custom-toggle)').length,
+    ).to.equal(DEFAULT_COLOR_PRESETS.length);
+    expect(root.querySelector('.grid')).to.equal(null);
+    (root.querySelector('.custom-toggle') as HTMLButtonElement).click();
+    await el.updateComplete;
+    expect(root.querySelector('.grid')).to.not.equal(null);
+    expect(root.querySelector('.hue-slider')).to.not.equal(null);
+  });
+
+  it('shows the custom picker directly when presets is empty', async () => {
+    const el = await fixture<BxColorPicker>(
+      html`<bx-color-picker inline .presets=${[]}></bx-color-picker>`,
+    );
+    expect(el.shadowRoot!.querySelector('.presets')).to.equal(null);
+    expect(el.shadowRoot!.querySelector('.grid')).to.not.equal(null);
+  });
+
+  it('changes format via the select and reformats the value', async () => {
+    const el = await fixture<BxColorPicker>(
+      html`<bx-color-picker inline value="#ff0000"></bx-color-picker>`,
+    );
+    const select = el.shadowRoot!.querySelector('.select') as HTMLSelectElement;
+    select.value = 'rgb';
+    select.dispatchEvent(new Event('change', { bubbles: true }));
+    await el.updateComplete;
+    expect(el.format).to.equal('rgb');
+    expect(el.value).to.equal('rgb(255, 0, 0)');
+  });
+
+  it('adjusts opacity via the percent field and writes alpha into the value', async () => {
+    const el = await fixture<BxColorPicker>(
+      html`<bx-color-picker inline value="#ff0000"></bx-color-picker>`,
+    );
+    const input = el.shadowRoot!.querySelector(
+      '.opacity-input',
+    ) as HTMLInputElement;
+    input.value = '50';
+    input.dispatchEvent(new Event('change', { bubbles: true }));
+    await el.updateComplete;
+    expect(el.value).to.equal('#ff000080');
+  });
+
+  it('hides opacity controls with no-opacity', async () => {
+    const el = await fixture<BxColorPicker>(
+      html`<bx-color-picker inline no-opacity></bx-color-picker>`,
+    );
+    expect(el.shadowRoot!.querySelector('.opacity-slider')).to.equal(null);
+    expect(el.shadowRoot!.querySelector('.opacity-input')).to.equal(null);
   });
 
   it('has no axe violations (inline mode)', async () => {

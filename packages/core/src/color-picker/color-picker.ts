@@ -163,16 +163,21 @@ function formatColor(
 ): string {
   const { r, g, b } = hsvToRgb(color.h, color.s, color.v);
   const a = Math.round(color.a * 100) / 100;
+  // Alpha is only written when opacity is enabled AND the color isn't fully opaque, so an
+  // untouched color stays a clean `#rrggbb` / `rgb(...)`.
+  const withAlpha = opacity && a < 1;
   let out: string;
 
   switch (format) {
     case 'rgb':
-      out = opacity ? `rgba(${r}, ${g}, ${b}, ${a})` : `rgb(${r}, ${g}, ${b})`;
+      out = withAlpha
+        ? `rgba(${r}, ${g}, ${b}, ${a})`
+        : `rgb(${r}, ${g}, ${b})`;
       break;
     case 'hsl': {
       const { h, s, l } = rgbToHsl(r, g, b);
       const [hr, sr, lr] = [Math.round(h), Math.round(s), Math.round(l)];
-      out = opacity
+      out = withAlpha
         ? `hsla(${hr}, ${sr}%, ${lr}%, ${a})`
         : `hsl(${hr}, ${sr}%, ${lr}%)`;
       break;
@@ -183,16 +188,37 @@ function formatColor(
         Math.round(color.s),
         Math.round(color.v),
       ];
-      out = opacity
+      out = withAlpha
         ? `hsva(${hr}, ${sr}%, ${vr}%, ${a})`
         : `hsv(${hr}, ${sr}%, ${vr}%)`;
       break;
     }
     default:
-      out = `#${toHex2(r)}${toHex2(g)}${toHex2(b)}${opacity ? toHex2(a * 255) : ''}`;
+      out = `#${toHex2(r)}${toHex2(g)}${toHex2(b)}${withAlpha ? toHex2(a * 255) : ''}`;
   }
   return uppercase ? out.toUpperCase() : out;
 }
+
+/** Default preset palette, used when no `presets` array is passed. */
+export const DEFAULT_COLOR_PRESETS: readonly string[] = [
+  '#ef4444',
+  '#f97316',
+  '#f59e0b',
+  '#eab308',
+  '#22c55e',
+  '#14b8a6',
+  '#06b6d4',
+  '#3b82f6',
+  '#6366f1',
+  '#8b5cf6',
+  '#d946ef',
+  '#ec4899',
+  '#64748b',
+  '#000000',
+  '#ffffff',
+];
+
+const FORMATS: readonly Format[] = ['hex', 'rgb', 'hsl', 'hsv'];
 
 declare global {
   interface Window {
@@ -231,20 +257,24 @@ declare global {
  *
  * @csspart base - The outer wrapper.
  * @csspart trigger - The swatch button that opens the panel (non-`inline` mode).
- * @csspart swatches - The wrapper around preset swatches.
+ * @csspart presets - The wrapper around preset swatches.
  * @csspart swatch - A single preset swatch button.
+ * @csspart custom-toggle - The tile that shows/hides the custom picker (grid + hue slider).
+ * @csspart custom - The custom picker section.
  * @csspart grid - The saturation/value `role="application"` area.
  * @csspart grid-handle - The grid's drag handle.
  * @csspart slider - Either hue/opacity slider track.
  * @csspart hue-slider - The hue slider track.
  * @csspart opacity-slider - The opacity slider track, present when `opacity` is set.
  * @csspart input - The text field showing/accepting the formatted value.
+ * @csspart opacity-input - The numeric opacity (%) field, present unless `no-opacity` is set.
  * @csspart eyedropper-button - The eyedropper button, present when `window.EyeDropper` exists.
- * @csspart format-button - The format-cycling button, present unless `no-format-toggle` is set.
+ * @csspart format-select - The format `<select>`, present unless `no-format-toggle` is set.
  *
  * @cssprop --bx-grid-width - Saturation/value grid width. Default `16rem`.
  * @cssprop --bx-grid-height - Saturation/value grid height. Default `10rem`.
- * @cssprop --bx-swatch-size - Swatch diameter. Default `1.5rem`.
+ * @cssprop --bx-swatch-radius - Corner radius of preset boxes, grid and trigger. Default `--bx-radius-m`.
+ * @cssprop --bx-swatch-size - Minimum preset box size. Default `1.75rem`.
  */
 export class BxColorPicker extends FormAssociatedMixin(BixElement) {
   static override tagName = 'bx-color-picker';
@@ -254,7 +284,6 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
     css`
       :host {
         display: inline-block;
-        container-type: inline-size;
         font-family: var(--bx-font-family-sans);
       }
 
@@ -270,7 +299,7 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
         display: inline-flex;
         inline-size: var(--bx-target-min, 2.75rem);
         block-size: var(--bx-target-min, 2.75rem);
-        border-radius: var(--bx-radius-s);
+        border-radius: var(--bx-swatch-radius, var(--bx-radius-m));
         border: var(--bx-border-width) solid var(--bx-border-subtle);
         background-image:
           linear-gradient(45deg, #ccc 25%, transparent 25%),
@@ -299,17 +328,20 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
       }
 
       .panel {
+        box-sizing: border-box;
         display: flex;
         flex-direction: column;
         gap: var(--bx-space-s);
         padding: var(--bx-space-s);
+        inline-size: calc(var(--bx-grid-width, 16rem) + var(--bx-space-s) * 2);
+        max-inline-size: 100%;
       }
 
       .grid {
         position: relative;
-        inline-size: var(--bx-grid-width, 16rem);
+        inline-size: 100%;
         block-size: var(--bx-grid-height, 10rem);
-        border-radius: var(--bx-radius-s);
+        border-radius: var(--bx-swatch-radius, var(--bx-radius-m));
         background-image:
           linear-gradient(to top, #000, transparent),
           linear-gradient(to right, #fff, transparent);
@@ -421,26 +453,67 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
         outline-offset: calc(var(--bx-focus-ring-offset) * -1);
       }
 
-      .swatches {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--bx-space-2xs);
+      .presets {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        gap: var(--bx-space-xs);
       }
 
-      @container (max-width: 200px) {
-        .swatches {
-          justify-content: space-between;
-        }
+      .custom {
+        display: flex;
+        flex-direction: column;
+        gap: var(--bx-space-s);
+      }
+
+      .select {
+        box-sizing: border-box;
+        min-block-size: 0;
+        padding: var(--bx-space-2xs) var(--bx-space-xs);
+        border: var(--bx-border-width) solid var(--bx-border-subtle);
+        border-radius: var(--bx-radius-s);
+        background: transparent;
+        color: inherit;
+        font: inherit;
+        font-size: var(--bx-font-s);
+        cursor: pointer;
+      }
+
+      .select:focus-visible,
+      .input:focus-visible {
+        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
+        outline-offset: var(--bx-focus-ring-offset);
+      }
+
+      .opacity-input {
+        inline-size: 4.5rem;
+        flex: none;
+      }
+
+      .swatch.custom-toggle {
+        background: conic-gradient(red, #ff0, #0f0, #0ff, #00f, #f0f, red);
+      }
+
+      .custom-toggle[aria-expanded='true'] {
+        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
+        outline-offset: var(--bx-focus-ring-offset);
       }
 
       .swatch {
         all: unset;
         box-sizing: border-box;
-        inline-size: var(--bx-swatch-size, 1.5rem);
-        block-size: var(--bx-swatch-size, 1.5rem);
-        border-radius: var(--bx-radius-s);
+        inline-size: 100%;
+        aspect-ratio: 1;
+        min-block-size: var(--bx-swatch-size, 1.75rem);
+        border-radius: var(--bx-swatch-radius, var(--bx-radius-m));
         border: var(--bx-border-width) solid var(--bx-border-subtle);
+        background-clip: padding-box;
         cursor: pointer;
+      }
+
+      .swatch[aria-pressed='true'] {
+        box-shadow:
+          0 0 0 2px var(--bx-surface-default, #fff),
+          0 0 0 4px var(--bx-focus-ring);
       }
 
       .swatch:focus-visible {
@@ -461,9 +534,10 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
   static override properties = {
     value: { type: String },
     format: { type: String },
-    opacity: { type: Boolean, reflect: true },
+    noOpacity: { type: Boolean, reflect: true, attribute: 'no-opacity' },
     uppercase: { type: Boolean, reflect: true },
-    swatches: { attribute: false },
+    presets: { attribute: false },
+    _customOpen: { state: true },
     inline: { type: Boolean, reflect: true },
     size: { type: String, reflect: true },
     noFormatToggle: { type: Boolean, attribute: 'no-format-toggle' },
@@ -476,9 +550,13 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
 
   declare value: string;
   declare format: Format;
-  declare opacity: boolean;
+  /** Hides the opacity slider/field and never writes alpha into `value`. */
+  declare noOpacity: boolean;
   declare uppercase: boolean;
-  declare swatches: string[];
+  /** Preset colors shown as swatches. Any parseable color string. `[]` hides the row. */
+  declare presets: readonly string[];
+  /** @internal */
+  declare _customOpen: boolean;
   declare inline: boolean;
   declare size: Size;
   declare noFormatToggle: boolean;
@@ -504,9 +582,10 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
     super();
     this.value = '';
     this.format = 'hex';
-    this.opacity = false;
+    this.noOpacity = false;
     this.uppercase = false;
-    this.swatches = [];
+    this.presets = DEFAULT_COLOR_PRESETS;
+    this._customOpen = false;
     this.inline = false;
     this.size = 'medium';
     this.noFormatToggle = false;
@@ -540,21 +619,31 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
     if (this.#opacityRafId) cancelAnimationFrame(this.#opacityRafId);
   }
 
-  protected override firstUpdated(): void {
-    if (this.value) {
+  protected override willUpdate(changed: PropertyValues<this>): void {
+    // Keep the canonical HSVA in sync when `value` is set from outside (attribute, property, form
+    // restore). Runs before render, so the first paint already reflects the initial value.
+    if (changed.has('value') && this.value) {
       const parsed = parseColor(this.value);
-      if (parsed) {
+      const current = formatColor(
+        this.#color,
+        this.format,
+        !this.noOpacity,
+        this.uppercase,
+      );
+      if (parsed && this.value !== current) {
         this.#color = parsed;
-        // Canonicalize into the current `format` — an author might set `value` in any parseable
-        // format regardless of `format`; the two stay in sync from here on (see `#commit`).
+        // Canonicalize into the current `format`.
         this.value = formatColor(
           parsed,
           this.format,
-          this.opacity,
+          !this.noOpacity,
           this.uppercase,
         );
       }
     }
+  }
+
+  protected override firstUpdated(): void {
     this.#defaultValue = this.value;
     this.#syncValidity();
   }
@@ -597,7 +686,7 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
     const formatted = formatColor(
       next,
       this.format,
-      this.opacity,
+      !this.noOpacity,
       this.uppercase,
     );
     const changed = formatted !== this.value;
@@ -619,7 +708,7 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
 
   /** Returns `value` reformatted in `format` without changing the picker's own `format`/`value`. */
   getFormattedValue(format: Format): string {
-    return formatColor(this.#color, format, this.opacity, this.uppercase);
+    return formatColor(this.#color, format, !this.noOpacity, this.uppercase);
   }
 
   override reportValidity(): boolean {
@@ -756,7 +845,7 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
     if (this.disabled) return;
     let da = 0;
     if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') da = -0.01;
-    else if (event.key === 'ArrowRight' || event.key === 'ArrowUp') da = 1;
+    else if (event.key === 'ArrowRight' || event.key === 'ArrowUp') da = 0.01;
     else return;
     event.preventDefault();
     this.#commit({ ...this.#color, a: clamp(this.#color.a + da, 0, 1) }, true);
@@ -788,15 +877,30 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
     }
   };
 
-  #handleFormatToggle = (): void => {
-    const order: Format[] = ['hex', 'rgb', 'hsl', 'hsv'];
-    this.format = order[(order.indexOf(this.format) + 1) % order.length]!;
+  #handleFormatChange = (event: Event): void => {
+    const next = (event.target as HTMLSelectElement).value as Format;
+    if (!FORMATS.includes(next)) return;
+    this.format = next;
     this.value = formatColor(
       this.#color,
       this.format,
-      this.opacity,
+      !this.noOpacity,
       this.uppercase,
     );
+  };
+
+  #handleOpacityInputChange = (event: Event): void => {
+    const input = event.target as HTMLInputElement;
+    const percent = Number.parseFloat(input.value);
+    if (Number.isNaN(percent)) {
+      input.value = String(Math.round(this.#color.a * 100));
+      return;
+    }
+    this.#commit({ ...this.#color, a: clamp(percent, 0, 100) / 100 }, true);
+  };
+
+  #handleCustomToggle = (): void => {
+    this._customOpen = !this._customOpen;
   };
 
   // --- Trigger/panel (non-inline mode). ---
@@ -846,55 +950,94 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
 
   #renderPanel() {
     const { r, g, b } = hsvToRgb(this.#color.h, this.#color.s, this.#color.v);
-    const rgba = `rgba(${r}, ${g}, ${b}, ${this.#color.a})`;
     const rgbOpaque = `rgb(${r}, ${g}, ${b})`;
     const huePercent = (this.#color.h / 360) * 100;
+    const hasPresets = this.presets.length > 0;
+    const showCustom = this._customOpen || !hasPresets;
+    const currentHex = formatColor(this.#color, 'hex', false, false);
 
     return html`
       <div class="panel">
-        <div
-          ${ref(this.#gridRef)}
-          class="grid"
-          part="grid"
-          role="application"
-          aria-label="Saturation and brightness"
-          aria-describedby=${this.#gridId}
-          tabindex=${this.disabled ? -1 : 0}
-          style="background-color: ${`hsl(${this.#color.h}, 100%, 50%)`}"
-          @pointerdown=${this.#handleGridPointerDown}
-          @pointermove=${this.#handleGridPointerMove}
-          @pointerup=${this.#handleGridPointerUp}
-          @keydown=${this.#handleGridKeydown}
-        >
-          <span id=${this.#gridId} hidden>${this.value}</span>
-          <div
-            class="grid-handle"
-            part="grid-handle"
-            style="left: ${this.#color.s}%; top: ${100 - this.#color.v}%; background: ${rgbOpaque}"
-          ></div>
-        </div>
-
-        <div
-          ${ref(this.#hueRef)}
-          class="slider hue-slider"
-          part="slider hue-slider"
-          role="slider"
-          aria-label="Hue"
-          aria-valuemin="0"
-          aria-valuemax="360"
-          aria-valuenow=${Math.round(this.#color.h)}
-          tabindex=${this.disabled ? -1 : 0}
-          @pointerdown=${this.#handleHuePointerDown}
-          @pointermove=${this.#handleHuePointerMove}
-          @pointerup=${this.#handleHuePointerUp}
-          @keydown=${this.#handleHueKeydown}
-        >
-          <div class="slider-handle" style="left: ${huePercent}%"></div>
-        </div>
-
         ${
-          this.opacity
-            ? html`<div
+          hasPresets
+            ? html`<div class="presets" part="presets">
+                ${this.presets.map((preset) => {
+                  const parsed = parseColor(preset);
+                  const pressed =
+                    parsed !== null &&
+                    formatColor(parsed, 'hex', false, false) === currentHex;
+                  return html`<button
+                    type="button"
+                    class="swatch"
+                    part="swatch"
+                    style="background: ${preset}"
+                    aria-label=${preset}
+                    aria-pressed=${pressed}
+                    ?disabled=${this.disabled}
+                    @click=${() => this.#handleSwatchClick(preset)}
+                  ></button>`;
+                })}
+                <button
+                  type="button"
+                  class="swatch custom-toggle"
+                  part="swatch custom-toggle"
+                  aria-label="Custom color"
+                  aria-expanded=${showCustom}
+                  ?disabled=${this.disabled}
+                  @click=${this.#handleCustomToggle}
+                ></button>
+              </div>`
+            : nothing
+        }
+        ${
+          showCustom
+            ? html`<div class="custom" part="custom">
+                <div
+                  ${ref(this.#gridRef)}
+                  class="grid"
+                  part="grid"
+                  role="application"
+                  aria-label="Saturation and brightness"
+                  aria-describedby=${this.#gridId}
+                  tabindex=${this.disabled ? -1 : 0}
+                  style="background-color: ${`hsl(${this.#color.h}, 100%, 50%)`}"
+                  @pointerdown=${this.#handleGridPointerDown}
+                  @pointermove=${this.#handleGridPointerMove}
+                  @pointerup=${this.#handleGridPointerUp}
+                  @keydown=${this.#handleGridKeydown}
+                >
+                  <span id=${this.#gridId} hidden>${this.value}</span>
+                  <div
+                    class="grid-handle"
+                    part="grid-handle"
+                    style="left: ${this.#color.s}%; top: ${100 - this.#color.v}%; background: ${rgbOpaque}"
+                  ></div>
+                </div>
+
+                <div
+                  ${ref(this.#hueRef)}
+                  class="slider hue-slider"
+                  part="slider hue-slider"
+                  role="slider"
+                  aria-label="Hue"
+                  aria-valuemin="0"
+                  aria-valuemax="360"
+                  aria-valuenow=${Math.round(this.#color.h)}
+                  tabindex=${this.disabled ? -1 : 0}
+                  @pointerdown=${this.#handleHuePointerDown}
+                  @pointermove=${this.#handleHuePointerMove}
+                  @pointerup=${this.#handleHuePointerUp}
+                  @keydown=${this.#handleHueKeydown}
+                >
+                  <div class="slider-handle" style="left: ${huePercent}%"></div>
+                </div>
+              </div>`
+            : nothing
+        }
+        ${
+          this.noOpacity
+            ? nothing
+            : html`<div
                 ${ref(this.#opacityRef)}
                 class="slider opacity-slider"
                 part="slider opacity-slider"
@@ -918,10 +1061,30 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
                   style="left: ${this.#color.a * 100}%"
                 ></div>
               </div>`
-            : nothing
         }
 
         <div class="row">
+          ${
+            this.noFormatToggle
+              ? nothing
+              : html`<select
+                  class="select"
+                  part="format-select"
+                  aria-label="Color format"
+                  ?disabled=${this.disabled}
+                  @change=${this.#handleFormatChange}
+                >
+                  ${FORMATS.map(
+                    (format) =>
+                      html`<option
+                        value=${format}
+                        ?selected=${format === this.format}
+                      >
+                        ${format.toUpperCase()}
+                      </option>`,
+                  )}
+                </select>`
+          }
           <input
             class="input"
             part="input"
@@ -932,6 +1095,22 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
             @change=${this.#handleInputChange}
           />
           ${
+            this.noOpacity
+              ? nothing
+              : html`<input
+                  class="input opacity-input"
+                  part="opacity-input"
+                  type="number"
+                  min="0"
+                  max="100"
+                  step="1"
+                  .value=${String(Math.round(this.#color.a * 100))}
+                  ?disabled=${this.disabled}
+                  aria-label="Opacity percent"
+                  @change=${this.#handleOpacityInputChange}
+                />`
+          }
+          ${
             window.EyeDropper
               ? html`<button
                   type="button"
@@ -941,45 +1120,26 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
                   ?disabled=${this.disabled}
                   @click=${this.#handleEyedropperClick}
                 >
-                  ⏻
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="m2 22 1-1h3l9-9M3 21v-3l9-9" />
+                    <path
+                      d="m15 6 3.4-3.4a2.1 2.1 0 1 1 3 3L18 9l.4.4a2.1 2.1 0 1 1-3 3l-3.8-3.8a2.1 2.1 0 1 1 3-3l.4.4Z"
+                    />
+                  </svg>
                 </button>`
               : nothing
           }
-          ${
-            this.noFormatToggle
-              ? nothing
-              : html`<button
-                  type="button"
-                  class="icon-button"
-                  part="format-button"
-                  aria-label="Switch color format"
-                  ?disabled=${this.disabled}
-                  @click=${this.#handleFormatToggle}
-                >
-                  ⇄
-                </button>`
-          }
         </div>
-
-        ${
-          this.swatches.length
-            ? html`<div class="swatches" part="swatches">
-                ${this.swatches.map(
-                  (swatch) =>
-                    html`<button
-                      type="button"
-                      class="swatch"
-                      part="swatch"
-                      style="background: ${swatch}"
-                      aria-label=${swatch}
-                      ?disabled=${this.disabled}
-                      @click=${() => this.#handleSwatchClick(swatch)}
-                    ></button>`,
-                )}
-              </div>`
-            : nothing
-        }
-        <span style="display:none">${rgba}</span>
       </div>
     `;
   }
