@@ -46,7 +46,7 @@ const meta = {
       }
       bx-intersection-observer.intersect .lazy-box {
         opacity: 1;
-        background: var(--bx-role-success-subtle);
+        background: var(--bx-role-brand-subtle);
       }
     </style>
     <div

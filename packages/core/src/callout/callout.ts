@@ -1,24 +1,24 @@
 import { css, html, nothing, svg, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
 
-type Variant = 'brand' | 'neutral' | 'success' | 'warning' | 'danger';
+type Variant = 'default' | 'secondary' | 'tertiary' | 'error' | 'warning';
 type Appearance =
   'accent' | 'filled' | 'outlined' | 'plain' | 'filled outlined';
 type Size = 'small' | 'medium' | 'large';
 
 // Vendored from packages/core/src/icon/default-library.ts (Phosphor Icons, regular, MIT) — kept
 // inline rather than depending on `bx-icon` so `bx-callout` stays independently importable
-// (docs/features/_conventions.md §1). `danger` reuses the warning glyph pending a dedicated one.
+// (docs/features/_conventions.md §1). `error` reuses the warning glyph pending a dedicated one.
 const DEFAULT_ICON_PATHS: Record<Variant, string> = {
-  brand:
+  default:
     'M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm16-40a8,8,0,0,1-8,8,16,16,0,0,1-16-16V128a8,8,0,0,1,0-16,16,16,0,0,1,16,16v40A8,8,0,0,1,144,176ZM112,84a12,12,0,1,1,12,12A12,12,0,0,1,112,84Z',
-  neutral:
+  secondary:
     'M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm16-40a8,8,0,0,1-8,8,16,16,0,0,1-16-16V128a8,8,0,0,1,0-16,16,16,0,0,1,16,16v40A8,8,0,0,1,144,176ZM112,84a12,12,0,1,1,12,12A12,12,0,0,1,112,84Z',
-  success:
-    'M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z',
+  tertiary:
+    'M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm16-40a8,8,0,0,1-8,8,16,16,0,0,1-16-16V128a8,8,0,0,1,0-16,16,16,0,0,1,16,16v40A8,8,0,0,1,144,176ZM112,84a12,12,0,1,1,12,12A12,12,0,0,1,112,84Z',
   warning:
     'M236.8,188.09,149.35,36.22h0a24.76,24.76,0,0,0-42.7,0L19.2,188.09a23.51,23.51,0,0,0,0,23.72A24.35,24.35,0,0,0,40.55,224h174.9a24.35,24.35,0,0,0,21.33-12.19A23.51,23.51,0,0,0,236.8,188.09ZM120,104a8,8,0,0,1,16,0v56a8,8,0,0,1-16,0Zm8,88a12,12,0,1,1,12-12A12,12,0,0,1,128,192Z',
-  danger:
+  error:
     'M236.8,188.09,149.35,36.22h0a24.76,24.76,0,0,0-42.7,0L19.2,188.09a23.51,23.51,0,0,0,0,23.72A24.35,24.35,0,0,0,40.55,224h174.9a24.35,24.35,0,0,0,21.33-12.19A23.51,23.51,0,0,0,236.8,188.09ZM120,104a8,8,0,0,1,16,0v56a8,8,0,0,1-16,0Zm8,88a12,12,0,1,1,12-12A12,12,0,0,1,128,192Z',
 };
 
@@ -26,10 +26,10 @@ const CLOSE_PATH =
   'M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z';
 
 /**
- * `<bx-callout>` — inline message block for info, success, warning and danger.
+ * `<bx-callout>` — inline message block for info, warning and error.
  *
  * `role` follows docs/features/core/callout.md §6: a callout present (and open) at first render
- * is treated as static page content (`role="note"`); a `warning`/`danger` callout that is shown
+ * is treated as static page content (`role="note"`); a `warning`/`error` callout that is shown
  * *after* that — via `show()` or setting `.open = true` — is treated as a live alert
  * (`role="alert"`) so assistive tech announces it immediately.
  *
@@ -91,24 +91,18 @@ export class BxCallout extends BixElement {
       }
 
       /* Variant → role tokens. */
-      :host([variant='neutral']),
-      :host(:not([variant])) {
+      :host([variant='secondary']) {
         --bx-callout-variant-solid: var(--bx-role-neutral-solid);
         --bx-callout-variant-subtle: var(--bx-role-neutral-subtle);
         --bx-callout-variant-fg: var(--bx-role-neutral-fg);
         --bx-callout-variant-border: var(--bx-role-neutral-border);
       }
-      :host([variant='brand']) {
+      :host([variant='default']),
+      :host(:not([variant])) {
         --bx-callout-variant-solid: var(--bx-role-brand-solid);
         --bx-callout-variant-subtle: var(--bx-role-brand-subtle);
         --bx-callout-variant-fg: var(--bx-role-brand-fg);
         --bx-callout-variant-border: var(--bx-role-brand-border);
-      }
-      :host([variant='success']) {
-        --bx-callout-variant-solid: var(--bx-role-success-solid);
-        --bx-callout-variant-subtle: var(--bx-role-success-subtle);
-        --bx-callout-variant-fg: var(--bx-role-success-fg);
-        --bx-callout-variant-border: var(--bx-role-success-border);
       }
       :host([variant='warning']) {
         --bx-callout-variant-solid: var(--bx-role-warning-solid);
@@ -116,7 +110,13 @@ export class BxCallout extends BixElement {
         --bx-callout-variant-fg: var(--bx-role-warning-fg);
         --bx-callout-variant-border: var(--bx-role-warning-border);
       }
-      :host([variant='danger']) {
+      :host([variant='tertiary']) {
+        --bx-callout-variant-solid: var(--bx-role-tertiary-solid);
+        --bx-callout-variant-subtle: var(--bx-role-tertiary-subtle);
+        --bx-callout-variant-fg: var(--bx-role-tertiary-fg);
+        --bx-callout-variant-border: var(--bx-role-tertiary-border);
+      }
+      :host([variant='error']) {
         --bx-callout-variant-solid: var(--bx-role-danger-solid);
         --bx-callout-variant-subtle: var(--bx-role-danger-subtle);
         --bx-callout-variant-fg: var(--bx-role-danger-fg);
@@ -240,7 +240,7 @@ export class BxCallout extends BixElement {
 
   constructor() {
     super();
-    this.variant = 'brand';
+    this.variant = 'default';
     this.appearance = 'outlined';
     this.size = 'medium';
     this.dismissible = false;
@@ -257,7 +257,7 @@ export class BxCallout extends BixElement {
     else this.setAttribute('aria-hidden', 'true');
 
     const isAlertVariant =
-      this.variant === 'warning' || this.variant === 'danger';
+      this.variant === 'warning' || this.variant === 'error';
     this.setAttribute(
       'role',
       isAlertVariant && this.#shownDynamically ? 'alert' : 'note',

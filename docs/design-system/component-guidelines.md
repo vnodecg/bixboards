@@ -23,11 +23,11 @@ Each component has two documents: the feature document ([features](../features/R
 
 ## Variants
 
-| Attribute  | Values                                   | Guidance                                               |
-| ---------- | ---------------------------------------- | ------------------------------------------------------ |
-| appearance | accent, filled, outlined, plain          | accent = primary emphasis; at most one per view region |
-| variant    | neutral, brand, success, warning, danger | Semantic intent, not decoration                        |
-| size       | small, medium, large                     | Match surrounding density                              |
+| Attribute  | Values                                       | Guidance                                               |
+| ---------- | -------------------------------------------- | ------------------------------------------------------ |
+| appearance | accent, filled, outlined, plain              | accent = primary emphasis; at most one per view region |
+| variant    | default, secondary, tertiary, error, warning | Semantic intent, not decoration                        |
+| size       | small, medium, large                         | Match surrounding density                              |
 
 ## States
 
@@ -56,7 +56,7 @@ Two or three pairs with pictures (Storybook stories).
 
 **When not to use.** For navigation that is part of running text, use a link. For toggling state use a switch or checkbox.
 
-**Variants.** `appearance`: accent, filled, outlined, plain. `variant`: neutral, brand, success, warning, danger (danger only for destructive or irreversible actions). `size`: small, medium (default), large.
+**Variants.** `appearance`: accent, filled, outlined, plain. `variant`: default, secondary, tertiary, error, warning (error only for destructive or irreversible actions). `size`: small, medium (default), large.
 
 **Content.** Verb-first, sentence case, 1–3 words. Icon-only buttons need an accessible name and a tooltip.
 

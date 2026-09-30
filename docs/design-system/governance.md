@@ -27,7 +27,7 @@ Decision rule: prefer the smallest change that solves the problem for more than 
 - Tags `bx-<name>`; events `bx-<name>`; component-level CSS properties `--bx-<component>-<parameter>` (owned by components); tokens `--bx-<group>-<name>` (dotted path, dashes in CSS).
 - Semantic names describe role (`text.secondary`), never appearance (`gray-700`) and never a component.
 - Parameter names are shared across components where the meaning is the same: `bg`, `fg`, `border`, `radius`, `min-height`, `padding-inline`, `gap`, `font-size`.
-- Values `neutral`, `brand`, `success`, `warning`, `danger` are the only allowed `variant` values.
+- Values `default`, `secondary`, `tertiary`, `error`, `warning` are the only allowed `variant` values (mapped to the `brand`, `neutral`, `tertiary`, `danger`, `warning` palettes).
 
 ## Versioning (semantic versioning)
 

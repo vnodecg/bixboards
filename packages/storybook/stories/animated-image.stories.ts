@@ -34,7 +34,7 @@ const meta = {
   },
   args: {
     src: DEMO_SRC,
-    alt: 'A circle cycling through brand, success, warning and danger colors',
+    alt: 'A circle cycling through brand, warning and danger colors',
     play: false,
   },
   render: (args) => html`

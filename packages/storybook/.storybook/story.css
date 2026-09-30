@@ -38,7 +38,7 @@
   font-weight: var(--bx-font-weight-semibold);
 }
 .sb-pass {
-  color: var(--bx-role-success-fg);
+  color: var(--bx-text-primary);
 }
 .sb-fail {
   color: var(--bx-role-danger-fg);

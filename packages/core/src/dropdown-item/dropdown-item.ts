@@ -1,7 +1,7 @@
 import { css, html, nothing, svg, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
 
-type Variant = 'default' | 'danger';
+type Variant = 'default' | 'error';
 type ItemType = 'normal' | 'checkbox';
 
 // Vendored from packages/core/src/icon/default-library.ts (Phosphor Icons, regular/fill, MIT).
@@ -76,7 +76,7 @@ export class BxDropdownItem extends BixElement {
         outline: none;
       }
 
-      :host([variant='danger']) .base {
+      :host([variant='error']) .base {
         color: var(--bx-role-danger-fg);
       }
 

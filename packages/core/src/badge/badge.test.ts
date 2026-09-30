@@ -3,10 +3,10 @@ import type { BxBadge } from './badge.ts';
 import './index.ts';
 
 describe('bx-badge', () => {
-  it('registers the tag with neutral/medium/filled-outlined defaults', async () => {
+  it('registers the tag with default/medium/filled-outlined defaults', async () => {
     const el = await fixture<BxBadge>(html`<bx-badge>Beta</bx-badge>`);
     expect(el).to.be.instanceOf(customElements.get('bx-badge')!);
-    expect(el.variant).to.equal('neutral');
+    expect(el.variant).to.equal('default');
     expect(el.size).to.equal('medium');
     expect(el.appearance).to.equal('filled outlined');
   });

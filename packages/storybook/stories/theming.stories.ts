@@ -35,7 +35,7 @@ const FONTS: Record<string, string | null> = {
 
 interface Args {
   brand: string;
-  success: string;
+  tertiary: string;
   warning: string;
   danger: string;
   lightest: number;
@@ -57,7 +57,7 @@ const meta = {
   },
   argTypes: {
     brand: { control: 'color' },
-    success: { control: 'color' },
+    tertiary: { control: 'color' },
     warning: { control: 'color' },
     danger: { control: 'color' },
     lightest: {
@@ -73,10 +73,10 @@ const meta = {
     scheme: { control: 'inline-radio', options: ['light', 'dark'] },
   },
   args: {
-    brand: '#3366ff',
-    success: '#00a86b',
-    warning: '#ffaa00',
-    danger: '#d91e48',
+    brand: '#4f46e5',
+    tertiary: '#8a7b6a',
+    warning: '#f5a20a',
+    danger: '#c4364f',
     lightest: 96,
     darkest: 18,
     radius: 'default',
@@ -94,10 +94,10 @@ function varsFor(a: Args): Record<string, string> {
   if (font) foundation['--bx-font-family-sans'] = font;
   return themeVars(
     {
-      brand: hex(a.brand, '#3366ff'),
-      success: hex(a.success, '#00a86b'),
-      warning: hex(a.warning, '#ffaa00'),
-      danger: hex(a.danger, '#d91e48'),
+      brand: hex(a.brand, '#4f46e5'),
+      tertiary: hex(a.tertiary, '#8a7b6a'),
+      warning: hex(a.warning, '#f5a20a'),
+      danger: hex(a.danger, '#c4364f'),
     },
     {
       scheme: a.scheme,
@@ -108,7 +108,7 @@ function varsFor(a: Args): Record<string, string> {
 }
 
 /** Palettes the playground lets you change; the rest keep the theme's values. */
-const EDITABLE = ['brand', 'success', 'warning', 'danger'];
+const EDITABLE = ['brand', 'tertiary', 'warning', 'danger'];
 const shown = PALETTES.filter((p) => EDITABLE.includes(p));
 
 const chip = (style: string, label: string) =>

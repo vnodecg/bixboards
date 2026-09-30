@@ -6,9 +6,9 @@
   "seeds": {
     "neutral": "#737a99",
     "brand": "#4f46e5",
-    "success": "#0f9d70",
     "warning": "#f5a20a",
-    "danger": "#d92d54"
+    "tertiary": "#8a7b6a",
+    "danger": "#c4364f"
   },
   "tokens": {
     "surface": {

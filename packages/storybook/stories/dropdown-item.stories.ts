@@ -3,7 +3,7 @@ import { html } from 'lit';
 import '@bixant/core/dropdown-item';
 
 interface Args {
-  variant: 'default' | 'danger';
+  variant: 'default' | 'error';
   type: 'normal' | 'checkbox';
   checked: boolean;
   disabled: boolean;
@@ -21,7 +21,7 @@ const meta = {
     },
   },
   argTypes: {
-    variant: { control: 'radio', options: ['default', 'danger'] },
+    variant: { control: 'radio', options: ['default', 'error'] },
     type: { control: 'radio', options: ['normal', 'checkbox'] },
     checked: { control: 'boolean' },
     disabled: { control: 'boolean' },
@@ -73,7 +73,7 @@ export const Menu: Story = {
       <bx-dropdown-item disabled
         >Move to project (unavailable)</bx-dropdown-item
       >
-      <bx-dropdown-item variant="danger">
+      <bx-dropdown-item variant="error">
         <span slot="icon">🗑️</span>Delete
       </bx-dropdown-item>
     </div>

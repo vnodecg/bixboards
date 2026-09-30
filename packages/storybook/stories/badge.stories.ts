@@ -3,7 +3,7 @@ import { html } from 'lit';
 import '@bixant/core/badge';
 
 interface Args {
-  variant: 'neutral' | 'brand' | 'success' | 'warning' | 'danger';
+  variant: 'default' | 'secondary' | 'tertiary' | 'error' | 'warning';
   appearance: 'accent' | 'filled' | 'outlined' | 'filled outlined';
   size: 'small' | 'medium' | 'large';
   pill: boolean;
@@ -26,7 +26,7 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['neutral', 'brand', 'success', 'warning', 'danger'],
+      options: ['default', 'secondary', 'tertiary', 'error', 'warning'],
     },
     appearance: {
       control: 'select',
@@ -40,7 +40,7 @@ const meta = {
     live: { control: 'boolean' },
   },
   args: {
-    variant: 'neutral',
+    variant: 'default',
     appearance: 'filled outlined',
     size: 'medium',
     pill: false,
@@ -71,7 +71,7 @@ export const Default: Story = {};
 export const Variants: Story = {
   render: () => html`
     <div style="display: flex; gap: 0.5rem; flex-wrap: wrap">
-      ${['neutral', 'brand', 'success', 'warning', 'danger'].map(
+      ${['default', 'secondary', 'tertiary', 'error', 'warning'].map(
         (variant) => html`<bx-badge variant=${variant}>${variant}</bx-badge>`,
       )}
     </div>
@@ -83,7 +83,7 @@ export const Appearances: Story = {
     <div style="display: flex; gap: 0.5rem; flex-wrap: wrap">
       ${['accent', 'filled', 'outlined', 'filled outlined'].map(
         (appearance) =>
-          html`<bx-badge variant="brand" appearance=${appearance}
+          html`<bx-badge variant="default" appearance=${appearance}
             >${appearance}</bx-badge
           >`,
       )}
@@ -95,8 +95,8 @@ export const CountOverflow: Story = {
   name: 'Count overflow (max)',
   render: () => html`
     <div style="display: flex; gap: 0.5rem; align-items: center">
-      <bx-badge variant="danger" pill max="99">42</bx-badge>
-      <bx-badge variant="danger" pill max="99">150</bx-badge>
+      <bx-badge variant="error" pill max="99">42</bx-badge>
+      <bx-badge variant="error" pill max="99">150</bx-badge>
     </div>
   `,
 };
@@ -119,7 +119,7 @@ export const AnchoredCount: Story = {
   render: () => html`
     <div style="position: relative; display: inline-block">
       <span style="font-size: 2rem">🔔</span>
-      <bx-badge variant="danger" appearance="accent" pill anchor="top-end"
+      <bx-badge variant="error" appearance="accent" pill anchor="top-end"
         >3</bx-badge
       >
     </div>

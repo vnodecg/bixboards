@@ -63,7 +63,7 @@ Form-associated components use `ElementInternals`: `formAssociated`, `setFormVal
 
 ## 7. Theming
 
-- Light/dark/auto via `color-scheme` and `light-dark()`; semantic roles (`brand`, `neutral`, `success`, `warning`, `danger`) map to token ramps.
+- Light/dark/auto via `color-scheme` and `light-dark()`; semantic roles (`brand`, `neutral`, `tertiary`, `warning`, `danger`) map to token ramps.
 - Forced-colors and high-contrast supported through system colors.
 - Component-level hooks are CSS custom properties and `::part()`; no internal class names are public API.
 

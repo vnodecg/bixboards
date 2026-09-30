@@ -22,7 +22,7 @@ Options
   --strict           Treat contrast and deprecation warnings as errors
   --viewport <px>    Reference viewport for the Figma export (default: 1280)
   --extends <theme>  init-theme: theme to extend (default: light)
-  --brand <hex>      init-theme: brand seed color (default: #3366ff)
+  --brand <hex>      init-theme: brand seed color (default: #4f46e5)
   -h, --help         Show this help
 `;
 
@@ -149,7 +149,7 @@ function initTheme(
 ): number {
   if (!name || !/^[a-z][a-z0-9-]*$/.test(name)) {
     io.error(
-      'usage: bixant-ds init-theme <name> [--extends light] [--brand #3366ff]',
+      'usage: bixant-ds init-theme <name> [--extends light] [--brand #4f46e5]',
     );
     return 2;
   }
@@ -161,7 +161,7 @@ function initTheme(
   const theme = {
     name,
     extends: extendsTheme ?? 'light',
-    seeds: { brand: brand ?? '#3366ff' },
+    seeds: { brand: brand ?? '#4f46e5' },
     foundation: { radius: { m: 'calc({unit} * 0.375)' } },
   };
   fs.writeFileSync(file, `${JSON.stringify(theme, null, 2)}\n`);

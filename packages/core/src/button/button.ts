@@ -2,7 +2,7 @@ import { css, html, nothing } from 'lit';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { BixElement } from '../bix-element.ts';
 
-type Variant = 'neutral' | 'brand' | 'success' | 'warning' | 'danger';
+type Variant = 'default' | 'secondary' | 'tertiary' | 'error' | 'warning';
 type Appearance =
   'accent' | 'filled' | 'outlined' | 'plain' | 'filled outlined';
 type Size = 'small' | 'medium' | 'large';
@@ -84,27 +84,20 @@ export class BxButton extends BixElement {
       }
 
       /* Variant → role tokens. */
-      :host([variant='neutral']),
-      :host(:not([variant])) {
+      :host([variant='secondary']) {
         --bx-button-variant-solid: var(--bx-role-neutral-solid);
         --bx-button-variant-on-solid: var(--bx-role-neutral-on-solid);
         --bx-button-variant-subtle: var(--bx-role-neutral-subtle);
         --bx-button-variant-fg: var(--bx-role-neutral-fg);
         --bx-button-variant-border: var(--bx-role-neutral-border);
       }
-      :host([variant='brand']) {
+      :host([variant='default']),
+      :host(:not([variant])) {
         --bx-button-variant-solid: var(--bx-role-brand-solid);
         --bx-button-variant-on-solid: var(--bx-role-brand-on-solid);
         --bx-button-variant-subtle: var(--bx-role-brand-subtle);
         --bx-button-variant-fg: var(--bx-role-brand-fg);
         --bx-button-variant-border: var(--bx-role-brand-border);
-      }
-      :host([variant='success']) {
-        --bx-button-variant-solid: var(--bx-role-success-solid);
-        --bx-button-variant-on-solid: var(--bx-role-success-on-solid);
-        --bx-button-variant-subtle: var(--bx-role-success-subtle);
-        --bx-button-variant-fg: var(--bx-role-success-fg);
-        --bx-button-variant-border: var(--bx-role-success-border);
       }
       :host([variant='warning']) {
         --bx-button-variant-solid: var(--bx-role-warning-solid);
@@ -113,7 +106,14 @@ export class BxButton extends BixElement {
         --bx-button-variant-fg: var(--bx-role-warning-fg);
         --bx-button-variant-border: var(--bx-role-warning-border);
       }
-      :host([variant='danger']) {
+      :host([variant='tertiary']) {
+        --bx-button-variant-solid: var(--bx-role-tertiary-solid);
+        --bx-button-variant-on-solid: var(--bx-role-tertiary-on-solid);
+        --bx-button-variant-subtle: var(--bx-role-tertiary-subtle);
+        --bx-button-variant-fg: var(--bx-role-tertiary-fg);
+        --bx-button-variant-border: var(--bx-role-tertiary-border);
+      }
+      :host([variant='error']) {
         --bx-button-variant-solid: var(--bx-role-danger-solid);
         --bx-button-variant-on-solid: var(--bx-role-danger-on-solid);
         --bx-button-variant-subtle: var(--bx-role-danger-subtle);
@@ -333,7 +333,7 @@ export class BxButton extends BixElement {
 
   constructor() {
     super();
-    this.variant = 'neutral';
+    this.variant = 'default';
     this.appearance = 'accent';
     this.size = 'medium';
     this.pill = false;

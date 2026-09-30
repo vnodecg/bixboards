@@ -122,7 +122,7 @@ export const WithActions: Story = {
   render: () => html`
     <bx-card with-header with-footer style="max-inline-size: 22rem">
       <span slot="header">Deploy #482</span>
-      <bx-badge slot="header-actions" variant="success">Live</bx-badge>
+      <bx-badge slot="header-actions" variant="secondary">Live</bx-badge>
       <p>Deployed to production 12 minutes ago by the release pipeline.</p>
       <span slot="footer">main @ a1b2c3d</span>
     </bx-card>

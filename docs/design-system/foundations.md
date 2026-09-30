@@ -4,7 +4,8 @@ Values below are the defaults from `packages/design-system/data/foundation.json`
 
 ## Color
 
-- Five semantic palettes: `neutral`, `brand`, `success`, `warning`, `danger`. Each is derived from one seed hex into steps `100…900` (seed = 500) plus alpha steps `transparent.100…600`.
+- Five palettes, deliberately few so the interface stays calm: `neutral` (surfaces, text, secondary), `brand` (default), `tertiary` (a muted stone), `warning`, `danger` (errors). There is no success palette; confirm success with an icon and text, not green.
+- Component `variant` values map onto them: `default` → `brand`, `secondary` → `neutral`, `tertiary` → `tertiary`, `error` → `danger`, `warning` → `warning`. Each is derived from one seed hex into steps `100…900` (seed = 500) plus alpha steps `transparent.100…600`.
 - **Use semantic tokens and roles in UI**; palette steps only inside themes. The step that reads well differs between light and dark, so components never pick a step themselves.
 
 | Group   | Tokens                                                                  | Use                                                        |

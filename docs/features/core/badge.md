@@ -26,17 +26,17 @@ There is no separate `bx-tag`: the two overlapped almost completely in look and 
 
 ### Properties / attributes
 
-| Name          | Type                                                                  | Default           | Description                                                        |
-| ------------- | --------------------------------------------------------------------- | ----------------- | ------------------------------------------------------------------ |
-| `variant`     | `neutral` \| `brand` \| `success` \| `warning` \| `danger` (palettes) | "neutral"         | Semantic intent; any palette added to the design system also works |
-| `appearance`  | "accent" \| "filled" \| "outlined" \| "filled outlined"               | "filled outlined" | Emphasis; `accent` is a solid fill                                 |
-| `size`        | "small" \| "medium" \| "large"                                        | "medium"          | `small` is the compact status/count size                           |
-| `pill`        | boolean                                                               | false             | Fully rounded ends                                                 |
-| `attention`   | "none" \| "pulse" \| "bounce"                                         | "none"            | Draws attention; disabled under reduced motion                     |
-| `max`         | number                                                                | 99                | Numeric content above this renders as `99+`                        |
-| `anchor`      | "top-end" \| "top-start" \| "bottom-end" \| "bottom-start"            | -                 | Overlays a corner of the parent (count/status dot)                 |
-| `with-remove` | boolean                                                               | false             | Adds a remove button (chip behavior)                               |
-| `live`        | boolean                                                               | false             | Announces changes (`role="status"`) for dynamic counts             |
+| Name          | Type                                                           | Default           | Description                                                        |
+| ------------- | -------------------------------------------------------------- | ----------------- | ------------------------------------------------------------------ |
+| `variant`     | `default` \| `secondary` \| `tertiary` \| `error` \| `warning` | "default"         | Semantic intent; any palette added to the design system also works |
+| `appearance`  | "accent" \| "filled" \| "outlined" \| "filled outlined"        | "filled outlined" | Emphasis; `accent` is a solid fill                                 |
+| `size`        | "small" \| "medium" \| "large"                                 | "medium"          | `small` is the compact status/count size                           |
+| `pill`        | boolean                                                        | false             | Fully rounded ends                                                 |
+| `attention`   | "none" \| "pulse" \| "bounce"                                  | "none"            | Draws attention; disabled under reduced motion                     |
+| `max`         | number                                                         | 99                | Numeric content above this renders as `99+`                        |
+| `anchor`      | "top-end" \| "top-start" \| "bottom-end" \| "bottom-start"     | -                 | Overlays a corner of the parent (count/status dot)                 |
+| `with-remove` | boolean                                                        | false             | Adds a remove button (chip behavior)                               |
+| `live`        | boolean                                                        | false             | Announces changes (`role="status"`) for dynamic counts             |
 
 ### Slots
 

@@ -22,7 +22,7 @@ Triggers an action or navigates. Supports variants, appearances, sizes, loading 
 
 | Name           | Type                                                               | Default   | Description                                      |
 | -------------- | ------------------------------------------------------------------ | --------- | ------------------------------------------------ |
-| `variant`      | "neutral" \| "brand" \| "success" \| "warning" \| "danger"         | "neutral" | Semantic color role                              |
+| `variant`      | "default" \| "secondary" \| "tertiary" \| "error" \| "warning"     | "default" | Semantic color role                              |
 | `appearance`   | "accent" \| "filled" \| "outlined" \| "plain" \| "filled outlined" | "accent"  | Visual emphasis                                  |
 | `size`         | "small" \| "medium" \| "large"                                     | "medium"  | Maps to a fluid size step, not fixed px          |
 | `pill`         | boolean                                                            | false     | Fully rounded ends                               |

@@ -1,7 +1,7 @@
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
 
-type Variant = 'neutral' | 'brand' | 'success' | 'warning' | 'danger';
+type Variant = 'default' | 'secondary' | 'tertiary' | 'error' | 'warning';
 type Appearance = 'accent' | 'filled' | 'outlined' | 'filled outlined';
 type Size = 'small' | 'medium' | 'large';
 type Attention = 'none' | 'pulse' | 'bounce';
@@ -54,27 +54,20 @@ export class BxBadge extends BixElement {
       }
 
       /* Variant → role tokens. */
-      :host([variant='neutral']),
-      :host(:not([variant])) {
+      :host([variant='secondary']) {
         --bx-badge-variant-solid: var(--bx-role-neutral-solid);
         --bx-badge-variant-on-solid: var(--bx-role-neutral-on-solid);
         --bx-badge-variant-subtle: var(--bx-role-neutral-subtle);
         --bx-badge-variant-fg: var(--bx-role-neutral-fg);
         --bx-badge-variant-border: var(--bx-role-neutral-border);
       }
-      :host([variant='brand']) {
+      :host([variant='default']),
+      :host(:not([variant])) {
         --bx-badge-variant-solid: var(--bx-role-brand-solid);
         --bx-badge-variant-on-solid: var(--bx-role-brand-on-solid);
         --bx-badge-variant-subtle: var(--bx-role-brand-subtle);
         --bx-badge-variant-fg: var(--bx-role-brand-fg);
         --bx-badge-variant-border: var(--bx-role-brand-border);
-      }
-      :host([variant='success']) {
-        --bx-badge-variant-solid: var(--bx-role-success-solid);
-        --bx-badge-variant-on-solid: var(--bx-role-success-on-solid);
-        --bx-badge-variant-subtle: var(--bx-role-success-subtle);
-        --bx-badge-variant-fg: var(--bx-role-success-fg);
-        --bx-badge-variant-border: var(--bx-role-success-border);
       }
       :host([variant='warning']) {
         --bx-badge-variant-solid: var(--bx-role-warning-solid);
@@ -83,7 +76,14 @@ export class BxBadge extends BixElement {
         --bx-badge-variant-fg: var(--bx-role-warning-fg);
         --bx-badge-variant-border: var(--bx-role-warning-border);
       }
-      :host([variant='danger']) {
+      :host([variant='tertiary']) {
+        --bx-badge-variant-solid: var(--bx-role-tertiary-solid);
+        --bx-badge-variant-on-solid: var(--bx-role-tertiary-on-solid);
+        --bx-badge-variant-subtle: var(--bx-role-tertiary-subtle);
+        --bx-badge-variant-fg: var(--bx-role-tertiary-fg);
+        --bx-badge-variant-border: var(--bx-role-tertiary-border);
+      }
+      :host([variant='error']) {
         --bx-badge-variant-solid: var(--bx-role-danger-solid);
         --bx-badge-variant-on-solid: var(--bx-role-danger-on-solid);
         --bx-badge-variant-subtle: var(--bx-role-danger-subtle);
@@ -324,7 +324,7 @@ export class BxBadge extends BixElement {
 
   constructor() {
     super();
-    this.variant = 'neutral';
+    this.variant = 'default';
     this.appearance = 'filled outlined';
     this.size = 'medium';
     this.pill = false;

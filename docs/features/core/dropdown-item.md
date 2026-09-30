@@ -22,7 +22,7 @@ A single menu entry: plain, checkbox, or submenu parent. Specified for the Bixan
 
 | Name       | Type                   | Default   | Description              |
 | ---------- | ---------------------- | --------- | ------------------------ |
-| `variant`  | "default" \| "danger"  | "default" | -                        |
+| `variant`  | "default" \| "error"   | "default" | -                        |
 | `type`     | "normal" \| "checkbox" | "normal"  | -                        |
 | `checked`  | boolean                | false     | Checkbox state           |
 | `value`    | string                 | ""        | Value reported on select |

@@ -3,7 +3,7 @@ import { html } from 'lit';
 import '@bixant/core/callout';
 
 interface Args {
-  variant: 'brand' | 'neutral' | 'success' | 'warning' | 'danger';
+  variant: 'default' | 'secondary' | 'tertiary' | 'error' | 'warning';
   appearance: 'accent' | 'filled' | 'outlined' | 'plain' | 'filled outlined';
   size: 'small' | 'medium' | 'large';
   dismissible: boolean;
@@ -17,14 +17,14 @@ const meta = {
     docs: {
       description: {
         component:
-          '`<bx-callout>`: inline message block for info, success, warning and danger, with an animated open/close and optional dismiss button. Spec: docs/features/core/callout.md.',
+          '`<bx-callout>`: inline message block for info, warning and error, with an animated open/close and optional dismiss button. Spec: docs/features/core/callout.md.',
       },
     },
   },
   argTypes: {
     variant: {
       control: 'select',
-      options: ['brand', 'neutral', 'success', 'warning', 'danger'],
+      options: ['default', 'secondary', 'tertiary', 'error', 'warning'],
     },
     appearance: {
       control: 'select',
@@ -36,7 +36,7 @@ const meta = {
     message: { control: 'text' },
   },
   args: {
-    variant: 'brand',
+    variant: 'default',
     appearance: 'outlined',
     size: 'medium',
     dismissible: false,
@@ -65,7 +65,7 @@ export const Variants: Story = {
     <div
       style="display: flex; flex-direction: column; gap: 0.75rem; max-inline-size: 32rem"
     >
-      ${(['neutral', 'brand', 'success', 'warning', 'danger'] as const).map(
+      ${(['default', 'secondary', 'tertiary', 'error', 'warning'] as const).map(
         (variant) =>
           html`<bx-callout variant=${variant}
             >This is a ${variant} callout.</bx-callout
@@ -84,7 +84,7 @@ export const Appearances: Story = {
         ['accent', 'filled', 'outlined', 'filled outlined', 'plain'] as const
       ).map(
         (appearance) =>
-          html`<bx-callout variant="brand" appearance=${appearance}
+          html`<bx-callout variant="default" appearance=${appearance}
             >Appearance: ${appearance}</bx-callout
           >`,
       )}
@@ -119,7 +119,7 @@ export const Dismissible: Story = {
 export const WithIconSlot: Story = {
   name: 'Custom icon slot',
   render: () => html`
-    <bx-callout variant="success" style="max-inline-size: 32rem">
+    <bx-callout variant="secondary" style="max-inline-size: 32rem">
       <span slot="icon">🎉</span>
       Your changes were published successfully.
     </bx-callout>

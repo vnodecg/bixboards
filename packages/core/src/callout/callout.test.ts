@@ -6,22 +6,22 @@ describe('bx-callout', () => {
   it('registers the tag with brand/medium/outlined, open by default', async () => {
     const el = await fixture<BxCallout>(html`<bx-callout>Hi</bx-callout>`);
     expect(el).to.be.instanceOf(customElements.get('bx-callout')!);
-    expect(el.variant).to.equal('brand');
+    expect(el.variant).to.equal('default');
     expect(el.size).to.equal('medium');
     expect(el.appearance).to.equal('outlined');
     expect(el.open).to.be.true;
   });
 
-  it('is role=note when statically open at first render, even for danger', async () => {
+  it('is role=note when statically open at first render, even for error', async () => {
     const el = await fixture<BxCallout>(
-      html`<bx-callout variant="danger">Careful</bx-callout>`,
+      html`<bx-callout variant="error">Careful</bx-callout>`,
     );
     expect(el.getAttribute('role')).to.equal('note');
   });
 
-  it('becomes role=alert when a danger/warning callout is shown dynamically', async () => {
+  it('becomes role=alert when a error/warning callout is shown dynamically', async () => {
     const el = await fixture<BxCallout>(
-      html`<bx-callout variant="danger" .open=${false}>Careful</bx-callout>`,
+      html`<bx-callout variant="error" .open=${false}>Careful</bx-callout>`,
     );
     expect(el.getAttribute('role')).to.equal('note');
     el.show();
@@ -71,7 +71,7 @@ describe('bx-callout', () => {
 
   it('renders a default icon per variant, replaceable via the icon slot', async () => {
     const el = await fixture<BxCallout>(
-      html`<bx-callout variant="success">Done</bx-callout>`,
+      html`<bx-callout variant="secondary">Done</bx-callout>`,
     );
     expect(el.shadowRoot!.querySelector('.icon svg')).to.exist;
 

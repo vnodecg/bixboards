@@ -20,15 +20,15 @@ One detailed feature document per component. Shared rules live in [_conventions.
 
 ### Feedback
 
-| Component                                   | Summary                                                                                    |
-| ------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| [`bx-badge`](core/badge.md)                 | Small status/count indicator, optionally pulsing or attached to another element.           |
-| [`bx-callout`](core/callout.md)             | Inline message block for info, success, warning and danger with optional icon and dismiss. |
-| [`bx-progress-bar`](core/progress-bar.md)   | Linear progress indicator, determinate or indeterminate.                                   |
-| [`bx-progress-ring`](core/progress-ring.md) | Circular progress indicator with centered label.                                           |
-| [`bx-skeleton`](core/skeleton.md)           | Placeholder shimmer while content loads.                                                   |
-| [`bx-spinner`](core/spinner.md)             | Indeterminate loading spinner.                                                             |
-| [`bx-tooltip`](core/tooltip.md)             | Short hover/focus hint anchored to any element via `for` or slot.                          |
+| Component                                   | Summary                                                                          |
+| ------------------------------------------- | -------------------------------------------------------------------------------- |
+| [`bx-badge`](core/badge.md)                 | Small status/count indicator, optionally pulsing or attached to another element. |
+| [`bx-callout`](core/callout.md)             | Inline message block for info, warning and error with optional icon and dismiss. |
+| [`bx-progress-bar`](core/progress-bar.md)   | Linear progress indicator, determinate or indeterminate.                         |
+| [`bx-progress-ring`](core/progress-ring.md) | Circular progress indicator with centered label.                                 |
+| [`bx-skeleton`](core/skeleton.md)           | Placeholder shimmer while content loads.                                         |
+| [`bx-spinner`](core/spinner.md)             | Indeterminate loading spinner.                                                   |
+| [`bx-tooltip`](core/tooltip.md)             | Short hover/focus hint anchored to any element via `for` or slot.                |
 
 ### Overlays
 

@@ -3,7 +3,7 @@ import { html } from 'lit';
 import '@bixant/core/button';
 
 interface Args {
-  variant: 'neutral' | 'brand' | 'success' | 'warning' | 'danger';
+  variant: 'default' | 'secondary' | 'tertiary' | 'error' | 'warning';
   appearance: 'accent' | 'filled' | 'outlined' | 'plain' | 'filled outlined';
   size: 'small' | 'medium' | 'large';
   pill: boolean;
@@ -26,7 +26,7 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['neutral', 'brand', 'success', 'warning', 'danger'],
+      options: ['default', 'secondary', 'tertiary', 'error', 'warning'],
     },
     appearance: {
       control: 'select',
@@ -40,7 +40,7 @@ const meta = {
     label: { control: 'text' },
   },
   args: {
-    variant: 'neutral',
+    variant: 'default',
     appearance: 'accent',
     size: 'medium',
     pill: false,
@@ -71,7 +71,7 @@ export const Default: Story = {};
 export const Variants: Story = {
   render: () => html`
     <div style="display: flex; gap: 0.5rem; flex-wrap: wrap">
-      ${(['neutral', 'brand', 'success', 'warning', 'danger'] as const).map(
+      ${(['default', 'secondary', 'tertiary', 'error', 'warning'] as const).map(
         (variant) => html`<bx-button variant=${variant}>${variant}</bx-button>`,
       )}
     </div>

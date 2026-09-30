@@ -1,6 +1,6 @@
 # `<bx-callout>`
 
-> Inline message block for info, success, warning and danger with optional icon and dismiss.
+> Inline message block for info, warning and error with optional icon and dismiss.
 
 |                     |                |
 | ------------------- | -------------- |
@@ -14,7 +14,7 @@ See [conventions](../_conventions.md) for shared rules (tokens, container querie
 
 ## 1. Overview
 
-Inline message block for info, success, warning and danger with optional icon and dismiss. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Inline message block for info, warning and error with optional icon and dismiss. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 
@@ -22,7 +22,7 @@ Inline message block for info, success, warning and danger with optional icon an
 
 | Name          | Type                                                               | Default    | Description        |
 | ------------- | ------------------------------------------------------------------ | ---------- | ------------------ |
-| `variant`     | "brand" \| "neutral" \| "success" \| "warning" \| "danger"         | "brand"    | -                  |
+| `variant`     | "default" \| "secondary" \| "tertiary" \| "error" \| "warning"     | "default"  | -                  |
 | `appearance`  | "accent" \| "filled" \| "outlined" \| "plain" \| "filled outlined" | "outlined" | -                  |
 | `size`        | "small" \| "medium" \| "large"                                     | "medium"   | -                  |
 | `dismissible` | boolean                                                            | false      | Shows close button |
@@ -71,7 +71,7 @@ Icon moves above text and actions wrap under text when container < 24 fluid unit
 
 ## 6. Accessibility
 
-- `role="alert"` for danger/warning when inserted dynamically, `role="note"` otherwise.
+- `role="alert"` for error/warning when inserted dynamically, `role="note"` otherwise.
 - Meets WCAG 2.2 AA: keyboard operable, visible focus, 4.5:1 text / 3:1 UI contrast, target size ≥ 24 px (44 px on coarse pointers), respects `prefers-reduced-motion` and forced-colors.
 - Fully operable at 200% zoom and with user text-spacing overrides without loss of content.
 
