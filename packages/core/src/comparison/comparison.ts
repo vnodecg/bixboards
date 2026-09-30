@@ -76,7 +76,8 @@ export class BxComparison extends BixElement {
         translate: -50% 0;
         inline-size: var(--divider-width, var(--bx-border-width-strong));
         background: var(--bx-surface-base);
-        box-shadow: 0 0 0 1px var(--bx-color-neutral-transparent-300, rgba(0, 0, 0, 0.16));
+        box-shadow: 0 0 0 1px
+          var(--bx-color-neutral-transparent-300, rgba(0, 0, 0, 0.16));
         cursor: ew-resize;
       }
 

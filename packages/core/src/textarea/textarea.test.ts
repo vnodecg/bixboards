@@ -10,7 +10,9 @@ describe('bx-textarea', () => {
   });
 
   it('reflects value into the native textarea and back out on input', async () => {
-    const el = await fixture<BxTextarea>(html`<bx-textarea value="hello"></bx-textarea>`);
+    const el = await fixture<BxTextarea>(
+      html`<bx-textarea value="hello"></bx-textarea>`,
+    );
     const textarea = el.shadowRoot!.querySelector('textarea')!;
     expect(textarea.value).to.equal('hello');
 
@@ -23,9 +25,14 @@ describe('bx-textarea', () => {
 
   it('shows label/hint from attributes', async () => {
     const el = await fixture<BxTextarea>(
-      html`<bx-textarea label="Bio" hint="Tell us about yourself"></bx-textarea>`,
+      html`<bx-textarea
+        label="Bio"
+        hint="Tell us about yourself"
+      ></bx-textarea>`,
     );
-    expect(el.shadowRoot!.querySelector('.label')!.textContent).to.include('Bio');
+    expect(el.shadowRoot!.querySelector('.label')!.textContent).to.include(
+      'Bio',
+    );
     expect(el.shadowRoot!.querySelector('.hint')!.textContent).to.include(
       'Tell us about yourself',
     );
@@ -46,7 +53,9 @@ describe('bx-textarea', () => {
   });
 
   it('is invalid when required and empty, valid once filled', async () => {
-    const el = await fixture<BxTextarea>(html`<bx-textarea required></bx-textarea>`);
+    const el = await fixture<BxTextarea>(
+      html`<bx-textarea required></bx-textarea>`,
+    );
     expect(el.checkValidity()).to.be.false;
     el.value = 'x';
     const textarea = el.shadowRoot!.querySelector('textarea')!;
@@ -94,7 +103,10 @@ describe('bx-textarea', () => {
 
   it('has no axe violations', async () => {
     const el = await fixture<BxTextarea>(
-      html`<bx-textarea label="Bio" hint="Tell us about yourself"></bx-textarea>`,
+      html`<bx-textarea
+        label="Bio"
+        hint="Tell us about yourself"
+      ></bx-textarea>`,
     );
     await expect(el).to.be.accessible();
   });

@@ -286,18 +286,30 @@ export class BxTextarea extends FormAssociatedMixin(BixElement) {
 
   #syncExternalValue(previous: string | undefined): void {
     const textareaEl = this.#textareaEl;
-    if (!textareaEl || textareaEl.value === this.value || previous === undefined) return;
+    if (
+      !textareaEl ||
+      textareaEl.value === this.value ||
+      previous === undefined
+    )
+      return;
     textareaEl.value = this.value;
   }
 
   #syncValidity(hasInteracted = this.#hasInteracted): void {
     const textareaEl = this.#textareaEl;
     if (!textareaEl) return;
-    this.internals.setValidity(textareaEl.validity, textareaEl.validationMessage, textareaEl);
+    this.internals.setValidity(
+      textareaEl.validity,
+      textareaEl.validationMessage,
+      textareaEl,
+    );
     if (hasInteracted) {
       this.toggleAttribute('data-user-valid', textareaEl.validity.valid);
       this.toggleAttribute('data-user-invalid', !textareaEl.validity.valid);
-      textareaEl.toggleAttribute('data-user-invalid', !textareaEl.validity.valid);
+      textareaEl.toggleAttribute(
+        'data-user-invalid',
+        !textareaEl.validity.valid,
+      );
     }
   }
 
@@ -312,7 +324,8 @@ export class BxTextarea extends FormAssociatedMixin(BixElement) {
       if (!textareaEl) return;
       textareaEl.style.height = 'auto';
       const maxHeight = getComputedStyle(textareaEl).maxHeight;
-      const cap = maxHeight === 'none' ? Infinity : Number.parseFloat(maxHeight);
+      const cap =
+        maxHeight === 'none' ? Infinity : Number.parseFloat(maxHeight);
       textareaEl.style.height = `${Math.min(textareaEl.scrollHeight, cap)}px`;
     });
   }
@@ -341,7 +354,9 @@ export class BxTextarea extends FormAssociatedMixin(BixElement) {
     this.#syncValidity();
     this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
     if (!this.internals.checkValidity())
-      this.dispatchEvent(new CustomEvent('bx-invalid', { bubbles: true, composed: true }));
+      this.dispatchEvent(
+        new CustomEvent('bx-invalid', { bubbles: true, composed: true }),
+      );
   };
 
   #handleInvalid = (event: Event): void => {
@@ -356,7 +371,8 @@ export class BxTextarea extends FormAssociatedMixin(BixElement) {
     const crossed = ANNOUNCE_THRESHOLDS.find(
       (threshold) =>
         remaining <= threshold &&
-        (this.#announcedRemaining === undefined || this.#announcedRemaining > threshold),
+        (this.#announcedRemaining === undefined ||
+          this.#announcedRemaining > threshold),
     );
     if (crossed === undefined) return;
     this.#announcedRemaining = remaining;
@@ -394,7 +410,10 @@ export class BxTextarea extends FormAssociatedMixin(BixElement) {
   protected override render() {
     const showLabel = this.withLabel || this.label.length > 0;
     const showHint = this.withHint || this.hint.length > 0;
-    const remaining = this.maxlength !== undefined ? this.maxlength - this.value.length : undefined;
+    const remaining =
+      this.maxlength !== undefined
+        ? this.maxlength - this.value.length
+        : undefined;
     const resizeCss = this.resize === 'auto' ? 'none' : this.resize;
 
     return html`
@@ -406,9 +425,13 @@ export class BxTextarea extends FormAssociatedMixin(BixElement) {
               >`
             : nothing
         }
-        <div class="base" part="base" style="--bx-textarea-resize: ${resizeCss}; --bx-textarea-field-sizing: ${
-          this.resize === 'auto' && supportsFieldSizing ? 'content' : 'unset'
-        }">
+        <div
+          class="base"
+          part="base"
+          style="--bx-textarea-resize: ${resizeCss}; --bx-textarea-field-sizing: ${
+            this.resize === 'auto' && supportsFieldSizing ? 'content' : 'unset'
+          }"
+        >
           <textarea
             ${ref(this.#textareaRef)}
             class="textarea"

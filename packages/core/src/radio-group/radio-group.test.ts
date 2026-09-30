@@ -19,7 +19,9 @@ describe('bx-radio-group', () => {
 
   it('renders role=radiogroup', async () => {
     const el = await fixture<BxRadioGroup>(html`
-      <bx-radio-group name="plan"><bx-radio value="a">A</bx-radio></bx-radio-group>
+      <bx-radio-group name="plan"
+        ><bx-radio value="a">A</bx-radio></bx-radio-group
+      >
     `);
     const group = el.shadowRoot!.querySelector('.radio-group')!;
     expect(group.getAttribute('role')).to.equal('radiogroup');
@@ -73,7 +75,11 @@ describe('bx-radio-group', () => {
     const [a, , c] = [...el.querySelectorAll('bx-radio')] as BxRadio[];
     c!.focus();
     c!.dispatchEvent(
-      new KeyboardEvent('keydown', { key: 'Home', bubbles: true, composed: true }),
+      new KeyboardEvent('keydown', {
+        key: 'Home',
+        bubbles: true,
+        composed: true,
+      }),
     );
     await a!.updateComplete;
     expect(a!.checked).to.be.true;

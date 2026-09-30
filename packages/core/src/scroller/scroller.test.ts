@@ -62,14 +62,18 @@ describe('bx-scroller', () => {
     await aTimeout(50);
     const content = el.shadowRoot!.querySelector('.content') as HTMLElement;
     expect(
-      el.shadowRoot!.querySelector('.shadow-start')!.classList.contains('visible'),
+      el
+        .shadowRoot!.querySelector('.shadow-start')!
+        .classList.contains('visible'),
     ).to.be.false;
 
     content.scrollLeft = 50;
     content.dispatchEvent(new Event('scroll'));
     await aTimeout(50);
     expect(
-      el.shadowRoot!.querySelector('.shadow-start')!.classList.contains('visible'),
+      el
+        .shadowRoot!.querySelector('.shadow-start')!
+        .classList.contains('visible'),
     ).to.be.true;
   });
 

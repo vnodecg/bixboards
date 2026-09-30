@@ -110,14 +110,18 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
         display: flex;
         align-items: center;
         gap: var(--bx-space-xs);
-        min-block-size: var(--bx-input-height, max(var(--bx-control-height-m), var(--bx-target-min, 1.5rem)));
+        min-block-size: var(
+          --bx-input-height,
+          max(var(--bx-control-height-m), var(--bx-target-min, 1.5rem))
+        );
         padding-inline: var(--bx-input-padding-inline, var(--bx-space-m));
         border-radius: var(--bx-radius-m);
         border: var(--bx-border-width) solid var(--bx-border-subtle);
         background: var(--bx-surface-base);
         flex: 1;
         min-inline-size: 0;
-        transition: border-color var(--bx-motion-duration-fast) var(--bx-motion-easing-standard);
+        transition: border-color var(--bx-motion-duration-fast)
+          var(--bx-motion-easing-standard);
       }
 
       .base:hover {
@@ -125,10 +129,16 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
       }
 
       :host([size='small']) .base {
-        --bx-input-height: max(var(--bx-control-height-s), var(--bx-target-min, 1.5rem));
+        --bx-input-height: max(
+          var(--bx-control-height-s),
+          var(--bx-target-min, 1.5rem)
+        );
       }
       :host([size='large']) .base {
-        --bx-input-height: max(var(--bx-control-height-l), var(--bx-target-min, 1.5rem));
+        --bx-input-height: max(
+          var(--bx-control-height-l),
+          var(--bx-target-min, 1.5rem)
+        );
       }
 
       :host([appearance~='filled']) .base {

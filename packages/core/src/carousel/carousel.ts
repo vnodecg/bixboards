@@ -146,7 +146,8 @@ export class BxCarousel extends BixElement {
             (
                 100% - (var(--bx-carousel-per-page, 1) - 1) *
                   var(--slide-gap, var(--bx-space-m))
-              ) / var(--bx-carousel-per-page, 1)
+              ) /
+              var(--bx-carousel-per-page, 1)
           );
       }
 
@@ -390,7 +391,10 @@ export class BxCarousel extends BixElement {
     this.removeEventListener('pointerleave', this.#handlePointerLeave);
     this.removeEventListener('focusin', this.#handleFocusIn);
     this.removeEventListener('focusout', this.#handleFocusOut);
-    document.removeEventListener('visibilitychange', this.#handleVisibilityChange);
+    document.removeEventListener(
+      'visibilitychange',
+      this.#handleVisibilityChange,
+    );
     this.#unobserveResize?.();
     this.#unobserveResize = undefined;
     this.#intersectionObserver?.disconnect();
@@ -435,7 +439,8 @@ export class BxCarousel extends BixElement {
     return (slot as HTMLSlotElement)
       .assignedElements({ flatten: true })
       .filter(
-        (el): el is BxCarouselItem => el.tagName.toLowerCase() === 'bx-carousel-item',
+        (el): el is BxCarouselItem =>
+          el.tagName.toLowerCase() === 'bx-carousel-item',
       );
   }
 
@@ -462,7 +467,10 @@ export class BxCarousel extends BixElement {
 
   #handleIntersect(entries: IntersectionObserverEntry[]): void {
     for (const entry of entries)
-      this.#visibility.set(entry.target, entry.isIntersecting ? entry.intersectionRatio : 0);
+      this.#visibility.set(
+        entry.target,
+        entry.isIntersecting ? entry.intersectionRatio : 0,
+      );
 
     const slides = this.#slides();
     let bestIndex = this._activeIndex;
@@ -498,7 +506,9 @@ export class BxCarousel extends BixElement {
   }
 
   #canGoNext(): boolean {
-    return this.loop || this._activeIndex + this.slidesPerMove < this._slideCount;
+    return (
+      this.loop || this._activeIndex + this.slidesPerMove < this._slideCount
+    );
   }
 
   /** Scrolls to `index` (clamped to the slide range), honouring `prefers-reduced-motion`. */
@@ -568,7 +578,10 @@ export class BxCarousel extends BixElement {
   #syncAutoplay(): void {
     const should = this.#shouldAutoplay();
     if (should && !this.#autoplayTimer) {
-      this.#autoplayTimer = setInterval(() => this.next(), this.autoplayInterval);
+      this.#autoplayTimer = setInterval(
+        () => this.next(),
+        this.autoplayInterval,
+      );
     } else if (!should && this.#autoplayTimer) {
       this.#stopAutoplay();
     }
@@ -594,7 +607,8 @@ export class BxCarousel extends BixElement {
     this.#dragStart = {
       x: event.clientX,
       y: event.clientY,
-      scroll: this.orientation === 'vertical' ? scroll.scrollTop : scroll.scrollLeft,
+      scroll:
+        this.orientation === 'vertical' ? scroll.scrollTop : scroll.scrollLeft,
       pointerId: event.pointerId,
     };
     scroll.setPointerCapture(event.pointerId);
@@ -602,7 +616,8 @@ export class BxCarousel extends BixElement {
   };
 
   #handlePointerMove = (event: PointerEvent): void => {
-    if (!this._dragging || event.pointerId !== this.#dragStart.pointerId) return;
+    if (!this._dragging || event.pointerId !== this.#dragStart.pointerId)
+      return;
     const scroll = this.#scrollRef.value;
     if (!scroll) return;
     if (this.orientation === 'vertical') {
@@ -672,7 +687,9 @@ export class BxCarousel extends BixElement {
                   >
                     <slot name="previous-icon">
                       ${svg`<svg viewBox="0 0 256 256" aria-hidden="true"><path d=${
-                        this.orientation === 'vertical' ? CHEVRON_UP_PATH : CHEVRON_LEFT_PATH
+                        this.orientation === 'vertical'
+                          ? CHEVRON_UP_PATH
+                          : CHEVRON_LEFT_PATH
                       }></path></svg>`}
                     </slot>
                   </button>
@@ -686,7 +703,9 @@ export class BxCarousel extends BixElement {
                   >
                     <slot name="next-icon">
                       ${svg`<svg viewBox="0 0 256 256" aria-hidden="true"><path d=${
-                        this.orientation === 'vertical' ? CHEVRON_DOWN_PATH : CHEVRON_RIGHT_PATH
+                        this.orientation === 'vertical'
+                          ? CHEVRON_DOWN_PATH
+                          : CHEVRON_RIGHT_PATH
                       }></path></svg>`}
                     </slot>
                   </button>
@@ -698,44 +717,55 @@ export class BxCarousel extends BixElement {
           this.pagination || this.autoplay
             ? html`
                 <div class="controls">
-                  ${this.autoplay
-                    ? html`
-                        <button
-                          type="button"
-                          class="play-toggle"
-                          aria-label=${this._playing ? 'Pause autoplay' : 'Play autoplay'}
-                          aria-pressed=${this._playing}
-                          @click=${this.#handleTogglePlay}
-                        >
-                          ${this._playing
-                            ? html`<span class="bars"
-                                ><span class="bar"></span><span class="bar"></span
-                              ></span>`
-                            : html`<span class="triangle"></span>`}
-                        </button>
-                      `
-                    : nothing}
-                  ${this.pagination
-                    ? html`
-                        <div class="pagination" part="pagination" role="tablist">
-                          ${Array.from({ length: pageCount }, (_, page) => {
-                            const current = page === activePage;
-                            return html`
-                              <button
-                                type="button"
-                                class="pagination-item"
-                                part="pagination-item"
-                                role="tab"
-                                aria-label="Go to slide ${page + 1} of ${pageCount}"
-                                aria-current=${current}
-                                aria-selected=${current}
-                                @click=${() => this.goToSlide(page * this._perPage)}
-                              ></button>
-                            `;
-                          })}
-                        </div>
-                      `
-                    : nothing}
+                  ${
+                    this.autoplay
+                      ? html`
+                          <button
+                            type="button"
+                            class="play-toggle"
+                            aria-label=${this._playing ? 'Pause autoplay' : 'Play autoplay'}
+                            aria-pressed=${this._playing}
+                            @click=${this.#handleTogglePlay}
+                          >
+                            ${
+                              this._playing
+                                ? html`<span class="bars"
+                                    ><span class="bar"></span
+                                    ><span class="bar"></span
+                                  ></span>`
+                                : html`<span class="triangle"></span>`
+                            }
+                          </button>
+                        `
+                      : nothing
+                  }
+                  ${
+                    this.pagination
+                      ? html`
+                          <div
+                            class="pagination"
+                            part="pagination"
+                            role="tablist"
+                          >
+                            ${Array.from({ length: pageCount }, (_, page) => {
+                              const current = page === activePage;
+                              return html`
+                                <button
+                                  type="button"
+                                  class="pagination-item"
+                                  part="pagination-item"
+                                  role="tab"
+                                  aria-label="Go to slide ${page + 1} of ${pageCount}"
+                                  aria-current=${current}
+                                  aria-selected=${current}
+                                  @click=${() => this.goToSlide(page * this._perPage)}
+                                ></button>
+                              `;
+                            })}
+                          </div>
+                        `
+                      : nothing
+                  }
                 </div>
               `
             : nothing

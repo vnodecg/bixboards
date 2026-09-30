@@ -182,7 +182,10 @@ export class BxTooltip extends BixElement {
   #attachAnchorListeners(): void {
     const anchor = this.#anchorEl;
     if (!anchor) return;
-    anchor.addEventListener('keydown', this.#handleAnchorKeydown as EventListener);
+    anchor.addEventListener(
+      'keydown',
+      this.#handleAnchorKeydown as EventListener,
+    );
     if (this.trigger === 'click') {
       anchor.addEventListener('click', this.#handleAnchorClick);
     } else if (this.trigger === 'hover focus') {
@@ -196,7 +199,10 @@ export class BxTooltip extends BixElement {
   #detachAnchorListeners(): void {
     const anchor = this.#anchorEl;
     if (!anchor) return;
-    anchor.removeEventListener('keydown', this.#handleAnchorKeydown as EventListener);
+    anchor.removeEventListener(
+      'keydown',
+      this.#handleAnchorKeydown as EventListener,
+    );
     anchor.removeEventListener('click', this.#handleAnchorClick);
     anchor.removeEventListener('mouseenter', this.#handleTriggerEnter);
     anchor.removeEventListener('mouseleave', this.#handleTriggerLeave);
@@ -242,7 +248,10 @@ export class BxTooltip extends BixElement {
     openTooltipCount = Math.max(0, openTooltipCount - 1);
     if (openTooltipCount === 0) {
       clearTimeout(recentlyOpenTimer);
-      recentlyOpenTimer = setTimeout(() => (recentlyOpen = false), RECENTLY_OPEN_GRACE_MS);
+      recentlyOpenTimer = setTimeout(
+        () => (recentlyOpen = false),
+        RECENTLY_OPEN_GRACE_MS,
+      );
     }
   }
 
@@ -250,24 +259,40 @@ export class BxTooltip extends BixElement {
   show(): void {
     if (this.open || this.disabled) return;
     if (
-      !this.dispatchEvent(new Event('bx-show', { bubbles: true, composed: true, cancelable: true }))
+      !this.dispatchEvent(
+        new Event('bx-show', {
+          bubbles: true,
+          composed: true,
+          cancelable: true,
+        }),
+      )
     )
       return;
     this.open = true;
     this.#incrementOpenCount();
-    this.dispatchEvent(new Event('bx-after-show', { bubbles: true, composed: true }));
+    this.dispatchEvent(
+      new Event('bx-after-show', { bubbles: true, composed: true }),
+    );
   }
 
   /** Hides the tooltip immediately, ignoring `hide-delay`. */
   hide(): void {
     if (!this.open) return;
     if (
-      !this.dispatchEvent(new Event('bx-hide', { bubbles: true, composed: true, cancelable: true }))
+      !this.dispatchEvent(
+        new Event('bx-hide', {
+          bubbles: true,
+          composed: true,
+          cancelable: true,
+        }),
+      )
     )
       return;
     this.open = false;
     this.#decrementOpenCount();
-    this.dispatchEvent(new Event('bx-after-hide', { bubbles: true, composed: true }));
+    this.dispatchEvent(
+      new Event('bx-after-hide', { bubbles: true, composed: true }),
+    );
   }
 
   protected override render() {

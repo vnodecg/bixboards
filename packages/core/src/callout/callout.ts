@@ -2,7 +2,8 @@ import { css, html, nothing, svg, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
 
 type Variant = 'brand' | 'neutral' | 'success' | 'warning' | 'danger';
-type Appearance = 'accent' | 'filled' | 'outlined' | 'plain' | 'filled outlined';
+type Appearance =
+  'accent' | 'filled' | 'outlined' | 'plain' | 'filled outlined';
 type Size = 'small' | 'medium' | 'large';
 
 // Vendored from packages/core/src/icon/default-library.ts (Phosphor Icons, regular, MIT) — kept
@@ -255,7 +256,8 @@ export class BxCallout extends BixElement {
     if (this.open) this.removeAttribute('aria-hidden');
     else this.setAttribute('aria-hidden', 'true');
 
-    const isAlertVariant = this.variant === 'warning' || this.variant === 'danger';
+    const isAlertVariant =
+      this.variant === 'warning' || this.variant === 'danger';
     this.setAttribute(
       'role',
       isAlertVariant && this.#shownDynamically ? 'alert' : 'note',
@@ -263,7 +265,10 @@ export class BxCallout extends BixElement {
 
     if (changed.has('open') && !this.open) {
       const cleanup = (event: TransitionEvent) => {
-        if (event.target !== this || event.propertyName !== 'grid-template-rows')
+        if (
+          event.target !== this ||
+          event.propertyName !== 'grid-template-rows'
+        )
           return;
         this.removeEventListener('transitionend', cleanup);
         this.dispatchEvent(
@@ -313,21 +318,23 @@ export class BxCallout extends BixElement {
         </span>
         <div class="message" part="message"><slot></slot></div>
         <div class="actions">
-          ${this.dismissible
-            ? html`
-                <button
-                  type="button"
-                  class="close-button"
-                  part="close-button"
-                  aria-label="Dismiss"
-                  @click=${this.#handleCloseClick}
-                >
-                  <svg viewBox="0 0 256 256" aria-hidden="true">
-                    <path d=${CLOSE_PATH}></path>
-                  </svg>
-                </button>
-              `
-            : nothing}
+          ${
+            this.dismissible
+              ? html`
+                  <button
+                    type="button"
+                    class="close-button"
+                    part="close-button"
+                    aria-label="Dismiss"
+                    @click=${this.#handleCloseClick}
+                  >
+                    <svg viewBox="0 0 256 256" aria-hidden="true">
+                      <path d=${CLOSE_PATH}></path>
+                    </svg>
+                  </button>
+                `
+              : nothing
+          }
         </div>
       </div>
     `;

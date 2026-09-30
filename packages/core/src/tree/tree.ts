@@ -87,7 +87,9 @@ export class BxTree extends BixElement {
   }
 
   #items(): BxTreeItem[] {
-    return [...this.querySelectorAll('bx-tree-item')] as unknown as BxTreeItem[];
+    return [
+      ...this.querySelectorAll('bx-tree-item'),
+    ] as unknown as BxTreeItem[];
   }
 
   #isTreeItem(node: Element | null): node is BxTreeItem {
@@ -95,7 +97,9 @@ export class BxTree extends BixElement {
   }
 
   #directChildren(parent: BxTreeItem | this): BxTreeItem[] {
-    return [...parent.children].filter((child): child is BxTreeItem => this.#isTreeItem(child));
+    return [...parent.children].filter((child): child is BxTreeItem =>
+      this.#isTreeItem(child),
+    );
   }
 
   #parentItem(item: BxTreeItem): BxTreeItem | null {
@@ -138,7 +142,10 @@ export class BxTree extends BixElement {
   #sync(): void {
     const items = this.#items();
 
-    if (!this.#hasWarnedLargeTree && items.length > LARGE_TREE_WARNING_THRESHOLD) {
+    if (
+      !this.#hasWarnedLargeTree &&
+      items.length > LARGE_TREE_WARNING_THRESHOLD
+    ) {
       this.#hasWarnedLargeTree = true;
       console.warn(
         `<bx-tree>: rendering ${items.length} nodes; consider <bx-virtual-tree> for trees this large.`,
@@ -167,12 +174,14 @@ export class BxTree extends BixElement {
     const visible = this.#visibleItems();
     if (!this.#activeItem || !visible.includes(this.#activeItem))
       this.#activeItem = visible[0] ?? null;
-    for (const item of items) item.tabIndex = item === this.#activeItem ? 0 : -1;
+    for (const item of items)
+      item.tabIndex = item === this.#activeItem ? 0 : -1;
   }
 
   #setActive(item: BxTreeItem, focus = true): void {
     this.#activeItem = item;
-    for (const candidate of this.#items()) candidate.tabIndex = candidate === item ? 0 : -1;
+    for (const candidate of this.#items())
+      candidate.tabIndex = candidate === item ? 0 : -1;
     if (focus) item.focus();
   }
 
@@ -207,8 +216,12 @@ export class BxTree extends BixElement {
     let ancestor = this.#parentItem(item);
     while (ancestor) {
       const children = this.#directChildren(ancestor);
-      const allSelected = children.every((child) => child.selected && !child.indeterminate);
-      const noneSelected = children.every((child) => !child.selected && !child.indeterminate);
+      const allSelected = children.every(
+        (child) => child.selected && !child.indeterminate,
+      );
+      const noneSelected = children.every(
+        (child) => !child.selected && !child.indeterminate,
+      );
       ancestor.selected = allSelected;
       ancestor.indeterminate = !allSelected && !noneSelected;
       ancestor = this.#parentItem(ancestor);
@@ -230,15 +243,22 @@ export class BxTree extends BixElement {
   }
 
   #clickExpandButton(item: BxTreeItem): void {
-    item.shadowRoot?.querySelector<HTMLButtonElement>('.expand-button')?.click();
+    item.shadowRoot
+      ?.querySelector<HTMLButtonElement>('.expand-button')
+      ?.click();
   }
 
   #handleClick = (event: MouseEvent): void => {
-    const item = (event.target as Element)?.closest?.('bx-tree-item') as BxTreeItem | null;
+    const item = (event.target as Element)?.closest?.(
+      'bx-tree-item',
+    ) as BxTreeItem | null;
     if (!item || !this.#items().includes(item) || item.disabled) return;
     this.#setActive(item, false);
 
-    if (this.expandSelector && (event.target as Element).matches?.(this.expandSelector)) {
+    if (
+      this.expandSelector &&
+      (event.target as Element).matches?.(this.expandSelector)
+    ) {
       this.#clickExpandButton(item);
       return;
     }
@@ -259,7 +279,9 @@ export class BxTree extends BixElement {
   // dispatches `change` instead — already toggled by the time this runs, so this only needs to
   // cascade/resync, the same tail end `#toggleCascade`/`#selectExclusive` reach.
   #handleChange = (event: Event): void => {
-    const item = (event.target as Element)?.closest?.('bx-tree-item') as BxTreeItem | null;
+    const item = (event.target as Element)?.closest?.(
+      'bx-tree-item',
+    ) as BxTreeItem | null;
     if (!item || !this.#items().includes(item)) return;
     if (this.selection === 'multiple') this.#cascadeFrom(item);
     else this.#selectExclusive(item);
@@ -270,7 +292,9 @@ export class BxTree extends BixElement {
   }
 
   #handleKeydown = (event: KeyboardEvent): void => {
-    const item = (event.target as Element)?.closest?.('bx-tree-item') as BxTreeItem | null;
+    const item = (event.target as Element)?.closest?.(
+      'bx-tree-item',
+    ) as BxTreeItem | null;
     if (!item || !this.#items().includes(item)) return;
 
     const visible = this.#visibleItems();
@@ -308,7 +332,8 @@ export class BxTree extends BixElement {
       case 'Enter':
       case ' ':
         event.preventDefault();
-        if (this.selection === 'leaf' && !this.#isLeaf(item)) this.#clickExpandButton(item);
+        if (this.selection === 'leaf' && !this.#isLeaf(item))
+          this.#clickExpandButton(item);
         else if (this.selection === 'multiple') this.#toggleCascade(item);
         else this.#selectExclusive(item);
         return;
@@ -327,15 +352,31 @@ export class BxTree extends BixElement {
     }
   };
 
-  #handleTypeahead(event: KeyboardEvent, visible: BxTreeItem[], index: number): void {
-    if (event.key.length !== 1 || event.ctrlKey || event.metaKey || event.altKey) return;
+  #handleTypeahead(
+    event: KeyboardEvent,
+    visible: BxTreeItem[],
+    index: number,
+  ): void {
+    if (
+      event.key.length !== 1 ||
+      event.ctrlKey ||
+      event.metaKey ||
+      event.altKey
+    )
+      return;
     clearTimeout(this.#typeaheadTimer);
     this.#typeaheadBuffer += event.key.toLowerCase();
     this.#typeaheadTimer = setTimeout(() => (this.#typeaheadBuffer = ''), 500);
 
-    const ordered = [...visible.slice(index + 1), ...visible.slice(0, index + 1)];
+    const ordered = [
+      ...visible.slice(index + 1),
+      ...visible.slice(0, index + 1),
+    ];
     const match = ordered.find((candidate) =>
-      candidate.textContent?.trim().toLowerCase().startsWith(this.#typeaheadBuffer),
+      candidate.textContent
+        ?.trim()
+        .toLowerCase()
+        .startsWith(this.#typeaheadBuffer),
     );
     if (match) {
       event.preventDefault();

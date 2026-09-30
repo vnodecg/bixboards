@@ -326,19 +326,28 @@ export class BxTreeItem extends BixElement {
   }
 
   #handleChildrenSlotChange = (event: Event): void => {
-    this._hasChildren = (event.target as HTMLSlotElement).assignedElements().length > 0;
+    this._hasChildren =
+      (event.target as HTMLSlotElement).assignedElements().length > 0;
   };
 
   #doExpand(): void {
-    this.dispatchEvent(new CustomEvent('bx-expand', { bubbles: true, composed: true }));
+    this.dispatchEvent(
+      new CustomEvent('bx-expand', { bubbles: true, composed: true }),
+    );
     this.expanded = true;
-    this.dispatchEvent(new CustomEvent('bx-after-expand', { bubbles: true, composed: true }));
+    this.dispatchEvent(
+      new CustomEvent('bx-after-expand', { bubbles: true, composed: true }),
+    );
   }
 
   #doCollapse(): void {
-    this.dispatchEvent(new CustomEvent('bx-collapse', { bubbles: true, composed: true }));
+    this.dispatchEvent(
+      new CustomEvent('bx-collapse', { bubbles: true, composed: true }),
+    );
     this.expanded = false;
-    this.dispatchEvent(new CustomEvent('bx-after-collapse', { bubbles: true, composed: true }));
+    this.dispatchEvent(
+      new CustomEvent('bx-after-collapse', { bubbles: true, composed: true }),
+    );
   }
 
   #toggleExpanded(): void {
@@ -353,7 +362,11 @@ export class BxTreeItem extends BixElement {
       this.lazyError = false;
       this.loading = true;
       const cancelled = !this.dispatchEvent(
-        new CustomEvent('bx-lazy-load', { bubbles: true, composed: true, cancelable: true }),
+        new CustomEvent('bx-lazy-load', {
+          bubbles: true,
+          composed: true,
+          cancelable: true,
+        }),
       );
       if (cancelled) this.loading = false;
       return;
@@ -418,41 +431,55 @@ export class BxTreeItem extends BixElement {
           @click=${this.#handleExpandClick}
           @keydown=${this.#handleExpandKeydown}
         >
-          ${showSpinner
-            ? html`<svg class="spinner" part="spinner" viewBox="0 0 32 32" aria-hidden="true">
-                <circle cx="16" cy="16" r="14"></circle>
-              </svg>`
-            : this.expanded
-              ? html`<slot name="collapse-icon"
-                  >${svg`<svg viewBox="0 0 256 256"><path d=${CHEVRON_RIGHT_PATH}></path></svg>`}</slot
-                >`
-              : html`<slot name="expand-icon"
-                  >${svg`<svg viewBox="0 0 256 256"><path d=${CHEVRON_RIGHT_PATH}></path></svg>`}</slot
-                >`}
+          ${
+            showSpinner
+              ? html`<svg
+                  class="spinner"
+                  part="spinner"
+                  viewBox="0 0 32 32"
+                  aria-hidden="true"
+                >
+                  <circle cx="16" cy="16" r="14"></circle>
+                </svg>`
+              : this.expanded
+                ? html`<slot name="collapse-icon"
+                    >${svg`<svg viewBox="0 0 256 256"><path d=${CHEVRON_RIGHT_PATH}></path></svg>`}</slot
+                  >`
+                : html`<slot name="expand-icon"
+                    >${svg`<svg viewBox="0 0 256 256"><path d=${CHEVRON_RIGHT_PATH}></path></svg>`}</slot
+                  >`
+          }
         </button>
-        ${this.withCheckbox
-          ? html`<span
-              class="checkbox"
-              part="checkbox"
-              role="checkbox"
-              tabindex=${this.roving ? -1 : this.disabled ? -1 : 0}
-              aria-checked=${this.indeterminate ? 'mixed' : this.selected}
-              aria-disabled=${this.disabled}
-              aria-label="Select"
-              @click=${this.#handleCheckboxClick}
-              @keydown=${this.#handleCheckboxKeydown}
-            >
-              ${this.indeterminate
-                ? svg`<svg viewBox="0 0 256 256"><path d=${MINUS_PATH}></path></svg>`
-                : this.selected
-                  ? svg`<svg viewBox="48 76 204 155"><path d=${CHECK_PATH}></path></svg>`
-                  : nothing}
-            </span>`
-          : nothing}
+        ${
+          this.withCheckbox
+            ? html`<span
+                class="checkbox"
+                part="checkbox"
+                role="checkbox"
+                tabindex=${this.roving ? -1 : this.disabled ? -1 : 0}
+                aria-checked=${this.indeterminate ? 'mixed' : this.selected}
+                aria-disabled=${this.disabled}
+                aria-label="Select"
+                @click=${this.#handleCheckboxClick}
+                @keydown=${this.#handleCheckboxKeydown}
+              >
+                ${
+                  this.indeterminate
+                    ? svg`<svg viewBox="0 0 256 256"><path d=${MINUS_PATH}></path></svg>`
+                    : this.selected
+                      ? svg`<svg viewBox="48 76 204 155"><path d=${CHECK_PATH}></path></svg>`
+                      : nothing
+                }
+              </span>`
+            : nothing
+        }
         <span class="label" part="label"><slot></slot></span>
       </div>
       <div class="children" part="children" ?hidden=${!this.expanded}>
-        <slot name="children" @slotchange=${this.#handleChildrenSlotChange}></slot>
+        <slot
+          name="children"
+          @slotchange=${this.#handleChildrenSlotChange}
+        ></slot>
       </div>
     `;
   }

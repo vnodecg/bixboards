@@ -3,7 +3,9 @@ import type { BxTree } from './tree.ts';
 import type { BxTreeItem } from '../tree-item/tree-item.ts';
 import './index.ts';
 
-async function fixtureTree(selection: 'single' | 'multiple' | 'leaf' = 'single') {
+async function fixtureTree(
+  selection: 'single' | 'multiple' | 'leaf' = 'single',
+) {
   return fixture<BxTree>(html`
     <bx-tree selection=${selection}>
       <bx-tree-item with-checkbox>
@@ -19,7 +21,9 @@ async function fixtureTree(selection: 'single' | 'multiple' | 'leaf' = 'single')
 describe('bx-tree', () => {
   it('sets role=tree and role=treeitem with aria-level/setsize/posinset', async () => {
     const el = await fixtureTree();
-    expect(el.shadowRoot!.querySelector('.base')!.getAttribute('role')).to.equal('tree');
+    expect(
+      el.shadowRoot!.querySelector('.base')!.getAttribute('role'),
+    ).to.equal('tree');
 
     const [fruit, apple, , vegetable] = el.querySelectorAll(
       'bx-tree-item',
@@ -60,7 +64,9 @@ describe('bx-tree', () => {
 
   it('multiple selection: partially selecting children makes the parent indeterminate', async () => {
     const el = await fixtureTree('multiple');
-    const [fruit, apple] = el.querySelectorAll('bx-tree-item') as unknown as BxTreeItem[];
+    const [fruit, apple] = el.querySelectorAll(
+      'bx-tree-item',
+    ) as unknown as BxTreeItem[];
     apple!.shadowRoot!.querySelector<HTMLElement>('[role="checkbox"]')!.click();
     await el.updateComplete;
     expect(fruit!.indeterminate).to.be.true;
@@ -69,7 +75,9 @@ describe('bx-tree', () => {
 
   it('fires bx-selection-change with the selected items', async () => {
     const el = await fixtureTree('single');
-    const [fruit] = el.querySelectorAll('bx-tree-item') as unknown as BxTreeItem[];
+    const [fruit] = el.querySelectorAll(
+      'bx-tree-item',
+    ) as unknown as BxTreeItem[];
     const changePromise = oneEvent(el, 'bx-selection-change');
     fruit!.click();
     const event = (await changePromise) as CustomEvent;
@@ -78,7 +86,9 @@ describe('bx-tree', () => {
 
   it('leaf selection: clicking a parent expands instead of selecting', async () => {
     const el = await fixtureTree('leaf');
-    const [fruit, apple] = el.querySelectorAll('bx-tree-item') as unknown as BxTreeItem[];
+    const [fruit, apple] = el.querySelectorAll(
+      'bx-tree-item',
+    ) as unknown as BxTreeItem[];
     fruit!.click();
     await el.updateComplete;
     expect(fruit!.selected).to.be.false;
@@ -96,25 +106,41 @@ describe('bx-tree', () => {
     ) as unknown as BxTreeItem[];
     fruit!.focus();
     fruit!.dispatchEvent(
-      new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true, composed: true }),
+      new KeyboardEvent('keydown', {
+        key: 'ArrowDown',
+        bubbles: true,
+        composed: true,
+      }),
     );
     // Fruit is collapsed, so its children aren't visible: next visible item is Vegetable.
-    expect(document.activeElement === vegetable || vegetable!.matches(':focus-within')).to.be
-      .true;
+    expect(
+      document.activeElement === vegetable ||
+        vegetable!.matches(':focus-within'),
+    ).to.be.true;
   });
 
   it('ArrowRight expands a collapsed parent; ArrowLeft collapses it', async () => {
     const el = await fixtureTree('single');
-    const [fruit] = el.querySelectorAll('bx-tree-item') as unknown as BxTreeItem[];
+    const [fruit] = el.querySelectorAll(
+      'bx-tree-item',
+    ) as unknown as BxTreeItem[];
     fruit!.focus();
     fruit!.dispatchEvent(
-      new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, composed: true }),
+      new KeyboardEvent('keydown', {
+        key: 'ArrowRight',
+        bubbles: true,
+        composed: true,
+      }),
     );
     await fruit!.updateComplete;
     expect(fruit!.expanded).to.be.true;
 
     fruit!.dispatchEvent(
-      new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true, composed: true }),
+      new KeyboardEvent('keydown', {
+        key: 'ArrowLeft',
+        bubbles: true,
+        composed: true,
+      }),
     );
     await fruit!.updateComplete;
     expect(fruit!.expanded).to.be.false;
@@ -122,7 +148,9 @@ describe('bx-tree', () => {
 
   it('roving tabindex: only one item is a tab stop', async () => {
     const el = await fixtureTree('single');
-    const items = [...el.querySelectorAll('bx-tree-item')] as unknown as BxTreeItem[];
+    const items = [
+      ...el.querySelectorAll('bx-tree-item'),
+    ] as unknown as BxTreeItem[];
     const tabbable = items.filter((item) => item.tabIndex === 0);
     expect(tabbable.length).to.equal(1);
   });

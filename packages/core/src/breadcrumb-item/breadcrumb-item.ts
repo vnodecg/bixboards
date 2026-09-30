@@ -117,25 +117,29 @@ export class BxBreadcrumbItem extends BixElement {
   }
 
   protected override render() {
-    const label = html`<slot name="start" part="prefix"></slot><slot></slot><slot
-        name="end"
-        part="suffix"
-      ></slot>`;
+    const label = html`<slot name="start" part="prefix"></slot><slot></slot
+      ><slot name="end" part="suffix"></slot>`;
 
     return html`
-      ${this.href
-        ? html`<a
-            class="label"
-            part="label"
-            href=${this.href}
-            target=${this.target || nothing}
-            rel=${this.rel || nothing}
-            aria-current=${this.current ? 'page' : nothing}
-            >${label}</a
-          >`
-        : this.current
-          ? html`<span class="label" part="label" aria-current="page">${label}</span>`
-          : html`<button class="label" part="label" type="button">${label}</button>`}
+      ${
+        this.href
+          ? html`<a
+              class="label"
+              part="label"
+              href=${this.href}
+              target=${this.target || nothing}
+              rel=${this.rel || nothing}
+              aria-current=${this.current ? 'page' : nothing}
+              >${label}</a
+            >`
+          : this.current
+            ? html`<span class="label" part="label" aria-current="page"
+                >${label}</span
+              >`
+            : html`<button class="label" part="label" type="button">
+                ${label}
+              </button>`
+      }
       <span class="separator" part="separator" aria-hidden="true">
         <slot name="separator">/</slot>
       </span>

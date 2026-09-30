@@ -17,7 +17,10 @@ const INITIAL_REPEAT_DELAY_MS = 400;
 const MIN_REPEAT_DELAY_MS = 40;
 const REPEAT_ACCELERATION = 0.85;
 
-function localeParts(locale: string | undefined): { decimal: string; group: string } {
+function localeParts(locale: string | undefined): {
+  decimal: string;
+  group: string;
+} {
   const parts = new Intl.NumberFormat(locale).formatToParts(12345.6);
   return {
     decimal: parts.find((part) => part.type === 'decimal')?.value ?? '.',
@@ -29,12 +32,7 @@ function localeParts(locale: string | undefined): { decimal: string; group: stri
  *  decimal separator to `.`, then a plain `Number()`. Returns `NaN` for unparseable input. */
 function parseLocaleNumber(raw: string, locale: string | undefined): number {
   const { decimal, group } = localeParts(locale);
-  const normalized = raw
-    .trim()
-    .split(group)
-    .join('')
-    .split(decimal)
-    .join('.');
+  const normalized = raw.trim().split(group).join('').split(decimal).join('.');
   return normalized === '' ? Number.NaN : Number(normalized);
 }
 
@@ -52,7 +50,11 @@ function applyStep(current: number, step: number, direction: 1 | -1): number {
   return Math.round((current + direction * step) * factor) / factor;
 }
 
-function clamp(value: number, min: number | undefined, max: number | undefined): number {
+function clamp(
+  value: number,
+  min: number | undefined,
+  max: number | undefined,
+): number {
   let result = value;
   if (min !== undefined) result = Math.max(result, min);
   if (max !== undefined) result = Math.min(result, max);
@@ -263,7 +265,11 @@ export class BxNumberInput extends FormAssociatedMixin(BixElement) {
     step: { type: Number },
     locale: { type: String },
     format: { attribute: false },
-    withoutSteppers: { type: Boolean, reflect: true, attribute: 'without-steppers' },
+    withoutSteppers: {
+      type: Boolean,
+      reflect: true,
+      attribute: 'without-steppers',
+    },
     wheel: { type: Boolean },
     _editing: { state: true },
   };
@@ -333,7 +339,8 @@ export class BxNumberInput extends FormAssociatedMixin(BixElement) {
       this.internals.setFormValue(this.value);
       this.#syncValidity();
     }
-    if (changed.has('required') || changed.has('min') || changed.has('max')) this.#syncValidity();
+    if (changed.has('required') || changed.has('min') || changed.has('max'))
+      this.#syncValidity();
   }
 
   get #numericValue(): number {
@@ -351,8 +358,16 @@ export class BxNumberInput extends FormAssociatedMixin(BixElement) {
   #syncValidity(): void {
     const numeric = this.#numericValue;
     const missing = this.required && this.value === '';
-    const rangeUnderflow = !missing && this.min !== undefined && !Number.isNaN(numeric) && numeric < this.min;
-    const rangeOverflow = !missing && this.max !== undefined && !Number.isNaN(numeric) && numeric > this.max;
+    const rangeUnderflow =
+      !missing &&
+      this.min !== undefined &&
+      !Number.isNaN(numeric) &&
+      numeric < this.min;
+    const rangeOverflow =
+      !missing &&
+      this.max !== undefined &&
+      !Number.isNaN(numeric) &&
+      numeric > this.max;
     const badInput = !missing && this.value !== '' && Number.isNaN(numeric);
 
     this.internals.setValidity(
@@ -400,11 +415,16 @@ export class BxNumberInput extends FormAssociatedMixin(BixElement) {
     const changed = next !== this.value;
     this.value = next;
     this.#hasInteracted = true;
-    if (changed) this.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
+    if (changed)
+      this.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
     if (fireChange) {
-      this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+      this.dispatchEvent(
+        new Event('change', { bubbles: true, composed: true }),
+      );
       if (!this.internals.checkValidity())
-        this.dispatchEvent(new CustomEvent('bx-invalid', { bubbles: true, composed: true }));
+        this.dispatchEvent(
+          new CustomEvent('bx-invalid', { bubbles: true, composed: true }),
+        );
     }
   }
 
@@ -415,7 +435,10 @@ export class BxNumberInput extends FormAssociatedMixin(BixElement) {
   #handleBlur = (): void => {
     this._editing = false;
     const raw = this.#inputEl.value;
-    this.#commit(raw === '' ? Number.NaN : parseLocaleNumber(raw, this.locale), true);
+    this.#commit(
+      raw === '' ? Number.NaN : parseLocaleNumber(raw, this.locale),
+      true,
+    );
   };
 
   #handleInput = (event: Event): void => {
@@ -473,7 +496,10 @@ export class BxNumberInput extends FormAssociatedMixin(BixElement) {
       this.#commit(applyStep(this.#numericValue || 0, this.step * 10, 1), true);
     } else if (event.key === 'PageDown') {
       event.preventDefault();
-      this.#commit(applyStep(this.#numericValue || 0, this.step * 10, -1), true);
+      this.#commit(
+        applyStep(this.#numericValue || 0, this.step * 10, -1),
+        true,
+      );
     }
   };
 
@@ -502,8 +528,10 @@ export class BxNumberInput extends FormAssociatedMixin(BixElement) {
     const showLabel = this.withLabel || this.label.length > 0;
     const showHint = this.withHint || this.hint.length > 0;
     const numeric = this.#numericValue;
-    const atMin = this.min !== undefined && !Number.isNaN(numeric) && numeric <= this.min;
-    const atMax = this.max !== undefined && !Number.isNaN(numeric) && numeric >= this.max;
+    const atMin =
+      this.min !== undefined && !Number.isNaN(numeric) && numeric <= this.min;
+    const atMax =
+      this.max !== undefined && !Number.isNaN(numeric) && numeric >= this.max;
 
     return html`
       <div class="form-control" part="form-control">
@@ -553,7 +581,8 @@ export class BxNumberInput extends FormAssociatedMixin(BixElement) {
                     @pointerdown=${(event: PointerEvent) => this.#handleStepperPointerDown(1, event)}
                   >
                     <slot name="increment-icon"
-                      ><svg viewBox="0 0 256 256"><path d=${PLUS_PATH}></path></svg
+                      ><svg viewBox="0 0 256 256">
+                        <path d=${PLUS_PATH}></path></svg
                     ></slot>
                   </button>
                   <button
@@ -566,7 +595,8 @@ export class BxNumberInput extends FormAssociatedMixin(BixElement) {
                     @pointerdown=${(event: PointerEvent) => this.#handleStepperPointerDown(-1, event)}
                   >
                     <slot name="decrement-icon"
-                      ><svg viewBox="0 0 256 256"><path d=${MINUS_PATH}></path></svg
+                      ><svg viewBox="0 0 256 256">
+                        <path d=${MINUS_PATH}></path></svg
                     ></slot>
                   </button>
                 </span>`

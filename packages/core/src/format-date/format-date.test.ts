@@ -50,9 +50,7 @@ describe('bx-format-date', () => {
       ></bx-format-date>`,
     );
     await el.updateComplete;
-    expect(el.shadowRoot!.querySelector('time')!.textContent).to.equal(
-      '13:05',
-    );
+    expect(el.shadowRoot!.querySelector('time')!.textContent).to.equal('13:05');
   });
 
   it('renders empty and warns on an invalid date', async () => {
@@ -69,9 +67,9 @@ describe('bx-format-date', () => {
       html`<bx-format-date></bx-format-date>`,
     );
     await el.updateComplete;
-    const datetime = el.shadowRoot!.querySelector('time')!.getAttribute(
-      'datetime',
-    )!;
+    const datetime = el
+      .shadowRoot!.querySelector('time')!
+      .getAttribute('datetime')!;
     expect(new Date(datetime).getTime()).to.be.closeTo(before, 5000);
   });
 

@@ -4,7 +4,9 @@ import './index.ts';
 
 describe('bx-dropdown-item', () => {
   it('registers the tag with role=menuitem by default', async () => {
-    const el = await fixture<BxDropdownItem>(html`<bx-dropdown-item>Item</bx-dropdown-item>`);
+    const el = await fixture<BxDropdownItem>(
+      html`<bx-dropdown-item>Item</bx-dropdown-item>`,
+    );
     expect(el).to.be.instanceOf(customElements.get('bx-dropdown-item')!);
     expect(el.shadowRoot!.querySelector('[role="menuitem"]')).to.exist;
   });
@@ -67,7 +69,9 @@ describe('bx-dropdown-item', () => {
       </div>
     `);
     const item = parent.querySelector('bx-dropdown-item') as BxDropdownItem;
-    expect(item.shadowRoot!.querySelector('.base')!.getAttribute('tabindex')).to.equal('0');
+    expect(
+      item.shadowRoot!.querySelector('.base')!.getAttribute('tabindex'),
+    ).to.equal('0');
   });
 
   it('sets aria-haspopup when a submenu is assigned', async () => {
@@ -78,7 +82,9 @@ describe('bx-dropdown-item', () => {
       </bx-dropdown-item>
     `);
     await el.updateComplete;
-    expect(el.shadowRoot!.querySelector('.base')!.getAttribute('aria-haspopup')).to.equal('menu');
+    expect(
+      el.shadowRoot!.querySelector('.base')!.getAttribute('aria-haspopup'),
+    ).to.equal('menu');
   });
 
   it('has no axe violations (role=menuitem requires a menu ancestor per the ARIA spec)', async () => {

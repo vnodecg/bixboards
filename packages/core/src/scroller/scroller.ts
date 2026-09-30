@@ -234,22 +234,24 @@ export class BxScroller extends BixElement {
       >
         <slot @slotchange=${this.#handleSlotChange}></slot>
       </div>
-      ${this.withoutShadow
-        ? nothing
-        : html`
-            <div
-              class="shadow shadow-start ${this._scrollable && !this._atStart
-                ? 'visible'
-                : ''}"
-              aria-hidden="true"
-            ></div>
-            <div
-              class="shadow shadow-end ${this._scrollable && !this._atEnd
-                ? 'visible'
-                : ''}"
-              aria-hidden="true"
-            ></div>
-          `}
+      ${
+        this.withoutShadow
+          ? nothing
+          : html`
+              <div
+                class="shadow shadow-start ${
+                  this._scrollable && !this._atStart ? 'visible' : ''
+                }"
+                aria-hidden="true"
+              ></div>
+              <div
+                class="shadow shadow-end ${
+                  this._scrollable && !this._atEnd ? 'visible' : ''
+                }"
+                aria-hidden="true"
+              ></div>
+            `
+      }
     `;
   }
 }

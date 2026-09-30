@@ -4,19 +4,25 @@ import './index.ts';
 
 describe('bx-zoomable-frame', () => {
   it('registers the tag with zoom 1 by default', async () => {
-    const el = await fixture<BxZoomableFrame>(html`<bx-zoomable-frame></bx-zoomable-frame>`);
+    const el = await fixture<BxZoomableFrame>(
+      html`<bx-zoomable-frame></bx-zoomable-frame>`,
+    );
     expect(el).to.be.instanceOf(customElements.get('bx-zoomable-frame')!);
     expect(el.zoom).to.equal(1);
   });
 
   it('defaults the iframe sandbox to the empty (most restrictive) value', async () => {
-    const el = await fixture<BxZoomableFrame>(html`<bx-zoomable-frame></bx-zoomable-frame>`);
+    const el = await fixture<BxZoomableFrame>(
+      html`<bx-zoomable-frame></bx-zoomable-frame>`,
+    );
     const iframe = el.shadowRoot!.querySelector('iframe')!;
     expect(iframe.getAttribute('sandbox')).to.equal('');
   });
 
   it('gives the iframe a title even without a label', async () => {
-    const el = await fixture<BxZoomableFrame>(html`<bx-zoomable-frame></bx-zoomable-frame>`);
+    const el = await fixture<BxZoomableFrame>(
+      html`<bx-zoomable-frame></bx-zoomable-frame>`,
+    );
     const iframe = el.shadowRoot!.querySelector('iframe')!;
     expect(iframe.getAttribute('title')).to.not.be.empty;
   });
@@ -41,21 +47,29 @@ describe('bx-zoomable-frame', () => {
     const el = await fixture<BxZoomableFrame>(
       html`<bx-zoomable-frame zoom-levels="0.5 1 2"></bx-zoomable-frame>`,
     );
-    const zoomInButton = el.shadowRoot!.querySelector<HTMLButtonElement>('.zoom-in-button')!;
+    const zoomInButton =
+      el.shadowRoot!.querySelector<HTMLButtonElement>('.zoom-in-button')!;
     zoomInButton.click();
     await el.updateComplete;
     expect(el.zoom).to.equal(2);
-    expect(el.shadowRoot!.querySelector('.zoom-label')!.textContent).to.equal('200%');
+    expect(el.shadowRoot!.querySelector('.zoom-label')!.textContent).to.equal(
+      '200%',
+    );
   });
 
   it('toggles the collapsed menu trigger and closes on Escape', async () => {
-    const el = await fixture<BxZoomableFrame>(html`<bx-zoomable-frame></bx-zoomable-frame>`);
-    const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('.menu-trigger')!;
+    const el = await fixture<BxZoomableFrame>(
+      html`<bx-zoomable-frame></bx-zoomable-frame>`,
+    );
+    const trigger =
+      el.shadowRoot!.querySelector<HTMLButtonElement>('.menu-trigger')!;
     trigger.click();
     await el.updateComplete;
     expect(trigger.getAttribute('aria-expanded')).to.equal('true');
 
-    el.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    el.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }),
+    );
     await el.updateComplete;
     expect(trigger.getAttribute('aria-expanded')).to.equal('false');
   });

@@ -241,7 +241,9 @@ export class BxTabGroup extends BixElement {
   }
 
   #panels(): BxTabPanel[] {
-    return [...this.querySelectorAll('bx-tab-panel')] as unknown as BxTabPanel[];
+    return [
+      ...this.querySelectorAll('bx-tab-panel'),
+    ] as unknown as BxTabPanel[];
   }
 
   protected override willUpdate(changed: PropertyValues<this>): void {
@@ -258,7 +260,8 @@ export class BxTabGroup extends BixElement {
       // than a plain `aria-controls`/`aria-labelledby` ID string, which can't resolve here.
       const panel = panels.find((candidate) => candidate.name === tab.panel);
       tab.controlsElement = panel ?? null;
-      if (panel) panel.ariaLabelledByElements = tab.tabElement ? [tab.tabElement] : null;
+      if (panel)
+        panel.ariaLabelledByElements = tab.tabElement ? [tab.tabElement] : null;
     }
     for (const panel of panels) panel.active = panel.name === this.active;
     this.#syncRovingTabindex();

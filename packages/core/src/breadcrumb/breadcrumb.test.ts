@@ -22,8 +22,11 @@ describe('bx-breadcrumb', () => {
         <bx-breadcrumb-item>B</bx-breadcrumb-item>
       </bx-breadcrumb>
     `);
-    const items = [...el.querySelectorAll('bx-breadcrumb-item')] as BxBreadcrumbItem[];
-    for (const item of items) expect(item.getAttribute('role')).to.equal('listitem');
+    const items = [
+      ...el.querySelectorAll('bx-breadcrumb-item'),
+    ] as BxBreadcrumbItem[];
+    for (const item of items)
+      expect(item.getAttribute('role')).to.equal('listitem');
     expect(items[0]!.current).to.be.false;
     expect(items[1]!.current).to.be.false;
     expect(items[2]!.current).to.be.true;
@@ -37,7 +40,9 @@ describe('bx-breadcrumb', () => {
         <bx-breadcrumb-item>C</bx-breadcrumb-item>
       </bx-breadcrumb>
     `);
-    const items = [...el.querySelectorAll('bx-breadcrumb-item')] as BxBreadcrumbItem[];
+    const items = [
+      ...el.querySelectorAll('bx-breadcrumb-item'),
+    ] as BxBreadcrumbItem[];
     expect(items.every((item) => !item.hidden)).to.be.true;
     expect(el.querySelector('.bx-breadcrumb-ellipsis')).to.not.exist;
   });
@@ -57,10 +62,14 @@ describe('bx-breadcrumb', () => {
     const el = container.querySelector('bx-breadcrumb') as BxBreadcrumb;
     await el.updateComplete;
 
-    const ellipsis = el.querySelector('.bx-breadcrumb-ellipsis') as HTMLButtonElement;
+    const ellipsis = el.querySelector(
+      '.bx-breadcrumb-ellipsis',
+    ) as HTMLButtonElement;
     expect(ellipsis).to.exist;
 
-    const items = [...el.querySelectorAll('bx-breadcrumb-item')] as BxBreadcrumbItem[];
+    const items = [
+      ...el.querySelectorAll('bx-breadcrumb-item'),
+    ] as BxBreadcrumbItem[];
     expect(items[0]!.hidden).to.be.false;
     expect(items[items.length - 1]!.hidden).to.be.false;
     expect(items.some((item) => item.hidden)).to.be.true;
@@ -81,10 +90,14 @@ describe('bx-breadcrumb', () => {
     const el = container.querySelector('bx-breadcrumb') as BxBreadcrumb;
     await el.updateComplete;
 
-    const ellipsis = el.querySelector('.bx-breadcrumb-ellipsis') as HTMLButtonElement;
+    const ellipsis = el.querySelector(
+      '.bx-breadcrumb-ellipsis',
+    ) as HTMLButtonElement;
     ellipsis.click();
 
-    const items = [...el.querySelectorAll('bx-breadcrumb-item')] as BxBreadcrumbItem[];
+    const items = [
+      ...el.querySelectorAll('bx-breadcrumb-item'),
+    ] as BxBreadcrumbItem[];
     expect(items.every((item) => !item.hidden)).to.be.true;
     expect(el.querySelector('.bx-breadcrumb-ellipsis')).to.not.exist;
   });

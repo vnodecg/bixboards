@@ -59,9 +59,10 @@ describe('bx-details', () => {
         <bx-details name="group" summary="B">B</bx-details>
       </div>
     `);
-    const [a, b] = Array.from(
-      wrapper.querySelectorAll('bx-details'),
-    ) as BxDetails[];
+    const [a, b] = Array.from(wrapper.querySelectorAll('bx-details')) as [
+      BxDetails,
+      BxDetails,
+    ];
     expect(a.open).to.be.true;
 
     b.show();
@@ -80,8 +81,7 @@ describe('bx-details', () => {
 
     el.show();
     await el.updateComplete;
-    expect(el.shadowRoot!.querySelector('.content slot:not([name])')).to
-      .exist;
+    expect(el.shadowRoot!.querySelector('.content slot:not([name])')).to.exist;
   });
 
   it('swaps between expand-icon and collapse-icon slots based on open state', async () => {
@@ -94,10 +94,8 @@ describe('bx-details', () => {
 
     el.show();
     await el.updateComplete;
-    expect(el.shadowRoot!.querySelector('slot[name="collapse-icon"]')).to
-      .exist;
-    expect(el.shadowRoot!.querySelector('slot[name="expand-icon"]')).to.be
-      .null;
+    expect(el.shadowRoot!.querySelector('slot[name="collapse-icon"]')).to.exist;
+    expect(el.shadowRoot!.querySelector('slot[name="expand-icon"]')).to.be.null;
   });
 
   it('has no axe violations, closed and open', async () => {

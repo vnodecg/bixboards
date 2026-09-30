@@ -25,7 +25,8 @@ function updateGroup(parent: Element): void {
   const set = groups.get(parent);
   if (!set) return;
   const reserve = [...set].some((item) => item.type === 'checkbox');
-  for (const item of set) item.toggleAttribute('data-reserve-checkmark', reserve);
+  for (const item of set)
+    item.toggleAttribute('data-reserve-checkmark', reserve);
 }
 
 let nextId = 0;
@@ -232,7 +233,8 @@ export class BxDropdownItem extends BixElement {
   }
 
   #handleSubmenuSlotChange = (event: Event): void => {
-    this.#hasSubmenu = (event.target as HTMLSlotElement).assignedElements().length > 0;
+    this.#hasSubmenu =
+      (event.target as HTMLSlotElement).assignedElements().length > 0;
     this.requestUpdate();
   };
 
@@ -276,18 +278,24 @@ export class BxDropdownItem extends BixElement {
         aria-labelledby=${this.#labelId}
       >
         <span class="checkmark" part="checkmark">
-          ${this.type === 'checkbox' && this.checked
-            ? svg`<svg viewBox="48 76 204 155"><path d=${CHECK_PATH}></path></svg>`
-            : nothing}
+          ${
+            this.type === 'checkbox' && this.checked
+              ? svg`<svg viewBox="48 76 204 155"><path d=${CHECK_PATH}></path></svg>`
+              : nothing
+          }
         </span>
         <span class="icon" part="icon"><slot name="icon"></slot></span>
-        <span class="label" part="label" id=${this.#labelId}><slot></slot></span>
+        <span class="label" part="label" id=${this.#labelId}
+          ><slot></slot
+        ></span>
         <span class="details" part="details"><slot name="details"></slot></span>
-        ${this.#hasSubmenu
-          ? html`<span class="submenu-icon" part="submenu-icon">
-              ${svg`<svg viewBox="0 0 256 256"><path d=${CHEVRON_RIGHT_PATH}></path></svg>`}
-            </span>`
-          : nothing}
+        ${
+          this.#hasSubmenu
+            ? html`<span class="submenu-icon" part="submenu-icon">
+                ${svg`<svg viewBox="0 0 256 256"><path d=${CHEVRON_RIGHT_PATH}></path></svg>`}
+              </span>`
+            : nothing
+        }
       </div>
       <slot name="submenu" @slotchange=${this.#handleSubmenuSlotChange}></slot>
     `;

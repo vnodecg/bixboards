@@ -26,17 +26,27 @@ const meta = {
     <bx-tree selection=${args.selection} style="max-inline-size: 320px">
       <bx-tree-item expanded ?with-checkbox=${args.selection === 'multiple'}>
         Documents
-        <bx-tree-item slot="children" ?with-checkbox=${args.selection === 'multiple'}
+        <bx-tree-item
+          slot="children"
+          ?with-checkbox=${args.selection === 'multiple'}
           >Resume.pdf</bx-tree-item
         >
-        <bx-tree-item slot="children" ?with-checkbox=${args.selection === 'multiple'} expanded>
+        <bx-tree-item
+          slot="children"
+          ?with-checkbox=${args.selection === 'multiple'}
+          expanded
+        >
           Projects
-          <bx-tree-item slot="children" ?with-checkbox=${args.selection === 'multiple'}
+          <bx-tree-item
+            slot="children"
+            ?with-checkbox=${args.selection === 'multiple'}
             >bixant</bx-tree-item
           >
         </bx-tree-item>
       </bx-tree-item>
-      <bx-tree-item ?with-checkbox=${args.selection === 'multiple'}>Downloads</bx-tree-item>
+      <bx-tree-item ?with-checkbox=${args.selection === 'multiple'}
+        >Downloads</bx-tree-item
+      >
     </bx-tree>
   `,
 } satisfies Meta<Args>;

@@ -119,7 +119,9 @@ export const Photos: Story = {
     >
       ${[1, 2, 3].map(
         (i) => html`
-          <bx-carousel-item style="inline-size: 100%; aspect-ratio: 16/9; border-radius: var(--bx-radius-m); overflow: hidden">
+          <bx-carousel-item
+            style="inline-size: 100%; aspect-ratio: 16/9; border-radius: var(--bx-radius-m); overflow: hidden"
+          >
             <img
               src="https://picsum.photos/seed/bixant-carousel-${i}/800/450"
               alt="Photo ${i}"

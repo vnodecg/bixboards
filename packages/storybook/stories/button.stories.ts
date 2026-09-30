@@ -82,7 +82,8 @@ export const Appearances: Story = {
   render: () => html`
     <div style="display: flex; gap: 0.5rem; flex-wrap: wrap">
       ${(['accent', 'filled', 'outlined', 'plain'] as const).map(
-        (appearance) => html`<bx-button appearance=${appearance}>${appearance}</bx-button>`,
+        (appearance) =>
+          html`<bx-button appearance=${appearance}>${appearance}</bx-button>`,
       )}
     </div>
   `,
@@ -99,10 +100,14 @@ export const Disabled: Story = {
 
 export const LinkMode: Story = {
   name: 'Link mode',
-  render: () => html`<bx-button href="https://example.com" target="_blank">Open docs</bx-button>`,
+  render: () =>
+    html`<bx-button href="https://example.com" target="_blank"
+      >Open docs</bx-button
+    >`,
 };
 
 export const IconOnly: Story = {
   name: 'Icon-only (needs aria-label)',
-  render: () => html`<bx-button aria-label="Close" appearance="plain">✕</bx-button>`,
+  render: () =>
+    html`<bx-button aria-label="Close" appearance="plain">✕</bx-button>`,
 };

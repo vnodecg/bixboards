@@ -12,9 +12,7 @@ describe('bx-option', () => {
 
   it('reflects selected/disabled to attributes and ARIA', async () => {
     const el = await fixture<BxOption>(
-      html`<bx-option selected disabled value="a" label="A"
-        >A</bx-option
-      >`,
+      html`<bx-option selected disabled value="a" label="A">A</bx-option>`,
     );
     expect(el.hasAttribute('selected')).to.be.true;
     expect(el.hasAttribute('disabled')).to.be.true;

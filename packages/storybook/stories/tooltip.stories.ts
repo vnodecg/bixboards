@@ -20,7 +20,10 @@ const meta = {
     },
   },
   argTypes: {
-    placement: { control: 'select', options: ['top', 'bottom', 'left', 'right'] },
+    placement: {
+      control: 'select',
+      options: ['top', 'bottom', 'left', 'right'],
+    },
     trigger: { control: 'radio', options: ['hover focus', 'click', 'manual'] },
     content: { control: 'text' },
   },
@@ -31,7 +34,10 @@ const meta = {
   },
   render: (args) => html`
     <bx-button id="story-anchor">Hover or focus me</bx-button>
-    <bx-tooltip for="story-anchor" placement=${args.placement} trigger=${args.trigger}
+    <bx-tooltip
+      for="story-anchor"
+      placement=${args.placement}
+      trigger=${args.trigger}
       >${args.content}</bx-tooltip
     >
   `,
@@ -60,6 +66,8 @@ export const DisabledAnchor: Story = {
   name: 'Anchored to a disabled bx-button',
   render: () => html`
     <bx-button id="disabled-anchor" disabled>Disabled</bx-button>
-    <bx-tooltip for="disabled-anchor">Still shows on hover (FR-BUTTON-06)</bx-tooltip>
+    <bx-tooltip for="disabled-anchor"
+      >Still shows on hover (FR-BUTTON-06)</bx-tooltip
+    >
   `,
 };

@@ -5,9 +5,15 @@ import './index.ts';
 async function threeSlides(): Promise<BxCarousel> {
   return fixture<BxCarousel>(html`
     <bx-carousel style="inline-size: 300px">
-      <bx-carousel-item style="inline-size: 100%; aspect-ratio: 16/9">1</bx-carousel-item>
-      <bx-carousel-item style="inline-size: 100%; aspect-ratio: 16/9">2</bx-carousel-item>
-      <bx-carousel-item style="inline-size: 100%; aspect-ratio: 16/9">3</bx-carousel-item>
+      <bx-carousel-item style="inline-size: 100%; aspect-ratio: 16/9"
+        >1</bx-carousel-item
+      >
+      <bx-carousel-item style="inline-size: 100%; aspect-ratio: 16/9"
+        >2</bx-carousel-item
+      >
+      <bx-carousel-item style="inline-size: 100%; aspect-ratio: 16/9"
+        >3</bx-carousel-item
+      >
     </bx-carousel>
   `);
 }
@@ -99,7 +105,12 @@ describe('bx-carousel', () => {
 
   it('has no axe violations', async () => {
     const el = await fixture<BxCarousel>(html`
-      <bx-carousel navigation pagination aria-label="Featured" style="inline-size: 300px">
+      <bx-carousel
+        navigation
+        pagination
+        aria-label="Featured"
+        style="inline-size: 300px"
+      >
         <bx-carousel-item style="inline-size: 100%">1</bx-carousel-item>
         <bx-carousel-item style="inline-size: 100%">2</bx-carousel-item>
       </bx-carousel>

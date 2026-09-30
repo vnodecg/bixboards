@@ -32,7 +32,9 @@ function alignment(placement: Placement): 'start' | 'end' | undefined {
 }
 
 function opposite(side: 'top' | 'bottom' | 'left' | 'right'): typeof side {
-  return { top: 'bottom', bottom: 'top', left: 'right', right: 'left' }[side] as typeof side;
+  return { top: 'bottom', bottom: 'top', left: 'right', right: 'left' }[
+    side
+  ] as typeof side;
 }
 
 interface Coords {
@@ -146,7 +148,10 @@ export class BxPopup extends BixElement {
     arrowPlacement: { type: String, attribute: 'arrow-placement' },
     arrowPadding: { type: Number, attribute: 'arrow-padding' },
     flip: { type: Boolean },
-    flipFallbackPlacements: { type: String, attribute: 'flip-fallback-placements' },
+    flipFallbackPlacements: {
+      type: String,
+      attribute: 'flip-fallback-placements',
+    },
     flipPadding: { type: Number, attribute: 'flip-padding' },
     shift: { type: Boolean },
     shiftPadding: { type: Number, attribute: 'shift-padding' },
@@ -203,12 +208,16 @@ export class BxPopup extends BixElement {
       capture: true,
       passive: true,
     });
-    window.addEventListener('resize', this.#handleViewportChange, { passive: true });
+    window.addEventListener('resize', this.#handleViewportChange, {
+      passive: true,
+    });
   }
 
   override disconnectedCallback(): void {
     super.disconnectedCallback();
-    window.removeEventListener('scroll', this.#handleViewportChange, { capture: true });
+    window.removeEventListener('scroll', this.#handleViewportChange, {
+      capture: true,
+    });
     window.removeEventListener('resize', this.#handleViewportChange);
     this.#teardownObservers();
     if (this.#rafId) cancelAnimationFrame(this.#rafId);
@@ -232,8 +241,15 @@ export class BxPopup extends BixElement {
 
   #setupObservers(): void {
     const anchorEl = this.#resolveAnchor();
-    if (anchorEl) this.#unobserveAnchorResize = observeResize(anchorEl, this.#handleViewportChange);
-    this.#unobservePopupResize = observeResize(this, this.#handleViewportChange);
+    if (anchorEl)
+      this.#unobserveAnchorResize = observeResize(
+        anchorEl,
+        this.#handleViewportChange,
+      );
+    this.#unobservePopupResize = observeResize(
+      this,
+      this.#handleViewportChange,
+    );
   }
 
   #handleViewportChange = (): void => {
@@ -247,13 +263,17 @@ export class BxPopup extends BixElement {
   #resolveAnchor(): Element | null {
     if (this.anchor instanceof Element) return this.anchor;
     if (typeof this.anchor === 'string')
-      return (this.getRootNode() as Document | ShadowRoot).getElementById(this.anchor);
+      return (this.getRootNode() as Document | ShadowRoot).getElementById(
+        this.anchor,
+      );
     return this.querySelector('[slot="anchor"]');
   }
 
   #fallbackPlacements(): Placement[] {
     if (this.flipFallbackPlacements)
-      return this.flipFallbackPlacements.split(',').map((p) => p.trim()) as Placement[];
+      return this.flipFallbackPlacements
+        .split(',')
+        .map((p) => p.trim()) as Placement[];
     const side = base(this.placement);
     const align = alignment(this.placement);
     const opp = opposite(side);
@@ -272,21 +292,33 @@ export class BxPopup extends BixElement {
     let top: number;
 
     if (side === 'top' || side === 'bottom') {
-      top = side === 'top' ? anchorRect.top - popupHeight - this.distance : anchorRect.bottom + this.distance;
+      top =
+        side === 'top'
+          ? anchorRect.top - popupHeight - this.distance
+          : anchorRect.bottom + this.distance;
       left =
         align === 'start'
           ? anchorRect.left + this.skidding
           : align === 'end'
             ? anchorRect.right - popupWidth - this.skidding
-            : anchorRect.left + anchorRect.width / 2 - popupWidth / 2 + this.skidding;
+            : anchorRect.left +
+              anchorRect.width / 2 -
+              popupWidth / 2 +
+              this.skidding;
     } else {
-      left = side === 'left' ? anchorRect.left - popupWidth - this.distance : anchorRect.right + this.distance;
+      left =
+        side === 'left'
+          ? anchorRect.left - popupWidth - this.distance
+          : anchorRect.right + this.distance;
       top =
         align === 'start'
           ? anchorRect.top + this.skidding
           : align === 'end'
             ? anchorRect.bottom - popupHeight - this.skidding
-            : anchorRect.top + anchorRect.height / 2 - popupHeight / 2 + this.skidding;
+            : anchorRect.top +
+              anchorRect.height / 2 -
+              popupHeight / 2 +
+              this.skidding;
     }
 
     const padding = this.flipPadding;
@@ -299,33 +331,64 @@ export class BxPopup extends BixElement {
     return { placement, left, top, fits };
   }
 
-  #applyShift(coords: Coords, popupWidth: number, popupHeight: number, placement: Placement): Coords {
+  #applyShift(
+    coords: Coords,
+    popupWidth: number,
+    popupHeight: number,
+    placement: Placement,
+  ): Coords {
     if (!this.shift) return coords;
-    const isVertical = base(placement) === 'top' || base(placement) === 'bottom';
+    const isVertical =
+      base(placement) === 'top' || base(placement) === 'bottom';
     const padding = this.shiftPadding;
     if (isVertical) {
       const maxLeft = innerWidth - popupWidth - padding;
-      return { ...coords, left: Math.min(Math.max(coords.left, padding), Math.max(padding, maxLeft)) };
+      return {
+        ...coords,
+        left: Math.min(
+          Math.max(coords.left, padding),
+          Math.max(padding, maxLeft),
+        ),
+      };
     }
     const maxTop = innerHeight - popupHeight - padding;
-    return { ...coords, top: Math.min(Math.max(coords.top, padding), Math.max(padding, maxTop)) };
+    return {
+      ...coords,
+      top: Math.min(Math.max(coords.top, padding), Math.max(padding, maxTop)),
+    };
   }
 
   #applyAutoSize(anchorRect: DOMRect, placement: Placement): void {
     if (!this.autoSize) return;
     const side = base(placement);
     const availableWidth =
-      side === 'left' ? anchorRect.left - this.distance : innerWidth - anchorRect.right - this.distance;
+      side === 'left'
+        ? anchorRect.left - this.distance
+        : innerWidth - anchorRect.right - this.distance;
     const availableHeight =
-      side === 'top' ? anchorRect.top - this.distance : innerHeight - anchorRect.bottom - this.distance;
+      side === 'top'
+        ? anchorRect.top - this.distance
+        : innerHeight - anchorRect.bottom - this.distance;
 
     if (this.autoSize === 'horizontal' || this.autoSize === 'both')
-      this.style.setProperty('--auto-size-available-width', `${Math.max(0, availableWidth)}px`);
+      this.style.setProperty(
+        '--auto-size-available-width',
+        `${Math.max(0, availableWidth)}px`,
+      );
     if (this.autoSize === 'vertical' || this.autoSize === 'both')
-      this.style.setProperty('--auto-size-available-height', `${Math.max(0, availableHeight)}px`);
+      this.style.setProperty(
+        '--auto-size-available-height',
+        `${Math.max(0, availableHeight)}px`,
+      );
   }
 
-  #applyArrow(anchorRect: DOMRect, coords: Coords, popupWidth: number, popupHeight: number, placement: Placement): void {
+  #applyArrow(
+    anchorRect: DOMRect,
+    coords: Coords,
+    popupWidth: number,
+    popupHeight: number,
+    placement: Placement,
+  ): void {
     if (!this.arrow) return;
     const side = base(placement);
     const isVertical = side === 'top' || side === 'bottom';
@@ -348,7 +411,10 @@ export class BxPopup extends BixElement {
       default:
         offset = anchorCenter;
     }
-    offset = Math.min(Math.max(offset, this.arrowPadding), Math.max(this.arrowPadding, popupSize - this.arrowPadding));
+    offset = Math.min(
+      Math.max(offset, this.arrowPadding),
+      Math.max(this.arrowPadding, popupSize - this.arrowPadding),
+    );
     // `updated()` calls `reposition()` on every update while `active` (below), and this render's
     // arrow position off `#lastArrowOffset` — an unconditional `requestUpdate()` here would
     // re-trigger `updated()` -> `reposition()` -> here, forever. Only schedule a re-render when
@@ -360,11 +426,18 @@ export class BxPopup extends BixElement {
 
   #applySync(anchorRect: DOMRect): void {
     if (!this.sync) return;
-    if (this.sync === 'width' || this.sync === 'both') this.style.width = `${anchorRect.width}px`;
-    if (this.sync === 'height' || this.sync === 'both') this.style.height = `${anchorRect.height}px`;
+    if (this.sync === 'width' || this.sync === 'both')
+      this.style.width = `${anchorRect.width}px`;
+    if (this.sync === 'height' || this.sync === 'both')
+      this.style.height = `${anchorRect.height}px`;
   }
 
-  #applyHoverBridge(anchorRect: DOMRect, coords: Coords, popupWidth: number, popupHeight: number): void {
+  #applyHoverBridge(
+    anchorRect: DOMRect,
+    coords: Coords,
+    popupWidth: number,
+    popupHeight: number,
+  ): void {
     if (!this.hoverBridge) {
       this.#lastHoverBridgeRect = undefined;
       return;
@@ -373,7 +446,12 @@ export class BxPopup extends BixElement {
     const top = Math.min(anchorRect.top, coords.top);
     const right = Math.max(anchorRect.right, coords.left + popupWidth);
     const bottom = Math.max(anchorRect.bottom, coords.top + popupHeight);
-    this.#lastHoverBridgeRect = { left, top, width: right - left, height: bottom - top };
+    this.#lastHoverBridgeRect = {
+      left,
+      top,
+      width: right - left,
+      height: bottom - top,
+    };
   }
 
   /** Forces an immediate recomputation of the popup's position. */
@@ -396,14 +474,31 @@ export class BxPopup extends BixElement {
     const popupWidth = popupRect.width;
     const popupHeight = popupRect.height;
 
-    const candidates = this.flip ? [this.placement, ...this.#fallbackPlacements()] : [this.placement];
-    let computed = this.#computeForPlacement(candidates[0]!, anchorRect, popupWidth, popupHeight);
+    const candidates = this.flip
+      ? [this.placement, ...this.#fallbackPlacements()]
+      : [this.placement];
+    let computed = this.#computeForPlacement(
+      candidates[0]!,
+      anchorRect,
+      popupWidth,
+      popupHeight,
+    );
     for (const placement of candidates.slice(1)) {
       if (computed.fits) break;
-      computed = this.#computeForPlacement(placement, anchorRect, popupWidth, popupHeight);
+      computed = this.#computeForPlacement(
+        placement,
+        anchorRect,
+        popupWidth,
+        popupHeight,
+      );
     }
 
-    const shifted = this.#applyShift(computed, popupWidth, popupHeight, computed.placement);
+    const shifted = this.#applyShift(
+      computed,
+      popupWidth,
+      popupHeight,
+      computed.placement,
+    );
 
     if (this.strategy === 'fixed') {
       this.style.position = 'fixed';
@@ -417,13 +512,22 @@ export class BxPopup extends BixElement {
 
     this.#applySync(anchorRect);
     this.#applyAutoSize(anchorRect, computed.placement);
-    this.#applyArrow(anchorRect, shifted, popupWidth, popupHeight, computed.placement);
+    this.#applyArrow(
+      anchorRect,
+      shifted,
+      popupWidth,
+      popupHeight,
+      computed.placement,
+    );
     this.#applyHoverBridge(anchorRect, shifted, popupWidth, popupHeight);
 
-    if (computed.placement !== this.placement) this.setAttribute('data-placement', computed.placement);
+    if (computed.placement !== this.placement)
+      this.setAttribute('data-placement', computed.placement);
     else this.removeAttribute('data-placement');
 
-    this.dispatchEvent(new Event('bx-reposition', { bubbles: true, composed: true }));
+    this.dispatchEvent(
+      new Event('bx-reposition', { bubbles: true, composed: true }),
+    );
   }
 
   #renderHoverBridge() {

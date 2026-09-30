@@ -21,7 +21,11 @@ function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));
 }
 
-function hsvToRgb(h: number, s: number, v: number): { r: number; g: number; b: number } {
+function hsvToRgb(
+  h: number,
+  s: number,
+  v: number,
+): { r: number; g: number; b: number } {
   const sNorm = s / 100;
   const vNorm = v / 100;
   const c = vNorm * sNorm;
@@ -41,7 +45,11 @@ function hsvToRgb(h: number, s: number, v: number): { r: number; g: number; b: n
   };
 }
 
-function rgbToHsv(r: number, g: number, b: number): { h: number; s: number; v: number } {
+function rgbToHsv(
+  r: number,
+  g: number,
+  b: number,
+): { h: number; s: number; v: number } {
   const rNorm = r / 255;
   const gNorm = g / 255;
   const bNorm = b / 255;
@@ -62,14 +70,22 @@ function rgbToHsv(r: number, g: number, b: number): { h: number; s: number; v: n
   return { h, s, v };
 }
 
-function rgbToHsl(r: number, g: number, b: number): { h: number; s: number; l: number } {
+function rgbToHsl(
+  r: number,
+  g: number,
+  b: number,
+): { h: number; s: number; l: number } {
   const { h, s: hsvS, v } = rgbToHsv(r, g, b);
   const l = (v / 100) * (1 - hsvS / 100 / 2);
   const s = l === 0 || l === 1 ? 0 : ((v / 100 - l) / Math.min(l, 1 - l)) * 100;
   return { h, s, l: l * 100 };
 }
 
-function hslToRgb(h: number, s: number, l: number): { r: number; g: number; b: number } {
+function hslToRgb(
+  h: number,
+  s: number,
+  l: number,
+): { r: number; g: number; b: number } {
   const sNorm = s / 100;
   const lNorm = l / 100;
   const c = (1 - Math.abs(2 * lNorm - 1)) * sNorm;
@@ -111,9 +127,10 @@ function parseColor(input: string): Hsva | null {
     return { ...rgbToHsv(r, g, b), a };
   }
 
-  const rgbMatch = /^rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*(?:,\s*([\d.]+)\s*)?\)$/i.exec(
-    raw,
-  );
+  const rgbMatch =
+    /^rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*(?:,\s*([\d.]+)\s*)?\)$/i.exec(
+      raw,
+    );
   if (rgbMatch) {
     const [, r, g, b, a] = rgbMatch;
     return {
@@ -123,11 +140,16 @@ function parseColor(input: string): Hsva | null {
   }
 
   const hslMatch =
-    /^hsla?\(\s*([\d.]+)\s*,\s*([\d.]+)%\s*,\s*([\d.]+)%\s*(?:,\s*([\d.]+)\s*)?\)$/i.exec(raw);
+    /^hsla?\(\s*([\d.]+)\s*,\s*([\d.]+)%\s*,\s*([\d.]+)%\s*(?:,\s*([\d.]+)\s*)?\)$/i.exec(
+      raw,
+    );
   if (hslMatch) {
     const [, h, s, l, a] = hslMatch;
     const { r, g, b } = hslToRgb(Number(h), Number(s), Number(l));
-    return { ...rgbToHsv(r, g, b), a: a === undefined ? 1 : clamp(Number(a), 0, 1) };
+    return {
+      ...rgbToHsv(r, g, b),
+      a: a === undefined ? 1 : clamp(Number(a), 0, 1),
+    };
   }
 
   return null;
@@ -150,12 +172,20 @@ function formatColor(
     case 'hsl': {
       const { h, s, l } = rgbToHsl(r, g, b);
       const [hr, sr, lr] = [Math.round(h), Math.round(s), Math.round(l)];
-      out = opacity ? `hsla(${hr}, ${sr}%, ${lr}%, ${a})` : `hsl(${hr}, ${sr}%, ${lr}%)`;
+      out = opacity
+        ? `hsla(${hr}, ${sr}%, ${lr}%, ${a})`
+        : `hsl(${hr}, ${sr}%, ${lr}%)`;
       break;
     }
     case 'hsv': {
-      const [hr, sr, vr] = [Math.round(color.h), Math.round(color.s), Math.round(color.v)];
-      out = opacity ? `hsva(${hr}, ${sr}%, ${vr}%, ${a})` : `hsv(${hr}, ${sr}%, ${vr}%)`;
+      const [hr, sr, vr] = [
+        Math.round(color.h),
+        Math.round(color.s),
+        Math.round(color.v),
+      ];
+      out = opacity
+        ? `hsva(${hr}, ${sr}%, ${vr}%, ${a})`
+        : `hsv(${hr}, ${sr}%, ${vr}%)`;
       break;
     }
     default:
@@ -248,7 +278,11 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
           linear-gradient(45deg, transparent 75%, #ccc 75%),
           linear-gradient(-45deg, transparent 75%, #ccc 75%);
         background-size: 8px 8px;
-        background-position: 0 0, 0 4px, 4px -4px, -4px 0;
+        background-position:
+          0 0,
+          0 4px,
+          4px -4px,
+          -4px 0;
         cursor: pointer;
       }
 
@@ -276,7 +310,8 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
         inline-size: var(--bx-grid-width, 16rem);
         block-size: var(--bx-grid-height, 10rem);
         border-radius: var(--bx-radius-s);
-        background-image: linear-gradient(to top, #000, transparent),
+        background-image:
+          linear-gradient(to top, #000, transparent),
           linear-gradient(to right, #fff, transparent);
         cursor: crosshair;
         touch-action: none;
@@ -321,7 +356,11 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
           linear-gradient(45deg, transparent 75%, #ccc 75%),
           linear-gradient(-45deg, transparent 75%, #ccc 75%);
         background-size: 8px 8px;
-        background-position: 0 0, 0 4px, 4px -4px, -4px 0;
+        background-position:
+          0 0,
+          0 4px,
+          4px -4px,
+          -4px 0;
       }
 
       .opacity-slider-fill {
@@ -482,12 +521,20 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
 
   override connectedCallback(): void {
     super.connectedCallback();
-    document.addEventListener('pointerdown', this.#handleOutsidePointerDown, true);
+    document.addEventListener(
+      'pointerdown',
+      this.#handleOutsidePointerDown,
+      true,
+    );
   }
 
   override disconnectedCallback(): void {
     super.disconnectedCallback();
-    document.removeEventListener('pointerdown', this.#handleOutsidePointerDown, true);
+    document.removeEventListener(
+      'pointerdown',
+      this.#handleOutsidePointerDown,
+      true,
+    );
     if (this.#gridRafId) cancelAnimationFrame(this.#gridRafId);
     if (this.#hueRafId) cancelAnimationFrame(this.#hueRafId);
     if (this.#opacityRafId) cancelAnimationFrame(this.#opacityRafId);
@@ -500,7 +547,12 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
         this.#color = parsed;
         // Canonicalize into the current `format` — an author might set `value` in any parseable
         // format regardless of `format`; the two stay in sync from here on (see `#commit`).
-        this.value = formatColor(parsed, this.format, this.opacity, this.uppercase);
+        this.value = formatColor(
+          parsed,
+          this.format,
+          this.opacity,
+          this.uppercase,
+        );
       }
     }
     this.#defaultValue = this.value;
@@ -542,15 +594,25 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
 
   #commit(next: Hsva, dispatchChange: boolean): void {
     this.#color = next;
-    const formatted = formatColor(next, this.format, this.opacity, this.uppercase);
+    const formatted = formatColor(
+      next,
+      this.format,
+      this.opacity,
+      this.uppercase,
+    );
     const changed = formatted !== this.value;
     this.value = formatted;
     this.#hasInteracted = true;
-    if (changed) this.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
+    if (changed)
+      this.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
     if (dispatchChange) {
-      this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+      this.dispatchEvent(
+        new Event('change', { bubbles: true, composed: true }),
+      );
       if (!this.internals.checkValidity())
-        this.dispatchEvent(new CustomEvent('bx-invalid', { bubbles: true, composed: true }));
+        this.dispatchEvent(
+          new CustomEvent('bx-invalid', { bubbles: true, composed: true }),
+        );
     }
     this.requestUpdate();
   }
@@ -657,7 +719,10 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
     else if (event.key === 'ArrowRight' || event.key === 'ArrowUp') dh = 1;
     else return;
     event.preventDefault();
-    this.#commit({ ...this.#color, h: clamp(this.#color.h + dh, 0, 360) }, true);
+    this.#commit(
+      { ...this.#color, h: clamp(this.#color.h + dh, 0, 360) },
+      true,
+    );
   };
 
   // --- Opacity slider. ---
@@ -726,7 +791,12 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
   #handleFormatToggle = (): void => {
     const order: Format[] = ['hex', 'rgb', 'hsl', 'hsv'];
     this.format = order[(order.indexOf(this.format) + 1) % order.length]!;
-    this.value = formatColor(this.#color, this.format, this.opacity, this.uppercase);
+    this.value = formatColor(
+      this.#color,
+      this.format,
+      this.opacity,
+      this.uppercase,
+    );
   };
 
   // --- Trigger/panel (non-inline mode). ---
@@ -765,7 +835,9 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
 
   /** Focuses the trigger (non-`inline`) or the grid (`inline`). */
   override focus(options?: FocusOptions): void {
-    (this.inline ? this.#gridRef.value : this.#triggerRef.value)?.focus(options);
+    (this.inline ? this.#gridRef.value : this.#triggerRef.value)?.focus(
+      options,
+    );
   }
 
   override blur(): void {
@@ -841,7 +913,10 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
                   class="opacity-slider-fill"
                   style="background: linear-gradient(to right, transparent, ${rgbOpaque})"
                 ></div>
-                <div class="slider-handle" style="left: ${this.#color.a * 100}%"></div>
+                <div
+                  class="slider-handle"
+                  style="left: ${this.#color.a * 100}%"
+                ></div>
               </div>`
             : nothing
         }
@@ -890,15 +965,16 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
           this.swatches.length
             ? html`<div class="swatches" part="swatches">
                 ${this.swatches.map(
-                  (swatch) => html`<button
-                    type="button"
-                    class="swatch"
-                    part="swatch"
-                    style="background: ${swatch}"
-                    aria-label=${swatch}
-                    ?disabled=${this.disabled}
-                    @click=${() => this.#handleSwatchClick(swatch)}
-                  ></button>`,
+                  (swatch) =>
+                    html`<button
+                      type="button"
+                      class="swatch"
+                      part="swatch"
+                      style="background: ${swatch}"
+                      aria-label=${swatch}
+                      ?disabled=${this.disabled}
+                      @click=${() => this.#handleSwatchClick(swatch)}
+                    ></button>`,
                 )}
               </div>`
             : nothing

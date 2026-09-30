@@ -214,7 +214,11 @@ export class BxDialog extends BixElement {
 
     if (this.open) {
       const cancelled = !this.dispatchEvent(
-        new CustomEvent('bx-show', { bubbles: true, composed: true, cancelable: true }),
+        new CustomEvent('bx-show', {
+          bubbles: true,
+          composed: true,
+          cancelable: true,
+        }),
       );
       if (cancelled) {
         this.open = false;
@@ -240,7 +244,9 @@ export class BxDialog extends BixElement {
   }
 
   #dispatchAfter(name: string): void {
-    this.dispatchEvent(new CustomEvent(name, { bubbles: true, composed: true }));
+    this.dispatchEvent(
+      new CustomEvent(name, { bubbles: true, composed: true }),
+    );
   }
 
   /** Opens the dialog. No-op if already open. */
@@ -294,31 +300,33 @@ export class BxDialog extends BixElement {
         @cancel=${this.#handleCancel}
         @click=${this.#handleDialogClick}
       >
-        ${this.withoutHeader
-          ? nothing
-          : html`
-              <div class="header" part="header">
-                <div class="title" part="title" id=${this.#titleId}>
-                  <slot name="label">${this.label}</slot>
+        ${
+          this.withoutHeader
+            ? nothing
+            : html`
+                <div class="header" part="header">
+                  <div class="title" part="title" id=${this.#titleId}>
+                    <slot name="label">${this.label}</slot>
+                  </div>
+                  <div class="header-actions" part="header-actions">
+                    <slot name="header-actions"></slot>
+                    <bx-button
+                      class="close-button"
+                      part="close-button"
+                      appearance="plain"
+                      aria-label="Close"
+                      data-dialog="close"
+                    >
+                      <svg viewBox="0 0 256 256">
+                        <path
+                          d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"
+                        ></path>
+                      </svg>
+                    </bx-button>
+                  </div>
                 </div>
-                <div class="header-actions" part="header-actions">
-                  <slot name="header-actions"></slot>
-                  <bx-button
-                    class="close-button"
-                    part="close-button"
-                    appearance="plain"
-                    aria-label="Close"
-                    data-dialog="close"
-                  >
-                    <svg viewBox="0 0 256 256">
-                      <path
-                        d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"
-                      ></path>
-                    </svg>
-                  </bx-button>
-                </div>
-              </div>
-            `}
+              `
+        }
         <div class="body" part="body">
           <slot></slot>
         </div>

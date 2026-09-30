@@ -5,7 +5,10 @@ import './index.ts';
 async function withAnchor() {
   const wrapper = await fixture<HTMLDivElement>(html`
     <div style="position: relative;">
-      <button id="anchor" style="position: absolute; top: 300px; left: 300px; width: 80px; height: 30px;">
+      <button
+        id="anchor"
+        style="position: absolute; top: 300px; left: 300px; width: 80px; height: 30px;"
+      >
         Anchor
       </button>
       <bx-popup anchor="anchor" style="position: fixed;">
@@ -37,7 +40,9 @@ describe('bx-popup', () => {
     // component's own doc comment. "fixed" is unaffected by that and is what this test asserts.
     popup.active = true;
     await popup.updateComplete;
-    const anchorRect = document.getElementById('anchor')!.getBoundingClientRect();
+    const anchorRect = document
+      .getElementById('anchor')!
+      .getBoundingClientRect();
     const popupRect = popup.getBoundingClientRect();
     expect(popupRect.bottom).to.be.closeTo(anchorRect.top, 1);
   });
@@ -48,7 +53,9 @@ describe('bx-popup', () => {
     popup.active = true;
     popup.distance = 10;
     await popup.updateComplete;
-    const anchorRect = document.getElementById('anchor')!.getBoundingClientRect();
+    const anchorRect = document
+      .getElementById('anchor')!
+      .getBoundingClientRect();
     const popupRect = popup.getBoundingClientRect();
     expect(anchorRect.top - popupRect.bottom).to.be.closeTo(10, 1);
   });
@@ -56,10 +63,18 @@ describe('bx-popup', () => {
   it('flips to bottom when there is no room above', async () => {
     const wrapper = await fixture<HTMLDivElement>(html`
       <div>
-        <button id="anchor2" style="position: fixed; top: 5px; left: 5px; width: 60px; height: 20px;">
+        <button
+          id="anchor2"
+          style="position: fixed; top: 5px; left: 5px; width: 60px; height: 20px;"
+        >
           Anchor
         </button>
-        <bx-popup anchor="anchor2" placement="top" flip style="position: fixed;">
+        <bx-popup
+          anchor="anchor2"
+          placement="top"
+          flip
+          style="position: fixed;"
+        >
           <div style="width: 100px; height: 40px;">Content</div>
         </bx-popup>
       </div>
@@ -67,7 +82,9 @@ describe('bx-popup', () => {
     const popup = wrapper.querySelector('bx-popup') as BxPopup;
     popup.active = true;
     await popup.updateComplete;
-    const anchorRect = document.getElementById('anchor2')!.getBoundingClientRect();
+    const anchorRect = document
+      .getElementById('anchor2')!
+      .getBoundingClientRect();
     const popupRect = popup.getBoundingClientRect();
     expect(popupRect.top).to.be.closeTo(anchorRect.bottom, 1);
   });
@@ -77,7 +94,9 @@ describe('bx-popup', () => {
     popup.sync = 'width';
     popup.active = true;
     await popup.updateComplete;
-    const anchorRect = document.getElementById('anchor')!.getBoundingClientRect();
+    const anchorRect = document
+      .getElementById('anchor')!
+      .getBoundingClientRect();
     const popupRect = popup.getBoundingClientRect();
     expect(popupRect.width).to.be.closeTo(anchorRect.width, 1);
   });

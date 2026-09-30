@@ -5,7 +5,8 @@ type Loading = 'eager' | 'lazy';
 
 const PLUS_PATH =
   'M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z';
-const MINUS_PATH = 'M216,128a8,8,0,0,1-8,8H48a8,8,0,0,1,0-16H208A8,8,0,0,1,216,128Z';
+const MINUS_PATH =
+  'M216,128a8,8,0,0,1-8,8H48a8,8,0,0,1,0-16H208A8,8,0,0,1,216,128Z';
 const MORE_PATH =
   'M60,128a16,16,0,1,1-16-16A16,16,0,0,1,60,128Zm68-16a16,16,0,1,0,16,16A16,16,0,0,0,128,112Zm68,0a16,16,0,1,0,16,16A16,16,0,0,0,196,112Z';
 
@@ -181,7 +182,11 @@ export class BxZoomableFrame extends BixElement {
     src: { type: String },
     srcdoc: { type: String },
     label: { type: String },
-    allowFullscreen: { type: Boolean, reflect: true, attribute: 'allow-fullscreen' },
+    allowFullscreen: {
+      type: Boolean,
+      reflect: true,
+      attribute: 'allow-fullscreen',
+    },
     loading: { type: String },
     referrerpolicy: { type: String },
     sandbox: { type: String },
@@ -231,7 +236,8 @@ export class BxZoomableFrame extends BixElement {
   }
 
   #handleOutsideClick = (event: MouseEvent): void => {
-    if (this._menuOpen && !event.composedPath().includes(this)) this._menuOpen = false;
+    if (this._menuOpen && !event.composedPath().includes(this))
+      this._menuOpen = false;
   };
 
   #handleKeydown = (event: KeyboardEvent): void => {
@@ -270,7 +276,12 @@ export class BxZoomableFrame extends BixElement {
   #renderControls() {
     const levels = parseLevels(this.zoomLevels);
     return html`
-      <div class="controls" part="controls" id=${this.#controlsId} ?data-open=${this._menuOpen}>
+      <div
+        class="controls"
+        part="controls"
+        id=${this.#controlsId}
+        ?data-open=${this._menuOpen}
+      >
         <button
           type="button"
           class="zoom-out-button"
@@ -280,10 +291,12 @@ export class BxZoomableFrame extends BixElement {
           @click=${this.zoomOut}
         >
           <slot name="zoom-out-icon"
-            ><svg viewBox="0 0 256 256"><path d=${MINUS_PATH}></path></svg></slot
-          >
+            ><svg viewBox="0 0 256 256"><path d=${MINUS_PATH}></path></svg
+          ></slot>
         </button>
-        <span class="zoom-label" part="zoom-label">${Math.round(this.zoom * 100)}%</span>
+        <span class="zoom-label" part="zoom-label"
+          >${Math.round(this.zoom * 100)}%</span
+        >
         <button
           type="button"
           class="zoom-in-button"
@@ -293,8 +306,8 @@ export class BxZoomableFrame extends BixElement {
           @click=${this.zoomIn}
         >
           <slot name="zoom-in-icon"
-            ><svg viewBox="0 0 256 256"><path d=${PLUS_PATH}></path></svg></slot
-          >
+            ><svg viewBox="0 0 256 256"><path d=${PLUS_PATH}></path></svg
+          ></slot>
         </button>
       </div>
     `;

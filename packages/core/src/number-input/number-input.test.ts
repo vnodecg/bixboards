@@ -4,7 +4,9 @@ import './index.ts';
 
 describe('bx-number-input', () => {
   it('registers the tag and wraps a native text input', async () => {
-    const el = await fixture<BxNumberInput>(html`<bx-number-input></bx-number-input>`);
+    const el = await fixture<BxNumberInput>(
+      html`<bx-number-input></bx-number-input>`,
+    );
     expect(el).to.be.instanceOf(customElements.get('bx-number-input')!);
     const input = el.shadowRoot!.querySelector('input')!;
     expect(input.getAttribute('type')).to.equal('text');
@@ -13,7 +15,12 @@ describe('bx-number-input', () => {
 
   it('stepUp/stepDown adjust value and clamp to min/max', async () => {
     const el = await fixture<BxNumberInput>(
-      html`<bx-number-input value="5" min="0" max="6" step="1"></bx-number-input>`,
+      html`<bx-number-input
+        value="5"
+        min="0"
+        max="6"
+        step="1"
+      ></bx-number-input>`,
     );
     el.stepUp();
     expect(el.value).to.equal('6');
@@ -43,7 +50,9 @@ describe('bx-number-input', () => {
       html`<bx-number-input value="1" step="1"></bx-number-input>`,
     );
     const input = el.shadowRoot!.querySelector('input')!;
-    input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
+    input.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }),
+    );
     expect(el.value).to.equal('2');
   });
 
@@ -52,7 +61,9 @@ describe('bx-number-input', () => {
       html`<bx-number-input value="0" step="1"></bx-number-input>`,
     );
     const input = el.shadowRoot!.querySelector('input')!;
-    input.dispatchEvent(new KeyboardEvent('keydown', { key: 'PageUp', bubbles: true }));
+    input.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'PageUp', bubbles: true }),
+    );
     expect(el.value).to.equal('10');
   });
 
@@ -83,7 +94,9 @@ describe('bx-number-input', () => {
   });
 
   it('parses locale-formatted input on blur and clamps/commits', async () => {
-    const el = await fixture<BxNumberInput>(html`<bx-number-input min="0" max="100"></bx-number-input>`);
+    const el = await fixture<BxNumberInput>(
+      html`<bx-number-input min="0" max="100"></bx-number-input>`,
+    );
     const input = el.shadowRoot!.querySelector('input')!;
     input.dispatchEvent(new Event('focus'));
     input.value = '150';
@@ -109,7 +122,9 @@ describe('bx-number-input', () => {
   });
 
   it('is invalid when required and empty', async () => {
-    const el = await fixture<BxNumberInput>(html`<bx-number-input required></bx-number-input>`);
+    const el = await fixture<BxNumberInput>(
+      html`<bx-number-input required></bx-number-input>`,
+    );
     expect(el.checkValidity()).to.be.false;
     el.stepUp();
     await el.updateComplete;

@@ -118,7 +118,8 @@ export class BxTab extends BixElement {
       @media (forced-colors: active) {
         :host([active]) .base {
           forced-color-adjust: none;
-          box-shadow: inset 0 calc(var(--bx-border-width-strong) * -1) 0 0 Highlight;
+          box-shadow: inset 0 calc(var(--bx-border-width-strong) * -1) 0 0
+            Highlight;
           color: Highlight;
         }
       }
@@ -185,7 +186,9 @@ export class BxTab extends BixElement {
 
   #close(): void {
     if (this.disabled) return;
-    this.dispatchEvent(new CustomEvent('bx-close', { bubbles: true, composed: true }));
+    this.dispatchEvent(
+      new CustomEvent('bx-close', { bubbles: true, composed: true }),
+    );
   }
 
   #handleCloseClick = (event: MouseEvent): void => {
@@ -219,16 +222,18 @@ export class BxTab extends BixElement {
         @keydown=${this.#handleBaseKeydown}
       >
         <slot></slot>
-        ${this.closable
-          ? html`<span
-              class="close-button"
-              part="close-button"
-              aria-hidden="true"
-              @click=${this.#handleCloseClick}
-            >
-              <svg viewBox="0 0 256 256"><path d=${X_PATH}></path></svg>
-            </span>`
-          : nothing}
+        ${
+          this.closable
+            ? html`<span
+                class="close-button"
+                part="close-button"
+                aria-hidden="true"
+                @click=${this.#handleCloseClick}
+              >
+                <svg viewBox="0 0 256 256"><path d=${X_PATH}></path></svg>
+              </span>`
+            : nothing
+        }
       </div>
     `;
   }

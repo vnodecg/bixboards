@@ -50,7 +50,9 @@ export class BxFormatNumber extends BixElement {
   declare type: NumberType;
   declare noGrouping: boolean;
   declare currency: string;
-  declare currencyDisplay: NonNullable<Intl.NumberFormatOptions['currencyDisplay']>;
+  declare currencyDisplay: NonNullable<
+    Intl.NumberFormatOptions['currencyDisplay']
+  >;
   declare minimumIntegerDigits?: number;
   declare minimumFractionDigits?: number;
   declare maximumFractionDigits?: number;

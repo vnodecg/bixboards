@@ -13,7 +13,11 @@ describe('bx-color-picker', () => {
 
   it('parses rgb() input and reformats to the requested format', async () => {
     const el = await fixture<BxColorPicker>(
-      html`<bx-color-picker inline format="rgb" value="rgb(0, 255, 0)"></bx-color-picker>`,
+      html`<bx-color-picker
+        inline
+        format="rgb"
+        value="rgb(0, 255, 0)"
+      ></bx-color-picker>`,
     );
     expect(el.value).to.equal('rgb(0, 255, 0)');
     expect(el.getFormattedValue('hex')).to.equal('#00ff00');
@@ -21,7 +25,11 @@ describe('bx-color-picker', () => {
 
   it('parses hsl() input', async () => {
     const el = await fixture<BxColorPicker>(
-      html`<bx-color-picker inline format="hex" value="hsl(240, 100%, 50%)"></bx-color-picker>`,
+      html`<bx-color-picker
+        inline
+        format="hex"
+        value="hsl(240, 100%, 50%)"
+      ></bx-color-picker>`,
     );
     expect(el.value.toLowerCase()).to.equal('#0000ff');
   });
@@ -37,9 +45,14 @@ describe('bx-color-picker', () => {
 
   it('clicking a swatch commits its color', async () => {
     const el = await fixture<BxColorPicker>(
-      html`<bx-color-picker inline .swatches=${['#00ff00', '#0000ff']}></bx-color-picker>`,
+      html`<bx-color-picker
+        inline
+        .swatches=${['#00ff00', '#0000ff']}
+      ></bx-color-picker>`,
     );
-    const swatch = el.shadowRoot!.querySelectorAll('.swatch')[0] as HTMLButtonElement;
+    const swatch = el.shadowRoot!.querySelectorAll(
+      '.swatch',
+    )[0] as HTMLButtonElement;
     const changePromise = oneEvent(el, 'change');
     swatch.click();
     await changePromise;
@@ -50,15 +63,21 @@ describe('bx-color-picker', () => {
     const el = await fixture<BxColorPicker>(
       html`<bx-color-picker inline value="#ff0000"></bx-color-picker>`,
     );
-    const hueSlider = el.shadowRoot!.querySelector('.hue-slider') as HTMLElement;
+    const hueSlider = el.shadowRoot!.querySelector(
+      '.hue-slider',
+    ) as HTMLElement;
     const changePromise = oneEvent(el, 'change');
-    hueSlider.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+    hueSlider.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }),
+    );
     await changePromise;
     expect(el.value).to.not.equal('#ff0000');
   });
 
   it('typing a valid color into the text input commits it', async () => {
-    const el = await fixture<BxColorPicker>(html`<bx-color-picker inline></bx-color-picker>`);
+    const el = await fixture<BxColorPicker>(
+      html`<bx-color-picker inline></bx-color-picker>`,
+    );
     const input = el.shadowRoot!.querySelector('.input') as HTMLInputElement;
     input.value = '#123456';
     input.dispatchEvent(new Event('change', { bubbles: true }));
@@ -78,8 +97,12 @@ describe('bx-color-picker', () => {
   });
 
   it('non-inline mode toggles the panel via the trigger button', async () => {
-    const el = await fixture<BxColorPicker>(html`<bx-color-picker></bx-color-picker>`);
-    const trigger = el.shadowRoot!.querySelector('.trigger') as HTMLButtonElement;
+    const el = await fixture<BxColorPicker>(
+      html`<bx-color-picker></bx-color-picker>`,
+    );
+    const trigger = el.shadowRoot!.querySelector(
+      '.trigger',
+    ) as HTMLButtonElement;
     expect(el.open).to.be.false;
     trigger.click();
     expect(el.open).to.be.true;
@@ -89,11 +112,15 @@ describe('bx-color-picker', () => {
 
   it('participates in form submission and resets to the default value', async () => {
     const form = await fixture<HTMLFormElement>(html`
-      <form><bx-color-picker inline name="color" value="#ff0000"></bx-color-picker></form>
+      <form>
+        <bx-color-picker inline name="color" value="#ff0000"></bx-color-picker>
+      </form>
     `);
     const el = form.querySelector('bx-color-picker') as BxColorPicker;
     const swatch = el.shadowRoot!.querySelector('.grid') as HTMLElement;
-    swatch.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
+    swatch.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }),
+    );
     await el.updateComplete;
     expect(new FormData(form).get('color')).to.equal(el.value);
 
@@ -103,13 +130,19 @@ describe('bx-color-picker', () => {
   });
 
   it('is invalid when required and empty', async () => {
-    const el = await fixture<BxColorPicker>(html`<bx-color-picker inline required></bx-color-picker>`);
+    const el = await fixture<BxColorPicker>(
+      html`<bx-color-picker inline required></bx-color-picker>`,
+    );
     expect(el.checkValidity()).to.be.false;
   });
 
   it('has no axe violations (inline mode)', async () => {
     const el = await fixture<BxColorPicker>(
-      html`<bx-color-picker inline label="Color" value="#ff0000"></bx-color-picker>`,
+      html`<bx-color-picker
+        inline
+        label="Color"
+        value="#ff0000"
+      ></bx-color-picker>`,
     );
     await expect(el).to.be.accessible();
   });

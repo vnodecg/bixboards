@@ -63,7 +63,9 @@ describe('bx-dialog', () => {
       html`<bx-dialog without-header>Body</bx-dialog>`,
     );
     expect(
-      withoutHeader.shadowRoot!.querySelector('dialog')!.hasAttribute('aria-labelledby'),
+      withoutHeader
+        .shadowRoot!.querySelector('dialog')!
+        .hasAttribute('aria-labelledby'),
     ).to.be.false;
   });
 

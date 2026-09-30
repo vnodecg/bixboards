@@ -116,7 +116,9 @@ export class BxBreadcrumb extends BixElement {
   }
 
   #items(): BxBreadcrumbItem[] {
-    return [...this.querySelectorAll('bx-breadcrumb-item')] as unknown as BxBreadcrumbItem[];
+    return [
+      ...this.querySelectorAll('bx-breadcrumb-item'),
+    ] as unknown as BxBreadcrumbItem[];
   }
 
   #ensureEllipsis(): HTMLButtonElement {
@@ -165,7 +167,8 @@ export class BxBreadcrumb extends BixElement {
     const available = list.clientWidth;
     const gap = Number.parseFloat(getComputedStyle(list).gap) || 0;
     const widths = items.map((item) => item.getBoundingClientRect().width);
-    const total = widths.reduce((sum, width) => sum + width, 0) + gap * (items.length - 1);
+    const total =
+      widths.reduce((sum, width) => sum + width, 0) + gap * (items.length - 1);
 
     if (total <= available) {
       if (this.#ellipsis?.isConnected) this.#ellipsis.remove();
@@ -189,7 +192,9 @@ export class BxBreadcrumb extends BixElement {
       const visibleWidth =
         widths[0]! +
         ellipsisWidth +
-        widths.slice(1 + hiddenCount, items.length - 1).reduce((sum, w) => sum + w, 0) +
+        widths
+          .slice(1 + hiddenCount, items.length - 1)
+          .reduce((sum, w) => sum + w, 0) +
         widths[items.length - 1]! +
         gap * (items.length - hiddenCount);
       if (visibleWidth <= available) break;

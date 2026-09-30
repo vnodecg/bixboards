@@ -3,7 +3,8 @@ import { createRef, ref } from 'lit/directives/ref.js';
 import { BixElement } from '../bix-element.ts';
 
 type Variant = 'neutral' | 'brand' | 'success' | 'warning' | 'danger';
-type Appearance = 'accent' | 'filled' | 'outlined' | 'plain' | 'filled outlined';
+type Appearance =
+  'accent' | 'filled' | 'outlined' | 'plain' | 'filled outlined';
 type Size = 'small' | 'medium' | 'large';
 type ButtonType = 'button' | 'submit' | 'reset';
 
@@ -140,18 +141,27 @@ export class BxButton extends BixElement {
 
       /* Size steps. */
       :host([size='small']) {
-        --bx-button-computed-min-height: max(var(--bx-control-height-s), var(--bx-target-min, 1.5rem));
+        --bx-button-computed-min-height: max(
+          var(--bx-control-height-s),
+          var(--bx-target-min, 1.5rem)
+        );
         --bx-button-computed-padding-inline: var(--bx-space-s);
         --bx-button-computed-font-size: var(--bx-font-s);
       }
       :host([size='medium']),
       :host(:not([size])) {
-        --bx-button-computed-min-height: max(var(--bx-control-height-m), var(--bx-target-min, 1.5rem));
+        --bx-button-computed-min-height: max(
+          var(--bx-control-height-m),
+          var(--bx-target-min, 1.5rem)
+        );
         --bx-button-computed-padding-inline: var(--bx-space-m);
         --bx-button-computed-font-size: var(--bx-font-m);
       }
       :host([size='large']) {
-        --bx-button-computed-min-height: max(var(--bx-control-height-l), var(--bx-target-min, 1.5rem));
+        --bx-button-computed-min-height: max(
+          var(--bx-control-height-l),
+          var(--bx-target-min, 1.5rem)
+        );
         --bx-button-computed-padding-inline: var(--bx-space-l);
         --bx-button-computed-font-size: var(--bx-font-l);
       }
@@ -163,9 +173,16 @@ export class BxButton extends BixElement {
         align-items: center;
         justify-content: center;
         gap: var(--bx-space-2xs);
-        min-block-size: var(--bx-button-min-height, var(--bx-button-computed-min-height));
-        padding-inline: var(--bx-button-padding-inline, var(--bx-button-computed-padding-inline));
-        border: var(--bx-border-width) solid var(--bx-button-border, var(--bx-button-computed-border));
+        min-block-size: var(
+          --bx-button-min-height,
+          var(--bx-button-computed-min-height)
+        );
+        padding-inline: var(
+          --bx-button-padding-inline,
+          var(--bx-button-computed-padding-inline)
+        );
+        border: var(--bx-border-width) solid
+          var(--bx-button-border, var(--bx-button-computed-border));
         border-radius: var(--bx-radius-m);
         background: var(--bx-button-bg, var(--bx-button-computed-bg));
         color: var(--bx-button-fg, var(--bx-button-computed-fg));
@@ -176,8 +193,10 @@ export class BxButton extends BixElement {
         cursor: pointer;
         transition:
           filter var(--bx-motion-duration-fast) var(--bx-motion-easing-standard),
-          box-shadow var(--bx-motion-duration-base) var(--bx-motion-easing-standard),
-          transform var(--bx-motion-duration-fast) var(--bx-motion-easing-standard);
+          box-shadow var(--bx-motion-duration-base)
+            var(--bx-motion-easing-standard),
+          transform var(--bx-motion-duration-fast)
+            var(--bx-motion-easing-standard);
       }
 
       :host(:not([appearance])) .base:not([aria-disabled='true']),
@@ -369,7 +388,8 @@ export class BxButton extends BixElement {
   }
 
   get #associatedForm(): HTMLFormElement | null {
-    if (this.form) return document.getElementById(this.form) as HTMLFormElement | null;
+    if (this.form)
+      return document.getElementById(this.form) as HTMLFormElement | null;
     return this.closest('form');
   }
 
@@ -384,7 +404,9 @@ export class BxButton extends BixElement {
     if (this.type === 'submit') {
       const form = this.#associatedForm;
       if (form && !form.reportValidity()) {
-        this.dispatchEvent(new CustomEvent('bx-invalid', { bubbles: true, composed: true }));
+        this.dispatchEvent(
+          new CustomEvent('bx-invalid', { bubbles: true, composed: true }),
+        );
         return;
       }
       form?.requestSubmit();
@@ -414,14 +436,24 @@ export class BxButton extends BixElement {
       <span class="start" part="start"><slot name="start"></slot></span>
       <span class="label" part="label"><slot></slot></span>
       <span class="end" part="end"><slot name="end"></slot></span>
-      ${this.withCaret
-        ? html`<span class="caret" part="caret" aria-hidden="true">
-            <svg viewBox="0 0 256 256"><path d=${CARET_DOWN_PATH}></path></svg>
-          </span>`
-        : nothing}
-      ${this.loading
-        ? html`<bx-spinner class="spinner" part="spinner" aria-hidden="true"></bx-spinner>`
-        : nothing}
+      ${
+        this.withCaret
+          ? html`<span class="caret" part="caret" aria-hidden="true">
+              <svg viewBox="0 0 256 256">
+                <path d=${CARET_DOWN_PATH}></path>
+              </svg>
+            </span>`
+          : nothing
+      }
+      ${
+        this.loading
+          ? html`<bx-spinner
+              class="spinner"
+              part="spinner"
+              aria-hidden="true"
+            ></bx-spinner>`
+          : nothing
+      }
     `;
 
     return this.href

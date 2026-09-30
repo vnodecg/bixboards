@@ -263,9 +263,13 @@ export class BxDetails extends BixElement {
 
     if (this.open) {
       this.#closeGroupSiblings();
-      this.dispatchEvent(new CustomEvent('bx-show', { bubbles: true, composed: true }));
+      this.dispatchEvent(
+        new CustomEvent('bx-show', { bubbles: true, composed: true }),
+      );
     } else {
-      this.dispatchEvent(new CustomEvent('bx-hide', { bubbles: true, composed: true }));
+      this.dispatchEvent(
+        new CustomEvent('bx-hide', { bubbles: true, composed: true }),
+      );
     }
 
     const afterEventName = this.open ? 'bx-after-show' : 'bx-after-hide';
@@ -274,7 +278,8 @@ export class BxDetails extends BixElement {
         new CustomEvent(afterEventName, { bubbles: true, composed: true }),
       );
 
-    const wrapper = this.shadowRoot!.querySelector<HTMLElement>('.body-wrapper')!;
+    const wrapper =
+      this.shadowRoot!.querySelector<HTMLElement>('.body-wrapper')!;
 
     // An initially-`open` details shouldn't visibly grow from 0 on page load — snap straight to
     // its resting state instead of animating into it.
@@ -292,7 +297,10 @@ export class BxDetails extends BixElement {
     }
 
     const cleanup = (event: Event): void => {
-      if (event.target !== wrapper || (event as TransitionEvent).propertyName !== 'block-size')
+      if (
+        event.target !== wrapper ||
+        (event as TransitionEvent).propertyName !== 'block-size'
+      )
         return;
       wrapper.removeEventListener('transitionend', cleanup);
       // Opening ends at an explicit pixel height (set below) so it has something definite to
@@ -360,13 +368,15 @@ export class BxDetails extends BixElement {
             <slot name="summary">${this.summary}</slot>
           </span>
           <span class="icon" part="icon">
-            ${this.open
-              ? html`<slot name="collapse-icon"
-                  >${svg`<svg viewBox="0 0 256 256"><path d=${CHEVRON_UP_PATH}></path></svg>`}</slot
-                >`
-              : html`<slot name="expand-icon"
-                  >${svg`<svg viewBox="0 0 256 256"><path d=${CHEVRON_DOWN_PATH}></path></svg>`}</slot
-                >`}
+            ${
+              this.open
+                ? html`<slot name="collapse-icon"
+                    >${svg`<svg viewBox="0 0 256 256"><path d=${CHEVRON_UP_PATH}></path></svg>`}</slot
+                  >`
+                : html`<slot name="expand-icon"
+                    >${svg`<svg viewBox="0 0 256 256"><path d=${CHEVRON_DOWN_PATH}></path></svg>`}</slot
+                  >`
+            }
           </span>
         </button>
         <div class="body-wrapper">

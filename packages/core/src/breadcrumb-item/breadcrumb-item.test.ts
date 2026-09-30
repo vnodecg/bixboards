@@ -4,7 +4,9 @@ import './index.ts';
 
 describe('bx-breadcrumb-item', () => {
   it('registers the tag', async () => {
-    const el = await fixture<BxBreadcrumbItem>(html`<bx-breadcrumb-item></bx-breadcrumb-item>`);
+    const el = await fixture<BxBreadcrumbItem>(
+      html`<bx-breadcrumb-item></bx-breadcrumb-item>`,
+    );
     expect(el).to.be.instanceOf(customElements.get('bx-breadcrumb-item')!);
   });
 
@@ -37,9 +39,9 @@ describe('bx-breadcrumb-item', () => {
     const el = await fixture<BxBreadcrumbItem>(
       html`<bx-breadcrumb-item href="/x" current>X</bx-breadcrumb-item>`,
     );
-    expect(el.shadowRoot!.querySelector('a.label')!.getAttribute('aria-current')).to.equal(
-      'page',
-    );
+    expect(
+      el.shadowRoot!.querySelector('a.label')!.getAttribute('aria-current'),
+    ).to.equal('page');
   });
 
   it('has no axe violations', async () => {

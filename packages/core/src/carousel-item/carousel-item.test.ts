@@ -4,7 +4,9 @@ import './index.ts';
 
 describe('bx-carousel-item', () => {
   it('registers the tag with role=group', async () => {
-    const el = await fixture<BxCarouselItem>(html`<bx-carousel-item></bx-carousel-item>`);
+    const el = await fixture<BxCarouselItem>(
+      html`<bx-carousel-item></bx-carousel-item>`,
+    );
     expect(el).to.be.instanceOf(customElements.get('bx-carousel-item')!);
     expect(el.getAttribute('role')).to.equal('group');
   });

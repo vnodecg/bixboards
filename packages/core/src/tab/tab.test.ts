@@ -11,21 +11,28 @@ describe('bx-tab', () => {
 
   it('reflects active to aria-selected', async () => {
     const el = await fixture<BxTab>(html`<bx-tab active>Tab</bx-tab>`);
-    expect(el.shadowRoot!.querySelector('[role="tab"]')!.getAttribute('aria-selected')).to.equal(
-      'true',
-    );
+    expect(
+      el
+        .shadowRoot!.querySelector('[role="tab"]')!
+        .getAttribute('aria-selected'),
+    ).to.equal('true');
   });
 
   it('does not render a plain aria-controls attribute (it cannot resolve cross-shadow-root)', async () => {
     const el = await fixture<BxTab>(html`<bx-tab panel="details">Tab</bx-tab>`);
     expect(
-      el.shadowRoot!.querySelector('[role="tab"]')!.hasAttribute('aria-controls'),
+      el
+        .shadowRoot!.querySelector('[role="tab"]')!
+        .hasAttribute('aria-controls'),
     ).to.be.false;
   });
 
   it('controlsElement wires ariaControlsElements on the role=tab element', async () => {
     const wrapper = await fixture<HTMLDivElement>(
-      html`<div><bx-tab panel="details">Tab</bx-tab><div id="panel"></div></div>`,
+      html`<div>
+        <bx-tab panel="details">Tab</bx-tab>
+        <div id="panel"></div>
+      </div>`,
     );
     const el = wrapper.querySelector('bx-tab') as BxTab;
     const panel = wrapper.querySelector('#panel') as HTMLDivElement;
@@ -37,7 +44,9 @@ describe('bx-tab', () => {
 
   it('is not a tab stop when disabled', async () => {
     const el = await fixture<BxTab>(html`<bx-tab disabled>Tab</bx-tab>`);
-    expect(el.shadowRoot!.querySelector('[role="tab"]')!.getAttribute('tabindex')).to.equal('-1');
+    expect(
+      el.shadowRoot!.querySelector('[role="tab"]')!.getAttribute('tabindex'),
+    ).to.equal('-1');
   });
 
   it('renders no close button by default', async () => {
@@ -53,7 +62,9 @@ describe('bx-tab', () => {
   });
 
   it('does not fire bx-close when disabled', async () => {
-    const el = await fixture<BxTab>(html`<bx-tab closable disabled>Tab</bx-tab>`);
+    const el = await fixture<BxTab>(
+      html`<bx-tab closable disabled>Tab</bx-tab>`,
+    );
     let fired = false;
     el.addEventListener('bx-close', () => (fired = true));
     el.shadowRoot!.querySelector<HTMLButtonElement>('.close-button')!.click();
@@ -62,10 +73,14 @@ describe('bx-tab', () => {
 
   it('closes via Backspace/Delete on the focused tab (close button is not its own tab stop)', async () => {
     const el = await fixture<BxTab>(html`<bx-tab closable>Tab</bx-tab>`);
-    expect(el.shadowRoot!.querySelector('.close-button')!.hasAttribute('tabindex')).to.be.false;
+    expect(
+      el.shadowRoot!.querySelector('.close-button')!.hasAttribute('tabindex'),
+    ).to.be.false;
     const row = el.shadowRoot!.querySelector<HTMLElement>('[role="tab"]')!;
     const closePromise = oneEvent(el, 'bx-close');
-    row.dispatchEvent(new KeyboardEvent('keydown', { key: 'Delete', bubbles: true }));
+    row.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Delete', bubbles: true }),
+    );
     await closePromise;
   });
 

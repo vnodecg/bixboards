@@ -179,33 +179,39 @@ export class BxCard extends BixElement {
   protected override render() {
     return html`
       <div class="base" part="base">
-        ${this.withMedia
-          ? html`
-              <div class="media" part="media">
-                <slot name="media"></slot>
-              </div>
-            `
-          : nothing}
-        ${this.withHeader
-          ? html`
-              <div class="header" part="header">
-                <slot name="header"></slot>
-                <slot name="header-actions"></slot>
-              </div>
-            `
-          : nothing}
+        ${
+          this.withMedia
+            ? html`
+                <div class="media" part="media">
+                  <slot name="media"></slot>
+                </div>
+              `
+            : nothing
+        }
+        ${
+          this.withHeader
+            ? html`
+                <div class="header" part="header">
+                  <slot name="header"></slot>
+                  <slot name="header-actions"></slot>
+                </div>
+              `
+            : nothing
+        }
         <div class="body" part="body">
           <slot></slot>
           <div class="actions"><slot name="actions"></slot></div>
         </div>
-        ${this.withFooter
-          ? html`
-              <div class="footer" part="footer">
-                <slot name="footer"></slot>
-                <slot name="footer-actions"></slot>
-              </div>
-            `
-          : nothing}
+        ${
+          this.withFooter
+            ? html`
+                <div class="footer" part="footer">
+                  <slot name="footer"></slot>
+                  <slot name="footer-actions"></slot>
+                </div>
+              `
+            : nothing
+        }
       </div>
     `;
   }

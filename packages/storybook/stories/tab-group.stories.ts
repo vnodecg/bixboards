@@ -68,12 +68,16 @@ export const ScrollingOverflow: Story = {
         ${Array.from(
           { length: 10 },
           (_, index) =>
-            html`<bx-tab slot="nav" panel="tab-${index}">Tab ${index + 1}</bx-tab>`,
+            html`<bx-tab slot="nav" panel="tab-${index}"
+              >Tab ${index + 1}</bx-tab
+            >`,
         )}
         ${Array.from(
           { length: 10 },
           (_, index) =>
-            html`<bx-tab-panel name="tab-${index}">Panel ${index + 1} content.</bx-tab-panel>`,
+            html`<bx-tab-panel name="tab-${index}"
+              >Panel ${index + 1} content.</bx-tab-panel
+            >`,
         )}
       </bx-tab-group>
     </div>

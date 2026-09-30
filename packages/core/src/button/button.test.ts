@@ -11,7 +11,9 @@ describe('bx-button', () => {
   });
 
   it('renders an inner <a> when href is set', async () => {
-    const el = await fixture<BxButton>(html`<bx-button href="/docs">Docs</bx-button>`);
+    const el = await fixture<BxButton>(
+      html`<bx-button href="/docs">Docs</bx-button>`,
+    );
     const a = el.shadowRoot!.querySelector('a')!;
     expect(a.getAttribute('href')).to.equal('/docs');
   });
@@ -24,7 +26,9 @@ describe('bx-button', () => {
   });
 
   it('suppresses click when disabled', async () => {
-    const el = await fixture<BxButton>(html`<bx-button disabled>Save</bx-button>`);
+    const el = await fixture<BxButton>(
+      html`<bx-button disabled>Save</bx-button>`,
+    );
     let fired = false;
     el.addEventListener('click', () => (fired = true));
     el.shadowRoot!.querySelector('button')!.click();
@@ -32,16 +36,22 @@ describe('bx-button', () => {
   });
 
   it('keeps the inner control focusable and hoverable when disabled (FR-BUTTON-06)', async () => {
-    const el = await fixture<BxButton>(html`<bx-button disabled>Save</bx-button>`);
+    const el = await fixture<BxButton>(
+      html`<bx-button disabled>Save</bx-button>`,
+    );
     const button = el.shadowRoot!.querySelector('button')!;
     expect(button.hasAttribute('disabled')).to.be.false;
     expect(button.getAttribute('aria-disabled')).to.equal('true');
     button.focus();
-    expect(document.activeElement === el || el.shadowRoot!.activeElement === button).to.be.true;
+    expect(
+      document.activeElement === el || el.shadowRoot!.activeElement === button,
+    ).to.be.true;
   });
 
   it('keeps the label in the DOM but visually hidden while loading (FR-BUTTON-03)', async () => {
-    const el = await fixture<BxButton>(html`<bx-button loading>Save</bx-button>`);
+    const el = await fixture<BxButton>(
+      html`<bx-button loading>Save</bx-button>`,
+    );
     const label = el.shadowRoot!.querySelector('.label')!;
     expect(label.textContent?.includes('Save') || true).to.be.true; // slot still projects content
     expect(getComputedStyle(label).visibility).to.equal('hidden');
@@ -108,7 +118,9 @@ describe('bx-button', () => {
   });
 
   it('has no axe violations when disabled', async () => {
-    const el = await fixture<BxButton>(html`<bx-button disabled>Save</bx-button>`);
+    const el = await fixture<BxButton>(
+      html`<bx-button disabled>Save</bx-button>`,
+    );
     await expect(el).to.be.accessible();
   });
 });

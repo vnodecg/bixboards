@@ -43,7 +43,10 @@ describe('bx-animation', () => {
 
   it('dispatches bx-finish when the animation completes naturally', async () => {
     const el = await fixture<BxAnimation>(
-      html`<bx-animation .keyframes=${BOX_KEYFRAMES} duration="10" iterations="1"
+      html`<bx-animation
+        .keyframes=${BOX_KEYFRAMES}
+        duration="10"
+        iterations="1"
         ><div>Content</div></bx-animation
       >`,
     );
@@ -145,9 +148,7 @@ describe('bx-animation', () => {
       );
       forced.play = true;
       await oneEvent(forced, 'bx-start');
-      expect(forced.getAnimation()!.effect!.getTiming().duration).to.equal(
-        10,
-      );
+      expect(forced.getAnimation()!.effect!.getTiming().duration).to.equal(10);
     } finally {
       window.matchMedia = originalMatchMedia;
     }

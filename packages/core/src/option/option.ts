@@ -130,9 +130,11 @@ export class BxOption extends BixElement {
         aria-disabled=${this.disabled}
       >
         <span class="checked-icon" part="checked-icon">
-          ${this.selected
-            ? svg`<svg viewBox="48 76 204 155"><path d=${CHECK_PATH}></path></svg>`
-            : nothing}
+          ${
+            this.selected
+              ? svg`<svg viewBox="48 76 204 155"><path d=${CHECK_PATH}></path></svg>`
+              : nothing
+          }
         </span>
         <span class="start" part="start"><slot name="start"></slot></span>
         <span class="label" part="label"><slot></slot></span>

@@ -13,7 +13,9 @@ describe('bx-tooltip', () => {
   });
 
   it('show()/hide() toggle open and fire bx-show/bx-after-show/bx-hide/bx-after-hide', async () => {
-    const el = await fixture<BxTooltip>(html`<bx-tooltip trigger="manual">Help</bx-tooltip>`);
+    const el = await fixture<BxTooltip>(
+      html`<bx-tooltip trigger="manual">Help</bx-tooltip>`,
+    );
     const showPromise = oneEvent(el, 'bx-show');
     el.show();
     await showPromise;
@@ -26,7 +28,9 @@ describe('bx-tooltip', () => {
   });
 
   it('bx-show is cancelable', async () => {
-    const el = await fixture<BxTooltip>(html`<bx-tooltip trigger="manual">Help</bx-tooltip>`);
+    const el = await fixture<BxTooltip>(
+      html`<bx-tooltip trigger="manual">Help</bx-tooltip>`,
+    );
     el.addEventListener('bx-show', (event) => event.preventDefault());
     el.show();
     expect(el.open).to.be.false;
@@ -58,7 +62,9 @@ describe('bx-tooltip', () => {
   it('hover trigger shows after show-delay and hides after hide-delay', async () => {
     const wrapper = await fixture<HTMLDivElement>(html`
       <div>
-        <bx-tooltip for="trigger" show-delay="10" hide-delay="10">Help</bx-tooltip>
+        <bx-tooltip for="trigger" show-delay="10" hide-delay="10"
+          >Help</bx-tooltip
+        >
         <button id="trigger">Hover</button>
       </div>
     `);
@@ -86,12 +92,18 @@ describe('bx-tooltip', () => {
     const button = wrapper.querySelector('#trigger') as HTMLButtonElement;
     el.show();
     expect(el.open).to.be.true;
-    button.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    button.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }),
+    );
     expect(el.open).to.be.false;
   });
 
   it('sets role=tooltip on the popup', async () => {
-    const el = await fixture<BxTooltip>(html`<bx-tooltip trigger="manual">Help</bx-tooltip>`);
-    expect(el.shadowRoot!.querySelector('bx-popup')!.getAttribute('role')).to.equal('tooltip');
+    const el = await fixture<BxTooltip>(
+      html`<bx-tooltip trigger="manual">Help</bx-tooltip>`,
+    );
+    expect(
+      el.shadowRoot!.querySelector('bx-popup')!.getAttribute('role'),
+    ).to.equal('tooltip');
   });
 });

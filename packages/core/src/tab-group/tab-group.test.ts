@@ -31,9 +31,9 @@ describe('bx-tab-group', () => {
 
   it('renders role=tablist on the nav element', async () => {
     const el = await fixtureGroup();
-    expect(el.shadowRoot!.querySelector('.tabs')!.getAttribute('role')).to.equal(
-      'tablist',
-    );
+    expect(
+      el.shadowRoot!.querySelector('.tabs')!.getAttribute('role'),
+    ).to.equal('tablist');
   });
 
   it('show() activates the matching tab and panel and fires bx-tab-show/bx-tab-hide', async () => {
@@ -41,7 +41,10 @@ describe('bx-tab-group', () => {
     const showPromise = oneEvent(el, 'bx-tab-show');
     const hidePromise = oneEvent(el, 'bx-tab-hide');
     el.show('two');
-    const [showEvent, hideEvent] = await Promise.all([showPromise, hidePromise]);
+    const [showEvent, hideEvent] = await Promise.all([
+      showPromise,
+      hidePromise,
+    ]);
     expect((showEvent as CustomEvent).detail.name).to.equal('two');
     expect((hideEvent as CustomEvent).detail.name).to.equal('one');
 

@@ -219,7 +219,8 @@ export class BxRadioGroup extends FormAssociatedMixin(BixElement) {
     if (members.length === 0) return;
     event.preventDefault();
 
-    const target = event.key === 'Home' ? members[0]! : members[members.length - 1]!;
+    const target =
+      event.key === 'Home' ? members[0]! : members[members.length - 1]!;
     target.focus();
     if (!target.disabled && !target.checked) target.click();
   };
@@ -232,7 +233,10 @@ export class BxRadioGroup extends FormAssociatedMixin(BixElement) {
       <div class="form-control" part="form-control">
         ${
           showLabel
-            ? html`<span class="label" part="label" id=${this.#hintId + '-label'}
+            ? html`<span
+                class="label"
+                part="label"
+                id=${this.#hintId + '-label'}
                 ><slot name="label">${this.label}</slot></span
               >`
             : nothing

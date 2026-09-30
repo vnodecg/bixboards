@@ -4,7 +4,9 @@ import './index.ts';
 
 describe('bx-format-bytes', () => {
   it('registers the tag with byte/short defaults', async () => {
-    const el = await fixture<BxFormatBytes>(html`<bx-format-bytes></bx-format-bytes>`);
+    const el = await fixture<BxFormatBytes>(
+      html`<bx-format-bytes></bx-format-bytes>`,
+    );
     expect(el).to.be.instanceOf(customElements.get('bx-format-bytes')!);
     expect(el.unit).to.equal('byte');
     expect(el.display).to.equal('short');
