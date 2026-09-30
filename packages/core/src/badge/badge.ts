@@ -196,6 +196,8 @@ export class BxBadge extends BixElement {
         gap: inherit;
         overflow: hidden;
         max-inline-size: var(--bx-badge-max-width, none);
+        /* line-height: 1 on .base would clip descenders (g, y, p) at the overflow edge. */
+        line-height: 1.3;
       }
 
       .content ::slotted(*) {
