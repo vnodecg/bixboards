@@ -1,6 +1,7 @@
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
 import { observeResize } from '../internal/shared-observers.ts';
+import '../scroller/index.ts';
 
 type View = 'mobile' | 'desktop';
 type NavPlacement = 'start' | 'end';
@@ -32,6 +33,9 @@ let nextId = 0;
  * `footer` (contentinfo) are real landmark elements in the shadow root; the skip link is first in
  * tab order and moves focus to `main`. Fragment links cannot target an id inside a shadow root,
  * so the skip link is handled with a click listener.
+ *
+ * The navigation body scrolls inside a `bx-scroller` (edge shadows, keyboard tab stop once it
+ * overflows) while the navigation header/footer slots stay pinned.
  *
  * Gaps, per docs/features/_conventions.md's "say so inline" rule: `--main-width` only caps the
  * main column's max inline size; the open drawer contains focus through `inert` on everything
@@ -187,7 +191,7 @@ export class BxPage extends BixElement {
         display: flex;
         flex-direction: column;
         min-inline-size: 0;
-        overflow-y: auto;
+        overflow: hidden;
         background: var(--bx-surface-base);
         border-inline-end: var(--bx-border-width) solid var(--bx-border-subtle);
         outline: none;
@@ -202,6 +206,7 @@ export class BxPage extends BixElement {
 
       .navigation-body {
         flex: 1;
+        min-block-size: 0;
       }
 
       .content {
@@ -525,7 +530,9 @@ export class BxPage extends BixElement {
                 : nothing
             }
             <slot name="navigation-header"></slot>
-            <div class="navigation-body"><slot name="navigation"></slot></div>
+            <bx-scroller class="navigation-body" orientation="vertical"
+              ><slot name="navigation"></slot
+            ></bx-scroller>
             <slot name="navigation-footer"></slot>
           </nav>
           <div class="scrim" @click=${this.hideNavigation}></div>

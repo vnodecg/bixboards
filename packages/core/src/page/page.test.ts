@@ -148,6 +148,26 @@ describe('bx-page', () => {
     expect(aside(mobile).top).to.be.at.least(main(mobile).bottom - 1);
   });
 
+  it('scrolls a long navigation inside a bx-scroller while the page stays fixed', async () => {
+    const wrapper = await fixture<HTMLDivElement>(
+      html`<div style="inline-size: 1000px; block-size: 300px">
+        <bx-page style="block-size: 100%">
+          <ul slot="navigation">
+            ${Array.from({ length: 40 }, (_, i) => html`<li><a href="#x">Item ${i}</a></li>`)}
+          </ul>
+        </bx-page>
+      </div>`,
+    );
+    const el = wrapper.querySelector('bx-page') as BxPage;
+    await el.updateComplete;
+    await nextFrame();
+    const scroller = q(el, 'bx-scroller');
+    const content =
+      scroller.shadowRoot!.querySelector<HTMLElement>('.content')!;
+    expect(content.scrollHeight).to.be.greaterThan(content.clientHeight);
+    expect(el.getBoundingClientRect().height).to.be.at.most(300);
+  });
+
   it('has no axe violations on desktop', async () => {
     await expect(await setup(1000)).to.be.accessible();
   });

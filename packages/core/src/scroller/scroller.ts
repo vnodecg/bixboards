@@ -54,7 +54,16 @@ export class BxScroller extends BixElement {
         overflow-y: hidden;
       }
 
+      /* A flex column so a height constraint on the host (max-block-size, or being a flex item)
+         reaches the inner scrollport; unconstrained, .content simply grows with its content. */
+      :host([orientation='vertical']) {
+        display: flex;
+        flex-direction: column;
+      }
+
       :host([orientation='vertical']) .content {
+        flex: 1 1 auto;
+        min-block-size: 0;
         overflow-y: auto;
         overflow-x: hidden;
       }

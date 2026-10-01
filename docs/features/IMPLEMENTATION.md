@@ -2,7 +2,7 @@
 
 Tracks build status for all 61 components across `@bixant/core`, `@bixant/data-table` and `@bixant/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 55 / 61 done.**
+**Progress: 56 / 61 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -105,7 +105,7 @@ Depend on Tier 2 components.
 
 ## Tier 5 — Application shell
 
-- [ ] [`bx-page`](core/page.md) — mobile nav becomes an off-canvas drawer (FR-PAGE-02); (shares pattern with `bx-drawer`); uses `bx-scroller`
+- [x] [`bx-page`](core/page.md) (view is derived from the page element's own measured width and reflected as `view`, since a container query can't take a configurable threshold; in mobile the navigation is an in-page off-canvas drawer — absolutely positioned, not a top-layer `<dialog>`, so it stays inside an embedding container — and focus is contained via `inert` on everything else rather than a Tab trap; the navigation body scrolls in a `bx-scroller`, whose vertical mode was fixed to honor a host height constraint; `--main-width` only caps the main column's max size; `sheet-narrow` n/a — see the component's own doc comment) — (shares pattern with `bx-drawer`); uses `bx-scroller` — `packages/core/src/page`
 
 ## Tier 6 — Data packages
 

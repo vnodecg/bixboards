@@ -7,7 +7,7 @@
 | **Package**         | `@bixant/core` |
 | **Category**        | Organization   |
 | **Tag**             | `bx-page`      |
-| **Status**          | Planned        |
+| **Status**          | Implemented    |
 | **Form-associated** | No             |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
@@ -105,14 +105,17 @@ Primary demonstration of container reflow: aside drops below main, nav becomes d
 
 ## 9. Acceptance criteria
 
-- [ ] All FR-PAGE-* requirements covered by unit/component tests (Web Test Runner, real browsers).
-- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark.
-- [ ] axe-core: zero violations; manual screen-reader pass (NVDA/VoiceOver) documented.
-- [ ] Keyboard-only walkthrough recorded in the test plan.
-- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events.
-- [ ] Size budget check (`size-limit`) passes.
+- [ ] All FR-PAGE-* requirements covered by unit/component tests (Web Test Runner, real browsers). FR-PAGE-01/02/03 are covered in Chromium; Firefox/WebKit run in CI only. The `prefers-reduced-motion` opt-out and forced-colors rules are CSS-only and not asserted in a test.
+- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark. No visual-regression tooling configured yet.
+- [ ] axe-core: zero violations (desktop, mobile closed, mobile drawer open, asserted in the component's test file; color-contrast is ignored for the drawer-open state because axe measures the inert page through the scrim); manual screen-reader pass (NVDA/VoiceOver) not done yet.
+- [ ] Keyboard-only walkthrough recorded in the test plan. Skip link, Escape-to-close and focus return are covered by tests and the Storybook story; no recorded walkthrough yet.
+- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events. No wrapper generation yet.
+- [ ] Size budget check (`size-limit`) passes. No size-limit tooling configured yet.
 
 ## 10. Notes and open questions
 
 - Naming prefix is `bx-`; CSS hooks use `--bx-*`.
 - Open: confirm final property names against the custom-elements manifest during implementation.
+- The mobile drawer is an absolutely positioned in-page panel (not a top-layer `<dialog>` like `bx-drawer`) so it stays within an embedding container. Focus containment is `inert` on everything else, so Tab can reach browser chrome.
+- `mobile-breakpoint` is resolved to px through a probe element, so `rem`/`em` follow the live root font size.
+- `--main-width` only caps the main column's maximum inline size.
