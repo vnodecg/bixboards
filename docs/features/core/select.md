@@ -7,7 +7,7 @@
 | **Package**         | `@bixant/core`         |
 | **Category**        | Form                   |
 | **Tag**             | `bx-select`            |
-| **Status**          | Planned                |
+| **Status**          | Implemented            |
 | **Form-associated** | Yes (ElementInternals) |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
@@ -20,29 +20,31 @@ Single or multiple choice with searchable, virtualized listbox and removable-bad
 
 ### Properties / attributes
 
-| Name                     | Type                                  | Default    | Description                                                               |
-| ------------------------ | ------------------------------------- | ---------- | ------------------------------------------------------------------------- |
-| `name`                   | string                                | ""         | Form field name                                                           |
-| `value`                  | string                                | ""         | Current value                                                             |
-| `disabled`               | boolean                               | false      | -                                                                         |
-| `required`               | boolean                               | false      | -                                                                         |
-| `form`                   | string                                | ""         | Associate with form by id                                                 |
-| `hint`                   | string                                | ""         | Help text (also `hint` slot)                                              |
-| `label`                  | string                                | ""         | Label (also `label` slot)                                                 |
-| `size`                   | "small" \| "medium" \| "large"        | "medium"   | -                                                                         |
-| `with-label / with-hint` | boolean                               | false      | Opt into slot-based label/hint                                            |
-| `multiple`               | boolean                               | false      | -                                                                         |
-| `max-options-visible`    | number                                | 3          | Tags before "+N"                                                          |
-| `clearable`              | boolean                               | false      | -                                                                         |
-| `placeholder`            | string                                | ""         | -                                                                         |
-| `placement`              | top \| bottom                         | "bottom"   | -                                                                         |
-| `appearance`             | outlined \| filled \| filled outlined | "outlined" | -                                                                         |
-| `pill`                   | boolean                               | false      | -                                                                         |
-| `searchable`             | boolean                               | false      | Adds filter input                                                         |
-| `virtual`                | boolean                               | "auto"     | Virtualize option list; `auto` at 200+ options                            |
-| `options`                | Option[]                              | -          | Data-driven alternative to slotted `bx-option`s (required for 10k+ items) |
-| `loading`                | boolean                               | false      | Async loading state                                                       |
-| `remote`                 | boolean                               | false      | Emit `bx-search` instead of filtering locally                             |
+| Name                     | Type                                     | Default    | Description                                                                                              |
+| ------------------------ | ---------------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------- |
+| `name`                   | string                                   | ""         | Form field name                                                                                          |
+| `value`                  | string \| string[]                       | ""         | Current value; a `string[]` when `multiple` (whitespace-separated as an attribute)                       |
+| `disabled`               | boolean                                  | false      | -                                                                                                        |
+| `required`               | boolean                                  | false      | -                                                                                                        |
+| `form`                   | string                                   | ""         | Associate with form by id — the native `form` attribute, honored by the browser; not a declared property |
+| `hint`                   | string                                   | ""         | Help text (also `hint` slot)                                                                             |
+| `label`                  | string                                   | ""         | Label (also `label` slot)                                                                                |
+| `size`                   | "small" \| "medium" \| "large"           | "medium"   | -                                                                                                        |
+| `with-label / with-hint` | boolean                                  | false      | Opt into slot-based label/hint                                                                           |
+| `multiple`               | boolean                                  | false      | -                                                                                                        |
+| `max-options-visible`    | number \| "auto"                         | 3          | Tags before "+N"; `auto` fits tags to the measured width                                                 |
+| `clearable`              | boolean                                  | false      | -                                                                                                        |
+| `placeholder`            | string                                   | ""         | -                                                                                                        |
+| `placement`              | top \| bottom                            | "bottom"   | -                                                                                                        |
+| `appearance`             | outlined \| filled \| filled outlined    | "outlined" | -                                                                                                        |
+| `pill`                   | boolean                                  | false      | -                                                                                                        |
+| `searchable`             | boolean                                  | false      | Adds filter input                                                                                        |
+| `virtual`                | boolean \| "auto"                        | "auto"     | Virtualize option list; `auto` at 200+ options (`virtual="false"` turns it off)                          |
+| `options`                | `{ value, label?, disabled?, group? }[]` | -          | Data-driven alternative to slotted `bx-option`s (required for 10k+ items)                                |
+| `loading`                | boolean                                  | false      | Async loading state                                                                                      |
+| `remote`                 | boolean                                  | false      | Emit `bx-search` instead of filtering locally                                                            |
+| `readonly`               | boolean                                  | false      | Value cannot be changed and the list cannot be opened (added)                                            |
+| `open`                   | boolean                                  | false      | Listbox visibility, reflected (added)                                                                    |
 
 ### Slots
 
@@ -58,19 +60,19 @@ Single or multiple choice with searchable, virtualized listbox and removable-bad
 
 ### Events
 
-| Event           | Detail / notes                            |
-| --------------- | ----------------------------------------- |
-| `input`         | Value changed by user (bubbles, composed) |
-| `change`        | Committed change                          |
-| `bx-invalid`    | Constraint validation failed              |
-| `focus / blur`  | -                                         |
-| `bx-clear`      | -                                         |
-| `bx-show`       | -                                         |
-| `bx-after-show` | -                                         |
-| `bx-hide`       | -                                         |
-| `bx-after-hide` | -                                         |
-| `bx-search`     | detail.query, debounced                   |
-| `bx-load-more`  | Near end of list for async paging         |
+| Event           | Detail / notes                                                                                                      |
+| --------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `input`         | Value changed by user (bubbles, composed)                                                                           |
+| `change`        | Committed change                                                                                                    |
+| `bx-invalid`    | Constraint validation failed                                                                                        |
+| `focus / blur`  | -                                                                                                                   |
+| `bx-clear`      | -                                                                                                                   |
+| `bx-show`       | Cancelable                                                                                                          |
+| `bx-after-show` | -                                                                                                                   |
+| `bx-hide`       | Cancelable; fired by `hide()` (selection, Escape, focus leaving)                                                    |
+| `bx-after-hide` | -                                                                                                                   |
+| `bx-search`     | `detail: { query, signal }`, debounced 250 ms, only when `remote`; `signal` aborts when a newer query supersedes it |
+| `bx-load-more`  | Near end of list for async paging                                                                                   |
 
 ### CSS parts
 
@@ -82,7 +84,7 @@ Single or multiple choice with searchable, virtualized listbox and removable-bad
 
 ### Methods
 
-`show()`, `hide()`, `focus()`, `blur()`
+`show()`, `hide()`, `focus()`, `blur()`, plus the form-associated `checkValidity()`, `reportValidity()`, `setCustomValidity()`
 
 ## 3. Functional requirements
 
@@ -128,15 +130,19 @@ Multi-select tags collapse to "+N" based on measured width, not fixed count (`ma
 
 ## 9. Acceptance criteria
 
-- [ ] All FR-SELECT-* requirements covered by unit/component tests (Web Test Runner, real browsers).
-- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark.
-- [ ] axe-core: zero violations; manual screen-reader pass (NVDA/VoiceOver) documented.
-- [ ] Keyboard-only walkthrough recorded in the test plan.
-- [ ] Form integration tests: submit, reset, autofill restore, `required`/custom validity, disabled/readonly semantics.
-- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events.
-- [ ] Size budget check (`size-limit`) passes.
+- [ ] All FR-SELECT-* requirements covered by unit/component tests (Web Test Runner, real browsers). FR-SELECT-01/02/03/05/06/07 are covered; FR-SELECT-04 is covered for the full data set but the "index built off-thread" part is not implemented (main-thread, lazily built search keys — a few ms at 100k rows). Run in Chromium only so far.
+- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark. No visual-regression tooling configured yet.
+- [ ] axe-core: zero violations (asserted closed, open, multiple, disabled and data-driven in the component's test file); manual screen-reader pass (NVDA/VoiceOver) not done yet.
+- [ ] Keyboard-only walkthrough recorded in the test plan. Keyboard behavior is covered by tests and the Storybook stories; no recorded walkthrough yet.
+- [x] Form integration tests: submit, reset, autofill restore, `required`/custom validity, disabled/readonly semantics. (Autofill restore calls `formStateRestoreCallback` directly rather than going through a browser restore.)
+- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events. No wrapper generation yet.
+- [ ] Size budget check (`size-limit`) passes. No size-limit tooling configured yet.
 
 ## 10. Notes and open questions
 
 - Virtualization, remote search, data-driven options.
+- Focus stays on a native `<input role="combobox">`; the highlighted option is exposed through `aria-activedescendant`, set via the `ariaActiveDescendantElement` element-reflection property so it can reference a slotted light-DOM `bx-option` (`bx-option` carries `role="option"` on its host for that reason). Browsers without element reflection fall back to the attribute, which only resolves for rows rendered in the shadow root.
+- Windowed lists render rows themselves; slotted `bx-option`s are then only a data source, so their `start`/`end` slot content is not shown. Slotted `value`/`label` are read from attributes and text.
+- Group headers are visual rows (`role="presentation"`), not `role="group"` — a flat, windowed list cannot nest options in a group element.
+- A multiple select submits one `FormData` entry per value under `name`.
 - Open: confirm final property names against the custom-elements manifest during implementation.

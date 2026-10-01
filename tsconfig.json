@@ -8,6 +8,15 @@
     },
     {
       "path": "./packages/core"
+    },
+    {
+      "path": "./packages/data-list"
+    },
+    {
+      "path": "./packages/data-table"
+    },
+    {
+      "path": "./packages/react"
     }
   ],
   "compilerOptions": {}

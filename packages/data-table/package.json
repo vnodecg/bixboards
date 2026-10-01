@@ -1,0 +1,47 @@
+{
+  "name": "@bixant/data-table",
+  "version": "0.0.0",
+  "description": "Bixant virtualized enterprise data table (bx-data-table), built on core VirtualizerController.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "./dist/data-table/index.js"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./data-table": {
+      "types": "./dist/data-table/index.d.ts",
+      "default": "./dist/data-table/index.js"
+    },
+    "./data-table/define": {
+      "types": "./dist/data-table/define.d.ts",
+      "default": "./dist/data-table/define.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@bixant/core": "workspace:*",
+    "lit": "^3.3.3"
+  },
+  "devDependencies": {
+    "@bixant/design-system": "workspace:*",
+    "@open-wc/testing": "^5.0.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^24.0.0",
+    "@web/dev-server-esbuild": "^2.0.0",
+    "@web/test-runner": "^1.0.0",
+    "@web/test-runner-commands": "^1.0.1",
+    "@web/test-runner-playwright": "^1.0.0",
+    "playwright": "^1.63.0"
+  }
+}

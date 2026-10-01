@@ -2,7 +2,7 @@
 
 Tracks build status for all 61 components across `@bixant/core`, `@bixant/data-table` and `@bixant/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 53 / 61 done.**
+**Progress: 55 / 61 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -99,9 +99,9 @@ Depend on Tier 2 components.
 
 ## Tier 4 — Virtualization infra + virtualized pickers
 
-- [ ] `VirtualizerController` (shared `ReactiveController`, `@bixant/core`) — infra, not a tag; required by `bx-select`, `bx-dropdown`, `bx-virtual-tree`, `bx-data-list`, `bx-data-table` (conventions §4)
-- [ ] [`bx-select`](core/select.md) — depends on `bx-popup`, `bx-option`, `VirtualizerController`
-- [ ] [`bx-dropdown`](core/dropdown.md) — depends on `bx-popup`, `bx-dropdown-item`, `VirtualizerController` (FR-DROPDOWN-01/05)
+- [x] `VirtualizerController` (shared `ReactiveController`, `@bixant/core`; fixed sizes are arithmetic, variable sizes use a Fenwick-tree prefix-sum index with measured-size correction, scroll anchoring, overscan, pinned and sticky indexes, `scrollToIndex/Key`, `aria-setsize`/`posinset`/`rowindex` from data indexes; `enabled: false` returns every item for the small-list fallback, and the consumer pairs it with `content-visibility`; horizontal/RTL axis is implemented but only the vertical axis is exercised by tests so far; observer callbacks defer renders to the next animation frame to avoid "ResizeObserver loop" errors) — infra, not a tag; required by `bx-select`, `bx-dropdown`, `bx-virtual-tree`, `bx-data-list`, `bx-data-table` (conventions §4) — `packages/core/src/virtualizer`
+- [x] [`bx-select`](core/select.md) (focus stays on a native `<input role="combobox">`, highlighted option via `aria-activedescendant` set through element reflection, so `bx-option` now carries `role="option"` on its host; slotted options are only a data source once the list is windowed, so their `start`/`end` slots are not shown then; FR-SELECT-04's off-thread index is not implemented — main-thread, lazily built search keys; adds `readonly`/`open`, `value` is `string[]` when `multiple`; `bx-search` only when `remote`; group headers are visual rows, not `role="group"` — see the component's own doc comment) — depends on `bx-popup`, `bx-option`, `VirtualizerController` — `packages/core/src/select`
+- [x] [`bx-dropdown`](core/dropdown.md) (virtual mode (FR-DROPDOWN-05) applies to the new `items` data array only — slotted items are the consumer's elements and cannot be windowed; `sheet-narrow` not implemented; `bx-dropdown-item` gained working submenus with safe-triangle hover, `type="radio"`, `focus()`, and its host dropped `container-type` because it broke fixed-position descendants; breadcrumb's ellipsis menu is still an inline expand, not wired to this — see the component's own doc comment) — depends on `bx-popup`, `bx-dropdown-item`, `VirtualizerController` (FR-DROPDOWN-01/05) — `packages/core/src/dropdown`
 
 ## Tier 5 — Application shell
 

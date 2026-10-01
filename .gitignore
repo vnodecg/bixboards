@@ -69,3 +69,6 @@ packages/storybook/.storybook/generated
 # Playwright run artifacts
 /playwright-report
 /test-results
+
+# svelte-package scratch output
+.svelte-kit

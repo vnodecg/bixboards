@@ -1,0 +1,45 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo",
+    "emitDeclarationOnly": false,
+    "declaration": true,
+    "sourceMap": true,
+    "lib": [
+      "es2023",
+      "dom",
+      "dom.iterable"
+    ],
+    "types": [
+      "node"
+    ],
+    "verbatimModuleSyntax": true,
+    "rewriteRelativeImportExtensions": true,
+    "erasableSyntaxOnly": true,
+    "noUncheckedIndexedAccess": true,
+    "jsx": "react-jsx",
+    "module": "esnext",
+    "moduleResolution": "bundler"
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+  "exclude": [
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx"
+  ],
+  "references": [
+    {
+      "path": "../core/tsconfig.lib.json"
+    },
+    {
+      "path": "../data-list/tsconfig.lib.json"
+    },
+    {
+      "path": "../data-table/tsconfig.lib.json"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "name": "@bixant/react",
+  "version": "0.0.0",
+  "description": "React wrappers for every Bixant element, generated from the Custom Elements Manifests.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "./dist/generated/*.js"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./dist/generated/*.d.ts",
+      "default": "./dist/generated/*.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "generate": "node ../../tools/wrappers/generate.mts react"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "dependencies": {
+    "@bixant/core": "workspace:*",
+    "@bixant/data-list": "workspace:*",
+    "@bixant/data-table": "workspace:*"
+  },
+  "devDependencies": {
+    "@open-wc/testing": "^5.0.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^24.0.0",
+    "@web/dev-server-esbuild": "^2.0.0",
+    "@web/test-runner": "^1.0.0",
+    "@web/test-runner-commands": "^1.0.1",
+    "@web/test-runner-playwright": "^1.0.0",
+    "playwright": "^1.63.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "esbuild": "^0.25.0"
+  }
+}

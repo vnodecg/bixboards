@@ -1,0 +1,28 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": false,
+    "declaration": false,
+    "emitDeclarationOnly": false,
+    "declarationMap": false,
+    "noEmit": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "lib": [
+      "es2023",
+      "dom",
+      "dom.iterable"
+    ],
+    "types": [
+      "node"
+    ],
+    "verbatimModuleSyntax": true,
+    "allowImportingTsExtensions": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.svelte",
+    "tests/**/*.ts",
+    "tests/**/*.svelte"
+  ]
+}

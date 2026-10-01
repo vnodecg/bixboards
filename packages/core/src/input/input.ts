@@ -484,6 +484,8 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
   }
 
   #handleInput = (event: Event): void => {
+    // The native `input` is composed and would reach consumers next to the one dispatched below.
+    event.stopPropagation();
     this.value = (event.target as HTMLInputElement).value;
     this.#hasInteracted = true;
     this.#syncValidity();

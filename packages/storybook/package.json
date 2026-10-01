@@ -18,6 +18,8 @@
     "@storybook/web-components-vite": "^10.6.0",
     "lit": "^3.3.3",
     "storybook": "^10.6.0",
-    "vite": "^8.3.1"
+    "vite": "^8.3.1",
+    "@bixant/data-list": "workspace:*",
+    "@bixant/data-table": "workspace:*"
   }
 }

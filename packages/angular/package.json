@@ -1,0 +1,54 @@
+{
+  "name": "@bixant/angular",
+  "version": "0.0.0",
+  "description": "Angular standalone components for every Bixant element (with ControlValueAccessor for form controls), generated from the Custom Elements Manifests.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "./dist/generated/*.js"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./dist/generated/*.d.ts",
+      "default": "./dist/generated/*.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "generate": "node ../../tools/wrappers/generate.mts angular"
+  },
+  "peerDependencies": {
+    "@angular/core": ">=19",
+    "@angular/forms": ">=19"
+  },
+  "dependencies": {
+    "@bixant/core": "workspace:*",
+    "@bixant/data-list": "workspace:*",
+    "@bixant/data-table": "workspace:*"
+  },
+  "devDependencies": {
+    "@open-wc/testing": "^5.0.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^24.0.0",
+    "@web/dev-server-esbuild": "^2.0.0",
+    "@web/test-runner": "^1.0.0",
+    "@web/test-runner-commands": "^1.0.1",
+    "@web/test-runner-playwright": "^1.0.0",
+    "playwright": "^1.63.0",
+    "@angular/compiler": "^22.0.0",
+    "@angular/compiler-cli": "^22.0.0",
+    "@angular/core": "^22.0.0",
+    "@angular/forms": "^22.0.0",
+    "@angular/common": "^22.0.0",
+    "@angular/platform-browser": "^22.0.0",
+    "rxjs": "^7.8.0"
+  }
+}

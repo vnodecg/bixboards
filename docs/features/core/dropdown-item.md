@@ -7,7 +7,7 @@
 | **Package**         | `@bixant/core`     |
 | **Category**        | Actions            |
 | **Tag**             | `bx-dropdown-item` |
-| **Status**          | Planned            |
+| **Status**          | Implemented        |
 | **Form-associated** | No                 |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
@@ -20,13 +20,16 @@ A single menu entry: plain, checkbox, or submenu parent. Specified for the Bixan
 
 ### Properties / attributes
 
-| Name       | Type                   | Default   | Description              |
-| ---------- | ---------------------- | --------- | ------------------------ |
-| `variant`  | "default" \| "error"   | "default" | -                        |
-| `type`     | "normal" \| "checkbox" | "normal"  | -                        |
-| `checked`  | boolean                | false     | Checkbox state           |
-| `value`    | string                 | ""        | Value reported on select |
-| `disabled` | boolean                | false     | -                        |
+| Name                      | Type                              | Default   | Description                                                                                        |
+| ------------------------- | --------------------------------- | --------- | -------------------------------------------------------------------------------------------------- |
+| `variant`                 | "default" \| "error"              | "default" | -                                                                                                  |
+| `type`                    | "normal" \| "checkbox" \| "radio" | "normal"  | `radio` (added) pairs with `name` for mutually exclusive groups                                    |
+| `checked`                 | boolean                           | false     | Checkbox state                                                                                     |
+| `value`                   | string                            | ""        | Value reported on select                                                                           |
+| `disabled`                | boolean                           | false     | -                                                                                                  |
+| `name`                    | string                            | ""        | Radio group name within one menu (added)                                                           |
+| `submenu-open`            | boolean                           | false     | Nested menu visibility, reflected (added)                                                          |
+| `set-size` / `pos-in-set` | number                            | -         | `aria-setsize`/`aria-posinset` for windowed menus, where DOM siblings are not the full set (added) |
 
 ### Slots
 
@@ -39,13 +42,13 @@ A single menu entry: plain, checkbox, or submenu parent. Specified for the Bixan
 
 ### Events
 
-| Event                             | Detail / notes |
-| --------------------------------- | -------------- |
-| `bx-select (bubbles to dropdown)` | -              |
+| Event                             | Detail / notes                                                                                       |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `bx-select (bubbles to dropdown)` | `detail: { value, checked, item }`; not fired for a submenu parent (activating it opens the submenu) |
 
 ### CSS parts
 
-`checkmark`, `icon`, `label`, `details`, `submenu-icon`
+`checkmark`, `icon`, `label`, `details`, `submenu-icon`, `submenu` (added)
 
 ### CSS custom properties
 
@@ -53,7 +56,7 @@ _Only global tokens (see conventions)._
 
 ### Methods
 
-_None._
+`openSubmenu(focusFirst?)`, `closeSubmenu()`, `focus()` (delegates to the row) — added
 
 ## 3. Functional requirements
 
@@ -93,14 +96,16 @@ Details slot hides when the menu is narrower than 12 fluid units.
 
 ## 9. Acceptance criteria
 
-- [ ] All FR-DROPDOWN-ITEM-* requirements covered by unit/component tests (Web Test Runner, real browsers).
-- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark.
-- [ ] axe-core: zero violations; manual screen-reader pass (NVDA/VoiceOver) documented.
-- [ ] Keyboard-only walkthrough recorded in the test plan.
-- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events.
-- [ ] Size budget check (`size-limit`) passes.
+- [ ] All FR-DROPDOWN-ITEM-* requirements covered by unit/component tests (Web Test Runner, real browsers). Run in Chromium only so far.
+- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark. No visual-regression tooling configured yet.
+- [ ] axe-core: zero violations (asserted in the item's and `bx-dropdown`'s test files); manual screen-reader pass (NVDA/VoiceOver) not done yet.
+- [ ] Keyboard-only walkthrough recorded in the test plan. Keyboard behavior is covered by tests and the Storybook stories; no recorded walkthrough yet.
+- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events. No wrapper generation yet.
+- [ ] Size budget check (`size-limit`) passes. No size-limit tooling configured yet.
 
 ## 10. Notes and open questions
 
 - Naming prefix is `bx-`; CSS hooks use `--bx-*`.
+- A `submenu` slot with children makes the item a submenu parent: the nested items render in an internal `bx-popup` beside the row. Opens on hover (after a dwell, with a safe triangle), ArrowRight/Enter/Space; closes with ArrowLeft/Escape. One submenu per menu at a time.
+- The host no longer sets `container-type`: it made fixed-position descendants (the submenu popup) resolve against the row instead of the viewport, so the "details hide when narrow" query now measures the inner row. Note that `@container` conditions cannot contain `var()`, so that query's `calc(var(--bx-unit) * 12)` threshold never matches today (pre-existing; not changed here).
 - Open: confirm final property names against the custom-elements manifest during implementation.

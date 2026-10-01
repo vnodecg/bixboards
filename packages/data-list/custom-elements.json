@@ -1,0 +1,822 @@
+{
+  "schemaVersion": "2.1.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/data-list/data-list.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxDataList",
+          "tagName": "bx-data-list",
+          "customElement": true,
+          "description": "`<bx-data-list>` — virtualized list / grid for feeds, inboxes and galleries\n(docs/features/data-list/data-list.md), built on core's `VirtualizerController`.\n\nItems are plain data (`items`, or pages pulled through `data-source`); the list renders only\nthe rows near the viewport, with `renderItem(item, index)` supplying each item's template.\nRows are measured (`item-height=\"auto\"`, the default) with scroll anchoring, or fixed\n(`item-height` in px, which includes any gap). Grid layout derives its column count from the\n*container's* inline size (`floor((width + gap) / (min-item-width + gap))`, via the shared\n`ResizeObserver`), so list → grid → list happens without breakpoints. `group-by` inserts group\nheader rows; the header covering the viewport top is rendered `position: sticky`.\n\n**Accessibility.** `role=\"list\"`/`listitem`, or `listbox`/`option` once the list is selectable or\nreorderable, with `aria-setsize`/`aria-posinset` from data indexes. Focus stays on the viewport\nand the active item is announced with `aria-activedescendant` (the item node is pinned in the\nwindow so it survives scrolling). Arrows/Home/End/PageUp/PageDown move, Space or Enter select\n(Shift extends a range, Ctrl+A selects all in `multiple`), typing jumps by `item-label`. A polite\nlive region announces each loaded batch.\n\n**Reorder (FR-DATA-LIST-05).** With `reorderable`: Space picks up the active item, arrows move\nit, Space drops, Escape cancels (so Enter is the select key then). Pointer drag starts after a\n4 px threshold, auto-scrolls near the viewport edges and drops on release. Both emit\n`bx-reorder` and move the item in the list's own copy; assign `items` again to resync.\n\n**Reverse (FR-DATA-LIST-03).** `direction=\"reverse\"` starts at the bottom, keeps the viewport\npinned to the bottom as items arrive unless the user scrolled up, and loads older items when\nscrolled near the top while keeping what the user is reading in place.\n\nGaps, per docs/features/_conventions.md's \"say so inline\" rule: `layout=\"masonry\"` is rendered\nas `grid` (true column-packing needs per-column virtualization, which the shared virtualizer\ndoes not do); the spec's `item` *slot* is replaced by the `renderItem` property (a slotted\ntemplate cannot be instantiated per item); `item-height` fixes the row height in px.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "item-key",
+              "fieldName": "itemKey",
+              "type": {
+                "text": "string | ((item: T, index: number) => Key)"
+              },
+              "default": "'id'"
+            },
+            {
+              "name": "layout",
+              "fieldName": "layout",
+              "type": {
+                "text": "Layout"
+              },
+              "default": "'list'"
+            },
+            {
+              "name": "min-item-width",
+              "fieldName": "minItemWidth",
+              "type": {
+                "text": "string"
+              },
+              "default": "'16rem'"
+            },
+            {
+              "name": "item-height",
+              "fieldName": "itemHeight",
+              "type": {
+                "text": "number | 'auto'"
+              },
+              "default": "'auto'"
+            },
+            {
+              "name": "overscan",
+              "fieldName": "overscan",
+              "type": {
+                "text": "number"
+              },
+              "default": "4"
+            },
+            {
+              "name": "group-by",
+              "fieldName": "groupBy",
+              "type": {
+                "text": "string | ((item: T) => string)"
+              }
+            },
+            {
+              "name": "selection",
+              "fieldName": "selection",
+              "type": {
+                "text": "Selection"
+              },
+              "default": "'none'"
+            },
+            {
+              "name": "reorderable",
+              "fieldName": "reorderable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "direction",
+              "fieldName": "direction",
+              "type": {
+                "text": "Direction"
+              },
+              "default": "'normal'"
+            },
+            {
+              "name": "loading",
+              "fieldName": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "empty-label",
+              "fieldName": "emptyLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'No items'"
+            },
+            {
+              "name": "item-label",
+              "fieldName": "itemLabel",
+              "type": {
+                "text": "string | ((item: T) => string)"
+              },
+              "description": "Field name or function giving an item's text for typeahead."
+            },
+            {
+              "name": "aria-label",
+              "fieldName": "ariaLabel",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "items",
+              "type": {
+                "text": "readonly T[]"
+              },
+              "default": "[]",
+              "description": "Data items (ignored while `data-source` is set; pages accumulate internally then)."
+            },
+            {
+              "kind": "field",
+              "name": "itemKey",
+              "type": {
+                "text": "string | ((item: T, index: number) => Key)"
+              },
+              "default": "'id'",
+              "attribute": "item-key"
+            },
+            {
+              "kind": "field",
+              "name": "layout",
+              "type": {
+                "text": "Layout"
+              },
+              "default": "'list'",
+              "attribute": "layout",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "minItemWidth",
+              "type": {
+                "text": "string"
+              },
+              "default": "'16rem'",
+              "attribute": "min-item-width"
+            },
+            {
+              "kind": "field",
+              "name": "itemHeight",
+              "type": {
+                "text": "number | 'auto'"
+              },
+              "default": "'auto'",
+              "attribute": "item-height"
+            },
+            {
+              "kind": "field",
+              "name": "overscan",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "attribute": "overscan"
+            },
+            {
+              "kind": "field",
+              "name": "groupBy",
+              "type": {
+                "text": "string | ((item: T) => string)"
+              },
+              "attribute": "group-by"
+            },
+            {
+              "kind": "field",
+              "name": "selection",
+              "type": {
+                "text": "Selection"
+              },
+              "default": "'none'",
+              "attribute": "selection",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "reorderable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "reorderable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "dataSource",
+              "type": {
+                "text": "DataSource<T>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "direction",
+              "type": {
+                "text": "Direction"
+              },
+              "default": "'normal'",
+              "attribute": "direction",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "emptyLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'No items'",
+              "attribute": "empty-label"
+            },
+            {
+              "kind": "field",
+              "name": "itemLabel",
+              "type": {
+                "text": "string | ((item: T) => string)"
+              },
+              "description": "Field name or function giving an item's text for typeahead.",
+              "attribute": "item-label"
+            },
+            {
+              "kind": "field",
+              "name": "selectedKeys",
+              "type": {
+                "text": "Key[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "renderItem",
+              "type": {
+                "text": "(item: T, index: number) => TemplateResult | string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "renderGroupHeader",
+              "type": {
+                "text": "(group: string) => TemplateResult | string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "ariaLabel",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null",
+              "attribute": "aria-label"
+            },
+            {
+              "kind": "method",
+              "name": "refresh",
+              "description": "Discards loaded pages (when a data source is set) and reloads from the start.",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "invalidateItem",
+              "description": "Re-measures one item (its content changed height).",
+              "parameters": [
+                {
+                  "name": "key",
+                  "type": {
+                    "text": "Key"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "scrollToIndex",
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "align",
+                  "type": {
+                    "text": "'start' | 'center' | 'end' | 'auto'"
+                  },
+                  "optional": true
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "scrollToKey",
+              "parameters": [
+                {
+                  "name": "key",
+                  "type": {
+                    "text": "Key"
+                  }
+                },
+                {
+                  "name": "align",
+                  "type": {
+                    "text": "'start' | 'center' | 'end' | 'auto'"
+                  },
+                  "optional": true
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "bx-item-click",
+              "description": "An item was activated. `detail: { item, index, key }`."
+            },
+            {
+              "name": "bx-selection-change",
+              "description": "`detail: { selectedKeys }`."
+            },
+            {
+              "name": "bx-reorder",
+              "description": "An item moved. `detail: { item, key, from, to }`."
+            },
+            {
+              "name": "bx-range-change",
+              "description": "The rendered item range changed. `detail: { start, end }`."
+            },
+            {
+              "name": "bx-load-more",
+              "description": "Scrolled near the end (the start in `reverse`). With `data-source` the next page is also requested automatically."
+            },
+            {
+              "name": "bx-data-error",
+              "description": "A `data-source` request failed. `detail: { error }`; call `refresh()` or scroll to retry."
+            }
+          ],
+          "slots": [
+            {
+              "name": "group-header",
+              "description": "Not used per group; see `renderGroupHeader`."
+            },
+            {
+              "name": "empty",
+              "description": "Shown when there are no items."
+            },
+            {
+              "name": "loading",
+              "description": "Shown while loading."
+            },
+            {
+              "name": "header",
+              "description": "Above the list."
+            },
+            {
+              "name": "footer",
+              "description": "Below the list."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "base",
+              "description": "The outer container."
+            },
+            {
+              "name": "viewport",
+              "description": "The scrolling element."
+            },
+            {
+              "name": "item",
+              "description": "An item."
+            },
+            {
+              "name": "group-header",
+              "description": "A group header row."
+            },
+            {
+              "name": "empty",
+              "description": "The empty state."
+            },
+            {
+              "name": "loading",
+              "description": "The loading state."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-list-gap",
+              "description": "Gap between items."
+            },
+            {
+              "name": "--bx-list-item-min-width",
+              "description": "Grid track minimum width."
+            },
+            {
+              "name": "--bx-list-item-height",
+              "description": "Item height when fixed."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/virtual-tree/virtual-tree.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxVirtualTree",
+          "tagName": "bx-virtual-tree",
+          "customElement": true,
+          "description": "`<bx-virtual-tree>` — virtualized tree for 100k+ nodes with lazy children, filtering and\nmulti-selection (docs/features/data-list/virtual-tree.md). The data-driven counterpart to\n`bx-tree`: nodes are plain objects and only the visible rows exist in the DOM.\n\n**Model (FR-VIRTUAL-TREE-01/03).** The tree is indexed once into pre-order arrays (parent,\ndepth, subtree end, leaf and selected-leaf counts). Because a subtree is a contiguous range,\nthe visible rows are produced by *skipping* collapsed subtrees (cost: visible rows, not total\nnodes) and a branch's tri-state is two integers — toggling a branch updates its range and\nwalks the ancestors, never touching DOM or unrendered components. The visible-row array feeds\ncore's `VirtualizerController`; the row that has focus is pinned in the window.\n\n**Lazy loading (FR-VIRTUAL-TREE-04).** A node with `hasChildren: true` and no `children` loads on\nfirst expand through `data-source.getChildren(key, signal)`, with a per-node loading/error\nstate: a failed node shows an error row and Enter/click retries. Without a data source the\nelement emits `bx-lazy-load` and the app answers with `setChildren(key, nodes)` /\n`setLoadError(key)`.\n\n**Filtering (FR-VIRTUAL-TREE-02).** `filter` (a substring, case-insensitive, or a predicate)\nkeeps matches and their ancestors, and ancestors auto-expand. It runs on the main thread in one\nlinear pass over the pre-order arrays (no Worker); that is a few ms at 200k nodes.\n\n**Selection.** `single` (any node), `multiple` (a branch selects every leaf below it and shows a\nmixed state while partly selected) and `leaf` (only leaves are selectable; clicking a branch\ntoggles it open). `selectedKeys` always lists leaf keys (or the one key in `single`).\n\n**Accessibility.** ARIA tree: `role=\"tree\"`/`treeitem`, `aria-level`/`setsize`/`posinset`\ncomputed from data, `aria-expanded`, `aria-selected`/`aria-checked`. Focus stays on the tree and\nthe active node is exposed with `aria-activedescendant`. Arrows/Home/End/`*`/typeahead per the\nAPG tree pattern; Space toggles selection, Enter activates.\n\nGaps, per docs/features/_conventions.md's \"say so inline\" rule: tree-*table* mode (secondary\ncolumns with priority hiding) is not implemented; the spec's `node` slot is the `renderNode`\nproperty (a slotted template cannot be instantiated per node); `expand-icon`/`collapse-icon` slots\nare not provided (the chevron is a CSS-rotated glyph).",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "node-key",
+              "fieldName": "nodeKey",
+              "type": {
+                "text": "string"
+              },
+              "default": "'id'"
+            },
+            {
+              "name": "selection",
+              "fieldName": "selection",
+              "type": {
+                "text": "Selection"
+              },
+              "default": "'none'"
+            },
+            {
+              "name": "row-height",
+              "fieldName": "rowHeight",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "indent",
+              "fieldName": "indent",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "show-guides",
+              "fieldName": "showGuides",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true"
+            },
+            {
+              "name": "aria-label",
+              "fieldName": "ariaLabel",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "nodes",
+              "type": {
+                "text": "readonly TreeNode<T>[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "dataSource",
+              "type": {
+                "text": "TreeDataSource<T>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "nodeKey",
+              "type": {
+                "text": "string"
+              },
+              "default": "'id'",
+              "attribute": "node-key"
+            },
+            {
+              "kind": "field",
+              "name": "expandedKeys",
+              "type": {
+                "text": "Key[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "selectedKeys",
+              "type": {
+                "text": "Key[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "selection",
+              "type": {
+                "text": "Selection"
+              },
+              "default": "'none'",
+              "attribute": "selection",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "filter",
+              "type": {
+                "text": "string | ((node: TreeNode<T>) => boolean)"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "rowHeight",
+              "type": {
+                "text": "number"
+              },
+              "attribute": "row-height"
+            },
+            {
+              "kind": "field",
+              "name": "indent",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "indent"
+            },
+            {
+              "kind": "field",
+              "name": "showGuides",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "show-guides",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "renderNode",
+              "type": {
+                "text": "(\n    node: TreeNode<T>,\n    context: TreeNodeContext,\n  ) => TemplateResult | string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "ariaLabel",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null",
+              "attribute": "aria-label"
+            },
+            {
+              "kind": "method",
+              "name": "expand",
+              "parameters": [
+                {
+                  "name": "key",
+                  "type": {
+                    "text": "Key"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "collapse",
+              "parameters": [
+                {
+                  "name": "key",
+                  "type": {
+                    "text": "Key"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "expandAll",
+              "description": "Expands every branch down to `depth` levels (0 = roots only). Default: all.",
+              "parameters": [
+                {
+                  "name": "depth",
+                  "type": {
+                    "text": "unknown"
+                  },
+                  "optional": true
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "collapseAll",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "scrollToKey",
+              "parameters": [
+                {
+                  "name": "key",
+                  "type": {
+                    "text": "Key"
+                  }
+                },
+                {
+                  "name": "align",
+                  "type": {
+                    "text": "'start' | 'center' | 'end' | 'auto'"
+                  },
+                  "optional": true
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "refresh",
+              "description": "Discards lazily-loaded children and errors, and rebuilds the tree from `nodes`.",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setChildren",
+              "description": "Supplies children for a lazy node (when not using `data-source`).",
+              "parameters": [
+                {
+                  "name": "key",
+                  "type": {
+                    "text": "Key"
+                  }
+                },
+                {
+                  "name": "children",
+                  "type": {
+                    "text": "TreeNode<T>[]"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setLoadError",
+              "description": "Marks a lazy node's load as failed; its row offers a retry.",
+              "parameters": [
+                {
+                  "name": "key",
+                  "type": {
+                    "text": "Key"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "bx-expand-change",
+              "description": "`detail: { key, expanded }`."
+            },
+            {
+              "name": "bx-selection-change",
+              "description": "`detail: { selectedKeys }`."
+            },
+            {
+              "name": "bx-node-click",
+              "description": "A node was activated. `detail: { key, node }`."
+            },
+            {
+              "name": "bx-lazy-load",
+              "description": "A lazy node was expanded. `detail: { key, signal }`."
+            },
+            {
+              "name": "bx-range-change",
+              "description": "The rendered row range changed. `detail: { start, end }`."
+            }
+          ],
+          "slots": [
+            {
+              "name": "empty",
+              "description": "Shown when no node is visible."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "base",
+              "description": "The outer container."
+            },
+            {
+              "name": "node",
+              "description": "A row."
+            },
+            {
+              "name": "indent",
+              "description": "The indentation (and guide) area of a row."
+            },
+            {
+              "name": "toggle",
+              "description": "The expand/collapse chevron."
+            },
+            {
+              "name": "label",
+              "description": "The node label."
+            },
+            {
+              "name": "guide",
+              "description": "The vertical guide lines (via the indent area's background)."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-tree-indent",
+              "description": "Indent per level."
+            },
+            {
+              "name": "--bx-tree-row-height",
+              "description": "Row height."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

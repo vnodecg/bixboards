@@ -7,7 +7,7 @@
 | **Package**         | `@bixant/core` |
 | **Category**        | Form           |
 | **Tag**             | `bx-option`    |
-| **Status**          | Planned        |
+| **Status**          | Implemented    |
 | **Form-associated** | No             |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
@@ -99,4 +99,5 @@ None.
 ## 10. Notes and open questions
 
 - Naming prefix is `bx-`; CSS hooks use `--bx-*`.
+- `role="option"`, `aria-selected` and `aria-disabled` live on the host (not on an element in the shadow root) so `bx-select`'s `aria-activedescendant` can reference the element that carries the role. A parent sets `data-active` for the keyboard/hover highlight and `aria-setsize`/`aria-posinset` when it windows the list.
 - Open: confirm final property names against the custom-elements manifest during implementation.

@@ -442,6 +442,8 @@ export class BxNumberInput extends FormAssociatedMixin(BixElement) {
   };
 
   #handleInput = (event: Event): void => {
+    // The native `input` is composed and would reach consumers next to the one dispatched below.
+    event.stopPropagation();
     const raw = (event.target as HTMLInputElement).value;
     this.#hasInteracted = true;
     if (raw === '') {

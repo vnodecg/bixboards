@@ -15,7 +15,7 @@ A Lit-based web component library that **scales automatically**.
 | Package                                                     | Purpose                                                                                               |
 | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | [`@bixant/design-system`](packages/design-system/README.md) | Design tokens and theming: JSON themes and foundation compiled to CSS custom properties (implemented) |
-| `@bixant/core`                                              | `VirtualizerController`, 58 general components (53 implemented, see the tracker)                      |
+| `@bixant/core`                                              | `VirtualizerController`, 58 general components (55 implemented, see the tracker)                      |
 | `@bixant/data-table`                                        | Virtualized enterprise data table                                                                     |
 | `@bixant/data-list`                                         | Virtualized list/grid and tree                                                                        |
 | `@bixant/react` · `@bixant/angular` · `@bixant/svelte`      | Generated wrappers over the custom elements                                                           |

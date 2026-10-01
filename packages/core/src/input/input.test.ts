@@ -1,3 +1,4 @@
+import { sendKeys } from '@web/test-runner-commands';
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import type { BxInput } from './input.ts';
 import './index.ts';
@@ -110,5 +111,14 @@ describe('bx-input', () => {
       html`<bx-input label="Email" hint="We won't spam you."></bx-input>`,
     );
     await expect(el).to.be.accessible();
+  });
+
+  it('fires exactly one input event per keystroke (not the native composed one as well)', async () => {
+    const el = await fixture<HTMLElement>(html`<bx-input></bx-input>`);
+    let inputs = 0;
+    el.addEventListener('input', () => inputs++);
+    el.focus();
+    await sendKeys({ type: '7' });
+    expect(inputs).to.equal(1);
   });
 });

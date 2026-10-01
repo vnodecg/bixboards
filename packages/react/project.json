@@ -1,0 +1,35 @@
+{
+  "name": "react",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/react/src",
+  "implicitDependencies": [
+    "core",
+    "data-list",
+    "data-table"
+  ],
+  "targets": {
+    "generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node tools/wrappers/generate.mts react",
+        "cwd": "."
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": [
+        "default",
+        "^default"
+      ],
+      "dependsOn": [
+        "^build"
+      ],
+      "options": {
+        "command": "web-test-runner",
+        "cwd": "packages/react"
+      }
+    }
+  }
+}

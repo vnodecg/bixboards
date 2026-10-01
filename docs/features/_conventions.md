@@ -52,6 +52,8 @@ A single token drives the system:
 - Emits accessibility metadata (`aria-setsize`, `aria-posinset`, `aria-rowindex`) from data indices, not DOM position.
 - Works with `content-visibility` fallback for small lists (< ~200 items) where simple rendering is faster.
 
+Implementation notes (`packages/core/src/virtualizer`): the controller owns geometry, not DOM. A host calls `setOptions({ count, getScrollElement, itemSize | dynamic, overscan, getItemKey, stickyIndexes, pinnedIndexes, enabled })` from `willUpdate`, renders `controller.items` (each `{ index, key, start, size }`) inside a spacer of `controller.totalSize` using `repeat()` keyed by `item.key`, and — for variable sizes — calls `measureElement(el)` on rendered items (which carry `data-index`). `pinnedIndexes` keeps an element (the focused or `aria-activedescendant` one) in the DOM outside the window; `getAria(index)` yields `aria-setsize`/`aria-posinset`/`aria-rowindex` from data indexes; `scrollToIndex`/`scrollToKey` and `sync()` (re-read geometry when a hidden scroller becomes visible) round it out. Fixed sizes are pure arithmetic; variable sizes use a Fenwick-tree prefix-sum index (O(log n) correction) with an adaptive estimate for unmeasured items. Observer callbacks only schedule renders on the next animation frame, since re-rendering inside a `ResizeObserver` callback triggers "loop completed with undelivered notifications".
+
 ## 5. Forms
 
 Form-associated components use `ElementInternals`: `formAssociated`, `setFormValue`, `setValidity`, `formResetCallback`, `formStateRestoreCallback`, `formDisabledCallback`. Constraint validation API matches native controls.

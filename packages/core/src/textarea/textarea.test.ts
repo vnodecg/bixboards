@@ -1,3 +1,4 @@
+import { sendKeys } from '@web/test-runner-commands';
 import { expect, fixture, html, oneEvent, aTimeout } from '@open-wc/testing';
 import type { BxTextarea } from './textarea.ts';
 import './index.ts';
@@ -109,5 +110,14 @@ describe('bx-textarea', () => {
       ></bx-textarea>`,
     );
     await expect(el).to.be.accessible();
+  });
+
+  it('fires exactly one input event per keystroke (not the native composed one as well)', async () => {
+    const el = await fixture<HTMLElement>(html`<bx-textarea></bx-textarea>`);
+    let inputs = 0;
+    el.addEventListener('input', () => inputs++);
+    el.focus();
+    await sendKeys({ type: '7' });
+    expect(inputs).to.equal(1);
   });
 });

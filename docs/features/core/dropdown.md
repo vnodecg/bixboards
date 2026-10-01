@@ -7,7 +7,7 @@
 | **Package**         | `@bixant/core` |
 | **Category**        | Actions        |
 | **Tag**             | `bx-dropdown`  |
-| **Status**          | Planned        |
+| **Status**          | Implemented    |
 | **Form-associated** | No             |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
@@ -20,15 +20,17 @@ Anchors a menu of items to a trigger; keyboard navigable, typeahead-enabled, wit
 
 ### Properties / attributes
 
-| Name                | Type                           | Default        | Description                                       |
-| ------------------- | ------------------------------ | -------------- | ------------------------------------------------- |
-| `open`              | boolean                        | false          | Controls visibility                               |
-| `placement`         | Placement                      | "bottom-start" | Popup placement                                   |
-| `distance`          | number                         | 0              | Offset from trigger                               |
-| `skidding`          | number                         | 0              | -                                                 |
-| `size`              | "small" \| "medium" \| "large" | "medium"       | -                                                 |
-| `virtual`           | boolean                        | false          | Virtualize items when count > `virtual-threshold` |
-| `virtual-threshold` | number                         | 100            | -                                                 |
+| Name                 | Type                           | Default        | Description                                                                                       |
+| -------------------- | ------------------------------ | -------------- | ------------------------------------------------------------------------------------------------- |
+| `open`               | boolean                        | false          | Controls visibility                                                                               |
+| `placement`          | Placement                      | "bottom-start" | Popup placement                                                                                   |
+| `distance`           | number                         | 0              | Offset from trigger                                                                               |
+| `skidding`           | number                         | 0              | -                                                                                                 |
+| `size`               | "small" \| "medium" \| "large" | "medium"       | -                                                                                                 |
+| `virtual`            | boolean                        | false          | Virtualize items when count > `virtual-threshold`; applies to the `items` data array only         |
+| `virtual-threshold`  | number                         | 100            | -                                                                                                 |
+| `items`              | `DropdownItemData[]`           | -              | Data-driven alternative to slotted items; required for virtualization (added)                     |
+| `focusable-disabled` | boolean                        | false          | Disabled items stay reachable with the arrow keys; read by the items (added, FR-DROPDOWN-ITEM-02) |
 
 ### Slots
 
@@ -39,11 +41,11 @@ Anchors a menu of items to a trigger; keyboard navigable, typeahead-enabled, wit
 
 ### Events
 
-| Event                     | Detail / notes                |
-| ------------------------- | ----------------------------- |
-| `bx-show / bx-after-show` | Cancelable / completed        |
-| `bx-hide / bx-after-hide` | -                             |
-| `bx-select`               | detail.item (the chosen item) |
+| Event                     | Detail / notes                                                                                                                                           |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bx-show / bx-after-show` | Cancelable / completed                                                                                                                                   |
+| `bx-hide / bx-after-hide` | `bx-hide` is cancelable; `detail.source`: `'trigger' \| 'light-dismiss' \| 'keyboard' \| 'select' \| 'focus-out' \| 'method'`                            |
+| `bx-select`               | `detail.item` (the chosen item element), `detail.value`, `detail.checked`; data rows also `detail.data` and `detail.index` (the element can be recycled) |
 
 ### CSS parts
 
@@ -99,14 +101,18 @@ Below a narrow container width, menu becomes a bottom sheet (`sheet-narrow`).
 
 ## 9. Acceptance criteria
 
-- [ ] All FR-DROPDOWN-* requirements covered by unit/component tests (Web Test Runner, real browsers).
-- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark.
-- [ ] axe-core: zero violations; manual screen-reader pass (NVDA/VoiceOver) documented.
-- [ ] Keyboard-only walkthrough recorded in the test plan.
-- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events.
-- [ ] Size budget check (`size-limit`) passes.
+- [ ] All FR-DROPDOWN-* requirements covered by unit/component tests (Web Test Runner, real browsers). All five are covered. FR-DROPDOWN-05 is met by the `items` data array: slotted children are the consumer's elements and cannot be windowed, so `virtual` does nothing for them. §5's `sheet-narrow` bottom sheet is not implemented. Run in Chromium only so far.
+- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark. No visual-regression tooling configured yet.
+- [ ] axe-core: zero violations (closed, open, submenu open and data-driven, asserted in the component's test file); manual screen-reader pass (NVDA/VoiceOver) not done yet.
+- [ ] Keyboard-only walkthrough recorded in the test plan. Keyboard behavior is covered by tests and the Storybook stories; no recorded walkthrough yet.
+- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events. No wrapper generation yet.
+- [ ] Size budget check (`size-limit`) passes. No size-limit tooling configured yet.
 
 ## 10. Notes and open questions
 
-- Adds virtual mode and narrow bottom-sheet behavior.
+- Adds virtual mode and narrow bottom-sheet behavior (virtual mode done; bottom sheet not).
+- Real DOM focus moves onto the items (roving, programmatic), per the APG menu pattern. Arrow keys wrap; Tab closes the menu and continues from the trigger; Escape returns focus to the trigger. Checkbox and radio items keep the menu open; other items close it.
+- Data rows are flat (no submenus). Their `checked` state lives in the dropdown so it survives node recycling, and the focused row is pinned in the window so scrolling never drops it.
+- The trigger is expected to be a button-like control; Enter/Space activate it through its own click. A click synthesized by the keyboard (`detail === 0`) focuses the first item, a pointer click focuses the menu.
+- Submenus open on hover (120 ms dwell, safe triangle while crossing siblings), ArrowRight/Enter/Space, and close with ArrowLeft/Escape; direction flips in RTL.
 - Open: confirm final property names against the custom-elements manifest during implementation.

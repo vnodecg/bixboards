@@ -1,0 +1,26 @@
+{
+  "name": "data-list",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/data-list/src",
+  "implicitDependencies": [
+    "core"
+  ],
+  "targets": {
+    "test": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": [
+        "default",
+        "^default"
+      ],
+      "dependsOn": [
+        "^build"
+      ],
+      "options": {
+        "command": "web-test-runner",
+        "cwd": "packages/data-list"
+      }
+    }
+  }
+}

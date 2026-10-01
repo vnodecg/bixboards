@@ -390,6 +390,34 @@
       "types": "./dist/tree/define.d.ts",
       "default": "./dist/tree/define.js"
     },
+    "./virtualizer": {
+      "types": "./dist/virtualizer/index.d.ts",
+      "default": "./dist/virtualizer/index.js"
+    },
+    "./select": {
+      "types": "./dist/select/index.d.ts",
+      "default": "./dist/select/index.js"
+    },
+    "./select/define": {
+      "types": "./dist/select/define.d.ts",
+      "default": "./dist/select/define.js"
+    },
+    "./dropdown": {
+      "types": "./dist/dropdown/index.d.ts",
+      "default": "./dist/dropdown/index.js"
+    },
+    "./dropdown/define": {
+      "types": "./dist/dropdown/define.d.ts",
+      "default": "./dist/dropdown/define.js"
+    },
+    "./page": {
+      "types": "./dist/page/index.d.ts",
+      "default": "./dist/page/index.js"
+    },
+    "./page/define": {
+      "types": "./dist/page/define.d.ts",
+      "default": "./dist/page/define.js"
+    },
     "./option": {
       "types": "./dist/option/index.d.ts",
       "default": "./dist/option/index.js"

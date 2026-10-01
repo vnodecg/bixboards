@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "noEmit": true,
+    "lib": ["es2023", "dom", "dom.iterable"],
+    "types": ["mocha"],
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "module": "es2022",
+    "moduleResolution": "bundler",
+    "target": "es2022",
+    "strict": true,
+    "skipLibCheck": true,
+    "allowImportingTsExtensions": true
+  },
+  "include": ["src/**/*.ts"]
+}

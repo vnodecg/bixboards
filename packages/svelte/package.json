@@ -1,0 +1,54 @@
+{
+  "name": "@bixant/svelte",
+  "version": "0.0.0",
+  "description": "Svelte 5 components for every Bixant element (typed props, callback events, bindable value/open/checked), generated from the Custom Elements Manifests.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "**/*.svelte"
+  ],
+  "svelte": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "svelte": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./*.svelte": {
+      "types": "./dist/generated/*.svelte.d.ts",
+      "svelte": "./dist/generated/*.svelte",
+      "default": "./dist/generated/*.svelte"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "generate": "node ../../tools/wrappers/generate.mts svelte",
+    "package": "svelte-package -i src -o dist --tsconfig tsconfig.lib.json",
+    "check": "svelte-check --tsconfig tsconfig.json"
+  },
+  "peerDependencies": {
+    "svelte": "^5.0.0"
+  },
+  "dependencies": {
+    "@bixant/core": "workspace:*",
+    "@bixant/data-list": "workspace:*",
+    "@bixant/data-table": "workspace:*"
+  },
+  "devDependencies": {
+    "@open-wc/testing": "^5.0.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^24.0.0",
+    "@web/dev-server-esbuild": "^2.0.0",
+    "@web/test-runner": "^1.0.0",
+    "@web/test-runner-commands": "^1.0.1",
+    "@web/test-runner-playwright": "^1.0.0",
+    "playwright": "^1.63.0",
+    "svelte": "^5.0.0",
+    "@sveltejs/package": "^2.3.0",
+    "svelte-check": "^4.0.0",
+    "typescript": "~6.0.3"
+  }
+}

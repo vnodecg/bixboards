@@ -1,0 +1,60 @@
+{
+  "name": "svelte",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/svelte/src",
+  "implicitDependencies": [
+    "core",
+    "data-list",
+    "data-table"
+  ],
+  "targets": {
+    "generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node tools/wrappers/generate.mts svelte",
+        "cwd": "."
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": [
+        "default",
+        "^default"
+      ],
+      "dependsOn": [
+        "^build"
+      ],
+      "options": {
+        "command": "web-test-runner",
+        "cwd": "packages/svelte"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "{projectRoot}/dist"
+      ],
+      "options": {
+        "command": "svelte-package -i src -o dist --tsconfig tsconfig.lib.json",
+        "cwd": "packages/svelte"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "dependsOn": [
+        "^build"
+      ],
+      "options": {
+        "command": "svelte-check --tsconfig tsconfig.json",
+        "cwd": "packages/svelte"
+      }
+    }
+  }
+}

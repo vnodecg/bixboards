@@ -1,0 +1,825 @@
+{
+  "schemaVersion": "2.1.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/data-table/data-table.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxDataTable",
+          "tagName": "bx-data-table",
+          "customElement": true,
+          "description": "`<bx-data-table>` — virtualized enterprise data table (docs/features/data-table/data-table.md),\nbuilt on core's `VirtualizerController`. Only the visible rows *and* columns (past 50 columns)\nexist in the DOM; cell renderers are plain functions returning templates or primitives, so there\nis no custom element per cell.\n\n**Data pipeline.** `data` (client) flows through filter → sort → group on *index arrays* — rows\nare never copied. Sort keys are extracted once per column into typed arrays, and the sort is\nstable. Grouping adds expandable group rows with per-column aggregates. With `data-source` the\ntable is server-side: a block cache (100 rows/block) fetches only the blocks near the viewport,\nde-duplicates in-flight requests, aborts blocks that scrolled away, and a failed block shows a\nretry row (`bx-data-error`).\n\n**Grid semantics.** `role=\"grid\"` with `aria-rowcount/rowindex/colcount/colindex/sort/selected`\nderived from data indexes, so rows scrolled out of the DOM keep their numbers. One cell holds\nthe roving `tabindex`; arrows, Home/End, Ctrl+Home/End and PageUp/PageDown move it; the header\nrow is part of the grid (Enter/Space sorts, Alt+Arrow resizes, Alt+Shift+Arrow reorders). Space\nselects the row, Shift+Arrow extends a cell range, Ctrl/Cmd+C copies the range as TSV. A polite\nlive region announces sort, selection and edit results.\n\n**Editing.** With `editable` and a column `editor` (`text`, `number`, `checkbox`, `select` or a\nfunction), Enter/F2/double-click edits, Enter commits, Escape cancels, Tab commits and moves.\n`bx-cell-edit-commit` is cancelable and supports async validation: call\n`event.detail.waitUntil(promise)`; a rejected promise (or `false`) keeps the editor open with an\nerror. An accepted edit assigns `row[field]` (data is held as provided, not cloned).\n\n**Layout.** Columns come from `columns` or declarative `<bx-column>` children. Pinned columns are\n`position: sticky`. `responsive=\"priority\"` hides the least important columns (`priority`) as\nthe table's own width shrinks; `\"cards\"` re-lays each row as a labelled card below\n`cards-breakpoint` px; `\"scroll\"` scrolls horizontally. The width is observed through the shared\n`ResizeObserver` pool, so the table is its own container, not a viewport.\n\nGaps, per docs/features/_conventions.md's \"say so inline\" rule: sorting/filtering/grouping run on\nthe main thread (no Worker; the pipeline is index-based and typed-array backed to keep it cheap\n— see the performance note in the spec's acceptance list); tree-data mode, the column show/hide\n*menu UI* (use `setColumnVisible()`), drag-to-pin UI (use `setColumnPinned()`), the toolbar\noverflow menu and the `columns` serialization of renderers are not implemented; `row-detail` is\nthe `renderDetail` property; server-side mode does not group (`group` is passed to the source).\n`exportXlsx()` writes a single-sheet, uncompressed (stored) workbook.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "row-key",
+              "fieldName": "rowKey",
+              "type": {
+                "text": "string | ((row: T, index: number) => Key)"
+              },
+              "default": "'id'"
+            },
+            {
+              "name": "row-height",
+              "fieldName": "rowHeight",
+              "type": {
+                "text": "number | 'auto'"
+              },
+              "default": "'auto'"
+            },
+            {
+              "name": "overscan",
+              "fieldName": "overscan",
+              "type": {
+                "text": "number"
+              },
+              "default": "6"
+            },
+            {
+              "name": "selection",
+              "fieldName": "selection",
+              "type": {
+                "text": "Selection"
+              },
+              "default": "'none'"
+            },
+            {
+              "name": "density",
+              "fieldName": "density",
+              "type": {
+                "text": "Density"
+              },
+              "default": "'comfortable'"
+            },
+            {
+              "name": "sticky-header",
+              "fieldName": "stickyHeader",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true"
+            },
+            {
+              "name": "loading",
+              "fieldName": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "empty-label",
+              "fieldName": "emptyLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'No rows'"
+            },
+            {
+              "name": "editable",
+              "fieldName": "editable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "resizable",
+              "fieldName": "resizable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true"
+            },
+            {
+              "name": "reorderable",
+              "fieldName": "reorderable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true"
+            },
+            {
+              "name": "virtualize-columns",
+              "fieldName": "virtualizeColumns",
+              "type": {
+                "text": "boolean | 'auto'"
+              },
+              "default": "'auto'"
+            },
+            {
+              "name": "responsive",
+              "fieldName": "responsive",
+              "type": {
+                "text": "Responsive"
+              },
+              "default": "'priority'"
+            },
+            {
+              "name": "cards-breakpoint",
+              "fieldName": "cardsBreakpoint",
+              "type": {
+                "text": "number"
+              },
+              "default": "CARDS_BREAKPOINT"
+            },
+            {
+              "name": "aria-label",
+              "fieldName": "ariaLabel",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "columns",
+              "type": {
+                "text": "ColumnDef<T>[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "data",
+              "type": {
+                "text": "readonly T[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "dataSource",
+              "type": {
+                "text": "TableDataSource<T>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "rowKey",
+              "type": {
+                "text": "string | ((row: T, index: number) => Key)"
+              },
+              "default": "'id'",
+              "attribute": "row-key"
+            },
+            {
+              "kind": "field",
+              "name": "rowHeight",
+              "type": {
+                "text": "number | 'auto'"
+              },
+              "default": "'auto'",
+              "attribute": "row-height"
+            },
+            {
+              "kind": "field",
+              "name": "overscan",
+              "type": {
+                "text": "number"
+              },
+              "default": "6",
+              "attribute": "overscan"
+            },
+            {
+              "kind": "field",
+              "name": "selection",
+              "type": {
+                "text": "Selection"
+              },
+              "default": "'none'",
+              "attribute": "selection",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selectedKeys",
+              "type": {
+                "text": "Key[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "sort",
+              "type": {
+                "text": "SortModel[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "filters",
+              "type": {
+                "text": "FilterModel"
+              },
+              "default": "{}"
+            },
+            {
+              "kind": "field",
+              "name": "groupBy",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "expandedKeys",
+              "type": {
+                "text": "Key[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "density",
+              "type": {
+                "text": "Density"
+              },
+              "default": "'comfortable'",
+              "attribute": "density",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "stickyHeader",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "sticky-header",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "emptyLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'No rows'",
+              "attribute": "empty-label"
+            },
+            {
+              "kind": "field",
+              "name": "editable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "editable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "resizable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "resizable"
+            },
+            {
+              "kind": "field",
+              "name": "reorderable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "reorderable"
+            },
+            {
+              "kind": "field",
+              "name": "virtualizeColumns",
+              "type": {
+                "text": "boolean | 'auto'"
+              },
+              "default": "'auto'",
+              "attribute": "virtualize-columns"
+            },
+            {
+              "kind": "field",
+              "name": "responsive",
+              "type": {
+                "text": "Responsive"
+              },
+              "default": "'priority'",
+              "attribute": "responsive",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "cardsBreakpoint",
+              "type": {
+                "text": "number"
+              },
+              "default": "CARDS_BREAKPOINT",
+              "attribute": "cards-breakpoint"
+            },
+            {
+              "kind": "field",
+              "name": "renderDetail",
+              "type": {
+                "text": "(row: T) => TemplateResult | string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "ariaLabel",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null",
+              "attribute": "aria-label"
+            },
+            {
+              "kind": "method",
+              "name": "retry",
+              "description": "Retries blocks that failed to load.",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "refresh",
+              "description": "Reloads server data or recomputes the client view.",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "invalidateRow",
+              "description": "The data changed in place for this row: recompute its view and size.",
+              "parameters": [
+                {
+                  "name": "key",
+                  "type": {
+                    "text": "Key"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "scrollToIndex",
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "align",
+                  "type": {
+                    "text": "'start' | 'center' | 'end' | 'auto'"
+                  },
+                  "optional": true
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "scrollToKey",
+              "parameters": [
+                {
+                  "name": "key",
+                  "type": {
+                    "text": "Key"
+                  }
+                },
+                {
+                  "name": "align",
+                  "type": {
+                    "text": "'start' | 'center' | 'end' | 'auto'"
+                  },
+                  "optional": true
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "getVisibleRange",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "{ start: number; end: number }"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setSort",
+              "parameters": [
+                {
+                  "name": "sort",
+                  "type": {
+                    "text": "SortModel[]"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setFilter",
+              "parameters": [
+                {
+                  "name": "id",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "FilterValue | undefined"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "clearFilters",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "selectAll",
+              "description": "Selects every row matching the current filter (server mode: \"select all matching\").",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "clearSelection",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "exportCsv",
+              "description": "CSV of the rows in the current sort/filter. Resolves to a Blob; pass a name to download it.",
+              "parameters": [
+                {
+                  "name": "filename",
+                  "type": {
+                    "text": "string"
+                  },
+                  "optional": true
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "Promise<Blob>"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "exportXlsx",
+              "description": "Single-sheet `.xlsx` of the rows in the current sort/filter.",
+              "parameters": [
+                {
+                  "name": "filename",
+                  "type": {
+                    "text": "string"
+                  },
+                  "optional": true
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "Promise<Blob>"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "autosizeColumns",
+              "description": "Widths each column to its widest rendered text among the rows near the viewport.",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setColumnVisible",
+              "parameters": [
+                {
+                  "name": "id",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "visible",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setColumnPinned",
+              "parameters": [
+                {
+                  "name": "id",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "pinned",
+                  "type": {
+                    "text": "'start' | 'end' | undefined"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "getState",
+              "description": "Serializable layout/sort/filter state for saved views (renderers are not included).",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "TableState"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setState",
+              "parameters": [
+                {
+                  "name": "state",
+                  "type": {
+                    "text": "Partial<TableState>"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "bx-sort-change",
+              "description": "`detail: { sort }`."
+            },
+            {
+              "name": "bx-filter-change",
+              "description": "`detail: { filters }`."
+            },
+            {
+              "name": "bx-selection-change",
+              "description": "`detail: { selectedKeys, allMatching }`."
+            },
+            {
+              "name": "bx-row-click",
+              "description": "`detail: { row, key, index }`."
+            },
+            {
+              "name": "bx-row-dblclick",
+              "description": "`detail: { row, key, index }`."
+            },
+            {
+              "name": "bx-cell-edit-start",
+              "description": "`detail: { row, key, columnId }`."
+            },
+            {
+              "name": "bx-cell-edit-commit",
+              "description": "Cancelable; `detail: { row, key, columnId, oldValue, newValue, waitUntil(promise) }`."
+            },
+            {
+              "name": "bx-column-resize",
+              "description": "`detail: { columnId, width }`."
+            },
+            {
+              "name": "bx-column-reorder",
+              "description": "`detail: { order }`."
+            },
+            {
+              "name": "bx-column-pin",
+              "description": "`detail: { columnId, pinned }`."
+            },
+            {
+              "name": "bx-range-change",
+              "description": "Visible row range. `detail: { start, end }`."
+            },
+            {
+              "name": "bx-data-request",
+              "description": "A server block was requested. `detail: { start, end }`."
+            },
+            {
+              "name": "bx-data-error",
+              "description": "A server block failed. `detail: { error, block }`."
+            },
+            {
+              "name": "bx-row-expand",
+              "description": "A group or detail row was toggled. `detail: { key, expanded }`."
+            }
+          ],
+          "slots": [
+            {
+              "name": "toolbar",
+              "description": "Above the grid."
+            },
+            {
+              "name": "empty",
+              "description": "Shown when there are no rows."
+            },
+            {
+              "name": "loading",
+              "description": "Shown while loading."
+            },
+            {
+              "name": "footer",
+              "description": "Below the grid."
+            },
+            {
+              "name": "",
+              "description": "Declarative `bx-column` children."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "base",
+              "description": "The outer container."
+            },
+            {
+              "name": "toolbar",
+              "description": "The toolbar region."
+            },
+            {
+              "name": "header",
+              "description": "The header row."
+            },
+            {
+              "name": "header-cell",
+              "description": "A header cell."
+            },
+            {
+              "name": "body",
+              "description": "The body spacer."
+            },
+            {
+              "name": "row",
+              "description": "A data row."
+            },
+            {
+              "name": "cell",
+              "description": "A cell."
+            },
+            {
+              "name": "cell-selected",
+              "description": "A cell in the selected range."
+            },
+            {
+              "name": "group-row",
+              "description": "A group row."
+            },
+            {
+              "name": "detail",
+              "description": "A row's detail panel."
+            },
+            {
+              "name": "footer",
+              "description": "The footer region."
+            },
+            {
+              "name": "resize-handle",
+              "description": "A header cell's resize handle."
+            },
+            {
+              "name": "loading-overlay",
+              "description": "The loading indicator."
+            },
+            {
+              "name": "empty",
+              "description": "The empty state."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-table-row-height",
+              "description": "Row height (density default)."
+            },
+            {
+              "name": "--bx-table-header-height",
+              "description": "Header height."
+            },
+            {
+              "name": "--bx-table-stripe",
+              "description": "Background of odd rows."
+            },
+            {
+              "name": "--bx-table-border",
+              "description": "Border color."
+            },
+            {
+              "name": "--bx-table-cell-padding-inline",
+              "description": "Cell inline padding."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "name": "BxColumn",
+          "tagName": "bx-column",
+          "customElement": true,
+          "description": "Data-only element for declaring a column in markup: `<bx-column field=\"name\" header=\"Name\">`.",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "attributes": [],
+          "members": [],
+          "events": [],
+          "slots": [],
+          "cssParts": [],
+          "cssProperties": []
+        }
+      ]
+    }
+  ]
+}
