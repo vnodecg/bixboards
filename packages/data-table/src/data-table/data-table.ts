@@ -98,7 +98,8 @@ interface CellPos {
  * — see the performance note in the spec's acceptance list); tree-data mode, the column show/hide
  * *menu UI* (use `setColumnVisible()`), drag-to-pin UI (use `setColumnPinned()`), the toolbar
  * overflow menu and the `columns` serialization of renderers are not implemented; `row-detail` is
- * the `renderDetail` property; server-side mode does not group (`group` is passed to the source).
+ * the `renderDetail` property; the built-in editors are native `<input>`/`<select>` (use a function
+ * `editor` to render `bx-input`/`bx-select`); server-side mode does not group (`group` is passed to the source).
  * `exportXlsx()` writes a single-sheet, uncompressed (stored) workbook.
  *
  * @fires bx-sort-change - `detail: { sort }`.

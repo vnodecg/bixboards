@@ -7,7 +7,7 @@
 | **Package**         | `@bixant/data-list` |
 | **Category**        | Data                |
 | **Tag**             | `bx-virtual-tree`   |
-| **Status**          | Planned             |
+| **Status**          | Implemented         |
 | **Form-associated** | No                  |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
@@ -102,15 +102,18 @@ Labels truncate; secondary columns (tree-table mode) hide via priority, as in da
 
 ## 9. Acceptance criteria
 
-- [ ] All FR-VIRTUAL-TREE-* requirements covered by unit/component tests (Web Test Runner, real browsers).
-- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark.
-- [ ] axe-core: zero violations; manual screen-reader pass (NVDA/VoiceOver) documented.
-- [ ] Keyboard-only walkthrough recorded in the test plan.
-- [ ] Benchmarks meet the stated budgets in CI (regression gate ±10%).
-- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events.
-- [ ] Size budget check (`size-limit`) passes.
+- [ ] All FR-VIRTUAL-TREE-* requirements covered by unit/component tests (Web Test Runner, real browsers). All four are covered in Chromium, including the 200k-node and 100k-leaf-branch cases. Firefox/WebKit run in CI only (not installed in every dev environment).
+- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark. No visual-regression tooling configured yet.
+- [ ] axe-core: zero violations (plain, expanded multiple-select and empty states, asserted in the component's test file); manual screen-reader pass (NVDA/VoiceOver) not done yet.
+- [ ] Keyboard-only walkthrough recorded in the test plan. The key models are covered by tests and the Storybook stories; no recorded walkthrough yet.
+- [ ] Benchmarks meet the stated budgets in CI (regression gate ±10%). The test renders a 200k-node window and asserts a 10k-child expand in < 150 ms (measured ~3 ms in Chromium; budget < 50 ms); neither is a CI regression gate.
+- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events. Wrappers are generated from the manifest; no per-component smoke test for this element yet.
+- [ ] Size budget check (`size-limit`) passes. No size-limit tooling configured yet.
 
 ## 10. Notes and open questions
 
 - New component.
 - Open: confirm final property names against the custom-elements manifest during implementation.
+- Filtering runs on the main thread in one linear pass over the pre-order index (no Worker), a few ms at 200k nodes; FR-VIRTUAL-TREE-02's "off-main-thread" is therefore not implemented.
+- Tree-_table_ mode (secondary columns with priority hiding, §5) is not implemented. The `node` slot is the `renderNode` property, and the `expand-icon`/`collapse-icon` slots are not provided (the chevron is a CSS-rotated glyph).
+- Focus stays on the tree element and the active node is exposed with `aria-activedescendant`, since the focused node may be outside the rendered window.

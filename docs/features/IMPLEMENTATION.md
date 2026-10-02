@@ -2,7 +2,7 @@
 
 Tracks build status for all 61 components across `@bixant/core`, `@bixant/data-table` and `@bixant/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 56 / 61 done.**
+**Progress: 59 / 61 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -111,9 +111,9 @@ Depend on Tier 2 components.
 
 Depend on `VirtualizerController` (Tier 4).
 
-- [ ] [`bx-virtual-tree`](data-list/virtual-tree.md) (`@bixant/data-list`) — depends on `VirtualizerController`; data-driven counterpart of `bx-tree`, build after it for API parity
-- [ ] [`bx-data-list`](data-list/data-list.md) (`@bixant/data-list`) — depends on `VirtualizerController`
-- [ ] [`bx-data-table`](data-table/data-table.md) (`@bixant/data-table`) — depends on `VirtualizerController`; row/cell editing reuses `bx-input`/`bx-checkbox`
+- [x] [`bx-virtual-tree`](data-list/virtual-tree.md) (`@bixant/data-list`; indexed once into pre-order arrays so collapsed subtrees are skipped and branch tri-state is two integers; filtering is a main-thread linear pass, not a Worker; tree-_table_ mode and the `expand-icon`/`collapse-icon` slots not implemented, the `node` slot is the `renderNode` property — see the component's own doc comment) — depends on `VirtualizerController`; data-driven counterpart of `bx-tree` — `packages/data-list/src/virtual-tree`
+- [x] [`bx-data-list`](data-list/data-list.md) (`@bixant/data-list`; `layout="masonry"` renders as `grid`, since column packing needs per-column virtualization the shared virtualizer lacks; `item`/`group-header` slots are the `renderItem`/`renderGroupHeader` properties; focus stays on the viewport with `aria-activedescendant` — see the component's own doc comment) — depends on `VirtualizerController` — `packages/data-list/src/data-list`
+- [x] [`bx-data-table`](data-table/data-table.md) (`@bixant/data-table`; sort/filter/group run on the main thread over typed-array index arrays, no Worker, so FR-DATA-TABLE-04's Worker path is not implemented; tree-data mode, column show/hide menu, drag-to-pin UI and toolbar overflow menu not implemented; `row-detail` is the `renderDetail` property; the built-in editors are native `<input>`/`<select>`, and `bx-input`/`bx-select` are used by passing a function `editor` — see the component's own doc comment) — depends on `VirtualizerController` — `packages/data-table/src/data-table`
 
 ## Framework wrappers (after the above)
 

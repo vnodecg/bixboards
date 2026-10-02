@@ -7,7 +7,7 @@
 | **Package**         | `@bixant/data-list` |
 | **Category**        | Data                |
 | **Tag**             | `bx-data-list`      |
-| **Status**          | Planned             |
+| **Status**          | Implemented         |
 | **Form-associated** | No                  |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
@@ -109,15 +109,18 @@ Column count = floor(container width / min-item-width); list→grid→list witho
 
 ## 9. Acceptance criteria
 
-- [ ] All FR-DATA-LIST-* requirements covered by unit/component tests (Web Test Runner, real browsers).
-- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark.
-- [ ] axe-core: zero violations; manual screen-reader pass (NVDA/VoiceOver) documented.
-- [ ] Keyboard-only walkthrough recorded in the test plan.
-- [ ] Benchmarks meet the stated budgets in CI (regression gate ±10%).
-- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events.
-- [ ] Size budget check (`size-limit`) passes.
+- [ ] All FR-DATA-LIST-* requirements covered by unit/component tests (Web Test Runner, real browsers). All five are covered in Chromium. Firefox/WebKit run in CI only (not installed in every dev environment).
+- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark. No visual-regression tooling configured yet.
+- [ ] axe-core: zero violations (plain, selectable, grouped and empty states, asserted in the component's test file); manual screen-reader pass (NVDA/VoiceOver) not done yet.
+- [ ] Keyboard-only walkthrough recorded in the test plan. The key models are covered by tests and the Storybook stories; no recorded walkthrough yet.
+- [ ] Benchmarks meet the stated budgets in CI (regression gate ±10%). The test renders 500k items and asserts fewer than 40 in the DOM (budget: ≤ 100); scroll fps and mount time are not benchmarked.
+- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events. Wrappers are generated from the manifest; no per-component smoke test for this element yet.
+- [ ] Size budget check (`size-limit`) passes. No size-limit tooling configured yet.
 
 ## 10. Notes and open questions
 
 - New component.
 - Open: confirm final property names against the custom-elements manifest during implementation.
+- `layout="masonry"` renders as `grid`: true column packing needs per-column virtualization, which the shared virtualizer does not do.
+- The `item` and `group-header` slots are the `renderItem` / `renderGroupHeader` properties, since a slotted template cannot be instantiated per item.
+- Focus stays on the viewport and the active item is exposed with `aria-activedescendant` (the item is pinned in the window so it survives scrolling).

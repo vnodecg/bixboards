@@ -7,7 +7,7 @@
 | **Package**         | `@bixant/data-table` |
 | **Category**        | Data                 |
 | **Tag**             | `bx-data-table`      |
-| **Status**          | Planned              |
+| **Status**          | Implemented          |
 | **Form-associated** | No                   |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
@@ -138,14 +138,18 @@ Table is a container-query root. `responsive="priority"` hides columns by `prior
 
 ## 9. Acceptance criteria
 
-- [ ] All FR-DATA-TABLE-* requirements covered by unit/component tests (Web Test Runner, real browsers).
-- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark.
-- [ ] axe-core: zero violations; manual screen-reader pass (NVDA/VoiceOver) documented.
-- [ ] Keyboard-only walkthrough recorded in the test plan.
-- [ ] Benchmarks meet the stated budgets in CI (regression gate ±10%).
-- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events.
-- [ ] Size budget check (`size-limit`) passes.
+- [ ] All FR-DATA-TABLE-* requirements covered by unit/component tests (Web Test Runner, real browsers). FR-DATA-TABLE-04 (Worker) and the tree-data part of -06 are not implemented; the rest are covered in Chromium. Firefox/WebKit run in CI only (not installed in every dev environment).
+- [ ] Visual regression snapshots at scale 0.85 / 1 / 1.25 and container widths 240 / 480 / 960 px, light + dark. No visual-regression tooling configured yet.
+- [ ] axe-core: zero violations (plain, multiple-select, grouped and editing states, asserted in the component's test file); manual screen-reader pass (NVDA/VoiceOver) not done yet.
+- [ ] Keyboard-only walkthrough recorded in the test plan. The key models are covered by tests and the Storybook stories; no recorded walkthrough yet.
+- [ ] Benchmarks meet the stated budgets in CI (regression gate ±10%). The test file asserts a small DOM for 1M rows and sorts 200k rows on the main thread in < 1.5 s (~80 ms in Chromium); the 1M-row sort < 1 s off-main-thread budget, scroll fps and render time are not measured.
+- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events. Wrappers are generated from the manifest; no per-component smoke test for this element yet.
+- [ ] Size budget check (`size-limit`) passes. No size-limit tooling configured yet.
 
 ## 10. Notes and open questions
 
 - Open: confirm final property names against the custom-elements manifest during implementation.
+- Sorting, filtering and grouping run on the main thread (no Worker), over typed-array-backed index arrays; FR-DATA-TABLE-04's Worker path is therefore not implemented.
+- Not implemented: tree-data mode, the column show/hide menu UI (use `setColumnVisible()`), drag-to-pin UI (use `setColumnPinned()`), the toolbar overflow menu, and serializing renderers in `columns`. `row-detail` is the `renderDetail` property; server-side mode does not group (`group` is passed to the data source).
+- The built-in editors (`text`, `number`, `checkbox`, `select`) render native `<input>`/`<select>` to keep per-cell cost low; FR-DATA-TABLE-08's `bx-input`/`bx-select` editors are supplied as a function `editor`.
+- `exportXlsx()` writes a single-sheet, uncompressed (stored) workbook.

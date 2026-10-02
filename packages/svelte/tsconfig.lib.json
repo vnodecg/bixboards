@@ -7,21 +7,23 @@
     "emitDeclarationOnly": true,
     "module": "esnext",
     "moduleResolution": "bundler",
-    "lib": [
-      "es2023",
-      "dom",
-      "dom.iterable"
-    ],
-    "types": [
-      "node"
-    ],
+    "lib": ["es2023", "dom", "dom.iterable"],
+    "types": ["node"],
     "verbatimModuleSyntax": true,
     "allowImportingTsExtensions": true,
     "rewriteRelativeImportExtensions": true,
     "noEmitOnError": false
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.svelte"
+  "include": ["src/**/*.ts", "src/**/*.svelte"],
+  "references": [
+    {
+      "path": "../data-table/tsconfig.lib.json"
+    },
+    {
+      "path": "../data-list/tsconfig.lib.json"
+    },
+    {
+      "path": "../core/tsconfig.lib.json"
+    }
   ]
 }

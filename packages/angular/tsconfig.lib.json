@@ -7,11 +7,7 @@
     "composite": false,
     "emitDeclarationOnly": false,
     "declarationMap": false,
-    "lib": [
-      "es2023",
-      "dom",
-      "dom.iterable"
-    ],
+    "lib": ["es2023", "dom", "dom.iterable"],
     "types": [],
     "experimentalDecorators": true,
     "module": "es2022",
@@ -26,15 +22,22 @@
     "allowImportingTsExtensions": true,
     "rewriteRelativeImportExtensions": true
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "src/**/*.test.ts"
-  ],
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/*.test.ts"],
   "angularCompilerOptions": {
     "compilationMode": "partial",
     "strictTemplates": true,
     "strictInjectionParameters": true
-  }
+  },
+  "references": [
+    {
+      "path": "../data-table/tsconfig.lib.json"
+    },
+    {
+      "path": "../data-list/tsconfig.lib.json"
+    },
+    {
+      "path": "../core/tsconfig.lib.json"
+    }
+  ]
 }

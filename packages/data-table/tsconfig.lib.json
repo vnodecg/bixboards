@@ -7,29 +7,22 @@
     "emitDeclarationOnly": false,
     "declaration": true,
     "sourceMap": true,
-    "lib": [
-      "es2023",
-      "dom",
-      "dom.iterable"
-    ],
-    "types": [
-      "node"
-    ],
+    "lib": ["es2023", "dom", "dom.iterable"],
+    "types": ["node"],
     "verbatimModuleSyntax": true,
     "rewriteRelativeImportExtensions": true,
     "erasableSyntaxOnly": true,
     "exactOptionalPropertyTypes": false,
     "noUncheckedIndexedAccess": true
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "src/**/*.test.ts"
-  ],
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/*.test.ts"],
   "references": [
     {
       "path": "../core/tsconfig.lib.json"
+    },
+    {
+      "path": "../design-system/tsconfig.lib.json"
     }
   ]
 }
