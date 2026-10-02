@@ -49,11 +49,44 @@ Edge-anchored panel (top/end/bottom/start), modal or contained to a parent. Spec
 
 ### CSS parts
 
-`dialog`, `overlay` (only rendered when `contained`; a modal drawer uses `::backdrop`), `header`, `title`, `header-actions`, `close-button`, `body`, `footer`
+| Part             | Description                                                                                                     |
+| ---------------- | --------------------------------------------------------------------------------------------------------------- |
+| `dialog`         | The native `<dialog>` element.                                                                                  |
+| `overlay`        | The scrim behind the panel; only rendered when `contained` (a modal drawer uses the dialog's own `::backdrop`). |
+| `header`         | The header region.                                                                                              |
+| `title`          | The title text.                                                                                                 |
+| `header-actions` | The wrapper around the header-actions slot.                                                                     |
+| `close-button`   | The default close button.                                                                                       |
+| `body`           | The scrollable body region.                                                                                     |
+| `footer`         | The footer region.                                                                                              |
 
 ### CSS custom properties
 
-`--bx-drawer-size`, `--bx-drawer-spacing`
+| Property                                 | Description                                                                                                             |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `--bx-drawer-size`                       | Panel size along its axis (width for start/end, height for top/bottom). Default `clamp(20rem, 30vi, 32rem)`-equivalent. |
+| `--bx-drawer-spacing`                    | Header/body/footer padding. Default `--bx-space-l`.                                                                     |
+| `--bx-drawer-overlay-bg`                 | Background of the `overlay` part. Default `var(--bx-surface-overlay)`.                                                  |
+| `--bx-drawer-dialog-bg`                  | Background of the `dialog` part. Default `var(--bx-surface-base)`.                                                      |
+| `--bx-drawer-dialog-fg`                  | Text/icon color of the `dialog` part. Default `var(--bx-text-primary)`.                                                 |
+| `--bx-drawer-dialog-shadow`              | Box shadow of the `dialog` part. Default `var(--bx-shadow-l)`.                                                          |
+| `--bx-drawer-dialog-backdrop-bg`         | Background of the `dialog` part's `::backdrop`. Default `var(--bx-surface-overlay)`.                                    |
+| `--bx-drawer-header-gap`                 | Gap of the `header` part. Default `var(--bx-space-s)`.                                                                  |
+| `--bx-drawer-header-padding-block-end`   | Padding block end of the `header` part. Default `var(--bx-space-m)`.                                                    |
+| `--bx-drawer-header-actions-gap`         | Gap of the `header-actions` part. Default `var(--bx-space-xs)`.                                                         |
+| `--bx-drawer-close-button-width`         | Width of the `close-button` part. Default `var(--bx-target-min)`.                                                       |
+| `--bx-drawer-close-button-radius`        | Corner radius of the `close-button` part. Default `var(--bx-radius-pill)`.                                              |
+| `--bx-drawer-close-button-fg`            | Text/icon color of the `close-button` part. Default `var(--bx-text-secondary)`.                                         |
+| `--bx-drawer-close-button-hover-bg`      | Background of the `close-button` part (hover state). Default `var(--bx-surface-subtle)`.                                |
+| `--bx-drawer-body-padding-block`         | Padding block of the `body` part. Default `var(--bx-space-m)`.                                                          |
+| `--bx-drawer-footer-gap`                 | Gap of the `footer` part. Default `var(--bx-space-s)`.                                                                  |
+| `--bx-drawer-footer-padding-block-start` | Padding block start of the `footer` part. Default `var(--bx-space-m)`.                                                  |
+| `--bx-drawer-dialog-font-family`         | Font family of the `dialog` part. Default `var(--bx-type-body-family)`.                                                 |
+| `--bx-drawer-title-font-family`          | Font family of the `title` part (text style `heading-s`). Default `var(--bx-type-heading-family)`.                      |
+| `--bx-drawer-title-font-size`            | Font size of the `title` part (text style `heading-s`). Default `var(--bx-type-heading-s-size)`.                        |
+| `--bx-drawer-title-font-weight`          | Font weight of the `title` part (text style `heading-s`). Default `var(--bx-type-heading-s-weight)`.                    |
+| `--bx-drawer-title-line-height`          | Line height of the `title` part (text style `heading-s`). Default `var(--bx-type-heading-s-leading)`.                   |
+| `--bx-drawer-title-letter-spacing`       | Letter spacing of the `title` part (text style `heading-s`). Default `var(--bx-type-heading-s-tracking)`.               |
 
 ### Methods
 

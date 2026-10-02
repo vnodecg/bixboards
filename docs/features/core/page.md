@@ -56,11 +56,58 @@ Application shell layout: header, subheader, navigation, main, aside, footer wit
 
 ### CSS parts
 
-`base`, `banner`, `header`, `subheader`, `main`, `navigation`, `aside`, `footer`
+| Part         | Description                 |
+| ------------ | --------------------------- |
+| `base`       | The outer layout container. |
+| `banner`     | The banner region.          |
+| `header`     | The header region.          |
+| `subheader`  | The subheader region.       |
+| `main`       | The `main` landmark.        |
+| `navigation` | The `nav` landmark.         |
+| `aside`      | The `aside` landmark.       |
+| `footer`     | The footer region.          |
 
 ### CSS custom properties
 
-`--menu-width`, `--aside-width`, `--main-width`, `--banner-height`, `--header-height`, `--subheader-height`, `--nav-transition`
+| Property                                         | Description                                                                                           |
+| ------------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
+| `--bx-page-menu-width`                           | Navigation width.                                                                                     |
+| `--bx-page-aside-width`                          | Aside width.                                                                                          |
+| `--bx-page-main-width`                           | Max inline size of the main column.                                                                   |
+| `--bx-page-banner-height`                        | Min height of the banner.                                                                             |
+| `--bx-page-header-height`                        | Min height of the header.                                                                             |
+| `--bx-page-subheader-height`                     | Min height of the subheader.                                                                          |
+| `--bx-page-nav-transition`                       | Drawer transition. Disabled under reduced motion.                                                     |
+| `--bx-page-fg`                                   | Text/icon color of the root surface. Default `var(--bx-text-primary)`.                                |
+| `--bx-page-bg`                                   | Background of the root surface. Default `var(--bx-surface-base)`.                                     |
+| `--bx-page-a-fg`                                 | Text/icon color of the `a` element. Default `var(--bx-text-primary)`.                                 |
+| `--bx-page-header-gap`                           | Gap of the `header` part. Default `var(--bx-space-s)`.                                                |
+| `--bx-page-header-padding-inline`                | Padding inline of the `header` part. Default `var(--bx-space-m)`.                                     |
+| `--bx-page-header-block-end-border-width`        | Block end border width of the `header` part. Default `var(--bx-border-width)`.                        |
+| `--bx-page-header-block-end-border-color`        | Block end border color of the `header` part. Default `var(--bx-border-subtle)`.                       |
+| `--bx-page-menu-button-min-width`                | Minimum width of the `menu-button` element. Default `var(--bx-target-min)`.                           |
+| `--bx-page-menu-button-min-height`               | Minimum height of the `menu-button` element. Default `var(--bx-target-min)`.                          |
+| `--bx-page-menu-button-radius`                   | Corner radius of the `menu-button` element. Default `var(--bx-radius-m)`.                             |
+| `--bx-page-menu-button-focus-ring-width`         | Focus ring width of the `menu-button` element (focus state). Default `var(--bx-border-width-strong)`. |
+| `--bx-page-menu-button-focus-ring-color`         | Focus ring color of the `menu-button` element (focus state). Default `var(--bx-focus-ring)`.          |
+| `--bx-page-menu-button-focus-ring-offset`        | Focus ring offset of the `menu-button` element (focus state). Default `var(--bx-focus-ring-offset)`.  |
+| `--bx-page-navigation-bg`                        | Background of the `navigation` part. Default `var(--bx-surface-base)`.                                |
+| `--bx-page-navigation-inline-end-border-width`   | Inline end border width of the `navigation` part. Default `var(--bx-border-width)`.                   |
+| `--bx-page-navigation-inline-end-border-color`   | Inline end border color of the `navigation` part. Default `var(--bx-border-subtle)`.                  |
+| `--bx-page-navigation-inline-start-border-width` | Inline start border width of the `navigation` part. Default `var(--bx-border-width)`.                 |
+| `--bx-page-navigation-inline-start-border-color` | Inline start border color of the `navigation` part. Default `var(--bx-border-subtle)`.                |
+| `--bx-page-main-padding`                         | Padding of the `main` part. Default `var(--bx-space-m)`.                                              |
+| `--bx-page-aside-padding`                        | Padding of the `aside` part. Default `var(--bx-space-m)`.                                             |
+| `--bx-page-aside-inline-start-border-width`      | Inline start border width of the `aside` part. Default `var(--bx-border-width)`.                      |
+| `--bx-page-aside-inline-start-border-color`      | Inline start border color of the `aside` part. Default `var(--bx-border-subtle)`.                     |
+| `--bx-page-footer-block-start-border-width`      | Block start border width of the `footer` part. Default `var(--bx-border-width)`.                      |
+| `--bx-page-footer-block-start-border-color`      | Block start border color of the `footer` part. Default `var(--bx-border-subtle)`.                     |
+| `--bx-page-aside-block-start-border-width`       | Block start border width of the `aside` part. Default `var(--bx-border-width)`.                       |
+| `--bx-page-aside-block-start-border-color`       | Block start border color of the `aside` part. Default `var(--bx-border-subtle)`.                      |
+| `--bx-page-navigation-shadow`                    | Box shadow of the `navigation` part. Default `var(--bx-shadow-m)`.                                    |
+| `--bx-page-scrim-bg`                             | Background of the `scrim` element. Default `color-mix(in srgb, CanvasText 40%, transparent)`.         |
+| `--bx-page-menu-button-icon-size`                | Size (width and height) of the icon inside the `menu-button` element. Default `1.25em`.               |
+| `--bx-page-font-family`                          | Font family of the root surface. Default `var(--bx-type-body-family)`.                                |
 
 ### Methods
 
@@ -118,4 +165,4 @@ Primary demonstration of container reflow: aside drops below main, nav becomes d
 - Open: confirm final property names against the custom-elements manifest during implementation.
 - The mobile drawer is an absolutely positioned in-page panel (not a top-layer `<dialog>` like `bx-drawer`) so it stays within an embedding container. Focus containment is `inert` on everything else, so Tab can reach browser chrome.
 - `mobile-breakpoint` is resolved to px through a probe element, so `rem`/`em` follow the live root font size.
-- `--main-width` only caps the main column's maximum inline size.
+- `--bx-page-main-width` only caps the main column's maximum inline size.

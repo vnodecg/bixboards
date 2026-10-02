@@ -27,8 +27,20 @@ function clamp(value: number, min: number, max: number): number {
  * @csspart divider - The draggable divider line + handle.
  * @csspart handle - The handle knob.
  *
- * @cssprop --divider-width - Divider line thickness. Default `--bx-border-width-strong`.
- * @cssprop --handle-size - Handle knob diameter. Default `calc(var(--bx-unit) * 2)`.
+ * @cssprop --bx-comparison-divider-width - Divider line thickness. Default `--bx-border-width-strong`.
+ * @cssprop --bx-comparison-handle-size - Handle knob diameter. Default `calc(var(--bx-unit) * 2)`.
+ * @cssprop --bx-comparison-divider-bg - Background of the `divider` part. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-comparison-divider-shadow - Box shadow of the `divider` part. Default `0 0 0 var(--bx-border-width) var(--bx-border-strong)`.
+ * @cssprop --bx-comparison-handle-knob-bg - Background of the `handle` part's knob. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-comparison-handle-knob-border-width - Border width of the `handle` part's knob. Default `var(--bx-border-width)`.
+ * @cssprop --bx-comparison-handle-knob-border-color - Border color of the `handle` part's knob. Default `var(--bx-border-strong)`.
+ * @cssprop --bx-comparison-handle-knob-shadow - Box shadow of the `handle` part's knob. Default `var(--bx-shadow-s)`.
+ * @cssprop --bx-comparison-handle-knob-focus-ring-width - Focus ring width of the `handle` part's knob (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-comparison-handle-knob-focus-ring-color - Focus ring color of the `handle` part's knob (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-comparison-handle-knob-focus-ring-offset - Focus ring offset of the `handle` part's knob (focus state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-comparison-aspect-ratio - Aspect ratio of the comparison area. Default `16 / 9`.
+ * @cssprop --bx-comparison-handle-icon-size - Size (width and height) of the icon inside the `handle` element. Default `0.85em`.
+ * @cssprop --bx-comparison-handle-hit-size - Size of the handle's pointer hit area (the visible knob is `--bx-comparison-handle-size`). Default `var(--bx-target-min)`.
  */
 export class BxComparison extends BixElement {
   static override tagName = 'bx-comparison';
@@ -62,27 +74,33 @@ export class BxComparison extends BixElement {
       }
 
       .before {
-        clip-path: inset(0 calc(100% - var(--bx-comparison-position, 50%)) 0 0);
+        clip-path: inset(0 calc(100% - var(--_position, 50%)) 0 0);
       }
 
       :host(:dir(rtl)) .before {
-        clip-path: inset(0 0 0 calc(100% - var(--bx-comparison-position, 50%)));
+        clip-path: inset(0 0 0 calc(100% - var(--_position, 50%)));
       }
 
       .divider {
         position: absolute;
         inset-block: 0;
-        inset-inline-start: var(--bx-comparison-position, 50%);
+        inset-inline-start: var(--_position, 50%);
         translate: -50% 0;
-        inline-size: var(--divider-width, var(--bx-border-width-strong));
-        background: var(--bx-surface-base);
-        box-shadow: 0 0 0 1px
-          var(--bx-color-neutral-transparent-300, rgba(0, 0, 0, 0.16));
+        inline-size: var(
+          --bx-comparison-divider-width,
+          var(--bx-border-width-strong)
+        );
+        background: var(--bx-comparison-divider-bg, var(--bx-surface-base));
+        box-shadow: var(
+          --bx-comparison-divider-shadow,
+          0 0 0 var(--bx-border-width)
+            color-mix(in srgb, var(--bx-text-primary) 24%, transparent)
+        );
         cursor: ew-resize;
       }
 
       :host(:dir(rtl)) .divider {
-        inset-inline-start: calc(100% - var(--bx-comparison-position, 50%));
+        inset-inline-start: calc(100% - var(--_position, 50%));
       }
 
       .handle {
@@ -93,8 +111,8 @@ export class BxComparison extends BixElement {
         display: flex;
         align-items: center;
         justify-content: center;
-        inline-size: var(--bx-target-min, 2.75rem);
-        block-size: var(--bx-target-min, 2.75rem);
+        inline-size: var(--bx-comparison-handle-hit-size, var(--bx-target-min));
+        block-size: var(--bx-comparison-handle-hit-size, var(--bx-target-min));
       }
 
       .handle::before {
@@ -110,18 +128,23 @@ export class BxComparison extends BixElement {
         inset-inline-start: 50%;
         translate: -50% -50%;
         box-sizing: border-box;
-        inline-size: var(--handle-size, calc(var(--bx-unit) * 2));
-        block-size: var(--handle-size, calc(var(--bx-unit) * 2));
+        inline-size: var(--bx-comparison-handle-size, calc(var(--bx-unit) * 2));
+        block-size: var(--bx-comparison-handle-size, calc(var(--bx-unit) * 2));
         border-radius: 50%;
-        background: var(--bx-surface-base);
-        border: var(--bx-border-width) solid var(--bx-border-strong);
-        box-shadow: var(--bx-shadow-s, 0 1px 3px rgba(0, 0, 0, 0.24));
+        background: var(--bx-comparison-handle-knob-bg, var(--bx-surface-base));
+        border: var(
+            --bx-comparison-handle-knob-border-width,
+            var(--bx-border-width)
+          )
+          solid
+          var(--bx-comparison-handle-knob-border-color, var(--bx-border-strong));
+        box-shadow: var(--bx-comparison-handle-knob-shadow, var(--bx-shadow-s));
       }
 
       .handle svg {
         position: relative;
-        inline-size: 0.85em;
-        block-size: 0.85em;
+        inline-size: var(--bx-comparison-handle-icon-size, 0.85em);
+        block-size: var(--bx-comparison-handle-icon-size, 0.85em);
         fill: var(--bx-text-secondary);
       }
 
@@ -134,8 +157,19 @@ export class BxComparison extends BixElement {
       }
 
       .divider:focus-visible .handle::before {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+        outline: var(
+            --bx-comparison-handle-knob-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(
+            --bx-comparison-handle-knob-focus-ring-color,
+            var(--bx-focus-ring)
+          );
+        outline-offset: var(
+          --bx-comparison-handle-knob-focus-ring-offset,
+          var(--bx-focus-ring-offset)
+        );
       }
 
       @media (forced-colors: active) {
@@ -252,11 +286,7 @@ export class BxComparison extends BixElement {
   protected override render() {
     return html`
       <div class="after" part="after"><slot name="after"></slot></div>
-      <div
-        class="before"
-        part="before"
-        style="--bx-comparison-position: ${this.position}%"
-      >
+      <div class="before" part="before" style="--_position: ${this.position}%">
         <slot name="before"></slot>
       </div>
       <div
@@ -270,7 +300,7 @@ export class BxComparison extends BixElement {
         aria-valuetext="${this.position}%"
         aria-label="Comparison position"
         aria-orientation="horizontal"
-        style="--bx-comparison-position: ${this.position}%"
+        style="--_position: ${this.position}%"
         @pointerdown=${this.#handlePointerDown}
         @pointermove=${this.#handlePointerMove}
         @pointerup=${this.#handlePointerUp}

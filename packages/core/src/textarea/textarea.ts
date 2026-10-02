@@ -2,6 +2,7 @@ import { css, html, nothing, type PropertyValues } from 'lit';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { BixElement } from '../bix-element.ts';
 import { FormAssociatedMixin } from '../internal/form-associated.ts';
+import { textStyle, textFamily } from '../internal/text-style.ts';
 
 type Size = 'small' | 'medium' | 'large';
 type Appearance = 'outlined' | 'filled' | 'filled outlined';
@@ -52,6 +53,55 @@ const supportsFieldSizing =
  * @csspart count - The visible character counter, present when `show-count` is set.
  *
  * @cssprop --bx-textarea-max-height - Caps auto-resize growth. Unset: grows unbounded.
+ * @cssprop --bx-textarea-form-control-gap - Gap of the `form-control` part. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-textarea-label-fg - Text/icon color of the `label` part. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-textarea-radius - Corner radius of the root surface. Default `var(--bx-radius-m)`.
+ * @cssprop --bx-textarea-border-width - Border width of the root surface. Default `var(--bx-border-width)`.
+ * @cssprop --bx-textarea-border-color - Border color of the root surface. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-textarea-bg - Background of the root surface. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-textarea-focus-ring-width - Focus ring width of the root surface (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-textarea-disabled-bg - Background of the root surface (disabled state). Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-textarea-disabled-fg - Text/icon color of the root surface (disabled state). Default `var(--bx-text-disabled)`.
+ * @cssprop --bx-textarea-invalid-border-color - Border color of the root surface (invalid state). Default `var(--bx-role-danger-border)`.
+ * @cssprop --bx-textarea-min-height - Minimum height of the root surface. Default `calc(var(--bx-unit) * 1.5 * 2)`.
+ * @cssprop --bx-textarea-padding-block - Padding block of the root surface. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-textarea-padding-inline - Padding inline of the root surface. Default `var(--bx-space-m)`.
+ * @cssprop --bx-textarea-placeholder-fg - Text/icon color of the `::placeholder`. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-textarea-count-padding-inline-end - Padding inline end of the `count` part. Default `var(--bx-space-m)`.
+ * @cssprop --bx-textarea-count-padding-block-end - Padding block end of the `count` part. Default `var(--bx-space-2xs)`.
+ * @cssprop --bx-textarea-count-fg - Text/icon color of the `count` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-textarea-hint-fg - Text/icon color of the `hint` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-textarea-hint-invalid-fg - Text/icon color of the `hint` part (invalid state). Default `var(--bx-role-danger-fg)`.
+ * @cssprop --bx-textarea-count-over-limit-fg - Color of the character counter once `maxlength` is exceeded. Default `var(--bx-role-danger-fg)`.
+ * @cssprop --bx-textarea-hover-border-color - Border color while hovered. Default `var(--bx-border-strong)`.
+ * @cssprop --bx-textarea-focus-border-color - Border color while focused. Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-textarea-focus-shadow - Soft halo around the field while focused. Default a translucent `--bx-focus-ring` ring.
+ * @cssprop --bx-textarea-hover-bg - Background of a `filled` field while hovered. Default `var(--bx-surface-muted)`.
+ * @cssprop --bx-textarea-focus-bg - Background of a `filled` field while focused. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-textarea-disabled-border-color - Border color when disabled. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-textarea-invalid-focus-shadow - Halo while focused and invalid. Default a translucent `--bx-role-danger-border` ring.
+ * @cssprop --bx-textarea-placeholder-opacity - Placeholder opacity. Default `1`.
+ * @cssprop --bx-textarea-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-textarea-label-font-family - Font family of the `label` part (text style `label-s`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-textarea-label-font-size - Font size of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-size)`.
+ * @cssprop --bx-textarea-label-font-weight - Font weight of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-weight)`.
+ * @cssprop --bx-textarea-label-line-height - Line height of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-leading)`.
+ * @cssprop --bx-textarea-label-letter-spacing - Letter spacing of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.
+ * @cssprop --bx-textarea-font-family - Font family of the root surface (text style `body-m`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-textarea-font-size - Font size of the root surface (text style `body-m`). Default `var(--bx-type-body-m-size)`.
+ * @cssprop --bx-textarea-font-weight - Font weight of the root surface (text style `body-m`). Default `var(--bx-type-body-m-weight)`.
+ * @cssprop --bx-textarea-line-height - Line height of the root surface (text style `body-m`). Default `var(--bx-type-body-m-leading)`.
+ * @cssprop --bx-textarea-letter-spacing - Letter spacing of the root surface (text style `body-m`). Default `var(--bx-type-body-m-tracking)`.
+ * @cssprop --bx-textarea-count-font-family - Font family of the `count` element (text style `body-s`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-textarea-count-font-size - Font size of the `count` element (text style `body-s`). Default `var(--bx-type-body-s-size)`.
+ * @cssprop --bx-textarea-count-font-weight - Font weight of the `count` element (text style `body-s`). Default `var(--bx-type-body-s-weight)`.
+ * @cssprop --bx-textarea-count-line-height - Line height of the `count` element (text style `body-s`). Default `var(--bx-type-body-s-leading)`.
+ * @cssprop --bx-textarea-count-letter-spacing - Letter spacing of the `count` element (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.
+ * @cssprop --bx-textarea-hint-font-family - Font family of the `hint` part (text style `body-s`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-textarea-hint-font-size - Font size of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-size)`.
+ * @cssprop --bx-textarea-hint-font-weight - Font weight of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-weight)`.
+ * @cssprop --bx-textarea-hint-line-height - Line height of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-leading)`.
+ * @cssprop --bx-textarea-hint-letter-spacing - Letter spacing of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.
  */
 export class BxTextarea extends FormAssociatedMixin(BixElement) {
   static override tagName = 'bx-textarea';
@@ -61,19 +111,19 @@ export class BxTextarea extends FormAssociatedMixin(BixElement) {
     css`
       :host {
         display: block;
-        font-family: var(--bx-font-family-sans);
+        ${textFamily('--bx-textarea', 'body')}
       }
 
       .form-control {
         display: flex;
         flex-direction: column;
-        gap: var(--bx-space-xs);
+        gap: var(--bx-textarea-form-control-gap, var(--bx-space-xs));
       }
 
       .label {
-        color: var(--bx-text-primary);
-        font-weight: var(--bx-font-weight-medium);
-        font-size: var(--bx-font-s);
+        color: var(--bx-textarea-label-fg, var(--bx-text-primary));
+
+        ${textStyle('--bx-textarea-label', 'label-s')}
       }
 
       .label:empty {
@@ -84,68 +134,160 @@ export class BxTextarea extends FormAssociatedMixin(BixElement) {
         position: relative;
         display: flex;
         flex-direction: column;
-        border-radius: var(--bx-radius-m);
-        border: var(--bx-border-width) solid var(--bx-border-subtle);
-        background: var(--bx-surface-base);
+        border-radius: var(--bx-textarea-radius, var(--bx-radius-m));
+        border: var(--bx-textarea-border-width, var(--bx-border-width)) solid
+          var(--bx-textarea-border-color, var(--bx-border-subtle));
+        background: var(--bx-textarea-bg, var(--bx-surface-base));
       }
 
       :host([appearance~='filled']) .base {
-        background: var(--bx-surface-subtle);
+        background: var(--bx-textarea-bg, var(--bx-surface-subtle));
         border-color: transparent;
       }
 
-      .base:has(.textarea:focus-visible) {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+      .base {
+        cursor: text;
+        transition:
+          border-color var(--bx-motion-duration-fast)
+            var(--bx-motion-easing-standard),
+          box-shadow var(--bx-motion-duration-fast)
+            var(--bx-motion-easing-standard),
+          background-color var(--bx-motion-duration-fast)
+            var(--bx-motion-easing-standard);
+      }
+
+      .base:hover {
+        border-color: var(
+          --bx-textarea-hover-border-color,
+          var(--bx-border-strong)
+        );
+      }
+
+      /* Focus: a crisp brand border plus a soft halo instead of a hard outline (same as
+         bx-input). The transparent outline keeps a visible ring in forced-colors mode. */
+      .base:focus-within {
+        border-color: var(
+          --bx-textarea-focus-border-color,
+          var(--bx-focus-ring)
+        );
+        box-shadow: var(
+          --bx-textarea-focus-shadow,
+          0 0 0 calc(var(--bx-border-width-strong) * 1.5)
+            color-mix(in srgb, var(--bx-focus-ring) 22%, transparent)
+        );
+        outline: var(
+            --bx-textarea-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid transparent;
+      }
+
+      :host([appearance='filled']) .base:hover {
+        background: var(--bx-textarea-hover-bg, var(--bx-surface-muted));
+      }
+      :host([appearance~='filled']) .base:focus-within {
+        background: var(--bx-textarea-focus-bg, var(--bx-surface-base));
+        border-color: var(
+          --bx-textarea-focus-border-color,
+          var(--bx-focus-ring)
+        );
       }
 
       :host([disabled]) .base {
-        background: var(--bx-surface-subtle);
-        color: var(--bx-text-disabled);
+        cursor: not-allowed;
+        border-color: var(
+          --bx-textarea-disabled-border-color,
+          var(--bx-border-subtle)
+        );
+        background: var(--bx-textarea-disabled-bg, var(--bx-surface-subtle));
+        color: var(--bx-textarea-disabled-fg, var(--bx-text-disabled));
       }
 
       .base:has(.textarea[data-user-invalid]) {
-        border-color: var(--bx-role-danger-border);
+        border-color: var(
+          --bx-textarea-invalid-border-color,
+          var(--bx-role-danger-border)
+        );
+      }
+      .base:has(.textarea[data-user-invalid]):focus-within {
+        box-shadow: var(
+          --bx-textarea-invalid-focus-shadow,
+          0 0 0 calc(var(--bx-border-width-strong) * 1.5)
+            color-mix(in srgb, var(--bx-role-danger-border) 22%, transparent)
+        );
       }
 
       .textarea {
         all: unset;
         box-sizing: border-box;
         display: block;
-        min-block-size: calc(var(--bx-unit) * 1.5 * 2);
+        min-block-size: var(
+          --bx-textarea-min-height,
+          calc(var(--bx-unit) * 1.5 * 2)
+        );
         max-block-size: var(--bx-textarea-max-height, none);
-        padding-block: var(--bx-space-xs);
-        padding-inline: var(--bx-space-m);
+        padding-block: var(--bx-textarea-padding-block, var(--bx-space-xs));
+        padding-inline: var(--bx-textarea-padding-inline, var(--bx-space-s));
         font: inherit;
-        font-size: max(1rem, var(--bx-font-m));
-        line-height: var(--bx-font-leading-normal, 1.5);
+
+        ${textStyle('--bx-textarea', 'body-m')}
+
         color: inherit;
-        resize: var(--bx-textarea-resize, vertical);
-        field-sizing: var(--bx-textarea-field-sizing, unset);
+        resize: var(--_resize, vertical);
+        field-sizing: var(--_field-sizing, unset);
         overflow: auto;
       }
 
       .textarea::placeholder {
-        color: var(--bx-text-secondary);
+        color: var(--bx-textarea-placeholder-fg, var(--bx-text-hint));
+        opacity: var(--bx-textarea-placeholder-opacity, 1);
       }
 
       :host([size='small']) .textarea {
-        font-size: var(--bx-font-s);
+        ${textStyle('--bx-textarea', 'body-s')}
       }
       :host([size='large']) .textarea {
-        font-size: var(--bx-font-l);
+        ${textStyle('--bx-textarea', 'body-l')}
+      }
+
+      @media (pointer: coarse) {
+        .textarea {
+          font-size: var(
+            --bx-textarea-font-size,
+            max(var(--bx-font-floor), var(--bx-type-body-m-size))
+          );
+        }
+        :host([size='small']) .textarea {
+          font-size: var(
+            --bx-textarea-font-size,
+            max(var(--bx-font-floor), var(--bx-type-body-s-size))
+          );
+        }
+        :host([size='large']) .textarea {
+          font-size: var(
+            --bx-textarea-font-size,
+            max(var(--bx-font-floor), var(--bx-type-body-l-size))
+          );
+        }
       }
 
       .count {
         align-self: flex-end;
-        padding-inline-end: var(--bx-space-m);
-        padding-block-end: var(--bx-space-2xs);
-        color: var(--bx-text-secondary);
-        font-size: var(--bx-font-s);
+        padding-inline-end: var(
+          --bx-textarea-count-padding-inline-end,
+          var(--bx-space-m)
+        );
+        padding-block-end: var(
+          --bx-textarea-count-padding-block-end,
+          var(--bx-space-2xs)
+        );
+        color: var(--bx-textarea-count-fg, var(--bx-text-secondary));
+
+        ${textStyle('--bx-textarea-count', 'body-s')}
       }
 
       .count[data-over-limit] {
-        color: var(--bx-role-danger-fg);
+        color: var(--bx-textarea-count-over-limit-fg, var(--bx-role-danger-fg));
       }
 
       .announcement {
@@ -157,8 +299,9 @@ export class BxTextarea extends FormAssociatedMixin(BixElement) {
       }
 
       .hint {
-        color: var(--bx-text-secondary);
-        font-size: var(--bx-font-s);
+        color: var(--bx-textarea-hint-fg, var(--bx-text-secondary));
+
+        ${textStyle('--bx-textarea-hint', 'body-s')}
       }
 
       .hint:empty {
@@ -166,7 +309,7 @@ export class BxTextarea extends FormAssociatedMixin(BixElement) {
       }
 
       .hint[data-user-invalid] {
-        color: var(--bx-role-danger-fg);
+        color: var(--bx-textarea-hint-invalid-fg, var(--bx-role-danger-fg));
       }
 
       @media (forced-colors: active) {
@@ -430,7 +573,7 @@ export class BxTextarea extends FormAssociatedMixin(BixElement) {
         <div
           class="base"
           part="base"
-          style="--bx-textarea-resize: ${resizeCss}; --bx-textarea-field-sizing: ${
+          style="--_resize: ${resizeCss}; --_field-sizing: ${
             this.resize === 'auto' && supportsFieldSizing ? 'content' : 'unset'
           }"
         >

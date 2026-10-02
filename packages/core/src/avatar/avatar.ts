@@ -1,5 +1,6 @@
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
+import { textStyle } from '../internal/text-style.ts';
 
 type Shape = 'circle' | 'square' | 'rounded';
 type Loading = 'eager' | 'lazy';
@@ -21,6 +22,16 @@ type Loading = 'eager' | 'lazy';
  * @csspart icon - The icon slot wrapper, present as the final fallback.
  *
  * @cssprop --bx-avatar-size - Diameter/side length. Default a fluid step (`calc(var(--bx-unit) * 2.5)`).
+ * @cssprop --bx-avatar-bg - Background of the root surface. Default `var(--bx-surface-muted)`.
+ * @cssprop --bx-avatar-fg - Text/icon color of the root surface. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-avatar-border-width - Border width of the root surface. Default `var(--bx-border-width)`.
+ * @cssprop --bx-avatar-border-color - Border color of the root surface. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-avatar-radius - Corner radius of the root surface. Default `var(--bx-radius-pill)`.
+ * @cssprop --bx-avatar-font-family - Font family of the root surface (text style `heading-xs`). Default `var(--bx-type-heading-family)`.
+ * @cssprop --bx-avatar-font-size - Font size of the root surface (text style `heading-xs`). Default `var(--bx-type-heading-xs-size)`.
+ * @cssprop --bx-avatar-font-weight - Font weight of the root surface (text style `heading-xs`). Default `var(--bx-type-heading-xs-weight)`.
+ * @cssprop --bx-avatar-line-height - Line height of the root surface (text style `heading-xs`). Default `var(--bx-type-heading-xs-leading)`.
+ * @cssprop --bx-avatar-letter-spacing - Letter spacing of the root surface (text style `heading-xs`). Default `var(--bx-type-heading-xs-tracking)`.
  */
 export class BxAvatar extends BixElement {
   static override tagName = 'bx-avatar';
@@ -42,26 +53,26 @@ export class BxAvatar extends BixElement {
         display: grid;
         place-items: center;
         overflow: hidden;
-        background: var(--bx-surface-muted);
-        color: var(--bx-text-secondary);
-        font-family: var(--bx-font-family-sans);
-        font-weight: var(--bx-font-weight-semibold);
-        font-size: 40cqi;
-        line-height: 1;
+        background: var(--bx-avatar-bg, var(--bx-surface-muted));
+        color: var(--bx-avatar-fg, var(--bx-text-secondary));
+
+        ${textStyle('--bx-avatar', 'heading-xs', { size: '40cqi', leading: '1' })}
+
         text-transform: uppercase;
         container-type: inline-size;
-        border: var(--bx-border-width) solid var(--bx-border-subtle);
+        border: var(--bx-avatar-border-width, var(--bx-border-width)) solid
+          var(--bx-avatar-border-color, var(--bx-border-subtle));
       }
 
       :host([shape='circle']) .base,
       :host(:not([shape])) .base {
-        border-radius: var(--bx-radius-pill);
+        border-radius: var(--bx-avatar-radius, var(--bx-radius-pill));
       }
       :host([shape='square']) .base {
         border-radius: 0;
       }
       :host([shape='rounded']) .base {
-        border-radius: var(--bx-radius-m);
+        border-radius: var(--bx-avatar-radius, var(--bx-radius-m));
       }
 
       img {

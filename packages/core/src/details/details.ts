@@ -1,5 +1,6 @@
 import { css, html, nothing, svg, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
+import { textStyle, textFamily } from '../internal/text-style.ts';
 
 type Appearance = 'filled' | 'outlined' | 'filled outlined' | 'plain';
 type IconPlacement = 'start' | 'end';
@@ -56,6 +57,24 @@ const groups = new Map<string, Set<BxDetails>>();
  * @cssprop --bx-details-spacing - Header/body padding. Default `--bx-space-m`.
  * @cssprop --bx-details-show-duration - Open-transition duration. Default `--bx-motion-duration-base`.
  * @cssprop --bx-details-hide-duration - Close-transition duration. Default `--bx-motion-duration-fast`.
+ * @cssprop --bx-details-radius - Corner radius of the root surface. Default `var(--bx-radius-m)`.
+ * @cssprop --bx-details-border-width - Border width of the root surface. Default `var(--bx-border-width)`.
+ * @cssprop --bx-details-bg - Background of the root surface. Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-details-border-color - Border color of the root surface. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-details-header-gap - Gap of the `header` part. Default `var(--bx-space-s)`.
+ * @cssprop --bx-details-header-min-height - Minimum height of the `header` part. Default `var(--bx-target-min)`.
+ * @cssprop --bx-details-header-fg - Text/icon color of the `header` part. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-details-header-focus-ring-width - Focus ring width of the `header` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-details-header-focus-ring-color - Focus ring color of the `header` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-details-header-focus-ring-offset - Focus ring offset of the `header` part (focus state). Default `calc(var(--bx-focus-ring-offset) * -1)`.
+ * @cssprop --bx-details-header-disabled-fg - Text/icon color of the `header` part (disabled state). Default `var(--bx-text-disabled)`.
+ * @cssprop --bx-details-icon-size - Size (width and height) of the `icon` part. Default `1em`.
+ * @cssprop --bx-details-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-details-header-font-family - Font family of the `header` part (text style `label-m`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-details-header-font-size - Font size of the `header` part (text style `label-m`). Default `var(--bx-type-label-m-size)`.
+ * @cssprop --bx-details-header-font-weight - Font weight of the `header` part (text style `label-m`). Default `var(--bx-type-label-m-weight)`.
+ * @cssprop --bx-details-header-line-height - Line height of the `header` part (text style `label-m`). Default `var(--bx-type-label-m-leading)`.
+ * @cssprop --bx-details-header-letter-spacing - Letter spacing of the `header` part (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.
  */
 export class BxDetails extends BixElement {
   static override tagName = 'bx-details';
@@ -65,19 +84,20 @@ export class BxDetails extends BixElement {
     css`
       :host {
         display: block;
-        font-family: var(--bx-font-family-sans);
+        ${textFamily('--bx-details', 'body')}
       }
 
       .base {
-        border-radius: var(--bx-radius-m);
-        border: var(--bx-border-width) solid transparent;
+        border-radius: var(--bx-details-radius, var(--bx-radius-m));
+        border: var(--bx-details-border-width, var(--bx-border-width)) solid
+          transparent;
       }
 
       :host([appearance~='filled']) .base {
-        background: var(--bx-surface-subtle);
+        background: var(--bx-details-bg, var(--bx-surface-subtle));
       }
       :host([appearance~='outlined']) .base {
-        border-color: var(--bx-border-subtle);
+        border-color: var(--bx-details-border-color, var(--bx-border-subtle));
       }
       :host([appearance='plain']) .base {
         border-color: transparent;
@@ -90,12 +110,17 @@ export class BxDetails extends BixElement {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: var(--bx-space-s);
+        gap: var(--bx-details-header-gap, var(--bx-space-s));
         inline-size: 100%;
-        min-block-size: var(--bx-target-min);
+        min-block-size: var(
+          --bx-details-header-min-height,
+          var(--bx-target-min)
+        );
         padding: var(--bx-details-spacing, var(--bx-space-m));
-        color: var(--bx-text-primary);
-        font-weight: var(--bx-font-weight-medium);
+        color: var(--bx-details-header-fg, var(--bx-text-primary));
+
+        ${textStyle('--bx-details-header', 'label-m')}
+
         cursor: pointer;
       }
 
@@ -105,13 +130,20 @@ export class BxDetails extends BixElement {
       }
 
       .header:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: calc(var(--bx-focus-ring-offset) * -1);
+        outline: var(
+            --bx-details-header-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid var(--bx-details-header-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-details-header-focus-ring-offset,
+          calc(var(--bx-focus-ring-offset) * -1)
+        );
       }
 
       :host([disabled]) .header {
         cursor: not-allowed;
-        color: var(--bx-text-disabled);
+        color: var(--bx-details-header-disabled-fg, var(--bx-text-disabled));
       }
 
       .summary {
@@ -122,8 +154,8 @@ export class BxDetails extends BixElement {
       .icon {
         display: inline-flex;
         flex-shrink: 0;
-        inline-size: 1em;
-        block-size: 1em;
+        inline-size: var(--bx-details-icon-size, 1em);
+        block-size: var(--bx-details-icon-size, 1em);
       }
 
       .icon svg,
@@ -144,14 +176,14 @@ export class BxDetails extends BixElement {
         overflow: hidden;
         block-size: 0;
         transition: block-size
-          var(--bx-details-hide-duration, var(--bx-motion-duration-fast, 0.12s))
-          var(--bx-motion-easing-standard, ease);
+          var(--bx-details-hide-duration, var(--bx-motion-duration-fast))
+          var(--bx-motion-easing-standard);
       }
 
       :host([open]) .body-wrapper {
         transition: block-size
-          var(--bx-details-show-duration, var(--bx-motion-duration-base, 0.2s))
-          var(--bx-motion-easing-standard, ease);
+          var(--bx-details-show-duration, var(--bx-motion-duration-base))
+          var(--bx-motion-easing-standard);
       }
 
       .content {

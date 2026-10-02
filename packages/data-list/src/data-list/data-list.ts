@@ -7,6 +7,7 @@ import {
 } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
 import { BixElement, VirtualizerController, observeResize } from '@bixant/core';
+import { textStyle, textFamily } from '@bixant/core';
 
 type Key = string | number;
 type Layout = 'list' | 'grid' | 'masonry';
@@ -90,9 +91,35 @@ let nextId = 0;
  * @csspart empty - The empty state.
  * @csspart loading - The loading state.
  *
- * @cssprop --bx-list-gap - Gap between items.
- * @cssprop --bx-list-item-min-width - Grid track minimum width.
- * @cssprop --bx-list-item-height - Item height when fixed.
+ * @cssprop --bx-data-list-gap - Gap between items.
+ * @cssprop --bx-data-list-fg - Text/icon color of the root surface. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-data-list-min-height - Minimum height of the root surface. Default `calc(var(--bx-unit) * 8)`.
+ * @cssprop --bx-data-list-viewport-focus-ring-width - Focus ring width of the `viewport` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-data-list-viewport-focus-ring-color - Focus ring color of the `viewport` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-data-list-viewport-focus-ring-offset - Focus ring offset of the `viewport` part (focus state). Default `calc(var(--bx-focus-ring-offset) * -1)`.
+ * @cssprop --bx-data-list-item-radius - Corner radius of the `item` part. Default `var(--bx-radius-m)`.
+ * @cssprop --bx-data-list-item-selected-bg - Background of the `item` part (selected state). Default `color-mix(in srgb, var(--bx-role-accent) 14%, transparent)`.
+ * @cssprop --bx-data-list-item-selected-shadow - Box shadow of the `item` part (selected state). Default `inset 0 0 0 var(--bx-border-width-strong) var(--bx-role-accent)`.
+ * @cssprop --bx-data-list-item-dragging-ring-width - Focus ring width of the `item` part (dragging state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-data-list-item-dragging-ring-color - Focus ring color of the `item` part (dragging state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-data-list-item-dragging-outline-offset - Outline offset of the `item` part (dragging state). Default `calc(var(--bx-focus-ring-offset) * -1)`.
+ * @cssprop --bx-data-list-item-dragging-opacity - Opacity of the `item` part (dragging state). Default `0.7`.
+ * @cssprop --bx-data-list-item-dragging-shadow - Box shadow of the `item` part (dragging state). Default `var(--bx-shadow-m)`.
+ * @cssprop --bx-data-list-item-drop-indicator-height - Height of the drop indicator on the `item` part. Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-data-list-item-drop-indicator-bg - Background of the drop indicator on the `item` part. Default `var(--bx-role-accent)`.
+ * @cssprop --bx-data-list-group-header-padding - Padding of the `group-header` part. Default `var(--bx-space-xs) var(--bx-space-m)`.
+ * @cssprop --bx-data-list-group-header-bg - Background of the `group-header` part. Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-data-list-group-header-fg - Text/icon color of the `group-header` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-data-list-group-header-block-end-border-width - Block end border width of the `group-header` part. Default `var(--bx-border-width)`.
+ * @cssprop --bx-data-list-group-header-block-end-border-color - Block end border color of the `group-header` part. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-data-list-loading-padding - Padding of the `loading` part. Default `var(--bx-space-l)`.
+ * @cssprop --bx-data-list-loading-fg - Text/icon color of the `loading` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-data-list-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-data-list-group-header-font-family - Font family of the `group-header` part (text style `label-s`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-data-list-group-header-font-size - Font size of the `group-header` part (text style `label-s`). Default `var(--bx-type-label-s-size)`.
+ * @cssprop --bx-data-list-group-header-font-weight - Font weight of the `group-header` part (text style `label-s`). Default `var(--bx-type-label-s-weight)`.
+ * @cssprop --bx-data-list-group-header-line-height - Line height of the `group-header` part (text style `label-s`). Default `var(--bx-type-label-s-leading)`.
+ * @cssprop --bx-data-list-group-header-letter-spacing - Letter spacing of the `group-header` part (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.
  */
 export class BxDataList<T = unknown> extends BixElement {
   static override tagName = 'bx-data-list';
@@ -102,9 +129,12 @@ export class BxDataList<T = unknown> extends BixElement {
     css`
       :host {
         display: block;
-        font-family: var(--bx-font-family-sans);
-        color: var(--bx-text-primary);
-        min-block-size: 8rem;
+        ${textFamily('--bx-data-list', 'body')}
+        color: var(--bx-data-list-fg, var(--bx-text-primary));
+        min-block-size: var(
+          --bx-data-list-min-height,
+          calc(var(--bx-unit) * 8)
+        );
       }
 
       :host([hidden]) {
@@ -125,11 +155,20 @@ export class BxDataList<T = unknown> extends BixElement {
         overscroll-behavior: contain;
         outline: none;
         position: relative;
+        isolation: isolate;
       }
 
       .viewport:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: calc(var(--bx-focus-ring-offset) * -1);
+        outline: var(
+            --bx-data-list-viewport-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(--bx-data-list-viewport-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-data-list-viewport-focus-ring-offset,
+          calc(var(--bx-focus-ring-offset) * -1)
+        );
       }
 
       .spacer {
@@ -155,8 +194,8 @@ export class BxDataList<T = unknown> extends BixElement {
       .cells {
         display: grid;
         grid-template-columns: repeat(var(--cols, 1), minmax(0, 1fr));
-        gap: var(--bx-list-gap, var(--bx-space-s));
-        padding-block-end: var(--bx-list-gap, var(--bx-space-s));
+        gap: var(--bx-data-list-gap, var(--bx-space-s));
+        padding-block-end: var(--bx-data-list-gap, var(--bx-space-s));
         block-size: 100%;
         box-sizing: border-box;
       }
@@ -165,7 +204,7 @@ export class BxDataList<T = unknown> extends BixElement {
         box-sizing: border-box;
         min-inline-size: 0;
         position: relative;
-        border-radius: var(--bx-radius-m);
+        border-radius: var(--bx-data-list-item-radius, var(--bx-radius-m));
         outline: none;
         overflow: hidden;
       }
@@ -177,20 +216,36 @@ export class BxDataList<T = unknown> extends BixElement {
       }
 
       .item[aria-selected='true'] {
-        background: color-mix(in srgb, var(--bx-role-accent) 14%, transparent);
-        box-shadow: inset 0 0 0 var(--bx-border-width-strong)
-          var(--bx-role-accent);
+        background: var(
+          --bx-data-list-item-selected-bg,
+          color-mix(in srgb, var(--bx-role-accent) 14%, transparent)
+        );
+        box-shadow: var(
+          --bx-data-list-item-selected-shadow,
+          inset 0 0 0 var(--bx-border-width-strong) var(--bx-role-accent)
+        );
       }
 
       .item[data-active]:not([data-dragging]) {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: calc(var(--bx-focus-ring-offset) * -1);
+        outline: var(
+            --bx-data-list-item-dragging-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(--bx-data-list-item-dragging-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-data-list-item-dragging-outline-offset,
+          calc(var(--bx-focus-ring-offset) * -1)
+        );
       }
 
       .item[data-grabbed],
       .item[data-dragging] {
-        opacity: 0.7;
-        box-shadow: var(--bx-shadow-m);
+        opacity: var(--bx-data-list-item-dragging-opacity, 0.7);
+        box-shadow: var(
+          --bx-data-list-item-dragging-shadow,
+          var(--bx-shadow-m)
+        );
         z-index: 3;
       }
 
@@ -199,26 +254,47 @@ export class BxDataList<T = unknown> extends BixElement {
         position: absolute;
         inset-inline: 0;
         inset-block-start: 0;
-        block-size: var(--bx-border-width-strong);
-        background: var(--bx-role-accent);
+        block-size: var(
+          --bx-data-list-item-drop-indicator-height,
+          var(--bx-border-width-strong)
+        );
+        background: var(
+          --bx-data-list-item-drop-indicator-bg,
+          var(--bx-role-accent)
+        );
       }
 
       .group-header {
         box-sizing: border-box;
-        padding: var(--bx-space-xs) var(--bx-space-m);
-        background: var(--bx-surface-subtle);
-        color: var(--bx-text-secondary);
-        font-size: var(--bx-font-s);
-        font-weight: var(--bx-font-weight-medium);
-        border-block-end: var(--bx-border-width) solid var(--bx-border-subtle);
+        padding: var(
+          --bx-data-list-group-header-padding,
+          var(--bx-space-xs) var(--bx-space-m)
+        );
+        background: var(
+          --bx-data-list-group-header-bg,
+          var(--bx-surface-subtle)
+        );
+        color: var(--bx-data-list-group-header-fg, var(--bx-text-secondary));
+
+        ${textStyle('--bx-data-list-group-header', 'label-s')}
+
+        border-block-end: var(
+            --bx-data-list-group-header-block-end-border-width,
+            var(--bx-border-width)
+          )
+          solid
+          var(
+            --bx-data-list-group-header-block-end-border-color,
+            var(--bx-border-subtle)
+          );
       }
 
       .state {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: var(--bx-space-l, 1.5rem);
-        color: var(--bx-text-secondary);
+        padding: var(--bx-data-list-loading-padding, var(--bx-space-l));
+        color: var(--bx-data-list-loading-fg, var(--bx-text-secondary));
       }
 
       .sr {
@@ -470,12 +546,12 @@ export class BxDataList<T = unknown> extends BixElement {
   #getViewport = (): Element | null => this.#viewportEl;
   #getRowKey = (index: number): Key => this.#rows[index]?.key ?? index;
 
-  /** Resolves CSS lengths (`min-item-width`, `--bx-list-gap`) to px with a probe. */
+  /** Resolves CSS lengths (`min-item-width`, `--bx-data-list-gap`) to px with a probe. */
   #measureCss(): void {
     const viewport = this.#viewportEl;
     if (!viewport) return;
     const probe = document.createElement('div');
-    probe.style.cssText = `position:absolute;visibility:hidden;inline-size:${this.minItemWidth};padding-inline-start:var(--bx-list-gap, var(--bx-space-s, 0.5rem))`;
+    probe.style.cssText = `position:absolute;visibility:hidden;inline-size:${this.minItemWidth};padding-inline-start:var(--bx-data-list-gap, var(--bx-space-s))`;
     viewport.appendChild(probe);
     const box = probe.getBoundingClientRect().width;
     const gap = parseFloat(getComputedStyle(probe).paddingInlineStart) || 8;

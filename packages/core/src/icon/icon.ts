@@ -22,6 +22,7 @@ type Status = 'idle' | 'loading' | 'ready' | 'error';
  * @csspart svg - The wrapper around the inlined `<svg>`.
  *
  * @cssprop --bx-icon-size - Width/height. Default `1em`, so the icon follows fluid type.
+ * @cssprop --bx-icon-fallback-opacity - Opacity of the `fallback` element. Default `0.6`.
  */
 export class BxIcon extends BixElement {
   static override tagName = 'bx-icon';
@@ -52,7 +53,7 @@ export class BxIcon extends BixElement {
       .svg .fallback {
         fill: none;
         stroke: currentColor;
-        opacity: 0.6;
+        opacity: var(--bx-icon-fallback-opacity, 0.6);
       }
     `,
   ];

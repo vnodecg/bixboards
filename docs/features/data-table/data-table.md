@@ -74,11 +74,102 @@ Enterprise-grade virtualized table for 100k–1M+ rows: sorting, filtering, grou
 
 ### CSS parts
 
-`base`, `toolbar`, `header`, `header-cell`, `body`, `row`, `cell`, `cell-selected`, `group-row`, `detail`, `footer`, `resize-handle`, `loading-overlay`, `empty`
+| Part              | Description                    |
+| ----------------- | ------------------------------ |
+| `base`            | The outer container.           |
+| `toolbar`         | The toolbar region.            |
+| `header`          | The header row.                |
+| `header-cell`     | A header cell.                 |
+| `body`            | The body spacer.               |
+| `row`             | A data row.                    |
+| `cell`            | A cell.                        |
+| `cell-selected`   | A cell in the selected range.  |
+| `group-row`       | A group row.                   |
+| `detail`          | A row's detail panel.          |
+| `footer`          | The footer region.             |
+| `resize-handle`   | A header cell's resize handle. |
+| `loading-overlay` | The loading indicator.         |
+| `empty`           | The empty state.               |
 
 ### CSS custom properties
 
-`--bx-table-row-height`, `--bx-table-header-height`, `--bx-table-stripe`, `--bx-table-border`, `--bx-table-cell-padding-inline`
+| Property                                           | Description                                                                                                                             |
+| -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `--bx-data-table-row-height`                       | Row height (density default).                                                                                                           |
+| `--bx-data-table-header-height`                    | Header height.                                                                                                                          |
+| `--bx-data-table-stripe`                           | Background of odd rows.                                                                                                                 |
+| `--bx-data-table-border`                           | Border color.                                                                                                                           |
+| `--bx-data-table-cell-padding-inline`              | Cell inline padding.                                                                                                                    |
+| `--bx-data-table-fg`                               | Text/icon color of the root surface. Default `var(--bx-text-primary)`.                                                                  |
+| `--bx-data-table-min-height`                       | Minimum height of the root surface. Default `calc(var(--bx-unit) * 10)`.                                                                |
+| `--bx-data-table-scroller-border-width`            | Border width of the `scroller` element. Default `var(--bx-border-width)`.                                                               |
+| `--bx-data-table-scroller-radius`                  | Corner radius of the `scroller` element. Default `var(--bx-radius-m)`.                                                                  |
+| `--bx-data-table-scroller-bg`                      | Background of the `scroller` element. Default `var(--bx-surface-base)`.                                                                 |
+| `--bx-data-table-header-bg`                        | Background of the `header` part. Default `var(--bx-surface-subtle)`.                                                                    |
+| `--bx-data-table-header-block-end-border-width`    | Block end border width of the `header` part. Default `var(--bx-border-width)`.                                                          |
+| `--bx-data-table-header-cell-gap`                  | Gap of the `header-cell` part. Default `var(--bx-space-xs)`.                                                                            |
+| `--bx-data-table-sort-fg`                          | Text/icon color of the `sort` element. Default `var(--bx-text-secondary)`.                                                              |
+| `--bx-data-table-sort-font-size`                   | Font size of the `sort` element. Default `0.8em`.                                                                                       |
+| `--bx-data-table-resize-handle-width`              | Width of the `resize-handle` part. Default `calc(var(--bx-unit) * 0.5)`.                                                                |
+| `--bx-data-table-resize-handle-hover-bg`           | Background of the `resize-handle` part (hover state). Default `var(--bx-role-accent)`.                                                  |
+| `--bx-data-table-header-cell-pinned-bg`            | Background of the `header-cell` part (pinned state). Default `var(--bx-surface-base)`.                                                  |
+| `--bx-data-table-header-cell-pinned-shadow`        | Box shadow of the `header-cell` part (pinned state). Default `inset calc(var(--bx-border-width) * -1) 0 0 var(--bx-border-subtle)`.     |
+| `--bx-data-table-header-cell-focus-ring-width`     | Focus ring width of the `header-cell` part (focus state). Default `var(--bx-border-width-strong)`.                                      |
+| `--bx-data-table-header-cell-focus-ring-color`     | Focus ring color of the `header-cell` part (focus state). Default `var(--bx-focus-ring)`.                                               |
+| `--bx-data-table-header-cell-focus-ring-offset`    | Focus ring offset of the `header-cell` part (focus state). Default `calc(var(--bx-focus-ring-offset) * -1)`.                            |
+| `--bx-data-table-group-row-block-end-border-width` | Block end border width of the `group-row` part. Default `var(--bx-border-width)`.                                                       |
+| `--bx-data-table-group-row-bg`                     | Background of the `group-row` part. Default `var(--bx-surface-base)`.                                                                   |
+| `--bx-data-table-group-row-hover-bg`               | Background of the `group-row` part (hover state). Default `var(--bx-surface-subtle)`.                                                   |
+| `--bx-data-table-group-row-selected-bg`            | Background of the `group-row` part (selected state). Default `color-mix( in srgb, var(--bx-role-accent) 14%, var(--bx-surface-base) )`. |
+| `--bx-data-table-cell-bg`                          | Background of the `cell` part. Default `color-mix( in srgb, var(--bx-role-accent) 20%, var(--bx-surface-base) )`.                       |
+| `--bx-data-table-skeleton-height`                  | Height of the `skeleton` element. Default `0.8em`.                                                                                      |
+| `--bx-data-table-skeleton-radius`                  | Corner radius of the `skeleton` element. Default `var(--bx-radius-s)`.                                                                  |
+| `--bx-data-table-skeleton-bg`                      | Background of the `skeleton` element. Default `var(--bx-surface-muted, var(--bx-surface-subtle))`.                                      |
+| `--bx-data-table-input-padding`                    | Padding of the `input` element. Default `0.15em 0.3em`.                                                                                 |
+| `--bx-data-table-input-border-width`               | Border width of the `input` element. Default `var(--bx-border-width-strong)`.                                                           |
+| `--bx-data-table-input-border-color`               | Border color of the `input` element. Default `var(--bx-focus-ring)`.                                                                    |
+| `--bx-data-table-input-radius`                     | Corner radius of the `input` element. Default `var(--bx-radius-s)`.                                                                     |
+| `--bx-data-table-input-bg`                         | Background of the `input` element. Default `var(--bx-surface-base)`.                                                                    |
+| `--bx-data-table-error-fg`                         | Text/icon color of the `error` element. Default `var(--bx-role-danger-fg)`.                                                             |
+| `--bx-data-table-toggle-size`                      | Size (width and height) of the `toggle` element. Default `1.25em`.                                                                      |
+| `--bx-data-table-toggle-fg`                        | Text/icon color of the `toggle` element. Default `var(--bx-text-secondary)`.                                                            |
+| `--bx-data-table-check-size`                       | Size (width and height) of the `check` element. Default `1.1em`.                                                                        |
+| `--bx-data-table-check-border-width`               | Border width of the `check` element. Default `var(--bx-border-width-strong)`.                                                           |
+| `--bx-data-table-check-border-color`               | Border color of the `check` element. Default `var(--bx-border-strong)`.                                                                 |
+| `--bx-data-table-check-radius`                     | Corner radius of the `check` element. Default `var(--bx-radius-s)`.                                                                     |
+| `--bx-data-table-check-font-size`                  | Font size of the `check` element. Default `0.8em`.                                                                                      |
+| `--bx-data-table-check-bg`                         | Background of the `check` element. Default `var(--bx-surface-base)`.                                                                    |
+| `--bx-data-table-check-fg`                         | Text/icon color of the `check` element. Default `var(--bx-on-accent)`.                                                                  |
+| `--bx-data-table-detail-padding`                   | Padding of the `detail` part. Default `var(--bx-space-s) var(--bx-space-m)`.                                                            |
+| `--bx-data-table-detail-bg`                        | Background of the `detail` part. Default `var(--bx-surface-subtle)`.                                                                    |
+| `--bx-data-table-empty-padding`                    | Padding of the `empty` part. Default `var(--bx-space-l)`.                                                                               |
+| `--bx-data-table-empty-fg`                         | Text/icon color of the `empty` part. Default `var(--bx-text-secondary)`.                                                                |
+| `--bx-data-table-loading-overlay-fg`               | Text/icon color of the `loading-overlay` part. Default `var(--bx-text-secondary)`.                                                      |
+| `--bx-data-table-group-row-padding-block`          | Padding block of the `group-row` part. Default `var(--bx-space-xs)`.                                                                    |
+| `--bx-data-table-cell-label-fg`                    | Text/icon color of the cell's data label (card layout). Default `var(--bx-text-secondary)`.                                             |
+| `--bx-data-table-check-checked-bg`                 | Background of a checked or mixed selection checkbox. Default `var(--bx-role-accent)`.                                                   |
+| `--bx-data-table-check-checked-border-color`       | Border color of a checked or mixed selection checkbox. Default `var(--bx-role-accent)`.                                                 |
+| `--bx-data-table-font-family`                      | Font family of the root surface. Default `var(--bx-type-body-family)`.                                                                  |
+| `--bx-data-table-header-cell-font-family`          | Font family of the `header-cell` part (text style `label-s`). Default `var(--bx-type-label-family)`.                                    |
+| `--bx-data-table-header-cell-font-size`            | Font size of the `header-cell` part (text style `label-s`). Default `var(--bx-type-label-s-size)`.                                      |
+| `--bx-data-table-header-cell-font-weight`          | Font weight of the `header-cell` part (text style `label-s`). Default `var(--bx-type-label-s-weight)`.                                  |
+| `--bx-data-table-header-cell-line-height`          | Line height of the `header-cell` part (text style `label-s`). Default `var(--bx-type-label-s-leading)`.                                 |
+| `--bx-data-table-header-cell-letter-spacing`       | Letter spacing of the `header-cell` part (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.                             |
+| `--bx-data-table-group-row-font-family`            | Font family of the `group-row` part (text style `label-m`). Default `var(--bx-type-label-family)`.                                      |
+| `--bx-data-table-group-row-font-size`              | Font size of the `group-row` part (text style `label-m`). Default `var(--bx-type-label-m-size)`.                                        |
+| `--bx-data-table-group-row-font-weight`            | Font weight of the `group-row` part (text style `label-m`). Default `var(--bx-type-label-m-weight)`.                                    |
+| `--bx-data-table-group-row-line-height`            | Line height of the `group-row` part (text style `label-m`). Default `var(--bx-type-label-m-leading)`.                                   |
+| `--bx-data-table-group-row-letter-spacing`         | Letter spacing of the `group-row` part (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.                               |
+| `--bx-data-table-error-font-family`                | Font family of the `error` element (text style `body-s`). Default `var(--bx-type-body-family)`.                                         |
+| `--bx-data-table-error-font-size`                  | Font size of the `error` element (text style `body-s`). Default `var(--bx-type-body-s-size)`.                                           |
+| `--bx-data-table-error-font-weight`                | Font weight of the `error` element (text style `body-s`). Default `var(--bx-type-body-s-weight)`.                                       |
+| `--bx-data-table-error-line-height`                | Line height of the `error` element (text style `body-s`). Default `var(--bx-type-body-s-leading)`.                                      |
+| `--bx-data-table-error-letter-spacing`             | Letter spacing of the `error` element (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.                                  |
+| `--bx-data-table-cell-label-font-family`           | Font family of the `cell` part (text style `label-m`). Default `var(--bx-type-label-family)`.                                           |
+| `--bx-data-table-cell-label-font-size`             | Font size of the `cell` part (text style `label-m`). Default `var(--bx-type-label-m-size)`.                                             |
+| `--bx-data-table-cell-label-font-weight`           | Font weight of the `cell` part (text style `label-m`). Default `var(--bx-type-label-m-weight)`.                                         |
+| `--bx-data-table-cell-label-line-height`           | Line height of the `cell` part (text style `label-m`). Default `var(--bx-type-label-m-leading)`.                                        |
+| `--bx-data-table-cell-label-letter-spacing`        | Letter spacing of the `cell` part (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.                                    |
 
 ### Methods
 

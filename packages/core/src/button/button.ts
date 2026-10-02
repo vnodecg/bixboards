@@ -1,6 +1,7 @@
 import { css, html, nothing } from 'lit';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { BixElement } from '../bix-element.ts';
+import { textStyle, textFamily } from '../internal/text-style.ts';
 
 type Variant = 'default' | 'secondary' | 'tertiary' | 'error' | 'warning';
 type Appearance =
@@ -68,6 +69,21 @@ const CARET_DOWN_PATH =
  * @cssprop --bx-button-padding-inline - Horizontal padding. Default derived from `size`.
  * @cssprop --bx-button-radius - Corner radius (any `border-radius` value). Used by `bx-button-group` to square inner corners.
  * @cssprop --bx-button-truncate - Label `white-space` value; set to `nowrap` to truncate.
+ * @cssprop --bx-button-gap - Gap of the root surface. Default `var(--bx-space-2xs)`.
+ * @cssprop --bx-button-border-width - Border width of the root surface. Default `var(--bx-border-width)`.
+ * @cssprop --bx-button-basenot-disabled-shadow - Box shadow of the `basenot` element (disabled state). Default `var(--bx-shadow-s)`.
+ * @cssprop --bx-button-focus-ring-width - Focus ring width of the root surface (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-button-focus-ring-color - Focus ring color of the root surface (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-button-focus-ring-offset - Focus ring offset of the root surface (focus state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-button-disabled-opacity - Opacity of the root surface (disabled state). Default `0.5`.
+ * @cssprop --bx-button-spinner-font-size - Font size of the `spinner` part. Default `1.1em`.
+ * @cssprop --bx-button-icon-size - Size (width and height) of the start, end and caret icons. Default `1em`.
+ * @cssprop --bx-button-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-button-font-family - Font family of the root surface (text style `label-m`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-button-font-size - Font size of the root surface (text style `label-m`). Default `var(--bx-type-label-m-size)`.
+ * @cssprop --bx-button-font-weight - Font weight of the root surface (text style `label-m`). Default `var(--bx-type-label-m-weight)`.
+ * @cssprop --bx-button-line-height - Line height of the root surface (text style `label-m`). Default `var(--bx-type-label-m-leading)`.
+ * @cssprop --bx-button-letter-spacing - Letter spacing of the root surface (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.
  */
 export class BxButton extends BixElement {
   static override tagName = 'bx-button';
@@ -78,7 +94,7 @@ export class BxButton extends BixElement {
       :host {
         display: inline-block;
         vertical-align: middle;
-        font-family: var(--bx-font-family-sans);
+        ${textFamily('--bx-button', 'body')}
         --bx-button-computed-bg: transparent;
         --bx-button-computed-fg: var(--bx-button-variant-fg);
         --bx-button-computed-border: transparent;
@@ -144,27 +160,27 @@ export class BxButton extends BixElement {
       :host([size='small']) {
         --bx-button-computed-min-height: max(
           var(--bx-control-height-s),
-          var(--bx-target-min, 1.5rem)
+          var(--bx-target-min)
         );
         --bx-button-computed-padding-inline: var(--bx-space-s);
-        --bx-button-computed-font-size: var(--bx-font-s);
+        --bx-button-computed-font-size: var(--bx-type-label-s-size);
       }
       :host([size='medium']),
       :host(:not([size])) {
         --bx-button-computed-min-height: max(
           var(--bx-control-height-m),
-          var(--bx-target-min, 1.5rem)
+          var(--bx-target-min)
         );
         --bx-button-computed-padding-inline: var(--bx-space-m);
-        --bx-button-computed-font-size: var(--bx-font-m);
+        --bx-button-computed-font-size: var(--bx-type-label-m-size);
       }
       :host([size='large']) {
         --bx-button-computed-min-height: max(
           var(--bx-control-height-l),
-          var(--bx-target-min, 1.5rem)
+          var(--bx-target-min)
         );
         --bx-button-computed-padding-inline: var(--bx-space-l);
-        --bx-button-computed-font-size: var(--bx-font-l);
+        --bx-button-computed-font-size: var(--bx-type-label-l-size);
       }
 
       .base {
@@ -173,7 +189,7 @@ export class BxButton extends BixElement {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: var(--bx-space-2xs);
+        gap: var(--bx-button-gap, var(--bx-space-2xs));
         min-block-size: var(
           --bx-button-min-height,
           var(--bx-button-computed-min-height)
@@ -182,14 +198,15 @@ export class BxButton extends BixElement {
           --bx-button-padding-inline,
           var(--bx-button-computed-padding-inline)
         );
-        border: var(--bx-border-width) solid
+        border: var(--bx-button-border-width, var(--bx-border-width)) solid
           var(--bx-button-border, var(--bx-button-computed-border));
         border-radius: var(--bx-button-radius, var(--bx-radius-m));
         background: var(--bx-button-bg, var(--bx-button-computed-bg));
         color: var(--bx-button-fg, var(--bx-button-computed-fg));
         font: inherit;
-        font-size: var(--bx-button-computed-font-size);
-        font-weight: var(--bx-font-weight-medium);
+
+        ${textStyle('--bx-button', 'label-m', { size: 'var(--bx-button-computed-font-size)' })}
+
         text-decoration: none;
         cursor: pointer;
         transition:
@@ -202,11 +219,14 @@ export class BxButton extends BixElement {
 
       :host(:not([appearance])) .base:not([aria-disabled='true']),
       :host([appearance='accent']) .base:not([aria-disabled='true']) {
-        box-shadow: var(--bx-shadow-s);
+        box-shadow: var(
+          --bx-button-basenot-disabled-shadow,
+          var(--bx-shadow-s)
+        );
       }
 
       :host([pill]) .base {
-        border-radius: var(--bx-button-radius, var(--bx-radius-pill, 999px));
+        border-radius: var(--bx-button-radius, var(--bx-radius-pill));
       }
 
       .base:hover {
@@ -219,13 +239,20 @@ export class BxButton extends BixElement {
       }
 
       .base:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+        outline: var(
+            --bx-button-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid var(--bx-button-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-button-focus-ring-offset,
+          var(--bx-focus-ring-offset)
+        );
       }
 
       .base[aria-disabled='true'] {
         cursor: not-allowed;
-        opacity: 0.5;
+        opacity: var(--bx-button-disabled-opacity, 0.5);
       }
 
       .start,
@@ -252,8 +279,8 @@ export class BxButton extends BixElement {
       .caret svg,
       .start svg,
       .end svg {
-        inline-size: 1em;
-        block-size: 1em;
+        inline-size: var(--bx-button-icon-size, 1em);
+        block-size: var(--bx-button-icon-size, 1em);
         fill: currentColor;
       }
 
@@ -267,7 +294,7 @@ export class BxButton extends BixElement {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.1em;
+        font-size: var(--bx-button-spinner-font-size, 1.1em);
       }
 
       @media (prefers-reduced-motion: reduce) {

@@ -1,5 +1,6 @@
 import { css, html, nothing } from 'lit';
 import { BixElement } from '../bix-element.ts';
+import { textStyle, textFamily } from '../internal/text-style.ts';
 
 type Loading = 'eager' | 'lazy';
 
@@ -42,11 +43,42 @@ function parseLevels(raw: string): number[] {
  * @slot zoom-in-icon - Overrides the default zoom-in icon.
  * @slot zoom-out-icon - Overrides the default zoom-out icon.
  *
+ * @csspart frame - The scaled box that holds the iframe.
  * @csspart iframe - The `<iframe>` element.
  * @csspart controls - The wrapper around the zoom controls.
  * @csspart zoom-in-button - The zoom-in button.
  * @csspart zoom-out-button - The zoom-out button.
  * @csspart zoom-label - The current zoom percentage label.
+ * @cssprop --bx-zoomable-frame-frame-radius - Corner radius of the `frame` part. Default `var(--bx-radius-m)`.
+ * @cssprop --bx-zoomable-frame-frame-border-width - Border width of the `frame` part. Default `var(--bx-border-width)`.
+ * @cssprop --bx-zoomable-frame-frame-border-color - Border color of the `frame` part. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-zoomable-frame-controls-gap - Gap of the `controls` part. Default `var(--bx-space-2xs)`.
+ * @cssprop --bx-zoomable-frame-controls-padding - Padding of the `controls` part. Default `var(--bx-space-2xs)`.
+ * @cssprop --bx-zoomable-frame-controls-radius - Corner radius of the `controls` part. Default `var(--bx-radius-pill)`.
+ * @cssprop --bx-zoomable-frame-controls-bg - Background of the `controls` part. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-zoomable-frame-controls-border-width - Border width of the `controls` part. Default `var(--bx-border-width)`.
+ * @cssprop --bx-zoomable-frame-controls-border-color - Border color of the `controls` part. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-zoomable-frame-controls-shadow - Box shadow of the `controls` part. Default `var(--bx-shadow-s)`.
+ * @cssprop --bx-zoomable-frame-button-size - Size (width and height) of the `button` element. Default `var(--bx-target-min)`.
+ * @cssprop --bx-zoomable-frame-button-fg - Text/icon color of the `button` element. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-zoomable-frame-menu-trigger-bg - Background of the `menu-trigger` element. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-zoomable-frame-menu-trigger-border-width - Border width of the `menu-trigger` element. Default `var(--bx-border-width)`.
+ * @cssprop --bx-zoomable-frame-menu-trigger-border-color - Border color of the `menu-trigger` element. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-zoomable-frame-menu-trigger-shadow - Box shadow of the `menu-trigger` element. Default `var(--bx-shadow-s)`.
+ * @cssprop --bx-zoomable-frame-button-hover-bg - Background of the `button` element (hover state). Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-zoomable-frame-button-focus-ring-width - Focus ring width of the `button` element (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-zoomable-frame-button-focus-ring-color - Focus ring color of the `button` element (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-zoomable-frame-button-focus-ring-offset - Focus ring offset of the `button` element (focus state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-zoomable-frame-button-disabled-fg - Text/icon color of the `button` element (disabled state). Default `var(--bx-text-disabled)`.
+ * @cssprop --bx-zoomable-frame-zoom-label-min-width - Minimum width of the `zoom-label` part. Default `3.5ch`.
+ * @cssprop --bx-zoomable-frame-zoom-label-fg - Text/icon color of the `zoom-label` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-zoomable-frame-icon-size - Size (width and height) of the icon inside the `svg` element. Default `1.1em`.
+ * @cssprop --bx-zoomable-frame-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-zoomable-frame-zoom-label-font-family - Font family of the `zoom-label` part (text style `body-s`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-zoomable-frame-zoom-label-font-size - Font size of the `zoom-label` part (text style `body-s`). Default `var(--bx-type-body-s-size)`.
+ * @cssprop --bx-zoomable-frame-zoom-label-font-weight - Font weight of the `zoom-label` part (text style `body-s`). Default `var(--bx-type-body-s-weight)`.
+ * @cssprop --bx-zoomable-frame-zoom-label-line-height - Line height of the `zoom-label` part (text style `body-s`). Default `var(--bx-type-body-s-leading)`.
+ * @cssprop --bx-zoomable-frame-zoom-label-letter-spacing - Letter spacing of the `zoom-label` part (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.
  */
 export class BxZoomableFrame extends BixElement {
   static override tagName = 'bx-zoomable-frame';
@@ -60,7 +92,7 @@ export class BxZoomableFrame extends BixElement {
         position: relative;
         inline-size: 100%;
         block-size: 100%;
-        font-family: var(--bx-font-family-sans);
+        ${textFamily('--bx-zoomable-frame', 'body')}
       }
 
       .frame {
@@ -68,18 +100,26 @@ export class BxZoomableFrame extends BixElement {
         inline-size: 100%;
         block-size: 100%;
         overflow: hidden;
-        border-radius: var(--bx-radius-m);
-        border: var(--bx-border-width) solid var(--bx-border-subtle);
+        border-radius: var(
+          --bx-zoomable-frame-frame-radius,
+          var(--bx-radius-m)
+        );
+        border: var(
+            --bx-zoomable-frame-frame-border-width,
+            var(--bx-border-width)
+          )
+          solid
+          var(--bx-zoomable-frame-frame-border-color, var(--bx-border-subtle));
       }
 
       .iframe {
         display: block;
-        inline-size: calc(100% / var(--bx-zoom, 1));
-        block-size: calc(100% / var(--bx-zoom, 1));
+        inline-size: calc(100% / var(--_zoom, 1));
+        block-size: calc(100% / var(--_zoom, 1));
         border: none;
-        transform: scale(var(--bx-zoom, 1));
+        transform: scale(var(--_zoom, 1));
         transform-origin: top left;
-        transition: transform var(--bx-motion-duration-fast, 0.12s) ease;
+        transition: transform var(--bx-motion-duration-fast) ease;
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -94,19 +134,36 @@ export class BxZoomableFrame extends BixElement {
         inset-inline-end: var(--bx-space-s);
         display: flex;
         align-items: center;
-        gap: var(--bx-space-2xs);
-        padding: var(--bx-space-2xs);
-        border-radius: var(--bx-radius-pill, 999px);
-        background: var(--bx-surface-base);
-        border: var(--bx-border-width) solid var(--bx-border-subtle);
-        box-shadow: var(--bx-shadow-s);
+        gap: var(--bx-zoomable-frame-controls-gap, var(--bx-space-2xs));
+        padding: var(--bx-zoomable-frame-controls-padding, var(--bx-space-2xs));
+        border-radius: var(
+          --bx-zoomable-frame-controls-radius,
+          var(--bx-radius-pill)
+        );
+        background: var(
+          --bx-zoomable-frame-controls-bg,
+          var(--bx-surface-base)
+        );
+        border: var(
+            --bx-zoomable-frame-controls-border-width,
+            var(--bx-border-width)
+          )
+          solid
+          var(
+            --bx-zoomable-frame-controls-border-color,
+            var(--bx-border-subtle)
+          );
+        box-shadow: var(
+          --bx-zoomable-frame-controls-shadow,
+          var(--bx-shadow-s)
+        );
       }
 
       .menu-trigger {
         display: none;
       }
 
-      @container (max-width: calc(var(--bx-unit) * 18)) {
+      @container (max-width: 18rem) {
         .controls {
           display: none;
         }
@@ -124,47 +181,77 @@ export class BxZoomableFrame extends BixElement {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        inline-size: var(--bx-target-min, 2.75rem);
-        block-size: var(--bx-target-min, 2.75rem);
+        inline-size: var(--bx-zoomable-frame-button-size, var(--bx-target-min));
+        block-size: var(--bx-zoomable-frame-button-size, var(--bx-target-min));
         border-radius: 50%;
         cursor: pointer;
-        color: var(--bx-text-primary);
+        color: var(--bx-zoomable-frame-button-fg, var(--bx-text-primary));
       }
 
       .menu-trigger {
         position: absolute;
         inset-block-end: var(--bx-space-s);
         inset-inline-end: var(--bx-space-s);
-        background: var(--bx-surface-base);
-        border: var(--bx-border-width) solid var(--bx-border-subtle);
-        box-shadow: var(--bx-shadow-s);
+        background: var(
+          --bx-zoomable-frame-menu-trigger-bg,
+          var(--bx-surface-base)
+        );
+        border: var(
+            --bx-zoomable-frame-menu-trigger-border-width,
+            var(--bx-border-width)
+          )
+          solid
+          var(
+            --bx-zoomable-frame-menu-trigger-border-color,
+            var(--bx-border-subtle)
+          );
+        box-shadow: var(
+          --bx-zoomable-frame-menu-trigger-shadow,
+          var(--bx-shadow-s)
+        );
       }
 
       button:hover {
-        background: var(--bx-surface-subtle);
+        background: var(
+          --bx-zoomable-frame-button-hover-bg,
+          var(--bx-surface-subtle)
+        );
       }
 
       button:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+        outline: var(
+            --bx-zoomable-frame-button-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(--bx-zoomable-frame-button-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-zoomable-frame-button-focus-ring-offset,
+          var(--bx-focus-ring-offset)
+        );
       }
 
       button:disabled {
-        color: var(--bx-text-disabled);
+        color: var(
+          --bx-zoomable-frame-button-disabled-fg,
+          var(--bx-text-disabled)
+        );
         cursor: not-allowed;
       }
 
       button svg {
-        inline-size: 1.1em;
-        block-size: 1.1em;
+        inline-size: var(--bx-zoomable-frame-icon-size, 1.1em);
+        block-size: var(--bx-zoomable-frame-icon-size, 1.1em);
         fill: currentColor;
       }
 
       .zoom-label {
-        min-inline-size: 3.5ch;
+        min-inline-size: var(--bx-zoomable-frame-zoom-label-min-width, 3.5ch);
         text-align: center;
-        font-size: var(--bx-font-s);
-        color: var(--bx-text-secondary);
+
+        ${textStyle('--bx-zoomable-frame-zoom-label', 'body-s')}
+
+        color: var(--bx-zoomable-frame-zoom-label-fg, var(--bx-text-secondary));
       }
 
       @media (forced-colors: active) {
@@ -315,7 +402,7 @@ export class BxZoomableFrame extends BixElement {
 
   protected override render() {
     return html`
-      <div class="frame" part="frame" style="--bx-zoom: ${this.zoom}">
+      <div class="frame" part="frame" style="--_zoom: ${this.zoom}">
         <iframe
           class="iframe"
           part="iframe"

@@ -18,6 +18,7 @@ import {
   type SelectOption,
   type SelectRow,
 } from './select-model.ts';
+import { textStyle, textFamily } from '../internal/text-style.ts';
 
 type Size = 'small' | 'medium' | 'large';
 type Appearance = 'outlined' | 'filled' | 'filled outlined';
@@ -111,6 +112,90 @@ let nextId = 0;
  *
  * @cssprop --bx-select-max-height - Max height of the listbox. Default `20rem`, further bounded by
  *   the space available in the viewport.
+ * @cssprop --bx-select-form-control-gap - Gap of the `form-control` part. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-select-label-fg - Text/icon color of the `label` part. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-select-combobox-gap - Gap of the `combobox` part. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-select-combobox-padding-inline - Padding inline of the `combobox` part. Default `var(--bx-space-s)`.
+ * @cssprop --bx-select-combobox-radius - Corner radius of the `combobox` part. Default `var(--bx-radius-m)`.
+ * @cssprop --bx-select-combobox-border-width - Border width of the `combobox` part. Default `var(--bx-border-width)`.
+ * @cssprop --bx-select-combobox-border-color - Border color of the `combobox` part. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-select-combobox-bg - Background of the `combobox` part. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-select-combobox-hover-border-color - Border color of the `combobox` part (hover state). Default `var(--bx-border-strong)`.
+ * @cssprop --bx-select-combobox-focus-border-color - Border color of the `combobox` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-select-combobox-focus-shadow - Box shadow of the `combobox` part (focus state). Default `0 0 0 calc(var(--bx-border-width-strong) * 1.5) color-mix(in srgb, var(--bx-focus-ring) 22%, transparent)`.
+ * @cssprop --bx-select-combobox-focus-ring-width - Focus ring width of the `combobox` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-select-combobox-hover-bg - Background of the `combobox` part (hover state). Default `var(--bx-surface-muted)`.
+ * @cssprop --bx-select-combobox-focus-bg - Background of the `combobox` part (focus state). Default `var(--bx-surface-base)`.
+ * @cssprop --bx-select-combobox-disabled-bg - Background of the `combobox` part (disabled state). Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-select-combobox-disabled-border-color - Border color of the `combobox` part (disabled state). Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-select-combobox-disabled-fg - Text/icon color of the `combobox` part (disabled state). Default `var(--bx-text-disabled)`.
+ * @cssprop --bx-select-combobox-invalid-border-color - Border color of the `combobox` part (invalid state). Default `var(--bx-role-danger-border)`.
+ * @cssprop --bx-select-combobox-invalid-focus-shadow - Box shadow of the `combobox` part (invalid + focus state). Default `0 0 0 calc(var(--bx-border-width-strong) * 1.5) color-mix(in srgb, var(--bx-role-danger-border) 22%, transparent)`.
+ * @cssprop --bx-select-value-area-gap - Gap of the `value-area` element. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-select-value-area-padding-block - Padding block of the `value-area` element. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-select-display-input-min-width - Minimum width of the `display-input` part. Default `4ch`.
+ * @cssprop --bx-select-display-input-fg - Text/icon color of the `display-input` part. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-select-display-input-disabled-fg - Text/icon color of the `display-input` part (disabled state). Default `var(--bx-text-disabled)`.
+ * @cssprop --bx-select-display-input-placeholder-fg - Text/icon color of the `display-input` part's `::placeholder`. Default `var(--bx-text-hint)`.
+ * @cssprop --bx-select-display-input-placeholder-opacity - Opacity of the `display-input` part's `::placeholder`. Default `1`.
+ * @cssprop --bx-select-start-fg - Text/icon color of the `start` element. Default `var(--bx-text-hint)`.
+ * @cssprop --bx-select-clear-button-size - Size (width and height) of the `clear-button` part. Default `1.5em`.
+ * @cssprop --bx-select-clear-button-radius - Corner radius of the `clear-button` part. Default `var(--bx-radius-pill)`.
+ * @cssprop --bx-select-clear-button-fg - Text/icon color of the `clear-button` part. Default `var(--bx-text-hint)`.
+ * @cssprop --bx-select-clear-button-hover-fg - Text/icon color of the `clear-button` part (hover state). Default `var(--bx-text-primary)`.
+ * @cssprop --bx-select-clear-button-focus-ring-width - Focus ring width of the `clear-button` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-select-clear-button-focus-ring-color - Focus ring color of the `clear-button` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-select-clear-button-focus-ring-offset - Focus ring offset of the `clear-button` part (focus state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-select-expand-icon-fg - Text/icon color of the `expand-icon` part. Default `var(--bx-text-hint)`.
+ * @cssprop --bx-select-hint-fg - Text/icon color of the `hint` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-select-hint-invalid-fg - Text/icon color of the `hint` part (invalid state). Default `var(--bx-role-danger-fg)`.
+ * @cssprop --bx-select-panel-border-width - Border width of the `panel` element. Default `var(--bx-border-width)`.
+ * @cssprop --bx-select-panel-border-color - Border color of the `panel` element. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-select-panel-radius - Corner radius of the `panel` element. Default `var(--bx-radius-m)`.
+ * @cssprop --bx-select-panel-shadow - Box shadow of the `panel` element. Default `var(--bx-shadow-m)`.
+ * @cssprop --bx-select-panel-bg - Background of the `panel` element. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-select-panel-fg - Text/icon color of the `panel` element. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-select-hr-block-start-border-width - Block start border width of the `hr` element. Default `var(--bx-border-width)`.
+ * @cssprop --bx-select-hr-block-start-border-color - Block start border color of the `hr` element. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-select-group-label-padding-block - Padding block of the `group-label` element. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-select-group-label-padding-inline - Padding inline of the `group-label` element. Default `var(--bx-space-s)`.
+ * @cssprop --bx-select-group-label-fg - Text/icon color of the `group-label` element. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-select-status-gap - Gap of the `status` element. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-select-status-padding - Padding of the `status` element. Default `var(--bx-space-s)`.
+ * @cssprop --bx-select-status-fg - Text/icon color of the `status` element. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-select-clear-button-icon-size - Size (width and height) of the icon inside the `clear-button` element. Default `1em`.
+ * @cssprop --bx-select-height - Combobox minimum height. Default derived from `size`.
+ * @cssprop --bx-select-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-select-label-font-family - Font family of the `label` part (text style `label-s`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-select-label-font-size - Font size of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-size)`.
+ * @cssprop --bx-select-label-font-weight - Font weight of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-weight)`.
+ * @cssprop --bx-select-label-line-height - Line height of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-leading)`.
+ * @cssprop --bx-select-label-letter-spacing - Letter spacing of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.
+ * @cssprop --bx-select-display-input-font-family - Font family of the `display-input` part (text style `field-m`). Default `var(--bx-type-field-family)`.
+ * @cssprop --bx-select-display-input-font-size - Font size of the `display-input` part (text style `field-m`). Default `var(--bx-type-field-m-size)`.
+ * @cssprop --bx-select-display-input-font-weight - Font weight of the `display-input` part (text style `field-m`). Default `var(--bx-type-field-m-weight)`.
+ * @cssprop --bx-select-display-input-line-height - Line height of the `display-input` part (text style `field-m`). Default `var(--bx-type-field-m-leading)`.
+ * @cssprop --bx-select-display-input-letter-spacing - Letter spacing of the `display-input` part (text style `field-m`). Default `var(--bx-type-field-m-tracking)`.
+ * @cssprop --bx-select-hint-font-family - Font family of the `hint` part (text style `body-s`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-select-hint-font-size - Font size of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-size)`.
+ * @cssprop --bx-select-hint-font-weight - Font weight of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-weight)`.
+ * @cssprop --bx-select-hint-line-height - Line height of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-leading)`.
+ * @cssprop --bx-select-hint-letter-spacing - Letter spacing of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.
+ * @cssprop --bx-select-panel-font-family - Font family of the `panel` element (text style `body-m`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-select-panel-font-size - Font size of the `panel` element (text style `body-m`). Default `var(--bx-type-body-m-size)`.
+ * @cssprop --bx-select-panel-font-weight - Font weight of the `panel` element (text style `body-m`). Default `var(--bx-type-body-m-weight)`.
+ * @cssprop --bx-select-panel-line-height - Line height of the `panel` element (text style `body-m`). Default `var(--bx-type-body-m-leading)`.
+ * @cssprop --bx-select-panel-letter-spacing - Letter spacing of the `panel` element (text style `body-m`). Default `var(--bx-type-body-m-tracking)`.
+ * @cssprop --bx-select-group-label-font-family - Font family of the `group-label` element (text style `label-s`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-select-group-label-font-size - Font size of the `group-label` element (text style `label-s`). Default `var(--bx-type-label-s-size)`.
+ * @cssprop --bx-select-group-label-font-weight - Font weight of the `group-label` element (text style `label-s`). Default `var(--bx-type-label-s-weight)`.
+ * @cssprop --bx-select-group-label-line-height - Line height of the `group-label` element (text style `label-s`). Default `var(--bx-type-label-s-leading)`.
+ * @cssprop --bx-select-group-label-letter-spacing - Letter spacing of the `group-label` element (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.
+ * @cssprop --bx-select-status-font-family - Font family of the `status` element (text style `body-s`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-select-status-font-size - Font size of the `status` element (text style `body-s`). Default `var(--bx-type-body-s-size)`.
+ * @cssprop --bx-select-status-font-weight - Font weight of the `status` element (text style `body-s`). Default `var(--bx-type-body-s-weight)`.
+ * @cssprop --bx-select-status-line-height - Line height of the `status` element (text style `body-s`). Default `var(--bx-type-body-s-leading)`.
+ * @cssprop --bx-select-status-letter-spacing - Letter spacing of the `status` element (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.
  */
 export class BxSelect extends FormAssociatedMixin(BixElement) {
   static override tagName = 'bx-select';
@@ -125,7 +210,7 @@ export class BxSelect extends FormAssociatedMixin(BixElement) {
     css`
       :host {
         display: block;
-        font-family: var(--bx-font-family-sans);
+        ${textFamily('--bx-select', 'body')}
       }
 
       :host([hidden]) {
@@ -135,14 +220,13 @@ export class BxSelect extends FormAssociatedMixin(BixElement) {
       .form-control {
         display: flex;
         flex-direction: column;
-        gap: var(--bx-space-xs);
+        gap: var(--bx-select-form-control-gap, var(--bx-space-xs));
       }
 
       .label {
-        color: var(--bx-text-primary);
-        font-weight: var(--bx-font-weight-medium);
-        font-size: var(--bx-font-s);
-        line-height: var(--bx-font-leading-tight);
+        color: var(--bx-select-label-fg, var(--bx-text-primary));
+
+        ${textStyle('--bx-select-label', 'label-s')}
       }
 
       .label:empty {
@@ -153,15 +237,17 @@ export class BxSelect extends FormAssociatedMixin(BixElement) {
         box-sizing: border-box;
         display: flex;
         align-items: center;
-        gap: var(--bx-space-xs);
-        min-block-size: var(
-          --bx-select-height,
-          max(var(--bx-control-height-m), var(--bx-target-min, 1.5rem))
+        gap: var(--bx-select-combobox-gap, var(--bx-space-xs));
+        --_height: max(var(--bx-control-height-m), var(--bx-target-min));
+        min-block-size: var(--bx-select-height, var(--_height));
+        padding-inline: var(
+          --bx-select-combobox-padding-inline,
+          var(--bx-space-s)
         );
-        padding-inline: var(--bx-space-s);
-        border-radius: var(--bx-radius-m);
-        border: var(--bx-border-width) solid var(--bx-border-subtle);
-        background: var(--bx-surface-base);
+        border-radius: var(--bx-select-combobox-radius, var(--bx-radius-m));
+        border: var(--bx-select-combobox-border-width, var(--bx-border-width))
+          solid var(--bx-select-combobox-border-color, var(--bx-border-subtle));
+        background: var(--bx-select-combobox-bg, var(--bx-surface-base));
         cursor: pointer;
         transition:
           border-color var(--bx-motion-duration-fast)
@@ -173,58 +259,80 @@ export class BxSelect extends FormAssociatedMixin(BixElement) {
       }
 
       .combobox:hover {
-        border-color: var(--bx-border-strong);
+        border-color: var(
+          --bx-select-combobox-hover-border-color,
+          var(--bx-border-strong)
+        );
       }
 
       .combobox:focus-within {
-        border-color: var(--bx-focus-ring);
-        box-shadow: 0 0 0 3px
-          color-mix(in srgb, var(--bx-focus-ring) 22%, transparent);
-        outline: var(--bx-border-width-strong) solid transparent;
+        border-color: var(
+          --bx-select-combobox-focus-border-color,
+          var(--bx-focus-ring)
+        );
+        box-shadow: var(
+          --bx-select-combobox-focus-shadow,
+          0 0 0 calc(var(--bx-border-width-strong) * 1.5)
+            color-mix(in srgb, var(--bx-focus-ring) 22%, transparent)
+        );
+        outline: var(
+            --bx-select-combobox-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid transparent;
       }
 
       :host([size='small']) .combobox {
-        --bx-select-height: max(
-          var(--bx-control-height-s),
-          var(--bx-target-min, 1.5rem)
-        );
+        --_height: max(var(--bx-control-height-s), var(--bx-target-min));
       }
       :host([size='large']) .combobox {
-        --bx-select-height: max(
-          var(--bx-control-height-l),
-          var(--bx-target-min, 1.5rem)
-        );
+        --_height: max(var(--bx-control-height-l), var(--bx-target-min));
       }
 
       :host([appearance~='filled']) .combobox {
-        background: var(--bx-surface-subtle);
+        background: var(--bx-select-combobox-bg, var(--bx-surface-subtle));
         border-color: transparent;
       }
       :host([appearance='filled']) .combobox:hover {
-        background: var(--bx-surface-muted);
+        background: var(--bx-select-combobox-hover-bg, var(--bx-surface-muted));
       }
       :host([appearance~='filled']) .combobox:focus-within {
-        background: var(--bx-surface-base);
-        border-color: var(--bx-focus-ring);
+        background: var(--bx-select-combobox-focus-bg, var(--bx-surface-base));
+        border-color: var(
+          --bx-select-combobox-focus-border-color,
+          var(--bx-focus-ring)
+        );
       }
 
       :host([pill]) .combobox {
-        border-radius: var(--bx-radius-pill, 999px);
+        border-radius: var(--bx-select-combobox-radius, var(--bx-radius-pill));
       }
 
       :host([disabled]) .combobox {
-        background: var(--bx-surface-subtle);
-        border-color: var(--bx-border-subtle);
-        color: var(--bx-text-disabled);
+        background: var(
+          --bx-select-combobox-disabled-bg,
+          var(--bx-surface-subtle)
+        );
+        border-color: var(
+          --bx-select-combobox-disabled-border-color,
+          var(--bx-border-subtle)
+        );
+        color: var(--bx-select-combobox-disabled-fg, var(--bx-text-disabled));
         cursor: not-allowed;
       }
 
       .combobox[data-user-invalid] {
-        border-color: var(--bx-role-danger-border);
+        border-color: var(
+          --bx-select-combobox-invalid-border-color,
+          var(--bx-role-danger-border)
+        );
       }
       .combobox[data-user-invalid]:focus-within {
-        box-shadow: 0 0 0 3px
-          color-mix(in srgb, var(--bx-role-danger-border) 22%, transparent);
+        box-shadow: var(
+          --bx-select-combobox-invalid-focus-shadow,
+          0 0 0 calc(var(--bx-border-width-strong) * 1.5)
+            color-mix(in srgb, var(--bx-role-danger-border) 22%, transparent)
+        );
       }
 
       .value-area {
@@ -232,9 +340,12 @@ export class BxSelect extends FormAssociatedMixin(BixElement) {
         flex: 1;
         align-items: center;
         flex-wrap: wrap;
-        gap: var(--bx-space-xs);
+        gap: var(--bx-select-value-area-gap, var(--bx-space-xs));
         min-inline-size: 0;
-        padding-block: var(--bx-space-xs);
+        padding-block: var(
+          --bx-select-value-area-padding-block,
+          var(--bx-space-xs)
+        );
       }
 
       :host([data-fit]) .value-area {
@@ -258,28 +369,38 @@ export class BxSelect extends FormAssociatedMixin(BixElement) {
         all: unset;
         box-sizing: border-box;
         flex: 1 1 4ch;
-        min-inline-size: 4ch;
+        min-inline-size: var(--bx-select-display-input-min-width, 4ch);
         font: inherit;
-        font-size: var(--bx-font-m);
-        line-height: var(--bx-font-leading-tight);
-        color: var(--bx-text-primary);
+
+        ${textStyle('--bx-select-display-input', 'field-m')}
+
+        color: var(--bx-select-display-input-fg, var(--bx-text-primary));
         cursor: inherit;
         text-overflow: ellipsis;
       }
 
       :host([disabled]) .display-input {
-        color: var(--bx-text-disabled);
+        color: var(
+          --bx-select-display-input-disabled-fg,
+          var(--bx-text-disabled)
+        );
       }
 
       @media (pointer: coarse) {
         .display-input {
-          font-size: max(1rem, var(--bx-font-m));
+          font-size: var(
+            --bx-select-display-input-font-size,
+            max(var(--bx-font-floor), var(--bx-type-body-m-size))
+          );
         }
       }
 
       .display-input::placeholder {
-        color: var(--bx-text-hint);
-        opacity: 1;
+        color: var(
+          --bx-select-display-input-placeholder-fg,
+          var(--bx-text-hint)
+        );
+        opacity: var(--bx-select-display-input-placeholder-opacity, 1);
       }
 
       .start,
@@ -287,7 +408,7 @@ export class BxSelect extends FormAssociatedMixin(BixElement) {
         display: inline-flex;
         align-items: center;
         flex-shrink: 0;
-        color: var(--bx-text-hint);
+        color: var(--bx-select-start-fg, var(--bx-text-hint));
       }
 
       .start[hidden],
@@ -302,33 +423,44 @@ export class BxSelect extends FormAssociatedMixin(BixElement) {
         flex-shrink: 0;
         align-items: center;
         justify-content: center;
-        inline-size: 1.5em;
-        block-size: 1.5em;
-        border-radius: var(--bx-radius-pill, 50%);
-        color: var(--bx-text-hint);
+        inline-size: var(--bx-select-clear-button-size, 1.5em);
+        block-size: var(--bx-select-clear-button-size, 1.5em);
+        border-radius: var(
+          --bx-select-clear-button-radius,
+          var(--bx-radius-pill)
+        );
+        color: var(--bx-select-clear-button-fg, var(--bx-text-hint));
         cursor: pointer;
       }
 
       .clear-button:hover {
-        color: var(--bx-text-primary);
+        color: var(--bx-select-clear-button-hover-fg, var(--bx-text-primary));
       }
 
       .clear-button:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+        outline: var(
+            --bx-select-clear-button-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(--bx-select-clear-button-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-select-clear-button-focus-ring-offset,
+          var(--bx-focus-ring-offset)
+        );
       }
 
       .clear-button svg,
       .expand-icon svg {
-        inline-size: 1em;
-        block-size: 1em;
+        inline-size: var(--bx-select-clear-button-icon-size, 1em);
+        block-size: var(--bx-select-clear-button-icon-size, 1em);
         fill: currentColor;
       }
 
       .expand-icon {
         display: inline-flex;
         flex-shrink: 0;
-        color: var(--bx-text-hint);
+        color: var(--bx-select-expand-icon-fg, var(--bx-text-hint));
         transition: rotate var(--bx-motion-duration-fast)
           var(--bx-motion-easing-standard);
       }
@@ -338,8 +470,9 @@ export class BxSelect extends FormAssociatedMixin(BixElement) {
       }
 
       .hint {
-        color: var(--bx-text-secondary);
-        font-size: var(--bx-font-s);
+        color: var(--bx-select-hint-fg, var(--bx-text-secondary));
+
+        ${textStyle('--bx-select-hint', 'body-s')}
       }
 
       .hint:empty {
@@ -347,25 +480,28 @@ export class BxSelect extends FormAssociatedMixin(BixElement) {
       }
 
       .hint[data-user-invalid] {
-        color: var(--bx-role-danger-fg);
+        color: var(--bx-select-hint-invalid-fg, var(--bx-role-danger-fg));
       }
 
       .panel {
         box-sizing: border-box;
-        border: var(--bx-border-width) solid var(--bx-border-subtle);
-        border-radius: var(--bx-radius-m);
-        box-shadow: var(--bx-shadow-m);
-        background: var(--bx-surface-base);
-        color: var(--bx-text-primary);
-        font-size: var(--bx-font-m);
+        border: var(--bx-select-panel-border-width, var(--bx-border-width))
+          solid var(--bx-select-panel-border-color, var(--bx-border-subtle));
+        border-radius: var(--bx-select-panel-radius, var(--bx-radius-m));
+        box-shadow: var(--bx-select-panel-shadow, var(--bx-shadow-m));
+        background: var(--bx-select-panel-bg, var(--bx-surface-base));
+        color: var(--bx-select-panel-fg, var(--bx-text-primary));
+
+        ${textStyle('--bx-select-panel', 'body-m')}
+
         overflow: hidden;
       }
 
       .listbox {
         box-sizing: border-box;
         max-block-size: min(
-          var(--bx-select-max-height, 20rem),
-          var(--auto-size-available-height, 100vh)
+          var(--bx-select-max-height, calc(var(--bx-unit) * 20)),
+          var(--bx-popup-auto-size-available-height, 100vh)
         );
         overflow-y: auto;
         overscroll-behavior: contain;
@@ -394,30 +530,42 @@ export class BxSelect extends FormAssociatedMixin(BixElement) {
       /* Small lists render every row; skipping off-screen layout is the cheap fallback (§4). */
       .rows:not([data-windowed]) .row {
         content-visibility: auto;
-        contain-intrinsic-block-size: auto var(--bx-target-min, 2.75rem);
+        contain-intrinsic-block-size: auto var(--bx-target-min);
       }
 
       .row hr {
         margin-block: var(--bx-space-xs);
         border: 0;
-        border-block-start: var(--bx-border-width) solid var(--bx-border-subtle);
+        border-block-start: var(
+            --bx-select-hr-block-start-border-width,
+            var(--bx-border-width)
+          )
+          solid
+          var(--bx-select-hr-block-start-border-color, var(--bx-border-subtle));
       }
 
       .group-label {
-        padding-block: var(--bx-space-xs);
-        padding-inline: var(--bx-space-s);
-        color: var(--bx-text-secondary);
-        font-size: var(--bx-font-s);
-        font-weight: var(--bx-font-weight-medium);
+        padding-block: var(
+          --bx-select-group-label-padding-block,
+          var(--bx-space-xs)
+        );
+        padding-inline: var(
+          --bx-select-group-label-padding-inline,
+          var(--bx-space-s)
+        );
+        color: var(--bx-select-group-label-fg, var(--bx-text-secondary));
+
+        ${textStyle('--bx-select-group-label', 'label-s')}
       }
 
       .status {
         display: flex;
         align-items: center;
-        gap: var(--bx-space-xs);
-        padding: var(--bx-space-s);
-        color: var(--bx-text-secondary);
-        font-size: var(--bx-font-s);
+        gap: var(--bx-select-status-gap, var(--bx-space-xs));
+        padding: var(--bx-select-status-padding, var(--bx-space-s));
+        color: var(--bx-select-status-fg, var(--bx-text-secondary));
+
+        ${textStyle('--bx-select-status', 'body-s')}
       }
 
       @media (prefers-reduced-motion: reduce) {

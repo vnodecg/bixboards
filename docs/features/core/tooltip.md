@@ -50,11 +50,28 @@ Short hover/focus hint anchored to any element via `for` or slot. Specified for 
 
 ### CSS parts
 
-`base`, `body`
+| Part    | Description                                |
+| ------- | ------------------------------------------ |
+| `base`  | The inner `bx-popup`.                      |
+| `arrow` | The arrow, present unless `without-arrow`. |
+| `body`  | The wrapper around the default slot.       |
 
 ### CSS custom properties
 
-`--bx-tooltip-max-width`
+| Property                           | Description                                                                                        |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `--bx-tooltip-max-width`           | Max width of the tooltip body. Default `20rem`.                                                    |
+| `--bx-tooltip-body-padding-block`  | Padding block of the `body` part. Default `var(--bx-space-xs)`.                                    |
+| `--bx-tooltip-body-padding-inline` | Padding inline of the `body` part. Default `var(--bx-space-s)`.                                    |
+| `--bx-tooltip-body-radius`         | Corner radius of the `body` part. Default `var(--bx-radius-s)`.                                    |
+| `--bx-tooltip-body-shadow`         | Box shadow of the `body` part. Default `var(--bx-shadow-m)`.                                       |
+| `--bx-tooltip-bg`                  | Tooltip (and arrow) background. Default `--bx-surface-inverse`.                                    |
+| `--bx-tooltip-fg`                  | Tooltip text color. Default `--bx-text-inverse`.                                                   |
+| `--bx-tooltip-body-font-family`    | Font family of the `body` part (text style `body-s`). Default `var(--bx-type-body-family)`.        |
+| `--bx-tooltip-body-font-size`      | Font size of the `body` part (text style `body-s`). Default `var(--bx-type-body-s-size)`.          |
+| `--bx-tooltip-body-font-weight`    | Font weight of the `body` part (text style `body-s`). Default `var(--bx-type-body-s-weight)`.      |
+| `--bx-tooltip-body-line-height`    | Line height of the `body` part (text style `body-s`). Default `var(--bx-type-body-s-leading)`.     |
+| `--bx-tooltip-body-letter-spacing` | Letter spacing of the `body` part (text style `body-s`). Default `var(--bx-type-body-s-tracking)`. |
 
 ### Methods
 

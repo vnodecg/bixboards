@@ -40,11 +40,31 @@ Before/after image comparison with draggable divider. Specified for the Bixant t
 
 ### CSS parts
 
-`before`, `after`, `divider`, `handle`
+| Part      | Description                          |
+| --------- | ------------------------------------ |
+| `before`  | The wrapper around the before slot.  |
+| `after`   | The wrapper around the after slot.   |
+| `divider` | The draggable divider line + handle. |
+| `handle`  | The handle knob.                     |
 
 ### CSS custom properties
 
-`--divider-width`, `--handle-size`
+| Property                                        | Description                                                                                                                |
+| ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `--bx-comparison-divider-width`                 | Divider line thickness. Default `--bx-border-width-strong`.                                                                |
+| `--bx-comparison-handle-size`                   | Handle knob diameter. Default `calc(var(--bx-unit) * 2)`.                                                                  |
+| `--bx-comparison-divider-bg`                    | Background of the `divider` part. Default `var(--bx-surface-base)`.                                                        |
+| `--bx-comparison-divider-shadow`                | Box shadow of the `divider` part. Default `0 0 0 var(--bx-border-width) var(--bx-border-strong)`.                          |
+| `--bx-comparison-handle-knob-bg`                | Background of the `handle` part's knob. Default `var(--bx-surface-base)`.                                                  |
+| `--bx-comparison-handle-knob-border-width`      | Border width of the `handle` part's knob. Default `var(--bx-border-width)`.                                                |
+| `--bx-comparison-handle-knob-border-color`      | Border color of the `handle` part's knob. Default `var(--bx-border-strong)`.                                               |
+| `--bx-comparison-handle-knob-shadow`            | Box shadow of the `handle` part's knob. Default `var(--bx-shadow-s)`.                                                      |
+| `--bx-comparison-handle-knob-focus-ring-width`  | Focus ring width of the `handle` part's knob (focus state). Default `var(--bx-border-width-strong)`.                       |
+| `--bx-comparison-handle-knob-focus-ring-color`  | Focus ring color of the `handle` part's knob (focus state). Default `var(--bx-focus-ring)`.                                |
+| `--bx-comparison-handle-knob-focus-ring-offset` | Focus ring offset of the `handle` part's knob (focus state). Default `var(--bx-focus-ring-offset)`.                        |
+| `--bx-comparison-aspect-ratio`                  | Aspect ratio of the comparison area. Default `16 / 9`.                                                                     |
+| `--bx-comparison-handle-icon-size`              | Size (width and height) of the icon inside the `handle` element. Default `0.85em`.                                         |
+| `--bx-comparison-handle-hit-size`               | Size of the handle's pointer hit area (the visible knob is `--bx-comparison-handle-size`). Default `var(--bx-target-min)`. |
 
 ### Methods
 

@@ -49,11 +49,43 @@ Binary or indeterminate selection. Specified for the Bixant token system (fluid 
 
 ### CSS parts
 
-`base`, `control`, `checked-icon`, `indeterminate-icon`, `label`, `hint`
+| Part                 | Description                          |
+| -------------------- | ------------------------------------ |
+| `base`               | The outer label wrapper.             |
+| `control`            | The checkbox box.                    |
+| `checked-icon`       | The checkmark icon.                  |
+| `indeterminate-icon` | The indeterminate (dash) icon.       |
+| `label`              | The wrapper around the default slot. |
+| `hint`               | The wrapper around the hint slot.    |
 
 ### CSS custom properties
 
-`--bx-checked-icon-color`
+| Property                                      | Description                                                                                        |
+| --------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `--bx-checkbox-checked-icon-color`            | Icon color when checked/indeterminate. Default `--bx-on-accent`.                                   |
+| `--bx-checkbox-gap`                           | Gap of the root surface. Default `var(--bx-space-xs)`.                                             |
+| `--bx-checkbox-disabled-fg`                   | Text/icon color of the root surface (disabled state). Default `var(--bx-text-disabled)`.           |
+| `--bx-checkbox-control-border-width`          | Border width of the `control` part. Default `var(--bx-border-width-strong)`.                       |
+| `--bx-checkbox-control-border-color`          | Border color of the `control` part. Default `var(--bx-border-strong)`.                             |
+| `--bx-checkbox-control-radius`                | Corner radius of the `control` part. Default `var(--bx-radius-s)`.                                 |
+| `--bx-checkbox-control-bg`                    | Background of the `control` part. Default `var(--bx-surface-base)`.                                |
+| `--bx-checkbox-control-checked-border-color`  | Border color of the `control` part (checked state). Default `var(--bx-role-accent)`.               |
+| `--bx-checkbox-control-checked-bg`            | Background of the `control` part (checked state). Default `var(--bx-role-accent)`.                 |
+| `--bx-checkbox-control-focus-ring-width`      | Focus ring width of the `control` part (focus state). Default `var(--bx-border-width-strong)`.     |
+| `--bx-checkbox-control-focus-ring-color`      | Focus ring color of the `control` part (focus state). Default `var(--bx-focus-ring)`.              |
+| `--bx-checkbox-control-focus-ring-offset`     | Focus ring offset of the `control` part (focus state). Default `var(--bx-focus-ring-offset)`.      |
+| `--bx-checkbox-control-disabled-border-color` | Border color of the `control` part (disabled state). Default `var(--bx-border-subtle)`.            |
+| `--bx-checkbox-control-disabled-bg`           | Background of the `control` part (disabled state). Default `var(--bx-surface-subtle)`.             |
+| `--bx-checkbox-label-padding-block-start`     | Padding block start of the `label` part. Default `calc((var(--bx-target-min) - 1lh) / 2)`.         |
+| `--bx-checkbox-label-min-height`              | Minimum height of the `label` part. Default `var(--bx-target-min)`.                                |
+| `--bx-checkbox-hint-fg`                       | Text/icon color of the `hint` part. Default `var(--bx-text-secondary)`.                            |
+| `--bx-checkbox-size`                          | Control size (width and height). Default `calc(var(--bx-unit) * 1.25)`, or per `size`.             |
+| `--bx-checkbox-font-family`                   | Font family of the root surface. Default `var(--bx-type-body-family)`.                             |
+| `--bx-checkbox-hint-font-family`              | Font family of the `hint` part (text style `body-s`). Default `var(--bx-type-body-family)`.        |
+| `--bx-checkbox-hint-font-size`                | Font size of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-size)`.          |
+| `--bx-checkbox-hint-font-weight`              | Font weight of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-weight)`.      |
+| `--bx-checkbox-hint-line-height`              | Line height of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-leading)`.     |
+| `--bx-checkbox-hint-letter-spacing`           | Letter spacing of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-tracking)`. |
 
 ### Methods
 

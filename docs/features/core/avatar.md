@@ -43,11 +43,28 @@ User image, initials or icon with shape variants. Specified for the Bixant token
 
 ### CSS parts
 
-`base`, `icon`, `initials`, `image`
+| Part       | Description                                            |
+| ---------- | ------------------------------------------------------ |
+| `base`     | The host's inner wrapper.                              |
+| `image`    | The `<img>` element, present while an image is loaded. |
+| `initials` | The initials text, present as a fallback.              |
+| `icon`     | The icon slot wrapper, present as the final fallback.  |
 
 ### CSS custom properties
 
-`--bx-avatar-size`
+| Property                     | Description                                                                                                 |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `--bx-avatar-size`           | Diameter/side length. Default a fluid step (`calc(var(--bx-unit) * 2.5)`).                                  |
+| `--bx-avatar-bg`             | Background of the root surface. Default `var(--bx-surface-muted)`.                                          |
+| `--bx-avatar-fg`             | Text/icon color of the root surface. Default `var(--bx-text-secondary)`.                                    |
+| `--bx-avatar-border-width`   | Border width of the root surface. Default `var(--bx-border-width)`.                                         |
+| `--bx-avatar-border-color`   | Border color of the root surface. Default `var(--bx-border-subtle)`.                                        |
+| `--bx-avatar-radius`         | Corner radius of the root surface. Default `var(--bx-radius-pill)`.                                         |
+| `--bx-avatar-font-family`    | Font family of the root surface (text style `heading-xs`). Default `var(--bx-type-heading-family)`.         |
+| `--bx-avatar-font-size`      | Font size of the root surface (text style `heading-xs`). Default `var(--bx-type-heading-xs-size)`.          |
+| `--bx-avatar-font-weight`    | Font weight of the root surface (text style `heading-xs`). Default `var(--bx-type-heading-xs-weight)`.      |
+| `--bx-avatar-line-height`    | Line height of the root surface (text style `heading-xs`). Default `var(--bx-type-heading-xs-leading)`.     |
+| `--bx-avatar-letter-spacing` | Letter spacing of the root surface (text style `heading-xs`). Default `var(--bx-type-heading-xs-tracking)`. |
 
 ### Methods
 

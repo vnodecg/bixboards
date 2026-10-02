@@ -58,11 +58,48 @@ Virtualized list/grid of items for feeds, inboxes and galleries with dynamic hei
 
 ### CSS parts
 
-`base`, `viewport`, `item`, `group-header`, `empty`, `loading`
+| Part           | Description            |
+| -------------- | ---------------------- |
+| `base`         | The outer container.   |
+| `viewport`     | The scrolling element. |
+| `item`         | An item.               |
+| `group-header` | A group header row.    |
+| `empty`        | The empty state.       |
+| `loading`      | The loading state.     |
 
 ### CSS custom properties
 
-`--bx-list-gap`, `--bx-list-item-min-width`, `--bx-list-item-height`
+| Property                                             | Description                                                                                                                |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `--bx-data-list-gap`                                 | Gap between items.                                                                                                         |
+| `--bx-data-list-fg`                                  | Text/icon color of the root surface. Default `var(--bx-text-primary)`.                                                     |
+| `--bx-data-list-min-height`                          | Minimum height of the root surface. Default `calc(var(--bx-unit) * 8)`.                                                    |
+| `--bx-data-list-viewport-focus-ring-width`           | Focus ring width of the `viewport` part (focus state). Default `var(--bx-border-width-strong)`.                            |
+| `--bx-data-list-viewport-focus-ring-color`           | Focus ring color of the `viewport` part (focus state). Default `var(--bx-focus-ring)`.                                     |
+| `--bx-data-list-viewport-focus-ring-offset`          | Focus ring offset of the `viewport` part (focus state). Default `calc(var(--bx-focus-ring-offset) * -1)`.                  |
+| `--bx-data-list-item-radius`                         | Corner radius of the `item` part. Default `var(--bx-radius-m)`.                                                            |
+| `--bx-data-list-item-selected-bg`                    | Background of the `item` part (selected state). Default `color-mix(in srgb, var(--bx-role-accent) 14%, transparent)`.      |
+| `--bx-data-list-item-selected-shadow`                | Box shadow of the `item` part (selected state). Default `inset 0 0 0 var(--bx-border-width-strong) var(--bx-role-accent)`. |
+| `--bx-data-list-item-dragging-ring-width`            | Focus ring width of the `item` part (dragging state). Default `var(--bx-border-width-strong)`.                             |
+| `--bx-data-list-item-dragging-ring-color`            | Focus ring color of the `item` part (dragging state). Default `var(--bx-focus-ring)`.                                      |
+| `--bx-data-list-item-dragging-outline-offset`        | Outline offset of the `item` part (dragging state). Default `calc(var(--bx-focus-ring-offset) * -1)`.                      |
+| `--bx-data-list-item-dragging-opacity`               | Opacity of the `item` part (dragging state). Default `0.7`.                                                                |
+| `--bx-data-list-item-dragging-shadow`                | Box shadow of the `item` part (dragging state). Default `var(--bx-shadow-m)`.                                              |
+| `--bx-data-list-item-drop-indicator-height`          | Height of the drop indicator on the `item` part. Default `var(--bx-border-width-strong)`.                                  |
+| `--bx-data-list-item-drop-indicator-bg`              | Background of the drop indicator on the `item` part. Default `var(--bx-role-accent)`.                                      |
+| `--bx-data-list-group-header-padding`                | Padding of the `group-header` part. Default `var(--bx-space-xs) var(--bx-space-m)`.                                        |
+| `--bx-data-list-group-header-bg`                     | Background of the `group-header` part. Default `var(--bx-surface-subtle)`.                                                 |
+| `--bx-data-list-group-header-fg`                     | Text/icon color of the `group-header` part. Default `var(--bx-text-secondary)`.                                            |
+| `--bx-data-list-group-header-block-end-border-width` | Block end border width of the `group-header` part. Default `var(--bx-border-width)`.                                       |
+| `--bx-data-list-group-header-block-end-border-color` | Block end border color of the `group-header` part. Default `var(--bx-border-subtle)`.                                      |
+| `--bx-data-list-loading-padding`                     | Padding of the `loading` part. Default `var(--bx-space-l)`.                                                                |
+| `--bx-data-list-loading-fg`                          | Text/icon color of the `loading` part. Default `var(--bx-text-secondary)`.                                                 |
+| `--bx-data-list-font-family`                         | Font family of the root surface. Default `var(--bx-type-body-family)`.                                                     |
+| `--bx-data-list-group-header-font-family`            | Font family of the `group-header` part (text style `label-s`). Default `var(--bx-type-label-family)`.                      |
+| `--bx-data-list-group-header-font-size`              | Font size of the `group-header` part (text style `label-s`). Default `var(--bx-type-label-s-size)`.                        |
+| `--bx-data-list-group-header-font-weight`            | Font weight of the `group-header` part (text style `label-s`). Default `var(--bx-type-label-s-weight)`.                    |
+| `--bx-data-list-group-header-line-height`            | Line height of the `group-header` part (text style `label-s`). Default `var(--bx-type-label-s-leading)`.                   |
+| `--bx-data-list-group-header-letter-spacing`         | Letter spacing of the `group-header` part (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.               |
 
 ### Methods
 

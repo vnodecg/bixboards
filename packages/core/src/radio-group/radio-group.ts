@@ -2,6 +2,7 @@ import { css, html, nothing, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
 import { FormAssociatedMixin } from '../internal/form-associated.ts';
 import type { BxRadio } from '../radio/radio.ts';
+import { textStyle, textFamily } from '../internal/text-style.ts';
 
 type Orientation = 'horizontal' | 'vertical';
 type Size = 'small' | 'medium' | 'large';
@@ -37,6 +38,20 @@ let nextId = 0;
  * @csspart label - The label element.
  * @csspart hint - The wrapper around the hint slot.
  * @csspart radio-group - The `role="radiogroup"` wrapper around the default slot.
+ * @cssprop --bx-radio-group-gap - Gap of the root surface. Default `var(--bx-space-s)`.
+ * @cssprop --bx-radio-group-hint-fg - Text/icon color of the `hint` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-radio-group-hint-invalid-fg - Text/icon color of the `hint` part (invalid state). Default `var(--bx-role-danger-fg)`.
+ * @cssprop --bx-radio-group-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-radio-group-label-font-family - Font family of the `label` part (text style `label-m`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-radio-group-label-font-size - Font size of the `label` part (text style `label-m`). Default `var(--bx-type-label-m-size)`.
+ * @cssprop --bx-radio-group-label-font-weight - Font weight of the `label` part (text style `label-m`). Default `var(--bx-type-label-m-weight)`.
+ * @cssprop --bx-radio-group-label-line-height - Line height of the `label` part (text style `label-m`). Default `var(--bx-type-label-m-leading)`.
+ * @cssprop --bx-radio-group-label-letter-spacing - Letter spacing of the `label` part (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.
+ * @cssprop --bx-radio-group-hint-font-family - Font family of the `hint` part (text style `body-s`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-radio-group-hint-font-size - Font size of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-size)`.
+ * @cssprop --bx-radio-group-hint-font-weight - Font weight of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-weight)`.
+ * @cssprop --bx-radio-group-hint-line-height - Line height of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-leading)`.
+ * @cssprop --bx-radio-group-hint-letter-spacing - Letter spacing of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.
  */
 export class BxRadioGroup extends FormAssociatedMixin(BixElement) {
   static override tagName = 'bx-radio-group';
@@ -47,13 +62,14 @@ export class BxRadioGroup extends FormAssociatedMixin(BixElement) {
       :host {
         display: block;
         container-type: inline-size;
-        font-family: var(--bx-font-family-sans);
+        ${textFamily('--bx-radio-group', 'body')}
       }
 
       .label {
         display: block;
         margin-block-end: var(--bx-space-xs);
-        font-weight: var(--bx-font-weight-medium);
+
+        ${textStyle('--bx-radio-group-label', 'label-m')}
       }
 
       .label:empty {
@@ -63,16 +79,16 @@ export class BxRadioGroup extends FormAssociatedMixin(BixElement) {
       .radio-group {
         display: flex;
         flex-direction: column;
-        gap: var(--bx-space-s);
+        gap: var(--bx-radio-group-gap, var(--bx-space-s));
       }
 
       :host([orientation='horizontal']) .radio-group {
         flex-direction: row;
         flex-wrap: wrap;
-        gap: var(--bx-space-m);
+        gap: var(--bx-radio-group-gap, var(--bx-space-m));
       }
 
-      @container (max-width: 320px) {
+      @container (max-width: 20rem) {
         :host([orientation='horizontal']) .radio-group {
           flex-direction: column;
         }
@@ -80,8 +96,9 @@ export class BxRadioGroup extends FormAssociatedMixin(BixElement) {
 
       .hint {
         margin-block-start: var(--bx-space-xs);
-        color: var(--bx-text-secondary);
-        font-size: var(--bx-font-s);
+        color: var(--bx-radio-group-hint-fg, var(--bx-text-secondary));
+
+        ${textStyle('--bx-radio-group-hint', 'body-s')}
       }
 
       .hint:empty {
@@ -89,7 +106,7 @@ export class BxRadioGroup extends FormAssociatedMixin(BixElement) {
       }
 
       .hint[data-user-invalid] {
-        color: var(--bx-role-danger-fg);
+        color: var(--bx-radio-group-hint-invalid-fg, var(--bx-role-danger-fg));
       }
     `,
   ];

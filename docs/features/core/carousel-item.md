@@ -38,7 +38,10 @@ _None._
 
 ### CSS custom properties
 
-`--aspect-ratio`
+| Property                          | Description                                                        |
+| --------------------------------- | ------------------------------------------------------------------ |
+| `--bx-carousel-item-aspect-ratio` | Slide aspect ratio. Unset by default (sizes to content/container). |
+| `--bx-carousel-item-snap-align`   | Scroll-snap alignment set by the parent carousel. Default `start`. |
 
 ### Methods
 

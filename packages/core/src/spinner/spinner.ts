@@ -20,7 +20,7 @@ const VIEWBOX_R = 14;
  * @cssprop --bx-spinner-track-width - Stroke width shared by the track and the indicator arc. Default `2`.
  * @cssprop --bx-spinner-track-color - Track color. Default transparent.
  * @cssprop --bx-spinner-indicator-color - Sweeping arc color. Default `currentColor`.
- * @cssprop --bx-spinner-speed - Full-rotation duration. Default `0.8s`.
+ * @cssprop --bx-spinner-speed - Full-rotation duration. Default `--bx-motion-duration-spin`.
  */
 export class BxSpinner extends BixElement {
   static override tagName = 'bx-spinner';
@@ -41,7 +41,9 @@ export class BxSpinner extends BixElement {
         display: block;
         inline-size: 100%;
         block-size: 100%;
-        animation: bx-spinner-spin var(--bx-spinner-speed, 0.8s) linear infinite;
+        animation: bx-spinner-spin
+          var(--bx-spinner-speed, var(--bx-motion-duration-spin)) linear
+          infinite;
       }
 
       circle {
@@ -76,7 +78,8 @@ export class BxSpinner extends BixElement {
 
       @media (prefers-reduced-motion: reduce) {
         svg {
-          animation: bx-spinner-pulse calc(var(--bx-spinner-speed, 0.8s) * 2)
+          animation: bx-spinner-pulse
+            calc(var(--bx-spinner-speed, var(--bx-motion-duration-spin)) * 2)
             ease-in-out infinite;
         }
       }

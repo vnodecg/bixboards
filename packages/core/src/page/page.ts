@@ -1,6 +1,7 @@
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
 import { observeResize } from '../internal/shared-observers.ts';
+import { textFamily } from '../internal/text-style.ts';
 import '../scroller/index.ts';
 
 type View = 'mobile' | 'desktop';
@@ -37,7 +38,7 @@ let nextId = 0;
  * The navigation body scrolls inside a `bx-scroller` (edge shadows, keyboard tab stop once it
  * overflows) while the navigation header/footer slots stay pinned.
  *
- * Gaps, per docs/features/_conventions.md's "say so inline" rule: `--main-width` only caps the
+ * Gaps, per docs/features/_conventions.md's "say so inline" rule: `--bx-page-main-width` only caps the
  * main column's max inline size; the open drawer contains focus through `inert` on everything
  * else rather than a keydown Tab trap, which lets Tab reach the browser chrome (equivalent for
  * assistive tech).
@@ -69,13 +70,43 @@ let nextId = 0;
  * @csspart aside - The `aside` landmark.
  * @csspart footer - The footer region.
  *
- * @cssprop --menu-width - Navigation width.
- * @cssprop --aside-width - Aside width.
- * @cssprop --main-width - Max inline size of the main column.
- * @cssprop --banner-height - Min height of the banner.
- * @cssprop --header-height - Min height of the header.
- * @cssprop --subheader-height - Min height of the subheader.
- * @cssprop --nav-transition - Drawer transition. Disabled under reduced motion.
+ * @cssprop --bx-page-menu-width - Navigation width.
+ * @cssprop --bx-page-aside-width - Aside width.
+ * @cssprop --bx-page-main-width - Max inline size of the main column.
+ * @cssprop --bx-page-banner-height - Min height of the banner.
+ * @cssprop --bx-page-header-height - Min height of the header.
+ * @cssprop --bx-page-subheader-height - Min height of the subheader.
+ * @cssprop --bx-page-nav-transition - Drawer transition. Disabled under reduced motion.
+ * @cssprop --bx-page-fg - Text/icon color of the root surface. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-page-bg - Background of the root surface. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-page-a-fg - Text/icon color of the `a` element. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-page-header-gap - Gap of the `header` part. Default `var(--bx-space-s)`.
+ * @cssprop --bx-page-header-padding-inline - Padding inline of the `header` part. Default `var(--bx-space-m)`.
+ * @cssprop --bx-page-header-block-end-border-width - Block end border width of the `header` part. Default `var(--bx-border-width)`.
+ * @cssprop --bx-page-header-block-end-border-color - Block end border color of the `header` part. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-page-menu-button-min-width - Minimum width of the `menu-button` element. Default `var(--bx-target-min)`.
+ * @cssprop --bx-page-menu-button-min-height - Minimum height of the `menu-button` element. Default `var(--bx-target-min)`.
+ * @cssprop --bx-page-menu-button-radius - Corner radius of the `menu-button` element. Default `var(--bx-radius-m)`.
+ * @cssprop --bx-page-menu-button-focus-ring-width - Focus ring width of the `menu-button` element (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-page-menu-button-focus-ring-color - Focus ring color of the `menu-button` element (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-page-menu-button-focus-ring-offset - Focus ring offset of the `menu-button` element (focus state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-page-navigation-bg - Background of the `navigation` part. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-page-navigation-inline-end-border-width - Inline end border width of the `navigation` part. Default `var(--bx-border-width)`.
+ * @cssprop --bx-page-navigation-inline-end-border-color - Inline end border color of the `navigation` part. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-page-navigation-inline-start-border-width - Inline start border width of the `navigation` part. Default `var(--bx-border-width)`.
+ * @cssprop --bx-page-navigation-inline-start-border-color - Inline start border color of the `navigation` part. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-page-main-padding - Padding of the `main` part. Default `var(--bx-space-m)`.
+ * @cssprop --bx-page-aside-padding - Padding of the `aside` part. Default `var(--bx-space-m)`.
+ * @cssprop --bx-page-aside-inline-start-border-width - Inline start border width of the `aside` part. Default `var(--bx-border-width)`.
+ * @cssprop --bx-page-aside-inline-start-border-color - Inline start border color of the `aside` part. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-page-footer-block-start-border-width - Block start border width of the `footer` part. Default `var(--bx-border-width)`.
+ * @cssprop --bx-page-footer-block-start-border-color - Block start border color of the `footer` part. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-page-aside-block-start-border-width - Block start border width of the `aside` part. Default `var(--bx-border-width)`.
+ * @cssprop --bx-page-aside-block-start-border-color - Block start border color of the `aside` part. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-page-navigation-shadow - Box shadow of the `navigation` part. Default `var(--bx-shadow-m)`.
+ * @cssprop --bx-page-scrim-bg - Background of the `scrim` element. Default `color-mix(in srgb, CanvasText 40%, transparent)`.
+ * @cssprop --bx-page-menu-button-icon-size - Size (width and height) of the icon inside the `menu-button` element. Default `1.25em`.
+ * @cssprop --bx-page-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
  */
 export class BxPage extends BixElement {
   static override tagName = 'bx-page';
@@ -86,9 +117,10 @@ export class BxPage extends BixElement {
       :host {
         display: block;
         position: relative;
-        font-family: var(--bx-font-family-sans);
-        color: var(--bx-text-primary);
-        background: var(--bx-surface-base);
+        ${textFamily('--bx-page', 'body')}
+        color: var(--bx-page-fg, var(--bx-text-primary));
+        background: var(--bx-page-bg, var(--bx-surface-base));
+        isolation: isolate;
       }
 
       .base {
@@ -104,7 +136,7 @@ export class BxPage extends BixElement {
         position: absolute;
         inset-block-start: var(--bx-space-xs);
         inset-inline-start: var(--bx-space-xs);
-        z-index: 30;
+        z-index: 3;
         padding: var(--bx-space-xs) var(--bx-space-s);
         background: var(--bx-surface-base);
         border: var(--bx-border-width-strong) solid var(--bx-focus-ring);
@@ -117,28 +149,33 @@ export class BxPage extends BixElement {
       }
 
       .skip a {
-        color: var(--bx-text-primary);
+        color: var(--bx-page-a-fg, var(--bx-text-primary));
       }
 
       .banner {
-        min-block-size: var(--banner-height, 0);
+        min-block-size: var(--bx-page-banner-height, 0);
       }
 
       .header,
       .subheader {
         display: flex;
         align-items: center;
-        gap: var(--bx-space-s);
-        padding-inline: var(--bx-space-m);
+        gap: var(--bx-page-header-gap, var(--bx-space-s));
+        padding-inline: var(--bx-page-header-padding-inline, var(--bx-space-m));
       }
 
       .header {
-        min-block-size: var(--header-height, 0);
-        border-block-end: var(--bx-border-width) solid var(--bx-border-subtle);
+        min-block-size: var(--bx-page-header-height, 0);
+        border-block-end: var(
+            --bx-page-header-block-end-border-width,
+            var(--bx-border-width)
+          )
+          solid
+          var(--bx-page-header-block-end-border-color, var(--bx-border-subtle));
       }
 
       .subheader {
-        min-block-size: var(--subheader-height, 0);
+        min-block-size: var(--bx-page-subheader-height, 0);
       }
 
       .header-content,
@@ -154,17 +191,31 @@ export class BxPage extends BixElement {
         display: none;
         align-items: center;
         justify-content: center;
-        min-inline-size: var(--bx-target-min, 2.75rem);
-        min-block-size: var(--bx-target-min, 2.75rem);
+        min-inline-size: var(
+          --bx-page-menu-button-min-width,
+          var(--bx-target-min)
+        );
+        min-block-size: var(
+          --bx-page-menu-button-min-height,
+          var(--bx-target-min)
+        );
         cursor: pointer;
-        border-radius: var(--bx-radius-m);
+        border-radius: var(--bx-page-menu-button-radius, var(--bx-radius-m));
       }
 
       .menu-button:focus-visible,
       .hide-menu-button:focus-visible,
       .skip a:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+        outline: var(
+            --bx-page-menu-button-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(--bx-page-menu-button-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-page-menu-button-focus-ring-offset,
+          var(--bx-focus-ring-offset)
+        );
       }
 
       :host([view='mobile']) .menu-button,
@@ -174,8 +225,8 @@ export class BxPage extends BixElement {
 
       .menu-button svg,
       .hide-menu-button svg {
-        inline-size: 1.25em;
-        block-size: 1.25em;
+        inline-size: var(--bx-page-menu-button-icon-size, 1.25em);
+        block-size: var(--bx-page-menu-button-icon-size, 1.25em);
         fill: currentColor;
       }
 
@@ -187,21 +238,40 @@ export class BxPage extends BixElement {
       }
 
       .navigation {
-        flex: 0 0 var(--menu-width, clamp(12rem, 20vi, 18rem));
+        flex: 0 0
+          var(
+            --bx-page-menu-width,
+            clamp(calc(var(--bx-unit) * 12), 20vi, calc(var(--bx-unit) * 18))
+          );
         display: flex;
         flex-direction: column;
         min-inline-size: 0;
         overflow: hidden;
-        background: var(--bx-surface-base);
-        border-inline-end: var(--bx-border-width) solid var(--bx-border-subtle);
+        background: var(--bx-page-navigation-bg, var(--bx-surface-base));
+        border-inline-end: var(
+            --bx-page-navigation-inline-end-border-width,
+            var(--bx-border-width)
+          )
+          solid
+          var(
+            --bx-page-navigation-inline-end-border-color,
+            var(--bx-border-subtle)
+          );
         outline: none;
       }
 
       :host([nav-placement='end']) .navigation {
         order: 3;
         border-inline-end: 0;
-        border-inline-start: var(--bx-border-width) solid
-          var(--bx-border-subtle);
+        border-inline-start: var(
+            --bx-page-navigation-inline-start-border-width,
+            var(--bx-border-width)
+          )
+          solid
+          var(
+            --bx-page-navigation-inline-start-border-color,
+            var(--bx-border-subtle)
+          );
       }
 
       .navigation-body {
@@ -218,22 +288,41 @@ export class BxPage extends BixElement {
 
       .main {
         flex: 1;
-        max-inline-size: var(--main-width, none);
+        max-inline-size: var(--bx-page-main-width, none);
         outline: none;
-        padding: var(--bx-space-m);
+        padding: var(--bx-page-main-padding, var(--bx-space-m));
       }
 
       .aside {
-        flex: 0 0 var(--aside-width, clamp(12rem, 18vi, 16rem));
+        flex: 0 0
+          var(
+            --bx-page-aside-width,
+            clamp(calc(var(--bx-unit) * 12), 18vi, calc(var(--bx-unit) * 16))
+          );
         min-inline-size: 0;
         overflow-y: auto;
-        padding: var(--bx-space-m);
-        border-inline-start: var(--bx-border-width) solid
-          var(--bx-border-subtle);
+        padding: var(--bx-page-aside-padding, var(--bx-space-m));
+        border-inline-start: var(
+            --bx-page-aside-inline-start-border-width,
+            var(--bx-border-width)
+          )
+          solid
+          var(
+            --bx-page-aside-inline-start-border-color,
+            var(--bx-border-subtle)
+          );
       }
 
       .footer {
-        border-block-start: var(--bx-border-width) solid var(--bx-border-subtle);
+        border-block-start: var(
+            --bx-page-footer-block-start-border-width,
+            var(--bx-border-width)
+          )
+          solid
+          var(
+            --bx-page-footer-block-start-border-color,
+            var(--bx-border-subtle)
+          );
       }
 
       .scrim {
@@ -248,20 +337,28 @@ export class BxPage extends BixElement {
       :host([view='mobile']) .aside {
         flex-basis: auto;
         border-inline-start: 0;
-        border-block-start: var(--bx-border-width) solid var(--bx-border-subtle);
+        border-block-start: var(
+            --bx-page-aside-block-start-border-width,
+            var(--bx-border-width)
+          )
+          solid
+          var(--bx-page-aside-block-start-border-color, var(--bx-border-subtle));
       }
 
       :host([view='mobile']) .navigation {
         position: absolute;
         inset-block: 0;
         inset-inline-start: 0;
-        z-index: 20;
-        inline-size: min(var(--menu-width, 18rem), 85%);
-        box-shadow: var(--bx-shadow-m);
+        z-index: 2;
+        inline-size: min(
+          var(--bx-page-menu-width, calc(var(--bx-unit) * 18)),
+          85%
+        );
+        box-shadow: var(--bx-page-navigation-shadow, var(--bx-shadow-m));
         transform: translateX(-100%);
         visibility: hidden;
         transition:
-          transform var(--nav-transition, 200ms ease),
+          transform var(--bx-page-nav-transition, 200ms ease),
           visibility 0s linear 200ms;
       }
 
@@ -283,7 +380,7 @@ export class BxPage extends BixElement {
         transform: none;
         visibility: visible;
         transition:
-          transform var(--nav-transition, 200ms ease),
+          transform var(--bx-page-nav-transition, 200ms ease),
           visibility 0s;
       }
 
@@ -291,8 +388,11 @@ export class BxPage extends BixElement {
         display: block;
         position: absolute;
         inset: 0;
-        z-index: 10;
-        background: color-mix(in srgb, CanvasText 40%, transparent);
+        z-index: 1;
+        background: var(
+          --bx-page-scrim-bg,
+          color-mix(in srgb, CanvasText 40%, transparent)
+        );
       }
 
       .hide-menu-button {

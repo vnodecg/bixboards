@@ -54,11 +54,42 @@ There is no separate `bx-tag`: the two overlapped almost completely in look and 
 
 ### CSS parts
 
-`base`, `content`, `remove-button`
+| Part            | Description                                    |
+| --------------- | ---------------------------------------------- |
+| `start`         | The start slot.                                |
+| `end`           | The end slot.                                  |
+| `base`          | The host's inner wrapper.                      |
+| `content`       | The wrapper around slotted/overflow content.   |
+| `remove-button` | The remove button, present with `with-remove`. |
 
 ### CSS custom properties
 
-Component properties (defaults come from design-system roles) `--bx-badge-bg`, `-fg`, `-border`, `-radius`, `-border-width`, `-gap`, `-min-height`, `-padding-inline`, `-font-size`, `-font-weight`. Component-level: `--bx-badge-max-width` (truncation).
+| Property                                     | Description                                                                                                        |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `--bx-badge-bg`                              | Background color. Defaults to a role/appearance combination.                                                       |
+| `--bx-badge-fg`                              | Text/icon color. Defaults to a role/appearance combination.                                                        |
+| `--bx-badge-border`                          | Border color. Defaults to a role/appearance combination.                                                           |
+| `--bx-badge-radius`                          | Corner radius when `pill` is unset. Default `--bx-radius-s`.                                                       |
+| `--bx-badge-border-width`                    | Border thickness. Default `--bx-border-width`.                                                                     |
+| `--bx-badge-gap`                             | Gap between slots. Default `--bx-space-2xs`.                                                                       |
+| `--bx-badge-min-height`                      | Minimum height, drives the `size` step.                                                                            |
+| `--bx-badge-padding-inline`                  | Horizontal padding, drives the `size` step.                                                                        |
+| `--bx-badge-max-width`                       | Truncation width for the content.                                                                                  |
+| `--bx-badge-content-line-height`             | Line height of the `content` part. Default `1.3`.                                                                  |
+| `--bx-badge-remove-button-size`              | Size (width and height) of the `remove-button` part. Default `1.4em`.                                              |
+| `--bx-badge-remove-button-radius`            | Corner radius of the `remove-button` part. Default `var(--bx-radius-pill)`.                                        |
+| `--bx-badge-remove-button-hit-size`          | Size (width and height) of the `remove-button` hit area. Default `max(100%, var(--bx-target-min))`.                |
+| `--bx-badge-remove-button-hover-bg`          | Background of the `remove-button` part (hover state). Default `color-mix(in srgb, currentColor 16%, transparent)`. |
+| `--bx-badge-remove-button-focus-ring-width`  | Focus ring width of the `remove-button` part (focus state). Default `var(--bx-border-width-strong)`.               |
+| `--bx-badge-remove-button-focus-ring-color`  | Focus ring color of the `remove-button` part (focus state). Default `var(--bx-focus-ring)`.                        |
+| `--bx-badge-remove-button-focus-ring-offset` | Focus ring offset of the `remove-button` part (focus state). Default `var(--bx-focus-ring-offset)`.                |
+| `--bx-badge-remove-button-icon-size`         | Size (width and height) of the icon inside the `remove-button` element. Default `0.85em`.                          |
+| `--bx-badge-font-family`                     | Font family of the root surface. Default `var(--bx-type-body-family)`.                                             |
+| `--bx-badge-font-family`                     | Font family of the root surface (text style `label-m`). Default `var(--bx-type-label-family)`.                     |
+| `--bx-badge-font-size`                       | Font size of the root surface (text style `label-m`). Default `var(--bx-type-label-m-size)`.                       |
+| `--bx-badge-font-weight`                     | Font weight of the root surface (text style `label-m`). Default `var(--bx-type-label-m-weight)`.                   |
+| `--bx-badge-line-height`                     | Line height of the root surface (text style `label-m`). Default `var(--bx-type-label-m-leading)`.                  |
+| `--bx-badge-letter-spacing`                  | Letter spacing of the root surface (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.              |
 
 ### Methods
 

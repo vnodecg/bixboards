@@ -48,11 +48,30 @@ Rich, interactive floating panel anchored to an element. Specified for the Bixan
 
 ### CSS parts
 
-`dialog`, `body`, `arrow`
+| Part     | Description                                     |
+| -------- | ----------------------------------------------- |
+| `dialog` | The inner `bx-popup` (carries `role="dialog"`). |
+| `body`   | The padded surface around the default slot.     |
+| `arrow`  | The arrow, present unless `without-arrow`.      |
 
 ### CSS custom properties
 
-`--bx-popover-arrow-size`, `--bx-popover-max-width`, `--bx-popover-bg` (added)
+| Property                           | Description                                                                                        |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `--bx-popover-bg`                  | Body/arrow background. Default `--bx-surface-base`.                                                |
+| `--bx-popover-arrow-size`          | Arrow diameter. Default `calc(var(--bx-unit) * 0.75)`.                                             |
+| `--bx-popover-max-width`           | Max width of the body. Default `20rem`.                                                            |
+| `--bx-popover-body-padding`        | Padding of the `body` part. Default `var(--bx-space-m)`.                                           |
+| `--bx-popover-body-border-width`   | Border width of the `body` part. Default `var(--bx-border-width)`.                                 |
+| `--bx-popover-body-border-color`   | Border color of the `body` part. Default `var(--bx-border-subtle)`.                                |
+| `--bx-popover-body-radius`         | Corner radius of the `body` part. Default `var(--bx-radius-m)`.                                    |
+| `--bx-popover-body-shadow`         | Box shadow of the `body` part. Default `var(--bx-shadow-m)`.                                       |
+| `--bx-popover-body-fg`             | Text/icon color of the `body` part. Default `var(--bx-text-primary)`.                              |
+| `--bx-popover-body-font-family`    | Font family of the `body` part (text style `body-m`). Default `var(--bx-type-body-family)`.        |
+| `--bx-popover-body-font-size`      | Font size of the `body` part (text style `body-m`). Default `var(--bx-type-body-m-size)`.          |
+| `--bx-popover-body-font-weight`    | Font weight of the `body` part (text style `body-m`). Default `var(--bx-type-body-m-weight)`.      |
+| `--bx-popover-body-line-height`    | Line height of the `body` part (text style `body-m`). Default `var(--bx-type-body-m-leading)`.     |
+| `--bx-popover-body-letter-spacing` | Letter spacing of the `body` part (text style `body-m`). Default `var(--bx-type-body-m-tracking)`. |
 
 ### Methods
 

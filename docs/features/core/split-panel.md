@@ -50,7 +50,7 @@ Two resizable panels with draggable divider. Specified for the Bixant token syst
 
 ### CSS custom properties
 
-`--divider-width`, `--min`, `--max`
+`--bx-split-panel-divider-width`, `--bx-split-panel-min`, `--bx-split-panel-max`
 
 ### Methods
 

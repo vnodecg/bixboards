@@ -39,7 +39,7 @@ A single token drives the system:
 ## 3. Container-query reflow
 
 - Layout-bearing components (`card`, `page`, `data-table`, `data-list`, `tab-group`, `carousel`, form fields, `breadcrumb`, `button-group`) set `container-type: inline-size` and reflow with `@container`, never `@media`.
-- Thresholds are expressed in fluid units so they track `--bx-scale`.
+- Thresholds are expressed in `rem` (custom properties such as `--bx-unit` are not allowed inside `@container` conditions, so a `calc(var(--bx-unit) * n)` threshold never matches).
 - Components that need a JS measurement (overflow collapse, virtual columns) use the shared `ResizeObserver` pool, never a per-instance observer.
 
 ## 4. Virtualization (built in)
@@ -68,6 +68,7 @@ Form-associated components use `ElementInternals`: `formAssociated`, `setFormVal
 - Light/dark/auto via `color-scheme` and `light-dark()`; semantic roles (`brand`, `neutral`, `tertiary`, `warning`, `danger`) map to token ramps.
 - Forced-colors and high-contrast supported through system colors.
 - Component-level hooks are CSS custom properties and `::part()`; no internal class names are public API.
+- Every themeable surface of every component is a documented `--bx-<component>-*` hook with a token-backed default, never shadowed inside the shadow tree. Naming, vocabulary and enforcement: [Styling API](../design-system/component-guidelines.md#styling-api-component-hooks).
 
 ## 8. Framework wrappers
 

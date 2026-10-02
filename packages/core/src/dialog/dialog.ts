@@ -1,5 +1,6 @@
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
+import { textStyle, textFamily } from '../internal/text-style.ts';
 
 type HideSource = 'close-button' | 'light-dismiss' | 'keyboard' | 'method';
 
@@ -46,6 +47,31 @@ let nextId = 0;
  *
  * @cssprop --bx-dialog-width - Max width. Default `40rem`-equivalent fluid width.
  * @cssprop --bx-dialog-spacing - Header/body/footer padding. Default `--bx-space-l`.
+ * @cssprop --bx-dialog-max-height - Maximum height of the root surface. Default `min(85vh, 100%)`.
+ * @cssprop --bx-dialog-border-width - Border width of the root surface. Default `var(--bx-border-width)`.
+ * @cssprop --bx-dialog-border-color - Border color of the root surface. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-dialog-radius - Corner radius of the root surface. Default `var(--bx-radius-l)`.
+ * @cssprop --bx-dialog-shadow - Box shadow of the root surface. Default `var(--bx-shadow-l)`.
+ * @cssprop --bx-dialog-bg - Background of the root surface. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-dialog-fg - Text/icon color of the root surface. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-dialog-backdrop-bg - Background of the `::backdrop`. Default `var(--bx-surface-overlay)`.
+ * @cssprop --bx-dialog-header-gap - Gap of the `header` part. Default `var(--bx-space-s)`.
+ * @cssprop --bx-dialog-header-padding-block-end - Padding block end of the `header` part. Default `var(--bx-space-m)`.
+ * @cssprop --bx-dialog-header-actions-gap - Gap of the `header-actions` part. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-dialog-close-button-width - Width of the `close-button` part. Default `var(--bx-target-min)`.
+ * @cssprop --bx-dialog-close-button-radius - Corner radius of the `close-button` part. Default `var(--bx-radius-pill)`.
+ * @cssprop --bx-dialog-close-button-fg - Text/icon color of the `close-button` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-dialog-close-button-hover-bg - Background of the `close-button` part (hover state). Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-dialog-body-padding-block - Padding block of the `body` part. Default `var(--bx-space-m)`.
+ * @cssprop --bx-dialog-footer-gap - Gap of the `footer` part. Default `var(--bx-space-s)`.
+ * @cssprop --bx-dialog-footer-padding-block-start - Padding block start of the `footer` part. Default `var(--bx-space-m)`.
+ * @cssprop --bx-dialog-close-button-icon-size - Size (width and height) of the icon inside the `close-button` element. Default `1em`.
+ * @cssprop --bx-dialog-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-dialog-title-font-family - Font family of the `title` part (text style `heading-s`). Default `var(--bx-type-heading-family)`.
+ * @cssprop --bx-dialog-title-font-size - Font size of the `title` part (text style `heading-s`). Default `var(--bx-type-heading-s-size)`.
+ * @cssprop --bx-dialog-title-font-weight - Font weight of the `title` part (text style `heading-s`). Default `var(--bx-type-heading-s-weight)`.
+ * @cssprop --bx-dialog-title-line-height - Line height of the `title` part (text style `heading-s`). Default `var(--bx-type-heading-s-leading)`.
+ * @cssprop --bx-dialog-title-letter-spacing - Letter spacing of the `title` part (text style `heading-s`). Default `var(--bx-type-heading-s-tracking)`.
  */
 export class BxDialog extends BixElement {
   static override tagName = 'bx-dialog';
@@ -61,28 +87,29 @@ export class BxDialog extends BixElement {
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
-        max-block-size: min(85vh, 100%);
+        max-block-size: var(--bx-dialog-max-height, min(85vh, 100%));
         inline-size: clamp(
           calc(var(--bx-unit) * 20),
           90vi,
           var(--bx-dialog-width, calc(var(--bx-unit) * 32))
         );
         padding: 0;
-        border: var(--bx-border-width) solid var(--bx-border-subtle);
-        border-radius: var(--bx-radius-l);
-        box-shadow: var(--bx-shadow-l);
-        background: var(--bx-surface-base, Canvas);
-        color: var(--bx-text-primary);
-        font-family: var(--bx-font-family-sans);
+        border: var(--bx-dialog-border-width, var(--bx-border-width)) solid
+          var(--bx-dialog-border-color, var(--bx-border-subtle));
+        border-radius: var(--bx-dialog-radius, var(--bx-radius-l));
+        box-shadow: var(--bx-dialog-shadow, var(--bx-shadow-l));
+        background: var(--bx-dialog-bg, var(--bx-surface-base));
+        color: var(--bx-dialog-fg, var(--bx-text-primary));
+        ${textFamily('--bx-dialog', 'body')}
       }
 
       dialog::backdrop {
-        background: var(--bx-surface-overlay, rgb(0 0 0 / 0.4));
+        background: var(--bx-dialog-backdrop-bg, var(--bx-surface-overlay));
       }
 
       dialog[open] {
-        animation: bx-dialog-in var(--bx-motion-duration-base, 0.2s)
-          var(--bx-motion-easing-standard, ease);
+        animation: bx-dialog-in var(--bx-motion-duration-base)
+          var(--bx-motion-easing-standard);
       }
 
       @keyframes bx-dialog-in {
@@ -102,42 +129,51 @@ export class BxDialog extends BixElement {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: var(--bx-space-s);
+        gap: var(--bx-dialog-header-gap, var(--bx-space-s));
         flex-shrink: 0;
         padding: var(--bx-dialog-spacing, var(--bx-space-l));
-        padding-block-end: var(--bx-space-m);
+        padding-block-end: var(
+          --bx-dialog-header-padding-block-end,
+          var(--bx-space-m)
+        );
       }
 
       .title {
         flex: 1;
         min-inline-size: 0;
-        font-size: var(--bx-font-l);
-        font-weight: var(--bx-font-weight-semibold);
+
+        ${textStyle('--bx-dialog-title', 'heading-s')}
       }
 
       .header-actions {
         display: flex;
         align-items: center;
-        gap: var(--bx-space-xs);
+        gap: var(--bx-dialog-header-actions-gap, var(--bx-space-xs));
       }
 
       /* bx-button's own base part is styled directly (rather than reaching for a bespoke
          close-button look) so this uses the same control every other composite in the package
          does, per docs/features/_conventions.md's spirit of one canonical trigger element. */
       .close-button::part(base) {
-        inline-size: var(--bx-target-min, 2.75rem);
+        inline-size: var(--bx-dialog-close-button-width, var(--bx-target-min));
         padding-inline: 0;
-        border-radius: var(--bx-radius-pill, 50%);
-        color: var(--bx-text-secondary);
+        border-radius: var(
+          --bx-dialog-close-button-radius,
+          var(--bx-radius-pill)
+        );
+        color: var(--bx-dialog-close-button-fg, var(--bx-text-secondary));
       }
 
       .close-button::part(base):hover {
-        background: var(--bx-surface-subtle);
+        background: var(
+          --bx-dialog-close-button-hover-bg,
+          var(--bx-surface-subtle)
+        );
       }
 
       .close-button svg {
-        inline-size: 1em;
-        block-size: 1em;
+        inline-size: var(--bx-dialog-close-button-icon-size, 1em);
+        block-size: var(--bx-dialog-close-button-icon-size, 1em);
         fill: currentColor;
       }
 
@@ -146,7 +182,7 @@ export class BxDialog extends BixElement {
         overflow: auto;
         min-block-size: 0;
         padding: var(--bx-dialog-spacing, var(--bx-space-l));
-        padding-block: var(--bx-space-m);
+        padding-block: var(--bx-dialog-body-padding-block, var(--bx-space-m));
       }
 
       :host([without-header]) .body {
@@ -157,10 +193,13 @@ export class BxDialog extends BixElement {
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        gap: var(--bx-space-s);
+        gap: var(--bx-dialog-footer-gap, var(--bx-space-s));
         flex-shrink: 0;
         padding: var(--bx-dialog-spacing, var(--bx-space-l));
-        padding-block-start: var(--bx-space-m);
+        padding-block-start: var(
+          --bx-dialog-footer-padding-block-start,
+          var(--bx-space-m)
+        );
       }
 
       .footer:empty {

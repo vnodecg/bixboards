@@ -42,11 +42,40 @@ Play/pause control for GIF and animated WebP. Specified for the Bixant token sys
 
 ### CSS parts
 
-`frame`, `control-box`, `play-icon`, `pause-icon`
+| Part          | Description                                                     |
+| ------------- | --------------------------------------------------------------- |
+| `frame`       | The element containing the image/canvas and the control button. |
+| `control-box` | The play/pause toggle button.                                   |
+| `play-icon`   | The `play-icon` slot wrapper, present while paused.             |
+| `pause-icon`  | The `pause-icon` slot wrapper, present while playing.           |
 
 ### CSS custom properties
 
-`--bx-animated-image-control-box-size`, `--bx-animated-image-control-box-bg`, `--bx-animated-image-control-box-color`, `--bx-animated-image-control-box-border-color`, `--bx-animated-image-frame-border-color`, `--bx-animated-image-frame-radius`
+| Property                                            | Description                                                                                                  |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `--bx-animated-image-control-box-size`              | Toggle button diameter. Default `max(control-height-m, target-min)`.                                         |
+| `--bx-animated-image-control-box-bg`                | Toggle button background. Default `--bx-surface-base` (translucent).                                         |
+| `--bx-animated-image-control-box-color`             | Toggle button icon/text color. Default `--bx-text-primary`.                                                  |
+| `--bx-animated-image-control-box-border-color`      | Toggle button border. Default `--bx-border-base`.                                                            |
+| `--bx-animated-image-frame-border-color`            | Border around the image area. Default `--bx-border-subtle`.                                                  |
+| `--bx-animated-image-frame-radius`                  | Corner radius of the image area. Default `--bx-radius-m`.                                                    |
+| `--bx-animated-image-frame-border-width`            | Border width of the `frame` part. Default `var(--bx-border-width)`.                                          |
+| `--bx-animated-image-frame-bg`                      | Background of the `frame` part. Default `var(--bx-surface-muted)`.                                           |
+| `--bx-animated-image-placeholder-fg`                | Text/icon color of the `placeholder` element. Default `var(--bx-text-hint)`.                                 |
+| `--bx-animated-image-placeholder-padding`           | Padding of the `placeholder` element. Default `var(--bx-space-xs)`.                                          |
+| `--bx-animated-image-control-box-border-width`      | Border width of the `control-box` part. Default `var(--bx-border-width)`.                                    |
+| `--bx-animated-image-control-box-radius`            | Corner radius of the `control-box` part. Default `var(--bx-radius-m)`.                                       |
+| `--bx-animated-image-control-box-font-size`         | Font size of the `control-box` part. Default `calc(var(--bx-animated-image-control-box-size) * 0.45)`.       |
+| `--bx-animated-image-control-box-disabled-bg`       | Background of the `control-box` part (disabled state). Default `var(--bx-role-neutral-subtle-hover)`.        |
+| `--bx-animated-image-control-box-disabled-opacity`  | Opacity of the `control-box` part (disabled state). Default `0.5`.                                           |
+| `--bx-animated-image-control-box-focus-ring-width`  | Focus ring width of the `control-box` part (focus state). Default `var(--bx-border-width-strong)`.           |
+| `--bx-animated-image-control-box-focus-ring-color`  | Focus ring color of the `control-box` part (focus state). Default `var(--bx-focus-ring)`.                    |
+| `--bx-animated-image-control-box-focus-ring-offset` | Focus ring offset of the `control-box` part (focus state). Default `var(--bx-focus-ring-offset)`.            |
+| `--bx-animated-image-placeholder-font-family`       | Font family of the `placeholder` element (text style `body-s`). Default `var(--bx-type-body-family)`.        |
+| `--bx-animated-image-placeholder-font-size`         | Font size of the `placeholder` element (text style `body-s`). Default `var(--bx-type-body-s-size)`.          |
+| `--bx-animated-image-placeholder-font-weight`       | Font weight of the `placeholder` element (text style `body-s`). Default `var(--bx-type-body-s-weight)`.      |
+| `--bx-animated-image-placeholder-line-height`       | Line height of the `placeholder` element (text style `body-s`). Default `var(--bx-type-body-s-leading)`.     |
+| `--bx-animated-image-placeholder-letter-spacing`    | Letter spacing of the `placeholder` element (text style `body-s`). Default `var(--bx-type-body-s-tracking)`. |
 
 ### Methods
 

@@ -3,11 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "packages/react/src",
-  "implicitDependencies": [
-    "core",
-    "data-list",
-    "data-table"
-  ],
+  "implicitDependencies": ["core", "data-list", "data-table"],
   "targets": {
     "generate": {
       "executor": "nx:run-commands",
@@ -19,13 +15,8 @@
     "test": {
       "executor": "nx:run-commands",
       "cache": true,
-      "inputs": [
-        "default",
-        "^default"
-      ],
-      "dependsOn": [
-        "^build"
-      ],
+      "inputs": ["default", "^default"],
+      "dependsOn": ["^build"],
       "options": {
         "command": "web-test-runner",
         "cwd": "packages/react"

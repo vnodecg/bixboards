@@ -4,7 +4,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Bixant design system
 
-Design tokens and theming: fluid, contrast-checked tokens and themes, defined as JSON and compiled to CSS custom properties. Components are built separately, on top of these tokens.
+Design tokens, theming and the `bx-*` web components built on them: fluid, contrast-checked tokens and themes, defined as JSON and compiled to CSS custom properties. Every component takes its look from those tokens and exposes its whole appearance as its own CSS variables.
 
 ## How to use this Storybook
 
@@ -12,14 +12,60 @@ Design tokens and theming: fluid, contrast-checked tokens and themes, defined as
 - **Foundation / Tokens**: palettes, per-theme roles, semantic colors, spacing, radius, elevation, typography.
 - **Foundation / Contrast**: WCAG contrast of every documented token pair for the selected theme (the same data the build enforces).
 - **Theming / Playground**: runtime theming from seed colors, with generated CSS.
+- **Theming / Component variables**: complete skins built only from component CSS variables, side by side with the defaults, plus a single-element override.
+- **Core, Data table, Data list**: one entry per component with every variant, state and size, live controls, and keyboard/accessibility usage.
 
 ## Token tiers
 
-| Tier         | Examples                                                        | Who uses it                         |
-| ------------ | --------------------------------------------------------------- | ----------------------------------- |
-| 1. Primitive | `color.brand.500`, `--bx-unit`, `space.m`                       | Themes; rarely components           |
-| 2. Semantic  | `surface.base`, `text.secondary`, `role.brand.fg`, `focus.ring` | Themes and components               |
-| Component    | `--bx-button-bg`, …                                             | Defined by each component, not here |
+<table>
+  <thead>
+    <tr>
+      <th>Tier</th>
+      <th>Examples</th>
+      <th>Who uses it</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1. Primitive</td>
+      <td>
+        <code>color.brand.500</code>, <code>--bx-unit</code>,{' '}
+        <code>space.m</code>
+      </td>
+      <td>Themes; rarely components</td>
+    </tr>
+    <tr>
+      <td>2. Semantic</td>
+      <td>
+        <code>surface.base</code>, <code>text.secondary</code>,{' '}
+        <code>role.brand.fg</code>, <code>focus.ring</code>
+      </td>
+      <td>Themes and components</td>
+    </tr>
+    <tr>
+      <td>Component</td>
+      <td>
+        <code>--bx-button-bg</code>, <code>--bx-switch-control-checked-bg</code>
+        , …
+      </td>
+      <td>Defined by each component; defaults are tier 1–2 tokens</td>
+    </tr>
+  </tbody>
+</table>
+
+## Customizing a component with CSS variables
+
+Every themeable surface is a documented custom property named `--bx-<component>-[<part>-][<state>-]<property>` (for example `--bx-input-radius`, `--bx-tab-selected-fg`, `--bx-dialog-backdrop-bg`). Each defaults to a token, so unset variables keep following the theme. Set them on a wrapper to restyle everything inside it, or on one element to restyle just that one:
+
+```css
+.checkout {
+  --bx-button-radius: 0;
+  --bx-input-border-color: var(--bx-border-strong);
+  --bx-dialog-shadow: none;
+}
+```
+
+A component's variables are listed in its docs page (generated from the source) and in the feature docs under `docs/features`. Rules, naming and how this is enforced: `docs/design-system/component-guidelines.md` → Styling API.
 
 ## Principles (in priority order)
 

@@ -30,9 +30,37 @@ The matrix for every theme is in `contrast.json` and Storybook → Foundation �
 
 ## Typography
 
+Text is styled by **text styles** (`type.*`), one per kind of text, each with a family, a set of predefined sizes, and per-size weight, line height and letter spacing. Components and apps pick a style; they never combine loose font tokens or write literal sizes. A theme retunes a whole text type in one place (a serif for every heading, a mono for code) without touching any component.
+
+| Style     | Sizes                     | Used for                                                     |
+| --------- | ------------------------- | ------------------------------------------------------------ |
+| `display` | `l`, `m`                  | Hero and marketing headlines                                 |
+| `heading` | `xl`, `l`, `m`, `s`, `xs` | Page, section and card/dialog titles (`s` dialog, `xs` card) |
+| `body`    | `l`, `m`, `s`             | Running text, menus, panels, hints (`s`)                     |
+| `label`   | `l`, `m`, `s`, `xs`       | Buttons, tabs, form labels, table headers, badges            |
+| `field`   | `l`, `m`, `s`             | The value typed into an input, select or number field        |
+| `caption` | `m`, `s`                  | Secondary and tertiary annotations (counters, tooltips)      |
+| `code`    | `m`, `s`                  | Monospaced values and snippets                               |
+
+Each style `<group>` and size `<size>` is five tokens: `--bx-type-<group>-family` (shared by the group) and `--bx-type-<group>-<size>-size`, `-weight`, `-leading`, `-tracking`. Defaults point at the primitive scale below, so changing a primitive moves every style that uses it; override a style token to change one text type only.
+
+```css
+/* Serif headings, everything else unchanged. */
+:root {
+  --bx-type-heading-family: Georgia, 'Times New Roman', serif;
+}
+/* Make body text one step larger. */
+:root {
+  --bx-type-body-m-size: var(--bx-font-l);
+}
+```
+
+Primitives (used by styles, rarely directly):
+
 - Family: `font.family.sans` (system UI stack) and `font.family.mono`.
-- Sizes: `xs, s, m, l, xl, 2xl, 3xl` as multiples of the fluid `--bx-unit` (0.75 → 2×). Body is `m`.
-- Weights: regular 400, medium 500, semibold 600, bold 700. Line height: `tight` 1.25 for headings, `normal` 1.5 for body.
+- Sizes: `xs, s, m, l, xl, 2xl, 3xl` as multiples of the fluid `--bx-unit` (0.75 → 2×); `display` goes to 3×. Body is `m`.
+- Weights: regular 400, medium 500, semibold 600, bold 700. Line height: `tight` 1.25 (headings, labels, fields), `snug` 1.4 (small text), `normal` 1.55 (body).
+- `font.floor` (1rem): the size form fields never go below on coarse pointers, so touch browsers don't zoom on focus.
 - Body text never renders below the equivalent of 16 px on coarse pointers.
 
 ## Spacing and the fluid scale
@@ -66,7 +94,7 @@ The default look is elegant and enterprise-grade: an indigo brand (`#4f46e5`) on
 
 ## Motion
 
-- Durations: `fast` 120 ms (state changes), `base` 200 ms (enter/exit), `slow` 360 ms (layout/large surfaces). Easing: `motion.easing.standard`.
+- Durations: `fast` 120 ms (state changes), `base` 200 ms (enter/exit), `slow` 360 ms (layout/large surfaces), `spin` 800 ms (continuous rotation), `loop` 1600 ms (indeterminate loops and pulses). Easing: `motion.easing.standard`.
 - Animate `transform` and `opacity`; avoid animating layout properties.
 - Under `prefers-reduced-motion: reduce`, replace movement with fades or nothing. No information is conveyed by animation alone.
 

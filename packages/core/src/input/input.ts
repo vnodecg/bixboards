@@ -1,6 +1,7 @@
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
 import { FormAssociatedMixin } from '../internal/form-associated.ts';
+import { textStyle, textFamily } from '../internal/text-style.ts';
 
 type InputType =
   | 'text'
@@ -62,7 +63,55 @@ let nextId = 0;
  * @csspart password-toggle-button - The password-reveal toggle button.
  *
  * @cssprop --bx-input-height - Control height. Default derived from `size`.
- * @cssprop --bx-input-padding-inline - Horizontal padding. Default `--bx-space-m`.
+ * @cssprop --bx-input-padding-inline - Horizontal padding. Default `--bx-space-s`.
+ * @cssprop --bx-input-form-control-gap - Gap of the `form-control` part. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-input-label-fg - Text/icon color of the `label` part. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-input-gap - Gap of the root surface. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-input-radius - Corner radius of the root surface. Default `var(--bx-radius-m)`.
+ * @cssprop --bx-input-border-width - Border width of the root surface. Default `var(--bx-border-width)`.
+ * @cssprop --bx-input-border-color - Border color of the root surface. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-input-bg - Background of the root surface. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-input-hover-border-color - Border color of the root surface (hover state). Default `var(--bx-border-strong)`.
+ * @cssprop --bx-input-focus-border-color - Border color of the root surface (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-input-focus-shadow - Box shadow of the root surface (focus state). Default `0 0 0 calc(var(--bx-border-width-strong) * 1.5) color-mix(in srgb, var(--bx-focus-ring) 22%, transparent)`.
+ * @cssprop --bx-input-focus-ring-width - Focus ring width of the root surface (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-input-hover-bg - Background of the root surface (hover state). Default `var(--bx-surface-muted)`.
+ * @cssprop --bx-input-focus-bg - Background of the root surface (focus state). Default `var(--bx-surface-base)`.
+ * @cssprop --bx-input-disabled-bg - Background of the root surface (disabled state). Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-input-disabled-border-color - Border color of the root surface (disabled state). Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-input-disabled-fg - Text/icon color of the root surface (disabled state). Default `var(--bx-text-disabled)`.
+ * @cssprop --bx-input-invalid-border-color - Border color of the root surface (invalid state). Default `var(--bx-role-danger-border)`.
+ * @cssprop --bx-input-invalid-focus-shadow - Box shadow of the root surface (invalid + focus state). Default `0 0 0 3px color-mix(in srgb, var(--bx-role-danger-border) 22%, transparent)`.
+ * @cssprop --bx-input-placeholder-fg - Text/icon color of the `::placeholder`. Default `var(--bx-text-hint)`.
+ * @cssprop --bx-input-placeholder-opacity - Opacity of the `::placeholder`. Default `1`.
+ * @cssprop --bx-input-start-fg - Text/icon color of the `start` part. Default `var(--bx-text-hint)`.
+ * @cssprop --bx-input-start-focus-fg - Text/icon color of the `start` part (focus state). Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-input-clear-button-size - Size (width and height) of the `clear-button` part. Default `1.5em`.
+ * @cssprop --bx-input-clear-button-radius - Corner radius of the `clear-button` part. Default `var(--bx-radius-pill)`.
+ * @cssprop --bx-input-clear-button-fg - Text/icon color of the `clear-button` part. Default `var(--bx-text-hint)`.
+ * @cssprop --bx-input-clear-button-hover-fg - Text/icon color of the `clear-button` part (hover state). Default `var(--bx-text-primary)`.
+ * @cssprop --bx-input-clear-button-focus-ring-width - Focus ring width of the `clear-button` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-input-clear-button-focus-ring-color - Focus ring color of the `clear-button` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-input-clear-button-focus-ring-offset - Focus ring offset of the `clear-button` part (focus state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-input-hint-fg - Text/icon color of the `hint` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-input-hint-invalid-fg - Text/icon color of the `hint` part (invalid state). Default `var(--bx-role-danger-fg)`.
+ * @cssprop --bx-input-clear-button-icon-size - Size (width and height) of the icon inside the `clear-button` element. Default `1em`.
+ * @cssprop --bx-input-font-family - Font family of the root surface. Default `var(--bx-type-field-family)`.
+ * @cssprop --bx-input-label-font-family - Font family of the `label` part (text style `label-s`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-input-label-font-size - Font size of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-size)`.
+ * @cssprop --bx-input-label-font-weight - Font weight of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-weight)`.
+ * @cssprop --bx-input-label-line-height - Line height of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-leading)`.
+ * @cssprop --bx-input-label-letter-spacing - Letter spacing of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.
+ * @cssprop --bx-input-font-family - Font family of the root surface (text style `field-m`). Default `var(--bx-type-field-family)`.
+ * @cssprop --bx-input-font-size - Font size of the root surface (text style `field-m`). Default `var(--bx-type-field-m-size)`.
+ * @cssprop --bx-input-font-weight - Font weight of the root surface (text style `field-m`). Default `var(--bx-type-field-m-weight)`.
+ * @cssprop --bx-input-line-height - Line height of the root surface (text style `field-m`). Default `var(--bx-type-field-m-leading)`.
+ * @cssprop --bx-input-letter-spacing - Letter spacing of the root surface (text style `field-m`). Default `var(--bx-type-field-m-tracking)`.
+ * @cssprop --bx-input-hint-font-family - Font family of the `hint` part (text style `body-s`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-input-hint-font-size - Font size of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-size)`.
+ * @cssprop --bx-input-hint-font-weight - Font weight of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-weight)`.
+ * @cssprop --bx-input-hint-line-height - Line height of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-leading)`.
+ * @cssprop --bx-input-hint-letter-spacing - Letter spacing of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.
  */
 export class BxInput extends FormAssociatedMixin(BixElement) {
   static override tagName = 'bx-input';
@@ -73,22 +122,22 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
       :host {
         display: block;
         container-type: inline-size;
-        font-family: var(--bx-font-family-sans);
+        ${textFamily('--bx-input', 'body')}
       }
 
       .form-control {
         display: flex;
         flex-direction: column;
-        gap: var(--bx-space-xs);
+        gap: var(--bx-input-form-control-gap, var(--bx-space-xs));
       }
 
       :host([label-position='inline']) .form-control {
         flex-direction: row;
         align-items: center;
-        gap: var(--bx-space-s);
+        gap: var(--bx-input-form-control-gap, var(--bx-space-s));
       }
 
-      @container (max-width: calc(var(--bx-unit) * 28)) {
+      @container (max-width: 28rem) {
         :host([label-position='auto']) .form-control {
           flex-direction: column;
           align-items: stretch;
@@ -96,10 +145,9 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
       }
 
       .label {
-        color: var(--bx-text-primary);
-        font-weight: var(--bx-font-weight-medium);
-        font-size: var(--bx-font-s);
-        line-height: var(--bx-font-leading-tight);
+        color: var(--bx-input-label-fg, var(--bx-text-primary));
+
+        ${textStyle('--bx-input-label', 'label-s')}
       }
 
       .label:empty {
@@ -110,15 +158,14 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
         box-sizing: border-box;
         display: flex;
         align-items: center;
-        gap: var(--bx-space-xs);
-        min-block-size: var(
-          --bx-input-height,
-          max(var(--bx-control-height-m), var(--bx-target-min, 1.5rem))
-        );
+        gap: var(--bx-input-gap, var(--bx-space-xs));
+        --_height: max(var(--bx-control-height-m), var(--bx-target-min));
+        min-block-size: var(--bx-input-height, var(--_height));
         padding-inline: var(--bx-input-padding-inline, var(--bx-space-s));
-        border-radius: var(--bx-radius-m);
-        border: var(--bx-border-width) solid var(--bx-border-subtle);
-        background: var(--bx-surface-base);
+        border-radius: var(--bx-input-radius, var(--bx-radius-m));
+        border: var(--bx-input-border-width, var(--bx-border-width)) solid
+          var(--bx-input-border-color, var(--bx-border-subtle));
+        background: var(--bx-input-bg, var(--bx-surface-base));
         flex: 1;
         min-inline-size: 0;
         cursor: text;
@@ -132,60 +179,70 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
       }
 
       .base:hover {
-        border-color: var(--bx-border-strong);
+        border-color: var(
+          --bx-input-hover-border-color,
+          var(--bx-border-strong)
+        );
       }
 
       /* Focus: a crisp brand border plus a soft halo instead of a hard outline. The transparent
          outline keeps a visible ring in forced-colors mode. */
       .base:focus-within {
-        border-color: var(--bx-focus-ring);
-        box-shadow: 0 0 0 3px
-          color-mix(in srgb, var(--bx-focus-ring) 22%, transparent);
-        outline: var(--bx-border-width-strong) solid transparent;
+        border-color: var(--bx-input-focus-border-color, var(--bx-focus-ring));
+        box-shadow: var(
+          --bx-input-focus-shadow,
+          0 0 0 calc(var(--bx-border-width-strong) * 1.5)
+            color-mix(in srgb, var(--bx-focus-ring) 22%, transparent)
+        );
+        outline: var(--bx-input-focus-ring-width, var(--bx-border-width-strong))
+          solid transparent;
       }
 
       :host([size='small']) .base {
-        --bx-input-height: max(
-          var(--bx-control-height-s),
-          var(--bx-target-min, 1.5rem)
-        );
+        --_height: max(var(--bx-control-height-s), var(--bx-target-min));
       }
       :host([size='large']) .base {
-        --bx-input-height: max(
-          var(--bx-control-height-l),
-          var(--bx-target-min, 1.5rem)
-        );
+        --_height: max(var(--bx-control-height-l), var(--bx-target-min));
       }
 
       :host([appearance~='filled']) .base {
-        background: var(--bx-surface-subtle);
+        background: var(--bx-input-bg, var(--bx-surface-subtle));
         border-color: transparent;
       }
       :host([appearance='filled']) .base:hover {
-        background: var(--bx-surface-muted);
+        background: var(--bx-input-hover-bg, var(--bx-surface-muted));
       }
       :host([appearance~='filled']) .base:focus-within {
-        background: var(--bx-surface-base);
-        border-color: var(--bx-focus-ring);
+        background: var(--bx-input-focus-bg, var(--bx-surface-base));
+        border-color: var(--bx-input-focus-border-color, var(--bx-focus-ring));
       }
 
       :host([pill]) .base {
-        border-radius: var(--bx-radius-pill, 999px);
+        border-radius: var(--bx-input-radius, var(--bx-radius-pill));
       }
 
       :host([disabled]) .base {
-        background: var(--bx-surface-subtle);
-        border-color: var(--bx-border-subtle);
-        color: var(--bx-text-disabled);
+        background: var(--bx-input-disabled-bg, var(--bx-surface-subtle));
+        border-color: var(
+          --bx-input-disabled-border-color,
+          var(--bx-border-subtle)
+        );
+        color: var(--bx-input-disabled-fg, var(--bx-text-disabled));
         cursor: not-allowed;
       }
 
       .base:has(.input[data-user-invalid]) {
-        border-color: var(--bx-role-danger-border);
+        border-color: var(
+          --bx-input-invalid-border-color,
+          var(--bx-role-danger-border)
+        );
       }
       .base:has(.input[data-user-invalid]):focus-within {
-        box-shadow: 0 0 0 3px
-          color-mix(in srgb, var(--bx-role-danger-border) 22%, transparent);
+        box-shadow: var(
+          --bx-input-invalid-focus-shadow,
+          0 0 0 calc(var(--bx-border-width-strong) * 1.5)
+            color-mix(in srgb, var(--bx-role-danger-border) 22%, transparent)
+        );
       }
 
       .input {
@@ -194,8 +251,9 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
         flex: 1;
         min-inline-size: 0;
         font: inherit;
-        font-size: var(--bx-font-m);
-        line-height: var(--bx-font-leading-tight);
+
+        ${textStyle('--bx-input', 'field-m')}
+
         color: inherit;
         cursor: inherit;
       }
@@ -203,13 +261,16 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
       /* Touch browsers zoom the page on focus for text under 16px; keep the floor there only. */
       @media (pointer: coarse) {
         .input {
-          font-size: max(1rem, var(--bx-font-m));
+          font-size: var(
+            --bx-input-font-size,
+            max(var(--bx-font-floor), var(--bx-type-body-m-size))
+          );
         }
       }
 
       .input::placeholder {
-        color: var(--bx-text-hint);
-        opacity: 1;
+        color: var(--bx-input-placeholder-fg, var(--bx-text-hint));
+        opacity: var(--bx-input-placeholder-opacity, 1);
       }
 
       .start,
@@ -217,7 +278,7 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
         display: inline-flex;
         align-items: center;
         flex-shrink: 0;
-        color: var(--bx-text-hint);
+        color: var(--bx-input-start-fg, var(--bx-text-hint));
       }
 
       /* Hidden until something is slotted, so an unused adornment adds no gap or indent. */
@@ -232,7 +293,7 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
       }
 
       .base:focus-within .start {
-        color: var(--bx-text-secondary);
+        color: var(--bx-input-start-focus-fg, var(--bx-text-secondary));
       }
 
       .clear-button,
@@ -243,10 +304,13 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
         flex-shrink: 0;
         align-items: center;
         justify-content: center;
-        inline-size: 1.5em;
-        block-size: 1.5em;
-        border-radius: var(--bx-radius-pill, 50%);
-        color: var(--bx-text-hint);
+        inline-size: var(--bx-input-clear-button-size, 1.5em);
+        block-size: var(--bx-input-clear-button-size, 1.5em);
+        border-radius: var(
+          --bx-input-clear-button-radius,
+          var(--bx-radius-pill)
+        );
+        color: var(--bx-input-clear-button-fg, var(--bx-text-hint));
         cursor: pointer;
         transition: color var(--bx-motion-duration-fast)
           var(--bx-motion-easing-standard);
@@ -254,25 +318,34 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
 
       .clear-button:hover,
       .password-toggle-button:hover {
-        color: var(--bx-text-primary);
+        color: var(--bx-input-clear-button-hover-fg, var(--bx-text-primary));
       }
 
       .clear-button:focus-visible,
       .password-toggle-button:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+        outline: var(
+            --bx-input-clear-button-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(--bx-input-clear-button-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-input-clear-button-focus-ring-offset,
+          var(--bx-focus-ring-offset)
+        );
       }
 
       .clear-button svg,
       .password-toggle-button svg {
-        inline-size: 1em;
-        block-size: 1em;
+        inline-size: var(--bx-input-clear-button-icon-size, 1em);
+        block-size: var(--bx-input-clear-button-icon-size, 1em);
         fill: currentColor;
       }
 
       .hint {
-        color: var(--bx-text-secondary);
-        font-size: var(--bx-font-s);
+        color: var(--bx-input-hint-fg, var(--bx-text-secondary));
+
+        ${textStyle('--bx-input-hint', 'body-s')}
       }
 
       .hint:empty {
@@ -280,7 +353,7 @@ export class BxInput extends FormAssociatedMixin(BixElement) {
       }
 
       .hint[data-user-invalid] {
-        color: var(--bx-role-danger-fg);
+        color: var(--bx-input-hint-invalid-fg, var(--bx-role-danger-fg));
       }
 
       @media (forced-colors: active) {

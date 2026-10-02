@@ -175,7 +175,7 @@ export function evalLength(
 // ---------------------------------------------------------------- types
 
 const DIMENSION_GROUPS =
-  /^(space|radius|control|target|fluid|unit|font\.(xs|s|m|l|xl|2xl|3xl))\b/;
+  /^(space|radius|control|target|fluid|unit|font\.(xs|s|m|l|xl|2xl|3xl)|type\.[a-z]+\.[a-z]+\.size)\b/;
 const COLOR_GROUPS = /^(color|surface|text|role|border|focus)\b/;
 const DIMENSION_LITERAL = /^-?(\d*\.?\d+)(px|rem|em)$/;
 const ALIAS = /^\{[^}]+\}$/;
@@ -186,6 +186,14 @@ interface Leaf {
 }
 
 function typeOf(path: string, value: string): string | undefined {
+  if (path.startsWith('type.')) {
+    // type.<style>.family | type.<style>.<size>.{size,weight,leading,tracking}
+    const prop = path.slice(path.lastIndexOf('.') + 1);
+    if (prop === 'family') return 'fontFamily';
+    if (prop === 'weight') return 'fontWeight';
+    if (prop === 'leading') return 'number';
+    return DIMENSION_LITERAL.test(value) ? 'dimension' : undefined;
+  }
   if (path.startsWith('font.family')) return 'fontFamily';
   if (path.startsWith('font.weight')) return 'fontWeight';
   if (

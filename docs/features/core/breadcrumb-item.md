@@ -41,11 +41,37 @@ _None._
 
 ### CSS parts
 
-`label`, `prefix`, `suffix`, `separator`
+| Part        | Description                            |
+| ----------- | -------------------------------------- |
+| `label`     | The anchor/button/text label.          |
+| `prefix`    | The wrapper around the start slot.     |
+| `suffix`    | The wrapper around the end slot.       |
+| `separator` | The wrapper around the separator slot. |
 
 ### CSS custom properties
 
-_Only global tokens (see conventions)._
+| Property                                            | Description                                                                                           |
+| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `--bx-breadcrumb-item-gap`                          | Gap of the root surface. Default `var(--bx-space-2xs)`.                                               |
+| `--bx-breadcrumb-item-label-gap`                    | Gap of the `label` part. Default `var(--bx-space-2xs)`.                                               |
+| `--bx-breadcrumb-item-label-min-height`             | Minimum height of the `label` part. Default `var(--bx-target-min)`.                                   |
+| `--bx-breadcrumb-item-label-focus-ring-width`       | Focus ring width of the `label` part (focus state). Default `var(--bx-border-width-strong)`.          |
+| `--bx-breadcrumb-item-label-focus-ring-color`       | Focus ring color of the `label` part (focus state). Default `var(--bx-focus-ring)`.                   |
+| `--bx-breadcrumb-item-label-focus-ring-offset`      | Focus ring offset of the `label` part (focus state). Default `var(--bx-focus-ring-offset)`.           |
+| `--bx-breadcrumb-item-label-focus-radius`           | Corner radius of the `label` part (focus state). Default `var(--bx-radius-s)`.                        |
+| `--bx-breadcrumb-item-label-current-fg`             | Text/icon color of the `label` part (current state). Default `var(--bx-text-primary)`.                |
+| `--bx-breadcrumb-item-separator-fg`                 | Text/icon color of the `separator` part. Default `var(--bx-text-secondary)`.                          |
+| `--bx-breadcrumb-item-link-fg`                      | Color of the label when the item is a link or button. Default `var(--bx-role-accent)`.                |
+| `--bx-breadcrumb-item-font-family`                  | Font family of the root surface (text style `body-s`). Default `var(--bx-type-body-family)`.          |
+| `--bx-breadcrumb-item-font-size`                    | Font size of the root surface (text style `body-s`). Default `var(--bx-type-body-s-size)`.            |
+| `--bx-breadcrumb-item-font-weight`                  | Font weight of the root surface (text style `body-s`). Default `var(--bx-type-body-s-weight)`.        |
+| `--bx-breadcrumb-item-line-height`                  | Line height of the root surface (text style `body-s`). Default `var(--bx-type-body-s-leading)`.       |
+| `--bx-breadcrumb-item-letter-spacing`               | Letter spacing of the root surface (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.   |
+| `--bx-breadcrumb-item-label-current-font-family`    | Font family of the `label` part (text style `label-m`). Default `var(--bx-type-label-family)`.        |
+| `--bx-breadcrumb-item-label-current-font-size`      | Font size of the `label` part (text style `label-m`). Default `var(--bx-type-label-m-size)`.          |
+| `--bx-breadcrumb-item-label-current-font-weight`    | Font weight of the `label` part (text style `label-m`). Default `var(--bx-type-label-m-weight)`.      |
+| `--bx-breadcrumb-item-label-current-line-height`    | Line height of the `label` part (text style `label-m`). Default `var(--bx-type-label-m-leading)`.     |
+| `--bx-breadcrumb-item-label-current-letter-spacing` | Letter spacing of the `label` part (text style `label-m`). Default `var(--bx-type-label-m-tracking)`. |
 
 ### Methods
 

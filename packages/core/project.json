@@ -8,11 +8,12 @@
     "test": {
       "executor": "nx:run-commands",
       "cache": true,
-      "inputs": ["default", "^default"],
+      "inputs": ["default", "^default", "{workspaceRoot}/tools/wtr-tokens.mjs"],
       "options": {
         "command": "web-test-runner",
         "cwd": "packages/core"
-      }
+      },
+      "dependsOn": ["design-system:tokens"]
     }
   }
 }

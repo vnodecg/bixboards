@@ -60,11 +60,71 @@ Numeric field with steppers, locale-aware parsing and min/max clamping. Specifie
 
 ### CSS parts
 
-`form-control`, `label`, `hint`, `base`, `input`, `stepper-up`, `stepper-down`
+| Part           | Description                                  |
+| -------------- | -------------------------------------------- |
+| `start`        | The wrapper around the start slot.           |
+| `end`          | The wrapper around the end slot.             |
+| `form-control` | The outer wrapper (label + base + hint).     |
+| `label`        | The label element.                           |
+| `hint`         | The wrapper around the hint slot.            |
+| `base`         | The wrapper around start/input/end/steppers. |
+| `input`        | The native `<input>`.                        |
+| `stepper-up`   | The increment button.                        |
+| `stepper-down` | The decrement button.                        |
 
 ### CSS custom properties
 
-_Only global tokens (see conventions)._
+| Property                                      | Description                                                                                                   |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `--bx-number-input-form-control-gap`          | Gap of the `form-control` part. Default `var(--bx-space-xs)`.                                                 |
+| `--bx-number-input-label-fg`                  | Text/icon color of the `label` part. Default `var(--bx-text-primary)`.                                        |
+| `--bx-number-input-gap`                       | Gap of the root surface. Default `var(--bx-space-xs)`.                                                        |
+| `--bx-number-input-radius`                    | Corner radius of the root surface. Default `var(--bx-radius-m)`.                                              |
+| `--bx-number-input-border-width`              | Border width of the root surface. Default `var(--bx-border-width)`.                                           |
+| `--bx-number-input-border-color`              | Border color of the root surface. Default `var(--bx-border-subtle)`.                                          |
+| `--bx-number-input-bg`                        | Background of the root surface. Default `var(--bx-surface-base)`.                                             |
+| `--bx-number-input-focus-ring-width`          | Focus ring width of the root surface (focus state). Default `var(--bx-border-width-strong)`.                  |
+| `--bx-number-input-disabled-bg`               | Background of the root surface (disabled state). Default `var(--bx-surface-subtle)`.                          |
+| `--bx-number-input-disabled-fg`               | Text/icon color of the root surface (disabled state). Default `var(--bx-text-disabled)`.                      |
+| `--bx-number-input-invalid-border-color`      | Border color of the root surface (invalid state). Default `var(--bx-role-danger-border)`.                     |
+| `--bx-number-input-start-fg`                  | Text/icon color of the `start` part. Default `var(--bx-text-secondary)`.                                      |
+| `--bx-number-input-stepper-width`             | Width of the `stepper-down` part. Default `calc(var(--bx-target-min) * 0.6)`.                                 |
+| `--bx-number-input-stepper-height`            | Height of the `stepper-down` part. Default `calc(var(--bx-target-min) * 0.5)`.                                |
+| `--bx-number-input-stepper-fg`                | Text/icon color of the `stepper-down` part. Default `var(--bx-text-secondary)`.                               |
+| `--bx-number-input-stepper-disabled-bg`       | Background of the `stepper-down` part (disabled state). Default `var(--bx-surface-subtle)`.                   |
+| `--bx-number-input-stepper-disabled-fg`       | Text/icon color of the `stepper-down` part (disabled state). Default `var(--bx-text-primary)`.                |
+| `--bx-number-input-stepper-focus-ring-width`  | Focus ring width of the `stepper-down` part (focus state). Default `var(--bx-border-width-strong)`.           |
+| `--bx-number-input-stepper-focus-ring-color`  | Focus ring color of the `stepper-down` part (focus state). Default `var(--bx-focus-ring)`.                    |
+| `--bx-number-input-stepper-focus-ring-offset` | Focus ring offset of the `stepper-down` part (focus state). Default `calc(var(--bx-focus-ring-offset) * -1)`. |
+| `--bx-number-input-stepper-disabled-opacity`  | Opacity of the `stepper-down` part (disabled state). Default `0.4`.                                           |
+| `--bx-number-input-hint-fg`                   | Text/icon color of the `hint` part. Default `var(--bx-text-secondary)`.                                       |
+| `--bx-number-input-hint-invalid-fg`           | Text/icon color of the `hint` part (invalid state). Default `var(--bx-role-danger-fg)`.                       |
+| `--bx-number-input-height`                    | Control height. Default derived from `size`.                                                                  |
+| `--bx-number-input-padding-inline`            | Horizontal padding. Default `--bx-space-s`.                                                                   |
+| `--bx-number-input-stepper-icon-size`         | Size (width and height) of the icon inside the `stepper-down` element. Default `0.7em`.                       |
+| `--bx-number-input-hover-border-color`        | Border color while hovered. Default `var(--bx-border-strong)`.                                                |
+| `--bx-number-input-focus-border-color`        | Border color while focused. Default `var(--bx-focus-ring)`.                                                   |
+| `--bx-number-input-focus-shadow`              | Soft halo around the field while focused. Default a translucent `--bx-focus-ring` ring.                       |
+| `--bx-number-input-hover-bg`                  | Background of a `filled` field while hovered. Default `var(--bx-surface-muted)`.                              |
+| `--bx-number-input-focus-bg`                  | Background of a `filled` field while focused. Default `var(--bx-surface-base)`.                               |
+| `--bx-number-input-disabled-border-color`     | Border color when disabled. Default `var(--bx-border-subtle)`.                                                |
+| `--bx-number-input-invalid-focus-shadow`      | Halo while focused and invalid. Default a translucent `--bx-role-danger-border` ring.                         |
+| `--bx-number-input-font-family`               | Font family of the root surface. Default `var(--bx-type-body-family)`.                                        |
+| `--bx-number-input-label-font-family`         | Font family of the `label` part (text style `label-s`). Default `var(--bx-type-label-family)`.                |
+| `--bx-number-input-label-font-size`           | Font size of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-size)`.                  |
+| `--bx-number-input-label-font-weight`         | Font weight of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-weight)`.              |
+| `--bx-number-input-label-line-height`         | Line height of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-leading)`.             |
+| `--bx-number-input-label-letter-spacing`      | Letter spacing of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.         |
+| `--bx-number-input-input-font-family`         | Font family of the `input` part (text style `field-m`). Default `var(--bx-type-field-family)`.                |
+| `--bx-number-input-input-font-size`           | Font size of the `input` part (text style `field-m`). Default `var(--bx-type-field-m-size)`.                  |
+| `--bx-number-input-input-font-weight`         | Font weight of the `input` part (text style `field-m`). Default `var(--bx-type-field-m-weight)`.              |
+| `--bx-number-input-input-line-height`         | Line height of the `input` part (text style `field-m`). Default `var(--bx-type-field-m-leading)`.             |
+| `--bx-number-input-input-letter-spacing`      | Letter spacing of the `input` part (text style `field-m`). Default `var(--bx-type-field-m-tracking)`.         |
+| `--bx-number-input-hint-font-family`          | Font family of the `hint` part (text style `body-s`). Default `var(--bx-type-body-family)`.                   |
+| `--bx-number-input-hint-font-size`            | Font size of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-size)`.                     |
+| `--bx-number-input-hint-font-weight`          | Font weight of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-weight)`.                 |
+| `--bx-number-input-hint-line-height`          | Line height of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-leading)`.                |
+| `--bx-number-input-hint-letter-spacing`       | Letter spacing of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.            |
 
 ### Methods
 

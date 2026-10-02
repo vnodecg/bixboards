@@ -22,6 +22,7 @@ type Effect = 'none' | 'pulse' | 'sheen';
  * @cssprop --bx-skeleton-sheen-color - Highlight color swept across during `sheen`. Default a
  * translucent mix of `currentColor`.
  * @cssprop --bx-skeleton-border-radius - Corner radius. Default `--bx-radius-s`.
+ * @cssprop --bx-skeleton-height - Height of the root surface. Default `1lh`.
  */
 export class BxSkeleton extends BixElement {
   static override tagName = 'bx-skeleton';
@@ -32,7 +33,7 @@ export class BxSkeleton extends BixElement {
       :host {
         display: block;
         inline-size: 100%;
-        block-size: 1lh;
+        block-size: var(--bx-skeleton-height, 1lh);
       }
 
       .indicator {
@@ -43,8 +44,8 @@ export class BxSkeleton extends BixElement {
       }
 
       :host([effect='pulse']) .indicator {
-        animation: bx-skeleton-pulse var(--bx-motion-duration-slow, 1.6s)
-          var(--bx-motion-easing-standard, ease) infinite;
+        animation: bx-skeleton-pulse var(--bx-motion-duration-slow)
+          var(--bx-motion-easing-standard) infinite;
       }
 
       :host([effect='sheen']) .indicator {
@@ -60,7 +61,7 @@ export class BxSkeleton extends BixElement {
         );
         background-size: 200% 100%;
         background-position: 150% 0;
-        animation: bx-skeleton-sheen var(--bx-motion-duration-slow, 1.6s) linear
+        animation: bx-skeleton-sheen var(--bx-motion-duration-slow) linear
           infinite;
       }
 

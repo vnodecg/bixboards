@@ -2,6 +2,7 @@ import { css, html, type PropertyValues } from 'lit';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { BixElement } from '../bix-element.ts';
 import type { BxPopup, Placement } from '../popup/popup.ts';
+import { textStyle } from '../internal/text-style.ts';
 
 type Trigger = 'hover focus' | 'click' | 'manual';
 
@@ -62,9 +63,21 @@ const RECENTLY_OPEN_GRACE_MS = 200;
  * @slot anchor - The anchor element, used when `for` is unset.
  *
  * @csspart base - The inner `bx-popup`.
+ * @csspart arrow - The arrow, present unless `without-arrow`.
  * @csspart body - The wrapper around the default slot.
  *
  * @cssprop --bx-tooltip-max-width - Max width of the tooltip body. Default `20rem`.
+ * @cssprop --bx-tooltip-body-padding-block - Padding block of the `body` part. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-tooltip-body-padding-inline - Padding inline of the `body` part. Default `var(--bx-space-s)`.
+ * @cssprop --bx-tooltip-body-radius - Corner radius of the `body` part. Default `var(--bx-radius-s)`.
+ * @cssprop --bx-tooltip-body-shadow - Box shadow of the `body` part. Default `var(--bx-shadow-m)`.
+ * @cssprop --bx-tooltip-bg - Tooltip (and arrow) background. Default `--bx-surface-inverse`.
+ * @cssprop --bx-tooltip-fg - Tooltip text color. Default `--bx-text-inverse`.
+ * @cssprop --bx-tooltip-body-font-family - Font family of the `body` part (text style `body-s`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-tooltip-body-font-size - Font size of the `body` part (text style `body-s`). Default `var(--bx-type-body-s-size)`.
+ * @cssprop --bx-tooltip-body-font-weight - Font weight of the `body` part (text style `body-s`). Default `var(--bx-type-body-s-weight)`.
+ * @cssprop --bx-tooltip-body-line-height - Line height of the `body` part (text style `body-s`). Default `var(--bx-type-body-s-leading)`.
+ * @cssprop --bx-tooltip-body-letter-spacing - Letter spacing of the `body` part (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.
  */
 export class BxTooltip extends BixElement {
   static override tagName = 'bx-tooltip';
@@ -77,21 +90,23 @@ export class BxTooltip extends BixElement {
       }
 
       bx-popup {
-        --arrow-color: var(--bx-tooltip-bg, var(--bx-surface-inverse, #1a1a1a));
+        --bx-popup-arrow-color: var(--bx-tooltip-bg, var(--bx-surface-inverse));
       }
 
       .body {
         box-sizing: border-box;
-        max-inline-size: var(--bx-tooltip-max-width, 20rem);
-        padding-block: var(--bx-space-xs);
-        padding-inline: var(--bx-space-s);
-        border-radius: var(--bx-radius-s);
-        box-shadow: var(--bx-shadow-m);
-        background: var(--bx-tooltip-bg, var(--bx-surface-inverse, #1a1a1a));
-        color: var(--bx-tooltip-fg, var(--bx-text-inverse, #fff));
-        font-family: var(--bx-font-family-sans);
-        font-size: var(--bx-font-s);
-        line-height: var(--bx-font-leading-tight, 1.25);
+        max-inline-size: var(--bx-tooltip-max-width, calc(var(--bx-unit) * 20));
+        padding-block: var(--bx-tooltip-body-padding-block, var(--bx-space-xs));
+        padding-inline: var(
+          --bx-tooltip-body-padding-inline,
+          var(--bx-space-s)
+        );
+        border-radius: var(--bx-tooltip-body-radius, var(--bx-radius-s));
+        box-shadow: var(--bx-tooltip-body-shadow, var(--bx-shadow-m));
+        background: var(--bx-tooltip-bg, var(--bx-surface-inverse));
+        color: var(--bx-tooltip-fg, var(--bx-text-inverse));
+
+        ${textStyle('--bx-tooltip-body', 'body-s')}
       }
 
       @media (forced-colors: active) {

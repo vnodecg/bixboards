@@ -2,6 +2,7 @@ import { css, html, nothing, type PropertyValues } from 'lit';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { BixElement } from '../bix-element.ts';
 import { FormAssociatedMixin } from '../internal/form-associated.ts';
+import { textStyle, textFamily } from '../internal/text-style.ts';
 
 type Size = 'small' | 'medium' | 'large';
 
@@ -84,6 +85,8 @@ function clamp(
  * @slot increment-icon - Overrides the default increment stepper icon.
  * @slot decrement-icon - Overrides the default decrement stepper icon.
  *
+ * @csspart start - The wrapper around the start slot.
+ * @csspart end - The wrapper around the end slot.
  * @csspart form-control - The outer wrapper (label + base + hint).
  * @csspart label - The label element.
  * @csspart hint - The wrapper around the hint slot.
@@ -91,6 +94,55 @@ function clamp(
  * @csspart input - The native `<input>`.
  * @csspart stepper-up - The increment button.
  * @csspart stepper-down - The decrement button.
+ * @cssprop --bx-number-input-form-control-gap - Gap of the `form-control` part. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-number-input-label-fg - Text/icon color of the `label` part. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-number-input-gap - Gap of the root surface. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-number-input-radius - Corner radius of the root surface. Default `var(--bx-radius-m)`.
+ * @cssprop --bx-number-input-border-width - Border width of the root surface. Default `var(--bx-border-width)`.
+ * @cssprop --bx-number-input-border-color - Border color of the root surface. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-number-input-bg - Background of the root surface. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-number-input-focus-ring-width - Focus ring width of the root surface (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-number-input-disabled-bg - Background of the root surface (disabled state). Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-number-input-disabled-fg - Text/icon color of the root surface (disabled state). Default `var(--bx-text-disabled)`.
+ * @cssprop --bx-number-input-invalid-border-color - Border color of the root surface (invalid state). Default `var(--bx-role-danger-border)`.
+ * @cssprop --bx-number-input-start-fg - Text/icon color of the `start` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-number-input-stepper-width - Width of the `stepper-down` part. Default `calc(var(--bx-target-min) * 0.6)`.
+ * @cssprop --bx-number-input-stepper-height - Height of the `stepper-down` part. Default `calc(var(--bx-target-min) * 0.5)`.
+ * @cssprop --bx-number-input-stepper-fg - Text/icon color of the `stepper-down` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-number-input-stepper-disabled-bg - Background of the `stepper-down` part (disabled state). Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-number-input-stepper-disabled-fg - Text/icon color of the `stepper-down` part (disabled state). Default `var(--bx-text-primary)`.
+ * @cssprop --bx-number-input-stepper-focus-ring-width - Focus ring width of the `stepper-down` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-number-input-stepper-focus-ring-color - Focus ring color of the `stepper-down` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-number-input-stepper-focus-ring-offset - Focus ring offset of the `stepper-down` part (focus state). Default `calc(var(--bx-focus-ring-offset) * -1)`.
+ * @cssprop --bx-number-input-stepper-disabled-opacity - Opacity of the `stepper-down` part (disabled state). Default `0.4`.
+ * @cssprop --bx-number-input-hint-fg - Text/icon color of the `hint` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-number-input-hint-invalid-fg - Text/icon color of the `hint` part (invalid state). Default `var(--bx-role-danger-fg)`.
+ * @cssprop --bx-number-input-height - Control height. Default derived from `size`.
+ * @cssprop --bx-number-input-padding-inline - Horizontal padding. Default `--bx-space-s`.
+ * @cssprop --bx-number-input-stepper-icon-size - Size (width and height) of the icon inside the `stepper-down` element. Default `0.7em`.
+ * @cssprop --bx-number-input-hover-border-color - Border color while hovered. Default `var(--bx-border-strong)`.
+ * @cssprop --bx-number-input-focus-border-color - Border color while focused. Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-number-input-focus-shadow - Soft halo around the field while focused. Default a translucent `--bx-focus-ring` ring.
+ * @cssprop --bx-number-input-hover-bg - Background of a `filled` field while hovered. Default `var(--bx-surface-muted)`.
+ * @cssprop --bx-number-input-focus-bg - Background of a `filled` field while focused. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-number-input-disabled-border-color - Border color when disabled. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-number-input-invalid-focus-shadow - Halo while focused and invalid. Default a translucent `--bx-role-danger-border` ring.
+ * @cssprop --bx-number-input-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-number-input-label-font-family - Font family of the `label` part (text style `label-s`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-number-input-label-font-size - Font size of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-size)`.
+ * @cssprop --bx-number-input-label-font-weight - Font weight of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-weight)`.
+ * @cssprop --bx-number-input-label-line-height - Line height of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-leading)`.
+ * @cssprop --bx-number-input-label-letter-spacing - Letter spacing of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.
+ * @cssprop --bx-number-input-input-font-family - Font family of the `input` part (text style `field-m`). Default `var(--bx-type-field-family)`.
+ * @cssprop --bx-number-input-input-font-size - Font size of the `input` part (text style `field-m`). Default `var(--bx-type-field-m-size)`.
+ * @cssprop --bx-number-input-input-font-weight - Font weight of the `input` part (text style `field-m`). Default `var(--bx-type-field-m-weight)`.
+ * @cssprop --bx-number-input-input-line-height - Line height of the `input` part (text style `field-m`). Default `var(--bx-type-field-m-leading)`.
+ * @cssprop --bx-number-input-input-letter-spacing - Letter spacing of the `input` part (text style `field-m`). Default `var(--bx-type-field-m-tracking)`.
+ * @cssprop --bx-number-input-hint-font-family - Font family of the `hint` part (text style `body-s`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-number-input-hint-font-size - Font size of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-size)`.
+ * @cssprop --bx-number-input-hint-font-weight - Font weight of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-weight)`.
+ * @cssprop --bx-number-input-hint-line-height - Line height of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-leading)`.
+ * @cssprop --bx-number-input-hint-letter-spacing - Letter spacing of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.
  */
 export class BxNumberInput extends FormAssociatedMixin(BixElement) {
   static override tagName = 'bx-number-input';
@@ -101,19 +153,19 @@ export class BxNumberInput extends FormAssociatedMixin(BixElement) {
       :host {
         display: block;
         container-type: inline-size;
-        font-family: var(--bx-font-family-sans);
+        ${textFamily('--bx-number-input', 'body')}
       }
 
       .form-control {
         display: flex;
         flex-direction: column;
-        gap: var(--bx-space-xs);
+        gap: var(--bx-number-input-form-control-gap, var(--bx-space-xs));
       }
 
       .label {
-        color: var(--bx-text-primary);
-        font-weight: var(--bx-font-weight-medium);
-        font-size: var(--bx-font-s);
+        color: var(--bx-number-input-label-fg, var(--bx-text-primary));
+
+        ${textStyle('--bx-number-input-label', 'label-s')}
       }
 
       .label:empty {
@@ -124,38 +176,104 @@ export class BxNumberInput extends FormAssociatedMixin(BixElement) {
         box-sizing: border-box;
         display: flex;
         align-items: center;
-        gap: var(--bx-space-xs);
-        min-block-size: var(--bx-input-height, var(--bx-target-min, 2.75rem));
-        padding-inline: var(--bx-input-padding-inline, var(--bx-space-m));
-        border-radius: var(--bx-radius-m);
-        border: var(--bx-border-width) solid var(--bx-border-subtle);
-        background: var(--bx-surface-base);
+        gap: var(--bx-number-input-gap, var(--bx-space-xs));
+        --_height: max(var(--bx-control-height-m), var(--bx-target-min));
+        min-block-size: var(--bx-number-input-height, var(--_height));
+        padding-inline: var(
+          --bx-number-input-padding-inline,
+          var(--bx-space-s)
+        );
+        border-radius: var(--bx-number-input-radius, var(--bx-radius-m));
+        border: var(--bx-number-input-border-width, var(--bx-border-width))
+          solid var(--bx-number-input-border-color, var(--bx-border-subtle));
+        background: var(--bx-number-input-bg, var(--bx-surface-base));
       }
 
       :host([size='small']) .base {
-        --bx-input-height: calc(var(--bx-target-min, 2.75rem) * 0.8);
+        --_height: max(var(--bx-control-height-s), var(--bx-target-min));
       }
       :host([size='large']) .base {
-        --bx-input-height: calc(var(--bx-target-min, 2.75rem) * 1.2);
+        --_height: max(var(--bx-control-height-l), var(--bx-target-min));
       }
 
       :host([appearance~='filled']) .base {
-        background: var(--bx-surface-subtle);
+        background: var(--bx-number-input-bg, var(--bx-surface-subtle));
         border-color: transparent;
       }
 
-      .base:has(.input:focus-visible) {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+      .base {
+        cursor: text;
+        transition:
+          border-color var(--bx-motion-duration-fast)
+            var(--bx-motion-easing-standard),
+          box-shadow var(--bx-motion-duration-fast)
+            var(--bx-motion-easing-standard),
+          background-color var(--bx-motion-duration-fast)
+            var(--bx-motion-easing-standard);
+      }
+
+      .base:hover {
+        border-color: var(
+          --bx-number-input-hover-border-color,
+          var(--bx-border-strong)
+        );
+      }
+
+      /* Focus: a crisp brand border plus a soft halo instead of a hard outline (same as
+         bx-input). The transparent outline keeps a visible ring in forced-colors mode. */
+      .base:focus-within {
+        border-color: var(
+          --bx-number-input-focus-border-color,
+          var(--bx-focus-ring)
+        );
+        box-shadow: var(
+          --bx-number-input-focus-shadow,
+          0 0 0 calc(var(--bx-border-width-strong) * 1.5)
+            color-mix(in srgb, var(--bx-focus-ring) 22%, transparent)
+        );
+        outline: var(
+            --bx-number-input-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid transparent;
+      }
+
+      :host([appearance='filled']) .base:hover {
+        background: var(--bx-number-input-hover-bg, var(--bx-surface-muted));
+      }
+      :host([appearance~='filled']) .base:focus-within {
+        background: var(--bx-number-input-focus-bg, var(--bx-surface-base));
+        border-color: var(
+          --bx-number-input-focus-border-color,
+          var(--bx-focus-ring)
+        );
       }
 
       :host([disabled]) .base {
-        background: var(--bx-surface-subtle);
-        color: var(--bx-text-disabled);
+        cursor: not-allowed;
+        border-color: var(
+          --bx-number-input-disabled-border-color,
+          var(--bx-border-subtle)
+        );
+        background: var(
+          --bx-number-input-disabled-bg,
+          var(--bx-surface-subtle)
+        );
+        color: var(--bx-number-input-disabled-fg, var(--bx-text-disabled));
       }
 
       .base:has(.input[data-user-invalid]) {
-        border-color: var(--bx-role-danger-border);
+        border-color: var(
+          --bx-number-input-invalid-border-color,
+          var(--bx-role-danger-border)
+        );
+      }
+      .base:has(.input[data-user-invalid]):focus-within {
+        box-shadow: var(
+          --bx-number-input-invalid-focus-shadow,
+          0 0 0 calc(var(--bx-border-width-strong) * 1.5)
+            color-mix(in srgb, var(--bx-role-danger-border) 22%, transparent)
+        );
       }
 
       .input {
@@ -164,9 +282,22 @@ export class BxNumberInput extends FormAssociatedMixin(BixElement) {
         flex: 1;
         min-inline-size: 0;
         font: inherit;
-        font-size: max(1rem, var(--bx-font-m));
+
+        ${textStyle('--bx-number-input-input', 'field-m')}
+
         color: inherit;
         text-align: end;
+        cursor: inherit;
+      }
+
+      /* Touch browsers zoom the page on focus for text under 16px; keep the floor there only. */
+      @media (pointer: coarse) {
+        .input {
+          font-size: var(
+            --bx-number-input-input-font-size,
+            max(var(--bx-font-floor), var(--bx-type-body-m-size))
+          );
+        }
       }
 
       .start,
@@ -174,7 +305,7 @@ export class BxNumberInput extends FormAssociatedMixin(BixElement) {
         display: inline-flex;
         align-items: center;
         flex-shrink: 0;
-        color: var(--bx-text-secondary);
+        color: var(--bx-number-input-start-fg, var(--bx-text-secondary));
       }
 
       .start:empty,
@@ -188,7 +319,7 @@ export class BxNumberInput extends FormAssociatedMixin(BixElement) {
         margin-inline: calc(var(--bx-space-2xs) * -1);
       }
 
-      @container (max-width: 200px) {
+      @container (max-width: 12.5rem) {
         .steppers {
           flex-direction: row;
         }
@@ -200,36 +331,57 @@ export class BxNumberInput extends FormAssociatedMixin(BixElement) {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        inline-size: calc(var(--bx-target-min, 2.75rem) * 0.6);
-        block-size: calc(var(--bx-target-min, 2.75rem) * 0.5);
-        color: var(--bx-text-secondary);
+        inline-size: var(
+          --bx-number-input-stepper-width,
+          calc(var(--bx-target-min) * 0.6)
+        );
+        block-size: var(
+          --bx-number-input-stepper-height,
+          calc(var(--bx-target-min) * 0.5)
+        );
+        color: var(--bx-number-input-stepper-fg, var(--bx-text-secondary));
         cursor: pointer;
       }
 
       .stepper:hover:not(:disabled) {
-        background: var(--bx-surface-subtle);
-        color: var(--bx-text-primary);
+        background: var(
+          --bx-number-input-stepper-disabled-bg,
+          var(--bx-surface-subtle)
+        );
+        color: var(
+          --bx-number-input-stepper-disabled-fg,
+          var(--bx-text-primary)
+        );
       }
 
       .stepper:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: calc(var(--bx-focus-ring-offset) * -1);
+        outline: var(
+            --bx-number-input-stepper-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(--bx-number-input-stepper-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-number-input-stepper-focus-ring-offset,
+          calc(var(--bx-focus-ring-offset) * -1)
+        );
       }
 
       .stepper:disabled {
         cursor: not-allowed;
-        opacity: 0.4;
+        opacity: var(--bx-number-input-stepper-disabled-opacity, 0.4);
       }
 
       .stepper svg {
-        inline-size: 0.7em;
-        block-size: 0.7em;
+        inline-size: var(--bx-number-input-stepper-icon-size, 0.7em);
+        block-size: var(--bx-number-input-stepper-icon-size, 0.7em);
         fill: currentColor;
       }
 
       .hint {
-        color: var(--bx-text-secondary);
-        font-size: var(--bx-font-s);
+        color: var(--bx-number-input-hint-fg, var(--bx-text-secondary));
+
+        ${textStyle('--bx-number-input-hint', 'body-s')}
       }
 
       .hint:empty {
@@ -237,7 +389,7 @@ export class BxNumberInput extends FormAssociatedMixin(BixElement) {
       }
 
       .hint[data-user-invalid] {
-        color: var(--bx-role-danger-fg);
+        color: var(--bx-number-input-hint-invalid-fg, var(--bx-role-danger-fg));
       }
 
       @media (forced-colors: active) {

@@ -32,11 +32,19 @@ _None._
 
 ### CSS parts
 
-`base`
+| Part   | Description      |
+| ------ | ---------------- |
+| `base` | The SVG element. |
 
 ### CSS custom properties
 
-`--bx-spinner-size`, `--bx-spinner-track-width`, `--bx-spinner-track-color`, `--bx-spinner-indicator-color`, `--bx-spinner-speed`
+| Property                       | Description                                                          |
+| ------------------------------ | -------------------------------------------------------------------- |
+| `--bx-spinner-size`            | Diameter. Default `1em`.                                             |
+| `--bx-spinner-track-width`     | Stroke width shared by the track and the indicator arc. Default `2`. |
+| `--bx-spinner-track-color`     | Track color. Default transparent.                                    |
+| `--bx-spinner-indicator-color` | Sweeping arc color. Default `currentColor`.                          |
+| `--bx-spinner-speed`           | Full-rotation duration. Default `--bx-motion-duration-spin`.         |
 
 ### Methods
 

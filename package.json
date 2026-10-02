@@ -9,11 +9,12 @@
     "validate": "nx run-many -t validate",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check": "pnpm format:check && pnpm generate:check && nx run-many -t typecheck test validate build tokens build-storybook",
+    "check": "pnpm format:check && pnpm generate:check && pnpm audit:design-system && nx run-many -t typecheck test validate build tokens build-storybook",
     "storybook": "pnpm --dir packages/storybook run storybook",
     "build-storybook": "pnpm --dir packages/storybook run build-storybook",
-    "generate": "node tools/cem/generate.mts && node tools/wrappers/generate.mts",
-    "generate:check": "node tools/cem/generate.mts --check && node tools/wrappers/generate.mts --check"
+    "generate": "node tools/cem/generate.mts && node tools/wrappers/generate.mts && node tools/docs/sync-css-api.mts",
+    "generate:check": "node tools/cem/generate.mts --check && node tools/wrappers/generate.mts --check && node tools/docs/sync-css-api.mts --check",
+    "audit:design-system": "node tools/audit-design-system.mts"
   },
   "private": true,
   "devDependencies": {

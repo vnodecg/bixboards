@@ -55,11 +55,20 @@ Low-level positioning primitive (anchor, flip, shift, size, arrow) used by dropd
 
 ### CSS parts
 
-`arrow`, `popup`, `hover-bridge`
+| Part           | Description                                                                        |
+| -------------- | ---------------------------------------------------------------------------------- |
+| `arrow`        | The arrow element, present when `arrow` is set.                                    |
+| `popup`        | The positioned wrapper around the default slot.                                    |
+| `hover-bridge` | The invisible bridge between anchor and popup, present when `hover-bridge` is set. |
 
 ### CSS custom properties
 
-`--arrow-size`, `--arrow-color`, `--auto-size-available-width`, `--auto-size-available-height`
+| Property                                | Description                                                                                                                                      |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `--bx-popup-arrow-size`                 | Arrow diameter. Default `calc(var(--bx-unit) * 0.75)`.                                                                                           |
+| `--bx-popup-arrow-color`                | Arrow color. Default `--bx-surface`.                                                                                                             |
+| `--bx-popup-auto-size-available-width`  | Set while `auto-size` includes `horizontal`; the space available before hitting the viewport edge, for consumers to cap their own content width. |
+| `--bx-popup-auto-size-available-height` | Set while `auto-size` includes `vertical`; same, for height.                                                                                     |
 
 ### Methods
 

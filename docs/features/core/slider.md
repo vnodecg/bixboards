@@ -56,11 +56,68 @@ Single or range slider with ticks, markers and tooltip. Specified for the Bixant
 
 ### CSS parts
 
-`label`, `hint`, `slider`, `track`, `indicator`, `markers`, `marker`, `thumb`, `thumb-min`, `thumb-max`, `tooltip`
+| Part           | Description                                             |
+| -------------- | ------------------------------------------------------- |
+| `form-control` | The outer layout wrapper around label, slider and hint. |
+| `label`        | The wrapper around the label slot.                      |
+| `hint`         | The wrapper around the hint slot.                       |
+| `slider`       | The outer interactive region (track + thumbs).          |
+| `track`        | The background track.                                   |
+| `indicator`    | The filled portion of the track.                        |
+| `markers`      | The wrapper around tick marks.                          |
+| `marker`       | A single tick mark.                                     |
+| `thumb`        | A single thumb (non-range mode).                        |
+| `thumb-min`    | The low thumb (range mode).                             |
+| `thumb-max`    | The high thumb (range mode).                            |
+| `tooltip`      | The value tooltip shown while `with-tooltip` is set.    |
 
 ### CSS custom properties
 
-`--bx-track-size`, `--bx-thumb-size`, `--bx-marker-width`, `--bx-marker-height`
+| Property                                       | Description                                                                                                          |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `--bx-slider-track-size`                       | Track thickness. Default `--bx-space-xs`.                                                                            |
+| `--bx-slider-thumb-size`                       | Thumb diameter. Default `calc(var(--bx-unit) * 1.25)`.                                                               |
+| `--bx-slider-marker-width`                     | Tick mark width. Default `--bx-border-width-strong`.                                                                 |
+| `--bx-slider-marker-height`                    | Tick mark height. Default `--bx-space-xs`.                                                                           |
+| `--bx-slider-form-control-gap`                 | Gap of the `form-control` part. Default `var(--bx-space-s)`.                                                         |
+| `--bx-slider-label-fg`                         | Text/icon color of the `label` part. Default `var(--bx-text-primary)`.                                               |
+| `--bx-slider-hint-fg`                          | Text/icon color of the `hint` part. Default `var(--bx-text-secondary)`.                                              |
+| `--bx-slider-height`                           | Height of the root surface. Default `var(--bx-target-min)`.                                                          |
+| `--bx-slider-width`                            | Width of the root surface. Default `var(--bx-target-min)`.                                                           |
+| `--bx-slider-disabled-opacity`                 | Opacity of the root surface (disabled state). Default `0.6`.                                                         |
+| `--bx-slider-track-radius`                     | Corner radius of the `track` part. Default `var(--bx-radius-pill)`.                                                  |
+| `--bx-slider-track-bg`                         | Background of the `track` part. Default `var(--bx-surface-subtle)`.                                                  |
+| `--bx-slider-indicator-bg`                     | Background of the `indicator` part. Default `var(--bx-role-accent)`.                                                 |
+| `--bx-slider-indicator-disabled-bg`            | Background of the `indicator` part (disabled state). Default `var(--bx-border-strong)`.                              |
+| `--bx-slider-marker-bg`                        | Background of the `marker` part. Default `var(--bx-border-strong)`.                                                  |
+| `--bx-slider-thumb-knob-border-width`          | Border width of the `thumb` part's knob. Default `var(--bx-border-width-strong)`.                                    |
+| `--bx-slider-thumb-knob-border-color`          | Border color of the `thumb` part's knob. Default `var(--bx-role-accent)`.                                            |
+| `--bx-slider-thumb-knob-bg`                    | Background of the `thumb` part's knob. Default `var(--bx-surface-base)`.                                             |
+| `--bx-slider-thumb-knob-focus-ring-width`      | Focus ring width of the `thumb` part's knob (focus state). Default `var(--bx-border-width-strong)`.                  |
+| `--bx-slider-thumb-knob-focus-ring-color`      | Focus ring color of the `thumb` part's knob (focus state). Default `var(--bx-focus-ring)`.                           |
+| `--bx-slider-thumb-knob-focus-ring-offset`     | Focus ring offset of the `thumb` part's knob (focus state). Default `var(--bx-focus-ring-offset)`.                   |
+| `--bx-slider-thumb-knob-disabled-border-color` | Border color of the `thumb` part's knob (disabled state). Default `var(--bx-border-strong)`.                         |
+| `--bx-slider-tooltip-padding`                  | Padding of the `tooltip` part. Default `var(--bx-space-2xs) var(--bx-space-xs)`.                                     |
+| `--bx-slider-tooltip-radius`                   | Corner radius of the `tooltip` part. Default `var(--bx-radius-s)`.                                                   |
+| `--bx-slider-tooltip-bg`                       | Background of the `tooltip` part. Default `var(--bx-surface-inverse, var(--bx-text-primary))`.                       |
+| `--bx-slider-tooltip-fg`                       | Text/icon color of the `tooltip` part. Default `var(--bx-on-accent, var(--bx-surface-base))`.                        |
+| `--bx-slider-thumb-hit-size`                   | Size of the thumb's pointer hit area (the visible knob is `--bx-slider-thumb-size`). Default `var(--bx-target-min)`. |
+| `--bx-slider-font-family`                      | Font family of the root surface. Default `var(--bx-type-body-family)`.                                               |
+| `--bx-slider-label-font-family`                | Font family of the `label` part (text style `label-s`). Default `var(--bx-type-label-family)`.                       |
+| `--bx-slider-label-font-size`                  | Font size of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-size)`.                         |
+| `--bx-slider-label-font-weight`                | Font weight of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-weight)`.                     |
+| `--bx-slider-label-line-height`                | Line height of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-leading)`.                    |
+| `--bx-slider-label-letter-spacing`             | Letter spacing of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.                |
+| `--bx-slider-hint-font-family`                 | Font family of the `hint` part (text style `body-s`). Default `var(--bx-type-body-family)`.                          |
+| `--bx-slider-hint-font-size`                   | Font size of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-size)`.                            |
+| `--bx-slider-hint-font-weight`                 | Font weight of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-weight)`.                        |
+| `--bx-slider-hint-line-height`                 | Line height of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-leading)`.                       |
+| `--bx-slider-hint-letter-spacing`              | Letter spacing of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.                   |
+| `--bx-slider-tooltip-font-family`              | Font family of the `tooltip` part (text style `caption-s`). Default `var(--bx-type-caption-family)`.                 |
+| `--bx-slider-tooltip-font-size`                | Font size of the `tooltip` part (text style `caption-s`). Default `var(--bx-type-caption-s-size)`.                   |
+| `--bx-slider-tooltip-font-weight`              | Font weight of the `tooltip` part (text style `caption-s`). Default `var(--bx-type-caption-s-weight)`.               |
+| `--bx-slider-tooltip-line-height`              | Line height of the `tooltip` part (text style `caption-s`). Default `var(--bx-type-caption-s-leading)`.              |
+| `--bx-slider-tooltip-letter-spacing`           | Letter spacing of the `tooltip` part (text style `caption-s`). Default `var(--bx-type-caption-s-tracking)`.          |
 
 ### Methods
 

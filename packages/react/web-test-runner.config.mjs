@@ -22,7 +22,12 @@ const specifiers = {
 // esbuild cannot know a CommonJS module's export names, so each facade lists them explicitly
 // (read from the real module) and re-exports them as ES named exports.
 const require = createRequire(import.meta.url);
-const facadeDir = path.join(process.cwd(), 'node_modules', '.cache', 'bixant-vendor');
+const facadeDir = path.join(
+  process.cwd(),
+  'node_modules',
+  '.cache',
+  'bixant-vendor',
+);
 fs.mkdirSync(facadeDir, { recursive: true });
 const entryPoints = {};
 for (const [source, file] of Object.entries(specifiers)) {
@@ -50,7 +55,9 @@ const bundle = await build({
   platform: 'browser',
   define: { 'process.env.NODE_ENV': '"development"' },
 });
-const files = new Map(bundle.outputFiles.map((f) => [path.basename(f.path), f.text]));
+const files = new Map(
+  bundle.outputFiles.map((f) => [path.basename(f.path), f.text]),
+);
 
 const reactVendor = {
   name: 'react-vendor',
@@ -70,7 +77,12 @@ export default {
   nodeResolve: true,
   plugins: [
     reactVendor,
-    esbuildPlugin({ ts: true, tsx: true, target: 'es2022', tsconfig: path.resolve('tsconfig.spec.json') }),
+    esbuildPlugin({
+      ts: true,
+      tsx: true,
+      target: 'es2022',
+      tsconfig: path.resolve('tsconfig.spec.json'),
+    }),
   ],
   browsers: requested.map((product) => playwrightLauncher({ product })),
   testFramework: { config: { timeout: 5000 } },

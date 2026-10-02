@@ -4,6 +4,7 @@ import { BixElement } from '../bix-element.ts';
 import { observeResize } from '../internal/shared-observers.ts';
 import type { BxTab } from '../tab/tab.ts';
 import type { BxTabPanel } from '../tab-panel/tab-panel.ts';
+import { textFamily } from '../internal/text-style.ts';
 
 type Placement = 'top' | 'bottom' | 'start' | 'end';
 type Activation = 'auto' | 'manual';
@@ -58,11 +59,24 @@ const CHEVRON_DOWN_PATH =
  * @csspart scroll-button - Either scroll button.
  * @csspart scroll-button--start - The "scroll to start" button.
  * @csspart scroll-button--end - The "scroll to end" button.
+ * @csspart indicator - The sliding bar under (or beside) the selected tab.
  *
- * @cssprop --indicator-color - Active tab's indicator/text color. Forwarded to slotted `bx-tab`
+ * @cssprop --bx-tab-group-indicator-color - Active tab's indicator/text color. Forwarded to slotted `bx-tab`
  *   via custom-property inheritance. Default `--bx-role-accent`.
- * @cssprop --track-color - Baseline track color under the tab list. Default `--bx-border-subtle`.
- * @cssprop --track-width - Baseline track thickness. Default the hairline border width.
+ * @cssprop --bx-tab-group-track-color - Baseline track color under the tab list. Default `--bx-border-subtle`.
+ * @cssprop --bx-tab-group-track-width - Baseline track thickness. Default the hairline border width.
+ * @cssprop --bx-tab-group-scroll-button-size - Size (width and height) of the `scroll-button` part. Default `var(--bx-target-min)`.
+ * @cssprop --bx-tab-group-scroll-button-fg - Text/icon color of the `scroll-button` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-tab-group-scroll-button-hover-bg - Background of the `scroll-button` part (hover state). Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-tab-group-scroll-button-hover-fg - Text/icon color of the `scroll-button` part (hover state). Default `var(--bx-text-primary)`.
+ * @cssprop --bx-tab-group-scroll-button-focus-ring-width - Focus ring width of the `scroll-button` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-tab-group-scroll-button-focus-ring-color - Focus ring color of the `scroll-button` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-tab-group-scroll-button-focus-ring-offset - Focus ring offset of the `scroll-button` part (focus state). Default `calc(var(--bx-focus-ring-offset) * -1)`.
+ * @cssprop --bx-tab-group-scroll-button-icon-size - Size (width and height) of the icon inside the `scroll-button` element. Default `1em`.
+ * @cssprop --bx-tab-group-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-tab-group-gap - Space between tabs. Default `var(--bx-space-2xs)`.
+ * @cssprop --bx-tab-group-indicator-width - Thickness of the selected-tab indicator. Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-tab-group-indicator-radius - Corner radius of the selected-tab indicator. Default `var(--bx-radius-pill)`.
  */
 export class BxTabGroup extends BixElement {
   static override tagName = 'bx-tab-group';
@@ -73,7 +87,7 @@ export class BxTabGroup extends BixElement {
       :host {
         display: block;
         container-type: inline-size;
-        font-family: var(--bx-font-family-sans);
+        ${textFamily('--bx-tab-group', 'body')}
       }
 
       .base {
@@ -81,8 +95,22 @@ export class BxTabGroup extends BixElement {
         flex-direction: column;
       }
 
+      /* Tabs round the corners that face away from the track. */
+      :host([placement='bottom']) {
+        --bx-tab-radius: 0 0 var(--bx-radius-m) var(--bx-radius-m);
+      }
+      :host([placement='start']),
+      :host([placement='end']) {
+        --bx-tab-radius: var(--bx-radius-m);
+      }
+
       :host([placement='bottom']) .base {
         flex-direction: column-reverse;
+      }
+
+      /* The baseline track sits against the panel, so a bottom tab list draws it on top. */
+      :host([placement='bottom']) .nav {
+        background-position: 0 0;
       }
 
       :host([placement='start']) .base,
@@ -98,11 +126,12 @@ export class BxTabGroup extends BixElement {
         display: flex;
         align-items: center;
         background-position: 0 100%;
-        background-size: 100% var(--track-width, var(--bx-border-width));
+        background-size: 100%
+          var(--bx-tab-group-track-width, var(--bx-border-width));
         background-repeat: no-repeat;
         background-image: linear-gradient(
-          var(--track-color, var(--bx-border-subtle)),
-          var(--track-color, var(--bx-border-subtle))
+          var(--bx-tab-group-track-color, var(--bx-border-subtle)),
+          var(--bx-tab-group-track-color, var(--bx-border-subtle))
         );
       }
 
@@ -111,7 +140,8 @@ export class BxTabGroup extends BixElement {
         flex-direction: column;
         align-items: stretch;
         background-position: 100% 0;
-        background-size: var(--track-width, var(--bx-border-width)) 100%;
+        background-size: var(--bx-tab-group-track-width, var(--bx-border-width))
+          100%;
       }
       :host([placement='start']) .nav {
         background-position: 100% 0;
@@ -121,10 +151,82 @@ export class BxTabGroup extends BixElement {
       }
 
       .tabs {
+        position: relative;
         display: flex;
         flex: 1;
+        gap: var(--bx-tab-group-gap, var(--bx-space-2xs));
         overflow: auto;
         scrollbar-width: none;
+      }
+
+      /* The selected-tab indicator slides between tabs. It lives inside the scroll container so it
+         scrolls with the tabs; script only sets its geometry (--_x/--_y/--_w/--_h). */
+      .indicator {
+        position: absolute;
+        inset-block-end: 0;
+        inset-inline-start: 0;
+        inline-size: var(--_w, 0);
+        block-size: var(
+          --bx-tab-group-indicator-width,
+          var(--bx-border-width-strong)
+        );
+        translate: var(--_x, 0) 0;
+        border-radius: var(
+          --bx-tab-group-indicator-radius,
+          var(--bx-radius-pill)
+        );
+        background: var(--bx-tab-group-indicator-color, var(--bx-role-accent));
+        pointer-events: none;
+        visibility: hidden;
+      }
+
+      .indicator[data-ready] {
+        visibility: visible;
+      }
+
+      .indicator[data-animate] {
+        transition:
+          translate var(--bx-motion-duration-base)
+            var(--bx-motion-easing-standard),
+          inline-size var(--bx-motion-duration-base)
+            var(--bx-motion-easing-standard);
+      }
+
+      :host([placement='bottom']) .indicator {
+        inset-block-end: auto;
+        inset-block-start: 0;
+      }
+
+      :host([placement='start']) .indicator,
+      :host([placement='end']) .indicator {
+        inset-block: auto;
+        inset-block-start: 0;
+        inset-inline-start: auto;
+        inset-inline-end: 0;
+        inline-size: var(
+          --bx-tab-group-indicator-width,
+          var(--bx-border-width-strong)
+        );
+        block-size: var(--_h, 0);
+        translate: 0 var(--_y, 0);
+      }
+      :host([placement='start']) .indicator[data-animate],
+      :host([placement='end']) .indicator[data-animate] {
+        transition:
+          translate var(--bx-motion-duration-base)
+            var(--bx-motion-easing-standard),
+          block-size var(--bx-motion-duration-base)
+            var(--bx-motion-easing-standard);
+      }
+      :host([placement='end']) .indicator {
+        inset-inline-end: auto;
+        inset-inline-start: 0;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .indicator[data-animate] {
+          transition: none;
+        }
       }
       .tabs::-webkit-scrollbar {
         display: none;
@@ -142,25 +244,48 @@ export class BxTabGroup extends BixElement {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        inline-size: var(--bx-target-min, 2.75rem);
-        block-size: var(--bx-target-min, 2.75rem);
-        color: var(--bx-text-secondary);
+        inline-size: var(
+          --bx-tab-group-scroll-button-size,
+          var(--bx-target-min)
+        );
+        block-size: var(
+          --bx-tab-group-scroll-button-size,
+          var(--bx-target-min)
+        );
+        color: var(--bx-tab-group-scroll-button-fg, var(--bx-text-secondary));
         cursor: pointer;
       }
 
       .scroll-button:hover {
-        background: var(--bx-surface-subtle);
-        color: var(--bx-text-primary);
+        background: var(
+          --bx-tab-group-scroll-button-hover-bg,
+          var(--bx-surface-subtle)
+        );
+        color: var(
+          --bx-tab-group-scroll-button-hover-fg,
+          var(--bx-text-primary)
+        );
       }
 
       .scroll-button:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: calc(var(--bx-focus-ring-offset) * -1);
+        outline: var(
+            --bx-tab-group-scroll-button-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(
+            --bx-tab-group-scroll-button-focus-ring-color,
+            var(--bx-focus-ring)
+          );
+        outline-offset: var(
+          --bx-tab-group-scroll-button-focus-ring-offset,
+          calc(var(--bx-focus-ring-offset) * -1)
+        );
       }
 
       .scroll-button svg {
-        inline-size: 1em;
-        block-size: 1em;
+        inline-size: var(--bx-tab-group-scroll-button-icon-size, 1em);
+        block-size: var(--bx-tab-group-scroll-button-icon-size, 1em);
         fill: currentColor;
       }
 
@@ -172,6 +297,10 @@ export class BxTabGroup extends BixElement {
       @media (forced-colors: active) {
         .nav {
           background-image: linear-gradient(CanvasText, CanvasText);
+        }
+        .indicator {
+          forced-color-adjust: none;
+          background: Highlight;
         }
       }
     `,
@@ -203,6 +332,9 @@ export class BxTabGroup extends BixElement {
   declare _atEnd: boolean;
 
   #tabsRef = createRef<HTMLDivElement>();
+  #indicatorRef = createRef<HTMLDivElement>();
+  #unobserveActive?: () => void;
+  #indicatorFrame = 0;
   #unobserveResize?: () => void;
   #rafId = 0;
 
@@ -224,8 +356,11 @@ export class BxTabGroup extends BixElement {
     super.disconnectedCallback();
     this.#unobserveResize?.();
     this.#unobserveResize = undefined;
+    this.#unobserveActive?.();
+    this.#unobserveActive = undefined;
     if (this.#rafId) cancelAnimationFrame(this.#rafId);
     this.#rafId = 0;
+    cancelAnimationFrame(this.#indicatorFrame);
   }
 
   protected override firstUpdated(): void {
@@ -247,6 +382,7 @@ export class BxTabGroup extends BixElement {
   }
 
   protected override willUpdate(changed: PropertyValues<this>): void {
+    if (changed.has('placement')) this.#scheduleIndicator(false);
     if (changed.has('active'))
       this.#applyActive((changed.get('active') as string | undefined) ?? '');
   }
@@ -265,6 +401,8 @@ export class BxTabGroup extends BixElement {
     }
     for (const panel of panels) panel.active = panel.name === this.active;
     this.#syncRovingTabindex();
+    this.#watchActiveTab();
+    this.#scheduleIndicator();
 
     if (previous && previous !== this.active)
       this.dispatchEvent(
@@ -359,6 +497,58 @@ export class BxTabGroup extends BixElement {
     this._scrollable = scrollSize - clientSize > 1;
     this._atStart = scrollPos <= 0;
     this._atEnd = scrollPos + clientSize >= scrollSize - 1;
+    this.#scheduleIndicator(false);
+  }
+
+  // Re-position the indicator when the active tab changes size (late font load, a close button
+  // appearing), not only when the tab list does.
+  #watchActiveTab(): void {
+    this.#unobserveActive?.();
+    const tab = this.#tabs().find((candidate) => candidate.active);
+    this.#unobserveActive = tab
+      ? observeResize(tab, () => this.#scheduleIndicator(false))
+      : undefined;
+  }
+
+  #scheduleIndicator(animate = true): void {
+    cancelAnimationFrame(this.#indicatorFrame);
+    this.#indicatorFrame = requestAnimationFrame(() =>
+      this.#positionIndicator(animate),
+    );
+  }
+
+  #positionIndicator(animate: boolean): void {
+    const indicator = this.#indicatorRef.value;
+    const list = this.#tabsRef.value;
+    if (!indicator || !list) return;
+    const tab = this.#tabs().find((candidate) => candidate.active);
+    if (!tab) {
+      indicator.removeAttribute('data-ready');
+      return;
+    }
+    const vertical = this.placement === 'start' || this.placement === 'end';
+    const t = tab.getBoundingClientRect();
+    const l = list.getBoundingClientRect();
+    // The first placement must not animate in from nothing.
+    const first = !indicator.hasAttribute('data-ready');
+    if (animate && !first) indicator.setAttribute('data-animate', '');
+    else indicator.removeAttribute('data-animate');
+    if (vertical) {
+      indicator.style.setProperty(
+        '--_y',
+        `${t.top - l.top + list.scrollTop}px`,
+      );
+      indicator.style.setProperty('--_h', `${t.height}px`);
+    } else {
+      // Physical offsets: `translate` is physical, and in RTL the list's scroll origin is its right
+      // edge, which scrollLeft (<= 0) already accounts for.
+      indicator.style.setProperty(
+        '--_x',
+        `${t.left - l.left + list.scrollLeft}px`,
+      );
+      indicator.style.setProperty('--_w', `${t.width}px`);
+    }
+    indicator.setAttribute('data-ready', '');
   }
 
   #scrollBy(direction: 1 | -1): void {
@@ -415,6 +605,12 @@ export class BxTabGroup extends BixElement {
             @scroll=${this.#handleScroll}
           >
             <slot name="nav" @slotchange=${this.#handleSlotChange}></slot>
+            <div
+              ${ref(this.#indicatorRef)}
+              class="indicator"
+              part="indicator"
+              aria-hidden="true"
+            ></div>
           </div>
           ${
             showControls

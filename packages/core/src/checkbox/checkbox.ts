@@ -1,6 +1,7 @@
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
 import { FormAssociatedMixin } from '../internal/form-associated.ts';
+import { textStyle, textFamily } from '../internal/text-style.ts';
 
 type Size = 'small' | 'medium' | 'large';
 
@@ -44,7 +45,30 @@ let nextId = 0;
  * @csspart label - The wrapper around the default slot.
  * @csspart hint - The wrapper around the hint slot.
  *
- * @cssprop --bx-checked-icon-color - Icon color when checked/indeterminate. Default `--bx-on-accent`.
+ * @cssprop --bx-checkbox-checked-icon-color - Icon color when checked/indeterminate. Default `--bx-on-accent`.
+ * @cssprop --bx-checkbox-gap - Gap of the root surface. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-checkbox-disabled-fg - Text/icon color of the root surface (disabled state). Default `var(--bx-text-disabled)`.
+ * @cssprop --bx-checkbox-control-border-width - Border width of the `control` part. Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-checkbox-control-border-color - Border color of the `control` part. Default `var(--bx-border-strong)`.
+ * @cssprop --bx-checkbox-control-radius - Corner radius of the `control` part. Default `var(--bx-radius-s)`.
+ * @cssprop --bx-checkbox-control-bg - Background of the `control` part. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-checkbox-control-checked-border-color - Border color of the `control` part (checked state). Default `var(--bx-role-accent)`.
+ * @cssprop --bx-checkbox-control-checked-bg - Background of the `control` part (checked state). Default `var(--bx-role-accent)`.
+ * @cssprop --bx-checkbox-control-focus-ring-width - Focus ring width of the `control` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-checkbox-control-focus-ring-color - Focus ring color of the `control` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-checkbox-control-focus-ring-offset - Focus ring offset of the `control` part (focus state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-checkbox-control-disabled-border-color - Border color of the `control` part (disabled state). Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-checkbox-control-disabled-bg - Background of the `control` part (disabled state). Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-checkbox-label-padding-block-start - Padding block start of the `label` part. Default `calc((var(--bx-target-min) - 1lh) / 2)`.
+ * @cssprop --bx-checkbox-label-min-height - Minimum height of the `label` part. Default `var(--bx-target-min)`.
+ * @cssprop --bx-checkbox-hint-fg - Text/icon color of the `hint` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-checkbox-size - Control size (width and height). Default `calc(var(--bx-unit) * 1.25)`, or per `size`.
+ * @cssprop --bx-checkbox-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-checkbox-hint-font-family - Font family of the `hint` part (text style `body-s`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-checkbox-hint-font-size - Font size of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-size)`.
+ * @cssprop --bx-checkbox-hint-font-weight - Font weight of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-weight)`.
+ * @cssprop --bx-checkbox-hint-line-height - Line height of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-leading)`.
+ * @cssprop --bx-checkbox-hint-letter-spacing - Letter spacing of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.
  */
 export class BxCheckbox extends FormAssociatedMixin(BixElement) {
   static override tagName = 'bx-checkbox';
@@ -54,19 +78,23 @@ export class BxCheckbox extends FormAssociatedMixin(BixElement) {
     css`
       :host {
         display: inline-block;
-        font-family: var(--bx-font-family-sans);
+        ${textFamily('--bx-checkbox', 'body')}
+        /* The public hook resolves to a private value on the host (so control, label offset and
+           hint indent all agree); size variants change the default without redeclaring it. */
+        --_default-size: calc(var(--bx-unit) * 1.25);
+        --_size: var(--bx-checkbox-size, var(--_default-size));
       }
 
       .base {
         display: inline-flex;
         align-items: flex-start;
-        gap: var(--bx-space-xs);
+        gap: var(--bx-checkbox-gap, var(--bx-space-xs));
         cursor: pointer;
       }
 
       :host([disabled]) .base {
         cursor: not-allowed;
-        color: var(--bx-text-disabled);
+        color: var(--bx-checkbox-disabled-fg, var(--bx-text-disabled));
       }
 
       .control {
@@ -75,54 +103,76 @@ export class BxCheckbox extends FormAssociatedMixin(BixElement) {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        inline-size: var(--bx-checkbox-size, calc(var(--bx-unit) * 1.25));
-        block-size: var(--bx-checkbox-size, calc(var(--bx-unit) * 1.25));
-        margin: calc(
-          (
-              var(--bx-target-min, 2.75rem) - var(
-                  --bx-checkbox-size,
-                  calc(var(--bx-unit) * 1.25)
-                )
-            ) /
-            2
-        );
-        border: var(--bx-border-width-strong) solid var(--bx-border-strong);
-        border-radius: var(--bx-radius-s);
-        background: var(--bx-surface-base);
+        inline-size: var(--_size);
+        block-size: var(--_size);
+        margin: calc((var(--bx-target-min) - var(--_size)) / 2);
+        border: var(
+            --bx-checkbox-control-border-width,
+            var(--bx-border-width-strong)
+          )
+          solid var(--bx-checkbox-control-border-color, var(--bx-border-strong));
+        border-radius: var(--bx-checkbox-control-radius, var(--bx-radius-s));
+        background: var(--bx-checkbox-control-bg, var(--bx-surface-base));
       }
 
-      :host([size='small']) .control {
-        --bx-checkbox-size: var(--bx-unit);
+      :host([size='small']) {
+        --_default-size: var(--bx-unit);
       }
-      :host([size='large']) .control {
-        --bx-checkbox-size: calc(var(--bx-unit) * 1.5);
+      :host([size='large']) {
+        --_default-size: calc(var(--bx-unit) * 1.5);
       }
 
       :host([checked]) .control,
       :host([indeterminate]) .control {
-        border-color: var(--bx-role-accent);
-        background: var(--bx-role-accent);
+        border-color: var(
+          --bx-checkbox-control-checked-border-color,
+          var(--bx-role-accent)
+        );
+        background: var(
+          --bx-checkbox-control-checked-bg,
+          var(--bx-role-accent)
+        );
       }
 
       .control:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+        outline: var(
+            --bx-checkbox-control-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(--bx-checkbox-control-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-checkbox-control-focus-ring-offset,
+          var(--bx-focus-ring-offset)
+        );
       }
 
       :host([disabled]) .control {
-        border-color: var(--bx-border-subtle);
-        background: var(--bx-surface-subtle);
+        border-color: var(
+          --bx-checkbox-control-disabled-border-color,
+          var(--bx-border-subtle)
+        );
+        background: var(
+          --bx-checkbox-control-disabled-bg,
+          var(--bx-surface-subtle)
+        );
       }
 
       .control svg {
         inline-size: 85%;
         block-size: 85%;
-        fill: var(--bx-checked-icon-color, var(--bx-on-accent));
+        fill: var(--bx-checkbox-checked-icon-color, var(--bx-on-accent));
       }
 
       .label {
-        padding-block-start: calc((var(--bx-target-min, 2.75rem) - 1lh) / 2);
-        min-block-size: var(--bx-target-min, 2.75rem);
+        padding-block-start: var(
+          --bx-checkbox-label-padding-block-start,
+          calc((var(--bx-target-min) - 1lh) / 2)
+        );
+        min-block-size: var(
+          --bx-checkbox-label-min-height,
+          var(--bx-target-min)
+        );
       }
 
       .label:empty {
@@ -130,12 +180,10 @@ export class BxCheckbox extends FormAssociatedMixin(BixElement) {
       }
 
       .hint {
-        margin-inline-start: calc(
-          var(--bx-checkbox-size, calc(var(--bx-unit) * 1.25)) +
-            var(--bx-space-xs)
-        );
-        color: var(--bx-text-secondary);
-        font-size: var(--bx-font-s);
+        margin-inline-start: calc(var(--_size) + var(--bx-space-xs));
+        color: var(--bx-checkbox-hint-fg, var(--bx-text-secondary));
+
+        ${textStyle('--bx-checkbox-hint', 'body-s')}
       }
 
       .hint:empty {

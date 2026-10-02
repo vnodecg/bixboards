@@ -49,11 +49,39 @@ Anchors a menu of items to a trigger; keyboard navigable, typeahead-enabled, wit
 
 ### CSS parts
 
-`base`, `menu`
+| Part   | Description                           |
+| ------ | ------------------------------------- |
+| `base` | The popup wrapping the menu.          |
+| `menu` | The scrollable `role="menu"` element. |
 
 ### CSS custom properties
 
-`--bx-dropdown-width`
+| Property                                    | Description                                                                                                                       |
+| ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `--bx-dropdown-width`                       | Menu width. Default `calc(var(--bx-unit) * 16)`.                                                                                  |
+| `--bx-dropdown-menu-max-height`             | Maximum height of the `menu` part. Default `min( var(--bx-popup-auto-size-available-height, 100vh), calc(var(--bx-unit) * 40) )`. |
+| `--bx-dropdown-menu-padding-block`          | Padding block of the `menu` part. Default `var(--bx-space-xs)`.                                                                   |
+| `--bx-dropdown-menu-border-width`           | Border width of the `menu` part. Default `var(--bx-border-width)`.                                                                |
+| `--bx-dropdown-menu-border-color`           | Border color of the `menu` part. Default `var(--bx-border-subtle)`.                                                               |
+| `--bx-dropdown-menu-radius`                 | Corner radius of the `menu` part. Default `var(--bx-radius-m)`.                                                                   |
+| `--bx-dropdown-menu-shadow`                 | Box shadow of the `menu` part. Default `var(--bx-shadow-m)`.                                                                      |
+| `--bx-dropdown-menu-bg`                     | Background of the `menu` part. Default `var(--bx-surface-base)`.                                                                  |
+| `--bx-dropdown-menu-fg`                     | Text/icon color of the `menu` part. Default `var(--bx-text-primary)`.                                                             |
+| `--bx-dropdown-hr-block-start-border-width` | Block start border width of the `hr` element. Default `var(--bx-border-width)`.                                                   |
+| `--bx-dropdown-hr-block-start-border-color` | Block start border color of the `hr` element. Default `var(--bx-border-subtle)`.                                                  |
+| `--bx-dropdown-heading-padding-block`       | Padding block of the `heading` element. Default `var(--bx-space-xs)`.                                                             |
+| `--bx-dropdown-heading-padding-inline`      | Padding inline of the `heading` element. Default `var(--bx-space-s)`.                                                             |
+| `--bx-dropdown-heading-fg`                  | Text/icon color of the `heading` element. Default `var(--bx-text-secondary)`.                                                     |
+| `--bx-dropdown-menu-font-family`            | Font family of the `menu` part (text style `body-m`). Default `var(--bx-type-body-family)`.                                       |
+| `--bx-dropdown-menu-font-size`              | Font size of the `menu` part (text style `body-m`). Default `var(--bx-type-body-m-size)`.                                         |
+| `--bx-dropdown-menu-font-weight`            | Font weight of the `menu` part (text style `body-m`). Default `var(--bx-type-body-m-weight)`.                                     |
+| `--bx-dropdown-menu-line-height`            | Line height of the `menu` part (text style `body-m`). Default `var(--bx-type-body-m-leading)`.                                    |
+| `--bx-dropdown-menu-letter-spacing`         | Letter spacing of the `menu` part (text style `body-m`). Default `var(--bx-type-body-m-tracking)`.                                |
+| `--bx-dropdown-heading-font-family`         | Font family of the `heading` element (text style `label-s`). Default `var(--bx-type-label-family)`.                               |
+| `--bx-dropdown-heading-font-size`           | Font size of the `heading` element (text style `label-s`). Default `var(--bx-type-label-s-size)`.                                 |
+| `--bx-dropdown-heading-font-weight`         | Font weight of the `heading` element (text style `label-s`). Default `var(--bx-type-label-s-weight)`.                             |
+| `--bx-dropdown-heading-line-height`         | Line height of the `heading` element (text style `label-s`). Default `var(--bx-type-label-s-leading)`.                            |
+| `--bx-dropdown-heading-letter-spacing`      | Letter spacing of the `heading` element (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.                        |
 
 ### Methods
 

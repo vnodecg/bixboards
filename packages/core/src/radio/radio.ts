@@ -1,6 +1,7 @@
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
 import { FormAssociatedMixin } from '../internal/form-associated.ts';
+import { textFamily } from '../internal/text-style.ts';
 
 type Size = 'small' | 'medium' | 'large';
 type Appearance = 'default' | 'button';
@@ -47,6 +48,36 @@ function groupMembers(name: string): BxRadio[] {
  * @csspart control - The circular control.
  * @csspart checked-icon - The filled dot shown when checked.
  * @csspart label - The wrapper around the default slot.
+ * @cssprop --bx-radio-gap - Gap of the root surface. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-radio-disabled-fg - Text/icon color of the root surface (disabled state). Default `var(--bx-text-disabled)`.
+ * @cssprop --bx-radio-control-border-width - Border width of the `control` part. Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-radio-control-border-color - Border color of the `control` part. Default `var(--bx-border-strong)`.
+ * @cssprop --bx-radio-control-bg - Background of the `control` part. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-radio-control-checked-border-color - Border color of the `control` part (checked state). Default `var(--bx-role-accent)`.
+ * @cssprop --bx-radio-control-focus-ring-width - Focus ring width of the `control` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-radio-control-focus-ring-color - Focus ring color of the `control` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-radio-control-focus-ring-offset - Focus ring offset of the `control` part (focus state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-radio-control-disabled-border-color - Border color of the `control` part (disabled state). Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-radio-control-disabled-bg - Background of the `control` part (disabled state). Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-radio-checked-icon-bg - Background of the `checked-icon` part. Default `var(--bx-role-accent)`.
+ * @cssprop --bx-radio-checked-icon-disabled-bg - Background of the `checked-icon` part (disabled state). Default `var(--bx-text-disabled)`.
+ * @cssprop --bx-radio-label-padding-block-start - Padding block start of the `label` part. Default `calc((var(--bx-target-min) - 1lh) / 2)`.
+ * @cssprop --bx-radio-label-min-height - Minimum height of the `label` part. Default `var(--bx-target-min)`.
+ * @cssprop --bx-radio-min-height - Minimum height of the root surface. Default `var(--bx-target-min)`.
+ * @cssprop --bx-radio-padding-inline - Padding inline of the root surface. Default `var(--bx-space-m)`.
+ * @cssprop --bx-radio-border-width - Border width of the root surface. Default `var(--bx-border-width)`.
+ * @cssprop --bx-radio-border-color - Border color of the root surface. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-radio-radius - Corner radius of the root surface. Default `var(--bx-radius-m)`.
+ * @cssprop --bx-radio-checked-border-color - Border color of the root surface (checked state). Default `var(--bx-role-accent)`.
+ * @cssprop --bx-radio-checked-bg - Background of the root surface (checked state). Default `var(--bx-role-accent-subtle, var(--bx-surface-subtle))`.
+ * @cssprop --bx-radio-checked-fg - Text/icon color of the root surface (checked state). Default `var(--bx-role-accent)`.
+ * @cssprop --bx-radio-focus-ring-width - Focus ring width of the root surface (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-radio-focus-ring-color - Focus ring color of the root surface (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-radio-focus-ring-offset - Focus ring offset of the root surface (focus state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-radio-disabled-border-color - Border color of the root surface (disabled state). Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-radio-disabled-bg - Background of the root surface (disabled state). Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-radio-size - Control size (width and height). Default `calc(var(--bx-unit) * 1.25)`, or per `size`.
+ * @cssprop --bx-radio-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
  */
 export class BxRadio extends FormAssociatedMixin(BixElement) {
   static override tagName = 'bx-radio';
@@ -56,19 +87,23 @@ export class BxRadio extends FormAssociatedMixin(BixElement) {
     css`
       :host {
         display: inline-block;
-        font-family: var(--bx-font-family-sans);
+        ${textFamily('--bx-radio', 'body')}
+        /* The public hook resolves to a private value on the host (so control, label offset and
+           hint indent all agree); size variants change the default without redeclaring it. */
+        --_default-size: calc(var(--bx-unit) * 1.25);
+        --_size: var(--bx-radio-size, var(--_default-size));
       }
 
       .base {
         display: inline-flex;
         align-items: flex-start;
-        gap: var(--bx-space-xs);
+        gap: var(--bx-radio-gap, var(--bx-space-xs));
         cursor: pointer;
       }
 
       :host([disabled]) .base {
         cursor: not-allowed;
-        color: var(--bx-text-disabled);
+        color: var(--bx-radio-disabled-fg, var(--bx-text-disabled));
       }
 
       .control {
@@ -77,57 +112,75 @@ export class BxRadio extends FormAssociatedMixin(BixElement) {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        inline-size: var(--bx-radio-size, calc(var(--bx-unit) * 1.25));
-        block-size: var(--bx-radio-size, calc(var(--bx-unit) * 1.25));
-        margin: calc(
-          (
-              var(--bx-target-min, 2.75rem) - var(
-                  --bx-radio-size,
-                  calc(var(--bx-unit) * 1.25)
-                )
-            ) /
-            2
-        );
-        border: var(--bx-border-width-strong) solid var(--bx-border-strong);
+        inline-size: var(--_size);
+        block-size: var(--_size);
+        margin: calc((var(--bx-target-min) - var(--_size)) / 2);
+        border: var(
+            --bx-radio-control-border-width,
+            var(--bx-border-width-strong)
+          )
+          solid var(--bx-radio-control-border-color, var(--bx-border-strong));
         border-radius: 50%;
-        background: var(--bx-surface-base);
+        background: var(--bx-radio-control-bg, var(--bx-surface-base));
       }
 
-      :host([size='small']) .control {
-        --bx-radio-size: var(--bx-unit);
+      :host([size='small']) {
+        --_default-size: var(--bx-unit);
       }
-      :host([size='large']) .control {
-        --bx-radio-size: calc(var(--bx-unit) * 1.5);
+      :host([size='large']) {
+        --_default-size: calc(var(--bx-unit) * 1.5);
       }
 
       :host([checked]) .control {
-        border-color: var(--bx-role-accent);
+        border-color: var(
+          --bx-radio-control-checked-border-color,
+          var(--bx-role-accent)
+        );
       }
 
       .control:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+        outline: var(
+            --bx-radio-control-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid var(--bx-radio-control-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-radio-control-focus-ring-offset,
+          var(--bx-focus-ring-offset)
+        );
       }
 
       :host([disabled]) .control {
-        border-color: var(--bx-border-subtle);
-        background: var(--bx-surface-subtle);
+        border-color: var(
+          --bx-radio-control-disabled-border-color,
+          var(--bx-border-subtle)
+        );
+        background: var(
+          --bx-radio-control-disabled-bg,
+          var(--bx-surface-subtle)
+        );
       }
 
       .checked-icon {
         inline-size: 55%;
         block-size: 55%;
         border-radius: 50%;
-        background: var(--bx-role-accent);
+        background: var(--bx-radio-checked-icon-bg, var(--bx-role-accent));
       }
 
       :host([disabled]) .checked-icon {
-        background: var(--bx-text-disabled);
+        background: var(
+          --bx-radio-checked-icon-disabled-bg,
+          var(--bx-text-disabled)
+        );
       }
 
       .label {
-        padding-block-start: calc((var(--bx-target-min, 2.75rem) - 1lh) / 2);
-        min-block-size: var(--bx-target-min, 2.75rem);
+        padding-block-start: var(
+          --bx-radio-label-padding-block-start,
+          calc((var(--bx-target-min) - 1lh) / 2)
+        );
+        min-block-size: var(--bx-radio-label-min-height, var(--bx-target-min));
       }
 
       .label:empty {
@@ -139,10 +192,11 @@ export class BxRadio extends FormAssociatedMixin(BixElement) {
       :host([appearance='button']) .base {
         align-items: center;
         gap: 0;
-        min-block-size: var(--bx-target-min, 2.75rem);
-        padding-inline: var(--bx-space-m);
-        border: var(--bx-border-width) solid var(--bx-border-subtle);
-        border-radius: var(--bx-radius-m);
+        min-block-size: var(--bx-radio-min-height, var(--bx-target-min));
+        padding-inline: var(--bx-radio-padding-inline, var(--bx-space-m));
+        border: var(--bx-radio-border-width, var(--bx-border-width)) solid
+          var(--bx-radio-border-color, var(--bx-border-subtle));
+        border-radius: var(--bx-radio-radius, var(--bx-radius-m));
       }
 
       :host([appearance='button']) .control {
@@ -155,20 +209,33 @@ export class BxRadio extends FormAssociatedMixin(BixElement) {
       }
 
       :host([appearance='button'][checked]) .base {
-        border-color: var(--bx-role-accent);
-        background: var(--bx-role-accent-subtle, var(--bx-surface-subtle));
-        color: var(--bx-role-accent);
+        border-color: var(
+          --bx-radio-checked-border-color,
+          var(--bx-role-accent)
+        );
+        background: var(
+          --bx-radio-checked-bg,
+          var(--bx-role-accent-subtle, var(--bx-surface-subtle))
+        );
+        color: var(--bx-radio-checked-fg, var(--bx-role-accent));
       }
 
       :host([appearance='button']) .base:focus-visible,
       :host([appearance='button']:has(.control:focus-visible)) .base {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+        outline: var(--bx-radio-focus-ring-width, var(--bx-border-width-strong))
+          solid var(--bx-radio-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-radio-focus-ring-offset,
+          var(--bx-focus-ring-offset)
+        );
       }
 
       :host([appearance='button'][disabled]) .base {
-        border-color: var(--bx-border-subtle);
-        background: var(--bx-surface-subtle);
+        border-color: var(
+          --bx-radio-disabled-border-color,
+          var(--bx-border-subtle)
+        );
+        background: var(--bx-radio-disabled-bg, var(--bx-surface-subtle));
       }
 
       @media (forced-colors: active) {

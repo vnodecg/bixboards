@@ -47,11 +47,47 @@ Modal dialog built on native `<dialog>`, with header, footer and light dismiss. 
 
 ### CSS parts
 
-`dialog`, `header`, `title`, `header-actions`, `close-button`, `body`, `footer`
+| Part             | Description                                 |
+| ---------------- | ------------------------------------------- |
+| `dialog`         | The native `<dialog>` element.              |
+| `header`         | The header region.                          |
+| `title`          | The title text.                             |
+| `header-actions` | The wrapper around the header-actions slot. |
+| `close-button`   | The default close button.                   |
+| `body`           | The scrollable body region.                 |
+| `footer`         | The footer region.                          |
 
 ### CSS custom properties
 
-`--bx-dialog-width`, `--bx-dialog-spacing`
+| Property                                 | Description                                                                                               |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `--bx-dialog-width`                      | Max width. Default `40rem`-equivalent fluid width.                                                        |
+| `--bx-dialog-spacing`                    | Header/body/footer padding. Default `--bx-space-l`.                                                       |
+| `--bx-dialog-max-height`                 | Maximum height of the root surface. Default `min(85vh, 100%)`.                                            |
+| `--bx-dialog-border-width`               | Border width of the root surface. Default `var(--bx-border-width)`.                                       |
+| `--bx-dialog-border-color`               | Border color of the root surface. Default `var(--bx-border-subtle)`.                                      |
+| `--bx-dialog-radius`                     | Corner radius of the root surface. Default `var(--bx-radius-l)`.                                          |
+| `--bx-dialog-shadow`                     | Box shadow of the root surface. Default `var(--bx-shadow-l)`.                                             |
+| `--bx-dialog-bg`                         | Background of the root surface. Default `var(--bx-surface-base)`.                                         |
+| `--bx-dialog-fg`                         | Text/icon color of the root surface. Default `var(--bx-text-primary)`.                                    |
+| `--bx-dialog-backdrop-bg`                | Background of the `::backdrop`. Default `var(--bx-surface-overlay)`.                                      |
+| `--bx-dialog-header-gap`                 | Gap of the `header` part. Default `var(--bx-space-s)`.                                                    |
+| `--bx-dialog-header-padding-block-end`   | Padding block end of the `header` part. Default `var(--bx-space-m)`.                                      |
+| `--bx-dialog-header-actions-gap`         | Gap of the `header-actions` part. Default `var(--bx-space-xs)`.                                           |
+| `--bx-dialog-close-button-width`         | Width of the `close-button` part. Default `var(--bx-target-min)`.                                         |
+| `--bx-dialog-close-button-radius`        | Corner radius of the `close-button` part. Default `var(--bx-radius-pill)`.                                |
+| `--bx-dialog-close-button-fg`            | Text/icon color of the `close-button` part. Default `var(--bx-text-secondary)`.                           |
+| `--bx-dialog-close-button-hover-bg`      | Background of the `close-button` part (hover state). Default `var(--bx-surface-subtle)`.                  |
+| `--bx-dialog-body-padding-block`         | Padding block of the `body` part. Default `var(--bx-space-m)`.                                            |
+| `--bx-dialog-footer-gap`                 | Gap of the `footer` part. Default `var(--bx-space-s)`.                                                    |
+| `--bx-dialog-footer-padding-block-start` | Padding block start of the `footer` part. Default `var(--bx-space-m)`.                                    |
+| `--bx-dialog-close-button-icon-size`     | Size (width and height) of the icon inside the `close-button` element. Default `1em`.                     |
+| `--bx-dialog-font-family`                | Font family of the root surface. Default `var(--bx-type-body-family)`.                                    |
+| `--bx-dialog-title-font-family`          | Font family of the `title` part (text style `heading-s`). Default `var(--bx-type-heading-family)`.        |
+| `--bx-dialog-title-font-size`            | Font size of the `title` part (text style `heading-s`). Default `var(--bx-type-heading-s-size)`.          |
+| `--bx-dialog-title-font-weight`          | Font weight of the `title` part (text style `heading-s`). Default `var(--bx-type-heading-s-weight)`.      |
+| `--bx-dialog-title-line-height`          | Line height of the `title` part (text style `heading-s`). Default `var(--bx-type-heading-s-leading)`.     |
+| `--bx-dialog-title-letter-spacing`       | Letter spacing of the `title` part (text style `heading-s`). Default `var(--bx-type-heading-s-tracking)`. |
 
 ### Methods
 

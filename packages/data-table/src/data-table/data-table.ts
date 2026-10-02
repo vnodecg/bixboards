@@ -25,6 +25,7 @@ import {
   type SortModel,
   type TableDataSource,
 } from './table-model.ts';
+import { textStyle, textFamily } from '@bixant/core';
 
 export type {
   ColumnDef,
@@ -139,11 +140,81 @@ interface CellPos {
  * @csspart loading-overlay - The loading indicator.
  * @csspart empty - The empty state.
  *
- * @cssprop --bx-table-row-height - Row height (density default).
- * @cssprop --bx-table-header-height - Header height.
- * @cssprop --bx-table-stripe - Background of odd rows.
- * @cssprop --bx-table-border - Border color.
- * @cssprop --bx-table-cell-padding-inline - Cell inline padding.
+ * @cssprop --bx-data-table-row-height - Row height (density default).
+ * @cssprop --bx-data-table-header-height - Header height.
+ * @cssprop --bx-data-table-stripe - Background of odd rows.
+ * @cssprop --bx-data-table-border - Border color.
+ * @cssprop --bx-data-table-cell-padding-inline - Cell inline padding.
+ * @cssprop --bx-data-table-fg - Text/icon color of the root surface. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-data-table-min-height - Minimum height of the root surface. Default `calc(var(--bx-unit) * 10)`.
+ * @cssprop --bx-data-table-scroller-border-width - Border width of the `scroller` element. Default `var(--bx-border-width)`.
+ * @cssprop --bx-data-table-scroller-radius - Corner radius of the `scroller` element. Default `var(--bx-radius-m)`.
+ * @cssprop --bx-data-table-scroller-bg - Background of the `scroller` element. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-data-table-header-bg - Background of the `header` part. Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-data-table-header-block-end-border-width - Block end border width of the `header` part. Default `var(--bx-border-width)`.
+ * @cssprop --bx-data-table-header-cell-gap - Gap of the `header-cell` part. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-data-table-sort-fg - Text/icon color of the `sort` element. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-data-table-sort-font-size - Font size of the `sort` element. Default `0.8em`.
+ * @cssprop --bx-data-table-resize-handle-width - Width of the `resize-handle` part. Default `calc(var(--bx-unit) * 0.5)`.
+ * @cssprop --bx-data-table-resize-handle-hover-bg - Background of the `resize-handle` part (hover state). Default `var(--bx-role-accent)`.
+ * @cssprop --bx-data-table-header-cell-pinned-bg - Background of the `header-cell` part (pinned state). Default `var(--bx-surface-base)`.
+ * @cssprop --bx-data-table-header-cell-pinned-shadow - Box shadow of the `header-cell` part (pinned state). Default `inset calc(var(--bx-border-width) * -1) 0 0 var(--bx-border-subtle)`.
+ * @cssprop --bx-data-table-header-cell-focus-ring-width - Focus ring width of the `header-cell` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-data-table-header-cell-focus-ring-color - Focus ring color of the `header-cell` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-data-table-header-cell-focus-ring-offset - Focus ring offset of the `header-cell` part (focus state). Default `calc(var(--bx-focus-ring-offset) * -1)`.
+ * @cssprop --bx-data-table-group-row-block-end-border-width - Block end border width of the `group-row` part. Default `var(--bx-border-width)`.
+ * @cssprop --bx-data-table-group-row-bg - Background of the `group-row` part. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-data-table-group-row-hover-bg - Background of the `group-row` part (hover state). Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-data-table-group-row-selected-bg - Background of the `group-row` part (selected state). Default `color-mix( in srgb, var(--bx-role-accent) 14%, var(--bx-surface-base) )`.
+ * @cssprop --bx-data-table-cell-bg - Background of the `cell` part. Default `color-mix( in srgb, var(--bx-role-accent) 20%, var(--bx-surface-base) )`.
+ * @cssprop --bx-data-table-skeleton-height - Height of the `skeleton` element. Default `0.8em`.
+ * @cssprop --bx-data-table-skeleton-radius - Corner radius of the `skeleton` element. Default `var(--bx-radius-s)`.
+ * @cssprop --bx-data-table-skeleton-bg - Background of the `skeleton` element. Default `var(--bx-surface-muted, var(--bx-surface-subtle))`.
+ * @cssprop --bx-data-table-input-padding - Padding of the `input` element. Default `0.15em 0.3em`.
+ * @cssprop --bx-data-table-input-border-width - Border width of the `input` element. Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-data-table-input-border-color - Border color of the `input` element. Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-data-table-input-radius - Corner radius of the `input` element. Default `var(--bx-radius-s)`.
+ * @cssprop --bx-data-table-input-bg - Background of the `input` element. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-data-table-error-fg - Text/icon color of the `error` element. Default `var(--bx-role-danger-fg)`.
+ * @cssprop --bx-data-table-toggle-size - Size (width and height) of the `toggle` element. Default `1.25em`.
+ * @cssprop --bx-data-table-toggle-fg - Text/icon color of the `toggle` element. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-data-table-check-size - Size (width and height) of the `check` element. Default `1.1em`.
+ * @cssprop --bx-data-table-check-border-width - Border width of the `check` element. Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-data-table-check-border-color - Border color of the `check` element. Default `var(--bx-border-strong)`.
+ * @cssprop --bx-data-table-check-radius - Corner radius of the `check` element. Default `var(--bx-radius-s)`.
+ * @cssprop --bx-data-table-check-font-size - Font size of the `check` element. Default `0.8em`.
+ * @cssprop --bx-data-table-check-bg - Background of the `check` element. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-data-table-check-fg - Text/icon color of the `check` element. Default `var(--bx-on-accent)`.
+ * @cssprop --bx-data-table-detail-padding - Padding of the `detail` part. Default `var(--bx-space-s) var(--bx-space-m)`.
+ * @cssprop --bx-data-table-detail-bg - Background of the `detail` part. Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-data-table-empty-padding - Padding of the `empty` part. Default `var(--bx-space-l)`.
+ * @cssprop --bx-data-table-empty-fg - Text/icon color of the `empty` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-data-table-loading-overlay-fg - Text/icon color of the `loading-overlay` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-data-table-group-row-padding-block - Padding block of the `group-row` part. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-data-table-cell-label-fg - Text/icon color of the cell's data label (card layout). Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-data-table-check-checked-bg - Background of a checked or mixed selection checkbox. Default `var(--bx-role-accent)`.
+ * @cssprop --bx-data-table-check-checked-border-color - Border color of a checked or mixed selection checkbox. Default `var(--bx-role-accent)`.
+ * @cssprop --bx-data-table-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-data-table-header-cell-font-family - Font family of the `header-cell` part (text style `label-s`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-data-table-header-cell-font-size - Font size of the `header-cell` part (text style `label-s`). Default `var(--bx-type-label-s-size)`.
+ * @cssprop --bx-data-table-header-cell-font-weight - Font weight of the `header-cell` part (text style `label-s`). Default `var(--bx-type-label-s-weight)`.
+ * @cssprop --bx-data-table-header-cell-line-height - Line height of the `header-cell` part (text style `label-s`). Default `var(--bx-type-label-s-leading)`.
+ * @cssprop --bx-data-table-header-cell-letter-spacing - Letter spacing of the `header-cell` part (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.
+ * @cssprop --bx-data-table-group-row-font-family - Font family of the `group-row` part (text style `label-m`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-data-table-group-row-font-size - Font size of the `group-row` part (text style `label-m`). Default `var(--bx-type-label-m-size)`.
+ * @cssprop --bx-data-table-group-row-font-weight - Font weight of the `group-row` part (text style `label-m`). Default `var(--bx-type-label-m-weight)`.
+ * @cssprop --bx-data-table-group-row-line-height - Line height of the `group-row` part (text style `label-m`). Default `var(--bx-type-label-m-leading)`.
+ * @cssprop --bx-data-table-group-row-letter-spacing - Letter spacing of the `group-row` part (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.
+ * @cssprop --bx-data-table-error-font-family - Font family of the `error` element (text style `body-s`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-data-table-error-font-size - Font size of the `error` element (text style `body-s`). Default `var(--bx-type-body-s-size)`.
+ * @cssprop --bx-data-table-error-font-weight - Font weight of the `error` element (text style `body-s`). Default `var(--bx-type-body-s-weight)`.
+ * @cssprop --bx-data-table-error-line-height - Line height of the `error` element (text style `body-s`). Default `var(--bx-type-body-s-leading)`.
+ * @cssprop --bx-data-table-error-letter-spacing - Letter spacing of the `error` element (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.
+ * @cssprop --bx-data-table-cell-label-font-family - Font family of the `cell` part (text style `label-m`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-data-table-cell-label-font-size - Font size of the `cell` part (text style `label-m`). Default `var(--bx-type-label-m-size)`.
+ * @cssprop --bx-data-table-cell-label-font-weight - Font weight of the `cell` part (text style `label-m`). Default `var(--bx-type-label-m-weight)`.
+ * @cssprop --bx-data-table-cell-label-line-height - Line height of the `cell` part (text style `label-m`). Default `var(--bx-type-label-m-leading)`.
+ * @cssprop --bx-data-table-cell-label-letter-spacing - Letter spacing of the `cell` part (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.
  */
 export class BxDataTable<T = unknown> extends BixElement {
   static override tagName = 'bx-data-table';
@@ -153,18 +224,21 @@ export class BxDataTable<T = unknown> extends BixElement {
     css`
       :host {
         display: block;
-        font-family: var(--bx-font-family-sans);
-        color: var(--bx-text-primary);
-        min-block-size: 10rem;
-        --_row: var(--bx-table-row-height, calc(var(--bx-unit, 1rem) * 2.25));
+        ${textFamily('--bx-data-table', 'body')}
+        color: var(--bx-data-table-fg, var(--bx-text-primary));
+        min-block-size: var(
+          --bx-data-table-min-height,
+          calc(var(--bx-unit) * 10)
+        );
+        --_row: var(--bx-data-table-row-height, calc(var(--bx-unit) * 2.25));
       }
 
       :host([density='compact']) {
-        --_row: var(--bx-table-row-height, calc(var(--bx-unit, 1rem) * 1.75));
+        --_row: var(--bx-data-table-row-height, calc(var(--bx-unit) * 1.75));
       }
 
       :host([density='spacious']) {
-        --_row: var(--bx-table-row-height, calc(var(--bx-unit, 1rem) * 3));
+        --_row: var(--bx-data-table-row-height, calc(var(--bx-unit) * 3));
       }
 
       :host([hidden]) {
@@ -183,11 +257,15 @@ export class BxDataTable<T = unknown> extends BixElement {
         min-block-size: 0;
         overflow: auto;
         position: relative;
+        isolation: isolate;
         outline: none;
-        border: var(--bx-border-width) solid
-          var(--bx-table-border, var(--bx-border-subtle));
-        border-radius: var(--bx-radius-m);
-        background: var(--bx-surface-base);
+        border: var(
+            --bx-data-table-scroller-border-width,
+            var(--bx-border-width)
+          )
+          solid var(--bx-data-table-border, var(--bx-border-subtle));
+        border-radius: var(--bx-data-table-scroller-radius, var(--bx-radius-m));
+        background: var(--bx-data-table-scroller-bg, var(--bx-surface-base));
       }
 
       .header {
@@ -198,10 +276,13 @@ export class BxDataTable<T = unknown> extends BixElement {
         min-inline-size: 100%;
         inline-size: var(--_total, 100%);
         grid-template-columns: var(--_tracks);
-        background: var(--bx-surface-subtle);
-        border-block-end: var(--bx-border-width) solid
-          var(--bx-table-border, var(--bx-border-subtle));
-        min-block-size: var(--bx-table-header-height, var(--_row));
+        background: var(--bx-data-table-header-bg, var(--bx-surface-subtle));
+        border-block-end: var(
+            --bx-data-table-header-block-end-border-width,
+            var(--bx-border-width)
+          )
+          solid var(--bx-data-table-border, var(--bx-border-subtle));
+        min-block-size: var(--bx-data-table-header-height, var(--_row));
       }
 
       :host(:not([sticky-header])) .header {
@@ -214,7 +295,10 @@ export class BxDataTable<T = unknown> extends BixElement {
         display: flex;
         align-items: center;
         min-inline-size: 0;
-        padding-inline: var(--bx-table-cell-padding-inline, var(--bx-space-s));
+        padding-inline: var(
+          --bx-data-table-cell-padding-inline,
+          var(--bx-space-s)
+        );
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -224,9 +308,10 @@ export class BxDataTable<T = unknown> extends BixElement {
 
       .hcell {
         position: relative;
-        font-weight: var(--bx-font-weight-medium);
-        font-size: var(--bx-font-s);
-        gap: var(--bx-space-xs);
+
+        ${textStyle('--bx-data-table-header-cell', 'label-s')}
+
+        gap: var(--bx-data-table-header-cell-gap, var(--bx-space-xs));
         user-select: none;
       }
 
@@ -235,8 +320,8 @@ export class BxDataTable<T = unknown> extends BixElement {
       }
 
       .hcell .sort {
-        color: var(--bx-text-secondary);
-        font-size: 0.8em;
+        color: var(--bx-data-table-sort-fg, var(--bx-text-secondary));
+        font-size: var(--bx-data-table-sort-font-size, 0.8em);
       }
 
       .hcell .title {
@@ -248,43 +333,71 @@ export class BxDataTable<T = unknown> extends BixElement {
         position: absolute;
         inset-block: 0;
         inset-inline-end: 0;
-        inline-size: 6px;
+        inline-size: var(
+          --bx-data-table-resize-handle-width,
+          calc(var(--bx-unit) * 0.5)
+        );
         cursor: col-resize;
         touch-action: none;
       }
 
       .resize-handle:hover,
       .resize-handle[data-active] {
-        background: var(--bx-role-accent);
+        background: var(
+          --bx-data-table-resize-handle-hover-bg,
+          var(--bx-role-accent)
+        );
       }
 
       .hcell[data-pinned],
       .cell[data-pinned] {
         position: sticky;
         z-index: 3;
-        background: var(--bx-surface-base);
+        background: var(
+          --bx-data-table-header-cell-pinned-bg,
+          var(--bx-surface-base)
+        );
       }
 
       .hcell[data-pinned] {
-        background: var(--bx-surface-subtle);
+        background: var(
+          --bx-data-table-header-cell-pinned-bg,
+          var(--bx-surface-subtle)
+        );
         z-index: 5;
       }
 
       .hcell[data-pinned='start'],
       .cell[data-pinned='start'] {
-        box-shadow: inset calc(var(--bx-border-width) * -1) 0 0
-          var(--bx-border-subtle);
+        box-shadow: var(
+          --bx-data-table-header-cell-pinned-shadow,
+          inset calc(var(--bx-border-width) * -1) 0 0 var(--bx-border-subtle)
+        );
       }
 
       .hcell[data-pinned='end'],
       .cell[data-pinned='end'] {
-        box-shadow: inset var(--bx-border-width) 0 0 var(--bx-border-subtle);
+        box-shadow: var(
+          --bx-data-table-header-cell-pinned-shadow,
+          inset var(--bx-border-width) 0 0 var(--bx-border-subtle)
+        );
       }
 
       .hcell:focus-visible,
       .cell:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: calc(var(--bx-focus-ring-offset) * -1);
+        outline: var(
+            --bx-data-table-header-cell-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(
+            --bx-data-table-header-cell-focus-ring-color,
+            var(--bx-focus-ring)
+          );
+        outline-offset: var(
+          --bx-data-table-header-cell-focus-ring-offset,
+          calc(var(--bx-focus-ring-offset) * -1)
+        );
         z-index: 6;
       }
 
@@ -303,38 +416,43 @@ export class BxDataTable<T = unknown> extends BixElement {
         display: grid;
         grid-template-columns: var(--_tracks);
         min-block-size: var(--_row);
-        border-block-end: var(--bx-border-width) solid
-          var(--bx-table-border, var(--bx-border-subtle));
-        background: var(--bx-surface-base);
+        border-block-end: var(
+            --bx-data-table-group-row-block-end-border-width,
+            var(--bx-border-width)
+          )
+          solid var(--bx-data-table-border, var(--bx-border-subtle));
+        background: var(--bx-data-table-group-row-bg, var(--bx-surface-base));
         grid-auto-rows: min-content;
       }
 
       .row:nth-child(odd) {
-        background: var(--bx-table-stripe, var(--bx-surface-base));
+        background: var(--bx-data-table-stripe, var(--bx-surface-base));
       }
 
       .row:hover {
-        background: var(--bx-surface-subtle);
+        background: var(
+          --bx-data-table-group-row-hover-bg,
+          var(--bx-surface-subtle)
+        );
       }
 
       .row[aria-selected='true'] {
-        background: color-mix(
-          in srgb,
-          var(--bx-role-accent) 14%,
-          var(--bx-surface-base)
+        background: var(
+          --bx-data-table-group-row-selected-bg,
+          color-mix(in srgb, var(--bx-role-accent) 14%, var(--bx-surface-base))
         );
       }
 
       .group-row {
-        font-weight: var(--bx-font-weight-medium);
-        background: var(--bx-surface-subtle);
+        ${textStyle('--bx-data-table-group-row', 'label-m')}
+
+        background: var(--bx-data-table-group-row-bg, var(--bx-surface-subtle));
       }
 
       .cell[data-range] {
-        background: color-mix(
-          in srgb,
-          var(--bx-role-accent) 20%,
-          var(--bx-surface-base)
+        background: var(
+          --bx-data-table-cell-bg,
+          color-mix(in srgb, var(--bx-role-accent) 20%, var(--bx-surface-base))
         );
       }
 
@@ -348,9 +466,12 @@ export class BxDataTable<T = unknown> extends BixElement {
 
       .skeleton {
         inline-size: 70%;
-        block-size: 0.8em;
-        border-radius: var(--bx-radius-s, 3px);
-        background: var(--bx-surface-muted, var(--bx-surface-subtle));
+        block-size: var(--bx-data-table-skeleton-height, 0.8em);
+        border-radius: var(--bx-data-table-skeleton-radius, var(--bx-radius-s));
+        background: var(
+          --bx-data-table-skeleton-bg,
+          var(--bx-surface-muted, var(--bx-surface-subtle))
+        );
       }
 
       .editor {
@@ -362,27 +483,32 @@ export class BxDataTable<T = unknown> extends BixElement {
         inline-size: 100%;
         box-sizing: border-box;
         font: inherit;
-        padding: 0.15em 0.3em;
-        border: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        border-radius: var(--bx-radius-s, 3px);
-        background: var(--bx-surface-base);
+        padding: var(--bx-data-table-input-padding, 0.15em 0.3em);
+        border: var(
+            --bx-data-table-input-border-width,
+            var(--bx-border-width-strong)
+          )
+          solid var(--bx-data-table-input-border-color, var(--bx-focus-ring));
+        border-radius: var(--bx-data-table-input-radius, var(--bx-radius-s));
+        background: var(--bx-data-table-input-bg, var(--bx-surface-base));
         color: inherit;
       }
 
       .error {
-        color: var(--bx-role-danger-fg);
-        font-size: var(--bx-font-s);
+        color: var(--bx-data-table-error-fg, var(--bx-role-danger-fg));
+
+        ${textStyle('--bx-data-table-error', 'body-s')}
       }
 
       .toggle {
         all: unset;
         cursor: pointer;
-        inline-size: 1.25em;
-        block-size: 1.25em;
+        inline-size: var(--bx-data-table-toggle-size, 1.25em);
+        block-size: var(--bx-data-table-toggle-size, 1.25em);
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        color: var(--bx-text-secondary);
+        color: var(--bx-data-table-toggle-fg, var(--bx-text-secondary));
         flex-shrink: 0;
       }
 
@@ -394,25 +520,38 @@ export class BxDataTable<T = unknown> extends BixElement {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        inline-size: 1.1em;
-        block-size: 1.1em;
-        border: var(--bx-border-width-strong) solid var(--bx-border-strong);
-        border-radius: var(--bx-radius-s, 3px);
-        font-size: 0.8em;
-        background: var(--bx-surface-base);
+        inline-size: var(--bx-data-table-check-size, 1.1em);
+        block-size: var(--bx-data-table-check-size, 1.1em);
+        border: var(
+            --bx-data-table-check-border-width,
+            var(--bx-border-width-strong)
+          )
+          solid var(--bx-data-table-check-border-color, var(--bx-border-strong));
+        border-radius: var(--bx-data-table-check-radius, var(--bx-radius-s));
+        font-size: var(--bx-data-table-check-font-size, 0.8em);
+        background: var(--bx-data-table-check-bg, var(--bx-surface-base));
       }
 
       .check[data-state='true'],
       .check[data-state='mixed'] {
-        background: var(--bx-role-accent);
-        border-color: var(--bx-role-accent);
-        color: var(--bx-role-accent-contrast, #fff);
+        background: var(
+          --bx-data-table-check-checked-bg,
+          var(--bx-role-accent)
+        );
+        border-color: var(
+          --bx-data-table-check-checked-border-color,
+          var(--bx-role-accent)
+        );
+        color: var(--bx-data-table-check-fg, var(--bx-on-accent));
       }
 
       .detail {
         grid-column: 1 / -1;
-        padding: var(--bx-space-s) var(--bx-space-m);
-        background: var(--bx-surface-subtle);
+        padding: var(
+          --bx-data-table-detail-padding,
+          var(--bx-space-s) var(--bx-space-m)
+        );
+        background: var(--bx-data-table-detail-bg, var(--bx-surface-subtle));
         white-space: normal;
         min-inline-size: 0;
         position: sticky;
@@ -420,18 +559,21 @@ export class BxDataTable<T = unknown> extends BixElement {
       }
 
       .state {
-        padding: var(--bx-space-l, 1.5rem);
+        padding: var(--bx-data-table-empty-padding, var(--bx-space-l));
         text-align: center;
-        color: var(--bx-text-secondary);
+        color: var(--bx-data-table-empty-fg, var(--bx-text-secondary));
       }
 
       .overlay {
         position: absolute;
-        inset-block-start: 3rem;
+        inset-block-start: calc(var(--bx-unit) * 3);
         inset-inline: 0;
         text-align: center;
         pointer-events: none;
-        color: var(--bx-text-secondary);
+        color: var(
+          --bx-data-table-loading-overlay-fg,
+          var(--bx-text-secondary)
+        );
       }
 
       .sr {
@@ -449,7 +591,10 @@ export class BxDataTable<T = unknown> extends BixElement {
 
       :host([data-cards]) .row {
         display: block;
-        padding-block: var(--bx-space-xs);
+        padding-block: var(
+          --bx-data-table-group-row-padding-block,
+          var(--bx-space-xs)
+        );
       }
 
       :host([data-cards]) .cell {
@@ -462,8 +607,10 @@ export class BxDataTable<T = unknown> extends BixElement {
 
       :host([data-cards]) .cell::before {
         content: attr(data-label);
-        font-weight: var(--bx-font-weight-medium);
-        color: var(--bx-text-secondary);
+
+        ${textStyle('--bx-data-table-cell-label', 'label-m')}
+
+        color: var(--bx-data-table-cell-label-fg, var(--bx-text-secondary));
         margin-inline-end: var(--bx-space-s);
       }
 

@@ -3,11 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "packages/angular/src",
-  "implicitDependencies": [
-    "core",
-    "data-list",
-    "data-table"
-  ],
+  "implicitDependencies": ["core", "data-list", "data-table"],
   "targets": {
     "generate": {
       "executor": "nx:run-commands",
@@ -19,13 +15,8 @@
     "test": {
       "executor": "nx:run-commands",
       "cache": true,
-      "inputs": [
-        "default",
-        "^default"
-      ],
-      "dependsOn": [
-        "^build"
-      ],
+      "inputs": ["default", "^default"],
+      "dependsOn": ["^build"],
       "options": {
         "command": "web-test-runner",
         "cwd": "packages/angular"
@@ -34,23 +25,17 @@
     "build": {
       "executor": "nx:run-commands",
       "cache": true,
-      "dependsOn": [
-        "^build"
-      ],
+      "dependsOn": ["^build"],
       "options": {
         "command": "ngc -p tsconfig.lib.json",
         "cwd": "packages/angular"
       },
-      "outputs": [
-        "{projectRoot}/dist"
-      ]
+      "outputs": ["{projectRoot}/dist"]
     },
     "typecheck": {
       "executor": "nx:run-commands",
       "cache": true,
-      "dependsOn": [
-        "^build"
-      ],
+      "dependsOn": ["^build"],
       "options": {
         "command": "tsc -p tsconfig.spec.json --noEmit",
         "cwd": "packages/angular"

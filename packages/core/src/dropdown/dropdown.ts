@@ -5,6 +5,7 @@ import { BixElement } from '../bix-element.ts';
 import { BxDropdownItem } from '../dropdown-item/dropdown-item.ts';
 import type { BxPopup, Placement } from '../popup/popup.ts';
 import { VirtualizerController } from '../virtualizer/virtualizer-controller.ts';
+import { textStyle } from '../internal/text-style.ts';
 
 type Size = 'small' | 'medium' | 'large';
 type HideSource =
@@ -84,6 +85,29 @@ let nextId = 0;
  * @csspart menu - The scrollable `role="menu"` element.
  *
  * @cssprop --bx-dropdown-width - Menu width. Default `calc(var(--bx-unit) * 16)`.
+ * @cssprop --bx-dropdown-menu-max-height - Maximum height of the `menu` part. Default `min( var(--bx-popup-auto-size-available-height, 100vh), calc(var(--bx-unit) * 40) )`.
+ * @cssprop --bx-dropdown-menu-padding-block - Padding block of the `menu` part. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-dropdown-menu-border-width - Border width of the `menu` part. Default `var(--bx-border-width)`.
+ * @cssprop --bx-dropdown-menu-border-color - Border color of the `menu` part. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-dropdown-menu-radius - Corner radius of the `menu` part. Default `var(--bx-radius-m)`.
+ * @cssprop --bx-dropdown-menu-shadow - Box shadow of the `menu` part. Default `var(--bx-shadow-m)`.
+ * @cssprop --bx-dropdown-menu-bg - Background of the `menu` part. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-dropdown-menu-fg - Text/icon color of the `menu` part. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-dropdown-hr-block-start-border-width - Block start border width of the `hr` element. Default `var(--bx-border-width)`.
+ * @cssprop --bx-dropdown-hr-block-start-border-color - Block start border color of the `hr` element. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-dropdown-heading-padding-block - Padding block of the `heading` element. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-dropdown-heading-padding-inline - Padding inline of the `heading` element. Default `var(--bx-space-s)`.
+ * @cssprop --bx-dropdown-heading-fg - Text/icon color of the `heading` element. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-dropdown-menu-font-family - Font family of the `menu` part (text style `body-m`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-dropdown-menu-font-size - Font size of the `menu` part (text style `body-m`). Default `var(--bx-type-body-m-size)`.
+ * @cssprop --bx-dropdown-menu-font-weight - Font weight of the `menu` part (text style `body-m`). Default `var(--bx-type-body-m-weight)`.
+ * @cssprop --bx-dropdown-menu-line-height - Line height of the `menu` part (text style `body-m`). Default `var(--bx-type-body-m-leading)`.
+ * @cssprop --bx-dropdown-menu-letter-spacing - Letter spacing of the `menu` part (text style `body-m`). Default `var(--bx-type-body-m-tracking)`.
+ * @cssprop --bx-dropdown-heading-font-family - Font family of the `heading` element (text style `label-s`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-dropdown-heading-font-size - Font size of the `heading` element (text style `label-s`). Default `var(--bx-type-label-s-size)`.
+ * @cssprop --bx-dropdown-heading-font-weight - Font weight of the `heading` element (text style `label-s`). Default `var(--bx-type-label-s-weight)`.
+ * @cssprop --bx-dropdown-heading-line-height - Line height of the `heading` element (text style `label-s`). Default `var(--bx-type-label-s-leading)`.
+ * @cssprop --bx-dropdown-heading-letter-spacing - Letter spacing of the `heading` element (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.
  */
 export class BxDropdown extends BixElement {
   static override tagName = 'bx-dropdown';
@@ -100,35 +124,37 @@ export class BxDropdown extends BixElement {
       }
 
       :host([size='small']) .menu {
-        --bx-dropdown-item-height: max(
-          var(--bx-control-height-s),
-          var(--bx-target-min, 1.5rem)
-        );
+        --_item-height: max(var(--bx-control-height-s), var(--bx-target-min));
       }
       :host([size='large']) .menu {
-        --bx-dropdown-item-height: max(
-          var(--bx-control-height-l),
-          var(--bx-target-min, 1.5rem)
-        );
+        --_item-height: max(var(--bx-control-height-l), var(--bx-target-min));
       }
 
       .menu {
         box-sizing: border-box;
-        inline-size: var(--bx-dropdown-width, calc(var(--bx-unit, 1rem) * 16));
-        max-block-size: min(
-          var(--auto-size-available-height, 100vh),
-          calc(var(--bx-unit, 1rem) * 40)
+        inline-size: var(--bx-dropdown-width, calc(var(--bx-unit) * 16));
+        max-block-size: var(
+          --bx-dropdown-menu-max-height,
+          min(
+            var(--bx-popup-auto-size-available-height, 100vh),
+            calc(var(--bx-unit) * 40)
+          )
         );
         overflow-y: auto;
         overscroll-behavior: contain;
-        padding-block: var(--bx-space-xs);
-        border: var(--bx-border-width) solid var(--bx-border-subtle);
-        border-radius: var(--bx-radius-m);
-        box-shadow: var(--bx-shadow-m);
-        background: var(--bx-surface-base);
-        color: var(--bx-text-primary);
-        font-family: var(--bx-font-family-sans);
-        font-size: var(--bx-font-m);
+        padding-block: var(
+          --bx-dropdown-menu-padding-block,
+          var(--bx-space-xs)
+        );
+        border: var(--bx-dropdown-menu-border-width, var(--bx-border-width))
+          solid var(--bx-dropdown-menu-border-color, var(--bx-border-subtle));
+        border-radius: var(--bx-dropdown-menu-radius, var(--bx-radius-m));
+        box-shadow: var(--bx-dropdown-menu-shadow, var(--bx-shadow-m));
+        background: var(--bx-dropdown-menu-bg, var(--bx-surface-base));
+        color: var(--bx-dropdown-menu-fg, var(--bx-text-primary));
+
+        ${textStyle('--bx-dropdown-menu', 'body-m')}
+
         outline: none;
       }
 
@@ -145,15 +171,29 @@ export class BxDropdown extends BixElement {
       .row hr {
         margin-block: var(--bx-space-xs);
         border: 0;
-        border-block-start: var(--bx-border-width) solid var(--bx-border-subtle);
+        border-block-start: var(
+            --bx-dropdown-hr-block-start-border-width,
+            var(--bx-border-width)
+          )
+          solid
+          var(
+            --bx-dropdown-hr-block-start-border-color,
+            var(--bx-border-subtle)
+          );
       }
 
       .heading {
-        padding-block: var(--bx-space-xs);
-        padding-inline: var(--bx-space-s);
-        color: var(--bx-text-secondary);
-        font-size: var(--bx-font-s);
-        font-weight: var(--bx-font-weight-medium);
+        padding-block: var(
+          --bx-dropdown-heading-padding-block,
+          var(--bx-space-xs)
+        );
+        padding-inline: var(
+          --bx-dropdown-heading-padding-inline,
+          var(--bx-space-s)
+        );
+        color: var(--bx-dropdown-heading-fg, var(--bx-text-secondary));
+
+        ${textStyle('--bx-dropdown-heading', 'label-s')}
       }
 
       ::slotted(bx-divider) {

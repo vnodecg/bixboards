@@ -38,11 +38,44 @@ _None._
 
 ### CSS parts
 
-`base`
+| Part           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `base`         | The tab's interactive row (`role="tab"`).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `close-button` | The close glyph, present when `closable` (not in the spec's own CSS parts table — added the same way `bx-badge`'s `remove-button` part exists for its own removable-chip case). It's a plain `aria-hidden` span, not its own focusable control: a focusable descendant of a `role="tab"` element is an ARIA nested-interactive violation (axe: nested-interactive) no matter its `tabindex`, since `tab` is itself an interactive widget role. Mouse users click it directly; keyboard users close via Backspace/Delete on the tab itself, the same pattern `bx-badge`'s removable chip uses for the same reason. |
 
 ### CSS custom properties
 
-_Only global tokens (see conventions)._
+| Property                                  | Description                                                                                                       |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `--bx-tab-gap`                            | Gap of the root surface. Default `var(--bx-space-2xs)`.                                                           |
+| `--bx-tab-min-height`                     | Minimum height of the root surface. Default `var(--bx-target-min)`.                                               |
+| `--bx-tab-padding-inline`                 | Padding inline of the root surface. Default `var(--bx-space-m)`.                                                  |
+| `--bx-tab-radius`                         | Corner radius of the root surface. Default `var(--bx-radius-s) var(--bx-radius-s) 0 0`.                           |
+| `--bx-tab-fg`                             | Text/icon color of the root surface. Default `var(--bx-text-secondary)`.                                          |
+| `--bx-tab-hover-fg`                       | Text/icon color of the root surface (hover state). Default `var(--bx-text-primary)`.                              |
+| `--bx-tab-focus-ring-width`               | Focus ring width of the root surface (focus state). Default `var(--bx-border-width-strong)`.                      |
+| `--bx-tab-focus-ring-color`               | Focus ring color of the root surface (focus state). Default `var(--bx-focus-ring)`.                               |
+| `--bx-tab-focus-ring-offset`              | Focus ring offset of the root surface (focus state). Default `calc(var(--bx-focus-ring-offset) * -1)`.            |
+| `--bx-tab-disabled-fg`                    | Text/icon color of the root surface (disabled state). Default `var(--bx-text-disabled)`.                          |
+| `--bx-tab-close-button-size`              | Size (width and height) of the `close-button` part. Default `1em`.                                                |
+| `--bx-tab-close-button-min-width`         | Minimum width of the `close-button` part. Default `var(--bx-target-min)`.                                         |
+| `--bx-tab-close-button-min-height`        | Minimum height of the `close-button` part. Default `var(--bx-target-min)`.                                        |
+| `--bx-tab-close-button-radius`            | Corner radius of the `close-button` part. Default `var(--bx-radius-pill)`.                                        |
+| `--bx-tab-close-button-hover-bg`          | Background of the `close-button` part (hover state). Default `color-mix(in srgb, currentColor 16%, transparent)`. |
+| `--bx-tab-close-button-focus-ring-width`  | Focus ring width of the `close-button` part (focus state). Default `var(--bx-border-width-strong)`.               |
+| `--bx-tab-close-button-focus-ring-color`  | Focus ring color of the `close-button` part (focus state). Default `var(--bx-focus-ring)`.                        |
+| `--bx-tab-close-button-focus-ring-offset` | Focus ring offset of the `close-button` part (focus state). Default `var(--bx-focus-ring-offset)`.                |
+| `--bx-tab-close-button-icon-size`         | Size (width and height) of the icon inside the `close-button` element. Default `0.65em`.                          |
+| `--bx-tab-font-family`                    | Font family of the root surface. Default `var(--bx-type-body-family)`.                                            |
+| `--bx-tab-font-family`                    | Font family of the root surface (text style `label-m`). Default `var(--bx-type-label-family)`.                    |
+| `--bx-tab-font-size`                      | Font size of the root surface (text style `label-m`). Default `var(--bx-type-label-m-size)`.                      |
+| `--bx-tab-font-weight`                    | Font weight of the root surface (text style `label-m`). Default `var(--bx-type-label-m-weight)`.                  |
+| `--bx-tab-line-height`                    | Line height of the root surface (text style `label-m`). Default `var(--bx-type-label-m-leading)`.                 |
+| `--bx-tab-letter-spacing`                 | Letter spacing of the root surface (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.             |
+| `--bx-tab-hover-bg`                       | Background while hovered. Default `var(--bx-surface-subtle)`.                                                     |
+| `--bx-tab-pressed-bg`                     | Background while pressed. Default `var(--bx-surface-muted)`.                                                      |
+| `--bx-tab-selected-fg`                    | Text color of the selected tab. Default `var(--bx-text-primary)`.                                                 |
+| `--bx-tab-selected-hover-bg`              | Background of the selected tab while hovered. Default `transparent`.                                              |
 
 ### Methods
 

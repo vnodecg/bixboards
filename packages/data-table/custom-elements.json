@@ -782,24 +782,304 @@
           ],
           "cssProperties": [
             {
-              "name": "--bx-table-row-height",
+              "name": "--bx-data-table-row-height",
               "description": "Row height (density default)."
             },
             {
-              "name": "--bx-table-header-height",
+              "name": "--bx-data-table-header-height",
               "description": "Header height."
             },
             {
-              "name": "--bx-table-stripe",
+              "name": "--bx-data-table-stripe",
               "description": "Background of odd rows."
             },
             {
-              "name": "--bx-table-border",
+              "name": "--bx-data-table-border",
               "description": "Border color."
             },
             {
-              "name": "--bx-table-cell-padding-inline",
+              "name": "--bx-data-table-cell-padding-inline",
               "description": "Cell inline padding."
+            },
+            {
+              "name": "--bx-data-table-fg",
+              "description": "Text/icon color of the root surface. Default `var(--bx-text-primary)`."
+            },
+            {
+              "name": "--bx-data-table-min-height",
+              "description": "Minimum height of the root surface. Default `calc(var(--bx-unit) * 10)`."
+            },
+            {
+              "name": "--bx-data-table-scroller-border-width",
+              "description": "Border width of the `scroller` element. Default `var(--bx-border-width)`."
+            },
+            {
+              "name": "--bx-data-table-scroller-radius",
+              "description": "Corner radius of the `scroller` element. Default `var(--bx-radius-m)`."
+            },
+            {
+              "name": "--bx-data-table-scroller-bg",
+              "description": "Background of the `scroller` element. Default `var(--bx-surface-base)`."
+            },
+            {
+              "name": "--bx-data-table-header-bg",
+              "description": "Background of the `header` part. Default `var(--bx-surface-subtle)`."
+            },
+            {
+              "name": "--bx-data-table-header-block-end-border-width",
+              "description": "Block end border width of the `header` part. Default `var(--bx-border-width)`."
+            },
+            {
+              "name": "--bx-data-table-header-cell-gap",
+              "description": "Gap of the `header-cell` part. Default `var(--bx-space-xs)`."
+            },
+            {
+              "name": "--bx-data-table-sort-fg",
+              "description": "Text/icon color of the `sort` element. Default `var(--bx-text-secondary)`."
+            },
+            {
+              "name": "--bx-data-table-sort-font-size",
+              "description": "Font size of the `sort` element. Default `0.8em`."
+            },
+            {
+              "name": "--bx-data-table-resize-handle-width",
+              "description": "Width of the `resize-handle` part. Default `calc(var(--bx-unit) * 0.5)`."
+            },
+            {
+              "name": "--bx-data-table-resize-handle-hover-bg",
+              "description": "Background of the `resize-handle` part (hover state). Default `var(--bx-role-accent)`."
+            },
+            {
+              "name": "--bx-data-table-header-cell-pinned-bg",
+              "description": "Background of the `header-cell` part (pinned state). Default `var(--bx-surface-base)`."
+            },
+            {
+              "name": "--bx-data-table-header-cell-pinned-shadow",
+              "description": "Box shadow of the `header-cell` part (pinned state). Default `inset calc(var(--bx-border-width) * -1) 0 0 var(--bx-border-subtle)`."
+            },
+            {
+              "name": "--bx-data-table-header-cell-focus-ring-width",
+              "description": "Focus ring width of the `header-cell` part (focus state). Default `var(--bx-border-width-strong)`."
+            },
+            {
+              "name": "--bx-data-table-header-cell-focus-ring-color",
+              "description": "Focus ring color of the `header-cell` part (focus state). Default `var(--bx-focus-ring)`."
+            },
+            {
+              "name": "--bx-data-table-header-cell-focus-ring-offset",
+              "description": "Focus ring offset of the `header-cell` part (focus state). Default `calc(var(--bx-focus-ring-offset) * -1)`."
+            },
+            {
+              "name": "--bx-data-table-group-row-block-end-border-width",
+              "description": "Block end border width of the `group-row` part. Default `var(--bx-border-width)`."
+            },
+            {
+              "name": "--bx-data-table-group-row-bg",
+              "description": "Background of the `group-row` part. Default `var(--bx-surface-base)`."
+            },
+            {
+              "name": "--bx-data-table-group-row-hover-bg",
+              "description": "Background of the `group-row` part (hover state). Default `var(--bx-surface-subtle)`."
+            },
+            {
+              "name": "--bx-data-table-group-row-selected-bg",
+              "description": "Background of the `group-row` part (selected state). Default `color-mix( in srgb, var(--bx-role-accent) 14%, var(--bx-surface-base) )`."
+            },
+            {
+              "name": "--bx-data-table-cell-bg",
+              "description": "Background of the `cell` part. Default `color-mix( in srgb, var(--bx-role-accent) 20%, var(--bx-surface-base) )`."
+            },
+            {
+              "name": "--bx-data-table-skeleton-height",
+              "description": "Height of the `skeleton` element. Default `0.8em`."
+            },
+            {
+              "name": "--bx-data-table-skeleton-radius",
+              "description": "Corner radius of the `skeleton` element. Default `var(--bx-radius-s)`."
+            },
+            {
+              "name": "--bx-data-table-skeleton-bg",
+              "description": "Background of the `skeleton` element. Default `var(--bx-surface-muted, var(--bx-surface-subtle))`."
+            },
+            {
+              "name": "--bx-data-table-input-padding",
+              "description": "Padding of the `input` element. Default `0.15em 0.3em`."
+            },
+            {
+              "name": "--bx-data-table-input-border-width",
+              "description": "Border width of the `input` element. Default `var(--bx-border-width-strong)`."
+            },
+            {
+              "name": "--bx-data-table-input-border-color",
+              "description": "Border color of the `input` element. Default `var(--bx-focus-ring)`."
+            },
+            {
+              "name": "--bx-data-table-input-radius",
+              "description": "Corner radius of the `input` element. Default `var(--bx-radius-s)`."
+            },
+            {
+              "name": "--bx-data-table-input-bg",
+              "description": "Background of the `input` element. Default `var(--bx-surface-base)`."
+            },
+            {
+              "name": "--bx-data-table-error-fg",
+              "description": "Text/icon color of the `error` element. Default `var(--bx-role-danger-fg)`."
+            },
+            {
+              "name": "--bx-data-table-toggle-size",
+              "description": "Size (width and height) of the `toggle` element. Default `1.25em`."
+            },
+            {
+              "name": "--bx-data-table-toggle-fg",
+              "description": "Text/icon color of the `toggle` element. Default `var(--bx-text-secondary)`."
+            },
+            {
+              "name": "--bx-data-table-check-size",
+              "description": "Size (width and height) of the `check` element. Default `1.1em`."
+            },
+            {
+              "name": "--bx-data-table-check-border-width",
+              "description": "Border width of the `check` element. Default `var(--bx-border-width-strong)`."
+            },
+            {
+              "name": "--bx-data-table-check-border-color",
+              "description": "Border color of the `check` element. Default `var(--bx-border-strong)`."
+            },
+            {
+              "name": "--bx-data-table-check-radius",
+              "description": "Corner radius of the `check` element. Default `var(--bx-radius-s)`."
+            },
+            {
+              "name": "--bx-data-table-check-font-size",
+              "description": "Font size of the `check` element. Default `0.8em`."
+            },
+            {
+              "name": "--bx-data-table-check-bg",
+              "description": "Background of the `check` element. Default `var(--bx-surface-base)`."
+            },
+            {
+              "name": "--bx-data-table-check-fg",
+              "description": "Text/icon color of the `check` element. Default `var(--bx-on-accent)`."
+            },
+            {
+              "name": "--bx-data-table-detail-padding",
+              "description": "Padding of the `detail` part. Default `var(--bx-space-s) var(--bx-space-m)`."
+            },
+            {
+              "name": "--bx-data-table-detail-bg",
+              "description": "Background of the `detail` part. Default `var(--bx-surface-subtle)`."
+            },
+            {
+              "name": "--bx-data-table-empty-padding",
+              "description": "Padding of the `empty` part. Default `var(--bx-space-l)`."
+            },
+            {
+              "name": "--bx-data-table-empty-fg",
+              "description": "Text/icon color of the `empty` part. Default `var(--bx-text-secondary)`."
+            },
+            {
+              "name": "--bx-data-table-loading-overlay-fg",
+              "description": "Text/icon color of the `loading-overlay` part. Default `var(--bx-text-secondary)`."
+            },
+            {
+              "name": "--bx-data-table-group-row-padding-block",
+              "description": "Padding block of the `group-row` part. Default `var(--bx-space-xs)`."
+            },
+            {
+              "name": "--bx-data-table-cell-label-fg",
+              "description": "Text/icon color of the cell's data label (card layout). Default `var(--bx-text-secondary)`."
+            },
+            {
+              "name": "--bx-data-table-check-checked-bg",
+              "description": "Background of a checked or mixed selection checkbox. Default `var(--bx-role-accent)`."
+            },
+            {
+              "name": "--bx-data-table-check-checked-border-color",
+              "description": "Border color of a checked or mixed selection checkbox. Default `var(--bx-role-accent)`."
+            },
+            {
+              "name": "--bx-data-table-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-body-family)`."
+            },
+            {
+              "name": "--bx-data-table-header-cell-font-family",
+              "description": "Font family of the `header-cell` part (text style `label-s`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-data-table-header-cell-font-size",
+              "description": "Font size of the `header-cell` part (text style `label-s`). Default `var(--bx-type-label-s-size)`."
+            },
+            {
+              "name": "--bx-data-table-header-cell-font-weight",
+              "description": "Font weight of the `header-cell` part (text style `label-s`). Default `var(--bx-type-label-s-weight)`."
+            },
+            {
+              "name": "--bx-data-table-header-cell-line-height",
+              "description": "Line height of the `header-cell` part (text style `label-s`). Default `var(--bx-type-label-s-leading)`."
+            },
+            {
+              "name": "--bx-data-table-header-cell-letter-spacing",
+              "description": "Letter spacing of the `header-cell` part (text style `label-s`). Default `var(--bx-type-label-s-tracking)`."
+            },
+            {
+              "name": "--bx-data-table-group-row-font-family",
+              "description": "Font family of the `group-row` part (text style `label-m`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-data-table-group-row-font-size",
+              "description": "Font size of the `group-row` part (text style `label-m`). Default `var(--bx-type-label-m-size)`."
+            },
+            {
+              "name": "--bx-data-table-group-row-font-weight",
+              "description": "Font weight of the `group-row` part (text style `label-m`). Default `var(--bx-type-label-m-weight)`."
+            },
+            {
+              "name": "--bx-data-table-group-row-line-height",
+              "description": "Line height of the `group-row` part (text style `label-m`). Default `var(--bx-type-label-m-leading)`."
+            },
+            {
+              "name": "--bx-data-table-group-row-letter-spacing",
+              "description": "Letter spacing of the `group-row` part (text style `label-m`). Default `var(--bx-type-label-m-tracking)`."
+            },
+            {
+              "name": "--bx-data-table-error-font-family",
+              "description": "Font family of the `error` element (text style `body-s`). Default `var(--bx-type-body-family)`."
+            },
+            {
+              "name": "--bx-data-table-error-font-size",
+              "description": "Font size of the `error` element (text style `body-s`). Default `var(--bx-type-body-s-size)`."
+            },
+            {
+              "name": "--bx-data-table-error-font-weight",
+              "description": "Font weight of the `error` element (text style `body-s`). Default `var(--bx-type-body-s-weight)`."
+            },
+            {
+              "name": "--bx-data-table-error-line-height",
+              "description": "Line height of the `error` element (text style `body-s`). Default `var(--bx-type-body-s-leading)`."
+            },
+            {
+              "name": "--bx-data-table-error-letter-spacing",
+              "description": "Letter spacing of the `error` element (text style `body-s`). Default `var(--bx-type-body-s-tracking)`."
+            },
+            {
+              "name": "--bx-data-table-cell-label-font-family",
+              "description": "Font family of the `cell` part (text style `label-m`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-data-table-cell-label-font-size",
+              "description": "Font size of the `cell` part (text style `label-m`). Default `var(--bx-type-label-m-size)`."
+            },
+            {
+              "name": "--bx-data-table-cell-label-font-weight",
+              "description": "Font weight of the `cell` part (text style `label-m`). Default `var(--bx-type-label-m-weight)`."
+            },
+            {
+              "name": "--bx-data-table-cell-label-line-height",
+              "description": "Line height of the `cell` part (text style `label-m`). Default `var(--bx-type-label-m-leading)`."
+            },
+            {
+              "name": "--bx-data-table-cell-label-letter-spacing",
+              "description": "Letter spacing of the `cell` part (text style `label-m`). Default `var(--bx-type-label-m-tracking)`."
             }
           ]
         },

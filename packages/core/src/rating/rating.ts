@@ -1,6 +1,7 @@
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
 import { FormAssociatedMixin } from '../internal/form-associated.ts';
+import { textFamily } from '../internal/text-style.ts';
 
 type Size = 'small' | 'medium' | 'large';
 
@@ -22,7 +23,7 @@ function clamp(value: number, min: number, max: number): number {
  * FR-RATING-04's hover preview is a single `clip-path` on one `.fill` overlay (the fully "on"
  * symbols drawn on top of the always-visible dim `.track` row underneath), not one clip per
  * symbol — so hovering only ever repaints that one clip boundary, never touches the `max` symbol
- * nodes themselves, and the pointer handler writes `--bx-rating-fill` straight to the overlay's
+ * nodes themselves, and the pointer handler writes `--_fill` straight to the overlay's
  * `style` (bypassing `requestUpdate`) so a fast mouse sweep doesn't schedule a render per pixel.
  * FR-RATING-05 (RTL fills right-to-left) falls out of the same technique: the clip inset flips
  * side under `:host(:dir(rtl))` instead of any per-symbol position math.
@@ -42,9 +43,17 @@ function clamp(value: number, min: number, max: number): number {
  * @csspart symbol - A single track (dim) symbol.
  * @csspart symbol-partial - The clipped overlay row of "on" symbols.
  *
- * @cssprop --bx-symbol-color - Track (unfilled) symbol color. Default `--bx-border-strong`.
- * @cssprop --bx-symbol-color-active - Filled symbol color. Default `--bx-role-accent`.
- * @cssprop --bx-symbol-spacing - Gap between symbols. Default `--bx-space-2xs`.
+ * @cssprop --bx-rating-symbol-color - Track (unfilled) symbol color. Default `--bx-border-strong`.
+ * @cssprop --bx-rating-symbol-color-active - Filled symbol color. Default `--bx-role-accent`.
+ * @cssprop --bx-rating-symbol-spacing - Gap between symbols. Default `--bx-space-2xs`.
+ * @cssprop --bx-rating-min-height - Minimum height of the root surface. Default `var(--bx-target-min)`.
+ * @cssprop --bx-rating-focus-ring-width - Focus ring width of the root surface (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-rating-focus-ring-color - Focus ring color of the root surface (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-rating-focus-ring-offset - Focus ring offset of the root surface (focus state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-rating-symbol-line-height - Line height of the `symbol` part. Default `1`.
+ * @cssprop --bx-rating-symbol-disabled-opacity - Opacity of the `symbol` part (disabled state). Default `0.5`.
+ * @cssprop --bx-rating-symbol-size - Symbol size (width and height). Default `calc(var(--bx-unit) * 1.5)`, or per `size`.
+ * @cssprop --bx-rating-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
  */
 export class BxRating extends FormAssociatedMixin(BixElement) {
   static override tagName = 'bx-rating';
@@ -54,16 +63,15 @@ export class BxRating extends FormAssociatedMixin(BixElement) {
     css`
       :host {
         display: inline-block;
-        container-type: inline-size;
-        font-family: var(--bx-font-family-sans);
+        ${textFamily('--bx-rating', 'body')}
       }
 
       .base {
         position: relative;
         display: inline-flex;
         align-items: center;
-        min-block-size: var(--bx-target-min, 2.75rem);
-        gap: var(--bx-symbol-spacing, var(--bx-space-2xs));
+        min-block-size: var(--bx-rating-min-height, var(--bx-target-min));
+        gap: var(--bx-rating-symbol-spacing, var(--bx-space-2xs));
         cursor: pointer;
         touch-action: manipulation;
       }
@@ -74,43 +82,54 @@ export class BxRating extends FormAssociatedMixin(BixElement) {
       }
 
       .base:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+        outline: var(
+            --bx-rating-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid var(--bx-rating-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-rating-focus-ring-offset,
+          var(--bx-focus-ring-offset)
+        );
       }
 
       .track,
       .fill {
         display: inline-flex;
-        gap: var(--bx-symbol-spacing, var(--bx-space-2xs));
+        gap: var(--bx-rating-symbol-spacing, var(--bx-space-2xs));
       }
 
       .fill {
         position: absolute;
         inset-inline-start: 0;
         inset-block-start: 0;
-        clip-path: inset(0 calc(100% - var(--bx-rating-fill, 0%)) 0 0);
+        clip-path: inset(0 calc(100% - var(--_fill, 0%)) 0 0);
         pointer-events: none;
       }
 
       :host(:dir(rtl)) .fill {
-        clip-path: inset(0 0 0 calc(100% - var(--bx-rating-fill, 0%)));
+        clip-path: inset(0 0 0 calc(100% - var(--_fill, 0%)));
       }
 
       .symbol {
-        inline-size: var(--bx-symbol-size, calc(var(--bx-unit) * 1.5));
-        block-size: var(--bx-symbol-size, calc(var(--bx-unit) * 1.5));
-        color: var(--bx-symbol-color, var(--bx-border-strong));
+        --_symbol: var(
+          --bx-rating-symbol-size,
+          var(--_default-symbol, calc(var(--bx-unit) * 1.5))
+        );
+        inline-size: var(--_symbol);
+        block-size: var(--_symbol);
+        color: var(--bx-rating-symbol-color, var(--bx-border-strong));
       }
 
-      :host([size='small']) .symbol {
-        --bx-symbol-size: var(--bx-unit);
+      :host([size='small']) {
+        --_default-symbol: var(--bx-unit);
       }
-      :host([size='large']) .symbol {
-        --bx-symbol-size: calc(var(--bx-unit) * 2);
+      :host([size='large']) {
+        --_default-symbol: calc(var(--bx-unit) * 2);
       }
 
       .fill .symbol {
-        color: var(--bx-symbol-color-active, var(--bx-role-accent));
+        color: var(--bx-rating-symbol-color-active, var(--bx-role-accent));
       }
 
       .symbol svg {
@@ -125,18 +144,12 @@ export class BxRating extends FormAssociatedMixin(BixElement) {
         justify-content: center;
         inline-size: 100%;
         block-size: 100%;
-        font-size: var(--bx-symbol-size, calc(var(--bx-unit) * 1.5));
-        line-height: 1;
+        font-size: var(--_symbol);
+        line-height: var(--bx-rating-symbol-line-height, 1);
       }
 
       :host([disabled]) .track .symbol {
-        opacity: 0.5;
-      }
-
-      @container (max-width: calc(var(--bx-unit) * 12)) {
-        .symbol {
-          --bx-symbol-size: var(--bx-unit);
-        }
+        opacity: var(--bx-rating-symbol-disabled-opacity, 0.5);
       }
 
       @media (forced-colors: active) {
@@ -238,10 +251,7 @@ export class BxRating extends FormAssociatedMixin(BixElement) {
   }
 
   #setFillPercent(value: number): void {
-    this.#fillEl?.style.setProperty(
-      '--bx-rating-fill',
-      `${(value / this.max) * 100}%`,
-    );
+    this.#fillEl?.style.setProperty('--_fill', `${(value / this.max) * 100}%`);
   }
 
   #handlePointerMove = (event: PointerEvent): void => {

@@ -41,11 +41,16 @@ Groups related buttons into a single segmented control with shared borders and r
 
 ### CSS parts
 
-`base`
+| Part   | Description                 |
+| ------ | --------------------------- |
+| `base` | The `role="group"` wrapper. |
 
 ### CSS custom properties
 
-`--bx-button-group-gap` (default `-1 × --bx-border-width`, the shared seam), `--bx-button-group-radius` (both renamed from the spec's `--bx-group-*` to follow the component-prefix rule). Corner shaping goes through `bx-button`'s `--bx-button-radius`.
+| Property                   | Description                                                           |
+| -------------------------- | --------------------------------------------------------------------- |
+| `--bx-button-group-gap`    | Offset between items. Default `-1 * --bx-border-width` (shared seam). |
+| `--bx-button-group-radius` | Outer corner radius. Default `--bx-radius-m`.                         |
 
 ### Methods
 

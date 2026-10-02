@@ -7,6 +7,7 @@ import {
 } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
 import { BixElement, VirtualizerController } from '@bixant/core';
+import { textStyle, textFamily } from '@bixant/core';
 
 type Key = string | number;
 type Selection = 'none' | 'single' | 'multiple' | 'leaf';
@@ -93,10 +94,45 @@ let nextId = 0;
  * @csspart indent - The indentation (and guide) area of a row.
  * @csspart toggle - The expand/collapse chevron.
  * @csspart label - The node label.
- * @csspart guide - The vertical guide lines (via the indent area's background).
  *
- * @cssprop --bx-tree-indent - Indent per level.
- * @cssprop --bx-tree-row-height - Row height.
+ * @cssprop --bx-virtual-tree-indent - Indent per level.
+ * @cssprop --bx-virtual-tree-row-height - Row height.
+ * @cssprop --bx-virtual-tree-fg - Text/icon color of the root surface. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-virtual-tree-min-height - Minimum height of the root surface. Default `calc(var(--bx-unit) * 6)`.
+ * @cssprop --bx-virtual-tree-tree-focus-ring-width - Focus ring width of the `tree` element (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-virtual-tree-tree-focus-ring-color - Focus ring color of the `tree` element (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-virtual-tree-tree-focus-ring-offset - Focus ring offset of the `tree` element (focus state). Default `calc(var(--bx-focus-ring-offset) * -1)`.
+ * @cssprop --bx-virtual-tree-node-gap - Gap of the `node` part. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-virtual-tree-node-padding-inline-end - Padding inline end of the `node` part. Default `var(--bx-space-s)`.
+ * @cssprop --bx-virtual-tree-node-hover-bg - Background of the `node` part (hover state). Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-virtual-tree-node-ring-width - Focus ring width of the `node` part. Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-virtual-tree-node-ring-color - Focus ring color of the `node` part. Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-virtual-tree-node-outline-offset - Outline offset of the `node` part. Default `calc(var(--bx-focus-ring-offset) * -1)`.
+ * @cssprop --bx-virtual-tree-node-selected-bg - Background of the `node` part (selected state). Default `color-mix(in srgb, var(--bx-role-accent) 14%, transparent)`.
+ * @cssprop --bx-virtual-tree-node-disabled-fg - Text/icon color of the `node` part (disabled state). Default `var(--bx-text-disabled)`.
+ * @cssprop --bx-virtual-tree-toggle-size - Size (width and height) of the `toggle` part. Default `1.25em`.
+ * @cssprop --bx-virtual-tree-toggle-fg - Text/icon color of the `toggle` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-virtual-tree-check-size - Size (width and height) of the `check` element. Default `1.1em`.
+ * @cssprop --bx-virtual-tree-check-border-width - Border width of the `check` element. Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-virtual-tree-check-border-color - Border color of the `check` element. Default `var(--bx-border-strong)`.
+ * @cssprop --bx-virtual-tree-check-radius - Corner radius of the `check` element. Default `var(--bx-radius-s)`.
+ * @cssprop --bx-virtual-tree-check-font-size - Font size of the `check` element. Default `0.8em`.
+ * @cssprop --bx-virtual-tree-check-line-height - Line height of the `check` element. Default `1`.
+ * @cssprop --bx-virtual-tree-check-bg - Background of the `check` element. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-virtual-tree-check-fg - Text/icon color of the `check` element. Default `var(--bx-on-accent)`.
+ * @cssprop --bx-virtual-tree-status-fg - Text/icon color of the `status` element. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-virtual-tree-empty-padding - Padding of the `empty` element. Default `var(--bx-space-m)`.
+ * @cssprop --bx-virtual-tree-empty-fg - Text/icon color of the `empty` element. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-virtual-tree-toggle-icon-size - Size (width and height) of the icon inside the `toggle` element. Default `0.75em`.
+ * @cssprop --bx-virtual-tree-status-error-fg - Color of the status line when loading failed. Default `var(--bx-role-danger-fg)`.
+ * @cssprop --bx-virtual-tree-check-checked-bg - Background of a checked or mixed `check` box. Default `var(--bx-role-accent)`.
+ * @cssprop --bx-virtual-tree-check-checked-border-color - Border color of a checked or mixed `check` box. Default `var(--bx-role-accent)`.
+ * @cssprop --bx-virtual-tree-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-virtual-tree-status-font-family - Font family of the `status` element (text style `body-s`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-virtual-tree-status-font-size - Font size of the `status` element (text style `body-s`). Default `var(--bx-type-body-s-size)`.
+ * @cssprop --bx-virtual-tree-status-font-weight - Font weight of the `status` element (text style `body-s`). Default `var(--bx-type-body-s-weight)`.
+ * @cssprop --bx-virtual-tree-status-line-height - Line height of the `status` element (text style `body-s`). Default `var(--bx-type-body-s-leading)`.
+ * @cssprop --bx-virtual-tree-status-letter-spacing - Letter spacing of the `status` element (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.
  */
 export class BxVirtualTree<T = unknown> extends BixElement {
   static override tagName = 'bx-virtual-tree';
@@ -106,9 +142,12 @@ export class BxVirtualTree<T = unknown> extends BixElement {
     css`
       :host {
         display: block;
-        font-family: var(--bx-font-family-sans);
-        color: var(--bx-text-primary);
-        min-block-size: 6rem;
+        ${textFamily('--bx-virtual-tree', 'body')}
+        color: var(--bx-virtual-tree-fg, var(--bx-text-primary));
+        min-block-size: var(
+          --bx-virtual-tree-min-height,
+          calc(var(--bx-unit) * 6)
+        );
       }
 
       :host([hidden]) {
@@ -132,8 +171,16 @@ export class BxVirtualTree<T = unknown> extends BixElement {
       }
 
       .tree:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: calc(var(--bx-focus-ring-offset) * -1);
+        outline: var(
+            --bx-virtual-tree-tree-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(--bx-virtual-tree-tree-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-virtual-tree-tree-focus-ring-offset,
+          calc(var(--bx-focus-ring-offset) * -1)
+        );
       }
 
       .spacer {
@@ -148,28 +195,44 @@ export class BxVirtualTree<T = unknown> extends BixElement {
         box-sizing: border-box;
         display: flex;
         align-items: center;
-        gap: var(--bx-space-xs);
-        min-block-size: var(--bx-tree-row-height, var(--bx-target-min, 2rem));
-        padding-inline-end: var(--bx-space-s);
+        gap: var(--bx-virtual-tree-node-gap, var(--bx-space-xs));
+        min-block-size: var(--bx-virtual-tree-row-height, var(--bx-target-min));
+        padding-inline-end: var(
+          --bx-virtual-tree-node-padding-inline-end,
+          var(--bx-space-s)
+        );
         cursor: pointer;
         white-space: nowrap;
       }
 
       .node:hover {
-        background: var(--bx-surface-subtle);
+        background: var(
+          --bx-virtual-tree-node-hover-bg,
+          var(--bx-surface-subtle)
+        );
       }
 
       .node[data-active] {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: calc(var(--bx-focus-ring-offset) * -1);
+        outline: var(
+            --bx-virtual-tree-node-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid var(--bx-virtual-tree-node-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-virtual-tree-node-outline-offset,
+          calc(var(--bx-focus-ring-offset) * -1)
+        );
       }
 
       .node[aria-selected='true'] {
-        background: color-mix(in srgb, var(--bx-role-accent) 14%, transparent);
+        background: var(
+          --bx-virtual-tree-node-selected-bg,
+          color-mix(in srgb, var(--bx-role-accent) 14%, transparent)
+        );
       }
 
       .node[aria-disabled='true'] {
-        color: var(--bx-text-disabled);
+        color: var(--bx-virtual-tree-node-disabled-fg, var(--bx-text-disabled));
         cursor: not-allowed;
       }
 
@@ -177,7 +240,7 @@ export class BxVirtualTree<T = unknown> extends BixElement {
         flex-shrink: 0;
         align-self: stretch;
         inline-size: calc(
-          var(--level, 0) * var(--bx-tree-indent, var(--bx-space-m))
+          var(--level, 0) * var(--bx-virtual-tree-indent, var(--bx-space-m))
         );
       }
 
@@ -187,13 +250,18 @@ export class BxVirtualTree<T = unknown> extends BixElement {
           transparent 0,
           transparent
             calc(
-              var(--bx-tree-indent, var(--bx-space-m)) - var(--bx-border-width)
+              var(--bx-virtual-tree-indent, var(--bx-space-m)) - var(
+                  --bx-border-width
+                )
             ),
           var(--bx-border-subtle)
             calc(
-              var(--bx-tree-indent, var(--bx-space-m)) - var(--bx-border-width)
+              var(--bx-virtual-tree-indent, var(--bx-space-m)) - var(
+                  --bx-border-width
+                )
             ),
-          var(--bx-border-subtle) var(--bx-tree-indent, var(--bx-space-m))
+          var(--bx-border-subtle)
+            var(--bx-virtual-tree-indent, var(--bx-space-m))
         );
       }
 
@@ -202,16 +270,16 @@ export class BxVirtualTree<T = unknown> extends BixElement {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        inline-size: 1.25em;
-        block-size: 1.25em;
-        color: var(--bx-text-secondary);
+        inline-size: var(--bx-virtual-tree-toggle-size, 1.25em);
+        block-size: var(--bx-virtual-tree-toggle-size, 1.25em);
+        color: var(--bx-virtual-tree-toggle-fg, var(--bx-text-secondary));
         transition: rotate var(--bx-motion-duration-fast)
           var(--bx-motion-easing-standard);
       }
 
       .toggle svg {
-        inline-size: 0.75em;
-        block-size: 0.75em;
+        inline-size: var(--bx-virtual-tree-toggle-icon-size, 0.75em);
+        block-size: var(--bx-virtual-tree-toggle-icon-size, 0.75em);
         fill: currentColor;
       }
 
@@ -228,20 +296,31 @@ export class BxVirtualTree<T = unknown> extends BixElement {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        inline-size: 1.1em;
-        block-size: 1.1em;
-        border: var(--bx-border-width-strong) solid var(--bx-border-strong);
-        border-radius: var(--bx-radius-s, 3px);
-        font-size: 0.8em;
-        line-height: 1;
-        background: var(--bx-surface-base);
+        inline-size: var(--bx-virtual-tree-check-size, 1.1em);
+        block-size: var(--bx-virtual-tree-check-size, 1.1em);
+        border: var(
+            --bx-virtual-tree-check-border-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(--bx-virtual-tree-check-border-color, var(--bx-border-strong));
+        border-radius: var(--bx-virtual-tree-check-radius, var(--bx-radius-s));
+        font-size: var(--bx-virtual-tree-check-font-size, 0.8em);
+        line-height: var(--bx-virtual-tree-check-line-height, 1);
+        background: var(--bx-virtual-tree-check-bg, var(--bx-surface-base));
       }
 
       .check[data-state='true'],
       .check[data-state='mixed'] {
-        background: var(--bx-role-accent);
-        border-color: var(--bx-role-accent);
-        color: var(--bx-role-accent-contrast, #fff);
+        background: var(
+          --bx-virtual-tree-check-checked-bg,
+          var(--bx-role-accent)
+        );
+        border-color: var(
+          --bx-virtual-tree-check-checked-border-color,
+          var(--bx-role-accent)
+        );
+        color: var(--bx-virtual-tree-check-fg, var(--bx-on-accent));
       }
 
       .label {
@@ -252,17 +331,18 @@ export class BxVirtualTree<T = unknown> extends BixElement {
       }
 
       .status {
-        color: var(--bx-text-secondary);
-        font-size: var(--bx-font-s);
+        color: var(--bx-virtual-tree-status-fg, var(--bx-text-secondary));
+
+        ${textStyle('--bx-virtual-tree-status', 'body-s')}
       }
 
       .status[data-error] {
-        color: var(--bx-role-danger-fg);
+        color: var(--bx-virtual-tree-status-error-fg, var(--bx-role-danger-fg));
       }
 
       .empty {
-        padding: var(--bx-space-m);
-        color: var(--bx-text-secondary);
+        padding: var(--bx-virtual-tree-empty-padding, var(--bx-space-m));
+        color: var(--bx-virtual-tree-empty-fg, var(--bx-text-secondary));
       }
 
       .sr {

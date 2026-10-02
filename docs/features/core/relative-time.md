@@ -42,7 +42,9 @@ _None._
 
 ### CSS custom properties
 
-_Only global tokens (see conventions)._
+| Property                         | Description                                                            |
+| -------------------------------- | ---------------------------------------------------------------------- |
+| `--bx-relative-time-font-family` | Font family of the root surface. Default `var(--bx-type-body-family)`. |
 
 ### Methods
 

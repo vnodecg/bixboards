@@ -40,7 +40,9 @@ _None._
 
 ### CSS custom properties
 
-_Only global tokens (see conventions)._
+| Property                       | Description                                                            |
+| ------------------------------ | ---------------------------------------------------------------------- |
+| `--bx-format-date-font-family` | Font family of the root surface. Default `var(--bx-type-body-family)`. |
 
 ### Methods
 

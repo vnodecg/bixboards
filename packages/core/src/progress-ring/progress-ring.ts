@@ -1,5 +1,6 @@
 import { css, html, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
+import { textStyle } from '../internal/text-style.ts';
 
 const MIN = 0;
 const MAX = 100;
@@ -26,11 +27,17 @@ function clampValue(value: number): number {
  * @csspart base - The SVG element.
  * @csspart label - The wrapper around the default slot.
  *
- * @cssprop --bx-ring-size - Diameter. Default `calc(var(--bx-unit) * 4)`.
- * @cssprop --bx-ring-track-width - Track stroke width. Default `2`.
- * @cssprop --bx-ring-indicator-width - Indicator stroke width. Default `--bx-ring-track-width`.
- * @cssprop --bx-ring-track-color - Track color. Default `--bx-role-neutral-subtle`.
- * @cssprop --bx-ring-indicator-color - Indicator color. Default `--bx-role-brand-solid`.
+ * @cssprop --bx-progress-ring-size - Diameter. Default `calc(var(--bx-unit) * 4)`.
+ * @cssprop --bx-progress-ring-track-width - Track stroke width. Default `2`.
+ * @cssprop --bx-progress-ring-indicator-width - Indicator stroke width. Default `--bx-progress-ring-track-width`.
+ * @cssprop --bx-progress-ring-track-color - Track color. Default `--bx-role-neutral-subtle`.
+ * @cssprop --bx-progress-ring-indicator-color - Indicator color. Default `--bx-role-brand-solid`.
+ * @cssprop --bx-progress-ring-label-fg - Text/icon color of the `label` part. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-progress-ring-label-font-family - Font family of the `label` part (text style `body-m`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-progress-ring-label-font-size - Font size of the `label` part (text style `body-m`). Default `22cqi`.
+ * @cssprop --bx-progress-ring-label-font-weight - Font weight of the `label` part (text style `body-m`). Default `var(--bx-type-body-m-weight)`.
+ * @cssprop --bx-progress-ring-label-line-height - Line height of the `label` part (text style `body-m`). Default `1`.
+ * @cssprop --bx-progress-ring-label-letter-spacing - Letter spacing of the `label` part (text style `body-m`). Default `var(--bx-type-body-m-tracking)`.
  */
 export class BxProgressRing extends BixElement {
   static override tagName = 'bx-progress-ring';
@@ -41,8 +48,8 @@ export class BxProgressRing extends BixElement {
       :host {
         display: inline-block;
         position: relative;
-        inline-size: var(--bx-ring-size, calc(var(--bx-unit) * 4));
-        block-size: var(--bx-ring-size, calc(var(--bx-unit) * 4));
+        inline-size: var(--bx-progress-ring-size, calc(var(--bx-unit) * 4));
+        block-size: var(--bx-progress-ring-size, calc(var(--bx-unit) * 4));
         container-type: inline-size;
       }
 
@@ -58,19 +65,25 @@ export class BxProgressRing extends BixElement {
       }
 
       .track {
-        stroke: var(--bx-ring-track-color, var(--bx-role-neutral-subtle));
-        stroke-width: var(--bx-ring-track-width, 2);
+        stroke: var(
+          --bx-progress-ring-track-color,
+          var(--bx-role-neutral-subtle)
+        );
+        stroke-width: var(--bx-progress-ring-track-width, 2);
       }
 
       .indicator {
-        stroke: var(--bx-ring-indicator-color, var(--bx-role-brand-solid));
+        stroke: var(
+          --bx-progress-ring-indicator-color,
+          var(--bx-role-brand-solid)
+        );
         stroke-width: var(
-          --bx-ring-indicator-width,
-          var(--bx-ring-track-width, 2)
+          --bx-progress-ring-indicator-width,
+          var(--bx-progress-ring-track-width, 2)
         );
         stroke-linecap: round;
-        transition: stroke-dashoffset var(--bx-motion-duration-base, 0.3s)
-          var(--bx-motion-easing-standard, ease);
+        transition: stroke-dashoffset var(--bx-motion-duration-base)
+          var(--bx-motion-easing-standard);
       }
 
       .label {
@@ -78,10 +91,8 @@ export class BxProgressRing extends BixElement {
         inset: 0;
         display: grid;
         place-items: center;
-        font-family: var(--bx-font-family-sans);
-        font-size: 22cqi;
-        line-height: 1;
-        color: var(--bx-text-primary);
+        ${textStyle('--bx-progress-ring-label', 'body-m', { size: '22cqi', leading: '1' })}
+        color: var(--bx-progress-ring-label-fg, var(--bx-text-primary));
         text-align: center;
       }
 

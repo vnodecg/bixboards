@@ -53,11 +53,56 @@ Virtualized tree/tree-table for 100k+ nodes with lazy children, filtering and mu
 
 ### CSS parts
 
-`base`, `node`, `indent`, `toggle`, `label`, `guide`
+| Part     | Description                                |
+| -------- | ------------------------------------------ |
+| `base`   | The outer container.                       |
+| `node`   | A row.                                     |
+| `indent` | The indentation (and guide) area of a row. |
+| `toggle` | The expand/collapse chevron.               |
+| `label`  | The node label.                            |
 
 ### CSS custom properties
 
-`--bx-tree-indent`, `--bx-tree-row-height`
+| Property                                       | Description                                                                                                           |
+| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `--bx-virtual-tree-indent`                     | Indent per level.                                                                                                     |
+| `--bx-virtual-tree-row-height`                 | Row height.                                                                                                           |
+| `--bx-virtual-tree-fg`                         | Text/icon color of the root surface. Default `var(--bx-text-primary)`.                                                |
+| `--bx-virtual-tree-min-height`                 | Minimum height of the root surface. Default `calc(var(--bx-unit) * 6)`.                                               |
+| `--bx-virtual-tree-tree-focus-ring-width`      | Focus ring width of the `tree` element (focus state). Default `var(--bx-border-width-strong)`.                        |
+| `--bx-virtual-tree-tree-focus-ring-color`      | Focus ring color of the `tree` element (focus state). Default `var(--bx-focus-ring)`.                                 |
+| `--bx-virtual-tree-tree-focus-ring-offset`     | Focus ring offset of the `tree` element (focus state). Default `calc(var(--bx-focus-ring-offset) * -1)`.              |
+| `--bx-virtual-tree-node-gap`                   | Gap of the `node` part. Default `var(--bx-space-xs)`.                                                                 |
+| `--bx-virtual-tree-node-padding-inline-end`    | Padding inline end of the `node` part. Default `var(--bx-space-s)`.                                                   |
+| `--bx-virtual-tree-node-hover-bg`              | Background of the `node` part (hover state). Default `var(--bx-surface-subtle)`.                                      |
+| `--bx-virtual-tree-node-ring-width`            | Focus ring width of the `node` part. Default `var(--bx-border-width-strong)`.                                         |
+| `--bx-virtual-tree-node-ring-color`            | Focus ring color of the `node` part. Default `var(--bx-focus-ring)`.                                                  |
+| `--bx-virtual-tree-node-outline-offset`        | Outline offset of the `node` part. Default `calc(var(--bx-focus-ring-offset) * -1)`.                                  |
+| `--bx-virtual-tree-node-selected-bg`           | Background of the `node` part (selected state). Default `color-mix(in srgb, var(--bx-role-accent) 14%, transparent)`. |
+| `--bx-virtual-tree-node-disabled-fg`           | Text/icon color of the `node` part (disabled state). Default `var(--bx-text-disabled)`.                               |
+| `--bx-virtual-tree-toggle-size`                | Size (width and height) of the `toggle` part. Default `1.25em`.                                                       |
+| `--bx-virtual-tree-toggle-fg`                  | Text/icon color of the `toggle` part. Default `var(--bx-text-secondary)`.                                             |
+| `--bx-virtual-tree-check-size`                 | Size (width and height) of the `check` element. Default `1.1em`.                                                      |
+| `--bx-virtual-tree-check-border-width`         | Border width of the `check` element. Default `var(--bx-border-width-strong)`.                                         |
+| `--bx-virtual-tree-check-border-color`         | Border color of the `check` element. Default `var(--bx-border-strong)`.                                               |
+| `--bx-virtual-tree-check-radius`               | Corner radius of the `check` element. Default `var(--bx-radius-s)`.                                                   |
+| `--bx-virtual-tree-check-font-size`            | Font size of the `check` element. Default `0.8em`.                                                                    |
+| `--bx-virtual-tree-check-line-height`          | Line height of the `check` element. Default `1`.                                                                      |
+| `--bx-virtual-tree-check-bg`                   | Background of the `check` element. Default `var(--bx-surface-base)`.                                                  |
+| `--bx-virtual-tree-check-fg`                   | Text/icon color of the `check` element. Default `var(--bx-on-accent)`.                                                |
+| `--bx-virtual-tree-status-fg`                  | Text/icon color of the `status` element. Default `var(--bx-text-secondary)`.                                          |
+| `--bx-virtual-tree-empty-padding`              | Padding of the `empty` element. Default `var(--bx-space-m)`.                                                          |
+| `--bx-virtual-tree-empty-fg`                   | Text/icon color of the `empty` element. Default `var(--bx-text-secondary)`.                                           |
+| `--bx-virtual-tree-toggle-icon-size`           | Size (width and height) of the icon inside the `toggle` element. Default `0.75em`.                                    |
+| `--bx-virtual-tree-status-error-fg`            | Color of the status line when loading failed. Default `var(--bx-role-danger-fg)`.                                     |
+| `--bx-virtual-tree-check-checked-bg`           | Background of a checked or mixed `check` box. Default `var(--bx-role-accent)`.                                        |
+| `--bx-virtual-tree-check-checked-border-color` | Border color of a checked or mixed `check` box. Default `var(--bx-role-accent)`.                                      |
+| `--bx-virtual-tree-font-family`                | Font family of the root surface. Default `var(--bx-type-body-family)`.                                                |
+| `--bx-virtual-tree-status-font-family`         | Font family of the `status` element (text style `body-s`). Default `var(--bx-type-body-family)`.                      |
+| `--bx-virtual-tree-status-font-size`           | Font size of the `status` element (text style `body-s`). Default `var(--bx-type-body-s-size)`.                        |
+| `--bx-virtual-tree-status-font-weight`         | Font weight of the `status` element (text style `body-s`). Default `var(--bx-type-body-s-weight)`.                    |
+| `--bx-virtual-tree-status-line-height`         | Line height of the `status` element (text style `body-s`). Default `var(--bx-type-body-s-leading)`.                   |
+| `--bx-virtual-tree-status-letter-spacing`      | Letter spacing of the `status` element (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.               |
 
 ### Methods
 

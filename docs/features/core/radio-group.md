@@ -50,11 +50,31 @@ Manages a set of radios: single value, roving tabindex, validation. Specified fo
 
 ### CSS parts
 
-`form-control`, `label`, `hint`, `radio-group`
+| Part           | Description                                              |
+| -------------- | -------------------------------------------------------- |
+| `form-control` | The outer wrapper (label + radio-group + hint).          |
+| `label`        | The label element.                                       |
+| `hint`         | The wrapper around the hint slot.                        |
+| `radio-group`  | The `role="radiogroup"` wrapper around the default slot. |
 
 ### CSS custom properties
 
-_Only global tokens (see conventions)._
+| Property                                | Description                                                                                           |
+| --------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `--bx-radio-group-gap`                  | Gap of the root surface. Default `var(--bx-space-s)`.                                                 |
+| `--bx-radio-group-hint-fg`              | Text/icon color of the `hint` part. Default `var(--bx-text-secondary)`.                               |
+| `--bx-radio-group-hint-invalid-fg`      | Text/icon color of the `hint` part (invalid state). Default `var(--bx-role-danger-fg)`.               |
+| `--bx-radio-group-font-family`          | Font family of the root surface. Default `var(--bx-type-body-family)`.                                |
+| `--bx-radio-group-label-font-family`    | Font family of the `label` part (text style `label-m`). Default `var(--bx-type-label-family)`.        |
+| `--bx-radio-group-label-font-size`      | Font size of the `label` part (text style `label-m`). Default `var(--bx-type-label-m-size)`.          |
+| `--bx-radio-group-label-font-weight`    | Font weight of the `label` part (text style `label-m`). Default `var(--bx-type-label-m-weight)`.      |
+| `--bx-radio-group-label-line-height`    | Line height of the `label` part (text style `label-m`). Default `var(--bx-type-label-m-leading)`.     |
+| `--bx-radio-group-label-letter-spacing` | Letter spacing of the `label` part (text style `label-m`). Default `var(--bx-type-label-m-tracking)`. |
+| `--bx-radio-group-hint-font-family`     | Font family of the `hint` part (text style `body-s`). Default `var(--bx-type-body-family)`.           |
+| `--bx-radio-group-hint-font-size`       | Font size of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-size)`.             |
+| `--bx-radio-group-hint-font-weight`     | Font weight of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-weight)`.         |
+| `--bx-radio-group-hint-line-height`     | Line height of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-leading)`.        |
+| `--bx-radio-group-hint-letter-spacing`  | Letter spacing of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.    |
 
 ### Methods
 

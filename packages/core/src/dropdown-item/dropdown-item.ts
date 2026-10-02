@@ -2,6 +2,7 @@ import { css, html, nothing, svg, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
 import type { BxPopup } from '../popup/popup.ts';
 import { inSafeTriangle, pointInBox } from './safe-triangle.ts';
+import { textStyle, textFamily } from '../internal/text-style.ts';
 
 type Variant = 'default' | 'error';
 type ItemType = 'normal' | 'checkbox' | 'radio';
@@ -70,12 +71,46 @@ let nextId = 0;
  * @slot details - Trailing hint (e.g. shortcut). Hidden under 12 fluid units (§5).
  * @slot submenu - Nested `bx-dropdown-item` elements.
  *
+ * @csspart base - The item row (the element carrying the menuitem role).
  * @csspart checkmark - The checkbox/radio checkmark (or its reserved gutter space).
  * @csspart icon - The wrapper around the icon slot.
  * @csspart label - The wrapper around the default slot.
  * @csspart details - The wrapper around the details slot.
  * @csspart submenu-icon - The trailing chevron shown when a submenu is present.
  * @csspart submenu - The floating panel around the nested items.
+ * @cssprop --bx-dropdown-item-gap - Gap of the root surface. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-dropdown-item-padding-inline - Padding inline of the root surface. Default `var(--bx-space-s)`.
+ * @cssprop --bx-dropdown-item-fg - Text/icon color of the root surface. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-dropdown-item-hover-bg - Background of the root surface (hover state). Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-dropdown-item-focus-ring-width - Focus ring width of the root surface (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-dropdown-item-focus-ring-color - Focus ring color of the root surface (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-dropdown-item-focus-ring-offset - Focus ring offset of the root surface (focus state). Default `calc(var(--bx-focus-ring-offset) * -1)`.
+ * @cssprop --bx-dropdown-item-disabled-fg - Text/icon color of the root surface (disabled state). Default `var(--bx-text-disabled)`.
+ * @cssprop --bx-dropdown-item-checkmark-size - Size (width and height) of the `checkmark` part. Default `1em`.
+ * @cssprop --bx-dropdown-item-icon-size - Size (width and height) of the `icon` part. Default `1em`.
+ * @cssprop --bx-dropdown-item-details-fg - Text/icon color of the `details` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-dropdown-item-submenu-icon-size - Size (width and height) of the `submenu-icon` part. Default `0.75em`.
+ * @cssprop --bx-dropdown-item-submenu-icon-fg - Text/icon color of the `submenu-icon` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-dropdown-item-submenu-min-width - Minimum width of the `submenu` part. Default `calc(var(--bx-unit) * 12)`.
+ * @cssprop --bx-dropdown-item-submenu-border-width - Border width of the `submenu` part. Default `var(--bx-border-width)`.
+ * @cssprop --bx-dropdown-item-submenu-border-color - Border color of the `submenu` part. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-dropdown-item-submenu-radius - Corner radius of the `submenu` part. Default `var(--bx-radius-m)`.
+ * @cssprop --bx-dropdown-item-submenu-shadow - Box shadow of the `submenu` part. Default `var(--bx-shadow-m)`.
+ * @cssprop --bx-dropdown-item-submenu-bg - Background of the `submenu` part. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-dropdown-item-submenu-fg - Text/icon color of the `submenu` part. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-dropdown-item-height - Minimum item height. Default follows the parent `bx-dropdown`'s `size`, else `--bx-target-min`.
+ * @cssprop --bx-dropdown-item-error-fg - Text color of `variant="error"` items. Default `var(--bx-role-danger-fg)`.
+ * @cssprop --bx-dropdown-item-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-dropdown-item-details-font-family - Font family of the `details` part (text style `body-s`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-dropdown-item-details-font-size - Font size of the `details` part (text style `body-s`). Default `var(--bx-type-body-s-size)`.
+ * @cssprop --bx-dropdown-item-details-font-weight - Font weight of the `details` part (text style `body-s`). Default `var(--bx-type-body-s-weight)`.
+ * @cssprop --bx-dropdown-item-details-line-height - Line height of the `details` part (text style `body-s`). Default `var(--bx-type-body-s-leading)`.
+ * @cssprop --bx-dropdown-item-details-letter-spacing - Letter spacing of the `details` part (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.
+ * @cssprop --bx-dropdown-item-submenu-font-family - Font family of the `submenu` part (text style `body-m`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-dropdown-item-submenu-font-size - Font size of the `submenu` part (text style `body-m`). Default `var(--bx-type-body-m-size)`.
+ * @cssprop --bx-dropdown-item-submenu-font-weight - Font weight of the `submenu` part (text style `body-m`). Default `var(--bx-type-body-m-weight)`.
+ * @cssprop --bx-dropdown-item-submenu-line-height - Line height of the `submenu` part (text style `body-m`). Default `var(--bx-type-body-m-leading)`.
+ * @cssprop --bx-dropdown-item-submenu-letter-spacing - Letter spacing of the `submenu` part (text style `body-m`). Default `var(--bx-type-body-m-tracking)`.
  */
 export class BxDropdownItem extends BixElement {
   static override tagName = 'bx-dropdown-item';
@@ -85,7 +120,7 @@ export class BxDropdownItem extends BixElement {
     css`
       :host {
         display: block;
-        font-family: var(--bx-font-family-sans);
+        ${textFamily('--bx-dropdown-item', 'body')}
       }
 
       :host([hidden]) {
@@ -96,43 +131,53 @@ export class BxDropdownItem extends BixElement {
         container-type: inline-size;
         display: flex;
         align-items: center;
-        gap: var(--bx-space-xs);
+        gap: var(--bx-dropdown-item-gap, var(--bx-space-xs));
         min-block-size: var(
           --bx-dropdown-item-height,
-          var(--bx-target-min, 2.75rem)
+          var(--_item-height, var(--bx-target-min))
         );
-        padding-inline: var(--bx-space-s);
-        color: var(--bx-text-primary);
+        padding-inline: var(
+          --bx-dropdown-item-padding-inline,
+          var(--bx-space-s)
+        );
+        color: var(--bx-dropdown-item-fg, var(--bx-text-primary));
         cursor: pointer;
         outline: none;
       }
 
       :host([variant='error']) .base {
-        color: var(--bx-role-danger-fg);
+        color: var(--bx-dropdown-item-error-fg, var(--bx-role-danger-fg));
       }
 
       .base:hover,
       .base:focus-visible,
       :host([submenu-open]) .base {
-        background: var(--bx-surface-subtle);
+        background: var(--bx-dropdown-item-hover-bg, var(--bx-surface-subtle));
       }
 
       .base:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: calc(var(--bx-focus-ring-offset) * -1);
+        outline: var(
+            --bx-dropdown-item-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid var(--bx-dropdown-item-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-dropdown-item-focus-ring-offset,
+          calc(var(--bx-focus-ring-offset) * -1)
+        );
       }
 
       :host([disabled]) .base {
         cursor: not-allowed;
-        color: var(--bx-text-disabled);
+        color: var(--bx-dropdown-item-disabled-fg, var(--bx-text-disabled));
         background: transparent;
       }
 
       .checkmark {
         display: none;
         flex-shrink: 0;
-        inline-size: 1em;
-        block-size: 1em;
+        inline-size: var(--bx-dropdown-item-checkmark-size, 1em);
+        block-size: var(--bx-dropdown-item-checkmark-size, 1em);
       }
 
       :host([data-reserve-checkmark]) .checkmark,
@@ -149,8 +194,8 @@ export class BxDropdownItem extends BixElement {
       .icon {
         display: inline-flex;
         flex-shrink: 0;
-        inline-size: 1em;
-        block-size: 1em;
+        inline-size: var(--bx-dropdown-item-icon-size, 1em);
+        block-size: var(--bx-dropdown-item-icon-size, 1em);
       }
 
       .icon ::slotted(*) {
@@ -164,11 +209,12 @@ export class BxDropdownItem extends BixElement {
       }
 
       .details {
-        color: var(--bx-text-secondary);
-        font-size: var(--bx-font-s);
+        color: var(--bx-dropdown-item-details-fg, var(--bx-text-secondary));
+
+        ${textStyle('--bx-dropdown-item-details', 'body-s')}
       }
 
-      @container (max-width: calc(var(--bx-unit) * 12)) {
+      @container (max-width: 12rem) {
         .details {
           display: none;
         }
@@ -177,9 +223,12 @@ export class BxDropdownItem extends BixElement {
       .submenu-icon {
         display: inline-flex;
         flex-shrink: 0;
-        inline-size: 0.75em;
-        block-size: 0.75em;
-        color: var(--bx-text-secondary);
+        inline-size: var(--bx-dropdown-item-submenu-icon-size, 0.75em);
+        block-size: var(--bx-dropdown-item-submenu-icon-size, 0.75em);
+        color: var(
+          --bx-dropdown-item-submenu-icon-fg,
+          var(--bx-text-secondary)
+        );
       }
 
       .submenu-icon svg {
@@ -194,13 +243,26 @@ export class BxDropdownItem extends BixElement {
 
       .submenu {
         box-sizing: border-box;
-        min-inline-size: calc(var(--bx-unit, 1rem) * 12);
-        border: var(--bx-border-width) solid var(--bx-border-subtle);
-        border-radius: var(--bx-radius-m);
-        box-shadow: var(--bx-shadow-m);
-        background: var(--bx-surface-base);
-        color: var(--bx-text-primary);
-        font-size: var(--bx-font-m);
+        min-inline-size: var(
+          --bx-dropdown-item-submenu-min-width,
+          calc(var(--bx-unit) * 12)
+        );
+        border: var(
+            --bx-dropdown-item-submenu-border-width,
+            var(--bx-border-width)
+          )
+          solid
+          var(--bx-dropdown-item-submenu-border-color, var(--bx-border-subtle));
+        border-radius: var(
+          --bx-dropdown-item-submenu-radius,
+          var(--bx-radius-m)
+        );
+        box-shadow: var(--bx-dropdown-item-submenu-shadow, var(--bx-shadow-m));
+        background: var(--bx-dropdown-item-submenu-bg, var(--bx-surface-base));
+        color: var(--bx-dropdown-item-submenu-fg, var(--bx-text-primary));
+
+        ${textStyle('--bx-dropdown-item-submenu', 'body-m')}
+
         overflow: hidden;
       }
 

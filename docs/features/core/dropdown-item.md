@@ -48,11 +48,53 @@ A single menu entry: plain, checkbox, or submenu parent. Specified for the Bixan
 
 ### CSS parts
 
-`checkmark`, `icon`, `label`, `details`, `submenu-icon`, `submenu` (added)
+| Part           | Description                                                  |
+| -------------- | ------------------------------------------------------------ |
+| `base`         | The item row (the element carrying the menuitem role).       |
+| `checkmark`    | The checkbox/radio checkmark (or its reserved gutter space). |
+| `icon`         | The wrapper around the icon slot.                            |
+| `label`        | The wrapper around the default slot.                         |
+| `details`      | The wrapper around the details slot.                         |
+| `submenu-icon` | The trailing chevron shown when a submenu is present.        |
+| `submenu`      | The floating panel around the nested items.                  |
 
 ### CSS custom properties
 
-_Only global tokens (see conventions)._
+| Property                                    | Description                                                                                            |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `--bx-dropdown-item-gap`                    | Gap of the root surface. Default `var(--bx-space-xs)`.                                                 |
+| `--bx-dropdown-item-padding-inline`         | Padding inline of the root surface. Default `var(--bx-space-s)`.                                       |
+| `--bx-dropdown-item-fg`                     | Text/icon color of the root surface. Default `var(--bx-text-primary)`.                                 |
+| `--bx-dropdown-item-hover-bg`               | Background of the root surface (hover state). Default `var(--bx-surface-subtle)`.                      |
+| `--bx-dropdown-item-focus-ring-width`       | Focus ring width of the root surface (focus state). Default `var(--bx-border-width-strong)`.           |
+| `--bx-dropdown-item-focus-ring-color`       | Focus ring color of the root surface (focus state). Default `var(--bx-focus-ring)`.                    |
+| `--bx-dropdown-item-focus-ring-offset`      | Focus ring offset of the root surface (focus state). Default `calc(var(--bx-focus-ring-offset) * -1)`. |
+| `--bx-dropdown-item-disabled-fg`            | Text/icon color of the root surface (disabled state). Default `var(--bx-text-disabled)`.               |
+| `--bx-dropdown-item-checkmark-size`         | Size (width and height) of the `checkmark` part. Default `1em`.                                        |
+| `--bx-dropdown-item-icon-size`              | Size (width and height) of the `icon` part. Default `1em`.                                             |
+| `--bx-dropdown-item-details-fg`             | Text/icon color of the `details` part. Default `var(--bx-text-secondary)`.                             |
+| `--bx-dropdown-item-submenu-icon-size`      | Size (width and height) of the `submenu-icon` part. Default `0.75em`.                                  |
+| `--bx-dropdown-item-submenu-icon-fg`        | Text/icon color of the `submenu-icon` part. Default `var(--bx-text-secondary)`.                        |
+| `--bx-dropdown-item-submenu-min-width`      | Minimum width of the `submenu` part. Default `calc(var(--bx-unit) * 12)`.                              |
+| `--bx-dropdown-item-submenu-border-width`   | Border width of the `submenu` part. Default `var(--bx-border-width)`.                                  |
+| `--bx-dropdown-item-submenu-border-color`   | Border color of the `submenu` part. Default `var(--bx-border-subtle)`.                                 |
+| `--bx-dropdown-item-submenu-radius`         | Corner radius of the `submenu` part. Default `var(--bx-radius-m)`.                                     |
+| `--bx-dropdown-item-submenu-shadow`         | Box shadow of the `submenu` part. Default `var(--bx-shadow-m)`.                                        |
+| `--bx-dropdown-item-submenu-bg`             | Background of the `submenu` part. Default `var(--bx-surface-base)`.                                    |
+| `--bx-dropdown-item-submenu-fg`             | Text/icon color of the `submenu` part. Default `var(--bx-text-primary)`.                               |
+| `--bx-dropdown-item-height`                 | Minimum item height. Default follows the parent `bx-dropdown`'s `size`, else `--bx-target-min`.        |
+| `--bx-dropdown-item-error-fg`               | Text color of `variant="error"` items. Default `var(--bx-role-danger-fg)`.                             |
+| `--bx-dropdown-item-font-family`            | Font family of the root surface. Default `var(--bx-type-body-family)`.                                 |
+| `--bx-dropdown-item-details-font-family`    | Font family of the `details` part (text style `body-s`). Default `var(--bx-type-body-family)`.         |
+| `--bx-dropdown-item-details-font-size`      | Font size of the `details` part (text style `body-s`). Default `var(--bx-type-body-s-size)`.           |
+| `--bx-dropdown-item-details-font-weight`    | Font weight of the `details` part (text style `body-s`). Default `var(--bx-type-body-s-weight)`.       |
+| `--bx-dropdown-item-details-line-height`    | Line height of the `details` part (text style `body-s`). Default `var(--bx-type-body-s-leading)`.      |
+| `--bx-dropdown-item-details-letter-spacing` | Letter spacing of the `details` part (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.  |
+| `--bx-dropdown-item-submenu-font-family`    | Font family of the `submenu` part (text style `body-m`). Default `var(--bx-type-body-family)`.         |
+| `--bx-dropdown-item-submenu-font-size`      | Font size of the `submenu` part (text style `body-m`). Default `var(--bx-type-body-m-size)`.           |
+| `--bx-dropdown-item-submenu-font-weight`    | Font weight of the `submenu` part (text style `body-m`). Default `var(--bx-type-body-m-weight)`.       |
+| `--bx-dropdown-item-submenu-line-height`    | Line height of the `submenu` part (text style `body-m`). Default `var(--bx-type-body-m-leading)`.      |
+| `--bx-dropdown-item-submenu-letter-spacing` | Letter spacing of the `submenu` part (text style `body-m`). Default `var(--bx-type-body-m-tracking)`.  |
 
 ### Methods
 

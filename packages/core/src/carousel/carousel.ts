@@ -81,9 +81,43 @@ function resolveSlidesPerPage(raw: string, containerWidth: number): number {
  * @csspart navigation-button--previous - The previous button specifically.
  * @csspart navigation-button--next - The next button specifically.
  *
- * @cssprop --slide-gap - Gap between slides. Default `--bx-space-m`.
- * @cssprop --aspect-ratio - Forwarded to each slide's `--aspect-ratio`.
- * @cssprop --scroll-hint - Extra scroll padding so adjacent slides peek at the edges. Default `0`.
+ * @cssprop --bx-carousel-slide-gap - Gap between slides. Default `--bx-space-m`.
+ * @cssprop --bx-carousel-item-aspect-ratio - Forwarded to each slide's `--bx-carousel-item-aspect-ratio`.
+ * @cssprop --bx-carousel-scroll-hint - Extra scroll padding so adjacent slides peek at the edges. Default `0`.
+ * @cssprop --bx-carousel-navigation-button-radius - Corner radius of the `navigation-button` part. Default `var(--bx-radius-pill)`.
+ * @cssprop --bx-carousel-navigation-button-bg - Background of the `navigation-button` part. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-carousel-navigation-button-fg - Text/icon color of the `navigation-button` part. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-carousel-navigation-button-border-width - Border width of the `navigation-button` part. Default `var(--bx-border-width)`.
+ * @cssprop --bx-carousel-navigation-button-border-color - Border color of the `navigation-button` part. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-carousel-navigation-button-shadow - Box shadow of the `navigation-button` part. Default `var(--bx-shadow-s)`.
+ * @cssprop --bx-carousel-navigation-button-focus-ring-width - Focus ring width of the `navigation-button` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-carousel-navigation-button-focus-ring-color - Focus ring color of the `navigation-button` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-carousel-navigation-button-focus-ring-offset - Focus ring offset of the `navigation-button` part (focus state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-carousel-navigation-button-disabled-opacity - Opacity of the `navigation-button` part (disabled state). Default `0.4`.
+ * @cssprop --bx-carousel-controls-gap - Gap of the `controls` element. Default `var(--bx-space-s)`.
+ * @cssprop --bx-carousel-play-toggle-size - Size (width and height) of the `play-toggle` element. Default `var(--bx-target-min)`.
+ * @cssprop --bx-carousel-play-toggle-radius - Corner radius of the `play-toggle` element. Default `var(--bx-radius-pill)`.
+ * @cssprop --bx-carousel-play-toggle-fg - Text/icon color of the `play-toggle` element. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-carousel-play-toggle-focus-ring-width - Focus ring width of the `play-toggle` element (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-carousel-play-toggle-focus-ring-color - Focus ring color of the `play-toggle` element (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-carousel-play-toggle-focus-ring-offset - Focus ring offset of the `play-toggle` element (focus state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-carousel-bar-width - Width of the `bar` element. Default `0.2em`.
+ * @cssprop --bx-carousel-bar-height - Height of the `bar` element. Default `0.8em`.
+ * @cssprop --bx-carousel-bars-gap - Gap of the `bars` element. Default `0.2em`.
+ * @cssprop --bx-carousel-triangle-block-start-border-width - Block start border width of the `triangle` element. Default `0.45em`.
+ * @cssprop --bx-carousel-triangle-block-end-border-width - Block end border width of the `triangle` element. Default `0.45em`.
+ * @cssprop --bx-carousel-triangle-inline-start-border-width - Inline start border width of the `triangle` element. Default `0.7em`.
+ * @cssprop --bx-carousel-pagination-gap - Gap of the `pagination` part. Default `var(--bx-space-2xs)`.
+ * @cssprop --bx-carousel-pagination-item-radius - Corner radius of the `pagination-item` part. Default `var(--bx-radius-pill)`.
+ * @cssprop --bx-carousel-pagination-item-bg - Background of the `pagination-item` part. Default `var(--bx-border-strong)`.
+ * @cssprop --bx-carousel-pagination-item-current-bg - Background of the `pagination-item` part (current state). Default `var(--bx-role-accent)`.
+ * @cssprop --bx-carousel-pagination-item-focus-ring-width - Focus ring width of the `pagination-item` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-carousel-pagination-item-focus-ring-color - Focus ring color of the `pagination-item` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-carousel-pagination-item-focus-ring-offset - Focus ring offset of the `pagination-item` part (focus state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-carousel-nav-size - Diameter of the previous/next buttons. Default `calc(var(--bx-unit) * 2.25)`.
+ * @cssprop --bx-carousel-pagination-item-size - Diameter of an inactive pagination dot. Default `calc(var(--bx-unit) * 0.5)`.
+ * @cssprop --bx-carousel-pagination-item-active-width - Width of the active pagination dot. Default `calc(var(--bx-unit) * 1.25)`.
+ * @cssprop --bx-carousel-navigation-button-icon-size - Size (width and height) of the icon inside the `navigation-button` element. Default `1em`.
  */
 export class BxCarousel extends BixElement {
   static override tagName = 'bx-carousel';
@@ -103,7 +137,7 @@ export class BxCarousel extends BixElement {
 
       .scroll-container {
         display: flex;
-        gap: var(--slide-gap, var(--bx-space-m));
+        gap: var(--bx-carousel-slide-gap, var(--bx-space-m));
         scroll-behavior: smooth;
         overscroll-behavior: contain;
         scrollbar-width: none;
@@ -119,7 +153,7 @@ export class BxCarousel extends BixElement {
         overflow-x: auto;
         overflow-y: hidden;
         scroll-snap-type: x mandatory;
-        scroll-padding-inline: var(--scroll-hint, 0px);
+        scroll-padding-inline: var(--bx-carousel-scroll-hint, 0px);
       }
 
       :host([orientation='vertical']) .scroll-container {
@@ -127,7 +161,7 @@ export class BxCarousel extends BixElement {
         overflow-y: auto;
         overflow-x: hidden;
         scroll-snap-type: y mandatory;
-        scroll-padding-block: var(--scroll-hint, 0px);
+        scroll-padding-block: var(--bx-carousel-scroll-hint, 0px);
         block-size: 100%;
       }
 
@@ -144,10 +178,10 @@ export class BxCarousel extends BixElement {
         flex: 0 0
           calc(
             (
-                100% - (var(--bx-carousel-per-page, 1) - 1) *
-                  var(--slide-gap, var(--bx-space-m))
+                100% - (var(--_per-page, 1) - 1) *
+                  var(--bx-carousel-slide-gap, var(--bx-space-m))
               ) /
-              var(--bx-carousel-per-page, 1)
+              var(--_per-page, 1)
           );
       }
 
@@ -161,28 +195,56 @@ export class BxCarousel extends BixElement {
         justify-content: center;
         inline-size: var(--bx-carousel-nav-size, calc(var(--bx-unit) * 2.25));
         block-size: var(--bx-carousel-nav-size, calc(var(--bx-unit) * 2.25));
-        border-radius: var(--bx-radius-pill);
-        background: var(--bx-surface-base);
-        color: var(--bx-text-primary);
-        border: var(--bx-border-width) solid var(--bx-border-subtle);
-        box-shadow: var(--bx-shadow-s, 0 1px 3px rgba(0, 0, 0, 0.24));
+        border-radius: var(
+          --bx-carousel-navigation-button-radius,
+          var(--bx-radius-pill)
+        );
+        background: var(
+          --bx-carousel-navigation-button-bg,
+          var(--bx-surface-base)
+        );
+        color: var(--bx-carousel-navigation-button-fg, var(--bx-text-primary));
+        border: var(
+            --bx-carousel-navigation-button-border-width,
+            var(--bx-border-width)
+          )
+          solid
+          var(
+            --bx-carousel-navigation-button-border-color,
+            var(--bx-border-subtle)
+          );
+        box-shadow: var(
+          --bx-carousel-navigation-button-shadow,
+          var(--bx-shadow-s)
+        );
         cursor: pointer;
       }
 
       .navigation-button:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+        outline: var(
+            --bx-carousel-navigation-button-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(
+            --bx-carousel-navigation-button-focus-ring-color,
+            var(--bx-focus-ring)
+          );
+        outline-offset: var(
+          --bx-carousel-navigation-button-focus-ring-offset,
+          var(--bx-focus-ring-offset)
+        );
       }
 
       .navigation-button:disabled {
-        opacity: 0.4;
+        opacity: var(--bx-carousel-navigation-button-disabled-opacity, 0.4);
         cursor: not-allowed;
         pointer-events: none;
       }
 
       .navigation-button svg {
-        inline-size: 1em;
-        block-size: 1em;
+        inline-size: var(--bx-carousel-navigation-button-icon-size, 1em);
+        block-size: var(--bx-carousel-navigation-button-icon-size, 1em);
         fill: currentColor;
       }
 
@@ -211,7 +273,7 @@ export class BxCarousel extends BixElement {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: var(--bx-space-s);
+        gap: var(--bx-carousel-controls-gap, var(--bx-space-s));
         margin-block-start: var(--bx-space-s);
       }
 
@@ -221,62 +283,114 @@ export class BxCarousel extends BixElement {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        inline-size: var(--bx-target-min, 2.75rem);
-        block-size: var(--bx-target-min, 2.75rem);
-        border-radius: var(--bx-radius-pill);
-        color: var(--bx-text-secondary);
+        inline-size: var(--bx-carousel-play-toggle-size, var(--bx-target-min));
+        block-size: var(--bx-carousel-play-toggle-size, var(--bx-target-min));
+        border-radius: var(
+          --bx-carousel-play-toggle-radius,
+          var(--bx-radius-pill)
+        );
+        color: var(--bx-carousel-play-toggle-fg, var(--bx-text-secondary));
         cursor: pointer;
       }
 
       .play-toggle:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+        outline: var(
+            --bx-carousel-play-toggle-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(--bx-carousel-play-toggle-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-carousel-play-toggle-focus-ring-offset,
+          var(--bx-focus-ring-offset)
+        );
       }
 
       .play-toggle .bar {
-        inline-size: 0.2em;
-        block-size: 0.8em;
+        inline-size: var(--bx-carousel-bar-width, 0.2em);
+        block-size: var(--bx-carousel-bar-height, 0.8em);
         background: currentColor;
       }
       .play-toggle .bars {
         display: inline-flex;
-        gap: 0.2em;
+        gap: var(--bx-carousel-bars-gap, 0.2em);
       }
       .play-toggle .triangle {
         inline-size: 0;
         block-size: 0;
-        border-block-start: 0.45em solid transparent;
-        border-block-end: 0.45em solid transparent;
-        border-inline-start: 0.7em solid currentColor;
+        border-block-start: var(
+            --bx-carousel-triangle-block-start-border-width,
+            0.45em
+          )
+          solid transparent;
+        border-block-end: var(
+            --bx-carousel-triangle-block-end-border-width,
+            0.45em
+          )
+          solid transparent;
+        border-inline-start: var(
+            --bx-carousel-triangle-inline-start-border-width,
+            0.7em
+          )
+          solid currentColor;
       }
 
       .pagination {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: var(--bx-space-2xs);
+        gap: var(--bx-carousel-pagination-gap, var(--bx-space-2xs));
       }
 
       .pagination-item {
         all: unset;
         box-sizing: border-box;
-        inline-size: 0.5rem;
-        block-size: 0.5rem;
-        border-radius: var(--bx-radius-pill);
-        background: var(--bx-border-strong);
+        inline-size: var(
+          --bx-carousel-pagination-item-size,
+          calc(var(--bx-unit) * 0.5)
+        );
+        block-size: var(
+          --bx-carousel-pagination-item-size,
+          calc(var(--bx-unit) * 0.5)
+        );
+        border-radius: var(
+          --bx-carousel-pagination-item-radius,
+          var(--bx-radius-pill)
+        );
+        background: var(
+          --bx-carousel-pagination-item-bg,
+          var(--bx-border-strong)
+        );
         cursor: pointer;
-        transition: inline-size var(--bx-motion-duration-fast, 0.12s)
-          var(--bx-motion-easing-standard, ease);
+        transition: inline-size var(--bx-motion-duration-fast)
+          var(--bx-motion-easing-standard);
       }
 
       .pagination-item[aria-current='true'] {
-        inline-size: 1.25rem;
-        background: var(--bx-role-brand-solid, var(--bx-role-accent));
+        inline-size: var(
+          --bx-carousel-pagination-item-active-width,
+          calc(var(--bx-unit) * 1.25)
+        );
+        background: var(
+          --bx-carousel-pagination-item-current-bg,
+          var(--bx-role-accent)
+        );
       }
 
       .pagination-item:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+        outline: var(
+            --bx-carousel-pagination-item-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(
+            --bx-carousel-pagination-item-focus-ring-color,
+            var(--bx-focus-ring)
+          );
+        outline-offset: var(
+          --bx-carousel-pagination-item-focus-ring-offset,
+          var(--bx-focus-ring-offset)
+        );
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -498,7 +612,7 @@ export class BxCarousel extends BixElement {
   #measurePerPage(): void {
     const width = this.getBoundingClientRect().width;
     this._perPage = resolveSlidesPerPage(this.slidesPerPage, width);
-    this.style.setProperty('--bx-carousel-per-page', String(this._perPage));
+    this.style.setProperty('--_per-page', String(this._perPage));
   }
 
   #canGoPrevious(): boolean {

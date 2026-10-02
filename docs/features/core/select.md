@@ -76,11 +76,108 @@ Single or multiple choice with searchable, virtualized listbox and removable-bad
 
 ### CSS parts
 
-`form-control`, `label`, `hint`, `combobox`, `display-input`, `listbox`, `tags`, `tag`, `clear-button`, `expand-icon`
+| Part            | Description                                                |
+| --------------- | ---------------------------------------------------------- |
+| `form-control`  | The outer wrapper (label + combobox + hint).               |
+| `label`         | The label element.                                         |
+| `hint`          | The wrapper around the hint slot.                          |
+| `combobox`      | The bordered control that opens the listbox.               |
+| `display-input` | The native `<input role="combobox">`.                      |
+| `listbox`       | The scrollable `role="listbox"` element.                   |
+| `tags`          | The wrapper around selected-value badges (`multiple`).     |
+| `tag`           | A selected-value badge, including the `+N` overflow badge. |
+| `clear-button`  | The clear button.                                          |
+| `expand-icon`   | The caret.                                                 |
 
 ### CSS custom properties
 
-`--bx-select-max-height`
+| Property                                        | Description                                                                                                                                                                             |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--bx-select-max-height`                        | Max height of the listbox. Default `20rem`, further bounded by the space available in the viewport.                                                                                     |
+| `--bx-select-form-control-gap`                  | Gap of the `form-control` part. Default `var(--bx-space-xs)`.                                                                                                                           |
+| `--bx-select-label-fg`                          | Text/icon color of the `label` part. Default `var(--bx-text-primary)`.                                                                                                                  |
+| `--bx-select-combobox-gap`                      | Gap of the `combobox` part. Default `var(--bx-space-xs)`.                                                                                                                               |
+| `--bx-select-combobox-padding-inline`           | Padding inline of the `combobox` part. Default `var(--bx-space-s)`.                                                                                                                     |
+| `--bx-select-combobox-radius`                   | Corner radius of the `combobox` part. Default `var(--bx-radius-m)`.                                                                                                                     |
+| `--bx-select-combobox-border-width`             | Border width of the `combobox` part. Default `var(--bx-border-width)`.                                                                                                                  |
+| `--bx-select-combobox-border-color`             | Border color of the `combobox` part. Default `var(--bx-border-subtle)`.                                                                                                                 |
+| `--bx-select-combobox-bg`                       | Background of the `combobox` part. Default `var(--bx-surface-base)`.                                                                                                                    |
+| `--bx-select-combobox-hover-border-color`       | Border color of the `combobox` part (hover state). Default `var(--bx-border-strong)`.                                                                                                   |
+| `--bx-select-combobox-focus-border-color`       | Border color of the `combobox` part (focus state). Default `var(--bx-focus-ring)`.                                                                                                      |
+| `--bx-select-combobox-focus-shadow`             | Box shadow of the `combobox` part (focus state). Default `0 0 0 calc(var(--bx-border-width-strong) * 1.5) color-mix(in srgb, var(--bx-focus-ring) 22%, transparent)`.                   |
+| `--bx-select-combobox-focus-ring-width`         | Focus ring width of the `combobox` part (focus state). Default `var(--bx-border-width-strong)`.                                                                                         |
+| `--bx-select-combobox-hover-bg`                 | Background of the `combobox` part (hover state). Default `var(--bx-surface-muted)`.                                                                                                     |
+| `--bx-select-combobox-focus-bg`                 | Background of the `combobox` part (focus state). Default `var(--bx-surface-base)`.                                                                                                      |
+| `--bx-select-combobox-disabled-bg`              | Background of the `combobox` part (disabled state). Default `var(--bx-surface-subtle)`.                                                                                                 |
+| `--bx-select-combobox-disabled-border-color`    | Border color of the `combobox` part (disabled state). Default `var(--bx-border-subtle)`.                                                                                                |
+| `--bx-select-combobox-disabled-fg`              | Text/icon color of the `combobox` part (disabled state). Default `var(--bx-text-disabled)`.                                                                                             |
+| `--bx-select-combobox-invalid-border-color`     | Border color of the `combobox` part (invalid state). Default `var(--bx-role-danger-border)`.                                                                                            |
+| `--bx-select-combobox-invalid-focus-shadow`     | Box shadow of the `combobox` part (invalid + focus state). Default `0 0 0 calc(var(--bx-border-width-strong) * 1.5) color-mix(in srgb, var(--bx-role-danger-border) 22%, transparent)`. |
+| `--bx-select-value-area-gap`                    | Gap of the `value-area` element. Default `var(--bx-space-xs)`.                                                                                                                          |
+| `--bx-select-value-area-padding-block`          | Padding block of the `value-area` element. Default `var(--bx-space-xs)`.                                                                                                                |
+| `--bx-select-display-input-min-width`           | Minimum width of the `display-input` part. Default `4ch`.                                                                                                                               |
+| `--bx-select-display-input-fg`                  | Text/icon color of the `display-input` part. Default `var(--bx-text-primary)`.                                                                                                          |
+| `--bx-select-display-input-disabled-fg`         | Text/icon color of the `display-input` part (disabled state). Default `var(--bx-text-disabled)`.                                                                                        |
+| `--bx-select-display-input-placeholder-fg`      | Text/icon color of the `display-input` part's `::placeholder`. Default `var(--bx-text-hint)`.                                                                                           |
+| `--bx-select-display-input-placeholder-opacity` | Opacity of the `display-input` part's `::placeholder`. Default `1`.                                                                                                                     |
+| `--bx-select-start-fg`                          | Text/icon color of the `start` element. Default `var(--bx-text-hint)`.                                                                                                                  |
+| `--bx-select-clear-button-size`                 | Size (width and height) of the `clear-button` part. Default `1.5em`.                                                                                                                    |
+| `--bx-select-clear-button-radius`               | Corner radius of the `clear-button` part. Default `var(--bx-radius-pill)`.                                                                                                              |
+| `--bx-select-clear-button-fg`                   | Text/icon color of the `clear-button` part. Default `var(--bx-text-hint)`.                                                                                                              |
+| `--bx-select-clear-button-hover-fg`             | Text/icon color of the `clear-button` part (hover state). Default `var(--bx-text-primary)`.                                                                                             |
+| `--bx-select-clear-button-focus-ring-width`     | Focus ring width of the `clear-button` part (focus state). Default `var(--bx-border-width-strong)`.                                                                                     |
+| `--bx-select-clear-button-focus-ring-color`     | Focus ring color of the `clear-button` part (focus state). Default `var(--bx-focus-ring)`.                                                                                              |
+| `--bx-select-clear-button-focus-ring-offset`    | Focus ring offset of the `clear-button` part (focus state). Default `var(--bx-focus-ring-offset)`.                                                                                      |
+| `--bx-select-expand-icon-fg`                    | Text/icon color of the `expand-icon` part. Default `var(--bx-text-hint)`.                                                                                                               |
+| `--bx-select-hint-fg`                           | Text/icon color of the `hint` part. Default `var(--bx-text-secondary)`.                                                                                                                 |
+| `--bx-select-hint-invalid-fg`                   | Text/icon color of the `hint` part (invalid state). Default `var(--bx-role-danger-fg)`.                                                                                                 |
+| `--bx-select-panel-border-width`                | Border width of the `panel` element. Default `var(--bx-border-width)`.                                                                                                                  |
+| `--bx-select-panel-border-color`                | Border color of the `panel` element. Default `var(--bx-border-subtle)`.                                                                                                                 |
+| `--bx-select-panel-radius`                      | Corner radius of the `panel` element. Default `var(--bx-radius-m)`.                                                                                                                     |
+| `--bx-select-panel-shadow`                      | Box shadow of the `panel` element. Default `var(--bx-shadow-m)`.                                                                                                                        |
+| `--bx-select-panel-bg`                          | Background of the `panel` element. Default `var(--bx-surface-base)`.                                                                                                                    |
+| `--bx-select-panel-fg`                          | Text/icon color of the `panel` element. Default `var(--bx-text-primary)`.                                                                                                               |
+| `--bx-select-hr-block-start-border-width`       | Block start border width of the `hr` element. Default `var(--bx-border-width)`.                                                                                                         |
+| `--bx-select-hr-block-start-border-color`       | Block start border color of the `hr` element. Default `var(--bx-border-subtle)`.                                                                                                        |
+| `--bx-select-group-label-padding-block`         | Padding block of the `group-label` element. Default `var(--bx-space-xs)`.                                                                                                               |
+| `--bx-select-group-label-padding-inline`        | Padding inline of the `group-label` element. Default `var(--bx-space-s)`.                                                                                                               |
+| `--bx-select-group-label-fg`                    | Text/icon color of the `group-label` element. Default `var(--bx-text-secondary)`.                                                                                                       |
+| `--bx-select-status-gap`                        | Gap of the `status` element. Default `var(--bx-space-xs)`.                                                                                                                              |
+| `--bx-select-status-padding`                    | Padding of the `status` element. Default `var(--bx-space-s)`.                                                                                                                           |
+| `--bx-select-status-fg`                         | Text/icon color of the `status` element. Default `var(--bx-text-secondary)`.                                                                                                            |
+| `--bx-select-clear-button-icon-size`            | Size (width and height) of the icon inside the `clear-button` element. Default `1em`.                                                                                                   |
+| `--bx-select-height`                            | Combobox minimum height. Default derived from `size`.                                                                                                                                   |
+| `--bx-select-font-family`                       | Font family of the root surface. Default `var(--bx-type-body-family)`.                                                                                                                  |
+| `--bx-select-label-font-family`                 | Font family of the `label` part (text style `label-s`). Default `var(--bx-type-label-family)`.                                                                                          |
+| `--bx-select-label-font-size`                   | Font size of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-size)`.                                                                                            |
+| `--bx-select-label-font-weight`                 | Font weight of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-weight)`.                                                                                        |
+| `--bx-select-label-line-height`                 | Line height of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-leading)`.                                                                                       |
+| `--bx-select-label-letter-spacing`              | Letter spacing of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.                                                                                   |
+| `--bx-select-display-input-font-family`         | Font family of the `display-input` part (text style `field-m`). Default `var(--bx-type-field-family)`.                                                                                  |
+| `--bx-select-display-input-font-size`           | Font size of the `display-input` part (text style `field-m`). Default `var(--bx-type-field-m-size)`.                                                                                    |
+| `--bx-select-display-input-font-weight`         | Font weight of the `display-input` part (text style `field-m`). Default `var(--bx-type-field-m-weight)`.                                                                                |
+| `--bx-select-display-input-line-height`         | Line height of the `display-input` part (text style `field-m`). Default `var(--bx-type-field-m-leading)`.                                                                               |
+| `--bx-select-display-input-letter-spacing`      | Letter spacing of the `display-input` part (text style `field-m`). Default `var(--bx-type-field-m-tracking)`.                                                                           |
+| `--bx-select-hint-font-family`                  | Font family of the `hint` part (text style `body-s`). Default `var(--bx-type-body-family)`.                                                                                             |
+| `--bx-select-hint-font-size`                    | Font size of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-size)`.                                                                                               |
+| `--bx-select-hint-font-weight`                  | Font weight of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-weight)`.                                                                                           |
+| `--bx-select-hint-line-height`                  | Line height of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-leading)`.                                                                                          |
+| `--bx-select-hint-letter-spacing`               | Letter spacing of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.                                                                                      |
+| `--bx-select-panel-font-family`                 | Font family of the `panel` element (text style `body-m`). Default `var(--bx-type-body-family)`.                                                                                         |
+| `--bx-select-panel-font-size`                   | Font size of the `panel` element (text style `body-m`). Default `var(--bx-type-body-m-size)`.                                                                                           |
+| `--bx-select-panel-font-weight`                 | Font weight of the `panel` element (text style `body-m`). Default `var(--bx-type-body-m-weight)`.                                                                                       |
+| `--bx-select-panel-line-height`                 | Line height of the `panel` element (text style `body-m`). Default `var(--bx-type-body-m-leading)`.                                                                                      |
+| `--bx-select-panel-letter-spacing`              | Letter spacing of the `panel` element (text style `body-m`). Default `var(--bx-type-body-m-tracking)`.                                                                                  |
+| `--bx-select-group-label-font-family`           | Font family of the `group-label` element (text style `label-s`). Default `var(--bx-type-label-family)`.                                                                                 |
+| `--bx-select-group-label-font-size`             | Font size of the `group-label` element (text style `label-s`). Default `var(--bx-type-label-s-size)`.                                                                                   |
+| `--bx-select-group-label-font-weight`           | Font weight of the `group-label` element (text style `label-s`). Default `var(--bx-type-label-s-weight)`.                                                                               |
+| `--bx-select-group-label-line-height`           | Line height of the `group-label` element (text style `label-s`). Default `var(--bx-type-label-s-leading)`.                                                                              |
+| `--bx-select-group-label-letter-spacing`        | Letter spacing of the `group-label` element (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.                                                                          |
+| `--bx-select-status-font-family`                | Font family of the `status` element (text style `body-s`). Default `var(--bx-type-body-family)`.                                                                                        |
+| `--bx-select-status-font-size`                  | Font size of the `status` element (text style `body-s`). Default `var(--bx-type-body-s-size)`.                                                                                          |
+| `--bx-select-status-font-weight`                | Font weight of the `status` element (text style `body-s`). Default `var(--bx-type-body-s-weight)`.                                                                                      |
+| `--bx-select-status-line-height`                | Line height of the `status` element (text style `body-s`). Default `var(--bx-type-body-s-leading)`.                                                                                     |
+| `--bx-select-status-letter-spacing`             | Letter spacing of the `status` element (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.                                                                                 |
 
 ### Methods
 

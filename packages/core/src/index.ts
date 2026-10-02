@@ -8,4 +8,14 @@ export {
   type VirtualItem,
   type VirtualizerOptions,
 } from './virtualizer/index.ts';
-export { observeIntersection, observeResize } from './internal/shared-observers.ts';
+export {
+  observeIntersection,
+  observeResize,
+} from './internal/shared-observers.ts';
+export {
+  textFamily,
+  textStyle,
+  type TextGroup,
+  type TextStyle,
+  type TextStyleOverrides,
+} from './internal/text-style.ts';

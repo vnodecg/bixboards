@@ -38,11 +38,22 @@ _None._
 
 ### CSS parts
 
-`content`
+| Part      | Description             |
+| --------- | ----------------------- |
+| `content` | The scrollable element. |
 
 ### CSS custom properties
 
-`--shadow-color`, `--shadow-size`
+| Property                                  | Description                                                                                                         |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `--bx-scroller-shadow-color`              | Edge shadow color. Default a translucent neutral.                                                                   |
+| `--bx-scroller-shadow-size`               | Edge shadow extent. Default `--bx-space-l`.                                                                         |
+| `--bx-scroller-content-focus-ring-width`  | Focus ring width of the `content` part (focus state). Default `var(--bx-border-width-strong)`.                      |
+| `--bx-scroller-content-focus-ring-color`  | Focus ring color of the `content` part (focus state). Default `var(--bx-focus-ring)`.                               |
+| `--bx-scroller-content-focus-ring-offset` | Focus ring offset of the `content` part (focus state). Default `calc(var(--bx-focus-ring-offset) * -1)`.            |
+| `--bx-scroller-shadow-opacity`            | Opacity of the `shadow` element. Default `1`.                                                                       |
+| `--bx-scroller-shadow-start-bg`           | Background of the `shadow-start` element. Default `linear-gradient( to right, var(--_shadow-color), transparent )`. |
+| `--bx-scroller-shadow-end-bg`             | Background of the `shadow-end` element. Default `linear-gradient( to left, var(--_shadow-color), transparent )`.    |
 
 ### Methods
 

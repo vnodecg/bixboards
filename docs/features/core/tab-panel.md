@@ -37,11 +37,16 @@ _None._
 
 ### CSS parts
 
-`base`
+| Part   | Description          |
+| ------ | -------------------- |
+| `base` | The content wrapper. |
 
 ### CSS custom properties
 
-`--padding`
+| Property                     | Description                                                            |
+| ---------------------------- | ---------------------------------------------------------------------- |
+| `--bx-tab-panel-padding`     | Panel padding. Default `--bx-space-m`.                                 |
+| `--bx-tab-panel-font-family` | Font family of the root surface. Default `var(--bx-type-body-family)`. |
 
 ### Methods
 

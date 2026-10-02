@@ -1,6 +1,7 @@
 import { css, html } from 'lit';
 import { BixElement } from '../bix-element.ts';
 import type { BxTreeItem } from '../tree-item/tree-item.ts';
+import { textFamily } from '../internal/text-style.ts';
 
 type Selection = 'single' | 'multiple' | 'leaf';
 
@@ -44,6 +45,7 @@ const LARGE_TREE_WARNING_THRESHOLD = 500;
  * @slot (default) - `bx-tree-item` elements.
  *
  * @csspart base - The `role="tree"` wrapper.
+ * @cssprop --bx-tree-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
  */
 export class BxTree extends BixElement {
   static override tagName = 'bx-tree';
@@ -53,7 +55,7 @@ export class BxTree extends BixElement {
     css`
       :host {
         display: block;
-        font-family: var(--bx-font-family-sans);
+        ${textFamily('--bx-tree', 'body')}
       }
 
       .base {

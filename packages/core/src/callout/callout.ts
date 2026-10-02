@@ -1,5 +1,6 @@
 import { css, html, nothing, svg, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
+import { textStyle, textFamily } from '../internal/text-style.ts';
 
 type Variant = 'default' | 'secondary' | 'tertiary' | 'error' | 'warning';
 type Appearance =
@@ -47,6 +48,33 @@ const CLOSE_PATH =
  * @csspart icon - The wrapper around the icon slot.
  * @csspart message - The wrapper around the default slot.
  * @csspart close-button - The dismiss button, present with `dismissible`.
+ * @cssprop --bx-callout-opacity - Opacity of the root surface. Default `1`.
+ * @cssprop --bx-callout-gap - Gap of the root surface. Default `var(--bx-space-s)`.
+ * @cssprop --bx-callout-radius - Corner radius of the root surface. Default `var(--bx-radius-m)`.
+ * @cssprop --bx-callout-border-width - Border width of the root surface. Default `var(--bx-border-width)`.
+ * @cssprop --bx-callout-border-color - Border color of the root surface. Default `var(--bx-callout-variant-border)`.
+ * @cssprop --bx-callout-inline-start-border-width - Inline start border width of the root surface. Default `calc(var(--bx-border-width-strong) * 2)`.
+ * @cssprop --bx-callout-inline-start-border-color - Inline start border color of the root surface. Default `var(--bx-callout-variant-solid)`.
+ * @cssprop --bx-callout-padding - Padding of the root surface. Default `var(--bx-space-xs) var(--bx-space-s)`.
+ * @cssprop --bx-callout-icon-size - Size (width and height) of the `icon` part. Default `1.25em`.
+ * @cssprop --bx-callout-icon-fg - Text/icon color of the `icon` part. Default `var(--bx-callout-variant-fg)`.
+ * @cssprop --bx-callout-message-line-height - Line height of the `message` part. Default `var(--bx-type-body-m-leading)`.
+ * @cssprop --bx-callout-actions-gap - Gap of the `actions` element. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-callout-close-button-size - Size (width and height) of the `close-button` part. Default `var(--bx-target-min)`.
+ * @cssprop --bx-callout-close-button-radius - Corner radius of the `close-button` part. Default `var(--bx-radius-pill)`.
+ * @cssprop --bx-callout-close-button-hover-bg - Background of the `close-button` part (hover state). Default `color-mix(in srgb, currentColor 12%, transparent)`.
+ * @cssprop --bx-callout-close-button-focus-ring-width - Focus ring width of the `close-button` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-callout-close-button-focus-ring-color - Focus ring color of the `close-button` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-callout-close-button-focus-ring-offset - Focus ring offset of the `close-button` part (focus state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-callout-fg - Text color. Default the variant's `fg` role color.
+ * @cssprop --bx-callout-bg - Background. Default the variant's `subtle` role color.
+ * @cssprop --bx-callout-close-button-icon-size - Size (width and height) of the icon inside the `close-button` element. Default `1em`.
+ * @cssprop --bx-callout-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-callout-font-family - Font family of the root surface (text style `caption-s`). Default `var(--bx-type-caption-family)`.
+ * @cssprop --bx-callout-font-size - Font size of the root surface (text style `caption-s`). Default `var(--bx-type-caption-s-size)`.
+ * @cssprop --bx-callout-font-weight - Font weight of the root surface (text style `caption-s`). Default `var(--bx-type-caption-s-weight)`.
+ * @cssprop --bx-callout-line-height - Line height of the root surface (text style `caption-s`). Default `var(--bx-type-caption-s-leading)`.
+ * @cssprop --bx-callout-letter-spacing - Letter spacing of the root surface (text style `caption-s`). Default `var(--bx-type-caption-s-tracking)`.
  */
 export class BxCallout extends BixElement {
   static override tagName = 'bx-callout';
@@ -57,12 +85,12 @@ export class BxCallout extends BixElement {
       :host {
         display: grid;
         grid-template-rows: 1fr;
-        opacity: 1;
+        opacity: var(--bx-callout-opacity, 1);
         transition:
-          grid-template-rows var(--bx-motion-duration-base, 0.2s)
-            var(--bx-motion-easing-standard, ease),
-          opacity var(--bx-motion-duration-base, 0.2s)
-            var(--bx-motion-easing-standard, ease);
+          grid-template-rows var(--bx-motion-duration-base)
+            var(--bx-motion-easing-standard),
+          opacity var(--bx-motion-duration-base)
+            var(--bx-motion-easing-standard);
       }
 
       :host(:not([open])) {
@@ -76,15 +104,16 @@ export class BxCallout extends BixElement {
         min-block-size: 0;
         display: flex;
         align-items: flex-start;
-        gap: var(--bx-space-s);
-        border-radius: var(--bx-radius-m);
-        font-family: var(--bx-font-family-sans);
+        gap: var(--bx-callout-gap, var(--bx-space-s));
+        border-radius: var(--bx-callout-radius, var(--bx-radius-m));
+        ${textFamily('--bx-callout', 'body')}
         color: var(--bx-callout-fg, var(--bx-callout-variant-fg));
         background: var(--bx-callout-bg, transparent);
-        border: var(--bx-border-width) solid transparent;
+        border: var(--bx-callout-border-width, var(--bx-border-width)) solid
+          transparent;
       }
 
-      @container (max-width: calc(var(--bx-unit) * 24)) {
+      @container (max-width: 24rem) {
         .base {
           flex-direction: column;
         }
@@ -127,35 +156,51 @@ export class BxCallout extends BixElement {
         background: var(--bx-callout-bg, var(--bx-callout-variant-subtle));
       }
       :host([appearance~='outlined']) .base {
-        border-color: var(--bx-callout-variant-border);
+        border-color: var(
+          --bx-callout-border-color,
+          var(--bx-callout-variant-border)
+        );
       }
       :host([appearance='accent']) .base {
         background: var(--bx-callout-bg, var(--bx-callout-variant-subtle));
-        border-inline-start: calc(var(--bx-border-width-strong) * 2) solid
-          var(--bx-callout-variant-solid);
+        border-inline-start: var(
+            --bx-callout-inline-start-border-width,
+            calc(var(--bx-border-width-strong) * 2)
+          )
+          solid
+          var(
+            --bx-callout-inline-start-border-color,
+            var(--bx-callout-variant-solid)
+          );
       }
 
       /* Size steps: padding, icon and type scale together (§4). */
       :host([size='small']) .base {
-        padding: var(--bx-space-xs) var(--bx-space-s);
-        font-size: var(--bx-font-xs);
+        padding: var(
+          --bx-callout-padding,
+          var(--bx-space-xs) var(--bx-space-s)
+        );
+
+        ${textStyle('--bx-callout', 'caption-s')}
       }
       :host([size='medium']) .base,
       :host(:not([size])) .base {
-        padding: var(--bx-space-s) var(--bx-space-m);
-        font-size: var(--bx-font-s);
+        padding: var(--bx-callout-padding, var(--bx-space-s) var(--bx-space-m));
+
+        ${textStyle('--bx-callout', 'body-s')}
       }
       :host([size='large']) .base {
-        padding: var(--bx-space-m) var(--bx-space-l);
-        font-size: var(--bx-font-m);
+        padding: var(--bx-callout-padding, var(--bx-space-m) var(--bx-space-l));
+
+        ${textStyle('--bx-callout', 'body-m')}
       }
 
       .icon {
         display: inline-flex;
         flex-shrink: 0;
-        inline-size: 1.25em;
-        block-size: 1.25em;
-        color: var(--bx-callout-variant-fg);
+        inline-size: var(--bx-callout-icon-size, 1.25em);
+        block-size: var(--bx-callout-icon-size, 1.25em);
+        color: var(--bx-callout-icon-fg, var(--bx-callout-variant-fg));
       }
 
       .icon ::slotted(*),
@@ -168,13 +213,16 @@ export class BxCallout extends BixElement {
       .message {
         flex: 1;
         min-inline-size: 0;
-        line-height: var(--bx-font-leading-normal);
+        line-height: var(
+          --bx-callout-message-line-height,
+          var(--bx-type-body-m-leading)
+        );
       }
 
       .actions {
         display: flex;
         align-items: center;
-        gap: var(--bx-space-xs);
+        gap: var(--bx-callout-actions-gap, var(--bx-space-xs));
         flex-shrink: 0;
       }
 
@@ -183,25 +231,39 @@ export class BxCallout extends BixElement {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        inline-size: var(--bx-target-min);
-        block-size: var(--bx-target-min);
-        border-radius: var(--bx-radius-pill);
+        inline-size: var(--bx-callout-close-button-size, var(--bx-target-min));
+        block-size: var(--bx-callout-close-button-size, var(--bx-target-min));
+        border-radius: var(
+          --bx-callout-close-button-radius,
+          var(--bx-radius-pill)
+        );
         cursor: pointer;
         flex-shrink: 0;
       }
 
       .close-button:hover {
-        background: color-mix(in srgb, currentColor 12%, transparent);
+        background: var(
+          --bx-callout-close-button-hover-bg,
+          color-mix(in srgb, currentColor 12%, transparent)
+        );
       }
 
       .close-button:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+        outline: var(
+            --bx-callout-close-button-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(--bx-callout-close-button-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-callout-close-button-focus-ring-offset,
+          var(--bx-focus-ring-offset)
+        );
       }
 
       .close-button svg {
-        inline-size: 1em;
-        block-size: 1em;
+        inline-size: var(--bx-callout-close-button-icon-size, 1em);
+        block-size: var(--bx-callout-close-button-icon-size, 1em);
         fill: currentColor;
       }
 

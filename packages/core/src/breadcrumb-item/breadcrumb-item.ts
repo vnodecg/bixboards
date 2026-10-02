@@ -1,5 +1,6 @@
 import { css, html, nothing } from 'lit';
 import { BixElement } from '../bix-element.ts';
+import { textStyle } from '../internal/text-style.ts';
 
 /**
  * `<bx-breadcrumb-item>` — one crumb; link or button.
@@ -21,6 +22,26 @@ import { BixElement } from '../bix-element.ts';
  * @csspart prefix - The wrapper around the start slot.
  * @csspart suffix - The wrapper around the end slot.
  * @csspart separator - The wrapper around the separator slot.
+ * @cssprop --bx-breadcrumb-item-gap - Gap of the root surface. Default `var(--bx-space-2xs)`.
+ * @cssprop --bx-breadcrumb-item-label-gap - Gap of the `label` part. Default `var(--bx-space-2xs)`.
+ * @cssprop --bx-breadcrumb-item-label-min-height - Minimum height of the `label` part. Default `var(--bx-target-min)`.
+ * @cssprop --bx-breadcrumb-item-label-focus-ring-width - Focus ring width of the `label` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-breadcrumb-item-label-focus-ring-color - Focus ring color of the `label` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-breadcrumb-item-label-focus-ring-offset - Focus ring offset of the `label` part (focus state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-breadcrumb-item-label-focus-radius - Corner radius of the `label` part (focus state). Default `var(--bx-radius-s)`.
+ * @cssprop --bx-breadcrumb-item-label-current-fg - Text/icon color of the `label` part (current state). Default `var(--bx-text-primary)`.
+ * @cssprop --bx-breadcrumb-item-separator-fg - Text/icon color of the `separator` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-breadcrumb-item-link-fg - Color of the label when the item is a link or button. Default `var(--bx-role-accent)`.
+ * @cssprop --bx-breadcrumb-item-font-family - Font family of the root surface (text style `body-s`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-breadcrumb-item-font-size - Font size of the root surface (text style `body-s`). Default `var(--bx-type-body-s-size)`.
+ * @cssprop --bx-breadcrumb-item-font-weight - Font weight of the root surface (text style `body-s`). Default `var(--bx-type-body-s-weight)`.
+ * @cssprop --bx-breadcrumb-item-line-height - Line height of the root surface (text style `body-s`). Default `var(--bx-type-body-s-leading)`.
+ * @cssprop --bx-breadcrumb-item-letter-spacing - Letter spacing of the root surface (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.
+ * @cssprop --bx-breadcrumb-item-label-current-font-family - Font family of the `label` part (text style `label-m`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-breadcrumb-item-label-current-font-size - Font size of the `label` part (text style `label-m`). Default `var(--bx-type-label-m-size)`.
+ * @cssprop --bx-breadcrumb-item-label-current-font-weight - Font weight of the `label` part (text style `label-m`). Default `var(--bx-type-label-m-weight)`.
+ * @cssprop --bx-breadcrumb-item-label-current-line-height - Line height of the `label` part (text style `label-m`). Default `var(--bx-type-label-m-leading)`.
+ * @cssprop --bx-breadcrumb-item-label-current-letter-spacing - Letter spacing of the `label` part (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.
  */
 export class BxBreadcrumbItem extends BixElement {
   static override tagName = 'bx-breadcrumb-item';
@@ -31,9 +52,9 @@ export class BxBreadcrumbItem extends BixElement {
       :host {
         display: inline-flex;
         align-items: center;
-        gap: var(--bx-space-2xs);
-        font-family: var(--bx-font-family-sans);
-        font-size: var(--bx-font-s);
+        gap: var(--bx-breadcrumb-item-gap, var(--bx-space-2xs));
+
+        ${textStyle('--bx-breadcrumb-item', 'body-s')}
       }
 
       /* Author styles beat the UA stylesheet's [hidden] at equal specificity, so :host's own
@@ -47,9 +68,11 @@ export class BxBreadcrumbItem extends BixElement {
       .label {
         display: inline-flex;
         align-items: center;
-        gap: var(--bx-space-2xs);
-        min-block-size: var(--bx-target-min, 2.75rem);
-        color: var(--bx-text-secondary);
+        gap: var(--bx-breadcrumb-item-label-gap, var(--bx-space-2xs));
+        min-block-size: var(
+          --bx-breadcrumb-item-label-min-height,
+          var(--bx-target-min)
+        );
         text-decoration: none;
         font: inherit;
         background: none;
@@ -60,7 +83,7 @@ export class BxBreadcrumbItem extends BixElement {
 
       a.label,
       button.label {
-        color: var(--bx-role-accent);
+        color: var(--bx-breadcrumb-item-link-fg, var(--bx-role-accent));
       }
 
       a.label:hover,
@@ -70,21 +93,37 @@ export class BxBreadcrumbItem extends BixElement {
 
       a.label:focus-visible,
       button.label:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
-        border-radius: var(--bx-radius-s);
+        outline: var(
+            --bx-breadcrumb-item-label-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(--bx-breadcrumb-item-label-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-breadcrumb-item-label-focus-ring-offset,
+          var(--bx-focus-ring-offset)
+        );
+        border-radius: var(
+          --bx-breadcrumb-item-label-focus-radius,
+          var(--bx-radius-s)
+        );
       }
 
       span.label[aria-current] {
-        color: var(--bx-text-primary);
-        font-weight: var(--bx-font-weight-medium);
+        color: var(
+          --bx-breadcrumb-item-label-current-fg,
+          var(--bx-text-primary)
+        );
+
+        ${textStyle('--bx-breadcrumb-item-label-current', 'label-m')}
+
         cursor: default;
       }
 
       .separator {
         display: inline-flex;
         margin-inline-end: var(--bx-space-2xs);
-        color: var(--bx-text-secondary);
+        color: var(--bx-breadcrumb-item-separator-fg, var(--bx-text-secondary));
         user-select: none;
       }
 

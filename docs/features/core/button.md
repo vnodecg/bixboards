@@ -52,11 +52,41 @@ Triggers an action or navigates. Supports variants, appearances, sizes, loading 
 
 ### CSS parts
 
-`base`, `start`, `label`, `end`, `caret`, `spinner`
+| Part      | Description                                           |
+| --------- | ----------------------------------------------------- |
+| `base`    | The inner `<button>`/`<a>`.                           |
+| `start`   | The wrapper around the start slot.                    |
+| `label`   | The wrapper around the default slot.                  |
+| `end`     | The wrapper around the end slot.                      |
+| `caret`   | The dropdown caret, present when `with-caret` is set. |
+| `spinner` | The loading spinner, present when `loading`.          |
 
 ### CSS custom properties
 
-`--bx-button-bg`, `--bx-button-fg`, `--bx-button-border`, `--bx-button-min-height`, `--bx-button-padding-inline`, `--bx-button-radius` (added; lets `bx-button-group` square inner corners)
+| Property                              | Description                                                                                           |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `--bx-button-bg`                      | Background color. Defaults to a role/appearance combination.                                          |
+| `--bx-button-fg`                      | Text/icon color. Defaults to a role/appearance combination.                                           |
+| `--bx-button-border`                  | Border color. Defaults to a role/appearance combination.                                              |
+| `--bx-button-min-height`              | Control height. Default derived from `size`.                                                          |
+| `--bx-button-padding-inline`          | Horizontal padding. Default derived from `size`.                                                      |
+| `--bx-button-radius`                  | Corner radius (any `border-radius` value). Used by `bx-button-group` to square inner corners.         |
+| `--bx-button-truncate`                | Label `white-space` value; set to `nowrap` to truncate.                                               |
+| `--bx-button-gap`                     | Gap of the root surface. Default `var(--bx-space-2xs)`.                                               |
+| `--bx-button-border-width`            | Border width of the root surface. Default `var(--bx-border-width)`.                                   |
+| `--bx-button-basenot-disabled-shadow` | Box shadow of the `basenot` element (disabled state). Default `var(--bx-shadow-s)`.                   |
+| `--bx-button-focus-ring-width`        | Focus ring width of the root surface (focus state). Default `var(--bx-border-width-strong)`.          |
+| `--bx-button-focus-ring-color`        | Focus ring color of the root surface (focus state). Default `var(--bx-focus-ring)`.                   |
+| `--bx-button-focus-ring-offset`       | Focus ring offset of the root surface (focus state). Default `var(--bx-focus-ring-offset)`.           |
+| `--bx-button-disabled-opacity`        | Opacity of the root surface (disabled state). Default `0.5`.                                          |
+| `--bx-button-spinner-font-size`       | Font size of the `spinner` part. Default `1.1em`.                                                     |
+| `--bx-button-icon-size`               | Size (width and height) of the start, end and caret icons. Default `1em`.                             |
+| `--bx-button-font-family`             | Font family of the root surface. Default `var(--bx-type-body-family)`.                                |
+| `--bx-button-font-family`             | Font family of the root surface (text style `label-m`). Default `var(--bx-type-label-family)`.        |
+| `--bx-button-font-size`               | Font size of the root surface (text style `label-m`). Default `var(--bx-type-label-m-size)`.          |
+| `--bx-button-font-weight`             | Font weight of the root surface (text style `label-m`). Default `var(--bx-type-label-m-weight)`.      |
+| `--bx-button-line-height`             | Line height of the root surface (text style `label-m`). Default `var(--bx-type-label-m-leading)`.     |
+| `--bx-button-letter-spacing`          | Letter spacing of the root surface (text style `label-m`). Default `var(--bx-type-label-m-tracking)`. |
 
 ### Methods
 

@@ -69,11 +69,72 @@ Single-line text field with all native input types, clearable, password toggle a
 
 ### CSS parts
 
-`form-control`, `label`, `hint`, `base`, `input`, `start`, `end`, `clear-button`, `password-toggle-button`
+| Part                     | Description                              |
+| ------------------------ | ---------------------------------------- |
+| `form-control`           | The outer wrapper (label + base + hint). |
+| `label`                  | The label element.                       |
+| `hint`                   | The wrapper around the hint slot.        |
+| `base`                   | The wrapper around start/input/end.      |
+| `input`                  | The native `<input>`.                    |
+| `start`                  | The wrapper around the start slot.       |
+| `end`                    | The wrapper around the end slot.         |
+| `clear-button`           | The clear button.                        |
+| `password-toggle-button` | The password-reveal toggle button.       |
 
 ### CSS custom properties
 
-`--bx-input-height`, `--bx-input-padding-inline`
+| Property                                    | Description                                                                                                                                                        |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `--bx-input-height`                         | Control height. Default derived from `size`.                                                                                                                       |
+| `--bx-input-padding-inline`                 | Horizontal padding. Default `--bx-space-s`.                                                                                                                        |
+| `--bx-input-form-control-gap`               | Gap of the `form-control` part. Default `var(--bx-space-xs)`.                                                                                                      |
+| `--bx-input-label-fg`                       | Text/icon color of the `label` part. Default `var(--bx-text-primary)`.                                                                                             |
+| `--bx-input-gap`                            | Gap of the root surface. Default `var(--bx-space-xs)`.                                                                                                             |
+| `--bx-input-radius`                         | Corner radius of the root surface. Default `var(--bx-radius-m)`.                                                                                                   |
+| `--bx-input-border-width`                   | Border width of the root surface. Default `var(--bx-border-width)`.                                                                                                |
+| `--bx-input-border-color`                   | Border color of the root surface. Default `var(--bx-border-subtle)`.                                                                                               |
+| `--bx-input-bg`                             | Background of the root surface. Default `var(--bx-surface-base)`.                                                                                                  |
+| `--bx-input-hover-border-color`             | Border color of the root surface (hover state). Default `var(--bx-border-strong)`.                                                                                 |
+| `--bx-input-focus-border-color`             | Border color of the root surface (focus state). Default `var(--bx-focus-ring)`.                                                                                    |
+| `--bx-input-focus-shadow`                   | Box shadow of the root surface (focus state). Default `0 0 0 calc(var(--bx-border-width-strong) * 1.5) color-mix(in srgb, var(--bx-focus-ring) 22%, transparent)`. |
+| `--bx-input-focus-ring-width`               | Focus ring width of the root surface (focus state). Default `var(--bx-border-width-strong)`.                                                                       |
+| `--bx-input-hover-bg`                       | Background of the root surface (hover state). Default `var(--bx-surface-muted)`.                                                                                   |
+| `--bx-input-focus-bg`                       | Background of the root surface (focus state). Default `var(--bx-surface-base)`.                                                                                    |
+| `--bx-input-disabled-bg`                    | Background of the root surface (disabled state). Default `var(--bx-surface-subtle)`.                                                                               |
+| `--bx-input-disabled-border-color`          | Border color of the root surface (disabled state). Default `var(--bx-border-subtle)`.                                                                              |
+| `--bx-input-disabled-fg`                    | Text/icon color of the root surface (disabled state). Default `var(--bx-text-disabled)`.                                                                           |
+| `--bx-input-invalid-border-color`           | Border color of the root surface (invalid state). Default `var(--bx-role-danger-border)`.                                                                          |
+| `--bx-input-invalid-focus-shadow`           | Box shadow of the root surface (invalid + focus state). Default `0 0 0 3px color-mix(in srgb, var(--bx-role-danger-border) 22%, transparent)`.                     |
+| `--bx-input-placeholder-fg`                 | Text/icon color of the `::placeholder`. Default `var(--bx-text-hint)`.                                                                                             |
+| `--bx-input-placeholder-opacity`            | Opacity of the `::placeholder`. Default `1`.                                                                                                                       |
+| `--bx-input-start-fg`                       | Text/icon color of the `start` part. Default `var(--bx-text-hint)`.                                                                                                |
+| `--bx-input-start-focus-fg`                 | Text/icon color of the `start` part (focus state). Default `var(--bx-text-secondary)`.                                                                             |
+| `--bx-input-clear-button-size`              | Size (width and height) of the `clear-button` part. Default `1.5em`.                                                                                               |
+| `--bx-input-clear-button-radius`            | Corner radius of the `clear-button` part. Default `var(--bx-radius-pill)`.                                                                                         |
+| `--bx-input-clear-button-fg`                | Text/icon color of the `clear-button` part. Default `var(--bx-text-hint)`.                                                                                         |
+| `--bx-input-clear-button-hover-fg`          | Text/icon color of the `clear-button` part (hover state). Default `var(--bx-text-primary)`.                                                                        |
+| `--bx-input-clear-button-focus-ring-width`  | Focus ring width of the `clear-button` part (focus state). Default `var(--bx-border-width-strong)`.                                                                |
+| `--bx-input-clear-button-focus-ring-color`  | Focus ring color of the `clear-button` part (focus state). Default `var(--bx-focus-ring)`.                                                                         |
+| `--bx-input-clear-button-focus-ring-offset` | Focus ring offset of the `clear-button` part (focus state). Default `var(--bx-focus-ring-offset)`.                                                                 |
+| `--bx-input-hint-fg`                        | Text/icon color of the `hint` part. Default `var(--bx-text-secondary)`.                                                                                            |
+| `--bx-input-hint-invalid-fg`                | Text/icon color of the `hint` part (invalid state). Default `var(--bx-role-danger-fg)`.                                                                            |
+| `--bx-input-clear-button-icon-size`         | Size (width and height) of the icon inside the `clear-button` element. Default `1em`.                                                                              |
+| `--bx-input-font-family`                    | Font family of the root surface. Default `var(--bx-type-field-family)`.                                                                                            |
+| `--bx-input-label-font-family`              | Font family of the `label` part (text style `label-s`). Default `var(--bx-type-label-family)`.                                                                     |
+| `--bx-input-label-font-size`                | Font size of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-size)`.                                                                       |
+| `--bx-input-label-font-weight`              | Font weight of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-weight)`.                                                                   |
+| `--bx-input-label-line-height`              | Line height of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-leading)`.                                                                  |
+| `--bx-input-label-letter-spacing`           | Letter spacing of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.                                                              |
+| `--bx-input-font-family`                    | Font family of the root surface (text style `field-m`). Default `var(--bx-type-field-family)`.                                                                     |
+| `--bx-input-font-size`                      | Font size of the root surface (text style `field-m`). Default `var(--bx-type-field-m-size)`.                                                                       |
+| `--bx-input-font-weight`                    | Font weight of the root surface (text style `field-m`). Default `var(--bx-type-field-m-weight)`.                                                                   |
+| `--bx-input-line-height`                    | Line height of the root surface (text style `field-m`). Default `var(--bx-type-field-m-leading)`.                                                                  |
+| `--bx-input-letter-spacing`                 | Letter spacing of the root surface (text style `field-m`). Default `var(--bx-type-field-m-tracking)`.                                                              |
+| `--bx-input-hint-font-family`               | Font family of the `hint` part (text style `body-s`). Default `var(--bx-type-body-family)`.                                                                        |
+| `--bx-input-hint-font-size`                 | Font size of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-size)`.                                                                          |
+| `--bx-input-hint-font-weight`               | Font weight of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-weight)`.                                                                      |
+| `--bx-input-hint-line-height`               | Line height of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-leading)`.                                                                     |
+| `--bx-input-hint-letter-spacing`            | Letter spacing of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.                                                                 |
 
 ### Methods
 

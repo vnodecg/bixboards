@@ -2,6 +2,30 @@ import { css, html, nothing, type PropertyValues } from 'lit';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { BixElement } from '../bix-element.ts';
 import { FormAssociatedMixin } from '../internal/form-associated.ts';
+import { textStyle, textFamily } from '../internal/text-style.ts';
+
+/**
+ * Transparency checkerboard shared by the trigger and the opacity track. Both tones come from
+ * tokens, so it themes with the surface; `--bx-color-picker-checker-*` retune it per instance.
+ */
+const CHECKERBOARD = css`
+  --_checker: var(--bx-color-picker-checker-size, calc(var(--bx-unit) * 0.5));
+  --_checker-color: var(
+    --bx-color-picker-checker-color,
+    var(--bx-surface-muted)
+  );
+  background-image:
+    linear-gradient(45deg, var(--_checker-color) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--_checker-color) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--_checker-color) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--_checker-color) 75%);
+  background-size: calc(var(--_checker) * 2) calc(var(--_checker) * 2);
+  background-position:
+    0 0,
+    0 var(--_checker),
+    var(--_checker) calc(var(--_checker) * -1),
+    calc(var(--_checker) * -1) 0;
+`;
 
 type Format = 'hex' | 'rgb' | 'hsl' | 'hsv';
 type Size = 'small' | 'medium' | 'large';
@@ -271,10 +295,73 @@ declare global {
  * @csspart eyedropper-button - The eyedropper button, present when `window.EyeDropper` exists.
  * @csspart format-select - The format `<select>`, present unless `no-format-toggle` is set.
  *
- * @cssprop --bx-grid-width - Saturation/value grid width. Default `16rem`.
- * @cssprop --bx-grid-height - Saturation/value grid height. Default `10rem`.
- * @cssprop --bx-swatch-radius - Corner radius of preset boxes, grid and trigger. Default `--bx-radius-m`.
- * @cssprop --bx-swatch-size - Minimum preset box size. Default `1.75rem`.
+ * @cssprop --bx-color-picker-grid-width - Saturation/value grid width. Default `calc(var(--bx-unit) * 16)`.
+ * @cssprop --bx-color-picker-grid-height - Saturation/value grid height. Default `calc(var(--bx-unit) * 10)`.
+ * @cssprop --bx-color-picker-swatch-radius - Corner radius of preset boxes, grid and trigger. Default `--bx-radius-m`.
+ * @cssprop --bx-color-picker-swatch-size - Minimum preset box size. Default `calc(var(--bx-unit) * 1.75)`.
+ * @cssprop --bx-color-picker-gap - Gap of the root surface. Default `var(--bx-space-s)`.
+ * @cssprop --bx-color-picker-trigger-size - Size (width and height) of the `trigger` part. Default `var(--bx-target-min)`.
+ * @cssprop --bx-color-picker-trigger-border-width - Border width of the `trigger` part. Default `var(--bx-border-width)`.
+ * @cssprop --bx-color-picker-trigger-border-color - Border color of the `trigger` part. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-color-picker-trigger-focus-ring-width - Focus ring width of the `trigger` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-color-picker-trigger-focus-ring-color - Focus ring color of the `trigger` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-color-picker-trigger-focus-ring-offset - Focus ring offset of the `trigger` part (focus state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-color-picker-panel-gap - Gap of the `panel` element. Default `var(--bx-space-s)`.
+ * @cssprop --bx-color-picker-panel-padding - Padding of the `panel` element. Default `var(--bx-space-s)`.
+ * @cssprop --bx-color-picker-grid-handle-size - Size (width and height) of the `grid-handle` part. Default `var(--bx-space-m)`.
+ * @cssprop --bx-color-picker-grid-handle-border-width - Border width of the `grid-handle` part. Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-color-picker-slider-height - Height of the `slider` part. Default `var(--bx-space-m)`.
+ * @cssprop --bx-color-picker-slider-radius - Corner radius of the `slider` part. Default `var(--bx-radius-pill)`.
+ * @cssprop --bx-color-picker-slider-handle-size - Size (width and height) of the `slider-handle` element. Default `var(--bx-space-m)`.
+ * @cssprop --bx-color-picker-slider-handle-border-width - Border width of the `slider-handle` element. Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-color-picker-row-gap - Gap of the `row` element. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-color-picker-opacity-input-padding - Padding of the `opacity-input` part. Default `var(--bx-space-2xs) var(--bx-space-xs)`.
+ * @cssprop --bx-color-picker-opacity-input-border-width - Border width of the `opacity-input` part. Default `var(--bx-border-width)`.
+ * @cssprop --bx-color-picker-opacity-input-border-color - Border color of the `opacity-input` part. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-color-picker-opacity-input-radius - Corner radius of the `opacity-input` part. Default `var(--bx-radius-s)`.
+ * @cssprop --bx-color-picker-eyedropper-button-size - Size (width and height) of the `eyedropper-button` part. Default `var(--bx-target-min)`.
+ * @cssprop --bx-color-picker-eyedropper-button-radius - Corner radius of the `eyedropper-button` part. Default `var(--bx-radius-s)`.
+ * @cssprop --bx-color-picker-eyedropper-button-fg - Text/icon color of the `eyedropper-button` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-color-picker-eyedropper-button-hover-bg - Background of the `eyedropper-button` part (hover state). Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-color-picker-eyedropper-button-focus-ring-width - Focus ring width of the `eyedropper-button` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-color-picker-eyedropper-button-focus-ring-color - Focus ring color of the `eyedropper-button` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-color-picker-eyedropper-button-focus-ring-offset - Focus ring offset of the `eyedropper-button` part (focus state). Default `calc(var(--bx-focus-ring-offset) * -1)`.
+ * @cssprop --bx-color-picker-presets-gap - Gap of the `presets` part. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-color-picker-custom-gap - Gap of the `custom` part. Default `var(--bx-space-s)`.
+ * @cssprop --bx-color-picker-format-select-padding - Padding of the `format-select` part. Default `var(--bx-space-2xs) var(--bx-space-xs)`.
+ * @cssprop --bx-color-picker-format-select-border-width - Border width of the `format-select` part. Default `var(--bx-border-width)`.
+ * @cssprop --bx-color-picker-format-select-border-color - Border color of the `format-select` part. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-color-picker-format-select-radius - Corner radius of the `format-select` part. Default `var(--bx-radius-s)`.
+ * @cssprop --bx-color-picker-format-select-focus-ring-width - Focus ring width of the `format-select` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-color-picker-format-select-focus-ring-color - Focus ring color of the `format-select` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-color-picker-format-select-focus-ring-offset - Focus ring offset of the `format-select` part (focus state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-color-picker-opacity-input-width - Width of the `opacity-input` part. Default `calc(var(--bx-unit) * 4.5)`.
+ * @cssprop --bx-color-picker-swatch-bg - Background of the `swatch` part. Default `conic-gradient(red, #ff0, #0f0, #0ff, #00f, #f0f, red)`.
+ * @cssprop --bx-color-picker-custom-toggle-expanded-ring-width - Focus ring width of the `custom-toggle` element (expanded state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-color-picker-custom-toggle-expanded-ring-color - Focus ring color of the `custom-toggle` element (expanded state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-color-picker-custom-toggle-expanded-outline-offset - Outline offset of the `custom-toggle` element (expanded state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-color-picker-swatch-border-width - Border width of the `swatch` part. Default `var(--bx-border-width)`.
+ * @cssprop --bx-color-picker-swatch-border-color - Border color of the `swatch` part. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-color-picker-swatch-pressed-shadow - Box shadow of the `swatch` part (pressed state). Default `0 0 0 var(--bx-border-width-strong) var(--bx-surface-base), 0 0 0 calc(var(--bx-border-width-strong) * 2) var(--bx-focus-ring)`.
+ * @cssprop --bx-color-picker-swatch-focus-ring-width - Focus ring width of the `swatch` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-color-picker-swatch-focus-ring-color - Focus ring color of the `swatch` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-color-picker-swatch-focus-ring-offset - Focus ring offset of the `swatch` part (focus state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-color-picker-grid-disabled-opacity - Opacity of the `grid` part (disabled state). Default `0.5`.
+ * @cssprop --bx-color-picker-checker-size - Edge length of one transparency-checkerboard square. Default `calc(var(--bx-unit) * 0.5)`.
+ * @cssprop --bx-color-picker-checker-color - Color of the darker checkerboard squares. Default `--bx-surface-muted`.
+ * @cssprop --bx-color-picker-handle-border - Ring color of the grid and slider handles; stays light by default so the handle reads on any picked color. Default `white`.
+ * @cssprop --bx-color-picker-handle-shadow - Outer outline color of the grid and slider handles. Default `rgb(0 0 0 / 30%)`.
+ * @cssprop --bx-color-picker-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-color-picker-opacity-input-font-family - Font family of the `opacity-input` part (text style `body-s`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-color-picker-opacity-input-font-size - Font size of the `opacity-input` part (text style `body-s`). Default `var(--bx-type-body-s-size)`.
+ * @cssprop --bx-color-picker-opacity-input-font-weight - Font weight of the `opacity-input` part (text style `body-s`). Default `var(--bx-type-body-s-weight)`.
+ * @cssprop --bx-color-picker-opacity-input-line-height - Line height of the `opacity-input` part (text style `body-s`). Default `var(--bx-type-body-s-leading)`.
+ * @cssprop --bx-color-picker-opacity-input-letter-spacing - Letter spacing of the `opacity-input` part (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.
+ * @cssprop --bx-color-picker-format-select-font-family - Font family of the `format-select` part (text style `body-s`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-color-picker-format-select-font-size - Font size of the `format-select` part (text style `body-s`). Default `var(--bx-type-body-s-size)`.
+ * @cssprop --bx-color-picker-format-select-font-weight - Font weight of the `format-select` part (text style `body-s`). Default `var(--bx-type-body-s-weight)`.
+ * @cssprop --bx-color-picker-format-select-line-height - Line height of the `format-select` part (text style `body-s`). Default `var(--bx-type-body-s-leading)`.
+ * @cssprop --bx-color-picker-format-select-letter-spacing - Letter spacing of the `format-select` part (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.
  */
 export class BxColorPicker extends FormAssociatedMixin(BixElement) {
   static override tagName = 'bx-color-picker';
@@ -284,40 +371,43 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
     css`
       :host {
         display: inline-block;
-        font-family: var(--bx-font-family-sans);
+        ${textFamily('--bx-color-picker', 'body')}
       }
 
       .base {
         display: flex;
         flex-direction: column;
-        gap: var(--bx-space-s);
+        gap: var(--bx-color-picker-gap, var(--bx-space-s));
       }
 
       .trigger {
         all: unset;
         box-sizing: border-box;
         display: inline-flex;
-        inline-size: var(--bx-target-min, 2.75rem);
-        block-size: var(--bx-target-min, 2.75rem);
-        border-radius: var(--bx-swatch-radius, var(--bx-radius-m));
-        border: var(--bx-border-width) solid var(--bx-border-subtle);
-        background-image:
-          linear-gradient(45deg, #ccc 25%, transparent 25%),
-          linear-gradient(-45deg, #ccc 25%, transparent 25%),
-          linear-gradient(45deg, transparent 75%, #ccc 75%),
-          linear-gradient(-45deg, transparent 75%, #ccc 75%);
-        background-size: 8px 8px;
-        background-position:
-          0 0,
-          0 4px,
-          4px -4px,
-          -4px 0;
+        inline-size: var(--bx-color-picker-trigger-size, var(--bx-target-min));
+        block-size: var(--bx-color-picker-trigger-size, var(--bx-target-min));
+        border-radius: var(--bx-color-picker-swatch-radius, var(--bx-radius-m));
+        border: var(
+            --bx-color-picker-trigger-border-width,
+            var(--bx-border-width)
+          )
+          solid
+          var(--bx-color-picker-trigger-border-color, var(--bx-border-subtle));
+        ${CHECKERBOARD}
         cursor: pointer;
       }
 
       .trigger:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+        outline: var(
+            --bx-color-picker-trigger-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(--bx-color-picker-trigger-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-color-picker-trigger-focus-ring-offset,
+          var(--bx-focus-ring-offset)
+        );
       }
 
       .trigger-fill,
@@ -331,31 +421,43 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
-        gap: var(--bx-space-s);
-        padding: var(--bx-space-s);
-        inline-size: calc(var(--bx-grid-width, 16rem) + var(--bx-space-s) * 2);
+        gap: var(--bx-color-picker-panel-gap, var(--bx-space-s));
+        padding: var(--bx-color-picker-panel-padding, var(--bx-space-s));
+        inline-size: calc(
+          var(--bx-color-picker-grid-width, calc(var(--bx-unit) * 16)) +
+            var(--bx-space-s) * 2
+        );
         max-inline-size: 100%;
       }
 
       .grid {
         position: relative;
         inline-size: 100%;
-        block-size: var(--bx-grid-height, 10rem);
-        border-radius: var(--bx-swatch-radius, var(--bx-radius-m));
+        block-size: var(
+          --bx-color-picker-grid-height,
+          calc(var(--bx-unit) * 10)
+        );
+        border-radius: var(--bx-color-picker-swatch-radius, var(--bx-radius-m));
         background-image:
           linear-gradient(to top, #000, transparent),
-          linear-gradient(to right, #fff, transparent);
+          /* ds-exempt: saturation/value plane is color-space data */
+          linear-gradient(to right, #fff, transparent); /* ds-exempt: saturation/value plane is color-space data */
         cursor: crosshair;
         touch-action: none;
       }
 
       .grid-handle {
         position: absolute;
-        inline-size: var(--bx-space-m);
-        block-size: var(--bx-space-m);
-        border: 2px solid #fff;
+        inline-size: var(--bx-color-picker-grid-handle-size, var(--bx-space-m));
+        block-size: var(--bx-color-picker-grid-handle-size, var(--bx-space-m));
+        border: var(
+            --bx-color-picker-grid-handle-border-width,
+            var(--bx-border-width-strong)
+          )
+          solid var(--bx-color-picker-handle-border, white); /* ds-exempt: handle ring must stay legible on any picked color */
         border-radius: 50%;
-        box-shadow: 0 0 0 1px rgb(0 0 0 / 30%);
+        box-shadow: 0 0 0 var(--bx-border-width)
+          var(--bx-color-picker-handle-shadow, rgb(0 0 0 / 30%)); /* ds-exempt: handle outline must stay legible on any picked color */
         transform: translate(-50%, -50%);
         pointer-events: none;
       }
@@ -363,15 +465,18 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
       .slider {
         position: relative;
         inline-size: 100%;
-        block-size: var(--bx-space-m);
-        border-radius: var(--bx-radius-pill, 999px);
+        block-size: var(--bx-color-picker-slider-height, var(--bx-space-m));
+        border-radius: var(
+          --bx-color-picker-slider-radius,
+          var(--bx-radius-pill)
+        );
         touch-action: none;
       }
 
       .hue-slider {
         background: linear-gradient(
           to right,
-          red 0%,
+          /* ds-exempt: hue track is color-space data, not theme */ red 0%,
           #ff0 17%,
           #0f0 33%,
           #0ff 50%,
@@ -382,17 +487,7 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
       }
 
       .opacity-slider {
-        background-image:
-          linear-gradient(45deg, #ccc 25%, transparent 25%),
-          linear-gradient(-45deg, #ccc 25%, transparent 25%),
-          linear-gradient(45deg, transparent 75%, #ccc 75%),
-          linear-gradient(-45deg, transparent 75%, #ccc 75%);
-        background-size: 8px 8px;
-        background-position:
-          0 0,
-          0 4px,
-          4px -4px,
-          -4px 0;
+        ${CHECKERBOARD}
       }
 
       .opacity-slider-fill {
@@ -404,11 +499,22 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
       .slider-handle {
         position: absolute;
         inset-block-start: 50%;
-        inline-size: var(--bx-space-m);
-        block-size: var(--bx-space-m);
-        border: 2px solid #fff;
+        inline-size: var(
+          --bx-color-picker-slider-handle-size,
+          var(--bx-space-m)
+        );
+        block-size: var(
+          --bx-color-picker-slider-handle-size,
+          var(--bx-space-m)
+        );
+        border: var(
+            --bx-color-picker-slider-handle-border-width,
+            var(--bx-border-width-strong)
+          )
+          solid var(--bx-color-picker-handle-border, white); /* ds-exempt: handle ring must stay legible on any picked color */
         border-radius: 50%;
-        box-shadow: 0 0 0 1px rgb(0 0 0 / 30%);
+        box-shadow: 0 0 0 var(--bx-border-width)
+          var(--bx-color-picker-handle-shadow, rgb(0 0 0 / 30%)); /* ds-exempt: handle outline must stay legible on any picked color */
         transform: translate(-50%, -50%);
         pointer-events: none;
       }
@@ -416,7 +522,7 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
       .row {
         display: flex;
         align-items: center;
-        gap: var(--bx-space-xs);
+        gap: var(--bx-color-picker-row-gap, var(--bx-space-xs));
       }
 
       .input {
@@ -424,11 +530,26 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
         box-sizing: border-box;
         flex: 1;
         min-inline-size: 0;
-        padding: var(--bx-space-2xs) var(--bx-space-xs);
-        border: var(--bx-border-width) solid var(--bx-border-subtle);
-        border-radius: var(--bx-radius-s);
+        padding: var(
+          --bx-color-picker-opacity-input-padding,
+          var(--bx-space-2xs) var(--bx-space-xs)
+        );
+        border: var(
+            --bx-color-picker-opacity-input-border-width,
+            var(--bx-border-width)
+          )
+          solid
+          var(
+            --bx-color-picker-opacity-input-border-color,
+            var(--bx-border-subtle)
+          );
+        border-radius: var(
+          --bx-color-picker-opacity-input-radius,
+          var(--bx-radius-s)
+        );
         font: inherit;
-        font-size: var(--bx-font-s);
+
+        ${textStyle('--bx-color-picker-opacity-input', 'body-s')}
       }
 
       .icon-button {
@@ -437,65 +558,135 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        inline-size: var(--bx-target-min, 2.75rem);
-        block-size: var(--bx-target-min, 2.75rem);
-        border-radius: var(--bx-radius-s);
-        color: var(--bx-text-secondary);
+        inline-size: var(
+          --bx-color-picker-eyedropper-button-size,
+          var(--bx-target-min)
+        );
+        block-size: var(
+          --bx-color-picker-eyedropper-button-size,
+          var(--bx-target-min)
+        );
+        border-radius: var(
+          --bx-color-picker-eyedropper-button-radius,
+          var(--bx-radius-s)
+        );
+        color: var(
+          --bx-color-picker-eyedropper-button-fg,
+          var(--bx-text-secondary)
+        );
         cursor: pointer;
       }
 
       .icon-button:hover {
-        background: var(--bx-surface-subtle);
+        background: var(
+          --bx-color-picker-eyedropper-button-hover-bg,
+          var(--bx-surface-subtle)
+        );
       }
 
       .icon-button:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: calc(var(--bx-focus-ring-offset) * -1);
+        outline: var(
+            --bx-color-picker-eyedropper-button-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(
+            --bx-color-picker-eyedropper-button-focus-ring-color,
+            var(--bx-focus-ring)
+          );
+        outline-offset: var(
+          --bx-color-picker-eyedropper-button-focus-ring-offset,
+          calc(var(--bx-focus-ring-offset) * -1)
+        );
       }
 
       .presets {
         display: grid;
         grid-template-columns: repeat(8, 1fr);
-        gap: var(--bx-space-xs);
+        gap: var(--bx-color-picker-presets-gap, var(--bx-space-xs));
       }
 
       .custom {
         display: flex;
         flex-direction: column;
-        gap: var(--bx-space-s);
+        gap: var(--bx-color-picker-custom-gap, var(--bx-space-s));
       }
 
       .select {
         box-sizing: border-box;
         min-block-size: 0;
-        padding: var(--bx-space-2xs) var(--bx-space-xs);
-        border: var(--bx-border-width) solid var(--bx-border-subtle);
-        border-radius: var(--bx-radius-s);
+        padding: var(
+          --bx-color-picker-format-select-padding,
+          var(--bx-space-2xs) var(--bx-space-xs)
+        );
+        border: var(
+            --bx-color-picker-format-select-border-width,
+            var(--bx-border-width)
+          )
+          solid
+          var(
+            --bx-color-picker-format-select-border-color,
+            var(--bx-border-subtle)
+          );
+        border-radius: var(
+          --bx-color-picker-format-select-radius,
+          var(--bx-radius-s)
+        );
         background: transparent;
         color: inherit;
         font: inherit;
-        font-size: var(--bx-font-s);
+
+        ${textStyle('--bx-color-picker-format-select', 'body-s')}
+
         cursor: pointer;
       }
 
       .select:focus-visible,
       .input:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+        outline: var(
+            --bx-color-picker-format-select-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(
+            --bx-color-picker-format-select-focus-ring-color,
+            var(--bx-focus-ring)
+          );
+        outline-offset: var(
+          --bx-color-picker-format-select-focus-ring-offset,
+          var(--bx-focus-ring-offset)
+        );
       }
 
       .opacity-input {
-        inline-size: 4.5rem;
+        inline-size: var(
+          --bx-color-picker-opacity-input-width,
+          calc(var(--bx-unit) * 4.5)
+        );
         flex: none;
       }
 
       .swatch.custom-toggle {
-        background: conic-gradient(red, #ff0, #0f0, #0ff, #00f, #f0f, red);
+        background: var(
+          --bx-color-picker-swatch-bg,
+          conic-gradient(red, #ff0, #0f0, #0ff, #00f, #f0f, red)
+        ); /* ds-exempt: hue wheel is color-space data, not theme */
       }
 
       .custom-toggle[aria-expanded='true'] {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+        outline: var(
+            --bx-color-picker-custom-toggle-expanded-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(
+            --bx-color-picker-custom-toggle-expanded-ring-color,
+            var(--bx-focus-ring)
+          );
+        outline-offset: var(
+          --bx-color-picker-custom-toggle-expanded-outline-offset,
+          var(--bx-focus-ring-offset)
+        );
       }
 
       .swatch {
@@ -503,22 +694,40 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
         box-sizing: border-box;
         inline-size: 100%;
         aspect-ratio: 1;
-        min-block-size: var(--bx-swatch-size, 1.75rem);
-        border-radius: var(--bx-swatch-radius, var(--bx-radius-m));
-        border: var(--bx-border-width) solid var(--bx-border-subtle);
+        min-block-size: var(
+          --bx-color-picker-swatch-size,
+          calc(var(--bx-unit) * 1.75)
+        );
+        border-radius: var(--bx-color-picker-swatch-radius, var(--bx-radius-m));
+        border: var(
+            --bx-color-picker-swatch-border-width,
+            var(--bx-border-width)
+          )
+          solid
+          var(--bx-color-picker-swatch-border-color, var(--bx-border-subtle));
         background-clip: padding-box;
         cursor: pointer;
       }
 
       .swatch[aria-pressed='true'] {
-        box-shadow:
-          0 0 0 2px var(--bx-surface-default, #fff),
-          0 0 0 4px var(--bx-focus-ring);
+        box-shadow: var(
+          --bx-color-picker-swatch-pressed-shadow,
+          0 0 0 var(--bx-border-width-strong) var(--bx-surface-base),
+          0 0 0 calc(var(--bx-border-width-strong) * 2) var(--bx-focus-ring)
+        );
       }
 
       .swatch:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+        outline: var(
+            --bx-color-picker-swatch-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(--bx-color-picker-swatch-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-color-picker-swatch-focus-ring-offset,
+          var(--bx-focus-ring-offset)
+        );
       }
 
       :host([disabled]) .grid,
@@ -526,7 +735,7 @@ export class BxColorPicker extends FormAssociatedMixin(BixElement) {
       :host([disabled]) .trigger,
       :host([disabled]) .swatch {
         pointer-events: none;
-        opacity: 0.5;
+        opacity: var(--bx-color-picker-grid-disabled-opacity, 0.5);
       }
     `,
   ];

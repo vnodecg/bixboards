@@ -46,11 +46,31 @@ _None._
 
 ### CSS parts
 
-`base`, `media`, `header`, `body`, `footer`
+| Part     | Description                                       |
+| -------- | ------------------------------------------------- |
+| `base`   | The outer container.                              |
+| `media`  | The wrapper around the media slot.                |
+| `header` | The wrapper around the header slots.              |
+| `body`   | The wrapper around the default and actions slots. |
+| `footer` | The wrapper around the footer slots.              |
 
 ### CSS custom properties
 
-`--spacing`, `--border-radius`
+| Property                          | Description                                                                                                  |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `--bx-card-spacing`               | Padding and inter-region gap. Default `--bx-space-m`.                                                        |
+| `--bx-card-radius`                | Corner radius. Default `--bx-radius-m`.                                                                      |
+| `--bx-card-fg`                    | Text/icon color of the root surface. Default `var(--bx-text-primary)`.                                       |
+| `--bx-card-border-width`          | Border width of the root surface. Default `var(--bx-border-width)`.                                          |
+| `--bx-card-shadow`                | Box shadow of the root surface. Default `var(--bx-shadow-s)`.                                                |
+| `--bx-card-bg`                    | Background of the root surface. Default `var(--bx-surface-subtle)`.                                          |
+| `--bx-card-border-color`          | Border color of the root surface. Default `var(--bx-border-subtle)`.                                         |
+| `--bx-card-font-family`           | Font family of the root surface. Default `var(--bx-type-body-family)`.                                       |
+| `--bx-card-header-font-family`    | Font family of the `header` part (text style `heading-xs`). Default `var(--bx-type-heading-family)`.         |
+| `--bx-card-header-font-size`      | Font size of the `header` part (text style `heading-xs`). Default `var(--bx-type-heading-xs-size)`.          |
+| `--bx-card-header-font-weight`    | Font weight of the `header` part (text style `heading-xs`). Default `var(--bx-type-heading-xs-weight)`.      |
+| `--bx-card-header-line-height`    | Line height of the `header` part (text style `heading-xs`). Default `var(--bx-type-heading-xs-leading)`.     |
+| `--bx-card-header-letter-spacing` | Letter spacing of the `header` part (text style `heading-xs`). Default `var(--bx-type-heading-xs-tracking)`. |
 
 ### Methods
 

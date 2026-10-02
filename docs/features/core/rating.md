@@ -47,11 +47,27 @@ _None._
 
 ### CSS parts
 
-`base`, `symbol`, `symbol-partial`
+| Part             | Description                              |
+| ---------------- | ---------------------------------------- |
+| `base`           | The outer interactive region.            |
+| `symbol`         | A single track (dim) symbol.             |
+| `symbol-partial` | The clipped overlay row of "on" symbols. |
 
 ### CSS custom properties
 
-`--bx-symbol-color`, `--bx-symbol-color-active`, `--bx-symbol-spacing`
+| Property                              | Description                                                                                  |
+| ------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `--bx-rating-symbol-color`            | Track (unfilled) symbol color. Default `--bx-border-strong`.                                 |
+| `--bx-rating-symbol-color-active`     | Filled symbol color. Default `--bx-role-accent`.                                             |
+| `--bx-rating-symbol-spacing`          | Gap between symbols. Default `--bx-space-2xs`.                                               |
+| `--bx-rating-min-height`              | Minimum height of the root surface. Default `var(--bx-target-min)`.                          |
+| `--bx-rating-focus-ring-width`        | Focus ring width of the root surface (focus state). Default `var(--bx-border-width-strong)`. |
+| `--bx-rating-focus-ring-color`        | Focus ring color of the root surface (focus state). Default `var(--bx-focus-ring)`.          |
+| `--bx-rating-focus-ring-offset`       | Focus ring offset of the root surface (focus state). Default `var(--bx-focus-ring-offset)`.  |
+| `--bx-rating-symbol-line-height`      | Line height of the `symbol` part. Default `1`.                                               |
+| `--bx-rating-symbol-disabled-opacity` | Opacity of the `symbol` part (disabled state). Default `0.5`.                                |
+| `--bx-rating-symbol-size`             | Symbol size (width and height). Default `calc(var(--bx-unit) * 1.5)`, or per `size`.         |
+| `--bx-rating-font-family`             | Font family of the root surface. Default `var(--bx-type-body-family)`.                       |
 
 ### Methods
 

@@ -1,6 +1,7 @@
 import { css, html } from 'lit';
 import { BixElement } from '../bix-element.ts';
 import { getDateTimeFormatter } from '../internal/intl-cache.ts';
+import { textFamily } from '../internal/text-style.ts';
 
 type Weekday = 'long' | 'short' | 'narrow';
 type Era = 'long' | 'short' | 'narrow';
@@ -28,6 +29,7 @@ type HourFormat = 'h11' | 'h12' | 'h23' | 'h24';
  *
  * An unparseable `date` renders nothing and logs a console warning rather than throwing or
  * showing "Invalid Date" (FR-FORMAT-DATE-01).
+ * @cssprop --bx-format-date-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
  */
 export class BxFormatDate extends BixElement {
   static override tagName = 'bx-format-date';
@@ -37,7 +39,7 @@ export class BxFormatDate extends BixElement {
     css`
       :host {
         display: inline;
-        font-family: inherit;
+        ${textFamily('--bx-format-date', 'body')}
       }
     `,
   ];

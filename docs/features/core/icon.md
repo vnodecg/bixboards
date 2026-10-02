@@ -42,11 +42,16 @@ _None._
 
 ### CSS parts
 
-`svg`
+| Part  | Description                             |
+| ----- | --------------------------------------- |
+| `svg` | The wrapper around the inlined `<svg>`. |
 
 ### CSS custom properties
 
-`--bx-icon-size`
+| Property                     | Description                                                  |
+| ---------------------------- | ------------------------------------------------------------ |
+| `--bx-icon-size`             | Width/height. Default `1em`, so the icon follows fluid type. |
+| `--bx-icon-fallback-opacity` | Opacity of the `fallback` element. Default `0.6`.            |
 
 ### Methods
 

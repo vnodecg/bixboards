@@ -51,11 +51,21 @@ One-click copy of text, a property, or another element's content to the clipboar
 
 ### CSS parts
 
-`button`, `copy-icon`, `success-icon`, `error-icon`, `tooltip`
+| Part           | Description                          |
+| -------------- | ------------------------------------ |
+| `button`       | The inner `bx-button`.               |
+| `copy-icon`    | The wrapper around the copy icon.    |
+| `success-icon` | The wrapper around the success icon. |
+| `error-icon`   | The wrapper around the error icon.   |
+| `tooltip`      | The inner `bx-tooltip`.              |
 
 ### CSS custom properties
 
-`--bx-copy-button-success-color`, `--bx-copy-button-error-color` (renamed from the spec's `--bx-success-color`/`--bx-error-color` to follow the package's component-prefix rule; defaults are `--bx-role-success-fg`/`--bx-role-danger-fg`)
+| Property                                | Description                                                                                                                                    |
+| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--bx-copy-button-success-color`        | Icon color while showing success. Default `--bx-role-brand-fg` (the design system has no success palette; the check icon carries the meaning). |
+| `--bx-copy-button-error-color`          | Icon color while showing an error. Default `--bx-role-danger-fg`.                                                                              |
+| `--bx-copy-button-error-icon-font-size` | Font size of the `error-icon` part. Default `1.1em`.                                                                                           |
 
 ### Methods
 

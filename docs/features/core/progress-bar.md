@@ -38,11 +38,28 @@ _None._
 
 ### CSS parts
 
-`base`, `indicator`, `label`
+| Part        | Description                                             |
+| ----------- | ------------------------------------------------------- |
+| `base`      | The track.                                              |
+| `indicator` | The filled (or sweeping, when `indeterminate`) portion. |
+| `label`     | The wrapper around the default slot.                    |
 
 ### CSS custom properties
 
-`--bx-progress-height`, `--bx-progress-track`, `--bx-progress-indicator`, `--bx-progress-transition`
+| Property                                            | Description                                                                                               |
+| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `--bx-progress-bar-height`                          | Track thickness. Default `--bx-space-xs`.                                                                 |
+| `--bx-progress-bar-track`                           | Track background. Default `--bx-role-neutral-subtle`.                                                     |
+| `--bx-progress-bar-indicator`                       | Indicator color. Default `--bx-role-brand-solid`.                                                         |
+| `--bx-progress-bar-transition`                      | Value-change transition. Default `0.3s` standard easing.                                                  |
+| `--bx-progress-bar-radius`                          | Corner radius of the root surface. Default `var(--bx-radius-pill)`.                                       |
+| `--bx-progress-bar-indicator-indeterminate-opacity` | Opacity of the `indicator` part (indeterminate state). Default `0.5`.                                     |
+| `--bx-progress-bar-label-fg`                        | Text/icon color of the `label` part. Default `var(--bx-text-primary)`.                                    |
+| `--bx-progress-bar-label-font-family`               | Font family of the `label` part (text style `caption-s`). Default `var(--bx-type-caption-family)`.        |
+| `--bx-progress-bar-label-font-size`                 | Font size of the `label` part (text style `caption-s`). Default `var(--bx-type-caption-s-size)`.          |
+| `--bx-progress-bar-label-font-weight`               | Font weight of the `label` part (text style `caption-s`). Default `var(--bx-type-caption-s-weight)`.      |
+| `--bx-progress-bar-label-line-height`               | Line height of the `label` part (text style `caption-s`). Default `var(--bx-type-caption-s-leading)`.     |
+| `--bx-progress-bar-label-letter-spacing`            | Letter spacing of the `label` part (text style `caption-s`). Default `var(--bx-type-caption-s-tracking)`. |
 
 ### Methods
 

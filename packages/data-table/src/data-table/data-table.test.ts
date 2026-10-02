@@ -928,9 +928,8 @@ describe('bx-data-table', () => {
       );
       await aTimeout(30);
       await settle(el);
-      const retryButton = el.shadowRoot!.querySelector<HTMLElement>(
-        '.state button',
-      );
+      const retryButton =
+        el.shadowRoot!.querySelector<HTMLElement>('.state button');
       expect(retryButton, 'retry control').to.exist;
       retryButton!.click();
       await aTimeout(60);

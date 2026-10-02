@@ -59,11 +59,69 @@ Multi-line text with auto-resize, character count and resize handle control. Spe
 
 ### CSS parts
 
-`form-control`, `label`, `hint`, `base`, `textarea`, `count`
+| Part           | Description                                                      |
+| -------------- | ---------------------------------------------------------------- |
+| `form-control` | The outer wrapper (label + base + hint).                         |
+| `label`        | The label element.                                               |
+| `hint`         | The wrapper around the hint slot.                                |
+| `base`         | The wrapper around the textarea and count.                       |
+| `textarea`     | The native `<textarea>`.                                         |
+| `count`        | The visible character counter, present when `show-count` is set. |
 
 ### CSS custom properties
 
-`--bx-textarea-max-height`
+| Property                                 | Description                                                                                            |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `--bx-textarea-max-height`               | Caps auto-resize growth. Unset: grows unbounded.                                                       |
+| `--bx-textarea-form-control-gap`         | Gap of the `form-control` part. Default `var(--bx-space-xs)`.                                          |
+| `--bx-textarea-label-fg`                 | Text/icon color of the `label` part. Default `var(--bx-text-primary)`.                                 |
+| `--bx-textarea-radius`                   | Corner radius of the root surface. Default `var(--bx-radius-m)`.                                       |
+| `--bx-textarea-border-width`             | Border width of the root surface. Default `var(--bx-border-width)`.                                    |
+| `--bx-textarea-border-color`             | Border color of the root surface. Default `var(--bx-border-subtle)`.                                   |
+| `--bx-textarea-bg`                       | Background of the root surface. Default `var(--bx-surface-base)`.                                      |
+| `--bx-textarea-focus-ring-width`         | Focus ring width of the root surface (focus state). Default `var(--bx-border-width-strong)`.           |
+| `--bx-textarea-disabled-bg`              | Background of the root surface (disabled state). Default `var(--bx-surface-subtle)`.                   |
+| `--bx-textarea-disabled-fg`              | Text/icon color of the root surface (disabled state). Default `var(--bx-text-disabled)`.               |
+| `--bx-textarea-invalid-border-color`     | Border color of the root surface (invalid state). Default `var(--bx-role-danger-border)`.              |
+| `--bx-textarea-min-height`               | Minimum height of the root surface. Default `calc(var(--bx-unit) * 1.5 * 2)`.                          |
+| `--bx-textarea-padding-block`            | Padding block of the root surface. Default `var(--bx-space-xs)`.                                       |
+| `--bx-textarea-padding-inline`           | Padding inline of the root surface. Default `var(--bx-space-m)`.                                       |
+| `--bx-textarea-placeholder-fg`           | Text/icon color of the `::placeholder`. Default `var(--bx-text-secondary)`.                            |
+| `--bx-textarea-count-padding-inline-end` | Padding inline end of the `count` part. Default `var(--bx-space-m)`.                                   |
+| `--bx-textarea-count-padding-block-end`  | Padding block end of the `count` part. Default `var(--bx-space-2xs)`.                                  |
+| `--bx-textarea-count-fg`                 | Text/icon color of the `count` part. Default `var(--bx-text-secondary)`.                               |
+| `--bx-textarea-hint-fg`                  | Text/icon color of the `hint` part. Default `var(--bx-text-secondary)`.                                |
+| `--bx-textarea-hint-invalid-fg`          | Text/icon color of the `hint` part (invalid state). Default `var(--bx-role-danger-fg)`.                |
+| `--bx-textarea-count-over-limit-fg`      | Color of the character counter once `maxlength` is exceeded. Default `var(--bx-role-danger-fg)`.       |
+| `--bx-textarea-hover-border-color`       | Border color while hovered. Default `var(--bx-border-strong)`.                                         |
+| `--bx-textarea-focus-border-color`       | Border color while focused. Default `var(--bx-focus-ring)`.                                            |
+| `--bx-textarea-focus-shadow`             | Soft halo around the field while focused. Default a translucent `--bx-focus-ring` ring.                |
+| `--bx-textarea-hover-bg`                 | Background of a `filled` field while hovered. Default `var(--bx-surface-muted)`.                       |
+| `--bx-textarea-focus-bg`                 | Background of a `filled` field while focused. Default `var(--bx-surface-base)`.                        |
+| `--bx-textarea-disabled-border-color`    | Border color when disabled. Default `var(--bx-border-subtle)`.                                         |
+| `--bx-textarea-invalid-focus-shadow`     | Halo while focused and invalid. Default a translucent `--bx-role-danger-border` ring.                  |
+| `--bx-textarea-placeholder-opacity`      | Placeholder opacity. Default `1`.                                                                      |
+| `--bx-textarea-font-family`              | Font family of the root surface. Default `var(--bx-type-body-family)`.                                 |
+| `--bx-textarea-label-font-family`        | Font family of the `label` part (text style `label-s`). Default `var(--bx-type-label-family)`.         |
+| `--bx-textarea-label-font-size`          | Font size of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-size)`.           |
+| `--bx-textarea-label-font-weight`        | Font weight of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-weight)`.       |
+| `--bx-textarea-label-line-height`        | Line height of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-leading)`.      |
+| `--bx-textarea-label-letter-spacing`     | Letter spacing of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.  |
+| `--bx-textarea-font-family`              | Font family of the root surface (text style `body-m`). Default `var(--bx-type-body-family)`.           |
+| `--bx-textarea-font-size`                | Font size of the root surface (text style `body-m`). Default `var(--bx-type-body-m-size)`.             |
+| `--bx-textarea-font-weight`              | Font weight of the root surface (text style `body-m`). Default `var(--bx-type-body-m-weight)`.         |
+| `--bx-textarea-line-height`              | Line height of the root surface (text style `body-m`). Default `var(--bx-type-body-m-leading)`.        |
+| `--bx-textarea-letter-spacing`           | Letter spacing of the root surface (text style `body-m`). Default `var(--bx-type-body-m-tracking)`.    |
+| `--bx-textarea-count-font-family`        | Font family of the `count` element (text style `body-s`). Default `var(--bx-type-body-family)`.        |
+| `--bx-textarea-count-font-size`          | Font size of the `count` element (text style `body-s`). Default `var(--bx-type-body-s-size)`.          |
+| `--bx-textarea-count-font-weight`        | Font weight of the `count` element (text style `body-s`). Default `var(--bx-type-body-s-weight)`.      |
+| `--bx-textarea-count-line-height`        | Line height of the `count` element (text style `body-s`). Default `var(--bx-type-body-s-leading)`.     |
+| `--bx-textarea-count-letter-spacing`     | Letter spacing of the `count` element (text style `body-s`). Default `var(--bx-type-body-s-tracking)`. |
+| `--bx-textarea-hint-font-family`         | Font family of the `hint` part (text style `body-s`). Default `var(--bx-type-body-family)`.            |
+| `--bx-textarea-hint-font-size`           | Font size of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-size)`.              |
+| `--bx-textarea-hint-font-weight`         | Font weight of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-weight)`.          |
+| `--bx-textarea-hint-line-height`         | Line height of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-leading)`.         |
+| `--bx-textarea-hint-letter-spacing`      | Letter spacing of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.     |
 
 ### Methods
 

@@ -37,14 +37,14 @@ Load `dist-acme/tokens.css`; apply with `data-theme="acme"` on any element to th
 
 From least to most invasive; use the lowest level that does the job.
 
-| Level                           | Mechanism                                                                    | Typical use                           |
-| ------------------------------- | ---------------------------------------------------------------------------- | ------------------------------------- |
-| 1. Brand color                  | `seeds` (palettes generated; roles such as text-on-fill derived by contrast) | White-label a product                 |
-| 2. Palette feel                 | `palette` curve, `shades` overrides                                          | Softer/deeper tints, hand-tuned steps |
-| 3. Semantic tokens              | `tokens` (`surface`, `text`, `border`, `focus`, role overrides, …)           | Different neutrals, elevated surfaces |
-| 4. Shape, type, density, motion | `foundation` (`radius`, `font`, `space`, `shadow`, `motion`, `scale`)        | Sharp vs. rounded, serif, compact     |
-| 5. Composition                  | `extends: ["brand", "dark"]`                                                 | Any brand × any mode                  |
-| 6. Runtime                      | `@bixant/design-system` (runtime API)                                        | Tenant-chosen colors without a build  |
+| Level                           | Mechanism                                                                                   | Typical use                           |
+| ------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------- |
+| 1. Brand color                  | `seeds` (palettes generated; roles such as text-on-fill derived by contrast)                | White-label a product                 |
+| 2. Palette feel                 | `palette` curve, `shades` overrides                                                         | Softer/deeper tints, hand-tuned steps |
+| 3. Semantic tokens              | `tokens` (`surface`, `text`, `border`, `focus`, role overrides, …)                          | Different neutrals, elevated surfaces |
+| 4. Shape, type, density, motion | `foundation` (`radius`, `font`, `type` (text styles), `space`, `shadow`, `motion`, `scale`) | Sharp vs. rounded, serif, compact     |
+| 5. Composition                  | `extends: ["brand", "dark"]`                                                                | Any brand × any mode                  |
+| 6. Runtime                      | `@bixant/design-system` (runtime API)                                                       | Tenant-chosen colors without a build  |
 
 | May change                              | May not change                                   |
 | --------------------------------------- | ------------------------------------------------ |
@@ -53,7 +53,25 @@ From least to most invasive; use the lowest level that does the job.
 
 Adding a palette, for example `info`, means adding a seed in the default theme: every theme gets `color.info.*` and `role.info.*`, and components can then offer an `info` variant.
 
-Component-level customization (one component in one app) is done with that component's own `--bx-<component>-*` properties once components exist; it is not a theme concern.
+### Component-level customization
+
+Restyling one component in one app is not a theme concern: set that component's own `--bx-<component>-*` hooks (documented per component, generated from its JSDoc; see [Styling API](component-guidelines.md#styling-api-component-hooks)). Every default is a token, so unset hooks keep following the theme.
+
+```css
+/* A flat, square, high-contrast skin for one product area. */
+.checkout {
+  --bx-button-radius: 0;
+  --bx-button-border: currentColor;
+  --bx-input-radius: 0;
+  --bx-input-border-color: var(--bx-border-strong);
+  --bx-input-focus-border-color: var(--bx-role-danger-border);
+  --bx-switch-control-checked-bg: var(--bx-role-danger-solid);
+  --bx-dialog-radius: 0;
+  --bx-dialog-shadow: none;
+}
+```
+
+Set hooks on a wrapper to restyle everything inside it, or on a single element to restyle just that one. Storybook → Theming → Component variables shows a complete skin built this way.
 
 ## Scale and density
 

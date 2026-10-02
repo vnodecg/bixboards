@@ -1,5 +1,6 @@
 import { css, html, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
+import { textStyle } from '../internal/text-style.ts';
 
 const MIN = 0;
 const MAX = 100;
@@ -23,10 +24,18 @@ function clampValue(value: number): number {
  * @csspart indicator - The filled (or sweeping, when `indeterminate`) portion.
  * @csspart label - The wrapper around the default slot.
  *
- * @cssprop --bx-progress-height - Track thickness. Default `--bx-space-xs`.
- * @cssprop --bx-progress-track - Track background. Default `--bx-role-neutral-subtle`.
- * @cssprop --bx-progress-indicator - Indicator color. Default `--bx-role-brand-solid`.
- * @cssprop --bx-progress-transition - Value-change transition. Default `0.3s` standard easing.
+ * @cssprop --bx-progress-bar-height - Track thickness. Default `--bx-space-xs`.
+ * @cssprop --bx-progress-bar-track - Track background. Default `--bx-role-neutral-subtle`.
+ * @cssprop --bx-progress-bar-indicator - Indicator color. Default `--bx-role-brand-solid`.
+ * @cssprop --bx-progress-bar-transition - Value-change transition. Default `0.3s` standard easing.
+ * @cssprop --bx-progress-bar-radius - Corner radius of the root surface. Default `var(--bx-radius-pill)`.
+ * @cssprop --bx-progress-bar-indicator-indeterminate-opacity - Opacity of the `indicator` part (indeterminate state). Default `0.5`.
+ * @cssprop --bx-progress-bar-label-fg - Text/icon color of the `label` part. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-progress-bar-label-font-family - Font family of the `label` part (text style `caption-s`). Default `var(--bx-type-caption-family)`.
+ * @cssprop --bx-progress-bar-label-font-size - Font size of the `label` part (text style `caption-s`). Default `var(--bx-type-caption-s-size)`.
+ * @cssprop --bx-progress-bar-label-font-weight - Font weight of the `label` part (text style `caption-s`). Default `var(--bx-type-caption-s-weight)`.
+ * @cssprop --bx-progress-bar-label-line-height - Line height of the `label` part (text style `caption-s`). Default `var(--bx-type-caption-s-leading)`.
+ * @cssprop --bx-progress-bar-label-letter-spacing - Letter spacing of the `label` part (text style `caption-s`). Default `var(--bx-type-caption-s-tracking)`.
  */
 export class BxProgressBar extends BixElement {
   static override tagName = 'bx-progress-bar';
@@ -46,9 +55,9 @@ export class BxProgressBar extends BixElement {
         align-items: center;
         overflow: hidden;
         inline-size: 100%;
-        block-size: var(--bx-progress-height, var(--bx-space-xs));
-        border-radius: var(--bx-radius-pill);
-        background: var(--bx-progress-track, var(--bx-role-neutral-subtle));
+        block-size: var(--bx-progress-bar-height, var(--bx-space-xs));
+        border-radius: var(--bx-progress-bar-radius, var(--bx-radius-pill));
+        background: var(--bx-progress-bar-track, var(--bx-role-neutral-subtle));
       }
 
       .indicator {
@@ -57,13 +66,16 @@ export class BxProgressBar extends BixElement {
         inset-inline-start: 0;
         inline-size: 100%;
         border-radius: inherit;
-        background: var(--bx-progress-indicator, var(--bx-role-brand-solid));
-        transform: scaleX(var(--bx-progress-scale, 0));
+        background: var(
+          --bx-progress-bar-indicator,
+          var(--bx-role-brand-solid)
+        );
+        transform: scaleX(var(--_scale, 0));
         transform-origin: left;
         transition: transform
           var(
-            --bx-progress-transition,
-            0.3s var(--bx-motion-easing-standard, ease)
+            --bx-progress-bar-transition,
+            0.3s var(--bx-motion-easing-standard)
           );
       }
 
@@ -74,8 +86,8 @@ export class BxProgressBar extends BixElement {
       :host([indeterminate]) .indicator {
         inline-size: 40%;
         transform: none;
-        animation: bx-progress-bar-indeterminate 1.6s
-          var(--bx-motion-easing-standard, ease) infinite;
+        animation: bx-progress-bar-indeterminate var(--bx-motion-duration-loop)
+          var(--bx-motion-easing-standard) infinite;
       }
 
       @keyframes bx-progress-bar-indeterminate {
@@ -91,7 +103,7 @@ export class BxProgressBar extends BixElement {
         :host([indeterminate]) .indicator {
           animation: none;
           inline-size: 100%;
-          opacity: 0.5;
+          opacity: var(--bx-progress-bar-indicator-indeterminate-opacity, 0.5);
         }
       }
 
@@ -99,9 +111,10 @@ export class BxProgressBar extends BixElement {
         position: relative;
         z-index: 1;
         margin-inline: var(--bx-space-2xs);
-        font-family: var(--bx-font-family-sans);
-        font-size: var(--bx-font-xs);
-        color: var(--bx-text-primary);
+
+        ${textStyle('--bx-progress-bar-label', 'caption-s')}
+
+        color: var(--bx-progress-bar-label-fg, var(--bx-text-primary));
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -111,7 +124,7 @@ export class BxProgressBar extends BixElement {
         display: none;
       }
 
-      @container (max-width: calc(var(--bx-unit) * 8)) {
+      @container (max-width: 8rem) {
         .label {
           display: none;
         }
@@ -174,11 +187,7 @@ export class BxProgressBar extends BixElement {
 
   protected override render() {
     return html`
-      <div
-        class="base"
-        part="base"
-        style="--bx-progress-scale: ${this.value / MAX}"
-      >
+      <div class="base" part="base" style="--_scale: ${this.value / MAX}">
         <div class="indicator" part="indicator"></div>
         <span class="label" part="label" ?hidden=${!this._hasOverlay}>
           <slot @slotchange=${this.#handleSlotChange}></slot>

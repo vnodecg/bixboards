@@ -34,11 +34,18 @@ _None._
 
 ### CSS parts
 
-`indicator`
+| Part        | Description                     |
+| ----------- | ------------------------------- |
+| `indicator` | The animated placeholder shape. |
 
 ### CSS custom properties
 
-`--bx-skeleton-color`, `--bx-skeleton-sheen-color`, `--bx-skeleton-border-radius`
+| Property                      | Description                                                                               |
+| ----------------------------- | ----------------------------------------------------------------------------------------- |
+| `--bx-skeleton-color`         | Base fill color. Default `--bx-surface-muted`.                                            |
+| `--bx-skeleton-sheen-color`   | Highlight color swept across during `sheen`. Default a translucent mix of `currentColor`. |
+| `--bx-skeleton-border-radius` | Corner radius. Default `--bx-radius-s`.                                                   |
+| `--bx-skeleton-height`        | Height of the root surface. Default `1lh`.                                                |
 
 ### Methods
 

@@ -41,11 +41,27 @@ _None._
 
 ### CSS parts
 
-`checked-icon`, `label`, `start`, `end`
+| Part           | Description                                             |
+| -------------- | ------------------------------------------------------- |
+| `base`         | The host's inner wrapper.                               |
+| `checked-icon` | The selection checkmark (or its reserved gutter space). |
+| `label`        | The wrapper around the default slot.                    |
+| `start`        | The wrapper around the `start` slot.                    |
+| `end`          | The wrapper around the `end` slot.                      |
 
 ### CSS custom properties
 
-_Only global tokens (see conventions)._
+| Property                        | Description                                                                              |
+| ------------------------------- | ---------------------------------------------------------------------------------------- |
+| `--bx-option-gap`               | Gap of the root surface. Default `var(--bx-space-xs)`.                                   |
+| `--bx-option-min-height`        | Minimum height of the root surface. Default `var(--bx-target-min)`.                      |
+| `--bx-option-padding-inline`    | Padding inline of the root surface. Default `var(--bx-space-s)`.                         |
+| `--bx-option-fg`                | Text/icon color of the root surface. Default `var(--bx-text-primary)`.                   |
+| `--bx-option-disabled-bg`       | Background of the root surface (disabled state). Default `var(--bx-surface-subtle)`.     |
+| `--bx-option-disabled-fg`       | Text/icon color of the root surface (disabled state). Default `var(--bx-text-disabled)`. |
+| `--bx-option-checked-icon-size` | Size (width and height) of the `checked-icon` part. Default `1em`.                       |
+| `--bx-option-start-size`        | Size (width and height) of the `start` part. Default `1em`.                              |
+| `--bx-option-font-family`       | Font family of the root surface. Default `var(--bx-type-body-family)`.                   |
 
 ### Methods
 

@@ -39,7 +39,9 @@ _None._
 
 ### CSS parts
 
-_None._
+| Part   | Description                                         |
+| ------ | --------------------------------------------------- |
+| `base` | The container the fetched content is inserted into. |
 
 ### CSS custom properties
 

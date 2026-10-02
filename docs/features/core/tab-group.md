@@ -45,11 +45,36 @@ Tabbed interface with scrolling tab list, manual/auto activation. Specified for 
 
 ### CSS parts
 
-`base`, `nav`, `tabs`, `body`, `scroll-button`, `scroll-button--start`, `scroll-button--end`
+| Part                   | Description                                               |
+| ---------------------- | --------------------------------------------------------- |
+| `base`                 | The outer wrapper.                                        |
+| `nav`                  | The wrapper around the scroll buttons and tab list.       |
+| `tabs`                 | The `role="tablist"` scrollable element (the `nav` slot). |
+| `body`                 | The wrapper around the default slot (panels).             |
+| `scroll-button`        | Either scroll button.                                     |
+| `scroll-button--start` | The "scroll to start" button.                             |
+| `scroll-button--end`   | The "scroll to end" button.                               |
+| `indicator`            | The sliding bar under (or beside) the selected tab.       |
 
 ### CSS custom properties
 
-`--indicator-color`, `--track-color`, `--track-width`
+| Property                                         | Description                                                                                                                   |
+| ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| `--bx-tab-group-indicator-color`                 | Active tab's indicator/text color. Forwarded to slotted `bx-tab` via custom-property inheritance. Default `--bx-role-accent`. |
+| `--bx-tab-group-track-color`                     | Baseline track color under the tab list. Default `--bx-border-subtle`.                                                        |
+| `--bx-tab-group-track-width`                     | Baseline track thickness. Default the hairline border width.                                                                  |
+| `--bx-tab-group-scroll-button-size`              | Size (width and height) of the `scroll-button` part. Default `var(--bx-target-min)`.                                          |
+| `--bx-tab-group-scroll-button-fg`                | Text/icon color of the `scroll-button` part. Default `var(--bx-text-secondary)`.                                              |
+| `--bx-tab-group-scroll-button-hover-bg`          | Background of the `scroll-button` part (hover state). Default `var(--bx-surface-subtle)`.                                     |
+| `--bx-tab-group-scroll-button-hover-fg`          | Text/icon color of the `scroll-button` part (hover state). Default `var(--bx-text-primary)`.                                  |
+| `--bx-tab-group-scroll-button-focus-ring-width`  | Focus ring width of the `scroll-button` part (focus state). Default `var(--bx-border-width-strong)`.                          |
+| `--bx-tab-group-scroll-button-focus-ring-color`  | Focus ring color of the `scroll-button` part (focus state). Default `var(--bx-focus-ring)`.                                   |
+| `--bx-tab-group-scroll-button-focus-ring-offset` | Focus ring offset of the `scroll-button` part (focus state). Default `calc(var(--bx-focus-ring-offset) * -1)`.                |
+| `--bx-tab-group-scroll-button-icon-size`         | Size (width and height) of the icon inside the `scroll-button` element. Default `1em`.                                        |
+| `--bx-tab-group-font-family`                     | Font family of the root surface. Default `var(--bx-type-body-family)`.                                                        |
+| `--bx-tab-group-gap`                             | Space between tabs. Default `var(--bx-space-2xs)`.                                                                            |
+| `--bx-tab-group-indicator-width`                 | Thickness of the selected-tab indicator. Default `var(--bx-border-width-strong)`.                                             |
+| `--bx-tab-group-indicator-radius`                | Corner radius of the selected-tab indicator. Default `var(--bx-radius-pill)`.                                                 |
 
 ### Methods
 

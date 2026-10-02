@@ -1,6 +1,7 @@
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
 import { FormAssociatedMixin } from '../internal/form-associated.ts';
+import { textStyle, textFamily } from '../internal/text-style.ts';
 
 type Size = 'small' | 'medium' | 'large';
 type Orientation = 'horizontal' | 'vertical';
@@ -37,8 +38,9 @@ function clamp(value: number, min: number, max: number): number {
  *
  * @slot label - Label content above the track.
  * @slot hint - Hint content below the track.
- * @slot reference - Marker label content, positioned via `--bx-marker-*` custom properties.
+ * @slot reference - Marker label content, positioned via `--bx-slider-marker-*` custom properties.
  *
+ * @csspart form-control - The outer layout wrapper around label, slider and hint.
  * @csspart label - The wrapper around the label slot.
  * @csspart hint - The wrapper around the hint slot.
  * @csspart slider - The outer interactive region (track + thumbs).
@@ -51,10 +53,49 @@ function clamp(value: number, min: number, max: number): number {
  * @csspart thumb-max - The high thumb (range mode).
  * @csspart tooltip - The value tooltip shown while `with-tooltip` is set.
  *
- * @cssprop --bx-track-size - Track thickness. Default `--bx-space-xs`.
- * @cssprop --bx-thumb-size - Thumb diameter. Default `calc(var(--bx-unit) * 1.25)`.
- * @cssprop --bx-marker-width - Tick mark width. Default `--bx-border-width-strong`.
- * @cssprop --bx-marker-height - Tick mark height. Default `--bx-space-xs`.
+ * @cssprop --bx-slider-track-size - Track thickness. Default `--bx-space-xs`.
+ * @cssprop --bx-slider-thumb-size - Thumb diameter. Default `calc(var(--bx-unit) * 1.25)`.
+ * @cssprop --bx-slider-marker-width - Tick mark width. Default `--bx-border-width-strong`.
+ * @cssprop --bx-slider-marker-height - Tick mark height. Default `--bx-space-xs`.
+ * @cssprop --bx-slider-form-control-gap - Gap of the `form-control` part. Default `var(--bx-space-s)`.
+ * @cssprop --bx-slider-label-fg - Text/icon color of the `label` part. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-slider-hint-fg - Text/icon color of the `hint` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-slider-height - Height of the root surface. Default `var(--bx-target-min)`.
+ * @cssprop --bx-slider-width - Width of the root surface. Default `var(--bx-target-min)`.
+ * @cssprop --bx-slider-disabled-opacity - Opacity of the root surface (disabled state). Default `0.6`.
+ * @cssprop --bx-slider-track-radius - Corner radius of the `track` part. Default `var(--bx-radius-pill)`.
+ * @cssprop --bx-slider-track-bg - Background of the `track` part. Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-slider-indicator-bg - Background of the `indicator` part. Default `var(--bx-role-accent)`.
+ * @cssprop --bx-slider-indicator-disabled-bg - Background of the `indicator` part (disabled state). Default `var(--bx-border-strong)`.
+ * @cssprop --bx-slider-marker-bg - Background of the `marker` part. Default `var(--bx-border-strong)`.
+ * @cssprop --bx-slider-thumb-knob-border-width - Border width of the `thumb` part's knob. Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-slider-thumb-knob-border-color - Border color of the `thumb` part's knob. Default `var(--bx-role-accent)`.
+ * @cssprop --bx-slider-thumb-knob-bg - Background of the `thumb` part's knob. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-slider-thumb-knob-focus-ring-width - Focus ring width of the `thumb` part's knob (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-slider-thumb-knob-focus-ring-color - Focus ring color of the `thumb` part's knob (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-slider-thumb-knob-focus-ring-offset - Focus ring offset of the `thumb` part's knob (focus state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-slider-thumb-knob-disabled-border-color - Border color of the `thumb` part's knob (disabled state). Default `var(--bx-border-strong)`.
+ * @cssprop --bx-slider-tooltip-padding - Padding of the `tooltip` part. Default `var(--bx-space-2xs) var(--bx-space-xs)`.
+ * @cssprop --bx-slider-tooltip-radius - Corner radius of the `tooltip` part. Default `var(--bx-radius-s)`.
+ * @cssprop --bx-slider-tooltip-bg - Background of the `tooltip` part. Default `var(--bx-surface-inverse, var(--bx-text-primary))`.
+ * @cssprop --bx-slider-tooltip-fg - Text/icon color of the `tooltip` part. Default `var(--bx-on-accent, var(--bx-surface-base))`.
+ * @cssprop --bx-slider-thumb-hit-size - Size of the thumb's pointer hit area (the visible knob is `--bx-slider-thumb-size`). Default `var(--bx-target-min)`.
+ * @cssprop --bx-slider-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-slider-label-font-family - Font family of the `label` part (text style `label-s`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-slider-label-font-size - Font size of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-size)`.
+ * @cssprop --bx-slider-label-font-weight - Font weight of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-weight)`.
+ * @cssprop --bx-slider-label-line-height - Line height of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-leading)`.
+ * @cssprop --bx-slider-label-letter-spacing - Letter spacing of the `label` part (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.
+ * @cssprop --bx-slider-hint-font-family - Font family of the `hint` part (text style `body-s`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-slider-hint-font-size - Font size of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-size)`.
+ * @cssprop --bx-slider-hint-font-weight - Font weight of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-weight)`.
+ * @cssprop --bx-slider-hint-line-height - Line height of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-leading)`.
+ * @cssprop --bx-slider-hint-letter-spacing - Letter spacing of the `hint` part (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.
+ * @cssprop --bx-slider-tooltip-font-family - Font family of the `tooltip` part (text style `caption-s`). Default `var(--bx-type-caption-family)`.
+ * @cssprop --bx-slider-tooltip-font-size - Font size of the `tooltip` part (text style `caption-s`). Default `var(--bx-type-caption-s-size)`.
+ * @cssprop --bx-slider-tooltip-font-weight - Font weight of the `tooltip` part (text style `caption-s`). Default `var(--bx-type-caption-s-weight)`.
+ * @cssprop --bx-slider-tooltip-line-height - Line height of the `tooltip` part (text style `caption-s`). Default `var(--bx-type-caption-s-leading)`.
+ * @cssprop --bx-slider-tooltip-letter-spacing - Letter spacing of the `tooltip` part (text style `caption-s`). Default `var(--bx-type-caption-s-tracking)`.
  */
 export class BxSlider extends FormAssociatedMixin(BixElement) {
   static override tagName = 'bx-slider';
@@ -65,13 +106,13 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
       :host {
         display: block;
         container-type: inline-size;
-        font-family: var(--bx-font-family-sans);
+        ${textFamily('--bx-slider', 'body')}
       }
 
       .form-control {
         display: flex;
         flex-direction: column;
-        gap: var(--bx-space-s);
+        gap: var(--bx-slider-form-control-gap, var(--bx-space-s));
       }
 
       .label:empty,
@@ -80,14 +121,15 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
       }
 
       .label {
-        color: var(--bx-text-primary);
-        font-weight: var(--bx-font-weight-medium);
-        font-size: var(--bx-font-s);
+        color: var(--bx-slider-label-fg, var(--bx-text-primary));
+
+        ${textStyle('--bx-slider-label', 'label-s')}
       }
 
       .hint {
-        color: var(--bx-text-secondary);
-        font-size: var(--bx-font-s);
+        color: var(--bx-slider-hint-fg, var(--bx-text-secondary));
+
+        ${textStyle('--bx-slider-hint', 'body-s')}
       }
 
       .slider {
@@ -95,53 +137,56 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
         display: flex;
         align-items: center;
         inline-size: 100%;
-        block-size: var(--bx-target-min, 2.75rem);
+        block-size: var(--bx-slider-height, var(--bx-target-min));
         touch-action: pan-y;
       }
 
       :host([orientation='vertical']) .slider {
-        inline-size: var(--bx-target-min, 2.75rem);
-        block-size: calc(var(--bx-unit) * 12);
+        inline-size: var(--bx-slider-width, var(--bx-target-min));
+        block-size: var(--bx-slider-height, calc(var(--bx-unit) * 12));
         touch-action: pan-x;
       }
 
       :host([disabled]) .slider {
         cursor: not-allowed;
-        opacity: 0.6;
+        opacity: var(--bx-slider-disabled-opacity, 0.6);
       }
 
       .track {
         position: relative;
         inline-size: 100%;
-        block-size: var(--bx-track-size, var(--bx-space-xs));
-        border-radius: var(--bx-radius-pill, 999px);
-        background: var(--bx-surface-subtle);
+        block-size: var(--bx-slider-track-size, var(--bx-space-xs));
+        border-radius: var(--bx-slider-track-radius, var(--bx-radius-pill));
+        background: var(--bx-slider-track-bg, var(--bx-surface-subtle));
       }
 
       :host([orientation='vertical']) .track {
-        inline-size: var(--bx-track-size, var(--bx-space-xs));
+        inline-size: var(--bx-slider-track-size, var(--bx-space-xs));
         block-size: 100%;
       }
 
       .indicator {
         position: absolute;
         inset-block: 0;
-        inset-inline-start: var(--bx-fill-start, 0%);
-        inline-size: calc(var(--bx-fill-end, 0%) - var(--bx-fill-start, 0%));
+        inset-inline-start: var(--_fill-start, 0%);
+        inline-size: calc(var(--_fill-end, 0%) - var(--_fill-start, 0%));
         border-radius: inherit;
-        background: var(--bx-role-accent);
+        background: var(--bx-slider-indicator-bg, var(--bx-role-accent));
       }
 
       :host([orientation='vertical']) .indicator {
         inset-inline: 0;
         inset-block-start: auto;
-        inset-block-end: var(--bx-fill-start, 0%);
-        block-size: calc(var(--bx-fill-end, 0%) - var(--bx-fill-start, 0%));
+        inset-block-end: var(--_fill-start, 0%);
+        block-size: calc(var(--_fill-end, 0%) - var(--_fill-start, 0%));
         inline-size: auto;
       }
 
       :host([disabled]) .indicator {
-        background: var(--bx-border-strong);
+        background: var(
+          --bx-slider-indicator-disabled-bg,
+          var(--bx-border-strong)
+        );
       }
 
       .markers {
@@ -153,18 +198,24 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
       .marker {
         position: absolute;
         inset-block-start: 50%;
-        inset-inline-start: var(--bx-marker-position, 0%);
-        inline-size: var(--bx-marker-width, var(--bx-border-width-strong));
-        block-size: var(--bx-marker-height, var(--bx-space-xs));
+        inset-inline-start: var(--_marker-position, 0%);
+        inline-size: var(
+          --bx-slider-marker-width,
+          var(--bx-border-width-strong)
+        );
+        block-size: var(--bx-slider-marker-height, var(--bx-space-xs));
         translate: -50% -50%;
-        background: var(--bx-border-strong);
+        background: var(--bx-slider-marker-bg, var(--bx-border-strong));
       }
 
       :host([orientation='vertical']) .marker {
         inset-inline-start: 50%;
-        inset-block-start: var(--bx-marker-position, 0%);
-        inline-size: var(--bx-marker-height, var(--bx-space-xs));
-        block-size: var(--bx-marker-width, var(--bx-border-width-strong));
+        inset-block-start: var(--_marker-position, 0%);
+        inline-size: var(--bx-slider-marker-height, var(--bx-space-xs));
+        block-size: var(
+          --bx-slider-marker-width,
+          var(--bx-border-width-strong)
+        );
       }
 
       /* The hit target is always --bx-target-min (44px on coarse pointers,
@@ -174,44 +225,59 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
          percentage rather than sitting in flow. */
       .thumb {
         position: absolute;
-        inset-inline-start: var(--bx-thumb-position, 0%);
+        inset-inline-start: var(--_thumb-position, 0%);
         inset-block-start: 50%;
         translate: -50% -50%;
         box-sizing: border-box;
         display: flex;
         align-items: center;
         justify-content: center;
-        inline-size: var(--bx-target-min, 2.75rem);
-        block-size: var(--bx-target-min, 2.75rem);
+        inline-size: var(--bx-slider-thumb-hit-size, var(--bx-target-min));
+        block-size: var(--bx-slider-thumb-hit-size, var(--bx-target-min));
         cursor: grab;
         touch-action: none;
       }
 
       :host([orientation='vertical']) .thumb {
         inset-inline-start: 50%;
-        inset-block-start: var(--bx-thumb-position, 0%);
+        inset-block-start: var(--_thumb-position, 0%);
       }
 
       .thumb::before {
         content: '';
         box-sizing: border-box;
-        inline-size: var(--bx-thumb-size, calc(var(--bx-unit) * 1.25));
-        block-size: var(--bx-thumb-size, calc(var(--bx-unit) * 1.25));
+        inline-size: var(--bx-slider-thumb-size, var(--_thumb-size));
+        block-size: var(--bx-slider-thumb-size, var(--_thumb-size));
         border-radius: 50%;
-        border: var(--bx-border-width-strong) solid var(--bx-role-accent);
-        background: var(--bx-surface-base);
+        border: var(
+            --bx-slider-thumb-knob-border-width,
+            var(--bx-border-width-strong)
+          )
+          solid var(--bx-slider-thumb-knob-border-color, var(--bx-role-accent));
+        background: var(--bx-slider-thumb-knob-bg, var(--bx-surface-base));
       }
 
+      .thumb {
+        --_thumb-size: calc(var(--bx-unit) * 1.25);
+      }
       :host([size='small']) .thumb {
-        --bx-thumb-size: var(--bx-unit);
+        --_thumb-size: var(--bx-unit);
       }
       :host([size='large']) .thumb {
-        --bx-thumb-size: calc(var(--bx-unit) * 1.5);
+        --_thumb-size: calc(var(--bx-unit) * 1.5);
       }
 
       .thumb:focus-visible::before {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+        outline: var(
+            --bx-slider-thumb-knob-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(--bx-slider-thumb-knob-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-slider-thumb-knob-focus-ring-offset,
+          var(--bx-focus-ring-offset)
+        );
       }
 
       :host([disabled]) .thumb {
@@ -219,7 +285,10 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
       }
 
       :host([disabled]) .thumb::before {
-        border-color: var(--bx-border-strong);
+        border-color: var(
+          --bx-slider-thumb-knob-disabled-border-color,
+          var(--bx-border-strong)
+        );
       }
 
       .tooltip {
@@ -227,11 +296,22 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
         inset-inline-start: 50%;
         inset-block-end: calc(100% + var(--bx-space-xs));
         translate: -50% 0;
-        padding: var(--bx-space-2xs) var(--bx-space-xs);
-        border-radius: var(--bx-radius-s);
-        background: var(--bx-surface-inverse, var(--bx-text-primary));
-        color: var(--bx-on-accent, var(--bx-surface-base));
-        font-size: var(--bx-font-xs);
+        padding: var(
+          --bx-slider-tooltip-padding,
+          var(--bx-space-2xs) var(--bx-space-xs)
+        );
+        border-radius: var(--bx-slider-tooltip-radius, var(--bx-radius-s));
+        background: var(
+          --bx-slider-tooltip-bg,
+          var(--bx-surface-inverse, var(--bx-text-primary))
+        );
+        color: var(
+          --bx-slider-tooltip-fg,
+          var(--bx-on-accent, var(--bx-surface-base))
+        );
+
+        ${textStyle('--bx-slider-tooltip', 'caption-s')}
+
         white-space: nowrap;
         pointer-events: none;
       }
@@ -241,7 +321,7 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
         inset-block-start: calc(100% + var(--bx-space-xs));
       }
 
-      @container (max-width: calc(var(--bx-unit) * 20)) {
+      @container (max-width: 20rem) {
         .markers .marker:not(:first-child):not(:last-child) {
           display: none;
         }
@@ -570,7 +650,7 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
             html`<span
               class="marker"
               part="marker"
-              style="--bx-marker-position: ${this.#percent(mark)}%"
+              style="--_marker-position: ${this.#percent(mark)}%"
             ></span>`,
         )}
       </div>
@@ -600,7 +680,7 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
         aria-disabled=${this.disabled}
         aria-readonly=${this.readonly}
         aria-label=${ariaLabel}
-        style="--bx-thumb-position: ${this.#percent(value)}%"
+        style="--_thumb-position: ${this.#percent(value)}%"
         @keydown=${this.#handleThumbKeydown(thumb)}
         @pointerdown=${this.#handleThumbPointerDown(thumb)}
         @pointermove=${this.#handleThumbPointerMove}
@@ -640,7 +720,7 @@ export class BxSlider extends FormAssociatedMixin(BixElement) {
           <div
             class="track"
             part="track"
-            style="--bx-fill-start: ${fillStart}%; --bx-fill-end: ${fillEnd}%"
+            style="--_fill-start: ${fillStart}%; --_fill-end: ${fillEnd}%"
           >
             <div class="indicator" part="indicator"></div>
             ${this.#renderMarkers()}

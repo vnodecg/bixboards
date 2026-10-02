@@ -46,14 +46,14 @@ export const Sizes: Story = {
       <bx-progress-ring
         value="30"
         label="30%"
-        style="--bx-ring-size: 2.5rem; font-size: 0.6rem"
+        style="--bx-progress-ring-size: 2.5rem; font-size: 0.6rem"
         >30%</bx-progress-ring
       >
       <bx-progress-ring value="65" label="65%">65%</bx-progress-ring>
       <bx-progress-ring
         value="90"
         label="90%"
-        style="--bx-ring-size: 6rem; font-size: 1.5rem"
+        style="--bx-progress-ring-size: 6rem; font-size: 1.5rem"
         >90%</bx-progress-ring
       >
     </div>

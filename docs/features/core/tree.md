@@ -41,11 +41,15 @@ Hierarchical tree with single/multi/leaf selection for small-to-medium data sets
 
 ### CSS parts
 
-`base`
+| Part   | Description                |
+| ------ | -------------------------- |
+| `base` | The `role="tree"` wrapper. |
 
 ### CSS custom properties
 
-`--indent-size`, `--indent-guide-width`, `--indent-guide-color`
+| Property                | Description                                                            |
+| ----------------------- | ---------------------------------------------------------------------- |
+| `--bx-tree-font-family` | Font family of the root surface. Default `var(--bx-type-body-family)`. |
 
 ### Methods
 

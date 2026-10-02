@@ -3,6 +3,7 @@ import { createRef, ref } from 'lit/directives/ref.js';
 import { BixElement } from '../bix-element.ts';
 import { observeResize } from '../internal/shared-observers.ts';
 import type { BxBreadcrumbItem } from '../breadcrumb-item/breadcrumb-item.ts';
+import { textFamily } from '../internal/text-style.ts';
 
 /**
  * `<bx-breadcrumb>` — navigation trail owning a default-slotted set of `bx-breadcrumb-item`
@@ -27,6 +28,7 @@ import type { BxBreadcrumbItem } from '../breadcrumb-item/breadcrumb-item.ts';
  * @slot (default) - `bx-breadcrumb-item` elements.
  *
  * @cssprop --bx-breadcrumb-gap - Gap between items. Default `--bx-space-2xs`.
+ * @cssprop --bx-breadcrumb-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
  */
 export class BxBreadcrumb extends BixElement {
   static override tagName = 'bx-breadcrumb';
@@ -37,7 +39,7 @@ export class BxBreadcrumb extends BixElement {
       :host {
         display: block;
         container-type: inline-size;
-        font-family: var(--bx-font-family-sans);
+        ${textFamily('--bx-breadcrumb', 'body')}
       }
 
       .list {
@@ -56,8 +58,8 @@ export class BxBreadcrumb extends BixElement {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-inline-size: var(--bx-target-min, 2.75rem);
-        min-block-size: var(--bx-target-min, 2.75rem);
+        min-inline-size: var(--bx-target-min);
+        min-block-size: var(--bx-target-min);
         color: var(--bx-role-accent);
         cursor: pointer;
         font: inherit;
@@ -88,6 +90,8 @@ export class BxBreadcrumb extends BixElement {
   #listRef = createRef<HTMLOListElement>();
   #ellipsis: HTMLButtonElement | null = null;
   #unobserveResize?: () => void;
+  #lastWidth = -1;
+  #raf = 0;
   // Set once the user clicks "…" to reveal everything; cleared on the next real container
   // resize, not on the next `slotchange` — inserting/removing the ellipsis button is itself a
   // light-DOM child mutation of the default slot's assigned nodes, so it fires its own
@@ -106,12 +110,13 @@ export class BxBreadcrumb extends BixElement {
     super.disconnectedCallback();
     this.#unobserveResize?.();
     this.#unobserveResize = undefined;
+    cancelAnimationFrame(this.#raf);
   }
 
   protected override firstUpdated(): void {
     const list = this.#listRef.value;
     if (!list) return;
-    this.#unobserveResize = observeResize(list, () => this.#handleResize());
+    this.#unobserveResize = observeResize(list, this.#handleResize);
     this.#reflow();
   }
 
@@ -133,9 +138,20 @@ export class BxBreadcrumb extends BixElement {
     return button;
   }
 
-  #handleResize = (): void => {
-    this.#userExpanded = false;
-    this.#reflow();
+  // Only a change of available *width* can change the collapse decision. Expanding makes the list
+  // wrap onto more lines (a height-only change) and must not count as a "genuine resize" that
+  // undoes the user's choice. The reflow also runs on the next frame, never inside the observer
+  // callback: it mutates layout, and doing that while the observer is delivering is what raises
+  // "ResizeObserver loop completed with undelivered notifications".
+  #handleResize = (entry: ResizeObserverEntry): void => {
+    const width = entry.contentRect.width;
+    if (width === this.#lastWidth) return;
+    this.#lastWidth = width;
+    cancelAnimationFrame(this.#raf);
+    this.#raf = requestAnimationFrame(() => {
+      this.#userExpanded = false;
+      this.#reflow();
+    });
   };
 
   #handleEllipsisClick = (): void => {

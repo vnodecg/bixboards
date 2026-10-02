@@ -37,11 +37,26 @@ _None._
 
 ### CSS parts
 
-`base`, `label`
+| Part    | Description                          |
+| ------- | ------------------------------------ |
+| `base`  | The SVG element.                     |
+| `label` | The wrapper around the default slot. |
 
 ### CSS custom properties
 
-`--bx-ring-size`, `--bx-ring-track-width`, `--bx-ring-indicator-width`, `--bx-ring-track-color`, `--bx-ring-indicator-color`
+| Property                                  | Description                                                                                         |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `--bx-progress-ring-size`                 | Diameter. Default `calc(var(--bx-unit) * 4)`.                                                       |
+| `--bx-progress-ring-track-width`          | Track stroke width. Default `2`.                                                                    |
+| `--bx-progress-ring-indicator-width`      | Indicator stroke width. Default `--bx-progress-ring-track-width`.                                   |
+| `--bx-progress-ring-track-color`          | Track color. Default `--bx-role-neutral-subtle`.                                                    |
+| `--bx-progress-ring-indicator-color`      | Indicator color. Default `--bx-role-brand-solid`.                                                   |
+| `--bx-progress-ring-label-fg`             | Text/icon color of the `label` part. Default `var(--bx-text-primary)`.                              |
+| `--bx-progress-ring-label-font-family`    | Font family of the `label` part (text style `body-m`). Default `var(--bx-type-body-family)`.        |
+| `--bx-progress-ring-label-font-size`      | Font size of the `label` part (text style `body-m`). Default `22cqi`.                               |
+| `--bx-progress-ring-label-font-weight`    | Font weight of the `label` part (text style `body-m`). Default `var(--bx-type-body-m-weight)`.      |
+| `--bx-progress-ring-label-line-height`    | Line height of the `label` part (text style `body-m`). Default `1`.                                 |
+| `--bx-progress-ring-label-letter-spacing` | Letter spacing of the `label` part (text style `body-m`). Default `var(--bx-type-body-m-tracking)`. |
 
 ### Methods
 
@@ -50,7 +65,7 @@ _None._
 ## 3. Functional requirements
 
 - **FR-PROGRESS-RING-01** SVG stroke-dasharray rendering; no JS layout reads.
-- **FR-PROGRESS-RING-02** Ring diameter derives from `--bx-ring-size` (fluid default).
+- **FR-PROGRESS-RING-02** Ring diameter derives from `--bx-progress-ring-size` (fluid default).
 
 ## 4. Fluid scaling
 

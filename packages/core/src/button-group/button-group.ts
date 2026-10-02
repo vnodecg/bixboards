@@ -44,11 +44,8 @@ export class BxButtonGroup extends BixElement {
       }
 
       .base {
-        --_r: var(--bx-button-group-radius, var(--bx-radius-m, 0.5rem));
-        --_gap: var(
-          --bx-button-group-gap,
-          calc(-1 * var(--bx-border-width, 1px))
-        );
+        --_r: var(--bx-button-group-radius, var(--bx-radius-m));
+        --_gap: var(--bx-button-group-gap, calc(-1 * var(--bx-border-width)));
         display: flex;
         flex-direction: row;
         align-items: stretch;

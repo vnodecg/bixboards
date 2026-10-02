@@ -41,7 +41,9 @@ _None._
 
 ### CSS custom properties
 
-_Only global tokens (see conventions)._
+| Property                      | Description                     |
+| ----------------------------- | ------------------------------- |
+| `--bx-format-bytes-font-size` | Font size. Inherits by default. |
 
 ### Methods
 

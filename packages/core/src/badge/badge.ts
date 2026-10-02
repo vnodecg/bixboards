@@ -1,5 +1,6 @@
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
+import { textStyle, textFamily } from '../internal/text-style.ts';
 
 type Variant = 'default' | 'secondary' | 'tertiary' | 'error' | 'warning';
 type Appearance = 'accent' | 'filled' | 'outlined' | 'filled outlined';
@@ -22,6 +23,8 @@ const NUMERIC_PATTERN = /^\d+$/;
  * @slot start - Leading icon/dot.
  * @slot end - Trailing content.
  *
+ * @csspart start - The start slot.
+ * @csspart end - The end slot.
  * @csspart base - The host's inner wrapper.
  * @csspart content - The wrapper around slotted/overflow content.
  * @csspart remove-button - The remove button, present with `with-remove`.
@@ -34,9 +37,22 @@ const NUMERIC_PATTERN = /^\d+$/;
  * @cssprop --bx-badge-gap - Gap between slots. Default `--bx-space-2xs`.
  * @cssprop --bx-badge-min-height - Minimum height, drives the `size` step.
  * @cssprop --bx-badge-padding-inline - Horizontal padding, drives the `size` step.
- * @cssprop --bx-badge-font-size - Font size, drives the `size` step.
- * @cssprop --bx-badge-font-weight - Font weight. Default `--bx-font-weight-medium`.
  * @cssprop --bx-badge-max-width - Truncation width for the content.
+ * @cssprop --bx-badge-content-line-height - Line height of the `content` part. Default `1.3`.
+ * @cssprop --bx-badge-remove-button-size - Size (width and height) of the `remove-button` part. Default `1.4em`.
+ * @cssprop --bx-badge-remove-button-radius - Corner radius of the `remove-button` part. Default `var(--bx-radius-pill)`.
+ * @cssprop --bx-badge-remove-button-hit-size - Size (width and height) of the `remove-button` hit area. Default `max(100%, var(--bx-target-min))`.
+ * @cssprop --bx-badge-remove-button-hover-bg - Background of the `remove-button` part (hover state). Default `color-mix(in srgb, currentColor 16%, transparent)`.
+ * @cssprop --bx-badge-remove-button-focus-ring-width - Focus ring width of the `remove-button` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-badge-remove-button-focus-ring-color - Focus ring color of the `remove-button` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-badge-remove-button-focus-ring-offset - Focus ring offset of the `remove-button` part (focus state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-badge-remove-button-icon-size - Size (width and height) of the icon inside the `remove-button` element. Default `0.85em`.
+ * @cssprop --bx-badge-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-badge-font-family - Font family of the root surface (text style `label-m`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-badge-font-size - Font size of the root surface (text style `label-m`). Default `var(--bx-type-label-m-size)`.
+ * @cssprop --bx-badge-font-weight - Font weight of the root surface (text style `label-m`). Default `var(--bx-type-label-m-weight)`.
+ * @cssprop --bx-badge-line-height - Line height of the root surface (text style `label-m`). Default `var(--bx-type-label-m-leading)`.
+ * @cssprop --bx-badge-letter-spacing - Letter spacing of the root surface (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.
  */
 export class BxBadge extends BixElement {
   static override tagName = 'bx-badge';
@@ -47,7 +63,7 @@ export class BxBadge extends BixElement {
       :host {
         display: inline-flex;
         vertical-align: middle;
-        font-family: var(--bx-font-family-sans);
+        ${textFamily('--bx-badge', 'body')}
         --bx-badge-computed-bg: transparent;
         --bx-badge-computed-fg: var(--bx-badge-variant-fg);
         --bx-badge-computed-border: transparent;
@@ -109,17 +125,17 @@ export class BxBadge extends BixElement {
       :host(:not([size])) {
         --bx-badge-computed-min-height: calc(var(--bx-unit) * 1.25);
         --bx-badge-computed-padding-inline: var(--bx-space-xs);
-        --bx-badge-computed-font-size: var(--bx-font-xs);
+        --bx-badge-computed-font-size: var(--bx-type-label-xs-size);
       }
       :host([size='medium']) {
         --bx-badge-computed-min-height: calc(var(--bx-unit) * 1.75);
         --bx-badge-computed-padding-inline: var(--bx-space-s);
-        --bx-badge-computed-font-size: var(--bx-font-s);
+        --bx-badge-computed-font-size: var(--bx-type-label-s-size);
       }
       :host([size='large']) {
         --bx-badge-computed-min-height: calc(var(--bx-unit) * 2.25);
         --bx-badge-computed-padding-inline: var(--bx-space-m);
-        --bx-badge-computed-font-size: var(--bx-font-m);
+        --bx-badge-computed-font-size: var(--bx-type-label-m-size);
       }
 
       .base {
@@ -140,12 +156,9 @@ export class BxBadge extends BixElement {
         border: var(--bx-badge-border-width, var(--bx-border-width)) solid
           var(--bx-badge-border, var(--bx-badge-computed-border));
         border-radius: var(--bx-badge-radius, var(--bx-radius-s));
-        font-size: var(
-          --bx-badge-font-size,
-          var(--bx-badge-computed-font-size)
-        );
-        font-weight: var(--bx-badge-font-weight, var(--bx-font-weight-medium));
-        line-height: 1;
+
+        ${textStyle('--bx-badge', 'label-m', { size: 'var(--bx-badge-computed-font-size)', leading: '1' })}
+
         white-space: nowrap;
         max-inline-size: 100%;
       }
@@ -155,7 +168,7 @@ export class BxBadge extends BixElement {
       }
 
       :host([pill]) .base {
-        border-radius: var(--bx-radius-pill);
+        border-radius: var(--bx-badge-radius, var(--bx-radius-pill));
       }
 
       :host([pill]) .base.circular {
@@ -197,7 +210,7 @@ export class BxBadge extends BixElement {
         overflow: hidden;
         max-inline-size: var(--bx-badge-max-width, none);
         /* line-height: 1 on .base would clip descenders (g, y, p) at the overflow edge. */
-        line-height: 1.3;
+        line-height: var(--bx-badge-content-line-height, 1.3);
       }
 
       .content ::slotted(*) {
@@ -221,9 +234,12 @@ export class BxBadge extends BixElement {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        inline-size: 1.4em;
-        block-size: 1.4em;
-        border-radius: var(--bx-radius-pill);
+        inline-size: var(--bx-badge-remove-button-size, 1.4em);
+        block-size: var(--bx-badge-remove-button-size, 1.4em);
+        border-radius: var(
+          --bx-badge-remove-button-radius,
+          var(--bx-radius-pill)
+        );
         cursor: pointer;
       }
 
@@ -233,30 +249,47 @@ export class BxBadge extends BixElement {
         inset-block-start: 50%;
         inset-inline-start: 50%;
         translate: -50% -50%;
-        inline-size: max(100%, var(--bx-target-min));
-        block-size: max(100%, var(--bx-target-min));
+        inline-size: var(
+          --bx-badge-remove-button-hit-size,
+          max(100%, var(--bx-target-min))
+        );
+        block-size: var(
+          --bx-badge-remove-button-hit-size,
+          max(100%, var(--bx-target-min))
+        );
       }
 
       .remove-button:hover {
-        background: color-mix(in srgb, currentColor 16%, transparent);
+        background: var(
+          --bx-badge-remove-button-hover-bg,
+          color-mix(in srgb, currentColor 16%, transparent)
+        );
       }
 
       .remove-button:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+        outline: var(
+            --bx-badge-remove-button-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(--bx-badge-remove-button-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-badge-remove-button-focus-ring-offset,
+          var(--bx-focus-ring-offset)
+        );
       }
 
       .remove-button svg {
-        inline-size: 0.85em;
-        block-size: 0.85em;
+        inline-size: var(--bx-badge-remove-button-icon-size, 0.85em);
+        block-size: var(--bx-badge-remove-button-icon-size, 0.85em);
       }
 
       :host([attention='pulse']) .base {
-        animation: bx-badge-pulse var(--bx-motion-duration-slow, 1.6s)
+        animation: bx-badge-pulse var(--bx-motion-duration-slow)
           var(--bx-motion-easing-standard) infinite;
       }
       :host([attention='bounce']) .base {
-        animation: bx-badge-bounce var(--bx-motion-duration-slow, 1.6s)
+        animation: bx-badge-bounce var(--bx-motion-duration-slow)
           var(--bx-motion-easing-standard) infinite;
       }
 

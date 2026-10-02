@@ -1,5 +1,6 @@
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
+import { textStyle, textFamily } from '../internal/text-style.ts';
 
 type HideSource = 'close-button' | 'light-dismiss' | 'keyboard' | 'method';
 type Placement = 'top' | 'end' | 'bottom' | 'start';
@@ -54,6 +55,27 @@ let nextId = 0;
  * @cssprop --bx-drawer-size - Panel size along its axis (width for start/end, height for
  *   top/bottom). Default `clamp(20rem, 30vi, 32rem)`-equivalent.
  * @cssprop --bx-drawer-spacing - Header/body/footer padding. Default `--bx-space-l`.
+ * @cssprop --bx-drawer-overlay-bg - Background of the `overlay` part. Default `var(--bx-surface-overlay)`.
+ * @cssprop --bx-drawer-dialog-bg - Background of the `dialog` part. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-drawer-dialog-fg - Text/icon color of the `dialog` part. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-drawer-dialog-shadow - Box shadow of the `dialog` part. Default `var(--bx-shadow-l)`.
+ * @cssprop --bx-drawer-dialog-backdrop-bg - Background of the `dialog` part's `::backdrop`. Default `var(--bx-surface-overlay)`.
+ * @cssprop --bx-drawer-header-gap - Gap of the `header` part. Default `var(--bx-space-s)`.
+ * @cssprop --bx-drawer-header-padding-block-end - Padding block end of the `header` part. Default `var(--bx-space-m)`.
+ * @cssprop --bx-drawer-header-actions-gap - Gap of the `header-actions` part. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-drawer-close-button-width - Width of the `close-button` part. Default `var(--bx-target-min)`.
+ * @cssprop --bx-drawer-close-button-radius - Corner radius of the `close-button` part. Default `var(--bx-radius-pill)`.
+ * @cssprop --bx-drawer-close-button-fg - Text/icon color of the `close-button` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-drawer-close-button-hover-bg - Background of the `close-button` part (hover state). Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-drawer-body-padding-block - Padding block of the `body` part. Default `var(--bx-space-m)`.
+ * @cssprop --bx-drawer-footer-gap - Gap of the `footer` part. Default `var(--bx-space-s)`.
+ * @cssprop --bx-drawer-footer-padding-block-start - Padding block start of the `footer` part. Default `var(--bx-space-m)`.
+ * @cssprop --bx-drawer-dialog-font-family - Font family of the `dialog` part. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-drawer-title-font-family - Font family of the `title` part (text style `heading-s`). Default `var(--bx-type-heading-family)`.
+ * @cssprop --bx-drawer-title-font-size - Font size of the `title` part (text style `heading-s`). Default `var(--bx-type-heading-s-size)`.
+ * @cssprop --bx-drawer-title-font-weight - Font weight of the `title` part (text style `heading-s`). Default `var(--bx-type-heading-s-weight)`.
+ * @cssprop --bx-drawer-title-line-height - Line height of the `title` part (text style `heading-s`). Default `var(--bx-type-heading-s-leading)`.
+ * @cssprop --bx-drawer-title-letter-spacing - Letter spacing of the `title` part (text style `heading-s`). Default `var(--bx-type-heading-s-tracking)`.
  */
 export class BxDrawer extends BixElement {
   static override tagName = 'bx-drawer';
@@ -81,7 +103,7 @@ export class BxDrawer extends BixElement {
       .overlay {
         position: absolute;
         inset: 0;
-        background: var(--bx-surface-overlay, rgb(0 0 0 / 0.4));
+        background: var(--bx-drawer-overlay-bg, var(--bx-surface-overlay));
       }
 
       dialog {
@@ -97,10 +119,10 @@ export class BxDrawer extends BixElement {
         max-inline-size: 100%;
         max-block-size: 100%;
         border: 0 solid var(--bx-border-subtle);
-        background: var(--bx-surface-base, Canvas);
-        color: var(--bx-text-primary);
-        font-family: var(--bx-font-family-sans);
-        box-shadow: var(--bx-shadow-l);
+        background: var(--bx-drawer-dialog-bg, var(--bx-surface-base));
+        color: var(--bx-drawer-dialog-fg, var(--bx-text-primary));
+        ${textFamily('--bx-drawer-dialog', 'body')}
+        box-shadow: var(--bx-drawer-dialog-shadow, var(--bx-shadow-l));
       }
 
       :host([contained]) dialog {
@@ -157,12 +179,15 @@ export class BxDrawer extends BixElement {
       }
 
       dialog::backdrop {
-        background: var(--bx-surface-overlay, rgb(0 0 0 / 0.4));
+        background: var(
+          --bx-drawer-dialog-backdrop-bg,
+          var(--bx-surface-overlay)
+        );
       }
 
       dialog[open] {
-        animation: bx-drawer-in var(--bx-motion-duration-base, 0.2s)
-          var(--bx-motion-easing-standard, ease);
+        animation: bx-drawer-in var(--bx-motion-duration-base)
+          var(--bx-motion-easing-standard);
       }
 
       @keyframes bx-drawer-in {
@@ -181,34 +206,43 @@ export class BxDrawer extends BixElement {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: var(--bx-space-s);
+        gap: var(--bx-drawer-header-gap, var(--bx-space-s));
         flex-shrink: 0;
         padding: var(--bx-drawer-spacing, var(--bx-space-l));
-        padding-block-end: var(--bx-space-m);
+        padding-block-end: var(
+          --bx-drawer-header-padding-block-end,
+          var(--bx-space-m)
+        );
       }
 
       .title {
         flex: 1;
         min-inline-size: 0;
-        font-size: var(--bx-font-l);
-        font-weight: var(--bx-font-weight-semibold);
+
+        ${textStyle('--bx-drawer-title', 'heading-s')}
       }
 
       .header-actions {
         display: flex;
         align-items: center;
-        gap: var(--bx-space-xs);
+        gap: var(--bx-drawer-header-actions-gap, var(--bx-space-xs));
       }
 
       .close-button::part(base) {
-        inline-size: var(--bx-target-min, 2.75rem);
+        inline-size: var(--bx-drawer-close-button-width, var(--bx-target-min));
         padding-inline: 0;
-        border-radius: var(--bx-radius-pill, 50%);
-        color: var(--bx-text-secondary);
+        border-radius: var(
+          --bx-drawer-close-button-radius,
+          var(--bx-radius-pill)
+        );
+        color: var(--bx-drawer-close-button-fg, var(--bx-text-secondary));
       }
 
       .close-button::part(base):hover {
-        background: var(--bx-surface-subtle);
+        background: var(
+          --bx-drawer-close-button-hover-bg,
+          var(--bx-surface-subtle)
+        );
       }
 
       .body {
@@ -216,7 +250,7 @@ export class BxDrawer extends BixElement {
         overflow: auto;
         min-block-size: 0;
         padding: var(--bx-drawer-spacing, var(--bx-space-l));
-        padding-block: var(--bx-space-m);
+        padding-block: var(--bx-drawer-body-padding-block, var(--bx-space-m));
       }
 
       :host([without-header]) .body {
@@ -227,10 +261,13 @@ export class BxDrawer extends BixElement {
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        gap: var(--bx-space-s);
+        gap: var(--bx-drawer-footer-gap, var(--bx-space-s));
         flex-shrink: 0;
         padding: var(--bx-drawer-spacing, var(--bx-space-l));
-        padding-block-start: var(--bx-space-m);
+        padding-block-start: var(
+          --bx-drawer-footer-padding-block-start,
+          var(--bx-space-m)
+        );
       }
 
       .footer:empty {

@@ -1,6 +1,7 @@
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
 import type { Placement } from '../popup/popup.ts';
+import { textStyle } from '../internal/text-style.ts';
 
 type HideSource = 'anchor' | 'light-dismiss' | 'keyboard' | 'method';
 
@@ -54,6 +55,17 @@ const FOCUSABLE = [
  * @cssprop --bx-popover-bg - Body/arrow background. Default `--bx-surface-base`.
  * @cssprop --bx-popover-arrow-size - Arrow diameter. Default `calc(var(--bx-unit) * 0.75)`.
  * @cssprop --bx-popover-max-width - Max width of the body. Default `20rem`.
+ * @cssprop --bx-popover-body-padding - Padding of the `body` part. Default `var(--bx-space-m)`.
+ * @cssprop --bx-popover-body-border-width - Border width of the `body` part. Default `var(--bx-border-width)`.
+ * @cssprop --bx-popover-body-border-color - Border color of the `body` part. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-popover-body-radius - Corner radius of the `body` part. Default `var(--bx-radius-m)`.
+ * @cssprop --bx-popover-body-shadow - Box shadow of the `body` part. Default `var(--bx-shadow-m)`.
+ * @cssprop --bx-popover-body-fg - Text/icon color of the `body` part. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-popover-body-font-family - Font family of the `body` part (text style `body-m`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-popover-body-font-size - Font size of the `body` part (text style `body-m`). Default `var(--bx-type-body-m-size)`.
+ * @cssprop --bx-popover-body-font-weight - Font weight of the `body` part (text style `body-m`). Default `var(--bx-type-body-m-weight)`.
+ * @cssprop --bx-popover-body-line-height - Line height of the `body` part (text style `body-m`). Default `var(--bx-type-body-m-leading)`.
+ * @cssprop --bx-popover-body-letter-spacing - Letter spacing of the `body` part (text style `body-m`). Default `var(--bx-type-body-m-tracking)`.
  */
 export class BxPopover extends BixElement {
   static override tagName = 'bx-popover';
@@ -66,21 +78,25 @@ export class BxPopover extends BixElement {
       }
 
       bx-popup {
-        --arrow-color: var(--bx-popover-bg, var(--bx-surface-base));
-        --arrow-size: var(--bx-popover-arrow-size, calc(var(--bx-unit) * 0.75));
+        --bx-popup-arrow-color: var(--bx-popover-bg, var(--bx-surface-base));
+        --bx-popup-arrow-size: var(
+          --bx-popover-arrow-size,
+          calc(var(--bx-unit) * 0.75)
+        );
       }
 
       .body {
         box-sizing: border-box;
-        max-inline-size: var(--bx-popover-max-width, 20rem);
-        padding: var(--bx-space-m);
-        border: var(--bx-border-width) solid var(--bx-border-subtle);
-        border-radius: var(--bx-radius-m);
-        box-shadow: var(--bx-shadow-m);
+        max-inline-size: var(--bx-popover-max-width, calc(var(--bx-unit) * 20));
+        padding: var(--bx-popover-body-padding, var(--bx-space-m));
+        border: var(--bx-popover-body-border-width, var(--bx-border-width))
+          solid var(--bx-popover-body-border-color, var(--bx-border-subtle));
+        border-radius: var(--bx-popover-body-radius, var(--bx-radius-m));
+        box-shadow: var(--bx-popover-body-shadow, var(--bx-shadow-m));
         background: var(--bx-popover-bg, var(--bx-surface-base));
-        color: var(--bx-text-primary);
-        font-family: var(--bx-font-family-sans);
-        font-size: var(--bx-font-m);
+        color: var(--bx-popover-body-fg, var(--bx-text-primary));
+
+        ${textStyle('--bx-popover-body', 'body-m')}
       }
 
       @media (forced-colors: active) {

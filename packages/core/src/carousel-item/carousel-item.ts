@@ -16,7 +16,7 @@ import { BixElement } from '../bix-element.ts';
  *
  * @slot (default) - Slide content.
  *
- * @cssprop --aspect-ratio - Slide aspect ratio. Unset by default (sizes to content/container).
+ * @cssprop --bx-carousel-item-aspect-ratio - Slide aspect ratio. Unset by default (sizes to content/container).
  * @cssprop --bx-carousel-item-snap-align - Scroll-snap alignment set by the parent carousel.
  *   Default `start`.
  */
@@ -31,7 +31,7 @@ export class BxCarouselItem extends BixElement {
         position: relative;
         flex: none;
         inline-size: 100%;
-        aspect-ratio: var(--aspect-ratio, auto);
+        aspect-ratio: var(--bx-carousel-item-aspect-ratio, auto);
         scroll-snap-align: var(--bx-carousel-item-snap-align, start);
       }
 

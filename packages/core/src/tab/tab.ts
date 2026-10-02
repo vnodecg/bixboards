@@ -1,6 +1,7 @@
 import { css, html, nothing } from 'lit';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { BixElement } from '../bix-element.ts';
+import { textStyle, textFamily } from '../internal/text-style.ts';
 
 // Vendored from packages/core/src/icon/default-library.ts (Phosphor Icons, regular, MIT).
 const X_PATH =
@@ -37,52 +38,119 @@ const X_PATH =
  *   nested-interactive) no matter its `tabindex`, since `tab` is itself an interactive widget role.
  *   Mouse users click it directly; keyboard users close via Backspace/Delete on the tab itself, the
  *   same pattern `bx-badge`'s removable chip uses for the same reason.
+ * @cssprop --bx-tab-gap - Gap of the root surface. Default `var(--bx-space-2xs)`.
+ * @cssprop --bx-tab-min-height - Minimum height of the root surface. Default `var(--bx-target-min)`.
+ * @cssprop --bx-tab-padding-inline - Padding inline of the root surface. Default `var(--bx-space-m)`.
+ * @cssprop --bx-tab-radius - Corner radius of the root surface. Default `var(--bx-radius-s) var(--bx-radius-s) 0 0`.
+ * @cssprop --bx-tab-fg - Text/icon color of the root surface. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-tab-hover-fg - Text/icon color of the root surface (hover state). Default `var(--bx-text-primary)`.
+ * @cssprop --bx-tab-focus-ring-width - Focus ring width of the root surface (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-tab-focus-ring-color - Focus ring color of the root surface (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-tab-focus-ring-offset - Focus ring offset of the root surface (focus state). Default `calc(var(--bx-focus-ring-offset) * -1)`.
+ * @cssprop --bx-tab-disabled-fg - Text/icon color of the root surface (disabled state). Default `var(--bx-text-disabled)`.
+ * @cssprop --bx-tab-close-button-size - Size (width and height) of the `close-button` part. Default `1em`.
+ * @cssprop --bx-tab-close-button-min-width - Minimum width of the `close-button` part. Default `var(--bx-target-min)`.
+ * @cssprop --bx-tab-close-button-min-height - Minimum height of the `close-button` part. Default `var(--bx-target-min)`.
+ * @cssprop --bx-tab-close-button-radius - Corner radius of the `close-button` part. Default `var(--bx-radius-pill)`.
+ * @cssprop --bx-tab-close-button-hover-bg - Background of the `close-button` part (hover state). Default `color-mix(in srgb, currentColor 16%, transparent)`.
+ * @cssprop --bx-tab-close-button-focus-ring-width - Focus ring width of the `close-button` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-tab-close-button-focus-ring-color - Focus ring color of the `close-button` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-tab-close-button-focus-ring-offset - Focus ring offset of the `close-button` part (focus state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-tab-close-button-icon-size - Size (width and height) of the icon inside the `close-button` element. Default `0.65em`.
+ * @cssprop --bx-tab-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-tab-font-family - Font family of the root surface (text style `label-m`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-tab-font-size - Font size of the root surface (text style `label-m`). Default `var(--bx-type-label-m-size)`.
+ * @cssprop --bx-tab-font-weight - Font weight of the root surface (text style `label-m`). Default `var(--bx-type-label-m-weight)`.
+ * @cssprop --bx-tab-line-height - Line height of the root surface (text style `label-m`). Default `var(--bx-type-label-m-leading)`.
+ * @cssprop --bx-tab-letter-spacing - Letter spacing of the root surface (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.
+ * @cssprop --bx-tab-hover-bg - Background while hovered. Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-tab-pressed-bg - Background while pressed. Default `var(--bx-surface-muted)`.
+ * @cssprop --bx-tab-selected-fg - Text color of the selected tab. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-tab-selected-hover-bg - Background of the selected tab while hovered. Default `transparent`.
  */
 export class BxTab extends BixElement {
   static override tagName = 'bx-tab';
+
+  static override shadowRootOptions: ShadowRootInit = {
+    ...BixElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
 
   static override styles = [
     BixElement.baseStyles,
     css`
       :host {
         display: inline-block;
-        font-family: var(--bx-font-family-sans);
+        ${textFamily('--bx-tab', 'body')}
       }
 
       .base {
         box-sizing: border-box;
         display: inline-flex;
         align-items: center;
-        gap: var(--bx-space-2xs);
-        min-block-size: var(--bx-target-min, 2.75rem);
-        padding-inline: var(--bx-space-m);
-        border-radius: var(--bx-radius-s) var(--bx-radius-s) 0 0;
-        color: var(--bx-text-secondary);
-        font-weight: var(--bx-font-weight-medium);
+        gap: var(--bx-tab-gap, var(--bx-space-xs));
+        min-block-size: var(
+          --bx-tab-min-height,
+          max(var(--bx-control-height-m), var(--bx-target-min))
+        );
+        padding-inline: var(--bx-tab-padding-inline, var(--bx-space-m));
+        border-radius: var(
+          --bx-tab-radius,
+          var(--bx-radius-m) var(--bx-radius-m) 0 0
+        );
+        color: var(--bx-tab-fg, var(--bx-text-secondary));
         font: inherit;
+
+        ${textStyle('--bx-tab', 'label-m')}
+
+        white-space: nowrap;
         cursor: pointer;
+        user-select: none;
         outline: none;
+        transition:
+          color var(--bx-motion-duration-fast) var(--bx-motion-easing-standard),
+          background-color var(--bx-motion-duration-fast)
+            var(--bx-motion-easing-standard);
       }
 
       .base:hover {
-        color: var(--bx-text-primary);
-        background: var(--bx-surface-subtle);
+        color: var(--bx-tab-hover-fg, var(--bx-text-primary));
+        background: var(--bx-tab-hover-bg, var(--bx-surface-subtle));
       }
 
+      .base:active {
+        background: var(--bx-tab-pressed-bg, var(--bx-surface-muted));
+      }
+
+      /* The selected tab is marked by the group's sliding indicator plus stronger text, so the
+         state never relies on color alone. */
       :host([active]) .base {
-        color: var(--indicator-color, var(--bx-role-accent));
-        box-shadow: inset 0 calc(var(--bx-border-width-strong) * -1) 0 0
-          var(--indicator-color, var(--bx-role-accent));
+        color: var(--bx-tab-selected-fg, var(--bx-text-primary));
+      }
+
+      :host([active]) .base:hover {
+        background: var(--bx-tab-selected-hover-bg, transparent);
       }
 
       .base:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: calc(var(--bx-focus-ring-offset) * -1);
+        outline: var(--bx-tab-focus-ring-width, var(--bx-border-width-strong))
+          solid var(--bx-tab-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-tab-focus-ring-offset,
+          calc(var(--bx-focus-ring-offset) * -1)
+        );
       }
 
       :host([disabled]) .base {
         cursor: not-allowed;
-        color: var(--bx-text-disabled);
+        color: var(--bx-tab-disabled-fg, var(--bx-text-disabled));
+        background: transparent;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .base {
+          transition: none;
+        }
       }
 
       .close-button {
@@ -91,35 +159,50 @@ export class BxTab extends BixElement {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        inline-size: 1em;
-        block-size: 1em;
-        min-inline-size: var(--bx-target-min);
-        min-block-size: var(--bx-target-min);
+        inline-size: var(--bx-tab-close-button-size, 1em);
+        block-size: var(--bx-tab-close-button-size, 1em);
+        min-inline-size: var(
+          --bx-tab-close-button-min-width,
+          var(--bx-target-min)
+        );
+        min-block-size: var(
+          --bx-tab-close-button-min-height,
+          var(--bx-target-min)
+        );
         margin-inline-end: calc(var(--bx-space-2xs) * -1);
-        border-radius: var(--bx-radius-pill);
+        border-radius: var(--bx-tab-close-button-radius, var(--bx-radius-pill));
         cursor: pointer;
       }
 
       .close-button:hover {
-        background: color-mix(in srgb, currentColor 16%, transparent);
+        background: var(
+          --bx-tab-close-button-hover-bg,
+          color-mix(in srgb, currentColor 16%, transparent)
+        );
       }
 
       .close-button:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+        outline: var(
+            --bx-tab-close-button-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(--bx-tab-close-button-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-tab-close-button-focus-ring-offset,
+          var(--bx-focus-ring-offset)
+        );
       }
 
       .close-button svg {
-        inline-size: 0.65em;
-        block-size: 0.65em;
+        inline-size: var(--bx-tab-close-button-icon-size, 0.65em);
+        block-size: var(--bx-tab-close-button-icon-size, 0.65em);
         fill: currentColor;
       }
 
       @media (forced-colors: active) {
         :host([active]) .base {
           forced-color-adjust: none;
-          box-shadow: inset 0 calc(var(--bx-border-width-strong) * -1) 0 0
-            Highlight;
           color: Highlight;
         }
       }

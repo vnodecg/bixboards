@@ -44,11 +44,44 @@ Inline message block for info, warning and error with optional icon and dismiss.
 
 ### CSS parts
 
-`base`, `icon`, `message`, `close-button`
+| Part           | Description                                     |
+| -------------- | ----------------------------------------------- |
+| `base`         | The outer wrapper (the animated grid row).      |
+| `icon`         | The wrapper around the icon slot.               |
+| `message`      | The wrapper around the default slot.            |
+| `close-button` | The dismiss button, present with `dismissible`. |
 
 ### CSS custom properties
 
-_Only global tokens (see conventions)._
+| Property                                      | Description                                                                                                       |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `--bx-callout-opacity`                        | Opacity of the root surface. Default `1`.                                                                         |
+| `--bx-callout-gap`                            | Gap of the root surface. Default `var(--bx-space-s)`.                                                             |
+| `--bx-callout-radius`                         | Corner radius of the root surface. Default `var(--bx-radius-m)`.                                                  |
+| `--bx-callout-border-width`                   | Border width of the root surface. Default `var(--bx-border-width)`.                                               |
+| `--bx-callout-border-color`                   | Border color of the root surface. Default `var(--bx-callout-variant-border)`.                                     |
+| `--bx-callout-inline-start-border-width`      | Inline start border width of the root surface. Default `calc(var(--bx-border-width-strong) * 2)`.                 |
+| `--bx-callout-inline-start-border-color`      | Inline start border color of the root surface. Default `var(--bx-callout-variant-solid)`.                         |
+| `--bx-callout-padding`                        | Padding of the root surface. Default `var(--bx-space-xs) var(--bx-space-s)`.                                      |
+| `--bx-callout-icon-size`                      | Size (width and height) of the `icon` part. Default `1.25em`.                                                     |
+| `--bx-callout-icon-fg`                        | Text/icon color of the `icon` part. Default `var(--bx-callout-variant-fg)`.                                       |
+| `--bx-callout-message-line-height`            | Line height of the `message` part. Default `var(--bx-type-body-m-leading)`.                                       |
+| `--bx-callout-actions-gap`                    | Gap of the `actions` element. Default `var(--bx-space-xs)`.                                                       |
+| `--bx-callout-close-button-size`              | Size (width and height) of the `close-button` part. Default `var(--bx-target-min)`.                               |
+| `--bx-callout-close-button-radius`            | Corner radius of the `close-button` part. Default `var(--bx-radius-pill)`.                                        |
+| `--bx-callout-close-button-hover-bg`          | Background of the `close-button` part (hover state). Default `color-mix(in srgb, currentColor 12%, transparent)`. |
+| `--bx-callout-close-button-focus-ring-width`  | Focus ring width of the `close-button` part (focus state). Default `var(--bx-border-width-strong)`.               |
+| `--bx-callout-close-button-focus-ring-color`  | Focus ring color of the `close-button` part (focus state). Default `var(--bx-focus-ring)`.                        |
+| `--bx-callout-close-button-focus-ring-offset` | Focus ring offset of the `close-button` part (focus state). Default `var(--bx-focus-ring-offset)`.                |
+| `--bx-callout-fg`                             | Text color. Default the variant's `fg` role color.                                                                |
+| `--bx-callout-bg`                             | Background. Default the variant's `subtle` role color.                                                            |
+| `--bx-callout-close-button-icon-size`         | Size (width and height) of the icon inside the `close-button` element. Default `1em`.                             |
+| `--bx-callout-font-family`                    | Font family of the root surface. Default `var(--bx-type-body-family)`.                                            |
+| `--bx-callout-font-family`                    | Font family of the root surface (text style `caption-s`). Default `var(--bx-type-caption-family)`.                |
+| `--bx-callout-font-size`                      | Font size of the root surface (text style `caption-s`). Default `var(--bx-type-caption-s-size)`.                  |
+| `--bx-callout-font-weight`                    | Font weight of the root surface (text style `caption-s`). Default `var(--bx-type-caption-s-weight)`.              |
+| `--bx-callout-line-height`                    | Line height of the root surface (text style `caption-s`). Default `var(--bx-type-caption-s-leading)`.             |
+| `--bx-callout-letter-spacing`                 | Letter spacing of the root surface (text style `caption-s`). Default `var(--bx-type-caption-s-tracking)`.         |
 
 ### Methods
 

@@ -45,14 +45,15 @@ Follow `packages/core/src/animated-image/` as the template for a new component `
 
 - Tag: `bx-<name>`. Events: `bx-<verb>` (`bx-load`, `bx-error`), `bubbles: true, composed: true`.
 - CSS parts use short, undecorated names (`frame`, `control-box`) — `::part()` is already scoped by the element it's called on, so no component prefix is needed.
-- CSS custom properties ARE prefixed with the component name: `--bx-<name>-<part>-<property>` (e.g. `--bx-animated-image-control-box-bg`), matching every other component's feature doc. This is easy to get wrong by shortening it to `--bx-<part>-<property>` — don't; grep the feature docs under `docs/features/` if unsure which pattern a sibling component uses.
-- Every custom property has a token-backed fallback: `var(--bx-<name>-<part>-<property>, <design-system-token>)`.
+- CSS custom properties ARE prefixed with the component name: `--bx-<name>-[<part>-][<state>-]<property>` (e.g. `--bx-animated-image-control-box-bg`, `--bx-tab-selected-fg`). The root surface (`base`) has no part segment. Never shorten it to `--bx-<part>-<property>` or leave it unprefixed (`--slide-gap`): every unprefixed or foreign name was a bug the audit now rejects.
+- Every custom property has a token-backed fallback: `var(--bx-<name>-<part>-<property>, var(--bx-<design-system-token>))`. No raw colors, `px`, durations or global-scale `z-index` anywhere in a component's CSS, and no raw fallback on a design-system token (`var(--bx-radius-m, 0.5rem)` is wrong — tokens are a hard dependency).
+- Full vocabulary, state/variant naming and the rules that keep hooks live: [docs/design-system/component-guidelines.md → Styling API](docs/design-system/component-guidelines.md#styling-api-component-hooks). It is enforced, not advisory: `pnpm audit:design-system` (static) and `packages/core/src/internal/css-hooks.test.ts` (runtime) fail the build.
 
 ## Keeping docs in sync
 
 A component is not done when the code and tests pass — the docs describing it must match, or the next person (human or agent) works from a stale spec. When you implement or change a component, update in the same change:
 
-- The feature doc (`docs/features/<package>/<name>.md`): `Status` field, the API tables (properties, slots, events, **CSS parts**, **CSS custom properties** — every part/prop in the JSDoc must appear here and vice versa), and check off the acceptance criteria that are genuinely met (leave the rest unchecked with a one-line reason, don't check something that isn't true).
+- The feature doc (`docs/features/<package>/<name>.md`): `Status` field, the API tables (properties, slots, events, **CSS parts**, **CSS custom properties** — every part/prop in the JSDoc must appear here and vice versa; these two tables are generated from the JSDoc by `pnpm generate`, so edit the JSDoc, not the table), and check off the acceptance criteria that are genuinely met (leave the rest unchecked with a one-line reason, don't check something that isn't true).
 - `docs/features/README.md`'s intro paragraph if it makes a claim that's no longer true (e.g. "components that do not exist yet").
 - Root `README.md`: the status callout and the `@bixant/core` row's implemented-count.
 - This `AGENTS.md` file, if the change introduces or changes a shared convention (a new `BixElement` member, a new required test category, a naming rule) — not for a change scoped to one component.
@@ -79,7 +80,9 @@ Default appearance should read like shadcn/ui, not material design: neutral surf
 
 Components must be easy to reskin without forking them, the way shadcn components are easy to edit because you own the code:
 
-- Every themeable visual surface (background, border, color, size — not just size) is its own CSS custom property with a token-backed default (see "Naming" above for the exact pattern). List every one in a `@cssprop` JSDoc block on the class and in the feature doc's "CSS custom properties" table.
+- Every themeable visual surface (background, border color/width, color, radius, shadow, padding, gap, font, size, focus ring — not just size) is its own CSS custom property with a token-backed default (see "Naming" above for the exact pattern). List every one in a `@cssprop` JSDoc block on the class; the feature doc's "CSS parts" and "CSS custom properties" tables are generated from that JSDoc by `pnpm generate` (never hand-edit them).
+- Every piece of text uses a design-system text style through `textStyle(hook, '<group>-<size>')` / `textFamily(hook, '<group>')` (`packages/core/src/internal/text-style.ts`, tokens `--bx-type-*`): never loose `--bx-font-*` tokens or literal font values. Pick the style by the kind of text (`label-s` form label, `body-s` hint, `field-m` typed value, `heading-s` dialog title); see Foundations → Typography.
+- A public hook is never redeclared inside the shadow tree: size/appearance variants set a private `--_*` property that feeds `var(--bx-<name>-<hook>, var(--_x))`, so the consumer's value always wins. Runtime state written by script (a fill percentage, a position) is a private `--_*` too, not a hook.
 - Every meaningful internal element gets a `part="..."` attribute and a matching `@csspart` JSDoc entry, per docs/features/_conventions.md §7 ("Component-level hooks are CSS custom properties and `::part()`; no internal class names are public API").
 - Slots are the first extension point for content/icons (see the animated-image `play-icon`/`pause-icon` slots); CSS custom properties and parts are for everything visual on top of that.
 
@@ -107,10 +110,12 @@ Do not mark a component done without both test categories passing.
 
 ```sh
 pnpm nx run core:typecheck          # tsc --build, includes design-system's build as a dependency
-pnpm nx run core:test               # web-test-runner: Chromium, Firefox, Webkit
+pnpm nx run core:test               # web-test-runner: Chromium, Firefox, Webkit (tokens.css is loaded into every test page)
 TEST_BROWSERS=chromium pnpm nx run core:test   # scope to installed browsers only (see below)
 pnpm nx run storybook:typecheck     # also compiles every story
 pnpm nx run storybook:build-storybook
+pnpm audit:design-system            # raw values, hook naming/shadowing, @cssprop/@csspart drift
+pnpm generate                       # CEM + framework wrappers + the feature docs' CSS tables
 npx prettier --check .              # run --write to fix
 ```
 

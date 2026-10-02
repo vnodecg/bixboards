@@ -86,11 +86,11 @@ interface ComputedPlacement extends Coords {
  * @csspart hover-bridge - The invisible bridge between anchor and popup, present when
  *   `hover-bridge` is set.
  *
- * @cssprop --arrow-size - Arrow diameter. Default `calc(var(--bx-unit) * 0.75)`.
- * @cssprop --arrow-color - Arrow color. Default `--bx-surface`.
- * @cssprop --auto-size-available-width - Set while `auto-size` includes `horizontal`; the space
+ * @cssprop --bx-popup-arrow-size - Arrow diameter. Default `calc(var(--bx-unit) * 0.75)`.
+ * @cssprop --bx-popup-arrow-color - Arrow color. Default `--bx-surface`.
+ * @cssprop --bx-popup-auto-size-available-width - Set while `auto-size` includes `horizontal`; the space
  *   available before hitting the viewport edge, for consumers to cap their own content width.
- * @cssprop --auto-size-available-height - Set while `auto-size` includes `vertical`; same, for height.
+ * @cssprop --bx-popup-auto-size-available-height - Set while `auto-size` includes `vertical`; same, for height.
  */
 export class BxPopup extends BixElement {
   static override tagName = 'bx-popup';
@@ -100,7 +100,7 @@ export class BxPopup extends BixElement {
     css`
       :host {
         display: none;
-        z-index: var(--bx-z-dropdown, 1000);
+        z-index: var(--bx-z-dropdown);
         inline-size: max-content;
       }
 
@@ -114,9 +114,9 @@ export class BxPopup extends BixElement {
 
       .arrow {
         position: absolute;
-        inline-size: var(--arrow-size, calc(var(--bx-unit) * 0.75));
-        block-size: var(--arrow-size, calc(var(--bx-unit) * 0.75));
-        background: var(--arrow-color, var(--bx-surface-base));
+        inline-size: var(--bx-popup-arrow-size, calc(var(--bx-unit) * 0.75));
+        block-size: var(--bx-popup-arrow-size, calc(var(--bx-unit) * 0.75));
+        background: var(--bx-popup-arrow-color, var(--bx-surface-base));
         rotate: 45deg;
         z-index: -1;
       }
@@ -372,12 +372,12 @@ export class BxPopup extends BixElement {
 
     if (this.autoSize === 'horizontal' || this.autoSize === 'both')
       this.style.setProperty(
-        '--auto-size-available-width',
+        '--bx-popup-auto-size-available-width',
         `${Math.max(0, availableWidth)}px`,
       );
     if (this.autoSize === 'vertical' || this.autoSize === 'both')
       this.style.setProperty(
-        '--auto-size-available-height',
+        '--bx-popup-auto-size-available-height',
         `${Math.max(0, availableHeight)}px`,
       );
   }
@@ -544,8 +544,8 @@ export class BxPopup extends BixElement {
     const side = base(this.placement);
     const isVertical = side === 'top' || side === 'bottom';
     const arrowStyle = isVertical
-      ? `inset-inline-start: ${this.#lastArrowOffset}px; inset-block-${side === 'top' ? 'end' : 'start'}: calc(var(--arrow-size, ${ARROW_SIZE_FALLBACK}) / -2)`
-      : `inset-block-start: ${this.#lastArrowOffset}px; inset-inline-${side === 'left' ? 'end' : 'start'}: calc(var(--arrow-size, ${ARROW_SIZE_FALLBACK}) / -2)`;
+      ? `inset-inline-start: ${this.#lastArrowOffset}px; inset-block-${side === 'top' ? 'end' : 'start'}: calc(var(--bx-popup-arrow-size, ${ARROW_SIZE_FALLBACK}) / -2)`
+      : `inset-block-start: ${this.#lastArrowOffset}px; inset-inline-${side === 'left' ? 'end' : 'start'}: calc(var(--bx-popup-arrow-size, ${ARROW_SIZE_FALLBACK}) / -2)`;
 
     return html`
       ${this.#renderHoverBridge()}

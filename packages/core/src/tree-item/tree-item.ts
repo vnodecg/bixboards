@@ -1,5 +1,6 @@
 import { css, html, nothing, svg, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
+import { textFamily } from '../internal/text-style.ts';
 
 // Vendored from packages/core/src/icon/default-library.ts (Phosphor Icons, regular/fill, MIT).
 const CHEVRON_RIGHT_PATH =
@@ -64,6 +65,34 @@ const MINUS_PATH =
  * @csspart checkbox - The selection checkbox. Present when `with-checkbox` is set.
  * @csspart label - The wrapper around the default slot.
  * @csspart children - The wrapper around the children slot; `hidden` while collapsed.
+ * @cssprop --bx-tree-item-item-gap - Gap of the `item` part. Default `var(--bx-space-2xs)`.
+ * @cssprop --bx-tree-item-item-min-height - Minimum height of the `item` part. Default `var(--bx-target-min)`.
+ * @cssprop --bx-tree-item-item-padding-inline-end - Padding inline end of the `item` part. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-tree-item-item-radius - Corner radius of the `item` part. Default `var(--bx-radius-s)`.
+ * @cssprop --bx-tree-item-item-fg - Text/icon color of the `item` part. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-tree-item-item-hover-bg - Background of the `item` part (hover state). Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-tree-item-item-selected-bg - Background of the `item` part (selected state). Default `var(--bx-role-accent-subtle, var(--bx-surface-subtle))`.
+ * @cssprop --bx-tree-item-item-selected-fg - Text/icon color of the `item` part (selected state). Default `var(--bx-role-accent-fg, var(--bx-text-primary))`.
+ * @cssprop --bx-tree-item-item-disabled-fg - Text/icon color of the `item` part (disabled state). Default `var(--bx-text-disabled)`.
+ * @cssprop --bx-tree-item-expand-button-size - Size (width and height) of the `expand-button` part. Default `var(--bx-target-min)`.
+ * @cssprop --bx-tree-item-expand-button-fg - Text/icon color of the `expand-button` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-tree-item-expand-button-focus-ring-width - Focus ring width of the `expand-button` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-tree-item-expand-button-focus-ring-color - Focus ring color of the `expand-button` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-tree-item-expand-button-focus-ring-offset - Focus ring offset of the `expand-button` part (focus state). Default `calc(var(--bx-focus-ring-offset) * -1)`.
+ * @cssprop --bx-tree-item-spinner-size - Size (width and height) of the `spinner` part. Default `0.9em`.
+ * @cssprop --bx-tree-item-checkbox-size - Size (width and height) of the `checkbox` part. Default `calc(var(--bx-unit) * 1.25)`.
+ * @cssprop --bx-tree-item-checkbox-border-width - Border width of the `checkbox` part. Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-tree-item-checkbox-border-color - Border color of the `checkbox` part. Default `var(--bx-border-strong)`.
+ * @cssprop --bx-tree-item-checkbox-radius - Corner radius of the `checkbox` part. Default `var(--bx-radius-s)`.
+ * @cssprop --bx-tree-item-checkbox-bg - Background of the `checkbox` part. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-tree-item-checkbox-selected-border-color - Border color of the `checkbox` part (selected state). Default `var(--bx-role-accent)`.
+ * @cssprop --bx-tree-item-checkbox-selected-bg - Background of the `checkbox` part (selected state). Default `var(--bx-role-accent)`.
+ * @cssprop --bx-tree-item-checkbox-focus-ring-width - Focus ring width of the `checkbox` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-tree-item-checkbox-focus-ring-color - Focus ring color of the `checkbox` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-tree-item-checkbox-focus-ring-offset - Focus ring offset of the `checkbox` part (focus state). Default `var(--bx-focus-ring-offset)`.
+ * @cssprop --bx-tree-item-expand-button-icon-size - Size (width and height) of the icon inside the `expand-button` element. Default `0.75em`.
+ * @cssprop --bx-tree-item-expand-button-error-fg - Color of the expand button after a lazy load failed. Default `var(--bx-role-danger-fg)`.
+ * @cssprop --bx-tree-item-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
  */
 export class BxTreeItem extends BixElement {
   static override tagName = 'bx-tree-item';
@@ -73,37 +102,49 @@ export class BxTreeItem extends BixElement {
     css`
       :host {
         display: block;
-        font-family: var(--bx-font-family-sans);
+        ${textFamily('--bx-tree-item', 'body')}
       }
 
       .item {
         display: flex;
         align-items: center;
-        gap: var(--bx-space-2xs);
-        min-block-size: var(--bx-target-min, 2.75rem);
-        padding-inline-end: var(--bx-space-xs);
-        border-radius: var(--bx-radius-s);
-        color: var(--bx-text-primary);
+        gap: var(--bx-tree-item-item-gap, var(--bx-space-2xs));
+        min-block-size: var(
+          --bx-tree-item-item-min-height,
+          var(--bx-target-min)
+        );
+        padding-inline-end: var(
+          --bx-tree-item-item-padding-inline-end,
+          var(--bx-space-xs)
+        );
+        border-radius: var(--bx-tree-item-item-radius, var(--bx-radius-s));
+        color: var(--bx-tree-item-item-fg, var(--bx-text-primary));
         cursor: pointer;
       }
 
       .item:hover {
-        background: var(--bx-surface-subtle);
+        background: var(--bx-tree-item-item-hover-bg, var(--bx-surface-subtle));
       }
 
       :host([selected]) .item {
-        background: var(--bx-role-accent-subtle, var(--bx-surface-subtle));
-        color: var(--bx-role-accent-fg, var(--bx-text-primary));
+        background: var(
+          --bx-tree-item-item-selected-bg,
+          var(--bx-role-accent-subtle, var(--bx-surface-subtle))
+        );
+        color: var(
+          --bx-tree-item-item-selected-fg,
+          var(--bx-role-accent-fg, var(--bx-text-primary))
+        );
       }
 
       :host([disabled]) .item {
         cursor: not-allowed;
-        color: var(--bx-text-disabled);
+        color: var(--bx-tree-item-item-disabled-fg, var(--bx-text-disabled));
       }
 
       .indentation {
         flex-shrink: 0;
-        inline-size: calc(var(--bx-space-l) * var(--bx-tree-item-level, 0));
+        inline-size: calc(var(--bx-space-l) * var(--_level, 0));
       }
 
       .expand-button {
@@ -113,10 +154,16 @@ export class BxTreeItem extends BixElement {
         flex-shrink: 0;
         align-items: center;
         justify-content: center;
-        inline-size: var(--bx-target-min, 2.75rem);
-        block-size: var(--bx-target-min, 2.75rem);
-        margin-inline: calc((var(--bx-target-min, 2.75rem) - 1.5em) / -2);
-        color: var(--bx-text-secondary);
+        inline-size: var(
+          --bx-tree-item-expand-button-size,
+          var(--bx-target-min)
+        );
+        block-size: var(
+          --bx-tree-item-expand-button-size,
+          var(--bx-target-min)
+        );
+        margin-inline: calc((var(--bx-target-min) - 1.5em) / -2);
+        color: var(--bx-tree-item-expand-button-fg, var(--bx-text-secondary));
         cursor: pointer;
       }
 
@@ -126,11 +173,11 @@ export class BxTreeItem extends BixElement {
       }
 
       .expand-button svg {
-        inline-size: 0.75em;
-        block-size: 0.75em;
+        inline-size: var(--bx-tree-item-expand-button-icon-size, 0.75em);
+        block-size: var(--bx-tree-item-expand-button-icon-size, 0.75em);
         fill: currentColor;
-        transition: rotate var(--bx-motion-duration-fast, 0.12s)
-          var(--bx-motion-easing-standard, ease);
+        transition: rotate var(--bx-motion-duration-fast)
+          var(--bx-motion-easing-standard);
       }
 
       :host([expanded]) .expand-button svg {
@@ -145,19 +192,34 @@ export class BxTreeItem extends BixElement {
       }
 
       :host([lazy-error]) .expand-button {
-        color: var(--bx-role-danger-fg);
+        color: var(
+          --bx-tree-item-expand-button-error-fg,
+          var(--bx-role-danger-fg)
+        );
       }
 
       .expand-button:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: calc(var(--bx-focus-ring-offset) * -1);
+        outline: var(
+            --bx-tree-item-expand-button-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(
+            --bx-tree-item-expand-button-focus-ring-color,
+            var(--bx-focus-ring)
+          );
+        outline-offset: var(
+          --bx-tree-item-expand-button-focus-ring-offset,
+          calc(var(--bx-focus-ring-offset) * -1)
+        );
       }
 
       .spinner {
         display: inline-flex;
-        inline-size: 0.9em;
-        block-size: 0.9em;
-        animation: bx-tree-item-spin 0.8s linear infinite;
+        inline-size: var(--bx-tree-item-spinner-size, 0.9em);
+        block-size: var(--bx-tree-item-spinner-size, 0.9em);
+        animation: bx-tree-item-spin var(--bx-motion-duration-spin) linear
+          infinite;
       }
 
       .spinner circle {
@@ -180,18 +242,35 @@ export class BxTreeItem extends BixElement {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        inline-size: calc(var(--bx-unit) * 1.25);
-        block-size: calc(var(--bx-unit) * 1.25);
-        border: var(--bx-border-width-strong) solid var(--bx-border-strong);
-        border-radius: var(--bx-radius-s);
-        background: var(--bx-surface-base);
+        inline-size: var(
+          --bx-tree-item-checkbox-size,
+          calc(var(--bx-unit) * 1.25)
+        );
+        block-size: var(
+          --bx-tree-item-checkbox-size,
+          calc(var(--bx-unit) * 1.25)
+        );
+        border: var(
+            --bx-tree-item-checkbox-border-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(--bx-tree-item-checkbox-border-color, var(--bx-border-strong));
+        border-radius: var(--bx-tree-item-checkbox-radius, var(--bx-radius-s));
+        background: var(--bx-tree-item-checkbox-bg, var(--bx-surface-base));
         cursor: pointer;
       }
 
       :host([selected]) .checkbox,
       :host([indeterminate]) .checkbox {
-        border-color: var(--bx-role-accent);
-        background: var(--bx-role-accent);
+        border-color: var(
+          --bx-tree-item-checkbox-selected-border-color,
+          var(--bx-role-accent)
+        );
+        background: var(
+          --bx-tree-item-checkbox-selected-bg,
+          var(--bx-role-accent)
+        );
       }
 
       .checkbox svg {
@@ -201,8 +280,16 @@ export class BxTreeItem extends BixElement {
       }
 
       .checkbox:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: var(--bx-focus-ring-offset);
+        outline: var(
+            --bx-tree-item-checkbox-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(--bx-tree-item-checkbox-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-tree-item-checkbox-focus-ring-offset,
+          var(--bx-focus-ring-offset)
+        );
       }
 
       .label {
@@ -219,7 +306,7 @@ export class BxTreeItem extends BixElement {
           transition: none;
         }
         .spinner {
-          animation-duration: 1.6s;
+          animation-duration: var(--bx-motion-duration-loop);
         }
       }
 
@@ -298,7 +385,7 @@ export class BxTreeItem extends BixElement {
       if (ancestor.tagName === this.tagName) depth++;
       ancestor = ancestor.parentElement;
     }
-    this.style.setProperty('--bx-tree-item-level', String(depth));
+    this.style.setProperty('--_level', String(depth));
   }
 
   protected override willUpdate(changed: PropertyValues<this>): void {

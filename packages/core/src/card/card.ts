@@ -1,5 +1,6 @@
 import { css, html, nothing } from 'lit';
 import { BixElement } from '../bix-element.ts';
+import { textStyle, textFamily } from '../internal/text-style.ts';
 
 type Appearance = 'accent' | 'filled' | 'outlined' | 'filled outlined';
 type Orientation = 'horizontal' | 'vertical';
@@ -30,6 +31,17 @@ type Orientation = 'horizontal' | 'vertical';
  *
  * @cssprop --bx-card-spacing - Padding and inter-region gap. Default `--bx-space-m`.
  * @cssprop --bx-card-radius - Corner radius. Default `--bx-radius-m`.
+ * @cssprop --bx-card-fg - Text/icon color of the root surface. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-card-border-width - Border width of the root surface. Default `var(--bx-border-width)`.
+ * @cssprop --bx-card-shadow - Box shadow of the root surface. Default `var(--bx-shadow-s)`.
+ * @cssprop --bx-card-bg - Background of the root surface. Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-card-border-color - Border color of the root surface. Default `var(--bx-border-subtle)`.
+ * @cssprop --bx-card-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-card-header-font-family - Font family of the `header` part (text style `heading-xs`). Default `var(--bx-type-heading-family)`.
+ * @cssprop --bx-card-header-font-size - Font size of the `header` part (text style `heading-xs`). Default `var(--bx-type-heading-xs-size)`.
+ * @cssprop --bx-card-header-font-weight - Font weight of the `header` part (text style `heading-xs`). Default `var(--bx-type-heading-xs-weight)`.
+ * @cssprop --bx-card-header-line-height - Line height of the `header` part (text style `heading-xs`). Default `var(--bx-type-heading-xs-leading)`.
+ * @cssprop --bx-card-header-letter-spacing - Letter spacing of the `header` part (text style `heading-xs`). Default `var(--bx-type-heading-xs-tracking)`.
  */
 export class BxCard extends BixElement {
   static override tagName = 'bx-card';
@@ -47,31 +59,32 @@ export class BxCard extends BixElement {
         flex-direction: column;
         overflow: hidden;
         border-radius: var(--bx-card-radius, var(--bx-radius-m));
-        font-family: var(--bx-font-family-sans);
-        color: var(--bx-text-primary);
+        ${textFamily('--bx-card', 'body')}
+        color: var(--bx-card-fg, var(--bx-text-primary));
         background: transparent;
-        border: var(--bx-border-width) solid transparent;
+        border: var(--bx-card-border-width, var(--bx-border-width)) solid
+          transparent;
       }
 
       :host([appearance~='outlined']) .base {
-        box-shadow: var(--bx-shadow-s);
+        box-shadow: var(--bx-card-shadow, var(--bx-shadow-s));
       }
 
       :host([appearance~='filled']) .base {
-        background: var(--bx-surface-subtle);
+        background: var(--bx-card-bg, var(--bx-surface-subtle));
       }
       :host([appearance~='outlined']) .base {
-        border-color: var(--bx-border-subtle);
+        border-color: var(--bx-card-border-color, var(--bx-border-subtle));
       }
       :host([appearance='accent']) .base {
-        background: var(--bx-role-neutral-subtle);
+        background: var(--bx-card-bg, var(--bx-role-neutral-subtle));
       }
 
       :host([orientation='horizontal']) .base {
         flex-direction: row;
       }
 
-      @container (max-width: calc(var(--bx-unit) * 30)) {
+      @container (max-width: 30rem) {
         :host([orientation='horizontal']) .base {
           flex-direction: column;
         }
@@ -93,7 +106,7 @@ export class BxCard extends BixElement {
         inline-size: 33%;
       }
 
-      @container (max-width: calc(var(--bx-unit) * 30)) {
+      @container (max-width: 30rem) {
         :host([orientation='horizontal']) .media {
           inline-size: 100%;
           aspect-ratio: 16 / 9;
@@ -107,7 +120,8 @@ export class BxCard extends BixElement {
         gap: var(--bx-card-spacing, var(--bx-space-m));
         padding: var(--bx-card-spacing, var(--bx-space-m));
         padding-block-end: 0;
-        font-weight: var(--bx-font-weight-semibold);
+
+        ${textStyle('--bx-card-header', 'heading-xs')}
       }
 
       .body {

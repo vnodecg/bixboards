@@ -47,11 +47,49 @@ Iframe with zoom controls. Specified for the Bixant token system (fluid sizing, 
 
 ### CSS parts
 
-`iframe`, `controls`, `zoom-in-button`, `zoom-out-button`, `zoom-label`
+| Part              | Description                           |
+| ----------------- | ------------------------------------- |
+| `frame`           | The scaled box that holds the iframe. |
+| `iframe`          | The `<iframe>` element.               |
+| `controls`        | The wrapper around the zoom controls. |
+| `zoom-in-button`  | The zoom-in button.                   |
+| `zoom-out-button` | The zoom-out button.                  |
+| `zoom-label`      | The current zoom percentage label.    |
 
 ### CSS custom properties
 
-_Only global tokens (see conventions)._
+| Property                                        | Description                                                                                              |
+| ----------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `--bx-zoomable-frame-frame-radius`              | Corner radius of the `frame` part. Default `var(--bx-radius-m)`.                                         |
+| `--bx-zoomable-frame-frame-border-width`        | Border width of the `frame` part. Default `var(--bx-border-width)`.                                      |
+| `--bx-zoomable-frame-frame-border-color`        | Border color of the `frame` part. Default `var(--bx-border-subtle)`.                                     |
+| `--bx-zoomable-frame-controls-gap`              | Gap of the `controls` part. Default `var(--bx-space-2xs)`.                                               |
+| `--bx-zoomable-frame-controls-padding`          | Padding of the `controls` part. Default `var(--bx-space-2xs)`.                                           |
+| `--bx-zoomable-frame-controls-radius`           | Corner radius of the `controls` part. Default `var(--bx-radius-pill)`.                                   |
+| `--bx-zoomable-frame-controls-bg`               | Background of the `controls` part. Default `var(--bx-surface-base)`.                                     |
+| `--bx-zoomable-frame-controls-border-width`     | Border width of the `controls` part. Default `var(--bx-border-width)`.                                   |
+| `--bx-zoomable-frame-controls-border-color`     | Border color of the `controls` part. Default `var(--bx-border-subtle)`.                                  |
+| `--bx-zoomable-frame-controls-shadow`           | Box shadow of the `controls` part. Default `var(--bx-shadow-s)`.                                         |
+| `--bx-zoomable-frame-button-size`               | Size (width and height) of the `button` element. Default `var(--bx-target-min)`.                         |
+| `--bx-zoomable-frame-button-fg`                 | Text/icon color of the `button` element. Default `var(--bx-text-primary)`.                               |
+| `--bx-zoomable-frame-menu-trigger-bg`           | Background of the `menu-trigger` element. Default `var(--bx-surface-base)`.                              |
+| `--bx-zoomable-frame-menu-trigger-border-width` | Border width of the `menu-trigger` element. Default `var(--bx-border-width)`.                            |
+| `--bx-zoomable-frame-menu-trigger-border-color` | Border color of the `menu-trigger` element. Default `var(--bx-border-subtle)`.                           |
+| `--bx-zoomable-frame-menu-trigger-shadow`       | Box shadow of the `menu-trigger` element. Default `var(--bx-shadow-s)`.                                  |
+| `--bx-zoomable-frame-button-hover-bg`           | Background of the `button` element (hover state). Default `var(--bx-surface-subtle)`.                    |
+| `--bx-zoomable-frame-button-focus-ring-width`   | Focus ring width of the `button` element (focus state). Default `var(--bx-border-width-strong)`.         |
+| `--bx-zoomable-frame-button-focus-ring-color`   | Focus ring color of the `button` element (focus state). Default `var(--bx-focus-ring)`.                  |
+| `--bx-zoomable-frame-button-focus-ring-offset`  | Focus ring offset of the `button` element (focus state). Default `var(--bx-focus-ring-offset)`.          |
+| `--bx-zoomable-frame-button-disabled-fg`        | Text/icon color of the `button` element (disabled state). Default `var(--bx-text-disabled)`.             |
+| `--bx-zoomable-frame-zoom-label-min-width`      | Minimum width of the `zoom-label` part. Default `3.5ch`.                                                 |
+| `--bx-zoomable-frame-zoom-label-fg`             | Text/icon color of the `zoom-label` part. Default `var(--bx-text-secondary)`.                            |
+| `--bx-zoomable-frame-icon-size`                 | Size (width and height) of the icon inside the `svg` element. Default `1.1em`.                           |
+| `--bx-zoomable-frame-font-family`               | Font family of the root surface. Default `var(--bx-type-body-family)`.                                   |
+| `--bx-zoomable-frame-zoom-label-font-family`    | Font family of the `zoom-label` part (text style `body-s`). Default `var(--bx-type-body-family)`.        |
+| `--bx-zoomable-frame-zoom-label-font-size`      | Font size of the `zoom-label` part (text style `body-s`). Default `var(--bx-type-body-s-size)`.          |
+| `--bx-zoomable-frame-zoom-label-font-weight`    | Font weight of the `zoom-label` part (text style `body-s`). Default `var(--bx-type-body-s-weight)`.      |
+| `--bx-zoomable-frame-zoom-label-line-height`    | Line height of the `zoom-label` part (text style `body-s`). Default `var(--bx-type-body-s-leading)`.     |
+| `--bx-zoomable-frame-zoom-label-letter-spacing` | Letter spacing of the `zoom-label` part (text style `body-s`). Default `var(--bx-type-body-s-tracking)`. |
 
 ### Methods
 

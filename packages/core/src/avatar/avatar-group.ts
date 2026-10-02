@@ -1,5 +1,6 @@
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
+import { textStyle } from '../internal/text-style.ts';
 
 /**
  * `<bx-avatar-group>` — overlapping stack of `bx-avatar` with a "+N" overflow indicator.
@@ -14,6 +15,17 @@ import { BixElement } from '../bix-element.ts';
  * @csspart overflow - The "+N" indicator, present when there are more than `max` avatars.
  *
  * @cssprop --bx-avatar-group-overlap - How much each avatar overlaps the previous one. Default `-0.5em`.
+ * @cssprop --bx-avatar-group-overflow-size - Size (width and height) of the `overflow` part. Default `var(--bx-avatar-size, calc(var(--bx-unit) * 2.5))`.
+ * @cssprop --bx-avatar-group-overflow-radius - Corner radius of the `overflow` part. Default `var(--bx-radius-pill)`.
+ * @cssprop --bx-avatar-group-overflow-border-width - Border width of the `overflow` part. Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-avatar-group-overflow-border-color - Border color of the `overflow` part. Default `var(--bx-surface-base)`.
+ * @cssprop --bx-avatar-group-overflow-bg - Background of the `overflow` part. Default `var(--bx-surface-muted)`.
+ * @cssprop --bx-avatar-group-overflow-fg - Text/icon color of the `overflow` part. Default `var(--bx-text-secondary)`.
+ * @cssprop --bx-avatar-group-overflow-font-family - Font family of the `overflow` part (text style `heading-xs`). Default `var(--bx-type-heading-family)`.
+ * @cssprop --bx-avatar-group-overflow-font-size - Font size of the `overflow` part (text style `heading-xs`). Default `var(--bx-type-heading-xs-size)`.
+ * @cssprop --bx-avatar-group-overflow-font-weight - Font weight of the `overflow` part (text style `heading-xs`). Default `var(--bx-type-heading-xs-weight)`.
+ * @cssprop --bx-avatar-group-overflow-line-height - Line height of the `overflow` part (text style `heading-xs`). Default `var(--bx-type-heading-xs-leading)`.
+ * @cssprop --bx-avatar-group-overflow-letter-spacing - Letter spacing of the `overflow` part (text style `heading-xs`). Default `var(--bx-type-heading-xs-tracking)`.
  */
 export class BxAvatarGroup extends BixElement {
   static override tagName = 'bx-avatar-group';
@@ -42,16 +54,29 @@ export class BxAvatarGroup extends BixElement {
       .overflow {
         display: grid;
         place-items: center;
-        inline-size: var(--bx-avatar-size, calc(var(--bx-unit) * 2.5));
-        block-size: var(--bx-avatar-size, calc(var(--bx-unit) * 2.5));
-        border-radius: var(--bx-radius-pill);
-        border: var(--bx-border-width-strong) solid var(--bx-surface-base);
+        inline-size: var(
+          --bx-avatar-group-overflow-size,
+          var(--bx-avatar-size, calc(var(--bx-unit) * 2.5))
+        );
+        block-size: var(
+          --bx-avatar-group-overflow-size,
+          var(--bx-avatar-size, calc(var(--bx-unit) * 2.5))
+        );
+        border-radius: var(
+          --bx-avatar-group-overflow-radius,
+          var(--bx-radius-pill)
+        );
+        border: var(
+            --bx-avatar-group-overflow-border-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(--bx-avatar-group-overflow-border-color, var(--bx-surface-base));
         margin-inline-start: var(--bx-avatar-group-overlap, -0.5em);
-        background: var(--bx-surface-muted);
-        color: var(--bx-text-secondary);
-        font-family: var(--bx-font-family-sans);
-        font-size: var(--bx-font-xs);
-        font-weight: var(--bx-font-weight-semibold);
+        background: var(--bx-avatar-group-overflow-bg, var(--bx-surface-muted));
+        color: var(--bx-avatar-group-overflow-fg, var(--bx-text-secondary));
+
+        ${textStyle('--bx-avatar-group-overflow', 'heading-xs', { size: 'var(--bx-type-label-xs-size)' })}
       }
     `,
   ];

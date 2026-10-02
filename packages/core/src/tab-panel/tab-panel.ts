@@ -1,5 +1,6 @@
 import { css, html } from 'lit';
 import { BixElement } from '../bix-element.ts';
+import { textFamily } from '../internal/text-style.ts';
 
 /**
  * `<bx-tab-panel>` — content for a tab.
@@ -18,7 +19,8 @@ import { BixElement } from '../bix-element.ts';
  *
  * @csspart base - The content wrapper.
  *
- * @cssprop --padding - Panel padding. Default `--bx-space-m`.
+ * @cssprop --bx-tab-panel-padding - Panel padding. Default `--bx-space-m`.
+ * @cssprop --bx-tab-panel-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
  */
 export class BxTabPanel extends BixElement {
   static override tagName = 'bx-tab-panel';
@@ -28,7 +30,7 @@ export class BxTabPanel extends BixElement {
     css`
       :host {
         display: block;
-        font-family: var(--bx-font-family-sans);
+        ${textFamily('--bx-tab-panel', 'body')}
       }
 
       :host([hidden]) {
@@ -36,7 +38,7 @@ export class BxTabPanel extends BixElement {
       }
 
       .base {
-        padding: var(--padding, var(--bx-space-m));
+        padding: var(--bx-tab-panel-padding, var(--bx-space-m));
       }
     `,
   ];

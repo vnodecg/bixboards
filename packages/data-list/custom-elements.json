@@ -434,16 +434,120 @@
           ],
           "cssProperties": [
             {
-              "name": "--bx-list-gap",
+              "name": "--bx-data-list-gap",
               "description": "Gap between items."
             },
             {
-              "name": "--bx-list-item-min-width",
-              "description": "Grid track minimum width."
+              "name": "--bx-data-list-fg",
+              "description": "Text/icon color of the root surface. Default `var(--bx-text-primary)`."
             },
             {
-              "name": "--bx-list-item-height",
-              "description": "Item height when fixed."
+              "name": "--bx-data-list-min-height",
+              "description": "Minimum height of the root surface. Default `calc(var(--bx-unit) * 8)`."
+            },
+            {
+              "name": "--bx-data-list-viewport-focus-ring-width",
+              "description": "Focus ring width of the `viewport` part (focus state). Default `var(--bx-border-width-strong)`."
+            },
+            {
+              "name": "--bx-data-list-viewport-focus-ring-color",
+              "description": "Focus ring color of the `viewport` part (focus state). Default `var(--bx-focus-ring)`."
+            },
+            {
+              "name": "--bx-data-list-viewport-focus-ring-offset",
+              "description": "Focus ring offset of the `viewport` part (focus state). Default `calc(var(--bx-focus-ring-offset) * -1)`."
+            },
+            {
+              "name": "--bx-data-list-item-radius",
+              "description": "Corner radius of the `item` part. Default `var(--bx-radius-m)`."
+            },
+            {
+              "name": "--bx-data-list-item-selected-bg",
+              "description": "Background of the `item` part (selected state). Default `color-mix(in srgb, var(--bx-role-accent) 14%, transparent)`."
+            },
+            {
+              "name": "--bx-data-list-item-selected-shadow",
+              "description": "Box shadow of the `item` part (selected state). Default `inset 0 0 0 var(--bx-border-width-strong) var(--bx-role-accent)`."
+            },
+            {
+              "name": "--bx-data-list-item-dragging-ring-width",
+              "description": "Focus ring width of the `item` part (dragging state). Default `var(--bx-border-width-strong)`."
+            },
+            {
+              "name": "--bx-data-list-item-dragging-ring-color",
+              "description": "Focus ring color of the `item` part (dragging state). Default `var(--bx-focus-ring)`."
+            },
+            {
+              "name": "--bx-data-list-item-dragging-outline-offset",
+              "description": "Outline offset of the `item` part (dragging state). Default `calc(var(--bx-focus-ring-offset) * -1)`."
+            },
+            {
+              "name": "--bx-data-list-item-dragging-opacity",
+              "description": "Opacity of the `item` part (dragging state). Default `0.7`."
+            },
+            {
+              "name": "--bx-data-list-item-dragging-shadow",
+              "description": "Box shadow of the `item` part (dragging state). Default `var(--bx-shadow-m)`."
+            },
+            {
+              "name": "--bx-data-list-item-drop-indicator-height",
+              "description": "Height of the drop indicator on the `item` part. Default `var(--bx-border-width-strong)`."
+            },
+            {
+              "name": "--bx-data-list-item-drop-indicator-bg",
+              "description": "Background of the drop indicator on the `item` part. Default `var(--bx-role-accent)`."
+            },
+            {
+              "name": "--bx-data-list-group-header-padding",
+              "description": "Padding of the `group-header` part. Default `var(--bx-space-xs) var(--bx-space-m)`."
+            },
+            {
+              "name": "--bx-data-list-group-header-bg",
+              "description": "Background of the `group-header` part. Default `var(--bx-surface-subtle)`."
+            },
+            {
+              "name": "--bx-data-list-group-header-fg",
+              "description": "Text/icon color of the `group-header` part. Default `var(--bx-text-secondary)`."
+            },
+            {
+              "name": "--bx-data-list-group-header-block-end-border-width",
+              "description": "Block end border width of the `group-header` part. Default `var(--bx-border-width)`."
+            },
+            {
+              "name": "--bx-data-list-group-header-block-end-border-color",
+              "description": "Block end border color of the `group-header` part. Default `var(--bx-border-subtle)`."
+            },
+            {
+              "name": "--bx-data-list-loading-padding",
+              "description": "Padding of the `loading` part. Default `var(--bx-space-l)`."
+            },
+            {
+              "name": "--bx-data-list-loading-fg",
+              "description": "Text/icon color of the `loading` part. Default `var(--bx-text-secondary)`."
+            },
+            {
+              "name": "--bx-data-list-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-body-family)`."
+            },
+            {
+              "name": "--bx-data-list-group-header-font-family",
+              "description": "Font family of the `group-header` part (text style `label-s`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-data-list-group-header-font-size",
+              "description": "Font size of the `group-header` part (text style `label-s`). Default `var(--bx-type-label-s-size)`."
+            },
+            {
+              "name": "--bx-data-list-group-header-font-weight",
+              "description": "Font weight of the `group-header` part (text style `label-s`). Default `var(--bx-type-label-s-weight)`."
+            },
+            {
+              "name": "--bx-data-list-group-header-line-height",
+              "description": "Line height of the `group-header` part (text style `label-s`). Default `var(--bx-type-label-s-leading)`."
+            },
+            {
+              "name": "--bx-data-list-group-header-letter-spacing",
+              "description": "Letter spacing of the `group-header` part (text style `label-s`). Default `var(--bx-type-label-s-tracking)`."
             }
           ]
         }
@@ -799,20 +903,160 @@
             {
               "name": "label",
               "description": "The node label."
-            },
-            {
-              "name": "guide",
-              "description": "The vertical guide lines (via the indent area's background)."
             }
           ],
           "cssProperties": [
             {
-              "name": "--bx-tree-indent",
+              "name": "--bx-virtual-tree-indent",
               "description": "Indent per level."
             },
             {
-              "name": "--bx-tree-row-height",
+              "name": "--bx-virtual-tree-row-height",
               "description": "Row height."
+            },
+            {
+              "name": "--bx-virtual-tree-fg",
+              "description": "Text/icon color of the root surface. Default `var(--bx-text-primary)`."
+            },
+            {
+              "name": "--bx-virtual-tree-min-height",
+              "description": "Minimum height of the root surface. Default `calc(var(--bx-unit) * 6)`."
+            },
+            {
+              "name": "--bx-virtual-tree-tree-focus-ring-width",
+              "description": "Focus ring width of the `tree` element (focus state). Default `var(--bx-border-width-strong)`."
+            },
+            {
+              "name": "--bx-virtual-tree-tree-focus-ring-color",
+              "description": "Focus ring color of the `tree` element (focus state). Default `var(--bx-focus-ring)`."
+            },
+            {
+              "name": "--bx-virtual-tree-tree-focus-ring-offset",
+              "description": "Focus ring offset of the `tree` element (focus state). Default `calc(var(--bx-focus-ring-offset) * -1)`."
+            },
+            {
+              "name": "--bx-virtual-tree-node-gap",
+              "description": "Gap of the `node` part. Default `var(--bx-space-xs)`."
+            },
+            {
+              "name": "--bx-virtual-tree-node-padding-inline-end",
+              "description": "Padding inline end of the `node` part. Default `var(--bx-space-s)`."
+            },
+            {
+              "name": "--bx-virtual-tree-node-hover-bg",
+              "description": "Background of the `node` part (hover state). Default `var(--bx-surface-subtle)`."
+            },
+            {
+              "name": "--bx-virtual-tree-node-ring-width",
+              "description": "Focus ring width of the `node` part. Default `var(--bx-border-width-strong)`."
+            },
+            {
+              "name": "--bx-virtual-tree-node-ring-color",
+              "description": "Focus ring color of the `node` part. Default `var(--bx-focus-ring)`."
+            },
+            {
+              "name": "--bx-virtual-tree-node-outline-offset",
+              "description": "Outline offset of the `node` part. Default `calc(var(--bx-focus-ring-offset) * -1)`."
+            },
+            {
+              "name": "--bx-virtual-tree-node-selected-bg",
+              "description": "Background of the `node` part (selected state). Default `color-mix(in srgb, var(--bx-role-accent) 14%, transparent)`."
+            },
+            {
+              "name": "--bx-virtual-tree-node-disabled-fg",
+              "description": "Text/icon color of the `node` part (disabled state). Default `var(--bx-text-disabled)`."
+            },
+            {
+              "name": "--bx-virtual-tree-toggle-size",
+              "description": "Size (width and height) of the `toggle` part. Default `1.25em`."
+            },
+            {
+              "name": "--bx-virtual-tree-toggle-fg",
+              "description": "Text/icon color of the `toggle` part. Default `var(--bx-text-secondary)`."
+            },
+            {
+              "name": "--bx-virtual-tree-check-size",
+              "description": "Size (width and height) of the `check` element. Default `1.1em`."
+            },
+            {
+              "name": "--bx-virtual-tree-check-border-width",
+              "description": "Border width of the `check` element. Default `var(--bx-border-width-strong)`."
+            },
+            {
+              "name": "--bx-virtual-tree-check-border-color",
+              "description": "Border color of the `check` element. Default `var(--bx-border-strong)`."
+            },
+            {
+              "name": "--bx-virtual-tree-check-radius",
+              "description": "Corner radius of the `check` element. Default `var(--bx-radius-s)`."
+            },
+            {
+              "name": "--bx-virtual-tree-check-font-size",
+              "description": "Font size of the `check` element. Default `0.8em`."
+            },
+            {
+              "name": "--bx-virtual-tree-check-line-height",
+              "description": "Line height of the `check` element. Default `1`."
+            },
+            {
+              "name": "--bx-virtual-tree-check-bg",
+              "description": "Background of the `check` element. Default `var(--bx-surface-base)`."
+            },
+            {
+              "name": "--bx-virtual-tree-check-fg",
+              "description": "Text/icon color of the `check` element. Default `var(--bx-on-accent)`."
+            },
+            {
+              "name": "--bx-virtual-tree-status-fg",
+              "description": "Text/icon color of the `status` element. Default `var(--bx-text-secondary)`."
+            },
+            {
+              "name": "--bx-virtual-tree-empty-padding",
+              "description": "Padding of the `empty` element. Default `var(--bx-space-m)`."
+            },
+            {
+              "name": "--bx-virtual-tree-empty-fg",
+              "description": "Text/icon color of the `empty` element. Default `var(--bx-text-secondary)`."
+            },
+            {
+              "name": "--bx-virtual-tree-toggle-icon-size",
+              "description": "Size (width and height) of the icon inside the `toggle` element. Default `0.75em`."
+            },
+            {
+              "name": "--bx-virtual-tree-status-error-fg",
+              "description": "Color of the status line when loading failed. Default `var(--bx-role-danger-fg)`."
+            },
+            {
+              "name": "--bx-virtual-tree-check-checked-bg",
+              "description": "Background of a checked or mixed `check` box. Default `var(--bx-role-accent)`."
+            },
+            {
+              "name": "--bx-virtual-tree-check-checked-border-color",
+              "description": "Border color of a checked or mixed `check` box. Default `var(--bx-role-accent)`."
+            },
+            {
+              "name": "--bx-virtual-tree-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-body-family)`."
+            },
+            {
+              "name": "--bx-virtual-tree-status-font-family",
+              "description": "Font family of the `status` element (text style `body-s`). Default `var(--bx-type-body-family)`."
+            },
+            {
+              "name": "--bx-virtual-tree-status-font-size",
+              "description": "Font size of the `status` element (text style `body-s`). Default `var(--bx-type-body-s-size)`."
+            },
+            {
+              "name": "--bx-virtual-tree-status-font-weight",
+              "description": "Font weight of the `status` element (text style `body-s`). Default `var(--bx-type-body-s-weight)`."
+            },
+            {
+              "name": "--bx-virtual-tree-status-line-height",
+              "description": "Line height of the `status` element (text style `body-s`). Default `var(--bx-type-body-s-leading)`."
+            },
+            {
+              "name": "--bx-virtual-tree-status-letter-spacing",
+              "description": "Letter spacing of the `status` element (text style `body-s`). Default `var(--bx-type-body-s-tracking)`."
             }
           ]
         }

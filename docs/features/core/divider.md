@@ -38,7 +38,11 @@ _None._
 
 ### CSS custom properties
 
-`--bx-divider-color`, `--bx-divider-width`, `--bx-divider-spacing`
+| Property               | Description                                                                                                                  |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `--bx-divider-color`   | Rule color. Default `--bx-border-subtle`.                                                                                    |
+| `--bx-divider-width`   | Rule thickness. Default `--bx-border-width` (1 device px, the only fixed-px exception per docs/features/_conventions.md §2). |
+| `--bx-divider-spacing` | Margin on the axis perpendicular to the rule. Default `--bx-space-m`.                                                        |
 
 ### Methods
 

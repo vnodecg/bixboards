@@ -1,5 +1,6 @@
 import { css, html, nothing, svg, type PropertyValues } from 'lit';
 import { BixElement } from '../bix-element.ts';
+import { textFamily } from '../internal/text-style.ts';
 
 // Vendored from packages/core/src/icon/default-library.ts (Phosphor Icons, regular/fill, MIT).
 // This glyph's own ink isn't centered in the usual 256x256 canvas (bbox roughly x:72-228,
@@ -34,6 +35,15 @@ const CHECK_PATH =
  * @csspart label - The wrapper around the default slot.
  * @csspart start - The wrapper around the `start` slot.
  * @csspart end - The wrapper around the `end` slot.
+ * @cssprop --bx-option-gap - Gap of the root surface. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-option-min-height - Minimum height of the root surface. Default `var(--bx-target-min)`.
+ * @cssprop --bx-option-padding-inline - Padding inline of the root surface. Default `var(--bx-space-s)`.
+ * @cssprop --bx-option-fg - Text/icon color of the root surface. Default `var(--bx-text-primary)`.
+ * @cssprop --bx-option-disabled-bg - Background of the root surface (disabled state). Default `var(--bx-surface-subtle)`.
+ * @cssprop --bx-option-disabled-fg - Text/icon color of the root surface (disabled state). Default `var(--bx-text-disabled)`.
+ * @cssprop --bx-option-checked-icon-size - Size (width and height) of the `checked-icon` part. Default `1em`.
+ * @cssprop --bx-option-start-size - Size (width and height) of the `start` part. Default `1em`.
+ * @cssprop --bx-option-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
  */
 export class BxOption extends BixElement {
   static override tagName = 'bx-option';
@@ -43,7 +53,7 @@ export class BxOption extends BixElement {
     css`
       :host {
         display: block;
-        font-family: var(--bx-font-family-sans);
+        ${textFamily('--bx-option', 'body')}
       }
 
       :host([hidden]) {
@@ -53,28 +63,28 @@ export class BxOption extends BixElement {
       .base {
         display: flex;
         align-items: center;
-        gap: var(--bx-space-xs);
-        min-block-size: var(--bx-target-min, 2.75rem);
-        padding-inline: var(--bx-space-s);
-        color: var(--bx-text-primary);
+        gap: var(--bx-option-gap, var(--bx-space-xs));
+        min-block-size: var(--bx-option-min-height, var(--bx-target-min));
+        padding-inline: var(--bx-option-padding-inline, var(--bx-space-s));
+        color: var(--bx-option-fg, var(--bx-text-primary));
         cursor: pointer;
       }
 
       :host(:hover:not([disabled])) .base,
       :host([data-active]:not([disabled])) .base {
-        background: var(--bx-surface-subtle);
+        background: var(--bx-option-disabled-bg, var(--bx-surface-subtle));
       }
 
       :host([disabled]) .base {
         cursor: not-allowed;
-        color: var(--bx-text-disabled);
+        color: var(--bx-option-disabled-fg, var(--bx-text-disabled));
       }
 
       .checked-icon {
         display: inline-flex;
         flex-shrink: 0;
-        inline-size: 1em;
-        block-size: 1em;
+        inline-size: var(--bx-option-checked-icon-size, 1em);
+        block-size: var(--bx-option-checked-icon-size, 1em);
       }
 
       .checked-icon svg {
@@ -87,8 +97,8 @@ export class BxOption extends BixElement {
       .end {
         display: inline-flex;
         flex-shrink: 0;
-        inline-size: 1em;
-        block-size: 1em;
+        inline-size: var(--bx-option-start-size, 1em);
+        block-size: var(--bx-option-start-size, 1em);
       }
 
       .start ::slotted(*),

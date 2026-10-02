@@ -139,7 +139,47 @@ export const SpacingAndRadius: Story = {
   `,
 };
 
+const TEXT_STYLES: Record<string, string[]> = {
+  display: ['l', 'm'],
+  heading: ['xl', 'l', 'm', 's', 'xs'],
+  body: ['l', 'm', 's'],
+  label: ['l', 'm', 's', 'xs'],
+  field: ['l', 'm', 's'],
+  caption: ['m', 's'],
+  code: ['m', 's'],
+};
+
+export const TextStyles: Story = {
+  name: 'Text styles',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Every text style (`--bx-type-<group>-<size>-*`), each rendered from its own tokens. Components pick a style by the kind of text; a theme can retune a whole group, for example `--bx-type-heading-family`.',
+      },
+    },
+  },
+  render: () => html`
+    ${Object.entries(TEXT_STYLES).map(
+      ([group, sizes]) => html`
+        <h3 class="sb-h">${group}</h3>
+        ${sizes.map((size) => {
+          const t = (prop: string) => `var(--bx-type-${group}-${size}-${prop})`;
+          return html`<div class="sb-row" style="align-items:baseline">
+            <span class="sb-label">${group}.${size}</span>
+            <span
+              style="font-family:var(--bx-type-${group}-family);font-size:${t('size')};font-weight:${t('weight')};line-height:${t('leading')};letter-spacing:${t('tracking')}"
+              >The quick brown fox jumps over the lazy dog</span
+            >
+          </div>`;
+        })}
+      `,
+    )}
+  `,
+};
+
 export const Typography: Story = {
+  name: 'Primitive scale',
   render: () => html`
     ${['xs', 's', 'm', 'l', 'xl', '2xl', '3xl'].map(
       (s) =>

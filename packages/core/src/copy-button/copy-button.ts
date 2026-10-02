@@ -68,7 +68,7 @@ function legacyCopy(text: string): void {
  * inner button as `aria-label`, and each state change is announced through a visually hidden
  * polite live region (FR-COPY-BUTTON-03) — the tooltip alone is not exposed to assistive tech.
  *
- * The success/error colors default to the design system's success/danger role tokens; the spec's
+ * The success/error colors default to the design system's brand/danger role tokens; the spec's
  * `--bx-success-color`/`--bx-error-color` are prefixed with the component name here
  * (`--bx-copy-button-success-color`) to follow the package's custom-property naming rule.
  *
@@ -89,8 +89,9 @@ function legacyCopy(text: string): void {
  * @csspart error-icon - The wrapper around the error icon.
  * @csspart tooltip - The inner `bx-tooltip`.
  *
- * @cssprop --bx-copy-button-success-color - Icon color while showing success. Default `--bx-role-success-fg`.
+ * @cssprop --bx-copy-button-success-color - Icon color while showing success. Default `--bx-role-brand-fg` (the design system has no success palette; the check icon carries the meaning).
  * @cssprop --bx-copy-button-error-color - Icon color while showing an error. Default `--bx-role-danger-fg`.
+ * @cssprop --bx-copy-button-error-icon-font-size - Font size of the `error-icon` part. Default `1.1em`.
  */
 export class BxCopyButton extends BixElement {
   static override tagName = 'bx-copy-button';
@@ -115,7 +116,7 @@ export class BxCopyButton extends BixElement {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.1em;
+        font-size: var(--bx-copy-button-error-icon-font-size, 1.1em);
       }
 
       .icon[hidden] {
@@ -123,7 +124,7 @@ export class BxCopyButton extends BixElement {
       }
 
       .success {
-        color: var(--bx-copy-button-success-color, var(--bx-role-success-fg));
+        color: var(--bx-copy-button-success-color, var(--bx-role-brand-fg));
       }
 
       .error {

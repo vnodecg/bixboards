@@ -1,6 +1,7 @@
 import { css, html } from 'lit';
 import { BixElement } from '../bix-element.ts';
 import { getRelativeTimeFormatter } from '../internal/intl-cache.ts';
+import { textFamily } from '../internal/text-style.ts';
 
 type Format = 'long' | 'short' | 'narrow';
 type Numeric = 'always' | 'auto';
@@ -101,6 +102,7 @@ const syncTicker = new SyncTicker();
  * dozens of independent ones. Both paths pause while the tab is hidden and catch up immediately on
  * return (FR-RELATIVE-TIME-02, via the `visibilitychange` listener in {@link SyncTicker} and this
  * class's own `#onVisibility`).
+ * @cssprop --bx-relative-time-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
  */
 export class BxRelativeTime extends BixElement {
   static override tagName = 'bx-relative-time';
@@ -110,7 +112,7 @@ export class BxRelativeTime extends BixElement {
     css`
       :host {
         display: inline;
-        font-family: inherit;
+        ${textFamily('--bx-relative-time', 'body')}
       }
     `,
   ];

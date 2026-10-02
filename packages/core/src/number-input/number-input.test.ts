@@ -147,7 +147,9 @@ describe('bx-number-input', () => {
   });
 
   it('fires exactly one input event per keystroke (not the native composed one as well)', async () => {
-    const el = await fixture<HTMLElement>(html`<bx-number-input></bx-number-input>`);
+    const el = await fixture<HTMLElement>(
+      html`<bx-number-input></bx-number-input>`,
+    );
     let inputs = 0;
     el.addEventListener('input', () => inputs++);
     el.focus();

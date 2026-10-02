@@ -31,6 +31,12 @@ type Orientation = 'horizontal' | 'vertical';
  *
  * @cssprop --bx-scroller-shadow-color - Edge shadow color. Default a translucent neutral.
  * @cssprop --bx-scroller-shadow-size - Edge shadow extent. Default `--bx-space-l`.
+ * @cssprop --bx-scroller-content-focus-ring-width - Focus ring width of the `content` part (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-scroller-content-focus-ring-color - Focus ring color of the `content` part (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-scroller-content-focus-ring-offset - Focus ring offset of the `content` part (focus state). Default `calc(var(--bx-focus-ring-offset) * -1)`.
+ * @cssprop --bx-scroller-shadow-opacity - Opacity of the `shadow` element. Default `1`.
+ * @cssprop --bx-scroller-shadow-start-bg - Background of the `shadow-start` element. Default `linear-gradient( to right, var(--_shadow-color), transparent )`.
+ * @cssprop --bx-scroller-shadow-end-bg - Background of the `shadow-end` element. Default `linear-gradient( to left, var(--_shadow-color), transparent )`.
  */
 export class BxScroller extends BixElement {
   static override tagName = 'bx-scroller';
@@ -41,6 +47,10 @@ export class BxScroller extends BixElement {
       :host {
         display: block;
         position: relative;
+        --_shadow-color: var(
+          --bx-scroller-shadow-color,
+          color-mix(in srgb, var(--bx-text-primary) 12%, transparent)
+        );
       }
 
       .content {
@@ -76,20 +86,28 @@ export class BxScroller extends BixElement {
       }
 
       .content:focus-visible {
-        outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
-        outline-offset: calc(var(--bx-focus-ring-offset) * -1);
+        outline: var(
+            --bx-scroller-content-focus-ring-width,
+            var(--bx-border-width-strong)
+          )
+          solid
+          var(--bx-scroller-content-focus-ring-color, var(--bx-focus-ring));
+        outline-offset: var(
+          --bx-scroller-content-focus-ring-offset,
+          calc(var(--bx-focus-ring-offset) * -1)
+        );
       }
 
       .shadow {
         position: absolute;
         pointer-events: none;
         opacity: 0;
-        transition: opacity var(--bx-motion-duration-fast, 0.12s)
-          var(--bx-motion-easing-standard, ease);
+        transition: opacity var(--bx-motion-duration-fast)
+          var(--bx-motion-easing-standard);
       }
 
       .shadow.visible {
-        opacity: 1;
+        opacity: var(--bx-scroller-shadow-opacity, 1);
       }
 
       :host(:not([orientation='vertical'])) .shadow {
@@ -98,18 +116,16 @@ export class BxScroller extends BixElement {
       }
       :host(:not([orientation='vertical'])) .shadow-start {
         inset-inline-start: 0;
-        background: linear-gradient(
-          to right,
-          var(--bx-scroller-shadow-color, rgb(0 0 0 / 12%)),
-          transparent
+        background: var(
+          --bx-scroller-shadow-start-bg,
+          linear-gradient(to right, var(--_shadow-color), transparent)
         );
       }
       :host(:not([orientation='vertical'])) .shadow-end {
         inset-inline-end: 0;
-        background: linear-gradient(
-          to left,
-          var(--bx-scroller-shadow-color, rgb(0 0 0 / 12%)),
-          transparent
+        background: var(
+          --bx-scroller-shadow-end-bg,
+          linear-gradient(to left, var(--_shadow-color), transparent)
         );
       }
 
@@ -119,18 +135,16 @@ export class BxScroller extends BixElement {
       }
       :host([orientation='vertical']) .shadow-start {
         inset-block-start: 0;
-        background: linear-gradient(
-          to bottom,
-          var(--bx-scroller-shadow-color, rgb(0 0 0 / 12%)),
-          transparent
+        background: var(
+          --bx-scroller-shadow-start-bg,
+          linear-gradient(to bottom, var(--_shadow-color), transparent)
         );
       }
       :host([orientation='vertical']) .shadow-end {
         inset-block-end: 0;
-        background: linear-gradient(
-          to top,
-          var(--bx-scroller-shadow-color, rgb(0 0 0 / 12%)),
-          transparent
+        background: var(
+          --bx-scroller-shadow-end-bg,
+          linear-gradient(to top, var(--_shadow-color), transparent)
         );
       }
 
