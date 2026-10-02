@@ -52,7 +52,7 @@ export class BxBreadcrumb extends BixElement {
         list-style: none;
       }
 
-      .list ::slotted(.bx-breadcrumb-ellipsis) {
+      .list ::slotted(.bx-breadcrumb-ellipsis-item) {
         all: unset;
         box-sizing: border-box;
         display: inline-flex;
@@ -61,15 +61,14 @@ export class BxBreadcrumb extends BixElement {
         min-inline-size: var(--bx-target-min);
         min-block-size: var(--bx-target-min);
         color: var(--bx-role-accent);
-        cursor: pointer;
         font: inherit;
       }
 
-      .list ::slotted(.bx-breadcrumb-ellipsis:hover) {
+      .list ::slotted(.bx-breadcrumb-ellipsis-item:hover) {
         text-decoration: underline;
       }
 
-      .list ::slotted(.bx-breadcrumb-ellipsis:focus-visible) {
+      .list ::slotted(.bx-breadcrumb-ellipsis-item:focus-within) {
         outline: var(--bx-border-width-strong) solid var(--bx-focus-ring);
         outline-offset: var(--bx-focus-ring-offset);
         border-radius: var(--bx-radius-s);
@@ -88,7 +87,8 @@ export class BxBreadcrumb extends BixElement {
   declare label: string;
 
   #listRef = createRef<HTMLOListElement>();
-  #ellipsis: HTMLButtonElement | null = null;
+  // A `role=listitem` wrapper around the button: the shadow `<ol>` may only contain list items.
+  #ellipsis: HTMLElement | null = null;
   #unobserveResize?: () => void;
   #lastWidth = -1;
   #raf = 0;
@@ -126,16 +126,22 @@ export class BxBreadcrumb extends BixElement {
     ] as unknown as BxBreadcrumbItem[];
   }
 
-  #ensureEllipsis(): HTMLButtonElement {
+  #ensureEllipsis(): HTMLElement {
     if (this.#ellipsis) return this.#ellipsis;
+    const item = document.createElement('span');
+    item.className = 'bx-breadcrumb-ellipsis-item';
+    item.setAttribute('role', 'listitem');
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'bx-breadcrumb-ellipsis';
     button.setAttribute('aria-label', 'Show all breadcrumbs');
     button.textContent = '…';
+    button.style.cssText =
+      'all: unset; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; min-inline-size: var(--bx-target-min); min-block-size: var(--bx-target-min); cursor: pointer; font: inherit; color: inherit;';
     button.addEventListener('click', this.#handleEllipsisClick);
-    this.#ellipsis = button;
-    return button;
+    item.append(button);
+    this.#ellipsis = item;
+    return item;
   }
 
   // Only a change of available *width* can change the collapse decision. Expanding makes the list

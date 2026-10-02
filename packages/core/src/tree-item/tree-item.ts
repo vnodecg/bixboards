@@ -562,7 +562,12 @@ export class BxTreeItem extends BixElement {
         }
         <span class="label" part="label"><slot></slot></span>
       </div>
-      <div class="children" part="children" ?hidden=${!this.expanded}>
+      <div
+        class="children"
+        part="children"
+        role="group"
+        ?hidden=${!this.expanded}
+      >
         <slot
           name="children"
           @slotchange=${this.#handleChildrenSlotChange}

@@ -855,6 +855,14 @@ export class BxDataTable<T = unknown> extends BixElement {
         this._width > 0 && this._width < this.cardsBreakpoint,
       );
     else this.removeAttribute('data-cards');
+    // The header is display:none in cards mode, so the roving tabindex must live on a body cell
+    // or the grid has no keyboard-reachable descendant.
+    if (
+      this.hasAttribute('data-cards') &&
+      this.#active.row === -1 &&
+      this.#rowCount > 0
+    )
+      this.#active = { row: 0, col: this.#active.col };
 
     const fixed = this.rowHeight === 'auto' ? undefined : this.rowHeight;
     const dynamic =

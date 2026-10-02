@@ -273,7 +273,8 @@ export class BxButton extends BixElement {
       }
 
       :host([loading]) .label {
-        visibility: hidden;
+        /* opacity, not visibility: the label must stay in the accessible name while busy. */
+        opacity: 0;
       }
 
       .caret svg,

@@ -54,7 +54,9 @@ describe('bx-button', () => {
     );
     const label = el.shadowRoot!.querySelector('.label')!;
     expect(label.textContent?.includes('Save') || true).to.be.true; // slot still projects content
-    expect(getComputedStyle(label).visibility).to.equal('hidden');
+    // opacity (not visibility) so the label stays in the accessible name while busy
+    expect(getComputedStyle(label).opacity).to.equal('0');
+    expect(getComputedStyle(label).visibility).to.equal('visible');
     expect(el.shadowRoot!.querySelector('.spinner')).to.exist;
   });
 

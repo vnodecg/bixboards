@@ -30,6 +30,7 @@ function clampValue(value: number): number {
  * @cssprop --bx-progress-bar-transition - Value-change transition. Default `0.3s` standard easing.
  * @cssprop --bx-progress-bar-radius - Corner radius of the root surface. Default `var(--bx-radius-pill)`.
  * @cssprop --bx-progress-bar-indicator-indeterminate-opacity - Opacity of the `indicator` part (indeterminate state). Default `0.5`.
+ * @cssprop --bx-progress-bar-label-bg - Background of the `label` part. Default `var(--bx-surface-base)`.
  * @cssprop --bx-progress-bar-label-fg - Text/icon color of the `label` part. Default `var(--bx-text-primary)`.
  * @cssprop --bx-progress-bar-label-font-family - Font family of the `label` part (text style `caption-s`). Default `var(--bx-type-caption-family)`.
  * @cssprop --bx-progress-bar-label-font-size - Font size of the `label` part (text style `caption-s`). Default `var(--bx-type-caption-s-size)`.
@@ -111,6 +112,11 @@ export class BxProgressBar extends BixElement {
         position: relative;
         z-index: 1;
         margin-inline: var(--bx-space-2xs);
+        /* Own opaque backing: the label straddles the indicator and the track, so its contrast
+           can only be guaranteed against its own background. */
+        padding-inline: var(--bx-space-2xs);
+        border-radius: var(--bx-radius-s);
+        background: var(--bx-progress-bar-label-bg, var(--bx-surface-base));
 
         ${textStyle('--bx-progress-bar-label', 'caption-s')}
 
