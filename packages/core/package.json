@@ -530,14 +530,6 @@
     "lit": "^3.3.3"
   },
   "devDependencies": {
-    "@bixant/design-system": "workspace:*",
-    "@open-wc/testing": "^5.0.0",
-    "@types/mocha": "^10.0.10",
-    "@types/node": "^24.0.0",
-    "@web/dev-server-esbuild": "^2.0.0",
-    "@web/test-runner": "^1.0.0",
-    "@web/test-runner-commands": "^1.0.1",
-    "@web/test-runner-playwright": "^1.0.0",
-    "playwright": "^1.63.0"
+    "@bixant/design-system": "workspace:*"
   }
 }

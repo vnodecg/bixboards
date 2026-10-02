@@ -74,13 +74,26 @@ const meta = {
 export default meta;
 type Story = StoryObj<Args>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    // The watched box is intentionally faded until it intersects.
+    a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } },
+  },
+};
 
 export const Once: Story = {
+  parameters: {
+    // The watched box is intentionally faded until it intersects.
+    a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } },
+  },
   name: 'Observe once (stop after first intersect)',
   args: { once: true },
 };
 
 export const Disabled: Story = {
+  parameters: {
+    // The watched box is intentionally faded until it intersects.
+    a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } },
+  },
   args: { disabled: true },
 };

@@ -180,6 +180,8 @@ const huge = Array.from({ length: 100_000 }, (_, i) => ({
 export const OneHundredThousand: Story = {
   name: '100,000 options (virtualized)',
   parameters: {
+    // Virtualized window is scroll-position dependent.
+    visual: false,
     docs: {
       description: {
         story:
@@ -203,6 +205,8 @@ export const OneHundredThousand: Story = {
 export const Remote: Story = {
   name: 'Remote search with paging',
   parameters: {
+    // Remote data loads asynchronously and never settles for a stable capture.
+    visual: false,
     docs: {
       description: {
         story:

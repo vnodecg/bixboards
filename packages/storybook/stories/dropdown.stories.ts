@@ -157,6 +157,8 @@ const many = Array.from({ length: 50_000 }, (_, i) => ({
 export const Virtualized: Story = {
   name: '50,000 items (virtualized)',
   parameters: {
+    // Virtualized list renders a scroll-position-dependent window; not pixel-stable.
+    visual: false,
     docs: {
       description: {
         story:

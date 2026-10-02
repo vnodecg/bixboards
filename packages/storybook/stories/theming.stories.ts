@@ -137,6 +137,10 @@ const sample = (p: string) => html`
 `;
 
 export const Playground: Story = {
+  parameters: {
+    // Height varies by a couple of pixels between runs.
+    visual: false,
+  },
   render: (args) => html`
     <div
       style=${styleMap({

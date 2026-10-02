@@ -12,7 +12,7 @@ interface Args {
   mouseDragging: boolean;
 }
 
-const COLORS = ['#3366ff', '#00a86b', '#ffaa00', '#d91e48', '#7a869f'];
+const COLORS = ['#3366ff', '#00a86b', '#b36b00', '#d91e48', '#7a869f'];
 
 const meta = {
   title: 'Core/Carousel',
@@ -108,6 +108,10 @@ export const Vertical: Story = {
 };
 
 export const Photos: Story = {
+  parameters: {
+    // Loads remote images; not deterministic.
+    visual: false,
+  },
   name: 'Photo gallery',
   render: (args) => html`
     <bx-carousel

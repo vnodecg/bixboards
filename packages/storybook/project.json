@@ -40,6 +40,21 @@
         "cwd": "packages/storybook"
       }
     },
+    "test-stories": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": [
+        "default",
+        "^default",
+        "{projectRoot}/../design-system/data/**/*",
+        "{projectRoot}/../design-system/src/**/*.ts",
+        "{projectRoot}/tests/screenshots/**/*"
+      ],
+      "options": {
+        "command": "pnpm run test:stories",
+        "cwd": "packages/storybook"
+      }
+    },
     "typecheck": {
       "executor": "nx:run-commands",
       "cache": true,

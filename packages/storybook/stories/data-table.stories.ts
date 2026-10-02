@@ -146,6 +146,10 @@ export const PinnedColumns: Story = {
 };
 
 export const ServerSide: Story = {
+  parameters: {
+    // Rows arrive from a fake async server; capture timing is not deterministic.
+    visual: false,
+  },
   render: () => {
     const dataSource = {
       getRows: async ({
@@ -175,6 +179,15 @@ export const ServerSide: Story = {
 };
 
 export const CardsWhenNarrow: Story = {
+  // The width is observed after first paint; wait for the resulting cards-mode re-render.
+  play: async ({ canvasElement }) => {
+    const table = canvasElement.querySelector(
+      'bx-data-table',
+    ) as HTMLElement & { updateComplete: Promise<unknown> };
+    await table.updateComplete;
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+    await table.updateComplete;
+  },
   render: () => html`
     <bx-data-table
       aria-label="Accounts as cards"

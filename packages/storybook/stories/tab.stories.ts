@@ -39,7 +39,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<Args>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    // bx-tab is rendered standalone here; its tablist parent is provided by bx-tab-group.
+    a11y: {
+      config: { rules: [{ id: 'aria-required-parent', enabled: false }] },
+    },
+  },
+};
 
 export const Row: Story = {
   name: 'Row of tabs',

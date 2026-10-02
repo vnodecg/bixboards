@@ -9,17 +9,14 @@
     "storybook:ci": "pnpm run tokens && storybook dev -p 6006 --no-open --ci",
     "build-storybook": "pnpm run tokens && storybook build -o dist",
     "test": "pnpm run tokens && node --test \"tests/**/*.test.ts\"",
+    "test:stories": "pnpm run tokens && vitest run --project stories",
+    "test:stories:update": "pnpm run tokens && vitest run --project stories -u",
     "typecheck": "pnpm run tokens && tsc -p tsconfig.json"
   },
   "devDependencies": {
     "@bixant/core": "workspace:*",
-    "@bixant/design-system": "workspace:*",
-    "@storybook/addon-docs": "^10.6.0",
-    "@storybook/web-components-vite": "^10.6.0",
-    "lit": "^3.3.3",
-    "storybook": "^10.6.0",
-    "vite": "^8.3.1",
     "@bixant/data-list": "workspace:*",
-    "@bixant/data-table": "workspace:*"
+    "@bixant/data-table": "workspace:*",
+    "@bixant/design-system": "workspace:*"
   }
 }

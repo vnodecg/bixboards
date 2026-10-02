@@ -49,9 +49,22 @@ const meta = {
 export default meta;
 type Story = StoryObj<Args>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    // bx-option is rendered standalone here; its listbox parent is provided by bx-select/bx-dropdown.
+    a11y: {
+      config: { rules: [{ id: 'aria-required-parent', enabled: false }] },
+    },
+  },
+};
 
 export const ListBox: Story = {
+  parameters: {
+    // bx-option is rendered standalone here; its listbox parent is provided by bx-select/bx-dropdown.
+    a11y: {
+      config: { rules: [{ id: 'aria-required-parent', enabled: false }] },
+    },
+  },
   name: 'List of options',
   render: () => html`
     <div
@@ -66,6 +79,12 @@ export const ListBox: Story = {
 };
 
 export const WithIcons: Story = {
+  parameters: {
+    // bx-option is rendered standalone here; its listbox parent is provided by bx-select/bx-dropdown.
+    a11y: {
+      config: { rules: [{ id: 'aria-required-parent', enabled: false }] },
+    },
+  },
   name: 'Start/end icon slots',
   render: () => html`
     <div

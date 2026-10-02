@@ -101,5 +101,9 @@ export const LazyLoading: Story = {
 };
 
 export const Disabled: Story = {
+  parameters: {
+    // Disabled items are exempt from WCAG contrast requirements (SC 1.4.3); axe does not detect disabled state on the custom element.
+    a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } },
+  },
   args: { disabled: true },
 };

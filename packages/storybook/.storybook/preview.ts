@@ -44,6 +44,9 @@ const preview: Preview = {
     layout: 'fullscreen',
     controls: { expanded: true },
     backgrounds: { disabled: true },
+    // axe-core runs on every story; violations fail `pnpm test:stories`. Override per story with
+    // `parameters.a11y.config.rules` (documented reason required) or `a11y.test = 'todo'`.
+    a11y: { test: 'error' },
   },
   decorators: [
     (story, { globals }) => {

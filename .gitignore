@@ -72,3 +72,7 @@ packages/storybook/.storybook/generated
 
 # svelte-package scratch output
 .svelte-kit
+
+# Storybook vitest
+.vitest-attachments
+__screenshots__

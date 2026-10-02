@@ -32,6 +32,10 @@ const cssVar = (token: string): string =>
   `var(--bx-${token.replace(/\./g, '-')})`;
 
 export const Pairs: Story = {
+  parameters: {
+    // This story deliberately renders failing token pairs as swatches.
+    a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } },
+  },
   name: 'Token pairs',
   render: (_args, { globals }) => {
     const theme = String(globals['theme']);
@@ -49,7 +53,7 @@ export const Pairs: Story = {
             <th>Background</th>
             <th>Ratio</th>
             <th>Min</th>
-            <th></th>
+            <th>Result</th>
           </tr>
         </thead>
         <tbody>

@@ -124,6 +124,12 @@ export const FlatWithParentId: Story = {
 };
 
 export const Empty: Story = {
+  parameters: {
+    // An empty tree intentionally has no treeitems.
+    a11y: {
+      config: { rules: [{ id: 'aria-required-children', enabled: false }] },
+    },
+  },
   render: () => html`
     <bx-virtual-tree aria-label="Empty tree" style="block-size: 8rem; ${frame}">
       <span slot="empty">No nodes</span>
