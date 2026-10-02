@@ -51,14 +51,24 @@ describe('@bixant/react', () => {
       { value: 'b', label: 'B' },
     ];
     const ref = createRef<BxSelectElement>();
-    await render(<BxSelect ref={ref} options={options} multiple value={['a']} placeholder="Pick" />);
+    await render(
+      <BxSelect
+        ref={ref}
+        options={options}
+        multiple
+        value={['a']}
+        placeholder="Pick"
+      />,
+    );
     const el = ref.current!;
     expect(el.options).to.equal(options); // same reference, not a stringified attribute
     expect(el.multiple).to.be.true;
     expect(el.value).to.deep.equal(['a']);
     expect(el.placeholder).to.equal('Pick');
 
-    await render(<BxSelect ref={ref} options={options} multiple={false} value="b" />);
+    await render(
+      <BxSelect ref={ref} options={options} multiple={false} value="b" />,
+    );
     expect(el.multiple).to.be.false; // false is assigned, not dropped
     expect(el.value).to.equal('b');
   });
@@ -68,14 +78,22 @@ describe('@bixant/react', () => {
     const ref = createRef<BxSelectElement>();
     const options = [{ value: 'a', label: 'A' }];
     await render(
-      <BxSelect ref={ref} options={options} onBxShow={() => calls.push('first')} />,
+      <BxSelect
+        ref={ref}
+        options={options}
+        onBxShow={() => calls.push('first')}
+      />,
     );
     ref.current!.show();
     await aTimeout(30);
     expect(calls).to.deep.equal(['first']);
     ref.current!.hide();
     await render(
-      <BxSelect ref={ref} options={options} onBxShow={() => calls.push('second')} />,
+      <BxSelect
+        ref={ref}
+        options={options}
+        onBxShow={() => calls.push('second')}
+      />,
     );
     ref.current!.show();
     await aTimeout(30);
@@ -122,7 +140,14 @@ describe('@bixant/react', () => {
   it('turns className into class and passes style, id, aria and data attributes through', async () => {
     const ref = createRef<BxButtonElement>();
     await render(
-      <BxButton ref={ref} className="primary wide" id="save" style={{ color: 'red' }} aria-label="Save it" data-test="x">
+      <BxButton
+        ref={ref}
+        className="primary wide"
+        id="save"
+        style={{ color: 'red' }}
+        aria-label="Save it"
+        data-test="x"
+      >
         S
       </BxButton>,
     );
@@ -136,10 +161,21 @@ describe('@bixant/react', () => {
 
   it('drives the data components with object props', async () => {
     const ref = createRef<BxVirtualTreeElement>();
-    const nodes = [{ id: 'a', label: 'Alpha', children: [{ id: 'a1', label: 'Child' }] }];
-    await render(<BxVirtualTree ref={ref} nodes={nodes} expandedKeys={['a']} style={{ blockSize: 200 }} />);
+    const nodes = [
+      { id: 'a', label: 'Alpha', children: [{ id: 'a1', label: 'Child' }] },
+    ];
+    await render(
+      <BxVirtualTree
+        ref={ref}
+        nodes={nodes}
+        expandedKeys={['a']}
+        style={{ blockSize: 200 }}
+      />,
+    );
     await aTimeout(60);
-    expect(ref.current!.shadowRoot!.querySelectorAll('[role="treeitem"]')).to.have.length(2);
+    expect(
+      ref.current!.shadowRoot!.querySelectorAll('[role="treeitem"]'),
+    ).to.have.length(2);
 
     const tableRef = createRef<BxDataTableElement>();
     await render(
@@ -152,7 +188,9 @@ describe('@bixant/react', () => {
       />,
     );
     await aTimeout(60);
-    expect(tableRef.current!.shadowRoot!.querySelectorAll('[role="row"][data-row]')).to.have.length(2);
+    expect(
+      tableRef.current!.shadowRoot!.querySelectorAll('[role="row"][data-row]'),
+    ).to.have.length(2);
   });
 
   it('unmounts without leaking listeners', async () => {

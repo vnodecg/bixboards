@@ -7,14 +7,8 @@
     "emitDeclarationOnly": false,
     "declaration": true,
     "sourceMap": true,
-    "lib": [
-      "es2023",
-      "dom",
-      "dom.iterable"
-    ],
-    "types": [
-      "node"
-    ],
+    "lib": ["es2023", "dom", "dom.iterable"],
+    "types": ["node"],
     "verbatimModuleSyntax": true,
     "rewriteRelativeImportExtensions": true,
     "erasableSyntaxOnly": true,
@@ -23,14 +17,8 @@
     "module": "esnext",
     "moduleResolution": "bundler"
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx"
-  ],
-  "exclude": [
-    "src/**/*.test.ts",
-    "src/**/*.test.tsx"
-  ],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx"],
   "references": [
     {
       "path": "../core/tsconfig.lib.json"

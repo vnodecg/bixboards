@@ -15,21 +15,10 @@
     "verbatimModuleSyntax": true,
     "erasableSyntaxOnly": true,
     "noUncheckedIndexedAccess": true,
-    "lib": [
-      "es2023",
-      "dom",
-      "dom.iterable"
-    ],
-    "types": [
-      "vite/client",
-      "node"
-    ]
+    "lib": ["es2023", "dom", "dom.iterable"],
+    "types": ["vite/client", "node"]
   },
-  "include": [
-    "stories/**/*.ts",
-    ".storybook/**/*.ts",
-    "tests/**/*.ts"
-  ],
+  "include": ["stories/**/*.ts", ".storybook/**/*.ts", "tests/**/*.ts"],
   "references": [
     {
       "path": "../design-system"

@@ -8,13 +8,17 @@ let app: Record<string, () => unknown> | undefined;
 async function setup(log: string[] = []) {
   target = document.createElement('div');
   document.body.append(target);
-  app = mount(Harness, { target, props: { log } }) as unknown as Record<string, () => unknown>;
+  app = mount(Harness, { target, props: { log } }) as unknown as Record<
+    string,
+    () => unknown
+  >;
   flushSync();
   await aTimeout(60);
   return app as unknown as {
     getState: () => { country: string; text: string; dropdownOpen: boolean };
     setCountry: (v: string) => void;
-    getSelect: () => (HTMLElement & { value: string; options: unknown[] }) | undefined;
+    getSelect: () =>
+      (HTMLElement & { value: string; options: unknown[] }) | undefined;
   };
 }
 
@@ -27,8 +31,16 @@ afterEach(() => {
 describe('@bixant/svelte', () => {
   it('compiles and mounts wrappers that register the custom elements', async () => {
     await setup();
-    for (const tag of ['bx-select', 'bx-input', 'bx-dropdown', 'bx-button', 'bx-virtual-tree'])
-      expect(target.querySelector(tag), tag).to.be.instanceOf(customElements.get(tag)!);
+    for (const tag of [
+      'bx-select',
+      'bx-input',
+      'bx-dropdown',
+      'bx-button',
+      'bx-virtual-tree',
+    ])
+      expect(target.querySelector(tag), tag).to.be.instanceOf(
+        customElements.get(tag)!,
+      );
   });
 
   it('sets properties by reference (options) and exposes the element through bind:element', async () => {
@@ -48,11 +60,15 @@ describe('@bixant/svelte', () => {
     expect(select.value).to.equal('a');
 
     select.value = 'b';
-    select.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+    select.dispatchEvent(
+      new Event('change', { bubbles: true, composed: true }),
+    );
     await aTimeout(30);
     expect(harness.getState().country).to.equal('b');
 
-    const input = target.querySelector('bx-input') as HTMLElement & { value: string };
+    const input = target.querySelector('bx-input') as HTMLElement & {
+      value: string;
+    };
     const inner = input.shadowRoot!.querySelector('input')!;
     inner.value = 'hello';
     inner.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
@@ -63,7 +79,11 @@ describe('@bixant/svelte', () => {
   it('maps onBx* callback props to bx-* events', async () => {
     const log: string[] = [];
     const harness = await setup(log);
-    harness.getSelect()!.dispatchEvent(new CustomEvent('bx-show', { bubbles: true, composed: true }));
+    harness
+      .getSelect()!
+      .dispatchEvent(
+        new CustomEvent('bx-show', { bubbles: true, composed: true }),
+      );
     expect(log).to.deep.equal(['show']);
 
     const item = target.querySelector('bx-dropdown-item')!;
@@ -74,7 +94,11 @@ describe('@bixant/svelte', () => {
 
   it('bind:open follows bx-after-show / bx-after-hide', async () => {
     const harness = await setup();
-    const dropdown = target.querySelector('bx-dropdown') as HTMLElement & { show(): void; hide(): void; open: boolean };
+    const dropdown = target.querySelector('bx-dropdown') as HTMLElement & {
+      show(): void;
+      hide(): void;
+      open: boolean;
+    };
     dropdown.show();
     await aTimeout(80);
     expect(harness.getState().dropdownOpen).to.be.true;
@@ -88,14 +112,17 @@ describe('@bixant/svelte', () => {
     const input = target.querySelector('bx-input')!;
     expect(input.classList.contains('field')).to.be.true;
     expect((input as HTMLElement).dataset['test']).to.equal('input');
-    expect(target.querySelector('bx-dropdown > bx-button[slot="trigger"]')).to.exist;
+    expect(target.querySelector('bx-dropdown > bx-button[slot="trigger"]')).to
+      .exist;
   });
 
   it('drives the data components with object props', async () => {
     await setup();
     const tree = target.querySelector('bx-virtual-tree')!;
     await aTimeout(60);
-    expect(tree.shadowRoot!.querySelectorAll('[role="treeitem"]')).to.have.length(2);
+    expect(
+      tree.shadowRoot!.querySelectorAll('[role="treeitem"]'),
+    ).to.have.length(2);
   });
 
   it('removes its listeners on unmount', async () => {

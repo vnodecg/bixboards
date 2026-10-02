@@ -235,7 +235,9 @@ function angular(els: El[]): Output {
     // re-declared (or imported) in the wrapper and cannot drift.
     const methods = el.methods
       .map(
-        (m) => `${doc(oneLine(m.description), '  ')}  ${m.name}(...args: Parameters<${name}Element[${q(m.name)}]>): ReturnType<${name}Element[${q(m.name)}]> {
+        (
+          m,
+        ) => `${doc(oneLine(m.description), '  ')}  ${m.name}(...args: Parameters<${name}Element[${q(m.name)}]>): ReturnType<${name}Element[${q(m.name)}]> {
     return this.element.${m.name}(...args);
   }`,
       )
@@ -283,7 +285,9 @@ ${outputs
     this.element.addEventListener(${q(e.name)}, on${pascal(e.name)});
     destroyRef.onDestroy(() => this.element.removeEventListener(${q(e.name)}, on${pascal(e.name)}));`,
   )
-  .join('\n')}${cva ? '    destroyRef.onDestroy(() => this.removeListeners());' : outputs.length === 0 ? '    void destroyRef;' : ''}
+  .join(
+    '\n',
+  )}${cva ? '    destroyRef.onDestroy(() => this.removeListeners());' : outputs.length === 0 ? '    void destroyRef;' : ''}
   }
 ${methods ? `\n${methods}\n` : ''}${
       cva
@@ -372,7 +376,9 @@ function svelte(els: El[]): Output {
       '...rest',
     ].join(',\n    ');
 
-    const syncObject = el.props.map((p) => `${q(p.name)}: _${p.name}`).join(', ');
+    const syncObject = el.props
+      .map((p) => `${q(p.name)}: _${p.name}`)
+      .join(', ');
     const helpers = [
       bindables.length ? 'bind as bindProps' : '',
       eventProps.length ? 'on as onEvents' : '',

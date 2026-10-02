@@ -3,7 +3,10 @@ import { Component, signal, ViewChild } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { getTestBed } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserTestingModule, platformBrowserTesting } from '@angular/platform-browser/testing';
+import {
+  BrowserTestingModule,
+  platformBrowserTesting,
+} from '@angular/platform-browser/testing';
 import { aTimeout, expect } from '@open-wc/testing';
 import {
   BxButtonComponent,
@@ -15,7 +18,10 @@ import {
   BxSelectComponent,
 } from './index.ts';
 
-getTestBed().initTestEnvironment(BrowserTestingModule, platformBrowserTesting());
+getTestBed().initTestEnvironment(
+  BrowserTestingModule,
+  platformBrowserTesting(),
+);
 
 const options = [
   { value: 'a', label: 'Alpha' },
@@ -24,9 +30,22 @@ const options = [
 
 @Component({
   standalone: true,
-  imports: [BxSelectComponent, BxInputComponent, BxCheckboxComponent, BxButtonComponent, FormsModule],
+  imports: [
+    BxSelectComponent,
+    BxInputComponent,
+    BxCheckboxComponent,
+    BxButtonComponent,
+    FormsModule,
+  ],
   template: `
-    <bx-select #sel [options]="options" [placeholder]="'Pick'" [multiple]="multiple()" (bxShow)="shows.push($event.type)" [(ngModel)]="model"></bx-select>
+    <bx-select
+      #sel
+      [options]="options"
+      [placeholder]="'Pick'"
+      [multiple]="multiple()"
+      (bxShow)="shows.push($event.type)"
+      [(ngModel)]="model"
+    ></bx-select>
     <bx-input label="Name" [(ngModel)]="name" name="n"></bx-input>
     <bx-checkbox [(ngModel)]="agreed">Agree</bx-checkbox>
     <bx-button class="b" (click)="clicks = clicks + 1">Go</bx-button>
@@ -54,13 +73,23 @@ class ReactiveHost {
 
 @Component({
   standalone: true,
-  imports: [BxDropdownComponent, BxDropdownItemComponent, BxButtonComponent, BxDataTableComponent],
+  imports: [
+    BxDropdownComponent,
+    BxDropdownItemComponent,
+    BxButtonComponent,
+    BxDataTableComponent,
+  ],
   template: `
     <bx-dropdown #dd (bxSelect)="selected.set($event.detail.value)">
       <bx-button slot="trigger">Menu</bx-button>
       <bx-dropdown-item value="one">One</bx-dropdown-item>
     </bx-dropdown>
-    <bx-data-table [columns]="columns" [data]="rows" [rowHeight]="30" style="display:block;block-size:200px;inline-size:400px"></bx-data-table>
+    <bx-data-table
+      [columns]="columns"
+      [data]="rows"
+      [rowHeight]="30"
+      style="display:block;block-size:200px;inline-size:400px"
+    ></bx-data-table>
   `,
 })
 class DataHost {
@@ -70,7 +99,10 @@ class DataHost {
   rows = [{ n: 1 }, { n: 2 }, { n: 3 }];
 }
 
-const stable = async (fixture: { whenStable(): Promise<unknown>; detectChanges(): void }) => {
+const stable = async (fixture: {
+  whenStable(): Promise<unknown>;
+  detectChanges(): void;
+}) => {
   fixture.detectChanges();
   await fixture.whenStable();
   await aTimeout(30);
@@ -84,7 +116,9 @@ describe('@bixant/angular', () => {
     await stable(fixture);
     const root = fixture.nativeElement as HTMLElement;
     for (const tag of ['bx-select', 'bx-input', 'bx-checkbox', 'bx-button'])
-      expect(root.querySelector(tag), tag).to.be.instanceOf(customElements.get(tag)!);
+      expect(root.querySelector(tag), tag).to.be.instanceOf(
+        customElements.get(tag)!,
+      );
   });
 
   it('forwards @Input() to element properties (objects by reference) and exposes the element', async () => {
@@ -107,7 +141,9 @@ describe('@bixant/angular', () => {
     await stable(fixture);
     expect(fixture.componentInstance.shows).to.deep.equal(['bx-show']);
 
-    const button = (fixture.nativeElement as HTMLElement).querySelector('bx-button')!;
+    const button = (fixture.nativeElement as HTMLElement).querySelector(
+      'bx-button',
+    )!;
     button.dispatchEvent(new MouseEvent('click'));
     await stable(fixture);
     expect(fixture.componentInstance.clicks).to.equal(1);
@@ -132,11 +168,15 @@ describe('@bixant/angular', () => {
     expect(select.value).to.equal('b'); // model -> element
 
     select.value = 'a';
-    select.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+    select.dispatchEvent(
+      new Event('change', { bubbles: true, composed: true }),
+    );
     await stable(fixture);
     expect(fixture.componentInstance.model).to.equal('a'); // element -> model
 
-    const input = root.querySelector('bx-input') as HTMLElement & { value: string };
+    const input = root.querySelector('bx-input') as HTMLElement & {
+      value: string;
+    };
     expect(input.value).to.equal('initial');
     const inner = input.shadowRoot!.querySelector('input')!;
     inner.value = 'typed';
@@ -144,9 +184,13 @@ describe('@bixant/angular', () => {
     await stable(fixture);
     expect(fixture.componentInstance.name).to.equal('typed');
 
-    const checkbox = root.querySelector('bx-checkbox') as HTMLElement & { checked: boolean };
+    const checkbox = root.querySelector('bx-checkbox') as HTMLElement & {
+      checked: boolean;
+    };
     checkbox.checked = true;
-    checkbox.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+    checkbox.dispatchEvent(
+      new Event('change', { bubbles: true, composed: true }),
+    );
     await stable(fixture);
     expect(fixture.componentInstance.agreed).to.be.true;
   });
@@ -154,7 +198,9 @@ describe('@bixant/angular', () => {
   it('works with reactive forms: value, disabled state and touched on blur', async () => {
     const fixture = TestBed.createComponent(ReactiveHost);
     await stable(fixture);
-    const input = (fixture.nativeElement as HTMLElement).querySelector('bx-input') as HTMLElement & {
+    const input = (fixture.nativeElement as HTMLElement).querySelector(
+      'bx-input',
+    ) as HTMLElement & {
       value: string;
       disabled: boolean;
     };
@@ -187,7 +233,9 @@ describe('@bixant/angular', () => {
 
     await aTimeout(60);
     const table = root.querySelector('bx-data-table')!;
-    expect(table.shadowRoot!.querySelectorAll('[role="row"][data-row]')).to.have.length(3);
+    expect(
+      table.shadowRoot!.querySelectorAll('[role="row"][data-row]'),
+    ).to.have.length(3);
   });
 
   it('removes element listeners when the component is destroyed', async () => {

@@ -54,6 +54,7 @@ _None._
 | `--bx-progress-bar-transition`                      | Value-change transition. Default `0.3s` standard easing.                                                  |
 | `--bx-progress-bar-radius`                          | Corner radius of the root surface. Default `var(--bx-radius-pill)`.                                       |
 | `--bx-progress-bar-indicator-indeterminate-opacity` | Opacity of the `indicator` part (indeterminate state). Default `0.5`.                                     |
+| `--bx-progress-bar-label-bg`                        | Background of the `label` part. Default `var(--bx-surface-base)`.                                         |
 | `--bx-progress-bar-label-fg`                        | Text/icon color of the `label` part. Default `var(--bx-text-primary)`.                                    |
 | `--bx-progress-bar-label-font-family`               | Font family of the `label` part (text style `caption-s`). Default `var(--bx-type-caption-family)`.        |
 | `--bx-progress-bar-label-font-size`                 | Font size of the `label` part (text style `caption-s`). Default `var(--bx-type-caption-s-size)`.          |

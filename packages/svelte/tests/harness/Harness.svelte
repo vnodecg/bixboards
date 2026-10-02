@@ -1,7 +1,7 @@
 <script lang="ts">
   // Test harness: exercises generated wrappers the way an app would (bind:, callbacks, slots).
   import { BxButton, BxDropdown, BxDropdownItem, BxInput, BxSelect, BxVirtualTree } from '../../src/index.ts';
-  import type { BxSelectElement } from '../../src/generated/BxSelect.svelte';
+  import type { BxSelect as BxSelectElement } from '@bixant/core/select';
 
   let { log = [] as string[] }: { log?: string[] } = $props();
 

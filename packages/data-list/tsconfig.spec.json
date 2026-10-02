@@ -4,23 +4,14 @@
     "rootDir": "src",
     "outDir": "out-tsc/spec",
     "tsBuildInfoFile": "out-tsc/spec/tsconfig.spec.tsbuildinfo",
-    "lib": [
-      "es2023",
-      "dom",
-      "dom.iterable"
-    ],
-    "types": [
-      "node",
-      "mocha"
-    ],
+    "lib": ["es2023", "dom", "dom.iterable"],
+    "types": ["node", "mocha"],
     "verbatimModuleSyntax": true,
     "allowImportingTsExtensions": true,
     "erasableSyntaxOnly": true,
     "noUncheckedIndexedAccess": true
   },
-  "include": [
-    "src/**/*.ts"
-  ],
+  "include": ["src/**/*.ts"],
   "references": [
     {
       "path": "./tsconfig.lib.json"
