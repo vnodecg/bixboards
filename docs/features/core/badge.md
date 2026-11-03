@@ -2,13 +2,13 @@
 
 > Compact status, count or label. One component for what many libraries split into "badge" and "tag": optionally removable, pulsing, or anchored to another element.
 
-|                     |                |
-| ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
-| **Category**        | Feedback       |
-| **Tag**             | `bx-badge`     |
-| **Status**          | Implemented    |
-| **Form-associated** | No             |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Feedback          |
+| **Tag**             | `bx-badge`        |
+| **Status**          | Implemented       |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
@@ -148,7 +148,7 @@ Text truncates when the container is narrower than the content; there is no othe
 ## 10. Notes and open questions
 
 - Badge and tag are one component (decision: they were visually and functionally near-identical). A chip is `<bx-badge with-remove>`; a status or count is a plain `<bx-badge>`.
-- Implemented in `@bixant/core` (`src/badge/`). `appearance="filled outlined"` (the default) is a space-separated pair of tokens read with CSS `~=` attribute selectors, so `filled` and `outlined` apply independently and compose; `accent` is its own single value.
+- Implemented in `@bixboards/core` (`src/badge/`). `appearance="filled outlined"` (the default) is a space-separated pair of tokens read with CSS `~=` attribute selectors, so `filled` and `outlined` apply independently and compose; `accent` is its own single value.
 - Numeric-overflow detection (`max`) and truncation (`--bx-badge-max-width`) both key off the default slot's assigned text via `slotchange`, not a rendered prop, so arbitrary slotted markup (an icon plus text) still works — only a slot whose flattened text is purely numeric gets the `max+` treatment.
 - Open: whether a selectable (toggle) chip is needed; if so it should be a separate `bx-chip` built on this visual, not a return of `bx-tag`.
 - Open: confirm final property names against the custom-elements manifest once the CEM generation pipeline exists.

@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/scroller';
-import type { BxScroller as BxScrollerElement } from '@bixant/core/scroller';
+import '@bixboards/core/scroller';
+import type { BxScroller as BxScrollerElement } from '@bixboards/core/scroller';
 
 /**
  * `<bx-scroller>` — scroll region with edge shadows and keyboard access.

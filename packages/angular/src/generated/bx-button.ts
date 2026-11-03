@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/button';
-import type { BxButton as BxButtonElement } from '@bixant/core/button';
+import '@bixboards/core/button';
+import type { BxButton as BxButtonElement } from '@bixboards/core/button';
 
 /**
  * `<bx-button>` — triggers an action, navigates (link mode), or submits/resets a form

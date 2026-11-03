@@ -108,7 +108,7 @@ const stable = async (fixture: {
   await aTimeout(30);
 };
 
-describe('@bixant/angular', () => {
+describe('@bixboards/angular', () => {
   afterEach(() => TestBed.resetTestingModule());
 
   it('registers the elements and matches them as known components (no schema needed)', async () => {

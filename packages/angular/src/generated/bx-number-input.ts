@@ -12,8 +12,8 @@ import {
   forwardRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, type ControlValueAccessor } from '@angular/forms';
-import '@bixant/core/number-input';
-import type { BxNumberInput as BxNumberInputElement } from '@bixant/core/number-input';
+import '@bixboards/core/number-input';
+import type { BxNumberInput as BxNumberInputElement } from '@bixboards/core/number-input';
 
 /**
  * `<bx-number-input>` — numeric field with steppers, locale-aware parsing and min/max clamping,

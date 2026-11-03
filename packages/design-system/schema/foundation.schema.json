@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://bixant.dev/schema/foundation.schema.json",
-  "title": "Bixant foundation tokens",
+  "$id": "https://bixboards.dev/schema/foundation.schema.json",
+  "title": "Bixboards foundation tokens",
   "description": "Theme-independent tokens (fluid unit, spacing, type, radii, motion). Values are literals or {token} references. `$coarse` overrides apply under @media (pointer: coarse).",
   "type": "object",
   "properties": {

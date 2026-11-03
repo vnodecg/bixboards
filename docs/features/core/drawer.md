@@ -2,19 +2,19 @@
 
 > Edge-anchored panel (top/end/bottom/start), modal or contained to a parent.
 
-|                     |                |
-| ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
-| **Category**        | Overlays       |
-| **Tag**             | `bx-drawer`    |
-| **Status**          | Implemented    |
-| **Form-associated** | No             |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Overlays          |
+| **Tag**             | `bx-drawer`       |
+| **Status**          | Implemented       |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Edge-anchored panel (top/end/bottom/start), modal or contained to a parent. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Edge-anchored panel (top/end/bottom/start), modal or contained to a parent. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

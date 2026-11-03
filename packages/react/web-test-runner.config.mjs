@@ -26,7 +26,7 @@ const facadeDir = path.join(
   process.cwd(),
   'node_modules',
   '.cache',
-  'bixant-vendor',
+  'bixboards-vendor',
 );
 fs.mkdirSync(facadeDir, { recursive: true });
 const entryPoints = {};

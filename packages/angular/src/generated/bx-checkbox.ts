@@ -12,8 +12,8 @@ import {
   forwardRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, type ControlValueAccessor } from '@angular/forms';
-import '@bixant/core/checkbox';
-import type { BxCheckbox as BxCheckboxElement } from '@bixant/core/checkbox';
+import '@bixboards/core/checkbox';
+import type { BxCheckbox as BxCheckboxElement } from '@bixboards/core/checkbox';
 
 /**
  * `<bx-checkbox>` — binary or indeterminate selection, form-associated via `ElementInternals`.

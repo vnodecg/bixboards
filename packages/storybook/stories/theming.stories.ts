@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
-import { themeVars, toCssText } from '@bixant/design-system';
+import { themeVars, toCssText } from '@bixboards/design-system';
 import { PALETTES } from './palettes.ts';
 
 const HEX = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i;
@@ -51,7 +51,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Runtime theming with `@bixant/design-system`: seeds are expanded into palettes and contrast-checked roles in the browser and applied as inline custom properties. Build-time themes are in the toolbar (Acme, Sharp & compact). Set `scheme` to the mode of the toolbar theme so roles are chosen for the right surfaces. Samples are plain elements styled only with tokens.',
+          'Runtime theming with `@bixboards/design-system`: seeds are expanded into palettes and contrast-checked roles in the browser and applied as inline custom properties. Build-time themes are in the toolbar (Acme, Sharp & compact). Set `scheme` to the mode of the toolbar theme so roles are chosen for the right surfaces. Samples are plain elements styled only with tokens.',
       },
     },
   },

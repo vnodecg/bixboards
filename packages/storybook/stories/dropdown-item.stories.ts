@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/dropdown-item';
+import '@bixboards/core/dropdown-item';
 
 interface Args {
   variant: 'default' | 'error';

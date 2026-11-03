@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/dialog';
-import type { BxDialog as BxDialogElement } from '@bixant/core/dialog';
+import '@bixboards/core/dialog';
+import type { BxDialog as BxDialogElement } from '@bixboards/core/dialog';
 
 /**
  * `<bx-dialog>` — modal dialog built on native `<dialog>`, with header, footer and light dismiss.

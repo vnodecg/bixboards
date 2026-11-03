@@ -70,7 +70,7 @@ function groupMembers(name: string): BxRadio[] {
  * @cssprop --bx-radio-radius - Corner radius of the root surface. Default `var(--bx-radius-m)`.
  * @cssprop --bx-radio-checked-border-color - Border color of the root surface (checked state). Default `var(--bx-role-accent)`.
  * @cssprop --bx-radio-checked-bg - Background of the root surface (checked state). Default `var(--bx-role-accent-subtle, var(--bx-surface-subtle))`.
- * @cssprop --bx-radio-checked-fg - Text/icon color of the root surface (checked state). Default `var(--bx-role-accent)`.
+ * @cssprop --bx-radio-checked-fg - Text/icon color of the root surface (checked state). Default `var(--bx-role-accent-fg)`.
  * @cssprop --bx-radio-focus-ring-width - Focus ring width of the root surface (focus state). Default `var(--bx-border-width-strong)`.
  * @cssprop --bx-radio-focus-ring-color - Focus ring color of the root surface (focus state). Default `var(--bx-focus-ring)`.
  * @cssprop --bx-radio-focus-ring-offset - Focus ring offset of the root surface (focus state). Default `var(--bx-focus-ring-offset)`.
@@ -217,7 +217,7 @@ export class BxRadio extends FormAssociatedMixin(BixElement) {
           --bx-radio-checked-bg,
           var(--bx-role-accent-subtle, var(--bx-surface-subtle))
         );
-        color: var(--bx-radio-checked-fg, var(--bx-role-accent));
+        color: var(--bx-radio-checked-fg, var(--bx-role-accent-fg));
       }
 
       :host([appearance='button']) .base:focus-visible,

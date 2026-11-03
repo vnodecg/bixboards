@@ -2,19 +2,19 @@
 
 > Modal dialog built on native `<dialog>`, with header, footer and light dismiss.
 
-|                     |                |
-| ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
-| **Category**        | Overlays       |
-| **Tag**             | `bx-dialog`    |
-| **Status**          | Planned        |
-| **Form-associated** | No             |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Overlays          |
+| **Tag**             | `bx-dialog`       |
+| **Status**          | Planned           |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Modal dialog built on native `<dialog>`, with header, footer and light dismiss. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Modal dialog built on native `<dialog>`, with header, footer and light dismiss. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

@@ -2,19 +2,19 @@
 
 > Indeterminate loading spinner.
 
-|                     |                |
-| ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
-| **Category**        | Feedback       |
-| **Tag**             | `bx-spinner`   |
-| **Status**          | Implemented    |
-| **Form-associated** | No             |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Feedback          |
+| **Tag**             | `bx-spinner`      |
+| **Status**          | Implemented       |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Indeterminate loading spinner. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Indeterminate loading spinner. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

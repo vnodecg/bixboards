@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 import { createRef, ref } from 'lit/directives/ref.js';
-import '@bixant/core/drawer';
-import '@bixant/core/button';
-import '@bixant/core/button-group';
-import '@bixant/core/copy-button';
-import '@bixant/core/input';
+import '@bixboards/core/drawer';
+import '@bixboards/core/button';
+import '@bixboards/core/button-group';
+import '@bixboards/core/copy-button';
+import '@bixboards/core/input';
 
 type Placement = 'top' | 'end' | 'bottom' | 'start';
 
@@ -66,8 +66,8 @@ const meta = {
         ?light-dismiss=${args.lightDismiss}
       >
         <div style="display: flex; flex-direction: column; gap: 1rem">
-          <bx-input label="Project name" value="Bixant"></bx-input>
-          <bx-input label="Slug" value="bixant"></bx-input>
+          <bx-input label="Project name" value="Bixboards"></bx-input>
+          <bx-input label="Slug" value="bixboards"></bx-input>
         </div>
         ${footerButtons(drawer)}
       </bx-drawer>

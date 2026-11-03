@@ -4,7 +4,7 @@
 
 |                     |                        |
 | ------------------- | ---------------------- |
-| **Package**         | `@bixant/core`         |
+| **Package**         | `@bixboards/core`      |
 | **Category**        | Form                   |
 | **Tag**             | `bx-rating`            |
 | **Status**          | Planned                |
@@ -14,7 +14,7 @@ See [conventions](../_conventions.md) for shared rules (tokens, container querie
 
 ## 1. Overview
 
-Star-style rating input/display with fractional precision. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Star-style rating input/display with fractional precision. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

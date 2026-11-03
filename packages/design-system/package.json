@@ -1,7 +1,7 @@
 {
-  "name": "@bixant/design-system",
+  "name": "@bixboards/design-system",
   "version": "0.0.0",
-  "description": "Design tokens and theming for Bixant: JSON themes and foundation tokens compiled to CSS custom properties, with a contrast-checked runtime API.",
+  "description": "Design tokens and theming for Bixboards: JSON themes and foundation tokens compiled to CSS custom properties, with a contrast-checked runtime API.",
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
@@ -11,7 +11,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "bixant-ds": "./dist/bin.js"
+    "bixboards-ds": "./dist/bin.js"
   },
   "exports": {
     ".": {

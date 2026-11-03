@@ -4,7 +4,7 @@
 
 |                     |                        |
 | ------------------- | ---------------------- |
-| **Package**         | `@bixant/core`         |
+| **Package**         | `@bixboards/core`      |
 | **Category**        | Form                   |
 | **Tag**             | `bx-select`            |
 | **Status**          | Implemented            |
@@ -14,7 +14,7 @@ See [conventions](../_conventions.md) for shared rules (tokens, container querie
 
 ## 1. Overview
 
-Single or multiple choice with searchable, virtualized listbox and removable-badge display for selections. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Single or multiple choice with searchable, virtualized listbox and removable-badge display for selections. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

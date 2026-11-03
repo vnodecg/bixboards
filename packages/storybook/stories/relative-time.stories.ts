@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/relative-time';
+import '@bixboards/core/relative-time';
 
 interface Args {
   offsetMinutes: number;

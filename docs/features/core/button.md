@@ -2,19 +2,19 @@
 
 > Triggers an action or navigates. Supports variants, appearances, sizes, loading state, link mode and form submission.
 
-|                     |                |
-| ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
-| **Category**        | Actions        |
-| **Tag**             | `bx-button`    |
-| **Status**          | Planned        |
-| **Form-associated** | No             |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Actions           |
+| **Tag**             | `bx-button`       |
+| **Status**          | Planned           |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Triggers an action or navigates. Supports variants, appearances, sizes, loading state, link mode and form submission. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Triggers an action or navigates. Supports variants, appearances, sizes, loading state, link mode and form submission. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

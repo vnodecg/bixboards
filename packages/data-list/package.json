@@ -1,7 +1,7 @@
 {
-  "name": "@bixant/data-list",
+  "name": "@bixboards/data-list",
   "version": "0.0.0",
-  "description": "Bixant virtualized list/grid and tree: bx-data-list and bx-virtual-tree, built on core VirtualizerController.",
+  "description": "Bixboards virtualized list/grid and tree: bx-data-list and bx-virtual-tree, built on core VirtualizerController.",
   "license": "MIT",
   "type": "module",
   "sideEffects": [
@@ -39,10 +39,10 @@
     "dist"
   ],
   "dependencies": {
-    "@bixant/core": "workspace:*",
+    "@bixboards/core": "workspace:*",
     "lit": "^3.3.3"
   },
   "devDependencies": {
-    "@bixant/design-system": "workspace:*"
+    "@bixboards/design-system": "workspace:*"
   }
 }

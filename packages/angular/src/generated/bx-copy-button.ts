@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/copy-button';
-import type { BxCopyButton as BxCopyButtonElement } from '@bixant/core/copy-button';
+import '@bixboards/core/copy-button';
+import type { BxCopyButton as BxCopyButtonElement } from '@bixboards/core/copy-button';
 
 /**
  * `<bx-copy-button>` — one-click copy of text, a property, or another element's content to the

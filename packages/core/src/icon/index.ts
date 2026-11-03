@@ -1,5 +1,5 @@
 // Side-effect: registers `<bx-icon>` under its default tag name. Import
-// `@bixant/core/icon/define` instead if a custom tag name/prefix is needed.
+// `@bixboards/core/icon/define` instead if a custom tag name/prefix is needed.
 import { defineIcon } from './define.ts';
 
 defineIcon();

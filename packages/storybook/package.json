@@ -1,5 +1,5 @@
 {
-  "name": "@bixant/storybook",
+  "name": "@bixboards/storybook",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -14,9 +14,9 @@
     "typecheck": "pnpm run tokens && tsc -p tsconfig.json"
   },
   "devDependencies": {
-    "@bixant/core": "workspace:*",
-    "@bixant/data-list": "workspace:*",
-    "@bixant/data-table": "workspace:*",
-    "@bixant/design-system": "workspace:*"
+    "@bixboards/core": "workspace:*",
+    "@bixboards/data-list": "workspace:*",
+    "@bixboards/data-table": "workspace:*",
+    "@bixboards/design-system": "workspace:*"
   }
 }

@@ -1,4 +1,4 @@
-// Side-effect: registers <bx-virtual-tree>. Import `@bixant/data-list/virtual-tree/define` for a custom tag.
+// Side-effect: registers <bx-virtual-tree>. Import `@bixboards/data-list/virtual-tree/define` for a custom tag.
 import { defineVirtualTree } from './define.ts';
 
 defineVirtualTree();

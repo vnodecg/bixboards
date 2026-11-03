@@ -1,5 +1,5 @@
 // Side-effect: registers `<bx-resize-observer>` under its default tag name. Import
-// `@bixant/core/resize-observer/define` instead if a custom tag name/prefix is needed.
+// `@bixboards/core/resize-observer/define` instead if a custom tag name/prefix is needed.
 import { defineResizeObserver } from './define.ts';
 
 defineResizeObserver();

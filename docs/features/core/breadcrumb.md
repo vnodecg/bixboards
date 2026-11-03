@@ -2,19 +2,19 @@
 
 > Navigation trail with separators and overflow collapsing.
 
-|                     |                 |
-| ------------------- | --------------- |
-| **Package**         | `@bixant/core`  |
-| **Category**        | Organization    |
-| **Tag**             | `bx-breadcrumb` |
-| **Status**          | Planned         |
-| **Form-associated** | No              |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Organization      |
+| **Tag**             | `bx-breadcrumb`   |
+| **Status**          | Planned           |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Navigation trail with separators and overflow collapsing. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Navigation trail with separators and overflow collapsing. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

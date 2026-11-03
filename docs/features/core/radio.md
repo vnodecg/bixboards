@@ -4,7 +4,7 @@
 
 |                     |                        |
 | ------------------- | ---------------------- |
-| **Package**         | `@bixant/core`         |
+| **Package**         | `@bixboards/core`      |
 | **Category**        | Form                   |
 | **Tag**             | `bx-radio`             |
 | **Status**          | Planned                |
@@ -14,7 +14,7 @@ See [conventions](../_conventions.md) for shared rules (tokens, container querie
 
 ## 1. Overview
 
-Single option within a radio group; supports default, button and card appearances. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Single option within a radio group; supports default, button and card appearances. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 
@@ -74,7 +74,7 @@ Single option within a radio group; supports default, button and card appearance
 | `--bx-radio-radius`                        | Corner radius of the root surface. Default `var(--bx-radius-m)`.                                                  |
 | `--bx-radio-checked-border-color`          | Border color of the root surface (checked state). Default `var(--bx-role-accent)`.                                |
 | `--bx-radio-checked-bg`                    | Background of the root surface (checked state). Default `var(--bx-role-accent-subtle, var(--bx-surface-subtle))`. |
-| `--bx-radio-checked-fg`                    | Text/icon color of the root surface (checked state). Default `var(--bx-role-accent)`.                             |
+| `--bx-radio-checked-fg`                    | Text/icon color of the root surface (checked state). Default `var(--bx-role-accent-fg)`.                          |
 | `--bx-radio-focus-ring-width`              | Focus ring width of the root surface (focus state). Default `var(--bx-border-width-strong)`.                      |
 | `--bx-radio-focus-ring-color`              | Focus ring color of the root surface (focus state). Default `var(--bx-focus-ring)`.                               |
 | `--bx-radio-focus-ring-offset`             | Focus ring offset of the root surface (focus state). Default `var(--bx-focus-ring-offset)`.                       |

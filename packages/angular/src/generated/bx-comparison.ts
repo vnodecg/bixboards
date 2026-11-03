@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/comparison';
-import type { BxComparison as BxComparisonElement } from '@bixant/core/comparison';
+import '@bixboards/core/comparison';
+import type { BxComparison as BxComparisonElement } from '@bixboards/core/comparison';
 
 /**
  * `<bx-comparison>` — before/after image comparison with a draggable divider.

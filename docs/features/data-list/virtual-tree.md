@@ -2,19 +2,19 @@
 
 > Virtualized tree/tree-table for 100k+ nodes with lazy children, filtering and multi-selection. Data-driven counterpart to `bx-tree`.
 
-|                     |                     |
-| ------------------- | ------------------- |
-| **Package**         | `@bixant/data-list` |
-| **Category**        | Data                |
-| **Tag**             | `bx-virtual-tree`   |
-| **Status**          | Implemented         |
-| **Form-associated** | No                  |
+|                     |                        |
+| ------------------- | ---------------------- |
+| **Package**         | `@bixboards/data-list` |
+| **Category**        | Data                   |
+| **Tag**             | `bx-virtual-tree`      |
+| **Status**          | Implemented            |
+| **Form-associated** | No                     |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Virtualized tree/tree-table for 100k+ nodes with lazy children, filtering and multi-selection. Data-driven counterpart to `bx-tree`. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Virtualized tree/tree-table for 100k+ nodes with lazy children, filtering and multi-selection. Data-driven counterpart to `bx-tree`. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 
@@ -136,7 +136,7 @@ Labels truncate; secondary columns (tree-table mode) hide via priority, as in da
 - Budget: 200k visible nodes, expand 10k children < 50 ms.
 - Safe to upgrade/define lazily; safe to move between documents and re-connect (no leaked listeners/observers).
 - SSR: renders declarative shadow DOM (Lit SSR) without touching browser-only APIs at import time.
-- Virtualization is built in and shares `VirtualizerController` from `@bixant/core`.
+- Virtualization is built in and shares `VirtualizerController` from `@bixboards/core`.
 
 ## 8. Framework wrapper notes
 

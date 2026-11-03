@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/avatar';
+import '@bixboards/core/avatar';
 
 interface Args {
   image: string;

@@ -1,5 +1,5 @@
 // Side-effect: registers `<bx-textarea>` under its default tag name. Import
-// `@bixant/core/textarea/define` instead if a custom tag name/prefix is needed.
+// `@bixboards/core/textarea/define` instead if a custom tag name/prefix is needed.
 import { defineTextarea } from './define.ts';
 
 defineTextarea();

@@ -12,8 +12,8 @@ import {
   forwardRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, type ControlValueAccessor } from '@angular/forms';
-import '@bixant/core/color-picker';
-import type { BxColorPicker as BxColorPickerElement } from '@bixant/core/color-picker';
+import '@bixboards/core/color-picker';
+import type { BxColorPicker as BxColorPickerElement } from '@bixboards/core/color-picker';
 
 /**
  * `<bx-color-picker>` — color selection with a saturation/value grid, hue/alpha sliders,

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/page';
+import '@bixboards/core/page';
 
 interface Args {
   navPlacement: 'start' | 'end';
@@ -57,7 +57,7 @@ const meta = {
         mobile-breakpoint=${args.mobileBreakpoint}
         ?disable-navigation-toggle=${args.disableNavigationToggle}
       >
-        <strong slot="header">Bixant</strong>
+        <strong slot="header">Bixboards</strong>
         <span slot="subheader">Projects / Overview</span>
         <ul
           slot="navigation"
@@ -72,7 +72,7 @@ const meta = {
           below this content.
         </p>
         <aside slot="aside">Related links</aside>
-        <small slot="footer">© Bixant</small>
+        <small slot="footer">© Bixboards</small>
       </bx-page>
     </div>
   `,

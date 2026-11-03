@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/divider';
-import type { BxDivider as BxDividerElement } from '@bixant/core/divider';
+import '@bixboards/core/divider';
+import type { BxDivider as BxDividerElement } from '@bixboards/core/divider';
 
 /**
  * `<bx-divider>` — horizontal or vertical rule.

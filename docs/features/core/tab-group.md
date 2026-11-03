@@ -2,19 +2,19 @@
 
 > Tabbed interface with scrolling tab list, manual/auto activation.
 
-|                     |                |
-| ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
-| **Category**        | Organization   |
-| **Tag**             | `bx-tab-group` |
-| **Status**          | Planned        |
-| **Form-associated** | No             |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Organization      |
+| **Tag**             | `bx-tab-group`    |
+| **Status**          | Planned           |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Tabbed interface with scrolling tab list, manual/auto activation. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Tabbed interface with scrolling tab list, manual/auto activation. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

@@ -56,7 +56,7 @@ export function createComponent<E extends HTMLElement, P>(
   const attributeOf = new Map(def.properties.map((p) => [p.name, p.attribute]));
 
   const Component = React.forwardRef<E, P>(
-    function BixantElement(props, forwardedRef) {
+    function BixboardsElement(props, forwardedRef) {
       const element = React.useRef<E | null>(null);
       const properties: Record<string, unknown> = {};
       const handlers: Record<string, ((event: Event) => void) | undefined> = {};

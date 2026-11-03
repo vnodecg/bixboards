@@ -2,19 +2,19 @@
 
 > A node in `bx-tree`, with lazy children.
 
-|                     |                |
-| ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
-| **Category**        | Organization   |
-| **Tag**             | `bx-tree-item` |
-| **Status**          | Planned        |
-| **Form-associated** | No             |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Organization      |
+| **Tag**             | `bx-tree-item`    |
+| **Status**          | Planned           |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-A node in `bx-tree`, with lazy children. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+A node in `bx-tree`, with lazy children. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

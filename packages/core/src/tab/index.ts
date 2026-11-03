@@ -1,4 +1,4 @@
-// Side-effect: registers `<bx-tab>` under its default tag name. Import `@bixant/core/tab/define`
+// Side-effect: registers `<bx-tab>` under its default tag name. Import `@bixboards/core/tab/define`
 // instead if a custom tag name/prefix is needed.
 import { defineTab } from './define.ts';
 

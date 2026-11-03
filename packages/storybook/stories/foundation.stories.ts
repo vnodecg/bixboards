@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html, type TemplateResult } from 'lit';
-import { ROLE_NAMES } from '@bixant/design-system';
+import { ROLE_NAMES } from '@bixboards/design-system';
 import { PALETTES } from './palettes.ts';
 
 const meta = {
@@ -9,7 +9,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Generated from `@bixant/design-system`. Use the toolbar to switch theme and `--bx-scale`.',
+          'Generated from `@bixboards/design-system`. Use the toolbar to switch theme and `--bx-scale`.',
       },
     },
   },

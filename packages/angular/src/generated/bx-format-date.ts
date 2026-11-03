@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/format-date';
-import type { BxFormatDate as BxFormatDateElement } from '@bixant/core/format-date';
+import '@bixboards/core/format-date';
+import type { BxFormatDate as BxFormatDateElement } from '@bixboards/core/format-date';
 
 /**
  * `<bx-format-date>` — formats a date via `Intl.DateTimeFormat`.

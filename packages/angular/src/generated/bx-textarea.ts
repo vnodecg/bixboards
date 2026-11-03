@@ -12,8 +12,8 @@ import {
   forwardRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, type ControlValueAccessor } from '@angular/forms';
-import '@bixant/core/textarea';
-import type { BxTextarea as BxTextareaElement } from '@bixant/core/textarea';
+import '@bixboards/core/textarea';
+import type { BxTextarea as BxTextareaElement } from '@bixboards/core/textarea';
 
 /**
  * `<bx-textarea>` — multi-line text field, form-associated via `ElementInternals`, wrapping a

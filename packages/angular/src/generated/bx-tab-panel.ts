@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/tab-panel';
-import type { BxTabPanel as BxTabPanelElement } from '@bixant/core/tab-panel';
+import '@bixboards/core/tab-panel';
+import type { BxTabPanel as BxTabPanelElement } from '@bixboards/core/tab-panel';
 
 /**
  * `<bx-tab-panel>` — content for a tab.

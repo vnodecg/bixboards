@@ -1,5 +1,5 @@
 // Side-effect: registers `<bx-checkbox>` under its default tag name. Import
-// `@bixant/core/checkbox/define` instead if a custom tag name/prefix is needed.
+// `@bixboards/core/checkbox/define` instead if a custom tag name/prefix is needed.
 import { defineCheckbox } from './define.ts';
 
 defineCheckbox();

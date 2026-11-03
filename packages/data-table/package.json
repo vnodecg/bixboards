@@ -1,7 +1,7 @@
 {
-  "name": "@bixant/data-table",
+  "name": "@bixboards/data-table",
   "version": "0.0.0",
-  "description": "Bixant virtualized enterprise data table (bx-data-table), built on core VirtualizerController.",
+  "description": "Bixboards virtualized enterprise data table (bx-data-table), built on core VirtualizerController.",
   "license": "MIT",
   "type": "module",
   "sideEffects": [
@@ -30,10 +30,10 @@
     "dist"
   ],
   "dependencies": {
-    "@bixant/core": "workspace:*",
+    "@bixboards/core": "workspace:*",
     "lit": "^3.3.3"
   },
   "devDependencies": {
-    "@bixant/design-system": "workspace:*"
+    "@bixboards/design-system": "workspace:*"
   }
 }

@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/dropdown-item';
-import type { BxDropdownItem as BxDropdownItemElement } from '@bixant/core/dropdown-item';
+import '@bixboards/core/dropdown-item';
+import type { BxDropdownItem as BxDropdownItemElement } from '@bixboards/core/dropdown-item';
 
 /**
  * `<bx-dropdown-item>` — a single menu entry: plain, checkbox, radio, or submenu parent.

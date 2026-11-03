@@ -24,7 +24,7 @@
 
 # Component workflow
 
-Components live in `@bixant/core` (plus `@bixant/data-table`, `@bixant/data-list` for the data components), built on `@bixant/design-system` tokens. Build components **one at a time**, not in batch:
+Components live in `@bixboards/core` (plus `@bixboards/data-table`, `@bixboards/data-list` for the data components), built on `@bixboards/design-system` tokens. Build components **one at a time**, not in batch:
 
 - Pick a single component from [docs/features/README.md](docs/features/README.md); read its feature doc plus [docs/features/_conventions.md](docs/features/_conventions.md) before writing it.
 - Implement it fully (element, styles, forms/a11y/virtualization as applicable per the conventions doc) and land it before starting the next component.
@@ -35,8 +35,8 @@ Components live in `@bixant/core` (plus `@bixant/data-table`, `@bixant/data-list
 Follow `packages/core/src/animated-image/` as the template for a new component `<name>`:
 
 - `<name>/<name>.ts` — the `BixElement` subclass. All logic and styles live here; keep it a single file unless it genuinely outgrows one (a sub-part like a shared item component, e.g. `tree-item`, is its own component/tag, not a file split).
-- `<name>/index.ts` — the side-effecting entry point: imports `define.ts` and calls it once, then re-exports the class and the `define...` function. This is what `@bixant/core/<name>` resolves to.
-- `<name>/define.ts` — a named `export function define<PascalName>(tagName?: string): void` wrapping `MyComponent.define(tagName)`. This is what `@bixant/core/<name>/define` resolves to (no eager registration).
+- `<name>/index.ts` — the side-effecting entry point: imports `define.ts` and calls it once, then re-exports the class and the `define...` function. This is what `@bixboards/core/<name>` resolves to.
+- `<name>/define.ts` — a named `export function define<PascalName>(tagName?: string): void` wrapping `MyComponent.define(tagName)`. This is what `@bixboards/core/<name>/define` resolves to (no eager registration).
 - `<name>/<name>.test.ts` — Web Test Runner + `@open-wc/testing`, real browsers. See "Required tests per component" below.
 - `<name>/fixtures/` — any binary/data fixtures the tests need (keep them tiny; the animated-image fixture is a 37-byte GIF).
 - Add both entries to `packages/core/package.json`'s `exports` map (`./<name>` and `./<name>/define`, each with `types`/`default`) and to `sideEffects` if not already covered by the `dist/*/index.js` glob.
@@ -55,7 +55,7 @@ A component is not done when the code and tests pass — the docs describing it 
 
 - The feature doc (`docs/features/<package>/<name>.md`): `Status` field, the API tables (properties, slots, events, **CSS parts**, **CSS custom properties** — every part/prop in the JSDoc must appear here and vice versa; these two tables are generated from the JSDoc by `pnpm generate`, so edit the JSDoc, not the table), and check off the acceptance criteria that are genuinely met (leave the rest unchecked with a one-line reason, don't check something that isn't true).
 - `docs/features/README.md`'s intro paragraph if it makes a claim that's no longer true (e.g. "components that do not exist yet").
-- Root `README.md`: the status callout and the `@bixant/core` row's implemented-count.
+- Root `README.md`: the status callout and the `@bixboards/core` row's implemented-count.
 - This `AGENTS.md` file, if the change introduces or changes a shared convention (a new `BixElement` member, a new required test category, a naming rule) — not for a change scoped to one component.
 
 Before finishing, grep for the old name/value if you renamed or removed something (a CSS custom property, a token, a file path) across `docs/`, `AGENTS.md`, `README.md` and `packages/*/src` — a rename that only touches the implementation is exactly the kind of drift this section exists to prevent.

@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/badge';
-import type { BxBadge as BxBadgeElement } from '@bixant/core/badge';
+import '@bixboards/core/badge';
+import type { BxBadge as BxBadgeElement } from '@bixboards/core/badge';
 
 /**
  * `<bx-badge>` — compact status, count or label.

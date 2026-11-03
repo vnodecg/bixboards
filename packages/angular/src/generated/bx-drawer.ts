@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/drawer';
-import type { BxDrawer as BxDrawerElement } from '@bixant/core/drawer';
+import '@bixboards/core/drawer';
+import type { BxDrawer as BxDrawerElement } from '@bixboards/core/drawer';
 
 /**
  * `<bx-drawer>` — edge-anchored panel (top/end/bottom/start), modal or contained to a parent

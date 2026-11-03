@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/breadcrumb';
-import type { BxBreadcrumb as BxBreadcrumbElement } from '@bixant/core/breadcrumb';
+import '@bixboards/core/breadcrumb';
+import type { BxBreadcrumb as BxBreadcrumbElement } from '@bixboards/core/breadcrumb';
 
 /**
  * `<bx-breadcrumb>` — navigation trail owning a default-slotted set of `bx-breadcrumb-item`

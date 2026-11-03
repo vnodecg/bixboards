@@ -6,7 +6,7 @@ One detailed feature document per component. Shared rules live in [_conventions.
 
 > **Status: proposals, hand-maintained.** These documents are the specification for each component. 59 are implemented (see [IMPLEMENTATION.md](IMPLEMENTATION.md) for the full tracker); the rest do not exist yet. API shapes for the unimplemented components are design proposals and have **not** been validated against real usage; confirm names and behavior when implementing each. Appearance, variant and size options are defined here, per component, and are implemented on top of the design-system tokens (colors from roles, sizes from the fluid scale) — the design system itself contains no component definitions. Conventions: appearance names use spaces (`filled outlined`), variants are the design-system palettes, and component CSS hooks are `--bx-<component>-<parameter>` (parts use short names; only custom properties carry the component prefix).
 
-## `@bixant/core`
+## `@bixboards/core`
 
 ### Actions
 
@@ -101,7 +101,7 @@ One detailed feature document per component. Shared rules live in [_conventions.
 | [`bx-resize-observer`](core/resize-observer.md)             | Declarative ResizeObserver.                                                                                    |
 | [`bx-popup`](core/popup.md)                                 | Low-level positioning primitive (anchor, flip, shift, size, arrow) used by dropdown, select, tooltip, popover. |
 
-## `@bixant/data-table`
+## `@bixboards/data-table`
 
 ### Data
 
@@ -109,7 +109,7 @@ One detailed feature document per component. Shared rules live in [_conventions.
 | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [`bx-data-table`](data-table/data-table.md) | Enterprise-grade virtualized table for 100k–1M+ rows: sorting, filtering, grouping, selection, pinning, resizing, reordering, inline editing, server-side data and export. Native-table accessibility. |
 
-## `@bixant/data-list`
+## `@bixboards/data-list`
 
 ### Data
 

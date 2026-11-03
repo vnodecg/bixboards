@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/details';
+import '@bixboards/core/details';
 
 interface Args {
   summary: string;
@@ -34,7 +34,7 @@ const meta = {
     lazy: { control: 'boolean' },
   },
   args: {
-    summary: 'What is Bixant?',
+    summary: 'What is Bixboards?',
     open: false,
     disabled: false,
     appearance: 'outlined',

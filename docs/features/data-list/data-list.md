@@ -2,19 +2,19 @@
 
 > Virtualized list/grid of items for feeds, inboxes and galleries with dynamic heights, grouping, sticky headers, selection, reordering and infinite loading.
 
-|                     |                     |
-| ------------------- | ------------------- |
-| **Package**         | `@bixant/data-list` |
-| **Category**        | Data                |
-| **Tag**             | `bx-data-list`      |
-| **Status**          | Implemented         |
-| **Form-associated** | No                  |
+|                     |                        |
+| ------------------- | ---------------------- |
+| **Package**         | `@bixboards/data-list` |
+| **Category**        | Data                   |
+| **Tag**             | `bx-data-list`         |
+| **Status**          | Implemented            |
+| **Form-associated** | No                     |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Virtualized list/grid of items for feeds, inboxes and galleries with dynamic heights, grouping, sticky headers, selection, reordering and infinite loading. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Virtualized list/grid of items for feeds, inboxes and galleries with dynamic heights, grouping, sticky headers, selection, reordering and infinite loading. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 
@@ -135,7 +135,7 @@ Column count = floor(container width / min-item-width); list→grid→list witho
 - Budget: 500k items, 60 fps scroll, ≤ 100 nodes in DOM; item mount < 1 ms median.
 - Safe to upgrade/define lazily; safe to move between documents and re-connect (no leaked listeners/observers).
 - SSR: renders declarative shadow DOM (Lit SSR) without touching browser-only APIs at import time.
-- Virtualization is built in and shares `VirtualizerController` from `@bixant/core`.
+- Virtualization is built in and shares `VirtualizerController` from `@bixboards/core`.
 
 ## 8. Framework wrapper notes
 

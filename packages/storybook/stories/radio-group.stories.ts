@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/radio-group';
+import '@bixboards/core/radio-group';
 
 interface Args {
   label: string;

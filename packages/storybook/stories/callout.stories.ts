@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/callout';
+import '@bixboards/core/callout';
 
 interface Args {
   variant: 'default' | 'secondary' | 'tertiary' | 'error' | 'warning';

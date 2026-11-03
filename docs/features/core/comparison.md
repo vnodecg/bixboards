@@ -2,19 +2,19 @@
 
 > Before/after image comparison with draggable divider.
 
-|                     |                 |
-| ------------------- | --------------- |
-| **Package**         | `@bixant/core`  |
-| **Category**        | Imagery         |
-| **Tag**             | `bx-comparison` |
-| **Status**          | Planned         |
-| **Form-associated** | No              |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Imagery           |
+| **Tag**             | `bx-comparison`   |
+| **Status**          | Planned           |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Before/after image comparison with draggable divider. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Before/after image comparison with draggable divider. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

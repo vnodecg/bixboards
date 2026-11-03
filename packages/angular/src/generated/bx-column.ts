@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/data-table/data-table';
-import type { BxColumn as BxColumnElement } from '@bixant/data-table/data-table';
+import '@bixboards/data-table/data-table';
+import type { BxColumn as BxColumnElement } from '@bixboards/data-table/data-table';
 
 /**
  * Data-only element for declaring a column in markup: `<bx-column field="name" header="Name">`.

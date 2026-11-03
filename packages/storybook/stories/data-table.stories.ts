@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/data-table/data-table';
-import type { ColumnDef } from '@bixant/data-table/data-table';
+import '@bixboards/data-table/data-table';
+import type { ColumnDef } from '@bixboards/data-table/data-table';
 
 interface Row {
   id: number;

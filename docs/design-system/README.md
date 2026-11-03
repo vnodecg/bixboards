@@ -1,6 +1,6 @@
-# Bixant design system
+# Bixboards design system
 
-How the design system is structured and governed. Implementation lives in [`@bixant/design-system`](../../packages/design-system/README.md).
+How the design system is structured and governed. Implementation lives in [`@bixboards/design-system`](../../packages/design-system/README.md).
 
 **Scope: tokens and theming only.** The design system defines color, type, space, shape, elevation and motion, the themes that change them, and their accessibility guarantees. It does not define components. Components are specified in [features](../features/README.md), are built afterwards, and consume these tokens.
 

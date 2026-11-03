@@ -25,7 +25,7 @@ interface Param {
 interface El {
   tag: string;
   className: string;
-  /** Import specifier of the element's package entry, e.g. `@bixant/core/select`. */
+  /** Import specifier of the element's package entry, e.g. `@bixboards/core/select`. */
   specifier: string;
   formAssociated: boolean;
   description: string;
@@ -57,14 +57,14 @@ function load(): El[] {
       );
     const manifest = JSON.parse(fs.readFileSync(file, 'utf8'));
     for (const mod of manifest.modules) {
-      // src/<dir>/<file>.ts  ->  @bixant/<pkg>/<dir>
+      // src/<dir>/<file>.ts  ->  @bixboards/<pkg>/<dir>
       const dir = (mod.path as string).split('/')[1]!;
       for (const d of mod.declarations) {
         if (!d.tagName) continue;
         elements.push({
           tag: d.tagName,
           className: d.name,
-          specifier: `@bixant/${pkg}/${dir}`,
+          specifier: `@bixboards/${pkg}/${dir}`,
           formAssociated: !!d.formAssociated,
           description: d.description ?? '',
           props: (d.members ?? [])

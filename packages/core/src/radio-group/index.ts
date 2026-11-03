@@ -1,5 +1,5 @@
 // Side-effect: registers `<bx-radio-group>` under its default tag name. Import
-// `@bixant/core/radio-group/define` instead if a custom tag name/prefix is needed.
+// `@bixboards/core/radio-group/define` instead if a custom tag name/prefix is needed.
 import { defineRadioGroup } from './define.ts';
 import '../radio/index.ts';
 

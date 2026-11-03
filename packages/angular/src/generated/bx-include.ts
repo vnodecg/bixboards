@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/include';
-import type { BxInclude as BxIncludeElement } from '@bixant/core/include';
+import '@bixboards/core/include';
+import type { BxInclude as BxIncludeElement } from '@bixboards/core/include';
 
 /**
  * `<bx-include>` — fetches remote HTML and inlines it into a shadow-DOM container.

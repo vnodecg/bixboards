@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/tab-group';
-import type { BxTabGroup as BxTabGroupElement } from '@bixant/core/tab-group';
+import '@bixboards/core/tab-group';
+import type { BxTabGroup as BxTabGroupElement } from '@bixboards/core/tab-group';
 
 /**
  * `<bx-tab-group>` — tabbed interface owning a `nav`-slotted set of `bx-tab` and a default-slotted

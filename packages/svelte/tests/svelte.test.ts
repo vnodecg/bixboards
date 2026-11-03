@@ -28,7 +28,7 @@ afterEach(() => {
   target?.remove();
 });
 
-describe('@bixant/svelte', () => {
+describe('@bixboards/svelte', () => {
   it('compiles and mounts wrappers that register the custom elements', async () => {
     await setup();
     for (const tag of [

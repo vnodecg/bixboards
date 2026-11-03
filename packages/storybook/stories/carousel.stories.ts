@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/carousel';
+import '@bixboards/core/carousel';
 
 interface Args {
   loop: boolean;
@@ -127,7 +127,7 @@ export const Photos: Story = {
             style="inline-size: 100%; aspect-ratio: 16/9; border-radius: var(--bx-radius-m); overflow: hidden"
           >
             <img
-              src="https://picsum.photos/seed/bixant-carousel-${i}/800/450"
+              src="https://picsum.photos/seed/bixboards-carousel-${i}/800/450"
               alt="Photo ${i}"
               style="inline-size: 100%; block-size: 100%; object-fit: cover"
             />

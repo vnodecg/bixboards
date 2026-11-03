@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/carousel-item';
+import '@bixboards/core/carousel-item';
 
 interface Args {
   label: string;

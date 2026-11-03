@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/popover';
-import type { BxPopover as BxPopoverElement } from '@bixant/core/popover';
+import '@bixboards/core/popover';
+import type { BxPopover as BxPopoverElement } from '@bixboards/core/popover';
 
 /**
  * `<bx-popover>` — rich, interactive floating panel anchored to an element, positioned by an

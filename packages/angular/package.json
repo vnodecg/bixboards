@@ -1,7 +1,7 @@
 {
-  "name": "@bixant/angular",
+  "name": "@bixboards/angular",
   "version": "0.0.0",
-  "description": "Angular standalone components for every Bixant element (with ControlValueAccessor for form controls), generated from the Custom Elements Manifests.",
+  "description": "Angular standalone components for every Bixboards element (with ControlValueAccessor for form controls), generated from the Custom Elements Manifests.",
   "license": "MIT",
   "type": "module",
   "sideEffects": [
@@ -30,8 +30,8 @@
     "@angular/forms": ">=19"
   },
   "dependencies": {
-    "@bixant/core": "workspace:*",
-    "@bixant/data-list": "workspace:*",
-    "@bixant/data-table": "workspace:*"
+    "@bixboards/core": "workspace:*",
+    "@bixboards/data-list": "workspace:*",
+    "@bixboards/data-table": "workspace:*"
   }
 }

@@ -2,19 +2,19 @@
 
 > Enterprise-grade virtualized table for 100k–1M+ rows: sorting, filtering, grouping, selection, pinning, resizing, reordering, inline editing, server-side data and export. Native-table accessibility.
 
-|                     |                      |
-| ------------------- | -------------------- |
-| **Package**         | `@bixant/data-table` |
-| **Category**        | Data                 |
-| **Tag**             | `bx-data-table`      |
-| **Status**          | Implemented          |
-| **Form-associated** | No                   |
+|                     |                         |
+| ------------------- | ----------------------- |
+| **Package**         | `@bixboards/data-table` |
+| **Category**        | Data                    |
+| **Tag**             | `bx-data-table`         |
+| **Status**          | Implemented             |
+| **Form-associated** | No                      |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Enterprise-grade virtualized table for 100k–1M+ rows: sorting, filtering, grouping, selection, pinning, resizing, reordering, inline editing, server-side data and export. Native-table accessibility. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Enterprise-grade virtualized table for 100k–1M+ rows: sorting, filtering, grouping, selection, pinning, resizing, reordering, inline editing, server-side data and export. Native-table accessibility. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 
@@ -216,7 +216,7 @@ Table is a container-query root. `responsive="priority"` hides columns by `prior
 - Benchmarks in CI with regression thresholds (see PRD).
 - Safe to upgrade/define lazily; safe to move between documents and re-connect (no leaked listeners/observers).
 - SSR: renders declarative shadow DOM (Lit SSR) without touching browser-only APIs at import time.
-- Virtualization is built in and shares `VirtualizerController` from `@bixant/core`.
+- Virtualization is built in and shares `VirtualizerController` from `@bixboards/core`.
 
 ## 8. Framework wrapper notes
 

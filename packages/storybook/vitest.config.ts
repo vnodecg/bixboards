@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 const dirname = fileURLToPath(new URL('.', import.meta.url));
 
 // Every story is a test: it renders, runs its `play` function, is checked by axe (a11y addon) and
-// compared against a committed screenshot (see .storybook/vitest.setup.ts). The '@bixant/*'
+// compared against a committed screenshot (see .storybook/vitest.setup.ts). The '@bixboards/*'
 // aliases come from .storybook/main.ts via the storybookTest plugin.
 // Run `pnpm test:stories`; refresh screenshot baselines with `pnpm test:stories -u`.
 export default defineConfig({

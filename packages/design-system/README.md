@@ -1,6 +1,6 @@
-# @bixant/design-system
+# @bixboards/design-system
 
-Design tokens and theming for Bixant. Themes and foundation tokens are plain JSON; a small TypeScript compiler turns them into CSS custom properties, token files for design tools, and a contrast report. A browser-safe runtime API can theme at runtime.
+Design tokens and theming for Bixboards. Themes and foundation tokens are plain JSON; a small TypeScript compiler turns them into CSS custom properties, token files for design tools, and a contrast report. A browser-safe runtime API can theme at runtime.
 
 **Scope.** This package owns _tokens and theming only_: color palettes and roles, semantic tokens, the fluid scale, type, radius, elevation, motion, themes, and their accessibility guarantees. It knows nothing about components. Components (built later) consume these tokens and define their own component-level custom properties (`--bx-button-bg`, …) on top of them.
 
@@ -14,7 +14,7 @@ src/index.ts          Browser-safe runtime API (package root)
 src/color.ts          Color math and palette generation
 src/roles.ts          Contrast-derived semantic roles (shared by build and runtime)
 src/build/            Compiler (Node only): themes, CSS, contrast report, DTCG/Figma export
-src/cli.ts, bin.ts    `bixant-ds` CLI
+src/cli.ts, bin.ts    `bixboards-ds` CLI
 ```
 
 Everything is TypeScript (`erasableSyntaxOnly`), so the sources also run directly on Node 24 (`node src/bin.ts …`); `tsc` emits the published JavaScript to `dist/`.
@@ -50,9 +50,9 @@ pnpm nx run design-system:validate  # strict checks, including the example theme
 ```
 
 ```sh
-bixant-ds build [--out dir] [--theme file]… [--strict] [--viewport 1280]
-bixant-ds validate [--strict] [--theme file]…
-bixant-ds init-theme <name> [--extends light] [--brand "#0a7d6b"]
+bixboards-ds build [--out dir] [--theme file]… [--strict] [--viewport 1280]
+bixboards-ds validate [--strict] [--theme file]…
+bixboards-ds init-theme <name> [--extends light] [--brand "#0a7d6b"]
 ```
 
 Unknown flags and missing values are errors. `--strict` fails on any warning (contrast, deprecations, un-evaluable Figma values).
@@ -68,7 +68,7 @@ Outputs in `dist/generated`:
 | `tokens.figma.json`  | Same, with fluid dimensions evaluated to pixels                        |
 
 ```html
-<link rel="stylesheet" href="@bixant/design-system/tokens.css" />
+<link rel="stylesheet" href="@bixboards/design-system/tokens.css" />
 <html data-theme="dark">
   <!-- `dark` also follows prefers-color-scheme when data-theme is absent -->
 </html>
@@ -141,7 +141,7 @@ Components are out of scope here, but the contract is simple:
 For brands known only at runtime (multi-tenant, user-chosen accent). Browser-safe; the package root imports no Node APIs.
 
 ```ts
-import { applyTheme, themeVars, toCssText } from '@bixant/design-system';
+import { applyTheme, themeVars, toCssText } from '@bixboards/design-system';
 
 applyTheme(
   document.documentElement,

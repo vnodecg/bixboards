@@ -1,7 +1,7 @@
 {
-  "name": "@bixant/react",
+  "name": "@bixboards/react",
   "version": "0.0.0",
-  "description": "React wrappers for every Bixant element, generated from the Custom Elements Manifests.",
+  "description": "React wrappers for every Bixboards element, generated from the Custom Elements Manifests.",
   "license": "MIT",
   "type": "module",
   "sideEffects": [
@@ -30,8 +30,8 @@
     "react-dom": ">=18"
   },
   "dependencies": {
-    "@bixant/core": "workspace:*",
-    "@bixant/data-list": "workspace:*",
-    "@bixant/data-table": "workspace:*"
+    "@bixboards/core": "workspace:*",
+    "@bixboards/data-list": "workspace:*",
+    "@bixboards/data-table": "workspace:*"
   }
 }

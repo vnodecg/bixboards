@@ -1,7 +1,7 @@
 // Browser-safe runtime theming. No Node APIs; safe to import from application code.
 //
 // Use when brand colors are only known at runtime (multi-tenant apps, user-chosen accents).
-// The build-time pipeline (`@bixant/design-system/build`) stays the source of truth for everything else.
+// The build-time pipeline (`@bixboards/design-system/build`) stays the source of truth for everything else.
 
 import {
   SHADES,

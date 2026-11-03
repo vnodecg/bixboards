@@ -4,7 +4,7 @@
 
 |                     |                   |
 | ------------------- | ----------------- |
-| **Package**         | `@bixant/core`    |
+| **Package**         | `@bixboards/core` |
 | **Category**        | Actions           |
 | **Tag**             | `bx-button-group` |
 | **Status**          | Implemented       |
@@ -14,7 +14,7 @@ See [conventions](../_conventions.md) for shared rules (tokens, container querie
 
 ## 1. Overview
 
-Groups related buttons into a single segmented control with shared borders and roving semantics. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Groups related buttons into a single segmented control with shared borders and roving semantics. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

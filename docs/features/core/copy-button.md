@@ -2,19 +2,19 @@
 
 > One-click copy of text, a property, or another element's content to the clipboard with success/error feedback.
 
-|                     |                  |
-| ------------------- | ---------------- |
-| **Package**         | `@bixant/core`   |
-| **Category**        | Actions          |
-| **Tag**             | `bx-copy-button` |
-| **Status**          | Implemented      |
-| **Form-associated** | No               |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Actions           |
+| **Tag**             | `bx-copy-button`  |
+| **Status**          | Implemented       |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-One-click copy of text, a property, or another element's content to the clipboard with success/error feedback. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+One-click copy of text, a property, or another element's content to the clipboard with success/error feedback. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

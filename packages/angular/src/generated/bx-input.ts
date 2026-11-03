@@ -12,8 +12,8 @@ import {
   forwardRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, type ControlValueAccessor } from '@angular/forms';
-import '@bixant/core/input';
-import type { BxInput as BxInputElement } from '@bixant/core/input';
+import '@bixboards/core/input';
+import type { BxInput as BxInputElement } from '@bixboards/core/input';
 
 /**
  * `<bx-input>` — single-line text field, form-associated via `ElementInternals`, wrapping a real

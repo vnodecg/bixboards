@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/popup';
-import type { BxPopup as BxPopupElement } from '@bixant/core/popup';
+import '@bixboards/core/popup';
+import type { BxPopup as BxPopupElement } from '@bixboards/core/popup';
 
 /**
  * `<bx-popup>` — low-level positioning primitive (anchor, flip, shift, size, arrow) used by

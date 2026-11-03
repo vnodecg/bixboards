@@ -2,19 +2,19 @@
 
 > Fetches and inlines remote HTML.
 
-|                     |                |
-| ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
-| **Category**        | Utilities      |
-| **Tag**             | `bx-include`   |
-| **Status**          | Planned        |
-| **Form-associated** | No             |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Utilities         |
+| **Tag**             | `bx-include`      |
+| **Status**          | Planned           |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Fetches and inlines remote HTML. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Fetches and inlines remote HTML. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

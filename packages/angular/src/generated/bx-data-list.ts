@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/data-list/data-list';
-import type { BxDataList as BxDataListElement } from '@bixant/data-list/data-list';
+import '@bixboards/data-list/data-list';
+import type { BxDataList as BxDataListElement } from '@bixboards/data-list/data-list';
 
 /**
  * `<bx-data-list>` — virtualized list / grid for feeds, inboxes and galleries

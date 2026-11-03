@@ -6,8 +6,8 @@ import {
   type TemplateResult,
 } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
-import { BixElement, VirtualizerController } from '@bixant/core';
-import { textStyle, textFamily } from '@bixant/core';
+import { BixElement, VirtualizerController } from '@bixboards/core';
+import { textStyle, textFamily } from '@bixboards/core';
 
 type Key = string | number;
 type Selection = 'none' | 'single' | 'multiple' | 'leaf';

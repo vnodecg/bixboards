@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/page';
-import type { BxPage as BxPageElement } from '@bixant/core/page';
+import '@bixboards/core/page';
+import type { BxPage as BxPageElement } from '@bixboards/core/page';
 
 /**
  * `<bx-page>` — application shell: banner, header, subheader, navigation, main, aside and footer

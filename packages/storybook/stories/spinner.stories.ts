@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/spinner';
+import '@bixboards/core/spinner';
 
 interface Args {
   label: string;

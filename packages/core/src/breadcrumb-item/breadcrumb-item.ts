@@ -31,7 +31,7 @@ import { textStyle } from '../internal/text-style.ts';
  * @cssprop --bx-breadcrumb-item-label-focus-radius - Corner radius of the `label` part (focus state). Default `var(--bx-radius-s)`.
  * @cssprop --bx-breadcrumb-item-label-current-fg - Text/icon color of the `label` part (current state). Default `var(--bx-text-primary)`.
  * @cssprop --bx-breadcrumb-item-separator-fg - Text/icon color of the `separator` part. Default `var(--bx-text-secondary)`.
- * @cssprop --bx-breadcrumb-item-link-fg - Color of the label when the item is a link or button. Default `var(--bx-role-accent)`.
+ * @cssprop --bx-breadcrumb-item-link-fg - Color of the label when the item is a link or button. Default `var(--bx-role-accent-fg)`.
  * @cssprop --bx-breadcrumb-item-font-family - Font family of the root surface (text style `body-s`). Default `var(--bx-type-body-family)`.
  * @cssprop --bx-breadcrumb-item-font-size - Font size of the root surface (text style `body-s`). Default `var(--bx-type-body-s-size)`.
  * @cssprop --bx-breadcrumb-item-font-weight - Font weight of the root surface (text style `body-s`). Default `var(--bx-type-body-s-weight)`.
@@ -83,7 +83,7 @@ export class BxBreadcrumbItem extends BixElement {
 
       a.label,
       button.label {
-        color: var(--bx-breadcrumb-item-link-fg, var(--bx-role-accent));
+        color: var(--bx-breadcrumb-item-link-fg, var(--bx-role-accent-fg));
       }
 
       a.label:hover,

@@ -2,19 +2,19 @@
 
 > Short hover/focus hint anchored to any element via `for` or slot.
 
-|                     |                |
-| ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
-| **Category**        | Feedback       |
-| **Tag**             | `bx-tooltip`   |
-| **Status**          | Planned        |
-| **Form-associated** | No             |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Feedback          |
+| **Tag**             | `bx-tooltip`      |
+| **Status**          | Planned           |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Short hover/focus hint anchored to any element via `for` or slot. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Short hover/focus hint anchored to any element via `for` or slot. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

@@ -1,5 +1,5 @@
 // Side-effect: registers `<bx-spinner>` under its default tag name. Import
-// `@bixant/core/spinner/define` instead if a custom tag name/prefix is needed.
+// `@bixboards/core/spinner/define` instead if a custom tag name/prefix is needed.
 import { defineSpinner } from './define.ts';
 
 defineSpinner();

@@ -1,5 +1,5 @@
 // Side-effect: registers `<bx-skeleton>` under its default tag name. Import
-// `@bixant/core/skeleton/define` instead if a custom tag name/prefix is needed.
+// `@bixboards/core/skeleton/define` instead if a custom tag name/prefix is needed.
 import { defineSkeleton } from './define.ts';
 
 defineSkeleton();

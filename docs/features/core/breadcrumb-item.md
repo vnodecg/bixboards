@@ -4,7 +4,7 @@
 
 |                     |                      |
 | ------------------- | -------------------- |
-| **Package**         | `@bixant/core`       |
+| **Package**         | `@bixboards/core`    |
 | **Category**        | Organization         |
 | **Tag**             | `bx-breadcrumb-item` |
 | **Status**          | Planned              |
@@ -14,7 +14,7 @@ See [conventions](../_conventions.md) for shared rules (tokens, container querie
 
 ## 1. Overview
 
-One crumb; link or button. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+One crumb; link or button. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 
@@ -61,7 +61,7 @@ _None._
 | `--bx-breadcrumb-item-label-focus-radius`           | Corner radius of the `label` part (focus state). Default `var(--bx-radius-s)`.                        |
 | `--bx-breadcrumb-item-label-current-fg`             | Text/icon color of the `label` part (current state). Default `var(--bx-text-primary)`.                |
 | `--bx-breadcrumb-item-separator-fg`                 | Text/icon color of the `separator` part. Default `var(--bx-text-secondary)`.                          |
-| `--bx-breadcrumb-item-link-fg`                      | Color of the label when the item is a link or button. Default `var(--bx-role-accent)`.                |
+| `--bx-breadcrumb-item-link-fg`                      | Color of the label when the item is a link or button. Default `var(--bx-role-accent-fg)`.             |
 | `--bx-breadcrumb-item-font-family`                  | Font family of the root surface (text style `body-s`). Default `var(--bx-type-body-family)`.          |
 | `--bx-breadcrumb-item-font-size`                    | Font size of the root surface (text style `body-s`). Default `var(--bx-type-body-s-size)`.            |
 | `--bx-breadcrumb-item-font-weight`                  | Font weight of the root surface (text style `body-s`). Default `var(--bx-type-body-s-weight)`.        |

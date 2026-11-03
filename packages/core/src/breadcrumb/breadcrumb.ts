@@ -60,7 +60,7 @@ export class BxBreadcrumb extends BixElement {
         justify-content: center;
         min-inline-size: var(--bx-target-min);
         min-block-size: var(--bx-target-min);
-        color: var(--bx-role-accent);
+        color: var(--bx-role-accent-fg);
         font: inherit;
       }
 

@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/details';
-import type { BxDetails as BxDetailsElement } from '@bixant/core/details';
+import '@bixboards/core/details';
+import type { BxDetails as BxDetailsElement } from '@bixboards/core/details';
 
 /**
  * `<bx-details>` — disclosure widget; supports grouping into an accordion via `name`.

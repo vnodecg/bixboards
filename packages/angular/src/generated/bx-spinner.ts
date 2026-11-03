@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/spinner';
-import type { BxSpinner as BxSpinnerElement } from '@bixant/core/spinner';
+import '@bixboards/core/spinner';
+import type { BxSpinner as BxSpinnerElement } from '@bixboards/core/spinner';
 
 /**
  * `<bx-spinner>` — indeterminate loading spinner.

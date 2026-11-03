@@ -1,4 +1,4 @@
-// Side-effect: registers <bx-data-list>. Import `@bixant/data-list/data-list/define` for a custom tag.
+// Side-effect: registers <bx-data-list>. Import `@bixboards/data-list/data-list/define` for a custom tag.
 import { defineDataList } from './define.ts';
 
 defineDataList();

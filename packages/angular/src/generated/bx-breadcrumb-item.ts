@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/breadcrumb-item';
-import type { BxBreadcrumbItem as BxBreadcrumbItemElement } from '@bixant/core/breadcrumb-item';
+import '@bixboards/core/breadcrumb-item';
+import type { BxBreadcrumbItem as BxBreadcrumbItemElement } from '@bixboards/core/breadcrumb-item';
 
 /**
  * `<bx-breadcrumb-item>` — one crumb; link or button.

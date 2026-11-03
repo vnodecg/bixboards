@@ -1,5 +1,5 @@
 // Side-effect: registers `<bx-badge>` under its default tag name. Import
-// `@bixant/core/badge/define` instead if a custom tag name/prefix is needed.
+// `@bixboards/core/badge/define` instead if a custom tag name/prefix is needed.
 import { defineBadge } from './define.ts';
 
 defineBadge();

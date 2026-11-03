@@ -2,19 +2,19 @@
 
 > Disclosure widget; supports grouping into an accordion.
 
-|                     |                |
-| ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
-| **Category**        | Organization   |
-| **Tag**             | `bx-details`   |
-| **Status**          | Implemented    |
-| **Form-associated** | No             |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Organization      |
+| **Tag**             | `bx-details`      |
+| **Status**          | Implemented       |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Disclosure widget; supports grouping into an accordion. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Disclosure widget; supports grouping into an accordion. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/data-list/data-list';
+import '@bixboards/data-list/data-list';
 
 interface Message {
   id: number;

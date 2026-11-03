@@ -1,4 +1,4 @@
-// Design-system conformance audit for @bixant/core, data-table and data-list.
+// Design-system conformance audit for @bixboards/core, data-table and data-list.
 //
 // Statically checks every component's `css` blocks against AGENTS.md / docs/design-system:
 //

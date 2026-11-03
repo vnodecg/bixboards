@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/zoomable-frame';
+import '@bixboards/core/zoomable-frame';
 
 interface Args {
   label: string;

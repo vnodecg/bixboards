@@ -46,7 +46,7 @@ const RECENTLY_OPEN_GRACE_MS = 200;
  * relationship working with `ariaControlsElements`/`ariaLabelledByElements` (that component's own
  * doc comment) because the *referencing* element there is the shadow-internal one, pointing out to
  * a light-DOM target. Here the direction is reversed — the anchor (light DOM, often not even a
- * Bixant component) would need to reference *into* this element's own shadow root (the popup body)
+ * Bixboards component) would need to reference *into* this element's own shadow root (the popup body)
  * — and verified against this package's actual pinned Chromium, `ariaDescribedByElements` set that
  * way reads back as an empty list; the reflected `aria-describedby` content attribute it also
  * writes comes back empty too. Shadow DOM encapsulation seems to allow a shadow tree reaching out

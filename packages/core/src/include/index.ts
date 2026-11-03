@@ -1,5 +1,5 @@
 // Side-effect: registers `<bx-include>` under its default tag name. Import
-// `@bixant/core/include/define` instead if a custom tag name/prefix is needed.
+// `@bixboards/core/include/define` instead if a custom tag name/prefix is needed.
 import { defineInclude } from './define.ts';
 
 defineInclude();

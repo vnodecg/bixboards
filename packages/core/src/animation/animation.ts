@@ -10,10 +10,10 @@ type Fill = FillMode;
  *
  * Animates its default-slotted element (the first assigned element) via `Element.animate()`.
  * Keyframes come from the `keyframes` property when set, otherwise from the tree-shakable preset
- * registered under `name` (import `@bixant/core/animation/presets/<name>` to register one) —
+ * registered under `name` (import `@bixboards/core/animation/presets/<name>` to register one) —
  * `name="none"` (the default) plays nothing. Built-in presets: `bounce`, `fadeIn`, `fadeOut`,
  * `flip`, `pulse`, `shake`, `slideInDown`, `slideInLeft`, `slideInRight`, `slideInUp`, `spin`,
- * `zoomIn`, `zoomOut` (kebab-case subpaths, e.g. `@bixant/core/animation/presets/slide-in-up`).
+ * `zoomIn`, `zoomOut` (kebab-case subpaths, e.g. `@bixboards/core/animation/presets/slide-in-up`).
  * Auto-disabled under `prefers-reduced-motion` (the animation still runs, but with zero duration
  * and a single iteration) unless `force` is set.
  *

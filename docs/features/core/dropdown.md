@@ -2,19 +2,19 @@
 
 > Anchors a menu of items to a trigger; keyboard navigable, typeahead-enabled, with checkbox and submenu support.
 
-|                     |                |
-| ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
-| **Category**        | Actions        |
-| **Tag**             | `bx-dropdown`  |
-| **Status**          | Implemented    |
-| **Form-associated** | No             |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Actions           |
+| **Tag**             | `bx-dropdown`     |
+| **Status**          | Implemented       |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Anchors a menu of items to a trigger; keyboard navigable, typeahead-enabled, with checkbox and submenu support. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Anchors a menu of items to a trigger; keyboard navigable, typeahead-enabled, with checkbox and submenu support. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

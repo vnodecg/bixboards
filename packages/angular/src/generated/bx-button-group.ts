@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/button-group';
-import type { BxButtonGroup as BxButtonGroupElement } from '@bixant/core/button-group';
+import '@bixboards/core/button-group';
+import type { BxButtonGroup as BxButtonGroupElement } from '@bixboards/core/button-group';
 
 /**
  * `<bx-button-group>` — groups related buttons into a single segmented control with shared borders

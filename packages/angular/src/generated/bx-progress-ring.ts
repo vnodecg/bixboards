@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/progress-ring';
-import type { BxProgressRing as BxProgressRingElement } from '@bixant/core/progress-ring';
+import '@bixboards/core/progress-ring';
+import type { BxProgressRing as BxProgressRingElement } from '@bixboards/core/progress-ring';
 
 /**
  * `<bx-progress-ring>` — circular progress indicator with a centered label.

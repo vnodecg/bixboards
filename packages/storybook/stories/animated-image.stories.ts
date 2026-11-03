@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/animated-image';
+import '@bixboards/core/animated-image';
 
 const DEMO_SRC = new URL('./assets/pulse-demo.gif', import.meta.url).href;
 const BROKEN_SRC = new URL('./assets/does-not-exist.gif', import.meta.url).href;

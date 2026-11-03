@@ -1,20 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/badge';
-import '@bixant/core/button';
-import '@bixant/core/callout';
-import '@bixant/core/card';
-import '@bixant/core/checkbox';
-import '@bixant/core/input';
-import '@bixant/core/progress-bar';
-import '@bixant/core/radio';
-import '@bixant/core/radio-group';
-import '@bixant/core/slider';
-import '@bixant/core/switch';
-import '@bixant/core/tab';
-import '@bixant/core/tab-group';
-import '@bixant/core/tab-panel';
-import '@bixant/core/textarea';
+import '@bixboards/core/badge';
+import '@bixboards/core/button';
+import '@bixboards/core/callout';
+import '@bixboards/core/card';
+import '@bixboards/core/checkbox';
+import '@bixboards/core/input';
+import '@bixboards/core/progress-bar';
+import '@bixboards/core/radio';
+import '@bixboards/core/radio-group';
+import '@bixboards/core/slider';
+import '@bixboards/core/switch';
+import '@bixboards/core/tab';
+import '@bixboards/core/tab-group';
+import '@bixboards/core/tab-panel';
+import '@bixboards/core/textarea';
 
 type Skin = 'default' | 'flat' | 'soft' | 'mono' | 'editorial';
 

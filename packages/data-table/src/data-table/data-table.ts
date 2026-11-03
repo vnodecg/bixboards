@@ -6,7 +6,7 @@ import {
   type TemplateResult,
 } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
-import { BixElement, VirtualizerController, observeResize } from '@bixant/core';
+import { BixElement, VirtualizerController, observeResize } from '@bixboards/core';
 import {
   BlockCache,
   columnId,
@@ -25,7 +25,7 @@ import {
   type SortModel,
   type TableDataSource,
 } from './table-model.ts';
-import { textStyle, textFamily } from '@bixant/core';
+import { textStyle, textFamily } from '@bixboards/core';
 
 export type {
   ColumnDef,

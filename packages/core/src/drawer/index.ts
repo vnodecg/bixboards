@@ -1,5 +1,5 @@
 // Side-effect: registers `<bx-drawer>` under its default tag name. Import
-// `@bixant/core/drawer/define` instead if a custom tag name/prefix is needed.
+// `@bixboards/core/drawer/define` instead if a custom tag name/prefix is needed.
 import { defineDrawer } from './define.ts';
 import '../button/index.ts';
 import '../icon/index.ts';

@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/data-list/virtual-tree';
-import type { BxVirtualTree as BxVirtualTreeElement } from '@bixant/data-list/virtual-tree';
+import '@bixboards/data-list/virtual-tree';
+import type { BxVirtualTree as BxVirtualTreeElement } from '@bixboards/data-list/virtual-tree';
 
 /**
  * `<bx-virtual-tree>` — virtualized tree for 100k+ nodes with lazy children, filtering and

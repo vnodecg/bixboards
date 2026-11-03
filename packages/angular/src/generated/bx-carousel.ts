@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/carousel';
-import type { BxCarousel as BxCarouselElement } from '@bixant/core/carousel';
+import '@bixboards/core/carousel';
+import type { BxCarousel as BxCarouselElement } from '@bixboards/core/carousel';
 
 /**
  * `<bx-carousel>` — scroll-snap carousel with pagination, navigation, autoplay and drag.

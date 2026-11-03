@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/option';
-import type { BxOption as BxOptionElement } from '@bixant/core/option';
+import '@bixboards/core/option';
+import type { BxOption as BxOptionElement } from '@bixboards/core/option';
 
 /**
  * `<bx-option>` — a single item inside `bx-select`.

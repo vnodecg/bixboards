@@ -4,7 +4,7 @@
 
 |                     |                   |
 | ------------------- | ----------------- |
-| **Package**         | `@bixant/core`    |
+| **Package**         | `@bixboards/core` |
 | **Category**        | Utilities         |
 | **Tag**             | `bx-format-bytes` |
 | **Status**          | Planned           |
@@ -14,7 +14,7 @@ See [conventions](../_conventions.md) for shared rules (tokens, container querie
 
 ## 1. Overview
 
-Formats byte counts in a locale-aware, human-readable form. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Formats byte counts in a locale-aware, human-readable form. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

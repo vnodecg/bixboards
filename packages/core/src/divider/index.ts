@@ -1,5 +1,5 @@
 // Side-effect: registers `<bx-divider>` under its default tag name. Import
-// `@bixant/core/divider/define` instead if a custom tag name/prefix is needed.
+// `@bixboards/core/divider/define` instead if a custom tag name/prefix is needed.
 import { defineDivider } from './define.ts';
 
 defineDivider();

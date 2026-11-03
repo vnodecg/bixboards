@@ -2,19 +2,19 @@
 
 > Scroll-snap carousel with pagination, navigation, autoplay, multi-slide and drag.
 
-|                     |                |
-| ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
-| **Category**        | Imagery        |
-| **Tag**             | `bx-carousel`  |
-| **Status**          | Planned        |
-| **Form-associated** | No             |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Imagery           |
+| **Tag**             | `bx-carousel`     |
+| **Status**          | Planned           |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Scroll-snap carousel with pagination, navigation, autoplay, multi-slide and drag. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Scroll-snap carousel with pagination, navigation, autoplay, multi-slide and drag. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

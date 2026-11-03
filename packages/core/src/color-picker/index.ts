@@ -1,5 +1,5 @@
 // Side-effect: registers `<bx-color-picker>` under its default tag name. Import
-// `@bixant/core/color-picker/define` instead if a custom tag name/prefix is needed.
+// `@bixboards/core/color-picker/define` instead if a custom tag name/prefix is needed.
 import { defineColorPicker } from './define.ts';
 import '../popup/index.ts';
 

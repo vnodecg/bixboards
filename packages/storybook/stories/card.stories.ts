@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/card';
-import '@bixant/core/badge';
+import '@bixboards/core/card';
+import '@bixboards/core/badge';
 
 interface Args {
   appearance: 'accent' | 'filled' | 'outlined' | 'filled outlined';
@@ -51,7 +51,7 @@ const meta = {
         args.withMedia
           ? html`<img
               slot="media"
-              src="https://picsum.photos/seed/bixant/400/225"
+              src="https://picsum.photos/seed/bixboards/400/225"
               alt=""
             />`
           : ''
@@ -105,7 +105,7 @@ export const HorizontalOrientation: Story = {
     >
       <img
         slot="media"
-        src="https://picsum.photos/seed/bixant-h/400/400"
+        src="https://picsum.photos/seed/bixboards-h/400/400"
         alt=""
       />
       <span slot="header">Horizontal card</span>

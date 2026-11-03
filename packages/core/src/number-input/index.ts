@@ -1,5 +1,5 @@
 // Side-effect: registers `<bx-number-input>` under its default tag name. Import
-// `@bixant/core/number-input/define` instead if a custom tag name/prefix is needed.
+// `@bixboards/core/number-input/define` instead if a custom tag name/prefix is needed.
 import { defineNumberInput } from './define.ts';
 
 defineNumberInput();

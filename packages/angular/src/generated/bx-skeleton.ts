@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/skeleton';
-import type { BxSkeleton as BxSkeletonElement } from '@bixant/core/skeleton';
+import '@bixboards/core/skeleton';
+import type { BxSkeleton as BxSkeletonElement } from '@bixboards/core/skeleton';
 
 /**
  * `<bx-skeleton>` — placeholder shimmer while content loads.

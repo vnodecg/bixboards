@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/format-number';
+import '@bixboards/core/format-number';
 
 interface Args {
   value: number;

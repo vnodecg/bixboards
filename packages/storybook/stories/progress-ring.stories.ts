@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/progress-ring';
+import '@bixboards/core/progress-ring';
 
 interface Args {
   value: number;

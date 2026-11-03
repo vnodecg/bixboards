@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/select';
-import '@bixant/core/button';
-import '@bixant/core/divider';
+import '@bixboards/core/select';
+import '@bixboards/core/button';
+import '@bixboards/core/divider';
 
 interface Args {
   label: string;

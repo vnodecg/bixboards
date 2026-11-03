@@ -1,7 +1,7 @@
 {
-  "name": "@bixant/svelte",
+  "name": "@bixboards/svelte",
   "version": "0.0.0",
-  "description": "Svelte 5 components for every Bixant element (typed props, callback events, bindable value/open/checked), generated from the Custom Elements Manifests.",
+  "description": "Svelte 5 components for every Bixboards element (typed props, callback events, bindable value/open/checked), generated from the Custom Elements Manifests.",
   "license": "MIT",
   "type": "module",
   "sideEffects": [
@@ -33,8 +33,8 @@
     "svelte": "^5.0.0"
   },
   "dependencies": {
-    "@bixant/core": "workspace:*",
-    "@bixant/data-list": "workspace:*",
-    "@bixant/data-table": "workspace:*"
+    "@bixboards/core": "workspace:*",
+    "@bixboards/data-list": "workspace:*",
+    "@bixboards/data-table": "workspace:*"
   }
 }

@@ -1,5 +1,5 @@
 // Side-effect: registers `<bx-slider>` under its default tag name. Import
-// `@bixant/core/slider/define` instead if a custom tag name/prefix is needed.
+// `@bixboards/core/slider/define` instead if a custom tag name/prefix is needed.
 import { defineSlider } from './define.ts';
 
 defineSlider();

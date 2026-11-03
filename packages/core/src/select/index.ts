@@ -1,5 +1,5 @@
 // Side-effect: registers `<bx-select>` under its default tag name. Import
-// `@bixant/core/select/define` instead if a custom tag name/prefix is needed.
+// `@bixboards/core/select/define` instead if a custom tag name/prefix is needed.
 import '../popup/index.ts';
 import '../option/index.ts';
 import '../badge/index.ts';

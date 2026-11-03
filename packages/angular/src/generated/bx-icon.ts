@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/icon';
-import type { BxIcon as BxIconElement } from '@bixant/core/icon';
+import '@bixboards/core/icon';
+import type { BxIcon as BxIconElement } from '@bixboards/core/icon';
 
 /**
  * `<bx-icon>` — icon from a registered library or URL, inlined SVG.

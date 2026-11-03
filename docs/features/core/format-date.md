@@ -2,19 +2,19 @@
 
 > Formats a date via `Intl.DateTimeFormat`.
 
-|                     |                  |
-| ------------------- | ---------------- |
-| **Package**         | `@bixant/core`   |
-| **Category**        | Utilities        |
-| **Tag**             | `bx-format-date` |
-| **Status**          | Planned          |
-| **Form-associated** | No               |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Utilities         |
+| **Tag**             | `bx-format-date`  |
+| **Status**          | Planned           |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Formats a date via `Intl.DateTimeFormat`. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Formats a date via `Intl.DateTimeFormat`. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

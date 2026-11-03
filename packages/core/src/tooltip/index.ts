@@ -1,5 +1,5 @@
 // Side-effect: registers `<bx-tooltip>` under its default tag name. Import
-// `@bixant/core/tooltip/define` instead if a custom tag name/prefix is needed.
+// `@bixboards/core/tooltip/define` instead if a custom tag name/prefix is needed.
 import { defineTooltip } from './define.ts';
 import '../popup/index.ts';
 

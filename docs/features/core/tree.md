@@ -2,19 +2,19 @@
 
 > Hierarchical tree with single/multi/leaf selection for small-to-medium data sets (use `bx-virtual-tree` for large).
 
-|                     |                |
-| ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
-| **Category**        | Organization   |
-| **Tag**             | `bx-tree`      |
-| **Status**          | Planned        |
-| **Form-associated** | No             |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Organization      |
+| **Tag**             | `bx-tree`         |
+| **Status**          | Planned           |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Hierarchical tree with single/multi/leaf selection for small-to-medium data sets (use `bx-virtual-tree` for large). Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Hierarchical tree with single/multi/leaf selection for small-to-medium data sets (use `bx-virtual-tree` for large). Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

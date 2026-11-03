@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/zoomable-frame';
-import type { BxZoomableFrame as BxZoomableFrameElement } from '@bixant/core/zoomable-frame';
+import '@bixboards/core/zoomable-frame';
+import type { BxZoomableFrame as BxZoomableFrameElement } from '@bixboards/core/zoomable-frame';
 
 /**
  * `<bx-zoomable-frame>` — iframe with zoom controls. Not form-associated.

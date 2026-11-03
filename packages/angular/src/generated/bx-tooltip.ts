@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/tooltip';
-import type { BxTooltip as BxTooltipElement } from '@bixant/core/tooltip';
+import '@bixboards/core/tooltip';
+import type { BxTooltip as BxTooltipElement } from '@bixboards/core/tooltip';
 
 /**
  * `<bx-tooltip>` — short hover/focus hint anchored to any element, positioned by an internal

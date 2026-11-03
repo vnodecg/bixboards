@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/animation';
-import '@bixant/core/animation/presets/bounce';
-import '@bixant/core/animation/presets/fade-in';
-import '@bixant/core/animation/presets/pulse';
-import '@bixant/core/animation/presets/shake';
-import '@bixant/core/animation/presets/spin';
-import '@bixant/core/animation/presets/zoom-in';
+import '@bixboards/core/animation';
+import '@bixboards/core/animation/presets/bounce';
+import '@bixboards/core/animation/presets/fade-in';
+import '@bixboards/core/animation/presets/pulse';
+import '@bixboards/core/animation/presets/shake';
+import '@bixboards/core/animation/presets/spin';
+import '@bixboards/core/animation/presets/zoom-in';
 
 interface Args {
   name: string;

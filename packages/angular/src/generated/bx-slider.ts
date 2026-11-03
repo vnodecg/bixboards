@@ -12,8 +12,8 @@ import {
   forwardRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, type ControlValueAccessor } from '@angular/forms';
-import '@bixant/core/slider';
-import type { BxSlider as BxSliderElement } from '@bixant/core/slider';
+import '@bixboards/core/slider';
+import type { BxSlider as BxSliderElement } from '@bixboards/core/slider';
 
 /**
  * `<bx-slider>` — single or range slider, form-associated via `ElementInternals`.

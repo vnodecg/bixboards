@@ -304,13 +304,13 @@ importers:
       '@angular/forms':
         specifier: '>=19'
         version: 22.2.0(@angular/common@22.2.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(@angular/platform-browser@22.2.0(@angular/common@22.2.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2)))(rxjs@7.8.2)
-      '@bixant/core':
+      '@bixboards/core':
         specifier: workspace:*
         version: link:../core
-      '@bixant/data-list':
+      '@bixboards/data-list':
         specifier: workspace:*
         version: link:../data-list
-      '@bixant/data-table':
+      '@bixboards/data-table':
         specifier: workspace:*
         version: link:../data-table
 
@@ -320,33 +320,33 @@ importers:
         specifier: ^3.3.3
         version: 3.3.3
     devDependencies:
-      '@bixant/design-system':
+      '@bixboards/design-system':
         specifier: workspace:*
         version: link:../design-system
 
   packages/data-list:
     dependencies:
-      '@bixant/core':
+      '@bixboards/core':
         specifier: workspace:*
         version: link:../core
       lit:
         specifier: ^3.3.3
         version: 3.3.3
     devDependencies:
-      '@bixant/design-system':
+      '@bixboards/design-system':
         specifier: workspace:*
         version: link:../design-system
 
   packages/data-table:
     dependencies:
-      '@bixant/core':
+      '@bixboards/core':
         specifier: workspace:*
         version: link:../core
       lit:
         specifier: ^3.3.3
         version: 3.3.3
     devDependencies:
-      '@bixant/design-system':
+      '@bixboards/design-system':
         specifier: workspace:*
         version: link:../design-system
 
@@ -354,13 +354,13 @@ importers:
 
   packages/react:
     dependencies:
-      '@bixant/core':
+      '@bixboards/core':
         specifier: workspace:*
         version: link:../core
-      '@bixant/data-list':
+      '@bixboards/data-list':
         specifier: workspace:*
         version: link:../data-list
-      '@bixant/data-table':
+      '@bixboards/data-table':
         specifier: workspace:*
         version: link:../data-table
       react:
@@ -372,28 +372,28 @@ importers:
 
   packages/storybook:
     devDependencies:
-      '@bixant/core':
+      '@bixboards/core':
         specifier: workspace:*
         version: link:../core
-      '@bixant/data-list':
+      '@bixboards/data-list':
         specifier: workspace:*
         version: link:../data-list
-      '@bixant/data-table':
+      '@bixboards/data-table':
         specifier: workspace:*
         version: link:../data-table
-      '@bixant/design-system':
+      '@bixboards/design-system':
         specifier: workspace:*
         version: link:../design-system
 
   packages/svelte:
     dependencies:
-      '@bixant/core':
+      '@bixboards/core':
         specifier: workspace:*
         version: link:../core
-      '@bixant/data-list':
+      '@bixboards/data-list':
         specifier: workspace:*
         version: link:../data-list
-      '@bixant/data-table':
+      '@bixboards/data-table':
         specifier: workspace:*
         version: link:../data-table
       svelte:

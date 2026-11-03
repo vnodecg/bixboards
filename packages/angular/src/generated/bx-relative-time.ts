@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/relative-time';
-import type { BxRelativeTime as BxRelativeTimeElement } from '@bixant/core/relative-time';
+import '@bixboards/core/relative-time';
+import type { BxRelativeTime as BxRelativeTimeElement } from '@bixboards/core/relative-time';
 
 /**
  * `<bx-relative-time>` — self-updating relative timestamp ("3 minutes ago") formatted via

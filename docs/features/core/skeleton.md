@@ -2,19 +2,19 @@
 
 > Placeholder shimmer while content loads.
 
-|                     |                |
-| ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
-| **Category**        | Feedback       |
-| **Tag**             | `bx-skeleton`  |
-| **Status**          | Implemented    |
-| **Form-associated** | No             |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Feedback          |
+| **Tag**             | `bx-skeleton`     |
+| **Status**          | Implemented       |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Placeholder shimmer while content loads. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Placeholder shimmer while content loads. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

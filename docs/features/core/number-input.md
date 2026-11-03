@@ -4,7 +4,7 @@
 
 |                     |                        |
 | ------------------- | ---------------------- |
-| **Package**         | `@bixant/core`         |
+| **Package**         | `@bixboards/core`      |
 | **Category**        | Form                   |
 | **Tag**             | `bx-number-input`      |
 | **Status**          | Planned                |
@@ -14,7 +14,7 @@ See [conventions](../_conventions.md) for shared rules (tokens, container querie
 
 ## 1. Overview
 
-Numeric field with steppers, locale-aware parsing and min/max clamping. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Numeric field with steppers, locale-aware parsing and min/max clamping. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

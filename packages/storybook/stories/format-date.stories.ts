@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/format-date';
+import '@bixboards/core/format-date';
 
 interface Args {
   date: string;

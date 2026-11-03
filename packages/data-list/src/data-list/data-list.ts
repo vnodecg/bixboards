@@ -6,8 +6,8 @@ import {
   type TemplateResult,
 } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
-import { BixElement, VirtualizerController, observeResize } from '@bixant/core';
-import { textStyle, textFamily } from '@bixant/core';
+import { BixElement, VirtualizerController, observeResize } from '@bixboards/core';
+import { textStyle, textFamily } from '@bixboards/core';
 
 type Key = string | number;
 type Layout = 'list' | 'grid' | 'masonry';

@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/button-group';
-import '@bixant/core/button';
-import '@bixant/core/copy-button';
-import '@bixant/core/icon';
-import '@bixant/core/tooltip';
+import '@bixboards/core/button-group';
+import '@bixboards/core/button';
+import '@bixboards/core/copy-button';
+import '@bixboards/core/icon';
+import '@bixboards/core/tooltip';
 
 interface Args {
   label: string;

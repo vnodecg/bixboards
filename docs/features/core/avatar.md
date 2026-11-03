@@ -2,19 +2,19 @@
 
 > User image, initials or icon with shape variants.
 
-|                     |                |
-| ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
-| **Category**        | Imagery        |
-| **Tag**             | `bx-avatar`    |
-| **Status**          | Implemented    |
-| **Form-associated** | No             |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Imagery           |
+| **Tag**             | `bx-avatar`       |
+| **Status**          | Implemented       |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-User image, initials or icon with shape variants. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+User image, initials or icon with shape variants. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 
@@ -118,7 +118,7 @@ Group collapses to "+N" by measured width.
 
 ## 10. Notes and open questions
 
-- Implemented in `@bixant/core` (`src/avatar/`), as `BxAvatar` plus a separate `BxAvatarGroup` (tag `bx-avatar-group`) for FR-AVATAR-02.
+- Implemented in `@bixboards/core` (`src/avatar/`), as `BxAvatar` plus a separate `BxAvatarGroup` (tag `bx-avatar-group`) for FR-AVATAR-02.
 - The default slot takes priority over image/initials/icon when it has assigned content, for fully custom avatar contents; `image` failing to load dispatches `bx-error` and falls back to `initials`, then the `icon` slot.
 - `bx-avatar-group`'s overflow ("+N") is driven by a `max` attribute over slotted children rather than a `ResizeObserver` measuring container width — deterministic under SSR and in tests, at the cost of not reflowing automatically when the container shrinks. A measured version can replace this later without changing the public API (`max`, `(default)` slot, `overflow` part).
 - Open: confirm final property names against the custom-elements manifest once the CEM generation pipeline exists.

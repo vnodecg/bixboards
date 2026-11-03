@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/resize-observer';
-import type { BxResizeObserver as BxResizeObserverElement } from '@bixant/core/resize-observer';
+import '@bixboards/core/resize-observer';
+import type { BxResizeObserver as BxResizeObserverElement } from '@bixboards/core/resize-observer';
 
 /**
  * `<bx-resize-observer>` — declaratively observes its own box size, firing `bx-resize` on change.

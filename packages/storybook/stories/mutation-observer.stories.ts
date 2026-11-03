@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/mutation-observer';
-import '@bixant/core/button';
+import '@bixboards/core/mutation-observer';
+import '@bixboards/core/button';
 
 interface Args {
   attr: string;

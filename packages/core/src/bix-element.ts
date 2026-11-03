@@ -4,7 +4,7 @@ import { defineCustomElement } from './internal/register.ts';
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
 
 /**
- * Base class for every Bixant component (docs/features/_conventions.md).
+ * Base class for every Bixboards component (docs/features/_conventions.md).
  *
  * This is deliberately small: a shared `box-sizing` reset, one `tagName`/`define()` pattern for
  * registration so per-component boilerplate doesn't drift, and a `prefersReducedMotion` check for
@@ -36,7 +36,7 @@ export abstract class BixElement extends LitElement {
    * second registration under the same name (HMR, a duplicate import) is skipped rather than
    * thrown, and registering under a different name gives the element a second, independent tag.
    *
-   * A component's side-effecting entry point (`@bixant/core/<component>`) calls this with the
+   * A component's side-effecting entry point (`@bixboards/core/<component>`) calls this with the
    * default name; call it yourself with a custom name/prefix instead of importing that entry
    * point when the app needs one (docs/features/_conventions.md §1).
    */

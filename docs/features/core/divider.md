@@ -2,19 +2,19 @@
 
 > Horizontal or vertical rule.
 
-|                     |                |
-| ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
-| **Category**        | Organization   |
-| **Tag**             | `bx-divider`   |
-| **Status**          | Implemented    |
-| **Form-associated** | No             |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Organization      |
+| **Tag**             | `bx-divider`      |
+| **Status**          | Implemented       |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Horizontal or vertical rule. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Horizontal or vertical rule. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 
@@ -96,6 +96,6 @@ All dimensions are expressed via `--bx-space-*`, `--bx-font-*`, `--bx-radius-*` 
 ## 10. Notes and open questions
 
 - Naming prefix is `bx-`; CSS hooks use `--bx-*`.
-- Implemented in `@bixant/core` (`src/divider/`), following the pattern established by `bx-animated-image`.
+- Implemented in `@bixboards/core` (`src/divider/`), following the pattern established by `bx-animated-image`.
 - `orientation="vertical"` needs a sizing context from its parent (flex/grid item, or an explicit block-size) — a vertical rule has no intrinsic height, the same constraint a vertical `<hr>` would have.
 - Open: confirm final property names against the custom-elements manifest once the CEM generation pipeline exists.

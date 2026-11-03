@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/avatar';
-import type { BxAvatar as BxAvatarElement } from '@bixant/core/avatar';
+import '@bixboards/core/avatar';
+import type { BxAvatar as BxAvatarElement } from '@bixboards/core/avatar';
 
 /**
  * `<bx-avatar>` — user image, initials or icon with shape variants.

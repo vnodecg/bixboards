@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/callout';
-import type { BxCallout as BxCalloutElement } from '@bixant/core/callout';
+import '@bixboards/core/callout';
+import type { BxCallout as BxCalloutElement } from '@bixboards/core/callout';
 
 /**
  * `<bx-callout>` — inline message block for info, warning and error.

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/tooltip';
-import '@bixant/core/button';
+import '@bixboards/core/tooltip';
+import '@bixboards/core/button';
 
 interface Args {
   placement: 'top' | 'bottom' | 'left' | 'right';

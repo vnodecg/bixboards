@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/mutation-observer';
-import type { BxMutationObserver as BxMutationObserverElement } from '@bixant/core/mutation-observer';
+import '@bixboards/core/mutation-observer';
+import type { BxMutationObserver as BxMutationObserverElement } from '@bixboards/core/mutation-observer';
 
 /**
  * `<bx-mutation-observer>` — declaratively observes its own light-DOM subtree for attribute,

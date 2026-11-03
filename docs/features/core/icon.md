@@ -2,19 +2,19 @@
 
 > Icon from a registered library or URL, inlined SVG.
 
-|                     |                |
-| ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
-| **Category**        | Imagery        |
-| **Tag**             | `bx-icon`      |
-| **Status**          | Implemented    |
-| **Form-associated** | No             |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Imagery           |
+| **Tag**             | `bx-icon`         |
+| **Status**          | Implemented       |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Icon from a registered library or URL, inlined SVG. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Icon from a registered library or URL, inlined SVG. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 
@@ -107,6 +107,6 @@ None.
 ## 10. Notes and open questions
 
 - Naming prefix is `bx-`; CSS hooks use `--bx-*`.
-- Implemented in `@bixant/core` (`src/icon/`). `registerIconLibrary(name, {resolver, mutator})` lives in `src/icon/registry.ts`; a resolver returns either raw SVG markup (used as-is — no network, this is how the bundled `default` library in `src/icon/default-library.ts` stays offline-safe) or a URL/data URI, which is fetched. Every result, and every `src` fetch, is sanitised (`<script>`/`<foreignObject>` stripped via `DOMParser`) and cached/de-duplicated by `library::family::variant::name` (or `src::<url>`) across every `<bx-icon>` instance on the page.
+- Implemented in `@bixboards/core` (`src/icon/`). `registerIconLibrary(name, {resolver, mutator})` lives in `src/icon/registry.ts`; a resolver returns either raw SVG markup (used as-is — no network, this is how the bundled `default` library in `src/icon/default-library.ts` stays offline-safe) or a URL/data URI, which is fetched. Every result, and every `src` fetch, is sanitised (`<script>`/`<foreignObject>` stripped via `DOMParser`) and cached/de-duplicated by `library::family::variant::name` (or `src::<url>`) across every `<bx-icon>` instance on the page.
 - The bundled `default` library ships a small set (`check`, `close`, `copy`, four `chevron-*`, `info`, `warning`) vendored from Phosphor Icons (regular weight, MIT) as path strings, matching the vendoring approach already used for `bx-animated-image`'s play/pause glyphs.
 - Open: confirm final property names against the custom-elements manifest once the CEM generation pipeline exists.

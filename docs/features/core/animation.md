@@ -2,19 +2,19 @@
 
 > Declarative Web Animations API wrapper with named presets.
 
-|                     |                |
-| ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
-| **Category**        | Utilities      |
-| **Tag**             | `bx-animation` |
-| **Status**          | Planned        |
-| **Form-associated** | No             |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Utilities         |
+| **Tag**             | `bx-animation`    |
+| **Status**          | Planned           |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Declarative Web Animations API wrapper with named presets. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Declarative Web Animations API wrapper with named presets. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/breadcrumb';
+import '@bixboards/core/breadcrumb';
 
 interface Args {
   label: string;

@@ -2,19 +2,19 @@
 
 > Low-level positioning primitive (anchor, flip, shift, size, arrow) used by dropdown, select, tooltip, popover.
 
-|                     |                |
-| ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
-| **Category**        | Utilities      |
-| **Tag**             | `bx-popup`     |
-| **Status**          | Planned        |
-| **Form-associated** | No             |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Utilities         |
+| **Tag**             | `bx-popup`        |
+| **Status**          | Planned           |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Low-level positioning primitive (anchor, flip, shift, size, arrow) used by dropdown, select, tooltip, popover. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Low-level positioning primitive (anchor, flip, shift, size, arrow) used by dropdown, select, tooltip, popover. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

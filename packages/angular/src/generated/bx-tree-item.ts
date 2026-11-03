@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/tree-item';
-import type { BxTreeItem as BxTreeItemElement } from '@bixant/core/tree-item';
+import '@bixboards/core/tree-item';
+import type { BxTreeItem as BxTreeItemElement } from '@bixboards/core/tree-item';
 
 /**
  * `<bx-tree-item>` — a node in `bx-tree`, with lazy children.

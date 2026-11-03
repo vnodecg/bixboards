@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/animation';
-import type { BxAnimation as BxAnimationElement } from '@bixant/core/animation';
+import '@bixboards/core/animation';
+import type { BxAnimation as BxAnimationElement } from '@bixboards/core/animation';
 
 /**
  * `<bx-animation>` — declarative Web Animations API wrapper with named presets.

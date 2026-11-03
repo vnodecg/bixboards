@@ -8,7 +8,7 @@ import {
   writeFiles,
 } from './build/index.ts';
 
-const USAGE = `bixant-ds <command> [options]
+const USAGE = `bixboards-ds <command> [options]
 
 Commands
   build              Compile themes to CSS custom properties and token files
@@ -149,7 +149,7 @@ function initTheme(
 ): number {
   if (!name || !/^[a-z][a-z0-9-]*$/.test(name)) {
     io.error(
-      'usage: bixant-ds init-theme <name> [--extends light] [--brand #4f46e5]',
+      'usage: bixboards-ds init-theme <name> [--extends light] [--brand #4f46e5]',
     );
     return 2;
   }
@@ -166,7 +166,7 @@ function initTheme(
   };
   fs.writeFileSync(file, `${JSON.stringify(theme, null, 2)}\n`);
   io.log(
-    `Created ${file}\nRoles (solid, fg, border, …) are derived from the seeds by contrast.\nBuild it with: bixant-ds build --theme ${name}.json`,
+    `Created ${file}\nRoles (solid, fg, border, …) are derived from the seeds by contrast.\nBuild it with: bixboards-ds build --theme ${name}.json`,
   );
   return 0;
 }

@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/avatar';
-import type { BxAvatarGroup as BxAvatarGroupElement } from '@bixant/core/avatar';
+import '@bixboards/core/avatar';
+import type { BxAvatarGroup as BxAvatarGroupElement } from '@bixboards/core/avatar';
 
 /**
  * `<bx-avatar-group>` — overlapping stack of `bx-avatar` with a "+N" overflow indicator.

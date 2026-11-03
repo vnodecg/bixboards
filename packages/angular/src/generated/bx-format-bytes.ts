@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/format-bytes';
-import type { BxFormatBytes as BxFormatBytesElement } from '@bixant/core/format-bytes';
+import '@bixboards/core/format-bytes';
+import type { BxFormatBytes as BxFormatBytesElement } from '@bixboards/core/format-bytes';
 
 /**
  * `<bx-format-bytes>` — formats a byte/bit count in a locale-aware, human-readable form.

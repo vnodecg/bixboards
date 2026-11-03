@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/badge';
+import '@bixboards/core/badge';
 
 interface Args {
   variant: 'default' | 'secondary' | 'tertiary' | 'error' | 'warning';

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/data-list/virtual-tree';
+import '@bixboards/data-list/virtual-tree';
 
 interface Args {
   selection: 'none' | 'single' | 'multiple' | 'leaf';

@@ -12,8 +12,8 @@ import {
   forwardRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, type ControlValueAccessor } from '@angular/forms';
-import '@bixant/core/select';
-import type { BxSelect as BxSelectElement } from '@bixant/core/select';
+import '@bixboards/core/select';
+import type { BxSelect as BxSelectElement } from '@bixboards/core/select';
 
 /**
  * `<bx-select>` — single or multiple choice with a searchable, virtualized listbox and

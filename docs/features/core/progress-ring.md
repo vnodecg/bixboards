@@ -4,7 +4,7 @@
 
 |                     |                    |
 | ------------------- | ------------------ |
-| **Package**         | `@bixant/core`     |
+| **Package**         | `@bixboards/core`  |
 | **Category**        | Feedback           |
 | **Tag**             | `bx-progress-ring` |
 | **Status**          | Implemented        |
@@ -14,7 +14,7 @@ See [conventions](../_conventions.md) for shared rules (tokens, container querie
 
 ## 1. Overview
 
-Circular progress indicator with centered label. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Circular progress indicator with centered label. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

@@ -12,8 +12,8 @@ import {
   forwardRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, type ControlValueAccessor } from '@angular/forms';
-import '@bixant/core/radio-group';
-import type { BxRadioGroup as BxRadioGroupElement } from '@bixant/core/radio-group';
+import '@bixboards/core/radio-group';
+import type { BxRadioGroup as BxRadioGroupElement } from '@bixboards/core/radio-group';
 
 /**
  * `<bx-radio-group>` — owns a set of slotted `bx-radio` children: single value, validation, and

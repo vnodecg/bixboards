@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/tab-group';
+import '@bixboards/core/tab-group';
 
 interface Args {
   placement: 'top' | 'bottom' | 'start' | 'end';

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/intersection-observer';
+import '@bixboards/core/intersection-observer';
 
 interface Args {
   threshold: string;

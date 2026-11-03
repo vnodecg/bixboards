@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/card';
-import type { BxCard as BxCardElement } from '@bixant/core/card';
+import '@bixboards/core/card';
+import type { BxCard as BxCardElement } from '@bixboards/core/card';
 
 /**
  * `<bx-card>` — container with header, media, body, footer and actions.

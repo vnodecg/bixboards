@@ -1,8 +1,8 @@
 /**
  * Tree-shakable preset registry (docs/features/core/animation.md FR-ANIMATION-01).
  *
- * Presets are opt-in: importing `@bixant/core/animation` alone registers no preset. Each preset
- * lives in its own subpath (`@bixant/core/animation/presets/<name>`) and registers itself as a
+ * Presets are opt-in: importing `@bixboards/core/animation` alone registers no preset. Each preset
+ * lives in its own subpath (`@bixboards/core/animation/presets/<name>`) and registers itself as a
  * side effect on import, so a bundler only ships the presets an app actually imports.
  */
 

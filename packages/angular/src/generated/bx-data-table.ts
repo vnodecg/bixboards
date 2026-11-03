@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/data-table/data-table';
-import type { BxDataTable as BxDataTableElement } from '@bixant/data-table/data-table';
+import '@bixboards/data-table/data-table';
+import type { BxDataTable as BxDataTableElement } from '@bixboards/data-table/data-table';
 
 /**
  * `<bx-data-table>` — virtualized enterprise data table (docs/features/data-table/data-table.md),

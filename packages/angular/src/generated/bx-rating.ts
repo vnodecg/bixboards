@@ -12,8 +12,8 @@ import {
   forwardRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, type ControlValueAccessor } from '@angular/forms';
-import '@bixant/core/rating';
-import type { BxRating as BxRatingElement } from '@bixant/core/rating';
+import '@bixboards/core/rating';
+import type { BxRating as BxRatingElement } from '@bixboards/core/rating';
 
 /**
  * `<bx-rating>` — star-style rating input/display with fractional precision, form-associated via

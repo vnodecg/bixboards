@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/intersection-observer';
-import type { BxIntersectionObserver as BxIntersectionObserverElement } from '@bixant/core/intersection-observer';
+import '@bixboards/core/intersection-observer';
+import type { BxIntersectionObserver as BxIntersectionObserverElement } from '@bixboards/core/intersection-observer';
 
 /**
  * `<bx-intersection-observer>` — declaratively observes its own intersection with a root (default

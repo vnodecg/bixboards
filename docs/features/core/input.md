@@ -4,7 +4,7 @@
 
 |                     |                        |
 | ------------------- | ---------------------- |
-| **Package**         | `@bixant/core`         |
+| **Package**         | `@bixboards/core`      |
 | **Category**        | Form                   |
 | **Tag**             | `bx-input`             |
 | **Status**          | Planned                |
@@ -14,7 +14,7 @@ See [conventions](../_conventions.md) for shared rules (tokens, container querie
 
 ## 1. Overview
 
-Single-line text field with all native input types, clearable, password toggle and prefix/suffix. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Single-line text field with all native input types, clearable, password toggle and prefix/suffix. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

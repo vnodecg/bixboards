@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/tree';
-import type { BxTree as BxTreeElement } from '@bixant/core/tree';
+import '@bixboards/core/tree';
+import type { BxTree as BxTreeElement } from '@bixboards/core/tree';
 
 /**
  * `<bx-tree>` — hierarchical tree owning a default-slotted, arbitrarily nested set of

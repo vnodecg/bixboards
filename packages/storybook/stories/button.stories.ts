@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/button';
+import '@bixboards/core/button';
 
 interface Args {
   variant: 'default' | 'secondary' | 'tertiary' | 'error' | 'warning';

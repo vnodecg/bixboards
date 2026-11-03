@@ -4,7 +4,7 @@
 
 |                     |                    |
 | ------------------- | ------------------ |
-| **Package**         | `@bixant/core`     |
+| **Package**         | `@bixboards/core`  |
 | **Category**        | Imagery            |
 | **Tag**             | `bx-carousel-item` |
 | **Status**          | Planned            |
@@ -14,7 +14,7 @@ See [conventions](../_conventions.md) for shared rules (tokens, container querie
 
 ## 1. Overview
 
-A single slide. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+A single slide. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

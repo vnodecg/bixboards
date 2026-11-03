@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/skeleton';
+import '@bixboards/core/skeleton';
 
 interface Args {
   effect: 'none' | 'pulse' | 'sheen';

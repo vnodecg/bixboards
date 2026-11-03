@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/tab';
-import '@bixant/core/tab-panel';
+import '@bixboards/core/tab';
+import '@bixboards/core/tab-panel';
 
 interface Args {
   active: boolean;

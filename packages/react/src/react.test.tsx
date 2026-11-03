@@ -37,7 +37,7 @@ const render = async (node: React.ReactNode): Promise<void> => {
   await aTimeout(30);
 };
 
-describe('@bixant/react', () => {
+describe('@bixboards/react', () => {
   it('registers the element and forwards a ref to it', async () => {
     const ref = createRef<BxButtonElement>();
     await render(<BxButton ref={ref}>Save</BxButton>);

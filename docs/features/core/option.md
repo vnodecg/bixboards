@@ -2,19 +2,19 @@
 
 > An item inside `bx-select`.
 
-|                     |                |
-| ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
-| **Category**        | Form           |
-| **Tag**             | `bx-option`    |
-| **Status**          | Implemented    |
-| **Form-associated** | No             |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Form              |
+| **Tag**             | `bx-option`       |
+| **Status**          | Implemented       |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-An item inside `bx-select`. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+An item inside `bx-select`. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

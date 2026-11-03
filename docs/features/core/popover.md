@@ -2,19 +2,19 @@
 
 > Rich, interactive floating panel anchored to an element.
 
-|                     |                |
-| ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
-| **Category**        | Overlays       |
-| **Tag**             | `bx-popover`   |
-| **Status**          | Implemented    |
-| **Form-associated** | No             |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Overlays          |
+| **Tag**             | `bx-popover`      |
+| **Status**          | Implemented       |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Rich, interactive floating panel anchored to an element. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Rich, interactive floating panel anchored to an element. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

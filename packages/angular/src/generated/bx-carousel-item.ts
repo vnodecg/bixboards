@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/carousel-item';
-import type { BxCarouselItem as BxCarouselItemElement } from '@bixant/core/carousel-item';
+import '@bixboards/core/carousel-item';
+import type { BxCarouselItem as BxCarouselItemElement } from '@bixboards/core/carousel-item';
 
 /**
  * `<bx-carousel-item>` — a single slide.

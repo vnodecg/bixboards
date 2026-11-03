@@ -1,5 +1,5 @@
 // Side-effect: registers `<bx-data-table>` and `<bx-column>`. Import
-// `@bixant/data-table/data-table/define` instead if a custom tag name/prefix is needed.
+// `@bixboards/data-table/data-table/define` instead if a custom tag name/prefix is needed.
 import { defineColumn, defineDataTable } from './define.ts';
 
 defineDataTable();

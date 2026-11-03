@@ -2,19 +2,19 @@
 
 > Inline message block for info, warning and error with optional icon and dismiss.
 
-|                     |                |
-| ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
-| **Category**        | Feedback       |
-| **Tag**             | `bx-callout`   |
-| **Status**          | Implemented    |
-| **Form-associated** | No             |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Feedback          |
+| **Tag**             | `bx-callout`      |
+| **Status**          | Implemented       |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
 ## 1. Overview
 
-Inline message block for info, warning and error with optional icon and dismiss. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Inline message block for info, warning and error with optional icon and dismiss. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

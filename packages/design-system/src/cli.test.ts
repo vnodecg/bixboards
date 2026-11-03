@@ -19,7 +19,7 @@ describe('cli', () => {
   it('prints usage and exits 0 for --help, 1 for no command', () => {
     const a = capture();
     assert.equal(run(['--help'], a.io), 0);
-    assert.match(a.out.join('\n'), /bixant-ds <command>/);
+    assert.match(a.out.join('\n'), /bixboards-ds <command>/);
     const b = capture();
     assert.equal(run([], b.io), 1);
   });
@@ -159,7 +159,7 @@ describe('cli', () => {
       );
       assert.equal(
         figma.foundation.unit.$value,
-        '18px',
+        '19px',
         'clamped to the max at a wide viewport',
       );
     } finally {

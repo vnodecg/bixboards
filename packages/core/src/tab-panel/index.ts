@@ -1,5 +1,5 @@
 // Side-effect: registers `<bx-tab-panel>` under its default tag name. Import
-// `@bixant/core/tab-panel/define` instead if a custom tag name/prefix is needed.
+// `@bixboards/core/tab-panel/define` instead if a custom tag name/prefix is needed.
 import { defineTabPanel } from './define.ts';
 
 defineTabPanel();

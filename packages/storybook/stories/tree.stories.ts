@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/tree';
+import '@bixboards/core/tree';
 
 interface Args {
   selection: 'single' | 'multiple' | 'leaf';
@@ -40,7 +40,7 @@ const meta = {
           <bx-tree-item
             slot="children"
             ?with-checkbox=${args.selection === 'multiple'}
-            >bixant</bx-tree-item
+            >bixboards</bx-tree-item
           >
         </bx-tree-item>
       </bx-tree-item>

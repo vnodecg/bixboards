@@ -1,5 +1,5 @@
 // Side-effect: registers `<bx-details>` under its default tag name. Import
-// `@bixant/core/details/define` instead if a custom tag name/prefix is needed.
+// `@bixboards/core/details/define` instead if a custom tag name/prefix is needed.
 import { defineDetails } from './define.ts';
 
 defineDetails();

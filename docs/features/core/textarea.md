@@ -4,7 +4,7 @@
 
 |                     |                        |
 | ------------------- | ---------------------- |
-| **Package**         | `@bixant/core`         |
+| **Package**         | `@bixboards/core`      |
 | **Category**        | Form                   |
 | **Tag**             | `bx-textarea`          |
 | **Status**          | Planned                |
@@ -14,7 +14,7 @@ See [conventions](../_conventions.md) for shared rules (tokens, container querie
 
 ## 1. Overview
 
-Multi-line text with auto-resize, character count and resize handle control. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Multi-line text with auto-resize, character count and resize handle control. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

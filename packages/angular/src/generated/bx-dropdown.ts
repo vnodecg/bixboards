@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/dropdown';
-import type { BxDropdown as BxDropdownElement } from '@bixant/core/dropdown';
+import '@bixboards/core/dropdown';
+import type { BxDropdown as BxDropdownElement } from '@bixboards/core/dropdown';
 
 /**
  * `<bx-dropdown>` — anchors a menu of `bx-dropdown-item`s to a trigger, positioned by an internal

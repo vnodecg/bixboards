@@ -12,8 +12,8 @@ import {
   forwardRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, type ControlValueAccessor } from '@angular/forms';
-import '@bixant/core/switch';
-import type { BxSwitch as BxSwitchElement } from '@bixant/core/switch';
+import '@bixboards/core/switch';
+import type { BxSwitch as BxSwitchElement } from '@bixboards/core/switch';
 
 /**
  * `<bx-switch>` — on/off toggle, form-associated via `ElementInternals`.

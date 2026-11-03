@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/comparison';
+import '@bixboards/core/comparison';
 
 interface Args {
   position: number;
@@ -24,12 +24,12 @@ const meta = {
     <bx-comparison position=${args.position} style="max-inline-size: 32rem">
       <img
         slot="before"
-        src="https://picsum.photos/seed/bixant-before/640/360?grayscale"
+        src="https://picsum.photos/seed/bixboards-before/640/360?grayscale"
         alt="Before"
       />
       <img
         slot="after"
-        src="https://picsum.photos/seed/bixant-before/640/360"
+        src="https://picsum.photos/seed/bixboards-before/640/360"
         alt="After"
       />
     </bx-comparison>
@@ -52,12 +52,12 @@ export const CustomHandle: Story = {
     <bx-comparison position=${args.position} style="max-inline-size: 32rem">
       <img
         slot="before"
-        src="https://picsum.photos/seed/bixant-h2/640/360?grayscale"
+        src="https://picsum.photos/seed/bixboards-h2/640/360?grayscale"
         alt="Before"
       />
       <img
         slot="after"
-        src="https://picsum.photos/seed/bixant-h2/640/360"
+        src="https://picsum.photos/seed/bixboards-h2/640/360"
         alt="After"
       />
       <span slot="handle" style="font-size: 1.25rem">↔</span>

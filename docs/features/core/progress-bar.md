@@ -4,7 +4,7 @@
 
 |                     |                   |
 | ------------------- | ----------------- |
-| **Package**         | `@bixant/core`    |
+| **Package**         | `@bixboards/core` |
 | **Category**        | Feedback          |
 | **Tag**             | `bx-progress-bar` |
 | **Status**          | Implemented       |
@@ -14,7 +14,7 @@ See [conventions](../_conventions.md) for shared rules (tokens, container querie
 
 ## 1. Overview
 
-Linear progress indicator, determinate or indeterminate. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Linear progress indicator, determinate or indeterminate. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

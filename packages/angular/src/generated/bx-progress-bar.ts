@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/progress-bar';
-import type { BxProgressBar as BxProgressBarElement } from '@bixant/core/progress-bar';
+import '@bixboards/core/progress-bar';
+import type { BxProgressBar as BxProgressBarElement } from '@bixboards/core/progress-bar';
 
 /**
  * `<bx-progress-bar>` — linear progress indicator, determinate or indeterminate.

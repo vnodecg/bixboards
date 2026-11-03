@@ -2,9 +2,9 @@
   "$schema": "../schema/foundation.schema.json",
   "scale": "1",
   "fluid": {
-    "min": "0.875rem",
-    "max": "1.125rem",
-    "preferred": "0.8125rem + 0.25vi"
+    "min": "0.9375rem",
+    "max": "1.1875rem",
+    "preferred": "0.875rem + 0.25vi"
   },
   "unit": "calc(clamp({fluid.min}, {fluid.preferred}, {fluid.max}) * {scale})",
   "target": {
@@ -40,9 +40,9 @@
       "bold": "700"
     },
     "leading": {
-      "tight": "1.25",
-      "snug": "1.4",
-      "normal": "1.55"
+      "tight": "1.3",
+      "snug": "1.5",
+      "normal": "1.65"
     }
   },
   "type": {
@@ -50,13 +50,13 @@
       "family": "{font.family.sans}",
       "l": {
         "size": "calc({unit} * 3)",
-        "weight": "{font.weight.bold}",
+        "weight": "{font.weight.semibold}",
         "leading": "{font.leading.tight}",
         "tracking": "-0.02em"
       },
       "m": {
         "size": "calc({unit} * 2.5)",
-        "weight": "{font.weight.bold}",
+        "weight": "{font.weight.semibold}",
         "leading": "{font.leading.tight}",
         "tracking": "-0.02em"
       }
@@ -65,7 +65,7 @@
       "family": "{font.family.sans}",
       "xl": {
         "size": "{font.3xl}",
-        "weight": "{font.weight.bold}",
+        "weight": "{font.weight.semibold}",
         "leading": "{font.leading.tight}",
         "tracking": "-0.01em"
       },
@@ -195,16 +195,16 @@
     }
   },
   "radius": {
-    "s": "calc({unit} * 0.375)",
-    "m": "calc({unit} * 0.5)",
-    "l": "calc({unit} * 0.75)",
+    "s": "calc({unit} * 0.5)",
+    "m": "calc({unit} * 0.75)",
+    "l": "calc({unit} * 1)",
     "pill": "9999px"
   },
   "control": {
     "height": {
-      "s": "calc({unit} * 2)",
-      "m": "calc({unit} * 2.5)",
-      "l": "calc({unit} * 3)"
+      "s": "calc({unit} * 2.125)",
+      "m": "calc({unit} * 2.625)",
+      "l": "calc({unit} * 3.125)"
     }
   },
   "border": {
@@ -215,20 +215,20 @@
     "ring-offset": "2px"
   },
   "shadow": {
-    "s": "0 1px 2px rgba(23, 25, 60, 0.05), 0 1px 3px rgba(23, 25, 60, 0.04)",
-    "m": "0 2px 4px rgba(23, 25, 60, 0.04), 0 8px 20px rgba(23, 25, 60, 0.08)",
-    "l": "0 4px 8px rgba(23, 25, 60, 0.05), 0 20px 48px rgba(23, 25, 60, 0.14)"
+    "s": "0 1px 2px rgba(30, 38, 50, 0.04), 0 1px 3px rgba(30, 38, 50, 0.03)",
+    "m": "0 2px 6px rgba(30, 38, 50, 0.03), 0 10px 28px rgba(30, 38, 50, 0.06)",
+    "l": "0 4px 12px rgba(30, 38, 50, 0.04), 0 24px 56px rgba(30, 38, 50, 0.1)"
   },
   "motion": {
     "duration": {
-      "fast": "120ms",
-      "base": "200ms",
-      "slow": "360ms",
-      "spin": "800ms",
-      "loop": "1600ms"
+      "fast": "160ms",
+      "base": "260ms",
+      "slow": "480ms",
+      "spin": "1100ms",
+      "loop": "2200ms"
     },
     "easing": {
-      "standard": "cubic-bezier(0.22, 1, 0.36, 1)"
+      "standard": "cubic-bezier(0.25, 0.8, 0.25, 1)"
     }
   },
   "z": {

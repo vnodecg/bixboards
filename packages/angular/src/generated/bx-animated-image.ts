@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/animated-image';
-import type { BxAnimatedImage as BxAnimatedImageElement } from '@bixant/core/animated-image';
+import '@bixboards/core/animated-image';
+import type { BxAnimatedImage as BxAnimatedImageElement } from '@bixboards/core/animated-image';
 
 /**
  * `<bx-animated-image>` — play/pause control for GIF and animated WebP.

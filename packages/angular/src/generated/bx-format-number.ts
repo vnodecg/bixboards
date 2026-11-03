@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import '@bixant/core/format-number';
-import type { BxFormatNumber as BxFormatNumberElement } from '@bixant/core/format-number';
+import '@bixboards/core/format-number';
+import type { BxFormatNumber as BxFormatNumberElement } from '@bixboards/core/format-number';
 
 /**
  * `<bx-format-number>` — formats numbers, currency and percent via `Intl.NumberFormat`.

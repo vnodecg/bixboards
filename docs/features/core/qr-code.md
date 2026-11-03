@@ -4,7 +4,7 @@
 
 |                     |                |
 | ------------------- | -------------- |
-| **Package**         | `@bixant/core` |
+| **Package**         | `@bixboards/core` |
 | **Category**        | Imagery        |
 | **Tag**             | `bx-qr-code`   |
 | **Status**          | Planned        |
@@ -14,7 +14,7 @@ See [conventions](../_conventions.md) for shared rules (tokens, container querie
 
 ## 1. Overview
 
-Generates a QR code from a value. Specified for the Bixant token system (fluid sizing, container-query reflow) and enterprise data volumes.
+Generates a QR code from a value. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes.
 
 ## 2. API
 

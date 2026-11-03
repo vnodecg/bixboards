@@ -1,7 +1,7 @@
 {
-  "name": "@bixant/core",
+  "name": "@bixboards/core",
   "version": "0.0.0",
-  "description": "Bixant general component catalog: base classes, VirtualizerController and general-purpose custom elements. Consumes @bixant/design-system tokens.",
+  "description": "Bixboards general component catalog: base classes, VirtualizerController and general-purpose custom elements. Consumes @bixboards/design-system tokens.",
   "license": "MIT",
   "type": "module",
   "sideEffects": [
@@ -530,6 +530,6 @@
     "lit": "^3.3.3"
   },
   "devDependencies": {
-    "@bixant/design-system": "workspace:*"
+    "@bixboards/design-system": "workspace:*"
   }
 }

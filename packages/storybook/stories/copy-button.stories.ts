@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/copy-button';
-import '@bixant/core/button';
-import '@bixant/core/button-group';
-import '@bixant/core/input';
+import '@bixboards/core/copy-button';
+import '@bixboards/core/button';
+import '@bixboards/core/button-group';
+import '@bixboards/core/input';
 
 interface Args {
   value: string;
@@ -53,7 +53,7 @@ const meta = {
     },
   },
   args: {
-    value: 'npm install @bixant/core',
+    value: 'npm install @bixboards/core',
     from: '',
     disabled: false,
     variant: 'secondary',
@@ -92,7 +92,7 @@ export const FromElement: Story = {
   render: () => html`
     <div style="display: flex; flex-direction: column; gap: 0.75rem">
       <div style="display: flex; align-items: center; gap: 0.5rem">
-        <code id="cb-src-text">pnpm add @bixant/core</code>
+        <code id="cb-src-text">pnpm add @bixboards/core</code>
         <bx-copy-button
           from="cb-src-text"
           copy-label="Copy text content"

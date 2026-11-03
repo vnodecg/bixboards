@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '@bixant/core/switch';
+import '@bixboards/core/switch';
 
 interface Args {
   checked: boolean;

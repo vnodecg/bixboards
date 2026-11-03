@@ -112,7 +112,7 @@ describe('build (built-in data)', () => {
     );
 
     const figma = JSON.parse(result.files['tokens.figma.json'] as string);
-    assert.equal(figma.foundation.space.m.$value, '16.2px');
+    assert.equal(figma.foundation.space.m.$value, '17.2px');
     assert.equal(figma.foundation.space.m.$type, 'dimension');
     assert.equal(figma.foundation.radius.pill.$value, '9999px');
   });
@@ -186,7 +186,7 @@ describe('build (custom data)', () => {
       );
       assert.equal(
         b.tokens['surface.base'],
-        '#14151f',
+        '#16191d',
         'dark surface wins over light',
       );
       assert.match(
