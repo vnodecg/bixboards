@@ -2,9 +2,9 @@
 
 One detailed feature document per component. Shared rules live in [_conventions.md](_conventions.md). Product context: [PRD](../PRD.md).
 
-**61 components** across 3 packages.
+**90 components** across 3 packages (29 proposed additions).
 
-> **Status: proposals, hand-maintained.** These documents are the specification for each component. 59 are implemented (see [IMPLEMENTATION.md](IMPLEMENTATION.md) for the full tracker); the rest do not exist yet. API shapes for the unimplemented components are design proposals and have **not** been validated against real usage; confirm names and behavior when implementing each. Appearance, variant and size options are defined here, per component, and are implemented on top of the design-system tokens (colors from roles, sizes from the fluid scale) — the design system itself contains no component definitions. Conventions: appearance names use spaces (`filled outlined`), variants are the design-system palettes, and component CSS hooks are `--bx-<component>-<parameter>` (parts use short names; only custom properties carry the component prefix).
+> **Status: proposals, hand-maintained.** These documents are the specification for each component. 59 of the first 61 are implemented, and the proposed additions are not (see [IMPLEMENTATION.md](IMPLEMENTATION.md) for the full tracker); the rest do not exist yet. API shapes for the unimplemented components are design proposals and have **not** been validated against real usage; confirm names and behavior when implementing each. Appearance, variant and size options are defined here, per component, and are implemented on top of the design-system tokens (colors from roles, sizes from the fluid scale) — the design system itself contains no component definitions. Conventions: appearance names use spaces (`filled outlined`), variants are the design-system palettes, and component CSS hooks are `--bx-<component>-<parameter>` (parts use short names; only custom properties carry the component prefix).
 
 ## `@bixboards/core`
 
@@ -100,6 +100,69 @@ One detailed feature document per component. Shared rules live in [_conventions.
 | [`bx-mutation-observer`](core/mutation-observer.md)         | Declarative MutationObserver.                                                                                  |
 | [`bx-resize-observer`](core/resize-observer.md)             | Declarative ResizeObserver.                                                                                    |
 | [`bx-popup`](core/popup.md)                                 | Low-level positioning primitive (anchor, flip, shift, size, arrow) used by dropdown, select, tooltip, popover. |
+
+### Proposed additions
+
+Specified, not implemented. Scope informed by a gap analysis against [BoardUI](https://www.boardui.com/) (see [boardui-gap-analysis](../boardui-gap-analysis.md)); APIs are original.
+
+**Actions**
+
+| Component                                   | Summary                                                                            |
+| ------------------------------------------- | ---------------------------------------------------------------------------------- |
+| [`bx-icon-button`](core/icon-button.md)     | Square or round button that shows only an icon, with a required accessible label.  |
+| [`bx-close-button`](core/close-button.md)   | Standard dismiss control (×) used by dialogs, drawers, callouts, toasts and chips. |
+| [`bx-social-button`](core/social-button.md) | Branded sign-in / share button for common identity providers and social networks.  |
+| [`bx-toggle-button`](core/toggle-button.md) | Button with a persistent pressed state, standalone or inside a group.              |
+
+**Form**
+
+| Component                                           | Summary                                                                                                        |
+| --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| [`bx-combobox`](core/combobox.md)                   | Text input with a filterable, virtualized listbox; free text or restricted to options; async source supported. |
+| [`bx-input-otp`](core/input-otp.md)                 | Segmented one-time-code entry with paste, autofill and auto-advance.                                           |
+| [`bx-file-upload`](core/file-upload.md)             | Drop zone and picker with file list, validation, progress and removal.                                         |
+| [`bx-search-field`](core/search-field.md)           | Search-specific input with leading icon, clear button, debounced search event and optional suggestions.        |
+| [`bx-segmented-control`](core/segmented-control.md) | Compact single-choice control rendered as connected segments with a sliding indicator.                         |
+| [`bx-calendar`](core/calendar.md)                   | Month grid for navigating and picking a date, range or multiple dates.                                         |
+| [`bx-date-picker`](core/date-picker.md)             | Date (or date range) field with typed entry and a `bx-calendar` popup.                                         |
+| [`bx-time-field`](core/time-field.md)               | Segmented time entry (hours, minutes, optional seconds, AM/PM) with locale-aware 12/24h.                       |
+| [`bx-tag-input`](core/tag-input.md)                 | Free-form multi-value entry that turns typed text into removable chips.                                        |
+
+**Feedback**
+
+| Component                                               | Summary                                                                                            |
+| ------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| [`bx-chip`](core/chip.md)                               | Compact token for tags, filters and selections; optionally selectable, removable or clickable.     |
+| [`bx-meter`](core/meter.md)                             | Scalar measurement within a known range (disk usage, score) with low/high/optimum bands.           |
+| [`bx-toast`](core/toast.md)                             | Transient, non-blocking message stack created imperatively or declaratively.                       |
+| [`bx-notification-center`](core/notification-center.md) | Bell trigger plus panel listing persistent notifications with unread state, grouping and actions.  |
+| [`bx-empty-state`](core/empty-state.md)                 | Illustrated placeholder for empty lists, search with no results and errors, with a primary action. |
+| [`bx-stepper`](core/stepper.md)                         | Multi-step progress indicator and wizard navigation, horizontal or vertical.                       |
+
+**Navigation**
+
+| Component                                       | Summary                                                                                                 |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| [`bx-pagination`](core/pagination.md)           | Page navigation with numbered pages, ellipsis collapsing, page size selector and compact mode.          |
+| [`bx-sidebar`](core/sidebar.md)                 | Application navigation rail with groups, nested items, collapse-to-icons and a mobile drawer mode.      |
+| [`bx-command-palette`](core/command-palette.md) | Global ⌘K-style launcher: fuzzy search over commands, pages and recent items with groups and shortcuts. |
+| [`bx-context-menu`](core/context-menu.md)       | Right-click / long-press menu anchored at the pointer, reusing dropdown items.                          |
+
+**Display**
+
+| Component                             | Summary                                                                                       |
+| ------------------------------------- | --------------------------------------------------------------------------------------------- |
+| [`bx-stat-card`](core/stat-card.md)   | KPI tile with label, value, delta trend and optional sparkline.                               |
+| [`bx-kbd`](core/kbd.md)               | Keyboard shortcut display that adapts modifier glyphs to the platform.                        |
+| [`bx-timeline`](core/timeline.md)     | Chronological list of events with markers, connectors and alternating or one-sided layout.    |
+| [`bx-code-block`](core/code-block.md) | Syntax-highlighted code with line numbers, highlighting, wrapping and a built-in copy button. |
+
+**Charts**
+
+| Component                           | Summary                                                                                                                            |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| [`bx-chart`](core/chart.md)         | Declarative chart element wrapping a charting library: line, area, bar, radial, radar, scatter, heatmap, funnel, sankey and combo. |
+| [`bx-sparkline`](core/sparkline.md) | Tiny dependency-free inline trend line, bar or area chart for tables and stat cards.                                               |
 
 ## `@bixboards/data-table`
 

@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import { templates } from '../data/site';
+---
+
+<Base title="Templates · Bixboards">
+  <section class="block">
+    <div class="wrap">
+      <h2>Templates</h2>
+      <p class="lead">Complete screens built from Bixboards components. Coming soon.</p>
+      <div class="grid">
+        {
+          templates.map((t) => (
+            <div class="tile">
+              <h3>{t.name}</h3>
+              <p>{t.blurb}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>

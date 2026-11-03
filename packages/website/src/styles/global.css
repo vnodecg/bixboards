@@ -1,0 +1,155 @@
+@import './generated/tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  background: var(--bx-surface-base);
+  color: var(--bx-text-primary);
+  font-family: var(--bx-font-family-sans);
+  font-size: var(--bx-font-m);
+  line-height: 1.5;
+}
+a {
+  color: var(--bx-text-link);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+.wrap {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+header.site {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--bx-surface-base) 85%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--bx-border-subtle);
+}
+header.site .wrap {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  min-height: 3.5rem;
+}
+header.site nav {
+  display: flex;
+  gap: 1.25rem;
+  flex: 1;
+}
+header.site nav a {
+  color: var(--bx-text-secondary);
+  font-weight: 500;
+}
+.logo {
+  font-weight: 700;
+  color: var(--bx-text-primary);
+  font-size: 1.125rem;
+}
+.hero {
+  padding-block: 6rem 4rem;
+  text-align: center;
+}
+.hero h1 {
+  font-size: clamp(2.25rem, 6vw, 4rem);
+  line-height: 1.1;
+  margin: 0 0 1rem;
+  letter-spacing: -0.02em;
+}
+.hero p {
+  max-width: 40rem;
+  margin: 0 auto 2rem;
+  color: var(--bx-text-secondary);
+  font-size: 1.125rem;
+}
+.cta {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+section.block {
+  padding-block: 3rem;
+}
+section.block h2 {
+  font-size: 1.75rem;
+  margin: 0 0 0.5rem;
+}
+section.block p.lead {
+  color: var(--bx-text-secondary);
+  margin: 0 0 2rem;
+}
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+}
+.tile {
+  display: block;
+  border: 1px solid var(--bx-border-subtle);
+  border-radius: var(--bx-radius-l);
+  padding: 1.25rem;
+  background: var(--bx-surface-subtle);
+  color: var(--bx-text-primary);
+}
+.tile h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+}
+.tile p {
+  margin: 0;
+  color: var(--bx-text-secondary);
+  font-size: 0.9rem;
+}
+.demo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+pre.code {
+  background: var(--bx-surface-inverse);
+  color: var(--bx-text-inverse);
+  padding: 1rem;
+  border-radius: var(--bx-radius-m);
+  overflow-x: auto;
+}
+footer.site {
+  border-top: 1px solid var(--bx-border-subtle);
+  padding-block: 2rem;
+  color: var(--bx-text-secondary);
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.chip {
+  border: 1px solid var(--bx-border-subtle);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.85rem;
+}
+.chip.planned {
+  opacity: 0.6;
+  border-style: dashed;
+}
+@media (max-width: 40rem) {
+  header.site nav {
+    gap: 0.75rem;
+  }
+  .hero {
+    padding-block: 3rem 2rem;
+  }
+}

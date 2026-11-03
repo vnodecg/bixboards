@@ -1,0 +1,22 @@
+{
+  "name": "@bixboards/website",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "tokens": "node ../design-system/src/bin.ts build --strict --theme themes/board.json --theme themes/board-dark.json --out src/styles/generated",
+    "dev": "pnpm run tokens && astro dev",
+    "build": "pnpm run tokens && astro build",
+    "preview": "astro preview",
+    "test": "node --test \"tests/**/*.test.ts\"",
+    "typecheck": "pnpm run tokens && astro check"
+  },
+  "dependencies": {
+    "@bixboards/core": "workspace:*",
+    "@bixboards/design-system": "workspace:*",
+    "astro": "^5.14.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "../../design-system/schema/theme.schema.json",
+  "name": "board",
+  "extends": "light",
+  "seeds": { "brand": "#3b82f6", "neutral": "#737373" },
+  "tokens": { "surface": { "base": "#ffffff" } },
+  "foundation": {
+    "font": { "family": { "sans": "Inter, system-ui, sans-serif" } },
+    "radius": {
+      "s": "calc({unit} * 0.75)",
+      "m": "calc({unit} * 1.25)",
+      "l": "calc({unit} * 2)"
+    }
+  }
+}

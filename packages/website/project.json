@@ -1,0 +1,32 @@
+{
+  "name": "website",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "implicitDependencies": ["design-system", "core"],
+  "targets": {
+    "dev": {
+      "executor": "nx:run-commands",
+      "continuous": true,
+      "options": { "command": "pnpm run dev", "cwd": "packages/website" }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": ["default", "^default", "{projectRoot}/../design-system/data/**/*"],
+      "outputs": ["{projectRoot}/dist"],
+      "options": { "command": "pnpm run build", "cwd": "packages/website" },
+      "dependsOn": ["^build"]
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "options": { "command": "pnpm run test", "cwd": "packages/website" }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "options": { "command": "pnpm run typecheck", "cwd": "packages/website" },
+      "dependsOn": ["^build"]
+    }
+  }
+}

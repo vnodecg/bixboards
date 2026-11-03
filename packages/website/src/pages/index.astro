@@ -1,0 +1,94 @@
+---
+import Base from '../layouts/Base.astro';
+import { features, templates, components } from '../data/site';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const available = components.filter((c) => c.status === 'available').length;
+---
+
+<Base title="Bixboards">
+  <section class="hero wrap">
+    <h1>Web components for modern dashboards</h1>
+    <p>
+      {available}+ accessible, themeable components that work in any framework. Ship dashboards,
+      boards and apps faster.
+    </p>
+    <div class="cta">
+      <bx-button href={`${base}/components/`}>Browse components</bx-button>
+      <bx-button appearance="outlined" href={`${base}/templates/`}>View templates</bx-button>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <h2>Live components</h2>
+      <p class="lead">Rendered with the real library.</p>
+      <div class="grid">
+        <bx-card with-header>
+          <span slot="header">Buttons</span>
+          <div class="demo">
+            <bx-button>Primary</bx-button>
+            <bx-button variant="secondary">Secondary</bx-button>
+            <bx-button variant="error">Delete</bx-button>
+          </div>
+        </bx-card>
+        <bx-card with-header>
+          <span slot="header">Form</span>
+          <div class="demo">
+            <bx-input label="Email"></bx-input>
+            <bx-switch>Notifications</bx-switch>
+            <bx-checkbox>Remember me</bx-checkbox>
+          </div>
+        </bx-card>
+        <bx-card with-header>
+          <span slot="header">Feedback</span>
+          <div class="demo">
+            <bx-badge>New</bx-badge>
+            <bx-progress-bar value="64" style="width:100%"></bx-progress-bar>
+            <bx-callout>Changes saved.</bx-callout>
+          </div>
+        </bx-card>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <h2>Why Bixboards</h2>
+      <p class="lead">Built for teams that outgrow copy-paste UI.</p>
+      <div class="grid">
+        {
+          features.map((f) => (
+            <div class="tile">
+              <h3>{f.title}</h3>
+              <p>{f.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <h2>Ready-made templates</h2>
+      <p class="lead">Start from a complete screen.</p>
+      <div class="grid">
+        {
+          templates.map((t) => (
+            <a class="tile" href={`${base}/templates/`}>
+              <h3>{t.name}</h3>
+              <p>{t.blurb}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <h2>Install</h2>
+      <pre class="code"><code>pnpm add @bixboards/core @bixboards/design-system</code></pre>
+    </div>
+  </section>
+</Base>

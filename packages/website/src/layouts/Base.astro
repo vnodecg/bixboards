@@ -1,0 +1,71 @@
+---
+import '../styles/global.css';
+interface Props {
+  title: string;
+  description?: string;
+}
+const {
+  title,
+  description = 'Bixboards: framework-agnostic web components with token-driven theming.',
+} = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script is:inline>
+      try {
+        var t = localStorage.getItem('theme');
+        if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'board-dark' : 'board';
+        document.documentElement.dataset.theme = t;
+      } catch (e) {
+        document.documentElement.dataset.theme = 'board';
+      }
+    </script>
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrap">
+        <a class="logo" href={`${base}/`}>Bixboards</a>
+        <nav aria-label="Main">
+          <a href={`${base}/components/`}>Components</a>
+          <a href={`${base}/templates/`}>Templates</a>
+        </nav>
+        <bx-button id="theme-toggle" appearance="outlined" size="s">Toggle theme</bx-button>
+      </div>
+    </header>
+    <main><slot /></main>
+    <footer class="site"><div class="wrap">Bixboards. MIT licensed.</div></footer>
+    <script>
+      import '@bixboards/core/button/define';
+      import '@bixboards/core/badge/define';
+      import '@bixboards/core/card/define';
+      import '@bixboards/core/callout/define';
+      import '@bixboards/core/switch/define';
+      import '@bixboards/core/input/define';
+      import '@bixboards/core/checkbox/define';
+      import '@bixboards/core/progress-bar/define';
+
+      document.getElementById('theme-toggle')?.addEventListener('click', () => {
+        const next =
+          document.documentElement.dataset.theme === 'board-dark' ? 'board' : 'board-dark';
+        document.documentElement.dataset.theme = next;
+        try {
+          localStorage.setItem('theme', next);
+        } catch {
+          /* storage unavailable */
+        }
+      });
+    </script>
+  </body>
+</html>

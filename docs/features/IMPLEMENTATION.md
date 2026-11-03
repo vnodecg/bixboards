@@ -1,8 +1,8 @@
 # Implementation checklist
 
-Tracks build status for all 61 components across `@bixboards/core`, `@bixboards/data-table` and `@bixboards/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
+Tracks build status for all 90 components across `@bixboards/core`, `@bixboards/data-table` and `@bixboards/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 59 / 61 done.**
+**Progress: 59 / 90 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -114,6 +114,57 @@ Depend on `VirtualizerController` (Tier 4).
 - [x] [`bx-virtual-tree`](data-list/virtual-tree.md) (`@bixboards/data-list`; indexed once into pre-order arrays so collapsed subtrees are skipped and branch tri-state is two integers; filtering is a main-thread linear pass, not a Worker; tree-_table_ mode and the `expand-icon`/`collapse-icon` slots not implemented, the `node` slot is the `renderNode` property — see the component's own doc comment) — depends on `VirtualizerController`; data-driven counterpart of `bx-tree` — `packages/data-list/src/virtual-tree`
 - [x] [`bx-data-list`](data-list/data-list.md) (`@bixboards/data-list`; `layout="masonry"` renders as `grid`, since column packing needs per-column virtualization the shared virtualizer lacks; `item`/`group-header` slots are the `renderItem`/`renderGroupHeader` properties; focus stays on the viewport with `aria-activedescendant` — see the component's own doc comment) — depends on `VirtualizerController` — `packages/data-list/src/data-list`
 - [x] [`bx-data-table`](data-table/data-table.md) (`@bixboards/data-table`; sort/filter/group run on the main thread over typed-array index arrays, no Worker, so FR-DATA-TABLE-04's Worker path is not implemented; tree-data mode, column show/hide menu, drag-to-pin UI and toolbar overflow menu not implemented; `row-detail` is the `renderDetail` property; the built-in editors are native `<input>`/`<select>`, and `bx-input`/`bx-select` are used by passing a function `editor` — see the component's own doc comment) — depends on `VirtualizerController` — `packages/data-table/src/data-table`
+
+## Tier 7 — Proposed additions (BoardUI gap)
+
+Not started. Each depends only on components in earlier tiers or on others in this tier as noted.
+
+### Actions
+
+- [ ] [`bx-icon-button`](core/icon-button.md) (depends on button, icon, spinner)
+- [ ] [`bx-close-button`](core/close-button.md) (depends on icon-button)
+- [ ] [`bx-social-button`](core/social-button.md) (depends on button, icon)
+- [ ] [`bx-toggle-button`](core/toggle-button.md) (depends on button, button-group, soft)
+
+### Form
+
+- [ ] [`bx-combobox`](core/combobox.md) (depends on select, option, popup, input, virtualizer)
+- [ ] [`bx-input-otp`](core/input-otp.md) (depends on input)
+- [ ] [`bx-file-upload`](core/file-upload.md) (depends on button, progress-bar, format-bytes, icon)
+- [ ] [`bx-search-field`](core/search-field.md) (depends on input, combobox, soft)
+- [ ] [`bx-segmented-control`](core/segmented-control.md) (depends on radio-group, resize-observer)
+- [ ] [`bx-calendar`](core/calendar.md) (depends on button)
+- [ ] [`bx-date-picker`](core/date-picker.md) (depends on calendar, popup, input)
+- [ ] [`bx-time-field`](core/time-field.md) (depends on date-picker, soft)
+- [ ] [`bx-tag-input`](core/tag-input.md) (depends on chip, input)
+
+### Feedback
+
+- [ ] [`bx-chip`](core/chip.md) (depends on close-button, badge, soft)
+- [ ] [`bx-meter`](core/meter.md) (depends on progress-bar, soft)
+- [ ] [`bx-toast`](core/toast.md) (depends on callout, close-button, popup)
+- [ ] [`bx-notification-center`](core/notification-center.md) (depends on popover, drawer, badge, relative-time, data-list, icon-button)
+- [ ] [`bx-empty-state`](core/empty-state.md) (depends on icon, button)
+- [ ] [`bx-stepper`](core/stepper.md) (depends on tab-group, soft)
+
+### Navigation
+
+- [ ] [`bx-pagination`](core/pagination.md) (depends on button, select, data-table, soft)
+- [ ] [`bx-sidebar`](core/sidebar.md) (depends on page, drawer, tooltip, badge, icon)
+- [ ] [`bx-command-palette`](core/command-palette.md) (depends on dialog, combobox, kbd, virtualizer)
+- [ ] [`bx-context-menu`](core/context-menu.md) (depends on dropdown, dropdown-item, popup)
+
+### Display
+
+- [ ] [`bx-stat-card`](core/stat-card.md) (depends on card, format-number, skeleton, sparkline, soft)
+- [ ] [`bx-kbd`](core/kbd.md)
+- [ ] [`bx-timeline`](core/timeline.md) (depends on relative-time, format-date, icon)
+- [ ] [`bx-code-block`](core/code-block.md) (depends on copy-button, scroller)
+
+### Charts
+
+- [ ] [`bx-chart`](core/chart.md) (depends on skeleton, resize-observer, intersection-observer)
+- [ ] [`bx-sparkline`](core/sparkline.md)
 
 ## Framework wrappers (after the above)
 

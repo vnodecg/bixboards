@@ -1,0 +1,6 @@
+{
+  "$schema": "../../design-system/schema/theme.schema.json",
+  "name": "board-dark",
+  "extends": ["board", "dark"],
+  "tokens": { "surface": { "base": "#121212" } }
+}

@@ -1,0 +1,122 @@
+# `<bx-toast>`
+
+> Transient, non-blocking message stack created imperatively or declaratively.
+
+|                     |                                    |
+| ------------------- | ---------------------------------- |
+| **Package**         | `@bixboards/core`                  |
+| **Category**        | Feedback                           |
+| **Tag**             | `bx-toast`                         |
+| **Status**          | Proposed (not implemented)         |
+| **Form-associated** | No                                 |
+| **Depends on**      | `callout`, `close-button`, `popup` |
+
+See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
+
+## 1. Overview
+
+Transient, non-blocking message stack created imperatively or declaratively. Specified for the Bixboards token system (fluid sizing, container-query reflow) and enterprise data volumes. Reference: the equivalent component category in BoardUI informed the scope; the API, copy and visuals are original.
+
+## 2. API
+
+### Properties / attributes
+
+| Name                              | Type                                                 | Default      | Description                         |
+| --------------------------------- | ---------------------------------------------------- | ------------ | ----------------------------------- |
+| `variant`                         | info/success/warning/error/neutral                   | "neutral"    | -                                   |
+| `duration`                        | number                                               | 5000         | ms before auto-dismiss; 0 = sticky. |
+| `closable`                        | boolean                                              | true         | -                                   |
+| `open`                            | boolean                                              | false        | -                                   |
+| `position (on `bx-toast-region`)` | top-start/top/top-end/bottom-start/bottom/bottom-end | "bottom-end" | -                                   |
+| `max-visible (region)`            | number                                               | 3            | -                                   |
+
+### Slots
+
+| Name        | Description                |
+| ----------- | -------------------------- |
+| `(default)` | Message.                   |
+| `icon`      | Overrides variant icon.    |
+| `action`    | Action button (e.g. Undo). |
+
+### Events
+
+| Event                                               | Detail / notes    |
+| --------------------------------------------------- | ----------------- |
+| `bx-show / bx-after-show / bx-hide / bx-after-hide` | Lifecycle.        |
+| `bx-action`                                         | Action slot used. |
+
+### CSS parts
+
+| Part           | Description            |
+| -------------- | ---------------------- |
+| `base`         | The base part.         |
+| `icon`         | The icon part.         |
+| `message`      | The message part.      |
+| `action`       | The action part.       |
+| `close-button` | The close-button part. |
+
+### CSS custom properties
+
+| Property                      | Description                                                              |
+| ----------------------------- | ------------------------------------------------------------------------ |
+| `--bx-toast-width`            | Max width.                                                               |
+| `--bx-toast-offset`           | Distance from the viewport edge (adds safe-area insets).                 |
+| `--bx-toast-duration`         | Enter/exit transition.                                                   |
+| `--bx-toast-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
+| `--bx-toast-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
+| `--bx-toast-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+
+### Methods
+
+`show()`, `hide()`, `toast(options) (static, returns the element)`
+
+## 3. Functional requirements
+
+- **FR-TOAST-01** A single `bx-toast-region` per document hosts the stack, created on first `Toast.show()`.
+- **FR-TOAST-02** Timer pauses on hover, focus and when the tab is hidden.
+- **FR-TOAST-03** Respects `prefers-reduced-motion` (fade only).
+- **FR-TOAST-04** Honors `--bx-safe-area-inset-*` (conventions §12).
+- **FR-TOAST-05** Queue is capped; overflow replaces oldest non-sticky toast.
+
+## 4. Fluid scaling
+
+Width in `ch`/rem with a max of the viewport minus gutters.
+
+All dimensions are expressed via `--bx-space-*`, `--bx-font-*`, `--bx-radius-*` tokens that resolve through `clamp()` and the single `--bx-scale` multiplier. No media queries or fixed px sizes (except 1 px hairlines).
+
+## 5. Container-query behavior
+
+Spans the full width on narrow viewports.
+
+## 6. Accessibility
+
+- Region is `role="region"` + `aria-live` (`polite`; `assertive` for error); toasts with actions are not auto-dismissed while focused; never the sole carrier of critical info.
+- Meets WCAG 2.2 AA: keyboard operable, visible focus, 4.5:1 text / 3:1 UI contrast, target size ≥ 24 px (44 px on coarse pointers), respects `prefers-reduced-motion` and forced-colors.
+- Fully operable at 200% zoom and with user text-spacing overrides without loss of content.
+
+## 7. Performance & reliability
+
+- Render cost O(1) per instance: no work in `connectedCallback` beyond scheduling; observers are created lazily and shared where possible.
+- Styles are shared via constructable stylesheets (`adoptedStyleSheets`); no per-instance `<style>` cloning.
+- No forced synchronous layout in hot paths; reads and writes are batched.
+- Safe to upgrade/define lazily; safe to move between documents and re-connect (no leaked listeners/observers).
+- SSR: renders declarative shadow DOM (Lit SSR) without touching browser-only APIs at import time.
+
+## 8. Framework wrapper notes
+
+- React: thin wrapper generated from the custom-elements manifest; props are set as properties, events map to `onBxEvent` handlers, refs forward to the element.
+- Angular: standalone directive/component wrapper with `@Input`/`@Output`.
+- Svelte: typed component wrapper exposing props and callback events.
+
+## 9. Acceptance criteria
+
+- [ ] All FR-TOAST-* requirements covered by unit/component tests (`toast.test.ts`, Web Test Runner, real browsers).
+- [ ] axe-core: zero violations in every meaningful state; manual screen-reader pass documented.
+- [ ] Keyboard-only walkthrough covered by tests.
+- [ ] Light + dark themes and scale 0.85 / 1 / 1.25 verified in Storybook (visual regression once tooling covers it).
+- [ ] Wrapper smoke tests (React, Angular, Svelte) render and round-trip props/events.
+
+## 10. Notes and open questions
+
+- Naming prefix is `bx-`; CSS hooks use `--bx-*`.
+- Proposed API: confirm names against real usage and the custom-elements manifest during implementation.
