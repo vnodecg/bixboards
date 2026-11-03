@@ -76,3 +76,6 @@ packages/storybook/.storybook/generated
 # Storybook vitest
 .vitest-attachments
 __screenshots__
+
+# Visual regression screenshots
+packages/storybook/tests/screenshots/
