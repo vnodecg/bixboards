@@ -36,5 +36,10 @@
     "@bixboards/core": "workspace:*",
     "@bixboards/data-list": "workspace:*",
     "@bixboards/data-table": "workspace:*"
+  },
+  "devDependencies": {
+    "@sveltejs/package": "^2.3.0",
+    "svelte": "^5.0.0",
+    "svelte-check": "^4.0.0"
   }
 }

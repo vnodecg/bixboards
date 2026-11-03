@@ -17,6 +17,7 @@
     "@bixboards/core": "workspace:*",
     "@bixboards/data-list": "workspace:*",
     "@bixboards/data-table": "workspace:*",
-    "@bixboards/design-system": "workspace:*"
+    "@bixboards/design-system": "workspace:*",
+    "lit": "^3.3.3"
   }
 }

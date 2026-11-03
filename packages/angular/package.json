@@ -33,5 +33,14 @@
     "@bixboards/core": "workspace:*",
     "@bixboards/data-list": "workspace:*",
     "@bixboards/data-table": "workspace:*"
+  },
+  "devDependencies": {
+    "@angular/common": "^22.0.0",
+    "@angular/compiler": "^22.0.0",
+    "@angular/compiler-cli": "^22.0.0",
+    "@angular/core": "^22.0.0",
+    "@angular/forms": "^22.0.0",
+    "@angular/platform-browser": "^22.0.0",
+    "rxjs": "^7.8.0"
   }
 }
