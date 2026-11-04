@@ -175,6 +175,6 @@ Not started. Each depends only on components in earlier tiers or on others in th
 
 Not per-component tasks — generated once from the Custom Elements Manifest, per conventions §8:
 
-- [ ] `@bixboards/react`
-- [ ] `@bixboards/angular`
-- [ ] `@bixboards/svelte`
+- [x] `@bixboards/react` (generated for all 98 elements; its smoke tests pass in Chromium and it typechecks)
+- [x] `@bixboards/angular` (generated for all 98 elements; its smoke tests pass in Chromium and it typechecks)
+- [x] `@bixboards/svelte` (generated for all 98 elements; its smoke tests pass in Chromium and it typechecks)
