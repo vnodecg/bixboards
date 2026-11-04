@@ -19858,6 +19858,335 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/time-field/time-field.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxTimeField",
+          "tagName": "bx-time-field",
+          "customElement": true,
+          "formAssociated": true,
+          "description": "`<bx-time-field>` — segmented time entry (docs/features/core/time-field.md).\n\nHour, minute, optional second and AM/PM are separate `role=\"spinbutton\"` segments, each a tab\nstop: type digits (auto-advancing once the segment can take no more), ArrowUp/Down step\n(minutes by `step`), PageUp/Down step by 10, Home/End jump to the bounds, Backspace clears,\nArrowLeft/Right move between segments, and `a`/`p` set AM/PM. `value` is always 24-hour\n`HH:mm[:ss]` and is only set once every segment is filled. 12/24-hour display follows\n`hour-cycle` (default: the locale's). Form-associated, with `min`/`max` validity. It is a\nstandalone field — it does not build on `bx-date-picker`, and it has no popup.",
+          "superclass": {
+            "name": "FormAssociatedMixin"
+          },
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "hint",
+              "fieldName": "hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "hour-cycle",
+              "fieldName": "hourCycle",
+              "type": {
+                "text": "HourCycle"
+              },
+              "default": "'auto'"
+            },
+            {
+              "name": "granularity",
+              "fieldName": "granularity",
+              "type": {
+                "text": "'hour' | 'minute' | 'second'"
+              },
+              "default": "'minute'"
+            },
+            {
+              "name": "min",
+              "fieldName": "min",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "max",
+              "fieldName": "max",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "step",
+              "fieldName": "step",
+              "type": {
+                "text": "number"
+              },
+              "default": "1"
+            },
+            {
+              "name": "locale",
+              "fieldName": "locale",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "required",
+              "fieldName": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'"
+            },
+            {
+              "name": "invalid",
+              "fieldName": "invalid",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "hint"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "hourCycle",
+              "type": {
+                "text": "HourCycle"
+              },
+              "default": "'auto'",
+              "attribute": "hour-cycle"
+            },
+            {
+              "kind": "field",
+              "name": "granularity",
+              "type": {
+                "text": "'hour' | 'minute' | 'second'"
+              },
+              "default": "'minute'",
+              "attribute": "granularity"
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "step",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "attribute": "step"
+            },
+            {
+              "kind": "field",
+              "name": "locale",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "locale"
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "required",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "invalid",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "invalid",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "focus",
+              "parameters": [
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "FocusOptions"
+                  },
+                  "optional": true
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "input",
+              "description": "A segment changed."
+            },
+            {
+              "name": "change",
+              "description": "The complete value changed."
+            },
+            {
+              "name": "bx-invalid",
+              "description": "Constraint validation failed."
+            }
+          ],
+          "slots": [
+            {
+              "name": "label",
+              "description": "Label content."
+            },
+            {
+              "name": "hint",
+              "description": "Help text."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "form-control",
+              "description": "The form-control part."
+            },
+            {
+              "name": "segment",
+              "description": "One editable segment."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-time-field-bg",
+              "description": "Field background."
+            },
+            {
+              "name": "--bx-time-field-border-color",
+              "description": "Field border color."
+            },
+            {
+              "name": "--bx-time-field-radius",
+              "description": "Field radius."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/timeline-item/timeline-item.ts",
       "declarations": [
         {

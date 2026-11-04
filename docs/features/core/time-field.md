@@ -2,14 +2,14 @@
 
 > Segmented time entry (hours, minutes, optional seconds, AM/PM) with locale-aware 12/24h.
 
-|                     |                            |
-| ------------------- | -------------------------- |
-| **Package**         | `@bixboards/core`          |
-| **Category**        | Form                       |
-| **Tag**             | `bx-time-field`            |
-| **Status**          | Proposed (not implemented) |
-| **Form-associated** | Yes (ElementInternals)     |
-| **Depends on**      | _date-picker_ (soft)       |
+|                     |                        |
+| ------------------- | ---------------------- |
+| **Package**         | `@bixboards/core`      |
+| **Category**        | Form                   |
+| **Tag**             | `bx-time-field`        |
+| **Status**          | Implemented            |
+| **Form-associated** | Yes (ElementInternals) |
+| **Depends on**      | _date-picker_ (soft)   |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
@@ -54,18 +54,15 @@ Segmented time entry (hours, minutes, optional seconds, AM/PM) with locale-aware
 | Part           | Description            |
 | -------------- | ---------------------- |
 | `form-control` | The form-control part. |
-| `segment`      | Editable segment.      |
-| `literal`      | Separator.             |
-| `period`       | AM/PM.                 |
+| `segment`      | One editable segment.  |
 
 ### CSS custom properties
 
-| Property                           | Description                                                              |
-| ---------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-time-field-segment-bg-focus` | Focused segment background.                                              |
-| `--bx-time-field-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-time-field-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-time-field-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                       | Description         |
+| ------------------------------ | ------------------- |
+| `--bx-time-field-bg`           | Field background.   |
+| `--bx-time-field-border-color` | Field border color. |
+| `--bx-time-field-radius`       | Field radius.       |
 
 ### Methods
 

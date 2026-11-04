@@ -670,6 +670,14 @@
       "types": "./dist/textarea/define.d.ts",
       "default": "./dist/textarea/define.js"
     },
+    "./time-field": {
+      "types": "./dist/time-field/index.d.ts",
+      "default": "./dist/time-field/index.js"
+    },
+    "./time-field/define": {
+      "types": "./dist/time-field/define.d.ts",
+      "default": "./dist/time-field/define.js"
+    },
     "./timeline": {
       "types": "./dist/timeline/index.d.ts",
       "default": "./dist/timeline/index.js"

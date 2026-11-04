@@ -79,6 +79,7 @@ export * from './generated/bx-tab-group.ts';
 export * from './generated/bx-tab-panel.ts';
 export * from './generated/bx-tag-input.ts';
 export * from './generated/bx-textarea.ts';
+export * from './generated/bx-time-field.ts';
 export * from './generated/bx-timeline.ts';
 export * from './generated/bx-timeline-item.ts';
 export * from './generated/bx-toast.ts';

@@ -157,6 +157,8 @@ export { default as BxTagInput } from './generated/BxTagInput.svelte';
 export type { BxTagInputProps, BxTagInputSlot } from './generated/BxTagInput.svelte';
 export { default as BxTextarea } from './generated/BxTextarea.svelte';
 export type { BxTextareaProps, BxTextareaSlot } from './generated/BxTextarea.svelte';
+export { default as BxTimeField } from './generated/BxTimeField.svelte';
+export type { BxTimeFieldProps, BxTimeFieldSlot } from './generated/BxTimeField.svelte';
 export { default as BxTimeline } from './generated/BxTimeline.svelte';
 export type { BxTimelineProps, BxTimelineSlot } from './generated/BxTimeline.svelte';
 export { default as BxTimelineItem } from './generated/BxTimelineItem.svelte';

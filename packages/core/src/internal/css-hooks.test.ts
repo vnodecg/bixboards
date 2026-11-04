@@ -217,6 +217,7 @@ const MARKUP: Record<string, string | string[]> = {
     '<bx-calendar mode="range" month="2024-05" value="2024-05-10/2024-05-14"></bx-calendar>',
   'bx-date-picker':
     '<bx-date-picker label="D" value="2024-05-09"></bx-date-picker>',
+  'bx-time-field': '<bx-time-field label="T" value="09:30"></bx-time-field>',
   'bx-input':
     '<bx-input label="Label" hint="Hint" clearable value="x"></bx-input>',
   'bx-number-input':
