@@ -166,6 +166,11 @@ Not started. Each depends only on components in earlier tiers or on others in th
 - [x] [`bx-chart`](core/chart.md) (dependency-free `svg` adapter draws line/area/bar/stacked-bar/bar-list/scatter/radial; radar/heatmap/funnel/sankey/combo need a registered `ChartAdapter` (no ECharts adapter ships); points are not individually keyboard-focusable (the data table is the non-pointer reading path)) — depends on skeleton, resize-observer, intersection-observer — `packages/core/src/chart`
 - [x] [`bx-sparkline`](core/sparkline.md) (exports `decimate`; `trend-is-good` has no default (the spec's `up` would colour every sparkline); highlight is a zero-length round-capped stroke so it stays circular under non-uniform scaling) — `packages/core/src/sparkline`
 
+### Specified, previously untracked
+
+- [x] [`bx-qr-code`](core/qr-code.md) (encoding by the `qrcode-generator` library, not an own encoder; drawn as one SVG path rather than a canvas) — `packages/core/src/qr-code`
+- [ ] [`bx-split-panel`](core/split-panel.md)
+
 ## Framework wrappers (after the above)
 
 Not per-component tasks — generated once from the Custom Elements Manifest, per conventions §8:

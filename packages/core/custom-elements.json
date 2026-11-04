@@ -14382,6 +14382,154 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/qr-code/qr-code.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxQrCode",
+          "tagName": "bx-qr-code",
+          "customElement": true,
+          "description": "`<bx-qr-code>` — QR code from `value` (docs/features/core/qr-code.md).\n\nEncoding is done by the `qrcode-generator` library (a deliberate change from the spec's \"own\nencoder\"); drawing is one SVG `<path>` (crisp at any size, instead of a canvas), regenerated only\nwhen `value` or `error-correction` change. `size` is in px, or `fill` to follow the container\nwidth. `fill`/`background` are CSS colors; the default `currentColor` on a transparent\nbackground keeps contrast with the theme (scanners need dark-on-light, so set `background` when\nthe page is dark). `role=\"img\"` with `label` (falling back to the value). A value too long for\nthe chosen error-correction level renders nothing and fires `bx-error`.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "string"
+              },
+              "default": "'128'"
+            },
+            {
+              "name": "fill",
+              "fieldName": "fill",
+              "type": {
+                "text": "string"
+              },
+              "default": "'currentColor'"
+            },
+            {
+              "name": "background",
+              "fieldName": "background",
+              "type": {
+                "text": "string"
+              },
+              "default": "'transparent'"
+            },
+            {
+              "name": "radius",
+              "fieldName": "radius",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "name": "error-correction",
+              "fieldName": "errorCorrection",
+              "type": {
+                "text": "Level"
+              },
+              "default": "'H'"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "string"
+              },
+              "default": "'128'",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "fill",
+              "type": {
+                "text": "string"
+              },
+              "default": "'currentColor'",
+              "attribute": "fill"
+            },
+            {
+              "kind": "field",
+              "name": "background",
+              "type": {
+                "text": "string"
+              },
+              "default": "'transparent'",
+              "attribute": "background"
+            },
+            {
+              "kind": "field",
+              "name": "radius",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "radius"
+            },
+            {
+              "kind": "field",
+              "name": "errorCorrection",
+              "type": {
+                "text": "Level"
+              },
+              "default": "'H'",
+              "attribute": "error-correction"
+            }
+          ],
+          "events": [
+            {
+              "name": "bx-error",
+              "description": "The value could not be encoded."
+            }
+          ],
+          "slots": [],
+          "cssParts": [],
+          "cssProperties": []
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/radio-group/radio-group.ts",
       "declarations": [
         {

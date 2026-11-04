@@ -115,6 +115,8 @@ export { default as BxProgressBar } from './generated/BxProgressBar.svelte';
 export type { BxProgressBarProps, BxProgressBarSlot } from './generated/BxProgressBar.svelte';
 export { default as BxProgressRing } from './generated/BxProgressRing.svelte';
 export type { BxProgressRingProps, BxProgressRingSlot } from './generated/BxProgressRing.svelte';
+export { default as BxQrCode } from './generated/BxQrCode.svelte';
+export type { BxQrCodeProps, BxQrCodeSlot } from './generated/BxQrCode.svelte';
 export { default as BxRadio } from './generated/BxRadio.svelte';
 export type { BxRadioProps, BxRadioSlot } from './generated/BxRadio.svelte';
 export { default as BxRadioGroup } from './generated/BxRadioGroup.svelte';

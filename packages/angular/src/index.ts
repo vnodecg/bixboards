@@ -57,6 +57,7 @@ export * from './generated/bx-popover.ts';
 export * from './generated/bx-popup.ts';
 export * from './generated/bx-progress-bar.ts';
 export * from './generated/bx-progress-ring.ts';
+export * from './generated/bx-qr-code.ts';
 export * from './generated/bx-radio.ts';
 export * from './generated/bx-radio-group.ts';
 export * from './generated/bx-rating.ts';
