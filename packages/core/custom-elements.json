@@ -3231,6 +3231,156 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/close-button/close-button.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxCloseButton",
+          "tagName": "bx-close-button",
+          "customElement": true,
+          "description": "`<bx-close-button>` — the standard dismiss control (×) (docs/features/core/close-button.md).\n\nA thin specialisation of `bx-icon-button` with a fixed `close` icon and a localisable default\nlabel (FR-CLOSEBUTTON-01). Activation emits a cancelable `bx-close`; Escape handling stays in\nthe owning overlay (FR-CLOSEBUTTON-03).",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Close'"
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'"
+            },
+            {
+              "name": "appearance",
+              "fieldName": "appearance",
+              "type": {
+                "text": "'plain' | 'filled'"
+              },
+              "default": "'plain'"
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Close'",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "appearance",
+              "type": {
+                "text": "'plain' | 'filled'"
+              },
+              "default": "'plain'",
+              "attribute": "appearance",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "focus",
+              "parameters": [
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "FocusOptions"
+                  },
+                  "optional": true
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "blur",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "click",
+              "description": "Native click."
+            },
+            {
+              "name": "bx-close",
+              "description": "Activation. Bubbles, composed, cancelable."
+            }
+          ],
+          "slots": [],
+          "cssParts": [
+            {
+              "name": "base",
+              "description": "The button surface."
+            },
+            {
+              "name": "icon",
+              "description": "The × glyph."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-close-button-size",
+              "description": "Hit target size. Default `var(--bx-target-min)`."
+            },
+            {
+              "name": "--bx-close-button-icon-size",
+              "description": "Glyph size. Default `0.875em`."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/color-picker/color-picker.ts",
       "declarations": [
         {

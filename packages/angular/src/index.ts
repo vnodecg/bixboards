@@ -13,6 +13,7 @@ export * from './generated/bx-card.ts';
 export * from './generated/bx-carousel.ts';
 export * from './generated/bx-carousel-item.ts';
 export * from './generated/bx-checkbox.ts';
+export * from './generated/bx-close-button.ts';
 export * from './generated/bx-color-picker.ts';
 export * from './generated/bx-column.ts';
 export * from './generated/bx-comparison.ts';
