@@ -2,14 +2,14 @@
 
 > Illustrated placeholder for empty lists, search with no results and errors, with a primary action.
 
-|                     |                            |
-| ------------------- | -------------------------- |
-| **Package**         | `@bixboards/core`          |
-| **Category**        | Feedback                   |
-| **Tag**             | `bx-empty-state`           |
-| **Status**          | Proposed (not implemented) |
-| **Form-associated** | No                         |
-| **Depends on**      | `icon`, `button`           |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Feedback          |
+| **Tag**             | `bx-empty-state`  |
+| **Status**          | Implemented       |
+| **Form-associated** | No                |
+| **Depends on**      | `icon`, `button`  |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
@@ -52,11 +52,10 @@ _None._
 
 ### CSS custom properties
 
-| Property                       | Description                                        |
-| ------------------------------ | -------------------------------------------------- |
-| `--bx-empty-state-max-width`   | Content width.                                     |
-| `--bx-empty-state-media-size`  | Illustration size.                                 |
-| `--bx-empty-state-font-family` | Font family. Default `var(--bx-font-family-sans)`. |
+| Property                      | Description        |
+| ----------------------------- | ------------------ |
+| `--bx-empty-state-max-width`  | Content width.     |
+| `--bx-empty-state-media-size` | Illustration size. |
 
 ### Methods
 

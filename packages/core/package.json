@@ -262,6 +262,14 @@
       "types": "./dist/dropdown/define.d.ts",
       "default": "./dist/dropdown/define.js"
     },
+    "./empty-state": {
+      "types": "./dist/empty-state/index.d.ts",
+      "default": "./dist/empty-state/index.js"
+    },
+    "./empty-state/define": {
+      "types": "./dist/empty-state/define.d.ts",
+      "default": "./dist/empty-state/define.js"
+    },
     "./format-bytes": {
       "types": "./dist/format-bytes/index.d.ts",
       "default": "./dist/format-bytes/index.js"

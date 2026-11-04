@@ -6543,6 +6543,160 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/empty-state/empty-state.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxEmptyState",
+          "tagName": "bx-empty-state",
+          "customElement": true,
+          "description": "`<bx-empty-state>` — placeholder for empty lists, no-result searches and errors\n(docs/features/core/empty-state.md).\n\nPresentational (FR-EMPTYSTATE-01). `variant` selects a default icon and copy from\n; `heading`/`description` and the `media` slot override them. The heading is\n`role=\"heading\"` at a configurable `heading-level` (FR-EMPTYSTATE-03, default 3) so it never\nbreaks the document outline. Not yet wired into `bx-data-table`/`bx-data-list`.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "heading",
+              "fieldName": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "variant",
+              "fieldName": "variant",
+              "type": {
+                "text": "Variant"
+              },
+              "default": "'empty'"
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'"
+            },
+            {
+              "name": "heading-level",
+              "fieldName": "headingLevel",
+              "type": {
+                "text": "number"
+              },
+              "default": "3"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "heading"
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "description"
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "Variant"
+              },
+              "default": "'empty'",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "headingLevel",
+              "type": {
+                "text": "number"
+              },
+              "default": "3",
+              "attribute": "heading-level"
+            }
+          ],
+          "events": [],
+          "slots": [
+            {
+              "name": "media",
+              "description": "Illustration or icon."
+            },
+            {
+              "name": "",
+              "description": "Extra content."
+            },
+            {
+              "name": "actions",
+              "description": "Buttons."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "base",
+              "description": "The base part."
+            },
+            {
+              "name": "media",
+              "description": "The media part."
+            },
+            {
+              "name": "heading",
+              "description": "The heading part."
+            },
+            {
+              "name": "description",
+              "description": "The description part."
+            },
+            {
+              "name": "actions",
+              "description": "The actions part."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-empty-state-max-width",
+              "description": "Content width."
+            },
+            {
+              "name": "--bx-empty-state-media-size",
+              "description": "Illustration size."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/format-bytes/format-bytes.ts",
       "declarations": [
         {
