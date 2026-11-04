@@ -45,7 +45,10 @@ export class BxIcon extends BixElement {
         block-size: 100%;
       }
 
-      .svg svg {
+      /* Inherited default so packs that set fill/stroke on the root <svg> (Lucide, Feather,
+         Heroicons outline: fill="none" stroke="currentColor") keep their own paint; glyph-only
+         packs (Phosphor, Material) with no paint attributes fall back to currentColor. */
+      .svg {
         fill: currentColor;
       }
 

@@ -92,6 +92,54 @@ describe('bx-icon', () => {
       .undefined;
   });
 
+  it('strips event-handler attributes and javascript: hrefs', async () => {
+    registerIconLibrary('handler-lib', {
+      resolver: () =>
+        '<svg viewBox="0 0 10 10" onload="1"><a href="javascript:alert(1)"><circle r="5" onclick="1"/></a></svg>',
+    });
+    const { el, loaded } = mount({ library: 'handler-lib', name: 'x' });
+    await loaded;
+    const root = el.shadowRoot!;
+    expect(root.querySelector('[onload]')).to.be.null;
+    expect(root.querySelector('[onclick]')).to.be.null;
+    expect(root.querySelector('a')!.hasAttribute('href')).to.be.false;
+  });
+
+  it('keeps stroke-style packs unfilled (root fill="none" is not overridden)', async () => {
+    registerIconLibrary('stroke-lib', {
+      resolver: () =>
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 12h16"/></svg>',
+    });
+    const { el, loaded } = mount({ library: 'stroke-lib', name: 'minus' });
+    await loaded;
+    const svg = el.shadowRoot!.querySelector('svg')!;
+    expect(getComputedStyle(svg).fill).to.equal('none');
+    expect(getComputedStyle(svg.querySelector('path')!).fill).to.equal('none');
+  });
+
+  it('fills glyph packs with currentColor and derives a viewBox from width/height', async () => {
+    registerIconLibrary('glyph-lib', {
+      resolver: () =>
+        '<svg width="20" height="20"><path d="M0 0h20v20z"/></svg>',
+    });
+    const { el, loaded } = mount({ library: 'glyph-lib', name: 'tri' });
+    await loaded;
+    const svg = el.shadowRoot!.querySelector('svg')!;
+    expect(svg.getAttribute('viewBox')).to.equal('0 0 20 20');
+    expect(getComputedStyle(svg.querySelector('path')!).fill).to.equal(
+      getComputedStyle(el).color,
+    );
+  });
+
+  it('renders any SVG from `src`, including a data: URI', async () => {
+    const svg = encodeURIComponent(
+      '<svg viewBox="0 0 10 10"><circle r="5"/></svg>',
+    );
+    const { el, loaded } = mount({ src: `data:image/svg+xml,${svg}` });
+    await loaded;
+    expect(el.shadowRoot!.querySelector('circle')).to.exist;
+  });
+
   it('has no axe violations, decorative or labelled', async () => {
     const { el, loaded } = mount({ name: 'check' });
     await loaded;

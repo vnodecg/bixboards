@@ -109,4 +109,14 @@ None.
 - Naming prefix is `bx-`; CSS hooks use `--bx-*`.
 - Implemented in `@bixboards/core` (`src/icon/`). `registerIconLibrary(name, {resolver, mutator})` lives in `src/icon/registry.ts`; a resolver returns either raw SVG markup (used as-is — no network, this is how the bundled `default` library in `src/icon/default-library.ts` stays offline-safe) or a URL/data URI, which is fetched. Every result, and every `src` fetch, is sanitised (`<script>`/`<foreignObject>` stripped via `DOMParser`) and cached/de-duplicated by `library::family::variant::name` (or `src::<url>`) across every `<bx-icon>` instance on the page.
 - The bundled `default` library ships a small set (`check`, `close`, `copy`, four `chevron-*`, `info`, `warning`) vendored from Phosphor Icons (regular weight, MIT) as path strings, matching the vendoring approach already used for `bx-animated-image`'s play/pause glyphs.
+- **Any SVG source works.** The bundled set is only a small offline default; `<bx-icon>` is pack-agnostic. Register a library (Lucide, Heroicons, Feather, Material, your own sprite folder) or pass `src`:
+  ```js
+  registerIconLibrary('lucide', {
+    resolver: (name) =>
+      `https://unpkg.com/lucide-static@0.469.0/icons/${name}.svg`,
+  });
+  // <bx-icon library="lucide" name="settings"></bx-icon>
+  // <bx-icon src="/assets/logo.svg"></bx-icon>  (URLs and data: URIs)
+  ```
+  Paint is inherited, not forced: `fill: currentColor` is set on the wrapper, so glyph packs (Phosphor, Material) with no paint attributes take the text colour, while stroke packs that set `fill="none" stroke="currentColor"` on the root (Lucide, Feather, Heroicons outline) keep it. A missing `viewBox` is derived from `width`/`height` so the icon scales with `--bx-icon-size`. Sanitisation also strips `on*` attributes and `javascript:` hrefs.
 - Open: confirm final property names against the custom-elements manifest once the CEM generation pipeline exists.
