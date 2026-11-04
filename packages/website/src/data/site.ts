@@ -7,7 +7,11 @@ export interface ComponentEntry {
   status: ComponentStatus;
 }
 
-const mk = (category: string, status: ComponentStatus, names: string[]): ComponentEntry[] =>
+const mk = (
+  category: string,
+  status: ComponentStatus,
+  names: string[],
+): ComponentEntry[] =>
   names.map((name) => ({
     name,
     tag: `bx-${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
@@ -17,7 +21,12 @@ const mk = (category: string, status: ComponentStatus, names: string[]): Compone
 
 export const components: ComponentEntry[] = [
   ...mk('Actions', 'available', ['Button', 'Button Group', 'Copy Button']),
-  ...mk('Actions', 'planned', ['Icon Button', 'Close Button', 'Link Button', 'Social Button']),
+  ...mk('Actions', 'planned', [
+    'Icon Button',
+    'Close Button',
+    'Link Button',
+    'Social Button',
+  ]),
   ...mk('Forms', 'available', [
     'Input',
     'Number Input',
@@ -56,17 +65,44 @@ export const components: ComponentEntry[] = [
     'Comparison',
   ]),
   ...mk('Display', 'planned', ['Chip', 'Meter']),
-  ...mk('Overlays', 'available', ['Dialog', 'Drawer', 'Dropdown', 'Popover', 'Tooltip']),
-  ...mk('Overlays', 'planned', ['Toast', 'Notification', 'Command Palette', 'Context Menu']),
+  ...mk('Overlays', 'available', [
+    'Dialog',
+    'Drawer',
+    'Dropdown',
+    'Popover',
+    'Tooltip',
+  ]),
+  ...mk('Overlays', 'planned', [
+    'Toast',
+    'Notification',
+    'Command Palette',
+    'Context Menu',
+  ]),
   ...mk('Navigation', 'available', ['Breadcrumb', 'Tab Group']),
   ...mk('Navigation', 'planned', ['Pagination', 'Sidebar']),
 ];
 
 export const templates = [
-  { slug: 'dashboard', name: 'Dashboard', blurb: 'KPI tiles, activity feed and a data table.' },
-  { slug: 'auth', name: 'Auth & settings', blurb: 'Sign in, sign up and account settings.' },
-  { slug: 'landing', name: 'Landing page', blurb: 'Hero, features, pricing and call to action.' },
-  { slug: 'board', name: 'Project board', blurb: 'Kanban columns with task cards.' },
+  {
+    slug: 'dashboard',
+    name: 'Dashboard',
+    blurb: 'KPI tiles, activity feed and a data table.',
+  },
+  {
+    slug: 'auth',
+    name: 'Auth & settings',
+    blurb: 'Sign in, sign up and account settings.',
+  },
+  {
+    slug: 'landing',
+    name: 'Landing page',
+    blurb: 'Hero, features, pricing and call to action.',
+  },
+  {
+    slug: 'board',
+    name: 'Project board',
+    blurb: 'Kanban columns with task cards.',
+  },
 ] as const;
 
 export const features = [

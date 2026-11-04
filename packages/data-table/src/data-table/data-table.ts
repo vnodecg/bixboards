@@ -6,7 +6,11 @@ import {
   type TemplateResult,
 } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
-import { BixElement, VirtualizerController, observeResize } from '@bixboards/core';
+import {
+  BixElement,
+  VirtualizerController,
+  observeResize,
+} from '@bixboards/core';
 import {
   BlockCache,
   columnId,

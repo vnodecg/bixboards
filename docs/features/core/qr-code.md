@@ -2,13 +2,13 @@
 
 > Generates a QR code from a value.
 
-|                     |                |
-| ------------------- | -------------- |
+|                     |                   |
+| ------------------- | ----------------- |
 | **Package**         | `@bixboards/core` |
-| **Category**        | Imagery        |
-| **Tag**             | `bx-qr-code`   |
-| **Status**          | Planned        |
-| **Form-associated** | No             |
+| **Category**        | Imagery           |
+| **Tag**             | `bx-qr-code`      |
+| **Status**          | Planned           |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 

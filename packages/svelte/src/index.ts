@@ -59,6 +59,8 @@ export { default as BxFormatNumber } from './generated/BxFormatNumber.svelte';
 export type { BxFormatNumberProps, BxFormatNumberSlot } from './generated/BxFormatNumber.svelte';
 export { default as BxIcon } from './generated/BxIcon.svelte';
 export type { BxIconProps, BxIconSlot } from './generated/BxIcon.svelte';
+export { default as BxIconButton } from './generated/BxIconButton.svelte';
+export type { BxIconButtonProps, BxIconButtonSlot } from './generated/BxIconButton.svelte';
 export { default as BxInclude } from './generated/BxInclude.svelte';
 export type { BxIncludeProps, BxIncludeSlot } from './generated/BxInclude.svelte';
 export { default as BxInput } from './generated/BxInput.svelte';

@@ -6611,6 +6611,364 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/icon-button/icon-button.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxIconButton",
+          "tagName": "bx-icon-button",
+          "customElement": true,
+          "description": "`<bx-icon-button>` — a square or round button that shows only an icon\n(docs/features/core/icon-button.md).\n\nComposes `bx-button` (FR-ICONBUTTON-01): state, link mode, loading and form submission all come\nfrom it; this element only fixes the geometry (equal width and height) and renders the icon from\n`name`/`src` or the default slot. The required `label` becomes the inner control's `aria-label`\n(FR-ICONBUTTON-02): a missing one logs a dev warning. The hit area never drops below\n`--bx-target-min` (FR-ICONBUTTON-03) because the inner `bx-button` already floors its height.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "src",
+              "fieldName": "src",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "variant",
+              "fieldName": "variant",
+              "type": {
+                "text": "Variant"
+              },
+              "default": "'secondary'"
+            },
+            {
+              "name": "appearance",
+              "fieldName": "appearance",
+              "type": {
+                "text": "Appearance"
+              },
+              "default": "'plain'"
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "Size"
+              },
+              "default": "'m'"
+            },
+            {
+              "name": "shape",
+              "fieldName": "shape",
+              "type": {
+                "text": "'square' | 'circle'"
+              },
+              "default": "'square'"
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "loading",
+              "fieldName": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "href",
+              "fieldName": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "target",
+              "fieldName": "target",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "rel",
+              "fieldName": "rel",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "download",
+              "fieldName": "download",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "type",
+              "fieldName": "type",
+              "type": {
+                "text": "'button' | 'submit' | 'reset'"
+              },
+              "default": "'button'"
+            },
+            {
+              "name": "form",
+              "fieldName": "form",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "src",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "src"
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "Variant"
+              },
+              "default": "'secondary'",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "appearance",
+              "type": {
+                "text": "Appearance"
+              },
+              "default": "'plain'",
+              "attribute": "appearance",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "Size"
+              },
+              "default": "'m'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "shape",
+              "type": {
+                "text": "'square' | 'circle'"
+              },
+              "default": "'square'",
+              "attribute": "shape",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "href"
+            },
+            {
+              "kind": "field",
+              "name": "target",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "target"
+            },
+            {
+              "kind": "field",
+              "name": "rel",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "rel"
+            },
+            {
+              "kind": "field",
+              "name": "download",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "download"
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "'button' | 'submit' | 'reset'"
+              },
+              "default": "'button'",
+              "attribute": "type"
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "form"
+            },
+            {
+              "kind": "method",
+              "name": "focus",
+              "description": "Focuses the inner control.",
+              "parameters": [
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "FocusOptions"
+                  },
+                  "optional": true
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "blur",
+              "description": "Blurs the inner control.",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "click",
+              "description": "Activates the inner control.",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "click",
+              "description": "Native; not emitted when `disabled`/`loading`."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "Icon content when not using `name`/`src`."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "base",
+              "description": "The interactive surface (the inner `bx-button`)."
+            },
+            {
+              "name": "icon",
+              "description": "The `bx-icon`, present when `name`/`src` is set."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-icon-button-size",
+              "description": "Width and height. Default derived from `size`."
+            },
+            {
+              "name": "--bx-icon-button-bg",
+              "description": "Background. Default role/appearance combination."
+            },
+            {
+              "name": "--bx-icon-button-icon-size",
+              "description": "Icon size. Default `1.25em`."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/icon/icon.ts",
       "declarations": [
         {

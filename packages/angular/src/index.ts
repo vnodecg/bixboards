@@ -29,6 +29,7 @@ export * from './generated/bx-format-bytes.ts';
 export * from './generated/bx-format-date.ts';
 export * from './generated/bx-format-number.ts';
 export * from './generated/bx-icon.ts';
+export * from './generated/bx-icon-button.ts';
 export * from './generated/bx-include.ts';
 export * from './generated/bx-input.ts';
 export * from './generated/bx-intersection-observer.ts';

@@ -12,7 +12,11 @@
     "build": {
       "executor": "nx:run-commands",
       "cache": true,
-      "inputs": ["default", "^default", "{projectRoot}/../design-system/data/**/*"],
+      "inputs": [
+        "default",
+        "^default",
+        "{projectRoot}/../design-system/data/**/*"
+      ],
       "outputs": ["{projectRoot}/dist"],
       "options": { "command": "pnpm run build", "cwd": "packages/website" },
       "dependsOn": ["^build"]

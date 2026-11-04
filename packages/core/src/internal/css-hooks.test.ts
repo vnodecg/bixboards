@@ -197,6 +197,7 @@ const MARKUP: Record<string, string | string[]> = {
   'bx-dropdown':
     '<bx-dropdown><bx-button slot="trigger">T</bx-button><bx-dropdown-item>A</bx-dropdown-item></bx-dropdown>',
   'bx-dropdown-item': '<bx-dropdown-item>Item</bx-dropdown-item>',
+  'bx-icon-button': '<bx-icon-button label="Go" name="check"></bx-icon-button>',
   'bx-input':
     '<bx-input label="Label" hint="Hint" clearable value="x"></bx-input>',
   'bx-number-input':

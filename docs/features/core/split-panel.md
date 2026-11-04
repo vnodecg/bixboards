@@ -2,13 +2,13 @@
 
 > Two resizable panels with draggable divider.
 
-|                     |                  |
-| ------------------- | ---------------- |
-| **Package**         | `@bixboards/core`   |
-| **Category**        | Organization     |
-| **Tag**             | `bx-split-panel` |
-| **Status**          | Planned          |
-| **Form-associated** | No               |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Organization      |
+| **Tag**             | `bx-split-panel`  |
+| **Status**          | Planned           |
+| **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 

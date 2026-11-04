@@ -2,7 +2,7 @@
 
 Tracks build status for all 90 components across `@bixboards/core`, `@bixboards/data-table` and `@bixboards/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 59 / 90 done.**
+**Progress: 60 / 90 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -121,7 +121,7 @@ Not started. Each depends only on components in earlier tiers or on others in th
 
 ### Actions
 
-- [ ] [`bx-icon-button`](core/icon-button.md) (depends on button, icon, spinner)
+- [x] [`bx-icon-button`](core/icon-button.md) (composes `bx-button`; `primary` maps to bx-button's `default` variant) — depends on button, icon, spinner — `packages/core/src/icon-button`
 - [ ] [`bx-close-button`](core/close-button.md) (depends on icon-button)
 - [ ] [`bx-social-button`](core/social-button.md) (depends on button, icon)
 - [ ] [`bx-toggle-button`](core/toggle-button.md) (depends on button, button-group, soft)
