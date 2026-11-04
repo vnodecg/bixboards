@@ -115,6 +115,8 @@ export { default as BxTabPanel } from './generated/BxTabPanel.svelte';
 export type { BxTabPanelProps, BxTabPanelSlot } from './generated/BxTabPanel.svelte';
 export { default as BxTextarea } from './generated/BxTextarea.svelte';
 export type { BxTextareaProps, BxTextareaSlot } from './generated/BxTextarea.svelte';
+export { default as BxToggleButton } from './generated/BxToggleButton.svelte';
+export type { BxToggleButtonProps, BxToggleButtonSlot } from './generated/BxToggleButton.svelte';
 export { default as BxTooltip } from './generated/BxTooltip.svelte';
 export type { BxTooltipProps, BxTooltipSlot } from './generated/BxTooltip.svelte';
 export { default as BxTree } from './generated/BxTree.svelte';

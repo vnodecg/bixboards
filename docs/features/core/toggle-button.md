@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core`               |
 | **Category**        | Actions                         |
 | **Tag**             | `bx-toggle-button`              |
-| **Status**          | Proposed (not implemented)      |
+| **Status**          | Implemented                     |
 | **Form-associated** | Yes (ElementInternals)          |
 | **Depends on**      | `button`, _button-group_ (soft) |
 
@@ -54,13 +54,12 @@ Button with a persistent pressed state, standalone or inside a group. Specified 
 
 ### CSS custom properties
 
-| Property                              | Description                                                              |
-| ------------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-toggle-button-bg-pressed`       | Background when pressed. Default role solid color.                       |
-| `--bx-toggle-button-fg-pressed`       | Foreground when pressed.                                                 |
-| `--bx-toggle-button-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-toggle-button-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-toggle-button-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                        | Description                                                     |
+| ------------------------------- | --------------------------------------------------------------- |
+| `--bx-toggle-button-pressed-bg` | Background when pressed. Default role solid color.              |
+| `--bx-toggle-button-pressed-fg` | Foreground when pressed. Default role on-solid color.           |
+| `--bx-toggle-button-bg`         | Background when not pressed. Default derived from `appearance`. |
+| `--bx-toggle-button-gap`        | Gap between slots. Default `var(--bx-space-2xs)`.               |
 
 ### Methods
 

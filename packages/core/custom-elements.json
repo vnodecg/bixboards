@@ -14938,6 +14938,237 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/toggle-button/toggle-button.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxToggleButton",
+          "tagName": "bx-toggle-button",
+          "customElement": true,
+          "formAssociated": true,
+          "description": "`<bx-toggle-button>` — a button with a persistent pressed state\n(docs/features/core/toggle-button.md).\n\nRenders a native `<button aria-pressed>` (FR role/Space/Enter come free). Form-associated:\nsubmits `name=value` only while pressed (FR-TOGGLEBUTTON-01). The pressed state is shown by a\nfilled role surface *and* a check glyph, so it is distinguishable without colour\n(FR-TOGGLEBUTTON-03). `bx-button-group` selection modes (FR-TOGGLEBUTTON-02) are not\nimplemented: the group has no selection mode yet, so exclusivity is the consumer's to manage.",
+          "superclass": {
+            "name": "FormAssociatedMixin"
+          },
+          "attributes": [
+            {
+              "name": "pressed",
+              "fieldName": "pressed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "'on'"
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "variant",
+              "fieldName": "variant",
+              "type": {
+                "text": "Variant"
+              },
+              "default": "'secondary'"
+            },
+            {
+              "name": "appearance",
+              "fieldName": "appearance",
+              "type": {
+                "text": "Appearance"
+              },
+              "default": "'outlined'"
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'"
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "pressed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "pressed",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "'on'",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "Variant"
+              },
+              "default": "'secondary'",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "appearance",
+              "type": {
+                "text": "Appearance"
+              },
+              "default": "'outlined'",
+              "attribute": "appearance",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "focus",
+              "parameters": [
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "FocusOptions"
+                  },
+                  "optional": true
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "blur",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "click",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "input",
+              "description": "Pressed state changed by the user; fires before `change`."
+            },
+            {
+              "name": "change",
+              "description": "Pressed state changed by the user."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "Label."
+            },
+            {
+              "name": "start",
+              "description": "Leading icon."
+            },
+            {
+              "name": "end",
+              "description": "Trailing icon."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "base",
+              "description": "The button surface."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-toggle-button-pressed-bg",
+              "description": "Background when pressed. Default role solid color."
+            },
+            {
+              "name": "--bx-toggle-button-pressed-fg",
+              "description": "Foreground when pressed. Default role on-solid color."
+            },
+            {
+              "name": "--bx-toggle-button-bg",
+              "description": "Background when not pressed. Default derived from `appearance`."
+            },
+            {
+              "name": "--bx-toggle-button-gap",
+              "description": "Gap between slots. Default `var(--bx-space-2xs)`."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/tooltip/tooltip.ts",
       "declarations": [
         {

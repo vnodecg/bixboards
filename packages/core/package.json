@@ -502,6 +502,14 @@
       "types": "./dist/textarea/define.d.ts",
       "default": "./dist/textarea/define.js"
     },
+    "./toggle-button": {
+      "types": "./dist/toggle-button/index.d.ts",
+      "default": "./dist/toggle-button/index.js"
+    },
+    "./toggle-button/define": {
+      "types": "./dist/toggle-button/define.d.ts",
+      "default": "./dist/toggle-button/define.js"
+    },
     "./tooltip": {
       "types": "./dist/tooltip/index.d.ts",
       "default": "./dist/tooltip/index.js"
