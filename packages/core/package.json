@@ -214,6 +214,14 @@
       "types": "./dist/comparison/define.d.ts",
       "default": "./dist/comparison/define.js"
     },
+    "./context-menu": {
+      "types": "./dist/context-menu/index.d.ts",
+      "default": "./dist/context-menu/index.js"
+    },
+    "./context-menu/define": {
+      "types": "./dist/context-menu/define.d.ts",
+      "default": "./dist/context-menu/define.js"
+    },
     "./copy-button": {
       "types": "./dist/copy-button/index.d.ts",
       "default": "./dist/copy-button/index.js"

@@ -2,7 +2,7 @@
 
 Tracks build status for all 90 components across `@bixboards/core`, `@bixboards/data-table` and `@bixboards/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 76 / 90 done.**
+**Progress: 77 / 90 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -152,7 +152,7 @@ Not started. Each depends only on components in earlier tiers or on others in th
 - [x] [`bx-pagination`](core/pagination.md) (page-size selector is a native `<select>`, not `bx-select`; exports the pure `pageRange`) — depends on button, select, data-table, soft — `packages/core/src/pagination`
 - [ ] [`bx-sidebar`](core/sidebar.md) (depends on page, drawer, tooltip, badge, icon)
 - [ ] [`bx-command-palette`](core/command-palette.md) (depends on dialog, combobox, kbd, virtualizer)
-- [ ] [`bx-context-menu`](core/context-menu.md) (depends on dropdown, dropdown-item, popup)
+- [x] [`bx-context-menu`](core/context-menu.md) (composes `bx-dropdown` with a zero-size virtual trigger at the pointer) — depends on dropdown, dropdown-item, popup — `packages/core/src/context-menu`
 
 ### Display
 

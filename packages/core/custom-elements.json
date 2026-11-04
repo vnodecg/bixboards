@@ -4689,6 +4689,158 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/context-menu/context-menu.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxContextMenu",
+          "tagName": "bx-context-menu",
+          "customElement": true,
+          "description": "`<bx-context-menu>` — right-click / long-press menu anchored at the pointer\n(docs/features/core/context-menu.md).\n\nComposes `bx-dropdown`: its positioning (flip/shift at viewport edges, FR-CONTEXTMENU-02) and its\nwhole keyboard model, typeahead and submenus (FR-CONTEXTMENU-04) are reused as-is; this element\nonly supplies a zero-size virtual trigger placed at the pointer. Opens on `contextmenu`, on a\ntouch long-press, and on Shift+F10 / the Menu key at the focused target (FR-CONTEXTMENU-01). The\nnative menu is suppressed only while enabled for that target (FR-CONTEXTMENU-03). The target is\nthe element named by `for`, else the parent element (the host when in a shadow root).",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "for",
+              "fieldName": "for",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "open",
+              "fieldName": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "for",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "for"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "description": "Opens the menu at viewport coordinates.",
+              "parameters": [
+                {
+                  "name": "x",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "y",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "hide",
+              "description": "Closes the menu.",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "bx-select",
+              "description": "An item was activated; `detail.item`."
+            },
+            {
+              "name": "bx-show",
+              "description": "The menu is opening. Cancelable."
+            },
+            {
+              "name": "bx-after-show",
+              "description": "The menu opened."
+            },
+            {
+              "name": "bx-hide",
+              "description": "The menu is closing."
+            },
+            {
+              "name": "bx-after-hide",
+              "description": "The menu closed."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "`bx-dropdown-item` children, dividers, submenus."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "menu",
+              "description": "The menu part."
+            },
+            {
+              "name": "panel",
+              "description": "The panel part."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-context-menu-min-width",
+              "description": "Min width."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/copy-button/copy-button.ts",
       "declarations": [
         {

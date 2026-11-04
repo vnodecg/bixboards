@@ -39,6 +39,8 @@ export { default as BxColumn } from './generated/BxColumn.svelte';
 export type { BxColumnProps, BxColumnSlot } from './generated/BxColumn.svelte';
 export { default as BxComparison } from './generated/BxComparison.svelte';
 export type { BxComparisonProps, BxComparisonSlot } from './generated/BxComparison.svelte';
+export { default as BxContextMenu } from './generated/BxContextMenu.svelte';
+export type { BxContextMenuProps, BxContextMenuSlot } from './generated/BxContextMenu.svelte';
 export { default as BxCopyButton } from './generated/BxCopyButton.svelte';
 export type { BxCopyButtonProps, BxCopyButtonSlot } from './generated/BxCopyButton.svelte';
 export { default as BxDataList } from './generated/BxDataList.svelte';
