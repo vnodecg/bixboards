@@ -12968,6 +12968,337 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/segment/segment.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxSegment",
+          "tagName": "bx-segment",
+          "customElement": true,
+          "description": "`<bx-segment>` — one option of a `bx-segmented-control` (FR-SEGMENTEDCONTROL-03).\n\nThe host is the `role=\"radio\"` element; `bx-segmented-control` owns `selected`, `tabindex` and\narrow-key movement. `label` (or the default slot) is the text, `icon` an optional leading icon\nname.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "icon",
+              "fieldName": "icon",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "selected",
+              "fieldName": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "full-width",
+              "fieldName": "fullWidth",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "icon",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "icon"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "fullWidth",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "full-width",
+              "reflects": true
+            }
+          ],
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "Label content; overrides `label`."
+            },
+            {
+              "name": "icon",
+              "description": "Leading icon; overrides `icon`."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "segment",
+              "description": "The segment surface."
+            }
+          ],
+          "cssProperties": []
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/segmented-control/segmented-control.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxSegmentedControl",
+          "tagName": "bx-segmented-control",
+          "customElement": true,
+          "formAssociated": true,
+          "description": "`<bx-segmented-control>` — compact single-choice control with a sliding indicator\n(docs/features/core/segmented-control.md).\n\nA `role=\"radiogroup\"` of `bx-segment` radios with roving tabindex; arrow keys move *and* select,\nHome/End jump (FR-SEGMENTEDCONTROL-01). The indicator moves with `transform` only and is\nre-measured through the shared `ResizeObserver` (FR-SEGMENTEDCONTROL-02); the slide duration is 0\nunder reduced motion. Form-associated: submits the selected `value` under `name`.",
+          "superclass": {
+            "name": "FormAssociatedMixin"
+          },
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'"
+            },
+            {
+              "name": "full-width",
+              "fieldName": "fullWidth",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "required",
+              "fieldName": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "fullWidth",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "full-width",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "required",
+              "reflects": true
+            }
+          ],
+          "events": [
+            {
+              "name": "input",
+              "description": "The selection changed by the user."
+            },
+            {
+              "name": "change",
+              "description": "The selection changed by the user; `detail.value`."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "`bx-segment` children (value, label, optional icon, disabled)."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "base",
+              "description": "Track."
+            },
+            {
+              "name": "indicator",
+              "description": "Sliding thumb."
+            },
+            {
+              "name": "segment",
+              "description": "A segment."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-segmented-control-bg",
+              "description": "Track background."
+            },
+            {
+              "name": "--bx-segmented-control-indicator-bg",
+              "description": "Thumb color."
+            },
+            {
+              "name": "--bx-segmented-control-indicator-duration",
+              "description": "Slide duration; 0 under reduced motion."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/select/select.ts",
       "declarations": [
         {

@@ -203,6 +203,8 @@ const MARKUP: Record<string, string | string[]> = {
   'bx-sparkline': '<bx-sparkline values="1,3,2,5"></bx-sparkline>',
   'bx-timeline':
     '<bx-timeline><bx-timeline-item heading="A" icon="check"></bx-timeline-item><bx-timeline-item heading="B"></bx-timeline-item></bx-timeline>',
+  'bx-segmented-control':
+    '<bx-segmented-control value="a"><bx-segment value="a" label="A"></bx-segment><bx-segment value="b" label="B"></bx-segment></bx-segmented-control>',
   'bx-input':
     '<bx-input label="Label" hint="Hint" clearable value="x"></bx-input>',
   'bx-number-input':

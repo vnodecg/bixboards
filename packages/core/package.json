@@ -478,6 +478,22 @@
       "types": "./dist/scroller/define.d.ts",
       "default": "./dist/scroller/define.js"
     },
+    "./segment": {
+      "types": "./dist/segment/index.d.ts",
+      "default": "./dist/segment/index.js"
+    },
+    "./segment/define": {
+      "types": "./dist/segment/define.d.ts",
+      "default": "./dist/segment/define.js"
+    },
+    "./segmented-control": {
+      "types": "./dist/segmented-control/index.d.ts",
+      "default": "./dist/segmented-control/index.js"
+    },
+    "./segmented-control/define": {
+      "types": "./dist/segmented-control/define.d.ts",
+      "default": "./dist/segmented-control/define.js"
+    },
     "./select": {
       "types": "./dist/select/index.d.ts",
       "default": "./dist/select/index.js"

@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core`                |
 | **Category**        | Form                             |
 | **Tag**             | `bx-segmented-control`           |
-| **Status**          | Proposed (not implemented)       |
+| **Status**          | Implemented                      |
 | **Form-associated** | Yes (ElementInternals)           |
 | **Depends on**      | `radio-group`, `resize-observer` |
 
@@ -54,14 +54,11 @@ Compact single-choice control rendered as connected segments with a sliding indi
 
 ### CSS custom properties
 
-| Property                                    | Description                                                              |
-| ------------------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-segmented-control-bg`                 | Track background.                                                        |
-| `--bx-segmented-control-indicator-bg`       | Thumb color.                                                             |
-| `--bx-segmented-control-indicator-duration` | Slide duration; 0 under reduced motion.                                  |
-| `--bx-segmented-control-focus-ring-width`   | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-segmented-control-focus-ring-color`   | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-segmented-control-font-family`        | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                                    | Description                             |
+| ------------------------------------------- | --------------------------------------- |
+| `--bx-segmented-control-bg`                 | Track background.                       |
+| `--bx-segmented-control-indicator-bg`       | Thumb color.                            |
+| `--bx-segmented-control-indicator-duration` | Slide duration; 0 under reduced motion. |
 
 ### Methods
 
