@@ -95,6 +95,8 @@ export { default as BxMeter } from './generated/BxMeter.svelte';
 export type { BxMeterProps, BxMeterSlot } from './generated/BxMeter.svelte';
 export { default as BxMutationObserver } from './generated/BxMutationObserver.svelte';
 export type { BxMutationObserverProps, BxMutationObserverSlot } from './generated/BxMutationObserver.svelte';
+export { default as BxNotificationCenter } from './generated/BxNotificationCenter.svelte';
+export type { BxNotificationCenterProps, BxNotificationCenterSlot } from './generated/BxNotificationCenter.svelte';
 export { default as BxNumberInput } from './generated/BxNumberInput.svelte';
 export type { BxNumberInputProps, BxNumberInputSlot } from './generated/BxNumberInput.svelte';
 export { default as BxOption } from './generated/BxOption.svelte';

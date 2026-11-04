@@ -11497,6 +11497,248 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/notification-center/notification-center.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxNotificationCenter",
+          "tagName": "bx-notification-center",
+          "customElement": true,
+          "description": "`<bx-notification-center>` — bell trigger plus a panel of persistent notifications\n(docs/features/core/notification-center.md).\n\nThe trigger is a `bx-icon-button` bell with a `bx-badge` unread count (`unread-count`, derived\nfrom `items` when unset). The panel is a non-modal `bx-popup` below the bell, or a full-width\nsheet under 48rem (FR-NOTIFICATIONCENTER-03; the spec's drawer is a plain CSS sheet here).\nItems are grouped by day (`group-by`), with times from `bx-relative-time`\n(FR-NOTIFICATIONCENTER-02); an item can carry an avatar, a link and action buttons. The element is\n**controlled**: it fires cancelable `bx-mark-read` / `bx-mark-all-read` / `bx-dismiss` and, unless\ncancelled, applies the change to its own copy of `items`, so it also works unmanaged. Scrolling to\nthe end of the list (or opening a short list) fires `bx-load-more` once per list length. The unread count is announced\npolitely when it changes (FR-NOTIFICATIONCENTER-04). The list renders every item rather than using\n`bx-data-list` (FR-NOTIFICATIONCENTER-01 is not implemented), so keep loaded history modest and\npage with `bx-load-more`. The `item` slot template is not implemented.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "unread-count",
+              "fieldName": "unreadCount",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "group-by",
+              "fieldName": "groupBy",
+              "type": {
+                "text": "'none' | 'day'"
+              },
+              "default": "'day'"
+            },
+            {
+              "name": "open",
+              "fieldName": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "empty-text",
+              "fieldName": "emptyText",
+              "type": {
+                "text": "string"
+              },
+              "default": "'No notifications'"
+            },
+            {
+              "name": "loading",
+              "fieldName": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Notifications'"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "items",
+              "type": {
+                "text": "NotificationItem[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "unreadCount",
+              "type": {
+                "text": "number"
+              },
+              "attribute": "unread-count"
+            },
+            {
+              "kind": "field",
+              "name": "groupBy",
+              "type": {
+                "text": "'none' | 'day'"
+              },
+              "default": "'day'",
+              "attribute": "group-by"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "emptyText",
+              "type": {
+                "text": "string"
+              },
+              "default": "'No notifications'",
+              "attribute": "empty-text"
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Notifications'",
+              "attribute": "label"
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "hide",
+              "parameters": [
+                {
+                  "name": "refocus",
+                  "type": {
+                    "text": "unknown"
+                  },
+                  "optional": true
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "bx-item-click",
+              "description": "A notification was activated. `detail.item`."
+            },
+            {
+              "name": "bx-mark-read",
+              "description": "Cancelable. `detail.ids`."
+            },
+            {
+              "name": "bx-mark-all-read",
+              "description": "Cancelable."
+            },
+            {
+              "name": "bx-dismiss",
+              "description": "Cancelable. `detail.id`."
+            },
+            {
+              "name": "bx-action",
+              "description": "An item action was used. `detail.item`, `detail.action`."
+            },
+            {
+              "name": "bx-load-more",
+              "description": "Near the end of the list."
+            },
+            {
+              "name": "bx-show",
+              "description": "Panel opening. Cancelable."
+            },
+            {
+              "name": "bx-hide",
+              "description": "Panel closing. Cancelable."
+            }
+          ],
+          "slots": [
+            {
+              "name": "trigger",
+              "description": "Replaces the bell."
+            },
+            {
+              "name": "empty",
+              "description": "Shown when there are no notifications."
+            },
+            {
+              "name": "footer",
+              "description": "e.g. \"View all\"."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "trigger",
+              "description": "The trigger part."
+            },
+            {
+              "name": "badge",
+              "description": "The badge part."
+            },
+            {
+              "name": "panel",
+              "description": "The panel part."
+            },
+            {
+              "name": "group-heading",
+              "description": "The group-heading part."
+            },
+            {
+              "name": "item",
+              "description": "The item part."
+            },
+            {
+              "name": "empty",
+              "description": "The empty part."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-notification-center-width",
+              "description": "Panel width."
+            },
+            {
+              "name": "--bx-notification-center-max-height",
+              "description": "Panel max height."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/number-input/number-input.ts",
       "declarations": [
         {

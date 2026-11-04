@@ -221,6 +221,8 @@ const MARKUP: Record<string, string | string[]> = {
   'bx-sidebar':
     '<bx-sidebar mode="inline"><bx-sidebar-item icon="info" active>A</bx-sidebar-item></bx-sidebar>',
   'bx-command-palette': '<bx-command-palette open></bx-command-palette>',
+  'bx-notification-center':
+    '<bx-notification-center unread-count="3" open></bx-notification-center>',
   'bx-input':
     '<bx-input label="Label" hint="Hint" clearable value="x"></bx-input>',
   'bx-number-input':

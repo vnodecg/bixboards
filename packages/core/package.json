@@ -422,6 +422,14 @@
       "types": "./dist/mutation-observer/define.d.ts",
       "default": "./dist/mutation-observer/define.js"
     },
+    "./notification-center": {
+      "types": "./dist/notification-center/index.d.ts",
+      "default": "./dist/notification-center/index.js"
+    },
+    "./notification-center/define": {
+      "types": "./dist/notification-center/define.d.ts",
+      "default": "./dist/notification-center/define.js"
+    },
     "./number-input": {
       "types": "./dist/number-input/index.d.ts",
       "default": "./dist/number-input/index.js"

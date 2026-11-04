@@ -47,6 +47,7 @@ export * from './generated/bx-intersection-observer.ts';
 export * from './generated/bx-kbd.ts';
 export * from './generated/bx-meter.ts';
 export * from './generated/bx-mutation-observer.ts';
+export * from './generated/bx-notification-center.ts';
 export * from './generated/bx-number-input.ts';
 export * from './generated/bx-option.ts';
 export * from './generated/bx-page.ts';

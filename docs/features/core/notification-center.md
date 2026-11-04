@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core`                                                         |
 | **Category**        | Feedback                                                                  |
 | **Tag**             | `bx-notification-center`                                                  |
-| **Status**          | Proposed (not implemented)                                                |
+| **Status**          | Implemented                                                               |
 | **Form-associated** | No                                                                        |
 | **Depends on**      | `popover`, `drawer`, `badge`, `relative-time`, `data-list`, `icon-button` |
 
@@ -62,13 +62,10 @@ Bell trigger plus panel listing persistent notifications with unread state, grou
 
 ### CSS custom properties
 
-| Property                                    | Description                                                              |
-| ------------------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-notification-center-width`            | Panel width.                                                             |
-| `--bx-notification-center-max-height`       | Panel max height.                                                        |
-| `--bx-notification-center-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-notification-center-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-notification-center-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                              | Description       |
+| ------------------------------------- | ----------------- |
+| `--bx-notification-center-width`      | Panel width.      |
+| `--bx-notification-center-max-height` | Panel max height. |
 
 ### Methods
 
