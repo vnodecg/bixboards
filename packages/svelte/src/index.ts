@@ -17,6 +17,8 @@ export { default as BxButton } from './generated/BxButton.svelte';
 export type { BxButtonProps, BxButtonSlot } from './generated/BxButton.svelte';
 export { default as BxButtonGroup } from './generated/BxButtonGroup.svelte';
 export type { BxButtonGroupProps, BxButtonGroupSlot } from './generated/BxButtonGroup.svelte';
+export { default as BxCalendar } from './generated/BxCalendar.svelte';
+export type { BxCalendarProps, BxCalendarSlot } from './generated/BxCalendar.svelte';
 export { default as BxCallout } from './generated/BxCallout.svelte';
 export type { BxCalloutProps, BxCalloutSlot } from './generated/BxCallout.svelte';
 export { default as BxCard } from './generated/BxCard.svelte';

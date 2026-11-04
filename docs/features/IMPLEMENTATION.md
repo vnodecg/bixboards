@@ -2,7 +2,7 @@
 
 Tracks build status for all 90 components across `@bixboards/core`, `@bixboards/data-table` and `@bixboards/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 81 / 90 done.**
+**Progress: 82 / 90 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -133,7 +133,7 @@ Not started. Each depends only on components in earlier tiers or on others in th
 - [x] [`bx-file-upload`](core/file-upload.md) (`directory` sets `webkitdirectory`; the per-file `file` slot template is not implemented; adds `name`) — depends on button, progress-bar, format-bytes, icon — `packages/core/src/file-upload`
 - [x] [`bx-search-field`](core/search-field.md) (composes `bx-input type=search`; the `suggestions` slot (FR-SEARCHFIELD-02) is not implemented, use `bx-combobox`) — depends on input, combobox, soft — `packages/core/src/search-field`
 - [x] [`bx-segmented-control`](core/segmented-control.md) (adds `bx-segment` (`packages/core/src/segment`); the radiogroup/radio roles live on the hosts; indicator animates `transform` for position and `inline-size` for width) — depends on radio-group, resize-observer — `packages/core/src/segmented-control`
-- [ ] [`bx-calendar`](core/calendar.md) (depends on button)
+- [x] [`bx-calendar`](core/calendar.md) (plain-ISO date helpers in `dates.ts`; the `day` slot is not implemented; `value` is always a string (`start/end` for range, comma-separated for multiple)) — depends on button — `packages/core/src/calendar`
 - [ ] [`bx-date-picker`](core/date-picker.md) (depends on calendar, popup, input)
 - [ ] [`bx-time-field`](core/time-field.md) (depends on date-picker, soft)
 - [x] [`bx-tag-input`](core/tag-input.md) (typed text is the native input inside the control, not `bx-input`; `add()`/`remove()` are public) — depends on chip, input — `packages/core/src/tag-input`

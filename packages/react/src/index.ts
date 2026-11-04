@@ -9,6 +9,7 @@ export * from './generated/bx-breadcrumb.ts';
 export * from './generated/bx-breadcrumb-item.ts';
 export * from './generated/bx-button.ts';
 export * from './generated/bx-button-group.ts';
+export * from './generated/bx-calendar.ts';
 export * from './generated/bx-callout.ts';
 export * from './generated/bx-card.ts';
 export * from './generated/bx-carousel.ts';

@@ -213,6 +213,8 @@ const MARKUP: Record<string, string | string[]> = {
     '<bx-combobox label="F"><bx-option value="a">A</bx-option></bx-combobox>',
   'bx-tag-input': '<bx-tag-input label="T" value="a,b"></bx-tag-input>',
   'bx-file-upload': '<bx-file-upload label="F"></bx-file-upload>',
+  'bx-calendar':
+    '<bx-calendar mode="range" month="2024-05" value="2024-05-10/2024-05-14"></bx-calendar>',
   'bx-input':
     '<bx-input label="Label" hint="Hint" clearable value="x"></bx-input>',
   'bx-number-input':

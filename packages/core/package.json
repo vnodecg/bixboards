@@ -134,6 +134,14 @@
       "types": "./dist/button/define.d.ts",
       "default": "./dist/button/define.js"
     },
+    "./calendar": {
+      "types": "./dist/calendar/index.d.ts",
+      "default": "./dist/calendar/index.js"
+    },
+    "./calendar/define": {
+      "types": "./dist/calendar/define.d.ts",
+      "default": "./dist/calendar/define.js"
+    },
     "./callout": {
       "types": "./dist/callout/index.d.ts",
       "default": "./dist/callout/index.js"

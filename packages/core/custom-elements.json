@@ -1939,6 +1939,265 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/calendar/calendar.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxCalendar",
+          "tagName": "bx-calendar",
+          "customElement": true,
+          "description": "`<bx-calendar>` — month grid for picking a date, a range or several dates\n(docs/features/core/calendar.md).\n\nThe ARIA date-grid pattern: each month is a `role=\"grid\"` whose day buttons have a roving\ntabindex; arrows move by day/week, Home/End jump to the week's ends, PageUp/PageDown change month\n(Shift: year). Locale names come from `Intl` with no date library (FR-CALENDAR-01); every date in\nthe API is a plain `YYYY-MM-DD` string with no timezone shifting (FR-CALENDAR-02). `value` is the\ndate (`single`), `start/end` (`range`) or comma-separated dates (`multiple`). Range mode\npreviews the range on hover and while moving with the keyboard (FR-CALENDAR-03). Disabled days\n(outside `min`/`max`, or rejected by `disabled-dates`) are announced as unavailable and skipped by\nkeyboard movement (FR-CALENDAR-04). The `day` slot is not implemented; `events` marks days with a\ndot.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "mode",
+              "fieldName": "mode",
+              "type": {
+                "text": "Mode"
+              },
+              "default": "'single'"
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "min",
+              "fieldName": "min",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "max",
+              "fieldName": "max",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "locale",
+              "fieldName": "locale",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "first-day-of-week",
+              "fieldName": "firstDayOfWeek",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "month",
+              "fieldName": "month",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "months",
+              "fieldName": "months",
+              "type": {
+                "text": "number"
+              },
+              "default": "1"
+            },
+            {
+              "name": "show-week-numbers",
+              "fieldName": "showWeekNumbers",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "mode",
+              "type": {
+                "text": "Mode"
+              },
+              "default": "'single'",
+              "attribute": "mode",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "locale",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "locale"
+            },
+            {
+              "kind": "field",
+              "name": "firstDayOfWeek",
+              "type": {
+                "text": "number"
+              },
+              "attribute": "first-day-of-week"
+            },
+            {
+              "kind": "field",
+              "name": "disabledDates",
+              "type": {
+                "text": "(date: string) => boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "month",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "month"
+            },
+            {
+              "kind": "field",
+              "name": "months",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "attribute": "months"
+            },
+            {
+              "kind": "field",
+              "name": "showWeekNumbers",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "show-week-numbers"
+            },
+            {
+              "kind": "field",
+              "name": "events",
+              "type": {
+                "text": "Map<string, unknown> | Set<string>"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "isDisabled",
+              "parameters": [
+                {
+                  "name": "iso",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "description": "Selection changed. `detail.value`."
+            },
+            {
+              "name": "bx-month-change",
+              "description": "The visible month changed. `detail.month` (`YYYY-MM`)."
+            },
+            {
+              "name": "bx-day-hover",
+              "description": "The pointer or keyboard focus is over a day. `detail.date`."
+            }
+          ],
+          "slots": [
+            {
+              "name": "header",
+              "description": "Replaces nothing; extra content shown above the grids."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "header",
+              "description": "Month/year row."
+            },
+            {
+              "name": "grid",
+              "description": "Day grid."
+            },
+            {
+              "name": "weekday",
+              "description": "Column heading."
+            },
+            {
+              "name": "day",
+              "description": "A day cell."
+            },
+            {
+              "name": "nav-button",
+              "description": "Prev/next."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-calendar-day-size",
+              "description": "Day cell size. Default `var(--bx-target-min)`."
+            },
+            {
+              "name": "--bx-calendar-day-bg-selected",
+              "description": "Selected day background."
+            },
+            {
+              "name": "--bx-calendar-range-bg",
+              "description": "In-range band."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/callout/callout.ts",
       "declarations": [
         {

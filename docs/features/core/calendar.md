@@ -2,14 +2,14 @@
 
 > Month grid for navigating and picking a date, range or multiple dates.
 
-|                     |                            |
-| ------------------- | -------------------------- |
-| **Package**         | `@bixboards/core`          |
-| **Category**        | Form                       |
-| **Tag**             | `bx-calendar`              |
-| **Status**          | Proposed (not implemented) |
-| **Form-associated** | No                         |
-| **Depends on**      | `button`                   |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Form              |
+| **Tag**             | `bx-calendar`     |
+| **Status**          | Implemented       |
+| **Form-associated** | No                |
+| **Depends on**      | `button`          |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
@@ -62,14 +62,11 @@ Month grid for navigating and picking a date, range or multiple dates. Specified
 
 ### CSS custom properties
 
-| Property                         | Description                                                              |
-| -------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-calendar-day-size`         | Day cell size. Default `var(--bx-target-min)`.                           |
-| `--bx-calendar-day-bg-selected`  | Selected day background.                                                 |
-| `--bx-calendar-range-bg`         | In-range band.                                                           |
-| `--bx-calendar-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-calendar-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-calendar-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                        | Description                                    |
+| ------------------------------- | ---------------------------------------------- |
+| `--bx-calendar-day-size`        | Day cell size. Default `var(--bx-target-min)`. |
+| `--bx-calendar-day-bg-selected` | Selected day background.                       |
+| `--bx-calendar-range-bg`        | In-range band.                                 |
 
 ### Methods
 
