@@ -44,6 +44,7 @@ export * from './generated/bx-mutation-observer.ts';
 export * from './generated/bx-number-input.ts';
 export * from './generated/bx-option.ts';
 export * from './generated/bx-page.ts';
+export * from './generated/bx-pagination.ts';
 export * from './generated/bx-popover.ts';
 export * from './generated/bx-popup.ts';
 export * from './generated/bx-progress-bar.ts';

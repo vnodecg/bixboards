@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core`                       |
 | **Category**        | Navigation                              |
 | **Tag**             | `bx-pagination`                         |
-| **Status**          | Proposed (not implemented)              |
+| **Status**          | Implemented                             |
 | **Form-associated** | No                                      |
 | **Depends on**      | `button`, `select`, _data-table_ (soft) |
 
@@ -51,25 +51,23 @@ Page navigation with numbered pages, ellipsis collapsing, page size selector and
 
 ### CSS parts
 
-| Part           | Description            |
-| -------------- | ---------------------- |
-| `base`         | `nav` element.         |
-| `page`         | A page button.         |
-| `page-current` | The page-current part. |
-| `ellipsis`     | The ellipsis part.     |
-| `prev`         | The prev part.         |
-| `next`         | The next part.         |
-| `size-select`  | The size-select part.  |
+| Part           | Description              |
+| -------------- | ------------------------ |
+| `base`         | `nav` element.           |
+| `page`         | A page button.           |
+| `page-current` | The current page button. |
+| `ellipsis`     | The ellipsis part.       |
+| `prev`         | The previous button.     |
+| `next`         | The next button.         |
+| `size-select`  | The page-size select.    |
 
 ### CSS custom properties
 
-| Property                           | Description                                                              |
-| ---------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-pagination-gap`              | Gap between items.                                                       |
-| `--bx-pagination-page-size`        | Button size.                                                             |
-| `--bx-pagination-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-pagination-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-pagination-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                     | Description                                          |
+| ---------------------------- | ---------------------------------------------------- |
+| `--bx-pagination-gap`        | Gap between controls. Default `var(--bx-space-2xs)`. |
+| `--bx-pagination-current-bg` | Current page background.                             |
+| `--bx-pagination-current-fg` | Current page text color.                             |
 
 ### Methods
 

@@ -89,6 +89,8 @@ export { default as BxOption } from './generated/BxOption.svelte';
 export type { BxOptionProps, BxOptionSlot } from './generated/BxOption.svelte';
 export { default as BxPage } from './generated/BxPage.svelte';
 export type { BxPageProps, BxPageSlot } from './generated/BxPage.svelte';
+export { default as BxPagination } from './generated/BxPagination.svelte';
+export type { BxPaginationProps, BxPaginationSlot } from './generated/BxPagination.svelte';
 export { default as BxPopover } from './generated/BxPopover.svelte';
 export type { BxPopoverProps, BxPopoverSlot } from './generated/BxPopover.svelte';
 export { default as BxPopup } from './generated/BxPopup.svelte';

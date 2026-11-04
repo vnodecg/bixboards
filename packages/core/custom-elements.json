@@ -10968,6 +10968,258 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/pagination/pagination.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxPagination",
+          "tagName": "bx-pagination",
+          "customElement": true,
+          "description": "`<bx-pagination>` — page navigation (docs/features/core/pagination.md).\n\nA `<nav aria-label=\"Pagination\">` of numbered pages with ellipsis collapsing, a compact\n\"3 of 20\" mode and an optional page-size selector. With `href-template` (e.g. `?page={page}`)\nevery page is a real anchor, so it works without JS and for crawlers (FR-PAGINATION-02); the\nclick is still intercepted to emit `change` and update `page` unless modified (Ctrl/Cmd/middle).\n`total` + `page-size` derive `page-count`. The size selector is a native `<select>` rather than\n`bx-select`, to keep the control light. Pairing with `bx-data-table` is left to the app: listen\nto `change` and feed the table (FR-PAGINATION-03).",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "page",
+              "fieldName": "page",
+              "type": {
+                "text": "number"
+              },
+              "default": "1"
+            },
+            {
+              "name": "page-count",
+              "fieldName": "pageCount",
+              "type": {
+                "text": "number"
+              },
+              "default": "1"
+            },
+            {
+              "name": "total",
+              "fieldName": "total",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "name": "page-size",
+              "fieldName": "pageSize",
+              "type": {
+                "text": "number"
+              },
+              "default": "10"
+            },
+            {
+              "name": "sibling-count",
+              "fieldName": "siblingCount",
+              "type": {
+                "text": "number"
+              },
+              "default": "1"
+            },
+            {
+              "name": "boundary-count",
+              "fieldName": "boundaryCount",
+              "type": {
+                "text": "number"
+              },
+              "default": "1"
+            },
+            {
+              "name": "compact",
+              "fieldName": "compact",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "href-template",
+              "fieldName": "hrefTemplate",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "page",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "attribute": "page",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "pageCount",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "attribute": "page-count"
+            },
+            {
+              "kind": "field",
+              "name": "total",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "total"
+            },
+            {
+              "kind": "field",
+              "name": "pageSize",
+              "type": {
+                "text": "number"
+              },
+              "default": "10",
+              "attribute": "page-size"
+            },
+            {
+              "kind": "field",
+              "name": "pageSizes",
+              "type": {
+                "text": "number[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "siblingCount",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "attribute": "sibling-count"
+            },
+            {
+              "kind": "field",
+              "name": "boundaryCount",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "attribute": "boundary-count"
+            },
+            {
+              "kind": "field",
+              "name": "compact",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "compact",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "hrefTemplate",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "href-template"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "description": "Page changed by the user. `detail.page`."
+            },
+            {
+              "name": "bx-page-size-change",
+              "description": "Page size changed by the user. `detail.pageSize`."
+            }
+          ],
+          "slots": [
+            {
+              "name": "summary",
+              "description": "\"Showing 1–10 of 200\"."
+            },
+            {
+              "name": "prev",
+              "description": "Previous label/icon."
+            },
+            {
+              "name": "next",
+              "description": "Next label/icon."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "base",
+              "description": "`nav` element."
+            },
+            {
+              "name": "page",
+              "description": "A page button."
+            },
+            {
+              "name": "page-current",
+              "description": "The current page button."
+            },
+            {
+              "name": "ellipsis",
+              "description": "The ellipsis part."
+            },
+            {
+              "name": "prev",
+              "description": "The previous button."
+            },
+            {
+              "name": "next",
+              "description": "The next button."
+            },
+            {
+              "name": "size-select",
+              "description": "The page-size select."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-pagination-gap",
+              "description": "Gap between controls. Default `var(--bx-space-2xs)`."
+            },
+            {
+              "name": "--bx-pagination-current-bg",
+              "description": "Current page background."
+            },
+            {
+              "name": "--bx-pagination-current-fg",
+              "description": "Current page text color."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/popover/popover.ts",
       "declarations": [
         {

@@ -205,6 +205,7 @@ const MARKUP: Record<string, string | string[]> = {
     '<bx-timeline><bx-timeline-item heading="A" icon="check"></bx-timeline-item><bx-timeline-item heading="B"></bx-timeline-item></bx-timeline>',
   'bx-segmented-control':
     '<bx-segmented-control value="a"><bx-segment value="a" label="A"></bx-segment><bx-segment value="b" label="B"></bx-segment></bx-segmented-control>',
+  'bx-pagination': '<bx-pagination page="3" page-count="9"></bx-pagination>',
   'bx-input':
     '<bx-input label="Label" hint="Hint" clearable value="x"></bx-input>',
   'bx-number-input':

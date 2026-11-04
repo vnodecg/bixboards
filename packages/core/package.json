@@ -398,6 +398,14 @@
       "types": "./dist/page/define.d.ts",
       "default": "./dist/page/define.js"
     },
+    "./pagination": {
+      "types": "./dist/pagination/index.d.ts",
+      "default": "./dist/pagination/index.js"
+    },
+    "./pagination/define": {
+      "types": "./dist/pagination/define.d.ts",
+      "default": "./dist/pagination/define.js"
+    },
     "./popover": {
       "types": "./dist/popover/index.d.ts",
       "default": "./dist/popover/index.js"
