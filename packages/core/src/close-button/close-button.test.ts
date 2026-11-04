@@ -22,12 +22,12 @@ describe('bx-close-button', () => {
       closes++;
       cancelable = e.cancelable;
     });
-    el.shadowRoot!.querySelector('bx-icon-button')!.click();
+    el.shadowRoot!.querySelector<HTMLElement>('bx-icon-button')!.click();
     expect(closes).to.equal(1);
     expect(cancelable).to.be.true;
     el.disabled = true;
     await el.updateComplete;
-    el.shadowRoot!.querySelector('bx-icon-button')!.click();
+    el.shadowRoot!.querySelector<HTMLElement>('bx-icon-button')!.click();
     expect(closes).to.equal(1);
   });
 

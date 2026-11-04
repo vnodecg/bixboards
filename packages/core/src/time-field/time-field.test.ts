@@ -4,7 +4,7 @@ import { localeIs12h, parseTime } from './time-field.ts';
 import './index.ts';
 
 const seg = (el: BxTimeField, i: number) =>
-  el.shadowRoot!.querySelectorAll<HTMLElement>('.segment')[i];
+  el.shadowRoot!.querySelectorAll<HTMLElement>('.segment')[i]!;
 const press = async (el: BxTimeField, i: number, key: string) => {
   seg(el, i).focus();
   seg(el, i).dispatchEvent(

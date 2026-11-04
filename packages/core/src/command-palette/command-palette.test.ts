@@ -222,7 +222,7 @@ describe('bx-command-palette', () => {
     let query = '';
     el.addEventListener(
       'input',
-      (e) => (query = (e as CustomEvent).detail.query),
+      (e) => (query = (e as unknown as CustomEvent).detail.query),
     );
     el.show();
     await el.updateComplete;

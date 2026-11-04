@@ -17,7 +17,7 @@ describe('bx-code-block', () => {
     await el.updateComplete;
     const lines = el.shadowRoot!.querySelectorAll('.line');
     expect(lines).to.have.length(2);
-    expect(lines[0].textContent).to.contain('const a = 1;');
+    expect(lines[0]!.textContent).to.contain('const a = 1;');
   });
 
   it('shows line numbers (aria-hidden) and highlights ranges', async () => {
@@ -39,7 +39,7 @@ describe('bx-code-block', () => {
       true,
     ]);
     expect(
-      lines[0].querySelector('.line-number')!.getAttribute('aria-hidden'),
+      lines[0]!.querySelector('.line-number')!.getAttribute('aria-hidden'),
     ).to.equal('true');
   });
 

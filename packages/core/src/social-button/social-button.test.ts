@@ -62,7 +62,7 @@ describe('bx-social-button', () => {
     expect(
       el.shadowRoot!.querySelector('[part=label]')!.textContent!.trim(),
     ).to.equal('Teilen auf Acme');
-    socialLabels['share'] = original;
+    socialLabels['share'] = original!;
   });
 
   it('has no axe violations', async () => {

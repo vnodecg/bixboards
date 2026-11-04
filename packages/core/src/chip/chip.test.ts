@@ -30,14 +30,17 @@ describe('bx-chip', () => {
         ><bx-chip removable value="b">B</bx-chip>
       </div>`,
     );
-    const [a, b] = [...wrap.querySelectorAll<BxChip>('bx-chip')];
+    const [a, b] = [...wrap.querySelectorAll<BxChip>('bx-chip')] as [
+      BxChip,
+      BxChip,
+    ];
     b.addEventListener('bx-remove', (e) => e.preventDefault());
     a.shadowRoot!.querySelector('bx-close-button')!
-      .shadowRoot!.querySelector('bx-icon-button')!
+      .shadowRoot!.querySelector<HTMLElement>('bx-icon-button')!
       .click();
     expect(wrap.contains(a)).to.be.false;
     b.shadowRoot!.querySelector('bx-close-button')!
-      .shadowRoot!.querySelector('bx-icon-button')!
+      .shadowRoot!.querySelector<HTMLElement>('bx-icon-button')!
       .click();
     expect(wrap.contains(b)).to.be.true;
   });

@@ -34,7 +34,7 @@ describe('bx-sidebar', () => {
     expect(el.querySelector('bx-sidebar-group')!.getAttribute('role')).to.equal(
       'group',
     );
-    const link = items(el)[0].shadowRoot!.querySelector('a')!;
+    const link = items(el)[0]!.shadowRoot!.querySelector('a')!;
     expect(link.getAttribute('href')).to.equal('/home');
     expect(link.getAttribute('aria-current')).to.equal('page');
   });
@@ -75,7 +75,7 @@ describe('bx-sidebar', () => {
     el.collapse();
     await el.updateComplete;
     await Promise.all(items(el).map((i) => i.updateComplete));
-    const home = items(el)[0];
+    const home = items(el)[0]!;
     expect(home.shadowRoot!.querySelector('bx-tooltip')).to.exist;
     expect(
       home.shadowRoot!.querySelector('a')!.getAttribute('aria-label'),
@@ -84,7 +84,7 @@ describe('bx-sidebar', () => {
 
   it('expands nested items with aria-expanded and fires a cancelable bx-navigate for links', async () => {
     const el = await fixture<BxSidebar>(make());
-    const reports = items(el)[2];
+    const reports = items(el)[2]!;
     const off = items(el).find((i) => i.getAttribute('href') === '/off')!;
     await off.updateComplete;
     await reports.updateComplete;
@@ -99,7 +99,7 @@ describe('bx-sidebar', () => {
         .getAttribute('aria-expanded'),
     ).to.equal('true');
 
-    const home = items(el)[0];
+    const home = items(el)[0]!;
     let href = '';
     home.addEventListener('bx-navigate', (e) => {
       href = (e as CustomEvent).detail.href;

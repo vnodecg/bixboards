@@ -85,9 +85,9 @@ describe('bx-toast', () => {
     await aTimeout(400);
     const regions = document.querySelectorAll<BxToastRegion>('bx-toast-region');
     expect(regions).to.have.length(1);
-    expect(regions[0].getAttribute('role')).to.equal('region');
+    expect(regions[0]!.getAttribute('role')).to.equal('region');
     expect(a.isConnected).to.be.false;
-    expect(regions[0].querySelectorAll('bx-toast[open]')).to.have.length(3);
+    expect(regions[0]!.querySelectorAll('bx-toast[open]')).to.have.length(3);
   });
 
   it('shows an action and fires bx-action', async () => {

@@ -9,15 +9,16 @@ describe('qrMatrix', () => {
     const n = m.length;
     expect(n).to.be.greaterThan(20);
     expect(m.every((row) => row.length === n)).to.be.true;
+    const at = (r: number, c: number) => m[r]![c];
     for (const [r, c] of [
       [0, 0],
       [0, n - 7],
       [n - 7, 0],
-    ]) {
-      expect(m[r][c] && m[r][c + 6] && m[r + 6][c] && m[r + 6][c + 6]).to.be
+    ] as Array<[number, number]>) {
+      expect(at(r, c) && at(r, c + 6) && at(r + 6, c) && at(r + 6, c + 6)).to.be
         .true;
-      expect(m[r + 3][c + 3]).to.be.true;
-      expect(m[r + 1][c + 1]).to.be.false;
+      expect(at(r + 3, c + 3)).to.be.true;
+      expect(at(r + 1, c + 1)).to.be.false;
     }
   });
   it('grows with the data and with error correction', () => {

@@ -35,12 +35,12 @@ describe('bx-stepper', () => {
   it('marks the current step with aria-current=step and speaks status', async () => {
     const el = await fixture<BxStepper>(make());
     await Promise.all(steps(el).map((s) => s.updateComplete));
-    const current = steps(el)[1].shadowRoot!.querySelector(
+    const current = steps(el)[1]!.shadowRoot!.querySelector(
       '[aria-current=step]',
     )!;
     expect(current).to.exist;
-    expect(steps(el)[0].shadowRoot!.textContent).to.contain('completed');
-    expect(steps(el)[2].shadowRoot!.textContent).to.contain('has an error');
+    expect(steps(el)[0]!.shadowRoot!.textContent).to.contain('completed');
+    expect(steps(el)[2]!.shadowRoot!.textContent).to.contain('has an error');
   });
 
   it('fires a cancelable bx-step-change and moves current unless cancelled', async () => {
@@ -52,14 +52,14 @@ describe('bx-stepper', () => {
       (e) => (detail = (e as CustomEvent).detail),
       { once: true },
     );
-    steps(el)[0].shadowRoot!.querySelector('button')!.click();
+    steps(el)[0]!.shadowRoot!.querySelector('button')!.click();
     expect(detail).to.deep.equal({ from: 1, to: 0 });
     expect(el.current).to.equal(0);
     el.addEventListener('bx-step-change', (e) => e.preventDefault(), {
       once: true,
     });
     await Promise.all(steps(el).map((s) => s.updateComplete));
-    steps(el)[3].shadowRoot!.querySelector('button')!.click();
+    steps(el)[3]!.shadowRoot!.querySelector('button')!.click();
     expect(el.current).to.equal(0);
   });
 

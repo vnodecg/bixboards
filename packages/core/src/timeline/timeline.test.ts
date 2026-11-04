@@ -33,7 +33,7 @@ describe('bx-timeline', () => {
     expect(items.map((i) => i.position)).to.deep.equal(['end', 'start', 'end']);
     el.layout = 'start';
     await el.updateComplete;
-    await items[0].updateComplete;
+    await items[0]!.updateComplete;
     expect(items.every((i) => !i.hasAttribute('position'))).to.be.true;
   });
 

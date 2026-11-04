@@ -93,7 +93,7 @@ describe('bx-notification-center', () => {
     el.addEventListener('bx-mark-read', (e) =>
       log.push(`read:${(e as CustomEvent).detail.ids}`),
     );
-    rows(el)[0].querySelector<HTMLElement>('.main')!.click();
+    rows(el)[0]!.querySelector<HTMLElement>('.main')!.click();
     await el.updateComplete;
     expect(log).to.deep.equal(['click:a', 'read:a']);
     expect(el.unread).to.equal(1);
@@ -120,7 +120,7 @@ describe('bx-notification-center', () => {
       (e) => (dismissed = (e as CustomEvent).detail.id),
     );
     await aTimeout(30);
-    rows(el)[0].querySelector<HTMLElement>('bx-icon-button')!.click();
+    rows(el)[0]!.querySelector<HTMLElement>('bx-icon-button')!.click();
     await el.updateComplete;
     expect(dismissed).to.equal('a');
     expect(el.items.some((i) => i.id === 'a')).to.be.false;
@@ -136,7 +136,7 @@ describe('bx-notification-center', () => {
       'bx-action',
       (e) => (action = (e as CustomEvent).detail.action.id),
     );
-    rows(el)[1].querySelector<HTMLElement>('.actions bx-button')!.click();
+    rows(el)[1]!.querySelector<HTMLElement>('.actions bx-button')!.click();
     expect(action).to.equal('reply');
     el.items = [];
     await el.updateComplete;

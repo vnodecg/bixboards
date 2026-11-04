@@ -26,7 +26,7 @@ const key = async (el: BxCombobox, k: string) => {
   await el.updateComplete;
 };
 const visible = (el: BxCombobox) =>
-  [...el.querySelectorAll('bx-option')]
+  [...el.querySelectorAll<HTMLElement>('bx-option')]
     .filter((o) => !o.hidden)
     .map((o) => o.getAttribute('value'));
 
@@ -140,7 +140,7 @@ describe('bx-combobox', () => {
     );
     const queries: string[] = [];
     el.addEventListener('input', (e) =>
-      queries.push((e as CustomEvent).detail.query),
+      queries.push((e as unknown as CustomEvent).detail.query),
     );
     await type(el, 'a');
     await type(el, 'ab');

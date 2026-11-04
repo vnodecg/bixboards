@@ -41,7 +41,7 @@ describe('bx-segmented-control', () => {
     el.addEventListener('change', (e) =>
       events.push(`change:${(e as CustomEvent).detail.value}`),
     );
-    segs(el)[0].click();
+    segs(el)[0]!.click();
     await el.updateComplete;
     expect(el.value).to.equal('a');
     expect(events).to.deep.equal(['input', 'change:a']);
@@ -69,11 +69,11 @@ describe('bx-segmented-control', () => {
 
   it('ignores disabled segments and a disabled group', async () => {
     const el = await fixture<BxSegmentedControl>(make());
-    segs(el)[2].click();
+    segs(el)[2]!.click();
     expect(el.value).to.equal('b');
     el.disabled = true;
     await el.updateComplete;
-    segs(el)[0].click();
+    segs(el)[0]!.click();
     expect(el.value).to.equal('b');
   });
 
@@ -94,7 +94,7 @@ describe('bx-segmented-control', () => {
     const el = form.querySelector('bx-segmented-control') as BxSegmentedControl;
     await el.updateComplete;
     expect(new FormData(form).get('view')).to.equal('b');
-    segs(el)[3].click();
+    segs(el)[3]!.click();
     await el.updateComplete;
     expect(new FormData(form).get('view')).to.equal('d');
     form.reset();

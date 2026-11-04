@@ -40,7 +40,9 @@ describe('pageRange', () => {
       [2, 2],
     ])
       for (let p = 1; p <= 40; p++)
-        expect(pageRange(p, 40, s, b).length).to.be.at.most(2 * s + 2 * b + 3);
+        expect(pageRange(p, 40, s!, b!).length).to.be.at.most(
+          2 * s! + 2 * b! + 3,
+        );
   });
 });
 
