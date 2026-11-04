@@ -226,6 +226,8 @@ const MARKUP: Record<string, string | string[]> = {
   'bx-chart':
     '<bx-chart x="m" style="inline-size: 30rem" height="10rem"></bx-chart>',
   'bx-qr-code': '<bx-qr-code value="x"></bx-qr-code>',
+  'bx-split-panel':
+    '<bx-split-panel><div slot="start">A</div><div slot="end">B</div></bx-split-panel>',
   'bx-input':
     '<bx-input label="Label" hint="Hint" clearable value="x"></bx-input>',
   'bx-number-input':

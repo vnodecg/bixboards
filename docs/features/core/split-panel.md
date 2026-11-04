@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core` |
 | **Category**        | Organization      |
 | **Tag**             | `bx-split-panel`  |
-| **Status**          | Planned           |
+| **Status**          | Implemented       |
 | **Form-associated** | No                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
@@ -46,11 +46,20 @@ Two resizable panels with draggable divider. Specified for the Bixboards token s
 
 ### CSS parts
 
-`start`, `end`, `panel`, `divider`
+| Part      | Description      |
+| --------- | ---------------- |
+| `start`   | The start panel. |
+| `end`     | The end panel.   |
+| `panel`   | Either panel.    |
+| `divider` | The divider.     |
 
 ### CSS custom properties
 
-`--bx-split-panel-divider-width`, `--bx-split-panel-min`, `--bx-split-panel-max`
+| Property                         | Description                                             |
+| -------------------------------- | ------------------------------------------------------- |
+| `--bx-split-panel-divider-width` | Divider width. Default `max(var(--bx-space-3xs), 2px)`. |
+| `--bx-split-panel-min`           | Minimum start-panel size. Default `0px`.                |
+| `--bx-split-panel-max`           | Maximum start-panel size. Default `100%`.               |
 
 ### Methods
 

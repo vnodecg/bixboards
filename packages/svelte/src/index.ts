@@ -153,6 +153,8 @@ export { default as BxSparkline } from './generated/BxSparkline.svelte';
 export type { BxSparklineProps, BxSparklineSlot } from './generated/BxSparkline.svelte';
 export { default as BxSpinner } from './generated/BxSpinner.svelte';
 export type { BxSpinnerProps, BxSpinnerSlot } from './generated/BxSpinner.svelte';
+export { default as BxSplitPanel } from './generated/BxSplitPanel.svelte';
+export type { BxSplitPanelProps, BxSplitPanelSlot } from './generated/BxSplitPanel.svelte';
 export { default as BxStatCard } from './generated/BxStatCard.svelte';
 export type { BxStatCardProps, BxStatCardSlot } from './generated/BxStatCard.svelte';
 export { default as BxStep } from './generated/BxStep.svelte';

@@ -654,6 +654,14 @@
       "types": "./dist/spinner/define.d.ts",
       "default": "./dist/spinner/define.js"
     },
+    "./split-panel": {
+      "types": "./dist/split-panel/index.d.ts",
+      "default": "./dist/split-panel/index.js"
+    },
+    "./split-panel/define": {
+      "types": "./dist/split-panel/define.d.ts",
+      "default": "./dist/split-panel/define.js"
+    },
     "./stat-card": {
       "types": "./dist/stat-card/index.d.ts",
       "default": "./dist/stat-card/index.js"

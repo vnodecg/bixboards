@@ -18832,6 +18832,227 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/split-panel/split-panel.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxSplitPanel",
+          "tagName": "bx-split-panel",
+          "customElement": true,
+          "description": "`<bx-split-panel>` — two resizable panels with a draggable divider\n(docs/features/core/split-panel.md).\n\nThe divider is a focusable `role=\"separator\"` (the ARIA window-splitter pattern) with\n`aria-valuenow` as a percent: arrows move by 1% (10% with Shift), Home/End jump to the limits,\nand Enter toggles between the limits and the last position. Dragging uses pointer capture\n(FR-SPLIT-PANEL-01); `snap` (e.g. `\"25% 50% 75%\"` or `\"200px\"`) pulls the divider to a point\nwithin `snap-threshold` px. `position` is a percent of the panel area, `position-in-pixels` the\nsame in px (the latest one set wins). `primary` keeps that panel's pixel size when the container\nresizes, via the shared `ResizeObserver` (FR-SPLIT-PANEL-02). `storage-key` persists the position\nin `localStorage` (guarded). Limits come from `--bx-split-panel-min` / `--bx-split-panel-max`\n(lengths, applied to the start panel).",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "position",
+              "fieldName": "position",
+              "type": {
+                "text": "number"
+              },
+              "default": "50"
+            },
+            {
+              "name": "position-in-pixels",
+              "fieldName": "positionInPixels",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "orientation",
+              "fieldName": "orientation",
+              "type": {
+                "text": "'horizontal' | 'vertical'"
+              },
+              "default": "'horizontal'"
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "primary",
+              "fieldName": "primary",
+              "type": {
+                "text": "'start' | 'end'"
+              }
+            },
+            {
+              "name": "snap",
+              "fieldName": "snap",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "snap-threshold",
+              "fieldName": "snapThreshold",
+              "type": {
+                "text": "number"
+              },
+              "default": "12"
+            },
+            {
+              "name": "storage-key",
+              "fieldName": "storageKey",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Resize panels'"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "position",
+              "type": {
+                "text": "number"
+              },
+              "default": "50",
+              "attribute": "position"
+            },
+            {
+              "kind": "field",
+              "name": "positionInPixels",
+              "type": {
+                "text": "number"
+              },
+              "attribute": "position-in-pixels"
+            },
+            {
+              "kind": "field",
+              "name": "orientation",
+              "type": {
+                "text": "'horizontal' | 'vertical'"
+              },
+              "default": "'horizontal'",
+              "attribute": "orientation",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "primary",
+              "type": {
+                "text": "'start' | 'end'"
+              },
+              "attribute": "primary"
+            },
+            {
+              "kind": "field",
+              "name": "snap",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "snap"
+            },
+            {
+              "kind": "field",
+              "name": "snapThreshold",
+              "type": {
+                "text": "number"
+              },
+              "default": "12",
+              "attribute": "snap-threshold"
+            },
+            {
+              "kind": "field",
+              "name": "storageKey",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "storage-key"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Resize panels'",
+              "attribute": "label"
+            }
+          ],
+          "events": [
+            {
+              "name": "bx-reposition",
+              "description": "The position changed. `detail.position` (percent), `detail.pixels`."
+            }
+          ],
+          "slots": [
+            {
+              "name": "start",
+              "description": "First panel."
+            },
+            {
+              "name": "end",
+              "description": "Second panel."
+            },
+            {
+              "name": "divider",
+              "description": "Custom divider handle content."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "start",
+              "description": "The start panel."
+            },
+            {
+              "name": "end",
+              "description": "The end panel."
+            },
+            {
+              "name": "panel",
+              "description": "Either panel."
+            },
+            {
+              "name": "divider",
+              "description": "The divider."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-split-panel-divider-width",
+              "description": "Divider width. Default `max(var(--bx-space-3xs), 2px)`."
+            },
+            {
+              "name": "--bx-split-panel-min",
+              "description": "Minimum start-panel size. Default `0px`."
+            },
+            {
+              "name": "--bx-split-panel-max",
+              "description": "Maximum start-panel size. Default `100%`."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/stat-card/stat-card.ts",
       "declarations": [
         {
