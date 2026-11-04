@@ -26,6 +26,7 @@ export * from './generated/bx-context-menu.ts';
 export * from './generated/bx-copy-button.ts';
 export * from './generated/bx-data-list.ts';
 export * from './generated/bx-data-table.ts';
+export * from './generated/bx-date-picker.ts';
 export * from './generated/bx-details.ts';
 export * from './generated/bx-dialog.ts';
 export * from './generated/bx-divider.ts';

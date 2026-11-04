@@ -51,6 +51,8 @@ export { default as BxDataList } from './generated/BxDataList.svelte';
 export type { BxDataListProps, BxDataListSlot } from './generated/BxDataList.svelte';
 export { default as BxDataTable } from './generated/BxDataTable.svelte';
 export type { BxDataTableProps, BxDataTableSlot } from './generated/BxDataTable.svelte';
+export { default as BxDatePicker } from './generated/BxDatePicker.svelte';
+export type { BxDatePickerProps, BxDatePickerSlot } from './generated/BxDatePicker.svelte';
 export { default as BxDetails } from './generated/BxDetails.svelte';
 export type { BxDetailsProps, BxDetailsSlot } from './generated/BxDetails.svelte';
 export { default as BxDialog } from './generated/BxDialog.svelte';

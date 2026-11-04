@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core`            |
 | **Category**        | Form                         |
 | **Tag**             | `bx-date-picker`             |
-| **Status**          | Proposed (not implemented)   |
+| **Status**          | Implemented                  |
 | **Form-associated** | Yes (ElementInternals)       |
 | **Depends on**      | `calendar`, `popup`, `input` |
 
@@ -58,18 +58,17 @@ Date (or date range) field with typed entry and a `bx-calendar` popup. Specified
 | Part           | Description            |
 | -------------- | ---------------------- |
 | `form-control` | The form-control part. |
-| `input`        | Segmented text entry.  |
-| `trigger`      | Calendar button.       |
-| `popup`        | The popup part.        |
+| `input`        | The text input.        |
+| `trigger`      | The calendar button.   |
+| `calendar`     | The `bx-calendar`.     |
 
 ### CSS custom properties
 
-| Property                            | Description                                                              |
-| ----------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-date-picker-popup-width`      | Popup width.                                                             |
-| `--bx-date-picker-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-date-picker-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-date-picker-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                        | Description         |
+| ------------------------------- | ------------------- |
+| `--bx-date-picker-bg`           | Field background.   |
+| `--bx-date-picker-border-color` | Field border color. |
+| `--bx-date-picker-radius`       | Field radius.       |
 
 ### Methods
 

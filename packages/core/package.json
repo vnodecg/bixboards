@@ -246,6 +246,14 @@
       "types": "./dist/copy-button/define.d.ts",
       "default": "./dist/copy-button/define.js"
     },
+    "./date-picker": {
+      "types": "./dist/date-picker/index.d.ts",
+      "default": "./dist/date-picker/index.js"
+    },
+    "./date-picker/define": {
+      "types": "./dist/date-picker/define.d.ts",
+      "default": "./dist/date-picker/define.js"
+    },
     "./details": {
       "types": "./dist/details/index.d.ts",
       "default": "./dist/details/index.js"

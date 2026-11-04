@@ -5769,6 +5769,419 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/date-picker/date-picker.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxDatePicker",
+          "tagName": "bx-date-picker",
+          "customElement": true,
+          "formAssociated": true,
+          "description": "`<bx-date-picker>` — date (or date range) field with a `bx-calendar` popup\n(docs/features/core/date-picker.md).\n\nThe field shows the value formatted with `Intl` (`format` options, default a short date) and\naccepts typed entry in the locale's order or ISO; a typed value is validated against `min`/`max`\nand committed on Enter or blur, an invalid one reverts. The calendar opens from the button or\nArrowDown, closes on selection (a range closes once both ends are picked), Escape or outside\nclick, and focus returns to the field. `value` is `YYYY-MM-DD`, or `start/end` with `range`.\nForm-associated. The popup is a non-modal `bx-popup`, not a dialog.",
+          "superclass": {
+            "name": "FormAssociatedMixin"
+          },
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "hint",
+              "fieldName": "hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "range",
+              "fieldName": "range",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "min",
+              "fieldName": "min",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "max",
+              "fieldName": "max",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "locale",
+              "fieldName": "locale",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "placeholder",
+              "fieldName": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "required",
+              "fieldName": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "open",
+              "fieldName": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'"
+            },
+            {
+              "name": "clearable",
+              "fieldName": "clearable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "invalid",
+              "fieldName": "invalid",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "hint"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "range",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "range",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "format",
+              "type": {
+                "text": "Intl.DateTimeFormatOptions"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "locale",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "locale"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "required",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "clearable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "clearable"
+            },
+            {
+              "kind": "field",
+              "name": "invalid",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "invalid",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "focus",
+              "parameters": [
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "FocusOptions"
+                  },
+                  "optional": true
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "blur",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "hide",
+              "parameters": [
+                {
+                  "name": "refocus",
+                  "type": {
+                    "text": "unknown"
+                  },
+                  "optional": true
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "input",
+              "description": "Typed text changed."
+            },
+            {
+              "name": "change",
+              "description": "Committed value changed."
+            },
+            {
+              "name": "bx-show",
+              "description": "Popup is opening. Cancelable."
+            },
+            {
+              "name": "bx-hide",
+              "description": "Popup is closing. Cancelable."
+            },
+            {
+              "name": "bx-invalid",
+              "description": "Constraint validation failed."
+            }
+          ],
+          "slots": [
+            {
+              "name": "label",
+              "description": "Label content."
+            },
+            {
+              "name": "hint",
+              "description": "Help text."
+            },
+            {
+              "name": "calendar-footer",
+              "description": "Presets row, e.g. \"Today\"."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "form-control",
+              "description": "The form-control part."
+            },
+            {
+              "name": "input",
+              "description": "The text input."
+            },
+            {
+              "name": "trigger",
+              "description": "The calendar button."
+            },
+            {
+              "name": "calendar",
+              "description": "The `bx-calendar`."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-date-picker-bg",
+              "description": "Field background."
+            },
+            {
+              "name": "--bx-date-picker-border-color",
+              "description": "Field border color."
+            },
+            {
+              "name": "--bx-date-picker-radius",
+              "description": "Field radius."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/details/details.ts",
       "declarations": [
         {

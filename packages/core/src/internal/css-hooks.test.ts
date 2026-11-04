@@ -215,6 +215,8 @@ const MARKUP: Record<string, string | string[]> = {
   'bx-file-upload': '<bx-file-upload label="F"></bx-file-upload>',
   'bx-calendar':
     '<bx-calendar mode="range" month="2024-05" value="2024-05-10/2024-05-14"></bx-calendar>',
+  'bx-date-picker':
+    '<bx-date-picker label="D" value="2024-05-09"></bx-date-picker>',
   'bx-input':
     '<bx-input label="Label" hint="Hint" clearable value="x"></bx-input>',
   'bx-number-input':
