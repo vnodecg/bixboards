@@ -52,6 +52,7 @@ export * from './generated/bx-scroller.ts';
 export * from './generated/bx-select.ts';
 export * from './generated/bx-skeleton.ts';
 export * from './generated/bx-slider.ts';
+export * from './generated/bx-social-button.ts';
 export * from './generated/bx-spinner.ts';
 export * from './generated/bx-switch.ts';
 export * from './generated/bx-tab.ts';

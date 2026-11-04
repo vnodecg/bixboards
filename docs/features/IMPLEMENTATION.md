@@ -2,7 +2,7 @@
 
 Tracks build status for all 90 components across `@bixboards/core`, `@bixboards/data-table` and `@bixboards/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 63 / 90 done.**
+**Progress: 64 / 90 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -123,7 +123,7 @@ Not started. Each depends only on components in earlier tiers or on others in th
 
 - [x] [`bx-icon-button`](core/icon-button.md) (composes `bx-button`; `primary` maps to bx-button's `default` variant) — depends on button, icon, spinner — `packages/core/src/icon-button`
 - [x] [`bx-close-button`](core/close-button.md) (specialisation of `bx-icon-button`; Escape handling stays in the owning overlay. Existing ad-hoc close buttons in dialog/drawer/callout are not migrated yet) — depends on icon-button — `packages/core/src/close-button`
-- [ ] [`bx-social-button`](core/social-button.md) (depends on button, icon)
+- [x] [`bx-social-button`](core/social-button.md) (no brand artwork is bundled; apps register marks via `registerSocialProvider`, unregistered providers fall back to a letter monogram) — depends on button, icon — `packages/core/src/social-button`
 - [x] [`bx-toggle-button`](core/toggle-button.md) (native `<button aria-pressed>` with a check glyph when pressed; `bx-button-group` selection modes (FR-TOGGLEBUTTON-02) not implemented since the group has no selection mode) — depends on button, button-group, soft — `packages/core/src/toggle-button`
 
 ### Form

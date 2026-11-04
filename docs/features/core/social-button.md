@@ -2,14 +2,14 @@
 
 > Branded sign-in / share button for common identity providers and social networks.
 
-|                     |                            |
-| ------------------- | -------------------------- |
-| **Package**         | `@bixboards/core`          |
-| **Category**        | Actions                    |
-| **Tag**             | `bx-social-button`         |
-| **Status**          | Proposed (not implemented) |
-| **Form-associated** | No                         |
-| **Depends on**      | `button`, `icon`           |
+|                     |                    |
+| ------------------- | ------------------ |
+| **Package**         | `@bixboards/core`  |
+| **Category**        | Actions            |
+| **Tag**             | `bx-social-button` |
+| **Status**          | Implemented        |
+| **Form-associated** | No                 |
+| **Depends on**      | `button`, `icon`   |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
@@ -53,13 +53,10 @@ Branded sign-in / share button for common identity providers and social networks
 
 ### CSS custom properties
 
-| Property                              | Description                                                              |
-| ------------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-social-button-bg`               | Background. Default per `appearance`.                                    |
-| `--bx-social-button-logo-size`        | Mark size. Default `1.25em`.                                             |
-| `--bx-social-button-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-social-button-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-social-button-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                       | Description                           |
+| ------------------------------ | ------------------------------------- |
+| `--bx-social-button-bg`        | Background. Default per `appearance`. |
+| `--bx-social-button-logo-size` | Mark size. Default `1.25em`.          |
 
 ### Methods
 

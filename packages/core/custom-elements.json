@@ -13428,6 +13428,213 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/social-button/social-button.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxSocialButton",
+          "tagName": "bx-social-button",
+          "customElement": true,
+          "description": "`<bx-social-button>` — branded sign-in / share button (docs/features/core/social-button.md).\n\nComposes `bx-button`. The mark and name come from a provider registered with\n; no brand artwork is bundled, so there is nothing to keep in\nsync with providers' brand guidelines (FR-SOCIALBUTTON-03) — register the official mark you are\nlicensed to use. An unregistered provider falls back to a letter monogram and its capitalised\nname. The default slot replaces the generated label; the logo is always `aria-hidden`.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "provider",
+              "fieldName": "provider",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "mode",
+              "fieldName": "mode",
+              "type": {
+                "text": "'continue' | 'signin' | 'signup' | 'share'"
+              },
+              "default": "'continue'"
+            },
+            {
+              "name": "appearance",
+              "fieldName": "appearance",
+              "type": {
+                "text": "'brand' | 'outlined' | 'mono'"
+              },
+              "default": "'outlined'"
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'"
+            },
+            {
+              "name": "href",
+              "fieldName": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "loading",
+              "fieldName": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "provider",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "provider"
+            },
+            {
+              "kind": "field",
+              "name": "mode",
+              "type": {
+                "text": "'continue' | 'signin' | 'signup' | 'share'"
+              },
+              "default": "'continue'",
+              "attribute": "mode"
+            },
+            {
+              "kind": "field",
+              "name": "appearance",
+              "type": {
+                "text": "'brand' | 'outlined' | 'mono'"
+              },
+              "default": "'outlined'",
+              "attribute": "appearance",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "href"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "focus",
+              "parameters": [
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "FocusOptions"
+                  },
+                  "optional": true
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "blur",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "click",
+              "description": "Native click."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "Overrides the generated label."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "base",
+              "description": "The button surface."
+            },
+            {
+              "name": "logo",
+              "description": "Provider mark."
+            },
+            {
+              "name": "label",
+              "description": "Text."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-social-button-bg",
+              "description": "Background. Default per `appearance`."
+            },
+            {
+              "name": "--bx-social-button-logo-size",
+              "description": "Mark size. Default `1.25em`."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/spinner/spinner.ts",
       "declarations": [
         {

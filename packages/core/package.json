@@ -462,6 +462,14 @@
       "types": "./dist/slider/define.d.ts",
       "default": "./dist/slider/define.js"
     },
+    "./social-button": {
+      "types": "./dist/social-button/index.d.ts",
+      "default": "./dist/social-button/index.js"
+    },
+    "./social-button/define": {
+      "types": "./dist/social-button/define.d.ts",
+      "default": "./dist/social-button/define.js"
+    },
     "./spinner": {
       "types": "./dist/spinner/index.d.ts",
       "default": "./dist/spinner/index.js"
