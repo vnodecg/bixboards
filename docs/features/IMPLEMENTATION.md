@@ -2,7 +2,7 @@
 
 Tracks build status for all 90 components across `@bixboards/core`, `@bixboards/data-table` and `@bixboards/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 70 / 90 done.**
+**Progress: 71 / 90 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -159,7 +159,7 @@ Not started. Each depends only on components in earlier tiers or on others in th
 - [x] [`bx-stat-card`](core/stat-card.md) (composes `bx-card`; formats with the shared `Intl.NumberFormat` cache instead of a nested `bx-format-number`; `count-up` is opt-in, not implicit) — depends on card, format-number, skeleton, sparkline, soft — `packages/core/src/stat-card`
 - [x] [`bx-kbd`](core/kbd.md) (key names are English; the localization registry the spec mentions does not exist yet) — `packages/core/src/kbd`
 - [x] [`bx-timeline`](core/timeline.md) (adds a `bx-timeline-item` child (`packages/core/src/timeline-item`, no spec of its own); horizontal orientation is basic and has no alternate layout; items are all rendered, long timelines should compose `bx-data-list`) — depends on relative-time, format-date, icon — `packages/core/src/timeline`
-- [ ] [`bx-code-block`](core/code-block.md) (depends on copy-button, scroller)
+- [x] [`bx-code-block`](core/code-block.md) (token-based highlighter API (`registerHighlighter` returns `CodeToken[]`, not HTML, so output is injection-safe); no grammars bundled; scrolls in its own `<pre>` rather than `bx-scroller`) — depends on copy-button, scroller — `packages/core/src/code-block`
 
 ### Charts
 

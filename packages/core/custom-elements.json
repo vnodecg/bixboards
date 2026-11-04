@@ -3681,6 +3681,199 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/code-block/code-block.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxCodeBlock",
+          "tagName": "bx-code-block",
+          "customElement": true,
+          "description": "`<bx-code-block>` — code with line numbers, line highlighting, wrapping and a copy button\n(docs/features/core/code-block.md).\n\nSource comes from `code` or the default slot's text. Grammars are pluggable via\n; with none registered for `language` the text is shown plain.\nToken colours come from semantic tokens and are drawn from `*-fg` role colours (FR-CODEBLOCK-02).\nThe scroll region is a keyboard-focusable `role=\"region\"` (FR-CODEBLOCK-03). Line numbers are\n`aria-hidden` and `user-select: none`, so copying yields only the code. The copy button is\n`bx-copy-button`; its `bx-copy`/`bx-error` events bubble out.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "language",
+              "fieldName": "language",
+              "type": {
+                "text": "string"
+              },
+              "default": "'plaintext'"
+            },
+            {
+              "name": "code",
+              "fieldName": "code",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "line-numbers",
+              "fieldName": "lineNumbers",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "highlight-lines",
+              "fieldName": "highlightLines",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "wrap",
+              "fieldName": "wrap",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "filename",
+              "fieldName": "filename",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "copyable",
+              "fieldName": "copyable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "language",
+              "type": {
+                "text": "string"
+              },
+              "default": "'plaintext'",
+              "attribute": "language"
+            },
+            {
+              "kind": "field",
+              "name": "code",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "code"
+            },
+            {
+              "kind": "field",
+              "name": "lineNumbers",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "line-numbers",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "highlightLines",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "highlight-lines"
+            },
+            {
+              "kind": "field",
+              "name": "wrap",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "wrap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "filename",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "filename"
+            },
+            {
+              "kind": "field",
+              "name": "copyable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "copyable"
+            }
+          ],
+          "events": [
+            {
+              "name": "bx-copy",
+              "description": "Via `bx-copy-button`."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "Source text."
+            },
+            {
+              "name": "header",
+              "description": "Replaces the filename caption."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "base",
+              "description": "The base part."
+            },
+            {
+              "name": "header",
+              "description": "The header part."
+            },
+            {
+              "name": "pre",
+              "description": "The pre part."
+            },
+            {
+              "name": "line",
+              "description": "The line part."
+            },
+            {
+              "name": "line-number",
+              "description": "The line-number part."
+            },
+            {
+              "name": "copy-button",
+              "description": "The copy-button part."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-code-block-bg",
+              "description": "Background."
+            },
+            {
+              "name": "--bx-code-block-line-highlight",
+              "description": "Highlighted line background."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/color-picker/color-picker.ts",
       "declarations": [
         {

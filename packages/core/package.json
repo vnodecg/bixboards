@@ -190,6 +190,14 @@
       "types": "./dist/close-button/define.d.ts",
       "default": "./dist/close-button/define.js"
     },
+    "./code-block": {
+      "types": "./dist/code-block/index.d.ts",
+      "default": "./dist/code-block/index.js"
+    },
+    "./code-block/define": {
+      "types": "./dist/code-block/define.d.ts",
+      "default": "./dist/code-block/define.js"
+    },
     "./color-picker": {
       "types": "./dist/color-picker/index.d.ts",
       "default": "./dist/color-picker/index.js"

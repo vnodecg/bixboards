@@ -31,6 +31,8 @@ export { default as BxChip } from './generated/BxChip.svelte';
 export type { BxChipProps, BxChipSlot } from './generated/BxChip.svelte';
 export { default as BxCloseButton } from './generated/BxCloseButton.svelte';
 export type { BxCloseButtonProps, BxCloseButtonSlot } from './generated/BxCloseButton.svelte';
+export { default as BxCodeBlock } from './generated/BxCodeBlock.svelte';
+export type { BxCodeBlockProps, BxCodeBlockSlot } from './generated/BxCodeBlock.svelte';
 export { default as BxColorPicker } from './generated/BxColorPicker.svelte';
 export type { BxColorPickerProps, BxColorPickerSlot } from './generated/BxColorPicker.svelte';
 export { default as BxColumn } from './generated/BxColumn.svelte';
