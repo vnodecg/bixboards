@@ -2,14 +2,14 @@
 
 > Free-form multi-value entry that turns typed text into removable chips.
 
-|                     |                            |
-| ------------------- | -------------------------- |
-| **Package**         | `@bixboards/core`          |
-| **Category**        | Form                       |
-| **Tag**             | `bx-tag-input`             |
-| **Status**          | Proposed (not implemented) |
-| **Form-associated** | Yes (ElementInternals)     |
-| **Depends on**      | `chip`, `input`            |
+|                     |                        |
+| ------------------- | ---------------------- |
+| **Package**         | `@bixboards/core`      |
+| **Category**        | Form                   |
+| **Tag**             | `bx-tag-input`         |
+| **Status**          | Implemented            |
+| **Form-associated** | Yes (ElementInternals) |
+| **Depends on**      | `chip`, `input`        |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
@@ -55,20 +55,21 @@ Free-form multi-value entry that turns typed text into removable chips. Specifie
 
 ### CSS parts
 
-| Part           | Description            |
-| -------------- | ---------------------- |
-| `form-control` | The form-control part. |
-| `tag`          | A chip.                |
-| `input`        | The text field.        |
+| Part           | Description              |
+| -------------- | ------------------------ |
+| `form-control` | The form-control part.   |
+| `base`         | The tag + input surface. |
+| `input`        | The text input.          |
+| `tag`          | A tag chip.              |
 
 ### CSS custom properties
 
-| Property                          | Description                                                              |
-| --------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-tag-input-gap`              | Gap between chips.                                                       |
-| `--bx-tag-input-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-tag-input-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-tag-input-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                      | Description       |
+| ----------------------------- | ----------------- |
+| `--bx-tag-input-bg`           | Background.       |
+| `--bx-tag-input-border-color` | Border color.     |
+| `--bx-tag-input-radius`       | Corner radius.    |
+| `--bx-tag-input-gap`          | Gap between tags. |
 
 ### Methods
 

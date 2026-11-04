@@ -147,6 +147,8 @@ export { default as BxTabGroup } from './generated/BxTabGroup.svelte';
 export type { BxTabGroupProps, BxTabGroupSlot } from './generated/BxTabGroup.svelte';
 export { default as BxTabPanel } from './generated/BxTabPanel.svelte';
 export type { BxTabPanelProps, BxTabPanelSlot } from './generated/BxTabPanel.svelte';
+export { default as BxTagInput } from './generated/BxTagInput.svelte';
+export type { BxTagInputProps, BxTagInputSlot } from './generated/BxTagInput.svelte';
 export { default as BxTextarea } from './generated/BxTextarea.svelte';
 export type { BxTextareaProps, BxTextareaSlot } from './generated/BxTextarea.svelte';
 export { default as BxTimeline } from './generated/BxTimeline.svelte';

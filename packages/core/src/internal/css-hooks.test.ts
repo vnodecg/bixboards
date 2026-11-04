@@ -211,6 +211,7 @@ const MARKUP: Record<string, string | string[]> = {
   'bx-toast': '<bx-toast open>Saved</bx-toast>',
   'bx-combobox':
     '<bx-combobox label="F"><bx-option value="a">A</bx-option></bx-combobox>',
+  'bx-tag-input': '<bx-tag-input label="T" value="a,b"></bx-tag-input>',
   'bx-input':
     '<bx-input label="Label" hint="Hint" clearable value="x"></bx-input>',
   'bx-number-input':

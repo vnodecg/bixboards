@@ -2,7 +2,7 @@
 
 Tracks build status for all 90 components across `@bixboards/core`, `@bixboards/data-table` and `@bixboards/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 79 / 90 done.**
+**Progress: 80 / 90 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -136,7 +136,7 @@ Not started. Each depends only on components in earlier tiers or on others in th
 - [ ] [`bx-calendar`](core/calendar.md) (depends on button)
 - [ ] [`bx-date-picker`](core/date-picker.md) (depends on calendar, popup, input)
 - [ ] [`bx-time-field`](core/time-field.md) (depends on date-picker, soft)
-- [ ] [`bx-tag-input`](core/tag-input.md) (depends on chip, input)
+- [x] [`bx-tag-input`](core/tag-input.md) (typed text is the native input inside the control, not `bx-input`; `add()`/`remove()` are public) — depends on chip, input — `packages/core/src/tag-input`
 
 ### Feedback
 

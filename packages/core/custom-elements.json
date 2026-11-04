@@ -17824,6 +17824,378 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/tag-input/tag-input.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxTagInput",
+          "tagName": "bx-tag-input",
+          "customElement": true,
+          "formAssociated": true,
+          "description": "`<bx-tag-input>` — free-form multi-value entry (docs/features/core/tag-input.md).\n\nTyped text becomes a removable `bx-chip` when a delimiter (default comma or Enter) is typed or\nthe input blurs; paste is split on the delimiters (FR-TAGINPUT-02). Backspace in an empty input\nfirst marks the last tag, then removes it (FR-TAGINPUT-03). Duplicates (case-insensitive), the\n`max` limit and a failing `validate` refuse the tag, firing `bx-reject` with a `reason`.\nForm-associated: one entry per tag under `name` (FR-TAGINPUT-01).",
+          "superclass": {
+            "name": "FormAssociatedMixin"
+          },
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "hint",
+              "fieldName": "hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]"
+            },
+            {
+              "name": "delimiters",
+              "fieldName": "delimiters",
+              "type": {
+                "text": "string"
+              },
+              "default": "',\\n'"
+            },
+            {
+              "name": "allow-duplicates",
+              "fieldName": "allowDuplicates",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "max",
+              "fieldName": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "name": "placeholder",
+              "fieldName": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "required",
+              "fieldName": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "readonly",
+              "fieldName": "readonly",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "hint"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "delimiters",
+              "type": {
+                "text": "string"
+              },
+              "default": "',\\n'",
+              "attribute": "delimiters"
+            },
+            {
+              "kind": "field",
+              "name": "allowDuplicates",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "allow-duplicates"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "validate",
+              "type": {
+                "text": "(value: string) => boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "required",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "readonly",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "readonly",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "focus",
+              "parameters": [
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "FocusOptions"
+                  },
+                  "optional": true
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "blur",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "add",
+              "description": "Adds a tag programmatically; returns false (and fires `bx-reject`) if refused.",
+              "parameters": [
+                {
+                  "name": "raw",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "remove",
+              "description": "Removes the tag at `index`.",
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "input",
+              "description": "Typed text changed."
+            },
+            {
+              "name": "change",
+              "description": "The tag list changed. `detail.value`."
+            },
+            {
+              "name": "bx-add",
+              "description": "A tag was added. `detail.value`."
+            },
+            {
+              "name": "bx-remove",
+              "description": "A tag was removed. `detail.value`."
+            },
+            {
+              "name": "bx-reject",
+              "description": "A tag was refused. `detail.value`, `detail.reason` (`duplicate`, `max`, `invalid`)."
+            },
+            {
+              "name": "bx-invalid",
+              "description": "Constraint validation failed."
+            }
+          ],
+          "slots": [
+            {
+              "name": "label",
+              "description": "Label content."
+            },
+            {
+              "name": "hint",
+              "description": "Help text."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "form-control",
+              "description": "The form-control part."
+            },
+            {
+              "name": "base",
+              "description": "The tag + input surface."
+            },
+            {
+              "name": "input",
+              "description": "The text input."
+            },
+            {
+              "name": "tag",
+              "description": "A tag chip."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-tag-input-bg",
+              "description": "Background."
+            },
+            {
+              "name": "--bx-tag-input-border-color",
+              "description": "Border color."
+            },
+            {
+              "name": "--bx-tag-input-radius",
+              "description": "Corner radius."
+            },
+            {
+              "name": "--bx-tag-input-gap",
+              "description": "Gap between tags."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/textarea/textarea.ts",
       "declarations": [
         {

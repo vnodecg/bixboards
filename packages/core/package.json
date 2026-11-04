@@ -630,6 +630,14 @@
       "types": "./dist/tab/define.d.ts",
       "default": "./dist/tab/define.js"
     },
+    "./tag-input": {
+      "types": "./dist/tag-input/index.d.ts",
+      "default": "./dist/tag-input/index.js"
+    },
+    "./tag-input/define": {
+      "types": "./dist/tag-input/define.d.ts",
+      "default": "./dist/tag-input/define.js"
+    },
     "./textarea": {
       "types": "./dist/textarea/index.d.ts",
       "default": "./dist/textarea/index.js"
