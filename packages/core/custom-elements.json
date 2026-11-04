@@ -8004,6 +8004,305 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/input-otp/input-otp.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxInputOtp",
+          "tagName": "bx-input-otp",
+          "customElement": true,
+          "formAssociated": true,
+          "description": "`<bx-input-otp>` — segmented one-time-code entry (docs/features/core/input-otp.md).\n\nOne real, visually transparent `<input autocomplete=\"one-time-code\" inputmode>` is stretched\nover presentational cells (FR-INPUTOTP-01), so OS autofill, password managers, native paste and\narrow/Backspace caret movement all work without reimplementation (FR-INPUTOTP-02); disallowed\ncharacters are stripped on input. Form-associated: `required` is only satisfied once every cell\nis filled (FR-INPUTOTP-03). The cell row is `dir=\"ltr\"` so digits never reverse in RTL\n(FR-INPUTOTP-04).",
+          "superclass": {
+            "name": "FormAssociatedMixin"
+          },
+          "attributes": [
+            {
+              "name": "length",
+              "fieldName": "length",
+              "type": {
+                "text": "number"
+              },
+              "default": "6"
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "type",
+              "fieldName": "type",
+              "type": {
+                "text": "OtpType"
+              },
+              "default": "'numeric'"
+            },
+            {
+              "name": "mask",
+              "fieldName": "mask",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "group-size",
+              "fieldName": "groupSize",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "invalid",
+              "fieldName": "invalid",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "required",
+              "fieldName": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "autofocus",
+              "fieldName": "autofocus",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "length",
+              "type": {
+                "text": "number"
+              },
+              "default": "6",
+              "attribute": "length"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "OtpType"
+              },
+              "default": "'numeric'",
+              "attribute": "type"
+            },
+            {
+              "kind": "field",
+              "name": "mask",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "mask"
+            },
+            {
+              "kind": "field",
+              "name": "groupSize",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "group-size"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "invalid",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "invalid",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "required",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "autofocus",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "autofocus"
+            },
+            {
+              "kind": "method",
+              "name": "focus",
+              "parameters": [
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "FocusOptions"
+                  },
+                  "optional": true
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "blur",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "input",
+              "description": "Any cell changed."
+            },
+            {
+              "name": "change",
+              "description": "Value committed (blur or completion)."
+            },
+            {
+              "name": "bx-complete",
+              "description": "All cells filled. `detail.value`."
+            }
+          ],
+          "slots": [
+            {
+              "name": "label",
+              "description": "Label content (alternative to `label`)."
+            },
+            {
+              "name": "hint",
+              "description": "Help text."
+            },
+            {
+              "name": "separator",
+              "description": "Between groups."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "group",
+              "description": "A visual group of cells."
+            },
+            {
+              "name": "cell",
+              "description": "A single character cell."
+            },
+            {
+              "name": "separator",
+              "description": "The separator part."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-input-otp-gap",
+              "description": "Gap between cells. Default `var(--bx-space-2xs)`."
+            },
+            {
+              "name": "--bx-input-otp-bg",
+              "description": "Cell background."
+            },
+            {
+              "name": "--bx-input-otp-border-color",
+              "description": "Cell border color."
+            },
+            {
+              "name": "--bx-input-otp-radius",
+              "description": "Cell radius."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/input/input.ts",
       "declarations": [
         {

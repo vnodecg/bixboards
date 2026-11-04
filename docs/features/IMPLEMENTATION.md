@@ -2,7 +2,7 @@
 
 Tracks build status for all 90 components across `@bixboards/core`, `@bixboards/data-table` and `@bixboards/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 71 / 90 done.**
+**Progress: 72 / 90 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -129,7 +129,7 @@ Not started. Each depends only on components in earlier tiers or on others in th
 ### Form
 
 - [ ] [`bx-combobox`](core/combobox.md) (depends on select, option, popup, input, virtualizer)
-- [ ] [`bx-input-otp`](core/input-otp.md) (depends on input)
+- [x] [`bx-input-otp`](core/input-otp.md) (one transparent real `<input>` over presentational cells, so caret/paste/autofill are native; adds `name`, not in the spec's property table) — depends on input — `packages/core/src/input-otp`
 - [ ] [`bx-file-upload`](core/file-upload.md) (depends on button, progress-bar, format-bytes, icon)
 - [ ] [`bx-search-field`](core/search-field.md) (depends on input, combobox, soft)
 - [ ] [`bx-segmented-control`](core/segmented-control.md) (depends on radio-group, resize-observer)

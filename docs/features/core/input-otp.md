@@ -2,14 +2,14 @@
 
 > Segmented one-time-code entry with paste, autofill and auto-advance.
 
-|                     |                            |
-| ------------------- | -------------------------- |
-| **Package**         | `@bixboards/core`          |
-| **Category**        | Form                       |
-| **Tag**             | `bx-input-otp`             |
-| **Status**          | Proposed (not implemented) |
-| **Form-associated** | Yes (ElementInternals)     |
-| **Depends on**      | `input`                    |
+|                     |                        |
+| ------------------- | ---------------------- |
+| **Package**         | `@bixboards/core`      |
+| **Category**        | Form                   |
+| **Tag**             | `bx-input-otp`         |
+| **Status**          | Implemented            |
+| **Form-associated** | Yes (ElementInternals) |
+| **Depends on**      | `input`                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
@@ -60,13 +60,12 @@ Segmented one-time-code entry with paste, autofill and auto-advance. Specified f
 
 ### CSS custom properties
 
-| Property                          | Description                                                              |
-| --------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-input-otp-cell-size`        | Cell width and height. Default `calc(var(--bx-unit) * 2.75)`.            |
-| `--bx-input-otp-gap`              | Gap between cells.                                                       |
-| `--bx-input-otp-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-input-otp-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-input-otp-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                      | Description                                       |
+| ----------------------------- | ------------------------------------------------- |
+| `--bx-input-otp-gap`          | Gap between cells. Default `var(--bx-space-2xs)`. |
+| `--bx-input-otp-bg`           | Cell background.                                  |
+| `--bx-input-otp-border-color` | Cell border color.                                |
+| `--bx-input-otp-radius`       | Cell radius.                                      |
 
 ### Methods
 

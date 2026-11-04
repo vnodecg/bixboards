@@ -73,6 +73,8 @@ export { default as BxInclude } from './generated/BxInclude.svelte';
 export type { BxIncludeProps, BxIncludeSlot } from './generated/BxInclude.svelte';
 export { default as BxInput } from './generated/BxInput.svelte';
 export type { BxInputProps, BxInputSlot } from './generated/BxInput.svelte';
+export { default as BxInputOtp } from './generated/BxInputOtp.svelte';
+export type { BxInputOtpProps, BxInputOtpSlot } from './generated/BxInputOtp.svelte';
 export { default as BxIntersectionObserver } from './generated/BxIntersectionObserver.svelte';
 export type { BxIntersectionObserverProps, BxIntersectionObserverSlot } from './generated/BxIntersectionObserver.svelte';
 export { default as BxKbd } from './generated/BxKbd.svelte';

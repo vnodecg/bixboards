@@ -330,6 +330,14 @@
       "types": "./dist/input/index.d.ts",
       "default": "./dist/input/index.js"
     },
+    "./input-otp": {
+      "types": "./dist/input-otp/index.d.ts",
+      "default": "./dist/input-otp/index.js"
+    },
+    "./input-otp/define": {
+      "types": "./dist/input-otp/define.d.ts",
+      "default": "./dist/input-otp/define.js"
+    },
     "./input/define": {
       "types": "./dist/input/define.d.ts",
       "default": "./dist/input/define.js"
