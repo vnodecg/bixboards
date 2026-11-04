@@ -4,7 +4,7 @@ One detailed feature document per component. Shared rules live in [_conventions.
 
 **90 components** across 3 packages (29 proposed additions).
 
-> **Status: proposals, hand-maintained.** These documents are the specification for each component. 59 of the first 61 are implemented, and the proposed additions are not (see [IMPLEMENTATION.md](IMPLEMENTATION.md) for the full tracker); the rest do not exist yet. API shapes for the unimplemented components are design proposals and have **not** been validated against real usage; confirm names and behavior when implementing each. Appearance, variant and size options are defined here, per component, and are implemented on top of the design-system tokens (colors from roles, sizes from the fluid scale) — the design system itself contains no component definitions. Conventions: appearance names use spaces (`filled outlined`), variants are the design-system palettes, and component CSS hooks are `--bx-<component>-<parameter>` (parts use short names; only custom properties carry the component prefix).
+> **Status: proposals, hand-maintained.** These documents are the specification for each component. All 90 are implemented (see [IMPLEMENTATION.md](IMPLEMENTATION.md) for the tracker and the per-component deviations from these specs). API shapes for the unimplemented components are design proposals and have **not** been validated against real usage; confirm names and behavior when implementing each. Appearance, variant and size options are defined here, per component, and are implemented on top of the design-system tokens (colors from roles, sizes from the fluid scale) — the design system itself contains no component definitions. Conventions: appearance names use spaces (`filled outlined`), variants are the design-system palettes, and component CSS hooks are `--bx-<component>-<parameter>` (parts use short names; only custom properties carry the component prefix).
 
 ## `@bixboards/core`
 
@@ -103,7 +103,7 @@ One detailed feature document per component. Shared rules live in [_conventions.
 
 ### Proposed additions
 
-Specified, not implemented. Scope informed by a gap analysis against [BoardUI](https://www.boardui.com/) (see [boardui-gap-analysis](../boardui-gap-analysis.md)); APIs are original.
+Implemented. Scope informed by a gap analysis against [BoardUI](https://www.boardui.com/) (see [boardui-gap-analysis](../boardui-gap-analysis.md)); APIs are original.
 
 **Actions**
 
