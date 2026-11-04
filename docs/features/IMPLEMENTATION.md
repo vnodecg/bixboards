@@ -2,7 +2,7 @@
 
 Tracks build status for all 90 components across `@bixboards/core`, `@bixboards/data-table` and `@bixboards/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 67 / 90 done.**
+**Progress: 68 / 90 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -164,7 +164,7 @@ Not started. Each depends only on components in earlier tiers or on others in th
 ### Charts
 
 - [ ] [`bx-chart`](core/chart.md) (depends on skeleton, resize-observer, intersection-observer)
-- [ ] [`bx-sparkline`](core/sparkline.md)
+- [x] [`bx-sparkline`](core/sparkline.md) (exports `decimate`; `trend-is-good` has no default (the spec's `up` would colour every sparkline); highlight is a zero-length round-capped stroke so it stays circular under non-uniform scaling) — `packages/core/src/sparkline`
 
 ## Framework wrappers (after the above)
 

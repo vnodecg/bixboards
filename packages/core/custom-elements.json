@@ -14303,6 +14303,178 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/sparkline/sparkline.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxSparkline",
+          "tagName": "bx-sparkline",
+          "customElement": true,
+          "description": "`<bx-sparkline>` — tiny dependency-free inline trend chart (docs/features/core/sparkline.md).\n\nPlain SVG with a non-uniform viewBox (`preserveAspectRatio=\"none\"`) and non-scaling strokes, so\nit stretches to its container's width while its height is `1.5em` and follows the surrounding\ntext. Highlighted points are zero-length round-capped strokes, which stay circular despite the\nnon-uniform scale. Without a `label` it is decorative (`aria-hidden`); with one it is a\n`role=\"img\"` whose name includes the first, last, min and max values. `trend-is-good` is\nunset by default (the spec's default `up` would colour every sparkline); set it to colour the\nline by whether the overall direction is good or bad.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "values",
+              "fieldName": "values",
+              "type": {
+                "text": "number[]"
+              },
+              "default": "[]"
+            },
+            {
+              "name": "type",
+              "fieldName": "type",
+              "type": {
+                "text": "'line' | 'area' | 'bar'"
+              },
+              "default": "'line'"
+            },
+            {
+              "name": "min",
+              "fieldName": "min",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "max",
+              "fieldName": "max",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "highlight",
+              "fieldName": "highlight",
+              "type": {
+                "text": "Highlight"
+              },
+              "default": "'last'"
+            },
+            {
+              "name": "trend-is-good",
+              "fieldName": "trendIsGood",
+              "type": {
+                "text": "'up' | 'down'"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "values",
+              "type": {
+                "text": "number[]"
+              },
+              "default": "[]",
+              "attribute": "values"
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "'line' | 'area' | 'bar'"
+              },
+              "default": "'line'",
+              "attribute": "type",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "number"
+              },
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "highlight",
+              "type": {
+                "text": "Highlight"
+              },
+              "default": "'last'",
+              "attribute": "highlight"
+            },
+            {
+              "kind": "field",
+              "name": "trendIsGood",
+              "type": {
+                "text": "'up' | 'down'"
+              },
+              "attribute": "trend-is-good"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            }
+          ],
+          "events": [],
+          "slots": [],
+          "cssParts": [
+            {
+              "name": "base",
+              "description": "SVG."
+            },
+            {
+              "name": "line",
+              "description": "The line part."
+            },
+            {
+              "name": "area",
+              "description": "The area part."
+            },
+            {
+              "name": "bar",
+              "description": "The bar part."
+            },
+            {
+              "name": "point",
+              "description": "The point part."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-sparkline-color",
+              "description": "Line/bar color. Default `--bx-role-accent`."
+            },
+            {
+              "name": "--bx-sparkline-stroke-width",
+              "description": "Line width."
+            },
+            {
+              "name": "--bx-sparkline-height",
+              "description": "Height. Default `1.5em`."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/spinner/spinner.ts",
       "declarations": [
         {

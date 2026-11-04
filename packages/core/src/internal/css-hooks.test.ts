@@ -200,6 +200,7 @@ const MARKUP: Record<string, string | string[]> = {
   'bx-icon-button': '<bx-icon-button label="Go" name="check"></bx-icon-button>',
   'bx-kbd': '<bx-kbd keys="mod+k"></bx-kbd>',
   'bx-chip': '<bx-chip selectable removable>Tag</bx-chip>',
+  'bx-sparkline': '<bx-sparkline values="1,3,2,5"></bx-sparkline>',
   'bx-input':
     '<bx-input label="Label" hint="Hint" clearable value="x"></bx-input>',
   'bx-number-input':

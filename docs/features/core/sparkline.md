@@ -2,14 +2,14 @@
 
 > Tiny dependency-free inline trend line, bar or area chart for tables and stat cards.
 
-|                     |                            |
-| ------------------- | -------------------------- |
-| **Package**         | `@bixboards/core`          |
-| **Category**        | Charts                     |
-| **Tag**             | `bx-sparkline`             |
-| **Status**          | Proposed (not implemented) |
-| **Form-associated** | No                         |
-| **Depends on**      | none                       |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Charts            |
+| **Tag**             | `bx-sparkline`    |
+| **Status**          | Implemented       |
+| **Form-associated** | No                |
+| **Depends on**      | none              |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
@@ -51,12 +51,11 @@ _None._
 
 ### CSS custom properties
 
-| Property                      | Description                                        |
-| ----------------------------- | -------------------------------------------------- |
-| `--bx-sparkline-color`        | Line/bar color. Default `--bx-role-accent`.        |
-| `--bx-sparkline-stroke-width` | Line width.                                        |
-| `--bx-sparkline-height`       | Height. Default `1.5em`.                           |
-| `--bx-sparkline-font-family`  | Font family. Default `var(--bx-font-family-sans)`. |
+| Property                      | Description                                 |
+| ----------------------------- | ------------------------------------------- |
+| `--bx-sparkline-color`        | Line/bar color. Default `--bx-role-accent`. |
+| `--bx-sparkline-stroke-width` | Line width.                                 |
+| `--bx-sparkline-height`       | Height. Default `1.5em`.                    |
 
 ### Methods
 

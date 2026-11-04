@@ -494,6 +494,14 @@
       "types": "./dist/social-button/define.d.ts",
       "default": "./dist/social-button/define.js"
     },
+    "./sparkline": {
+      "types": "./dist/sparkline/index.d.ts",
+      "default": "./dist/sparkline/index.js"
+    },
+    "./sparkline/define": {
+      "types": "./dist/sparkline/define.d.ts",
+      "default": "./dist/sparkline/define.js"
+    },
     "./spinner": {
       "types": "./dist/spinner/index.d.ts",
       "default": "./dist/spinner/index.js"

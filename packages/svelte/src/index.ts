@@ -113,6 +113,8 @@ export { default as BxSlider } from './generated/BxSlider.svelte';
 export type { BxSliderProps, BxSliderSlot } from './generated/BxSlider.svelte';
 export { default as BxSocialButton } from './generated/BxSocialButton.svelte';
 export type { BxSocialButtonProps, BxSocialButtonSlot } from './generated/BxSocialButton.svelte';
+export { default as BxSparkline } from './generated/BxSparkline.svelte';
+export type { BxSparklineProps, BxSparklineSlot } from './generated/BxSparkline.svelte';
 export { default as BxSpinner } from './generated/BxSpinner.svelte';
 export type { BxSpinnerProps, BxSpinnerSlot } from './generated/BxSpinner.svelte';
 export { default as BxSwitch } from './generated/BxSwitch.svelte';
