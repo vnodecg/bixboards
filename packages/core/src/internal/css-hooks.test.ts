@@ -220,6 +220,7 @@ const MARKUP: Record<string, string | string[]> = {
   'bx-time-field': '<bx-time-field label="T" value="09:30"></bx-time-field>',
   'bx-sidebar':
     '<bx-sidebar mode="inline"><bx-sidebar-item icon="info" active>A</bx-sidebar-item></bx-sidebar>',
+  'bx-command-palette': '<bx-command-palette open></bx-command-palette>',
   'bx-input':
     '<bx-input label="Label" hint="Hint" clearable value="x"></bx-input>',
   'bx-number-input':

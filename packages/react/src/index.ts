@@ -21,6 +21,7 @@ export * from './generated/bx-code-block.ts';
 export * from './generated/bx-color-picker.ts';
 export * from './generated/bx-column.ts';
 export * from './generated/bx-combobox.ts';
+export * from './generated/bx-command-palette.ts';
 export * from './generated/bx-comparison.ts';
 export * from './generated/bx-context-menu.ts';
 export * from './generated/bx-copy-button.ts';

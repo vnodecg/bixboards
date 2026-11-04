@@ -222,6 +222,14 @@
       "types": "./dist/combobox/define.d.ts",
       "default": "./dist/combobox/define.js"
     },
+    "./command-palette": {
+      "types": "./dist/command-palette/index.d.ts",
+      "default": "./dist/command-palette/index.js"
+    },
+    "./command-palette/define": {
+      "types": "./dist/command-palette/define.d.ts",
+      "default": "./dist/command-palette/define.js"
+    },
     "./comparison": {
       "types": "./dist/comparison/index.d.ts",
       "default": "./dist/comparison/index.js"

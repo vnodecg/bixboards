@@ -5183,6 +5183,232 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/command-palette/command-palette.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxCommandPalette",
+          "tagName": "bx-command-palette",
+          "customElement": true,
+          "description": "`<bx-command-palette>` — global ⌘K launcher (docs/features/core/command-palette.md).\n\nA modal native `<dialog>` holding a search `input role=\"combobox\"` and a `listbox`; DOM focus\nstays in the input and the highlighted row is its `aria-activedescendant` (the combobox pattern).\nCommands come from the `commands` property; with no query they are grouped (recent ids first),\nwith one they are ranked flat by  or a custom `filter(command, query) => number`\n(higher wins, 0 hides). Selecting fires a cancelable `bx-select`; unless cancelled it runs the\ncommand's `handler` or navigates to its `href`, then closes. The opening `shortcut` (default\n`mod+k`) is registered globally and, when it has no modifier, ignored inside editable fields\n(FR-COMMANDPALETTE-04). Shortcuts in rows use `bx-kbd` (FR-COMMANDPALETTE-03). At most 200 results\nrender; true virtualization above that (FR-COMMANDPALETTE-01) is not implemented, and the dialog\nis a native `<dialog>` rather than `bx-dialog`.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "open",
+              "fieldName": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "placeholder",
+              "fieldName": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Type a command or search…'"
+            },
+            {
+              "name": "shortcut",
+              "fieldName": "shortcut",
+              "type": {
+                "text": "string"
+              },
+              "default": "'mod+k'"
+            },
+            {
+              "name": "loading",
+              "fieldName": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Command palette'"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "commands",
+              "type": {
+                "text": "Command[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Type a command or search…'",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "shortcut",
+              "type": {
+                "text": "string"
+              },
+              "default": "'mod+k'",
+              "attribute": "shortcut"
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "recent",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "filter",
+              "type": {
+                "text": "(command: Command, query: string) => number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Command palette'",
+              "attribute": "label"
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "hide",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "bx-select",
+              "description": "A command was chosen. Cancelable. `detail.command`."
+            },
+            {
+              "name": "input",
+              "description": "Query changed. `detail.query` (for async sources)."
+            },
+            {
+              "name": "bx-show",
+              "description": "Opening. Cancelable."
+            },
+            {
+              "name": "bx-after-show",
+              "description": "Opened."
+            },
+            {
+              "name": "bx-hide",
+              "description": "Closing. Cancelable."
+            },
+            {
+              "name": "bx-after-hide",
+              "description": "Closed."
+            }
+          ],
+          "slots": [
+            {
+              "name": "empty",
+              "description": "Shown when nothing matches."
+            },
+            {
+              "name": "footer",
+              "description": "Hints (↑↓ navigate, ↵ select)."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "dialog",
+              "description": "The dialog part."
+            },
+            {
+              "name": "input",
+              "description": "The input part."
+            },
+            {
+              "name": "list",
+              "description": "The list part."
+            },
+            {
+              "name": "group",
+              "description": "The group part."
+            },
+            {
+              "name": "item",
+              "description": "The item part."
+            },
+            {
+              "name": "shortcut",
+              "description": "The shortcut part."
+            },
+            {
+              "name": "footer",
+              "description": "The footer part."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-command-palette-width",
+              "description": "Dialog width."
+            },
+            {
+              "name": "--bx-command-palette-max-height",
+              "description": "List max height."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/comparison/comparison.ts",
       "declarations": [
         {

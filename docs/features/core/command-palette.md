@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core`                          |
 | **Category**        | Navigation                                 |
 | **Tag**             | `bx-command-palette`                       |
-| **Status**          | Proposed (not implemented)                 |
+| **Status**          | Implemented                                |
 | **Form-associated** | No                                         |
 | **Depends on**      | `dialog`, `combobox`, `kbd`, `virtualizer` |
 
@@ -60,13 +60,10 @@ Global ⌘K-style launcher: fuzzy search over commands, pages and recent items w
 
 ### CSS custom properties
 
-| Property                                | Description                                                              |
-| --------------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-command-palette-width`            | Dialog width.                                                            |
-| `--bx-command-palette-max-height`       | List max height.                                                         |
-| `--bx-command-palette-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-command-palette-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-command-palette-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                          | Description      |
+| --------------------------------- | ---------------- |
+| `--bx-command-palette-width`      | Dialog width.    |
+| `--bx-command-palette-max-height` | List max height. |
 
 ### Methods
 
