@@ -199,6 +199,7 @@ const MARKUP: Record<string, string | string[]> = {
   'bx-dropdown-item': '<bx-dropdown-item>Item</bx-dropdown-item>',
   'bx-icon-button': '<bx-icon-button label="Go" name="check"></bx-icon-button>',
   'bx-kbd': '<bx-kbd keys="mod+k"></bx-kbd>',
+  'bx-chip': '<bx-chip selectable removable>Tag</bx-chip>',
   'bx-input':
     '<bx-input label="Label" hint="Hint" clearable value="x"></bx-input>',
   'bx-number-input':

@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core`              |
 | **Category**        | Feedback                       |
 | **Tag**             | `bx-chip`                      |
-| **Status**          | Proposed (not implemented)     |
+| **Status**          | Implemented                    |
 | **Form-associated** | No                             |
 | **Depends on**      | `close-button`, _badge_ (soft) |
 
@@ -51,22 +51,20 @@ Compact token for tags, filters and selections; optionally selectable, removable
 
 ### CSS parts
 
-| Part            | Description             |
-| --------------- | ----------------------- |
-| `base`          | The base part.          |
-| `label`         | The label part.         |
-| `remove-button` | The remove-button part. |
+| Part            | Description        |
+| --------------- | ------------------ |
+| `base`          | The chip surface.  |
+| `label`         | The label part.    |
+| `remove-button` | The remove button. |
 
 ### CSS custom properties
 
-| Property                     | Description                                                              |
-| ---------------------------- | ------------------------------------------------------------------------ |
-| `--bx-chip-bg`               | Background.                                                              |
-| `--bx-chip-fg`               | Foreground.                                                              |
-| `--bx-chip-radius`           | Corner radius.                                                           |
-| `--bx-chip-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-chip-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-chip-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property           | Description                                       |
+| ------------------ | ------------------------------------------------- |
+| `--bx-chip-bg`     | Background.                                       |
+| `--bx-chip-fg`     | Foreground.                                       |
+| `--bx-chip-radius` | Corner radius.                                    |
+| `--bx-chip-gap`    | Gap between parts. Default `var(--bx-space-2xs)`. |
 
 ### Methods
 

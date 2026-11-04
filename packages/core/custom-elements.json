@@ -3231,6 +3231,306 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/chip/chip.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxChip",
+          "tagName": "bx-chip",
+          "customElement": true,
+          "description": "`<bx-chip>` — compact token for tags, filters and selections (docs/features/core/chip.md).\n\nDistinct from `bx-badge` (FR-CHIP-03): a chip is interactive. `selectable` renders a native\n`<button aria-pressed>` toggling `selected`; `clickable` renders a plain button that only emits\n`click` (an addition to the spec's property table, for filter-style chips); with neither it is\nstatic text. `removable` adds a `bx-close-button`; Delete/Backspace on the focused chip requests\nremoval as well (FR-CHIP-02). Removal fires a cancelable `bx-remove`; if nobody cancels it the\nchip removes itself from the DOM. `bx-chip-group` (FR-CHIP-01, optional in the spec) is not\nimplemented.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "variant",
+              "fieldName": "variant",
+              "type": {
+                "text": "Variant"
+              },
+              "default": "'neutral'"
+            },
+            {
+              "name": "appearance",
+              "fieldName": "appearance",
+              "type": {
+                "text": "Appearance"
+              },
+              "default": "'subtle'"
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'"
+            },
+            {
+              "name": "selectable",
+              "fieldName": "selectable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "selected",
+              "fieldName": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "clickable",
+              "fieldName": "clickable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "removable",
+              "fieldName": "removable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "pill",
+              "fieldName": "pill",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true"
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "remove-label",
+              "fieldName": "removeLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Remove'"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "Variant"
+              },
+              "default": "'neutral'",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "appearance",
+              "type": {
+                "text": "Appearance"
+              },
+              "default": "'subtle'",
+              "attribute": "appearance",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selectable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "selectable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "clickable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "clickable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "removable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "removable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "pill",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "pill",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "removeLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Remove'",
+              "attribute": "remove-label"
+            },
+            {
+              "kind": "method",
+              "name": "focus",
+              "parameters": [
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "FocusOptions"
+                  },
+                  "optional": true
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "blur",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "description": "Selected state changed by the user."
+            },
+            {
+              "name": "bx-remove",
+              "description": "Removal requested. Cancelable; uncancelled, the chip removes itself."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "Label."
+            },
+            {
+              "name": "start",
+              "description": "Avatar or icon."
+            },
+            {
+              "name": "end",
+              "description": "Trailing content."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "base",
+              "description": "The chip surface."
+            },
+            {
+              "name": "label",
+              "description": "The label part."
+            },
+            {
+              "name": "remove-button",
+              "description": "The remove button."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-chip-bg",
+              "description": "Background."
+            },
+            {
+              "name": "--bx-chip-fg",
+              "description": "Foreground."
+            },
+            {
+              "name": "--bx-chip-radius",
+              "description": "Corner radius."
+            },
+            {
+              "name": "--bx-chip-gap",
+              "description": "Gap between parts. Default `var(--bx-space-2xs)`."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/close-button/close-button.ts",
       "declarations": [
         {

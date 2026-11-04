@@ -2,7 +2,7 @@
 
 Tracks build status for all 90 components across `@bixboards/core`, `@bixboards/data-table` and `@bixboards/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 64 / 90 done.**
+**Progress: 65 / 90 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -140,7 +140,7 @@ Not started. Each depends only on components in earlier tiers or on others in th
 
 ### Feedback
 
-- [ ] [`bx-chip`](core/chip.md) (depends on close-button, badge, soft)
+- [x] [`bx-chip`](core/chip.md) (`bx-chip-group` (optional, FR-CHIP-01) not implemented; adds `clickable` and `remove-label`, not in the spec's property table) — depends on close-button, badge, soft — `packages/core/src/chip`
 - [ ] [`bx-meter`](core/meter.md) (depends on progress-bar, soft)
 - [ ] [`bx-toast`](core/toast.md) (depends on callout, close-button, popup)
 - [ ] [`bx-notification-center`](core/notification-center.md) (depends on popover, drawer, badge, relative-time, data-list, icon-button)

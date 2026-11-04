@@ -27,6 +27,8 @@ export { default as BxCarouselItem } from './generated/BxCarouselItem.svelte';
 export type { BxCarouselItemProps, BxCarouselItemSlot } from './generated/BxCarouselItem.svelte';
 export { default as BxCheckbox } from './generated/BxCheckbox.svelte';
 export type { BxCheckboxProps, BxCheckboxSlot } from './generated/BxCheckbox.svelte';
+export { default as BxChip } from './generated/BxChip.svelte';
+export type { BxChipProps, BxChipSlot } from './generated/BxChip.svelte';
 export { default as BxCloseButton } from './generated/BxCloseButton.svelte';
 export type { BxCloseButtonProps, BxCloseButtonSlot } from './generated/BxCloseButton.svelte';
 export { default as BxColorPicker } from './generated/BxColorPicker.svelte';
