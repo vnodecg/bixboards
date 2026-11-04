@@ -73,6 +73,8 @@ export { default as BxIntersectionObserver } from './generated/BxIntersectionObs
 export type { BxIntersectionObserverProps, BxIntersectionObserverSlot } from './generated/BxIntersectionObserver.svelte';
 export { default as BxKbd } from './generated/BxKbd.svelte';
 export type { BxKbdProps, BxKbdSlot } from './generated/BxKbd.svelte';
+export { default as BxMeter } from './generated/BxMeter.svelte';
+export type { BxMeterProps, BxMeterSlot } from './generated/BxMeter.svelte';
 export { default as BxMutationObserver } from './generated/BxMutationObserver.svelte';
 export type { BxMutationObserverProps, BxMutationObserverSlot } from './generated/BxMutationObserver.svelte';
 export { default as BxNumberInput } from './generated/BxNumberInput.svelte';

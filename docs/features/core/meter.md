@@ -2,14 +2,14 @@
 
 > Scalar measurement within a known range (disk usage, score) with low/high/optimum bands.
 
-|                     |                            |
-| ------------------- | -------------------------- |
-| **Package**         | `@bixboards/core`          |
-| **Category**        | Feedback                   |
-| **Tag**             | `bx-meter`                 |
-| **Status**          | Proposed (not implemented) |
-| **Form-associated** | No                         |
-| **Depends on**      | _progress-bar_ (soft)      |
+|                     |                       |
+| ------------------- | --------------------- |
+| **Package**         | `@bixboards/core`     |
+| **Category**        | Feedback              |
+| **Tag**             | `bx-meter`            |
+| **Status**          | Implemented           |
+| **Form-associated** | No                    |
+| **Depends on**      | _progress-bar_ (soft) |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
@@ -54,13 +54,12 @@ _None._
 
 ### CSS custom properties
 
-| Property                  | Description                                        |
-| ------------------------- | -------------------------------------------------- |
-| `--bx-meter-height`       | Track height.                                      |
-| `--bx-meter-fill-good`    | Color in the optimum band.                         |
-| `--bx-meter-fill-warning` | Color in the middle band.                          |
-| `--bx-meter-fill-bad`     | Color in the worst band.                           |
-| `--bx-meter-font-family`  | Font family. Default `var(--bx-font-family-sans)`. |
+| Property                  | Description                |
+| ------------------------- | -------------------------- |
+| `--bx-meter-height`       | Track height.              |
+| `--bx-meter-fill-good`    | Color in the optimum band. |
+| `--bx-meter-fill-warning` | Color in the middle band.  |
+| `--bx-meter-fill-bad`     | Color in the worst band.   |
 
 ### Methods
 

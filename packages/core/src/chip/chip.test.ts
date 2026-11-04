@@ -52,15 +52,13 @@ describe('bx-chip', () => {
       detail = (e as CustomEvent).detail;
       e.preventDefault();
     });
-    chip
-      .shadowRoot!.querySelector<HTMLElement>('.label')!
-      .dispatchEvent(
-        new KeyboardEvent('keydown', {
-          key: 'Backspace',
-          bubbles: true,
-          composed: true,
-        }),
-      );
+    chip.shadowRoot!.querySelector<HTMLElement>('.label')!.dispatchEvent(
+      new KeyboardEvent('keydown', {
+        key: 'Backspace',
+        bubbles: true,
+        composed: true,
+      }),
+    );
     expect(detail).to.exist;
   });
 

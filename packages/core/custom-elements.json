@@ -8800,6 +8800,220 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/meter/meter.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxMeter",
+          "tagName": "bx-meter",
+          "customElement": true,
+          "description": "`<bx-meter>` — scalar measurement within a known range (docs/features/core/meter.md).\n\n`role=\"meter\"` with `aria-valuenow/min/max`. The value is clamped to `min`/`max`\n(FR-METER-03). The band (good/warning/bad) is conveyed by a glyph and by `aria-valuetext`, not by\nthe fill colour alone (FR-METER-02). For task progress use `bx-progress-bar`.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "name": "min",
+              "fieldName": "min",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "name": "max",
+              "fieldName": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100"
+            },
+            {
+              "name": "low",
+              "fieldName": "low",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "high",
+              "fieldName": "high",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "optimum",
+              "fieldName": "optimum",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "show-value",
+              "fieldName": "showValue",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "low",
+              "type": {
+                "text": "number"
+              },
+              "attribute": "low"
+            },
+            {
+              "kind": "field",
+              "name": "high",
+              "type": {
+                "text": "number"
+              },
+              "attribute": "high"
+            },
+            {
+              "kind": "field",
+              "name": "optimum",
+              "type": {
+                "text": "number"
+              },
+              "attribute": "optimum"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "showValue",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "show-value"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "format",
+              "type": {
+                "text": "Intl.NumberFormatOptions"
+              }
+            }
+          ],
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "Overlay label."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "base",
+              "description": "Track."
+            },
+            {
+              "name": "fill",
+              "description": "Value bar."
+            },
+            {
+              "name": "label",
+              "description": "The label part."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-meter-height",
+              "description": "Track height."
+            },
+            {
+              "name": "--bx-meter-fill-good",
+              "description": "Color in the optimum band."
+            },
+            {
+              "name": "--bx-meter-fill-warning",
+              "description": "Color in the middle band."
+            },
+            {
+              "name": "--bx-meter-fill-bad",
+              "description": "Color in the worst band."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/mutation-observer/mutation-observer.ts",
       "declarations": [
         {

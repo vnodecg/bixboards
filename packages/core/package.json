@@ -334,6 +334,14 @@
       "types": "./dist/kbd/define.d.ts",
       "default": "./dist/kbd/define.js"
     },
+    "./meter": {
+      "types": "./dist/meter/index.d.ts",
+      "default": "./dist/meter/index.js"
+    },
+    "./meter/define": {
+      "types": "./dist/meter/define.d.ts",
+      "default": "./dist/meter/define.js"
+    },
     "./mutation-observer": {
       "types": "./dist/mutation-observer/index.d.ts",
       "default": "./dist/mutation-observer/index.js"
