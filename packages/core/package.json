@@ -558,6 +558,22 @@
       "types": "./dist/textarea/define.d.ts",
       "default": "./dist/textarea/define.js"
     },
+    "./timeline": {
+      "types": "./dist/timeline/index.d.ts",
+      "default": "./dist/timeline/index.js"
+    },
+    "./timeline-item": {
+      "types": "./dist/timeline-item/index.d.ts",
+      "default": "./dist/timeline-item/index.js"
+    },
+    "./timeline-item/define": {
+      "types": "./dist/timeline-item/define.d.ts",
+      "default": "./dist/timeline-item/define.js"
+    },
+    "./timeline/define": {
+      "types": "./dist/timeline/define.d.ts",
+      "default": "./dist/timeline/define.js"
+    },
     "./toggle-button": {
       "types": "./dist/toggle-button/index.d.ts",
       "default": "./dist/toggle-button/index.js"

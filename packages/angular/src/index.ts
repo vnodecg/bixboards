@@ -64,6 +64,8 @@ export * from './generated/bx-tab.ts';
 export * from './generated/bx-tab-group.ts';
 export * from './generated/bx-tab-panel.ts';
 export * from './generated/bx-textarea.ts';
+export * from './generated/bx-timeline.ts';
+export * from './generated/bx-timeline-item.ts';
 export * from './generated/bx-toggle-button.ts';
 export * from './generated/bx-tooltip.ts';
 export * from './generated/bx-tree.ts';

@@ -201,6 +201,8 @@ const MARKUP: Record<string, string | string[]> = {
   'bx-kbd': '<bx-kbd keys="mod+k"></bx-kbd>',
   'bx-chip': '<bx-chip selectable removable>Tag</bx-chip>',
   'bx-sparkline': '<bx-sparkline values="1,3,2,5"></bx-sparkline>',
+  'bx-timeline':
+    '<bx-timeline><bx-timeline-item heading="A" icon="check"></bx-timeline-item><bx-timeline-item heading="B"></bx-timeline-item></bx-timeline>',
   'bx-input':
     '<bx-input label="Label" hint="Hint" clearable value="x"></bx-input>',
   'bx-number-input':

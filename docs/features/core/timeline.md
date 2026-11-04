@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core`                      |
 | **Category**        | Display                                |
 | **Tag**             | `bx-timeline`                          |
-| **Status**          | Proposed (not implemented)             |
+| **Status**          | Implemented                            |
 | **Form-associated** | No                                     |
 | **Depends on**      | `relative-time`, `format-date`, `icon` |
 
@@ -39,22 +39,16 @@ _None._
 
 ### CSS parts
 
-| Part        | Description         |
-| ----------- | ------------------- |
-| `base`      | The base part.      |
-| `item`      | The item part.      |
-| `marker`    | The marker part.    |
-| `connector` | The connector part. |
-| `time`      | The time part.      |
-| `content`   | The content part.   |
+| Part   | Description    |
+| ------ | -------------- |
+| `base` | The base part. |
 
 ### CSS custom properties
 
-| Property                        | Description                                        |
-| ------------------------------- | -------------------------------------------------- |
-| `--bx-timeline-marker-size`     | Marker size.                                       |
-| `--bx-timeline-connector-color` | Line color.                                        |
-| `--bx-timeline-font-family`     | Font family. Default `var(--bx-font-family-sans)`. |
+| Property                        | Description  |
+| ------------------------------- | ------------ |
+| `--bx-timeline-marker-size`     | Marker size. |
+| `--bx-timeline-connector-color` | Line color.  |
 
 ### Methods
 

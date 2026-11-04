@@ -16326,6 +16326,316 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/timeline-item/timeline-item.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxTimelineItem",
+          "tagName": "bx-timeline-item",
+          "customElement": true,
+          "description": "`<bx-timeline-item>` — one event in a `bx-timeline` (docs/features/core/timeline.md).\n\n`time` (any `Date` string) renders through `bx-format-date`, or `bx-relative-time` with\n`relative` (FR-TIMELINE-01). `bx-timeline` sets `position`, `orientation` and `last` on its\nitems; they are plain reflected properties, not for consumers to set.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "time",
+              "fieldName": "time",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "relative",
+              "fieldName": "relative",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "heading",
+              "fieldName": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "status",
+              "fieldName": "status",
+              "type": {
+                "text": "Status"
+              },
+              "default": "'secondary'"
+            },
+            {
+              "name": "icon",
+              "fieldName": "icon",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "position",
+              "fieldName": "position",
+              "type": {
+                "text": "'start' | 'end'"
+              }
+            },
+            {
+              "name": "orientation",
+              "fieldName": "orientation",
+              "type": {
+                "text": "'vertical' | 'horizontal'"
+              },
+              "default": "'vertical'"
+            },
+            {
+              "name": "last",
+              "fieldName": "last",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "time",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "time"
+            },
+            {
+              "kind": "field",
+              "name": "relative",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "relative"
+            },
+            {
+              "kind": "field",
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "heading"
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "description"
+            },
+            {
+              "kind": "field",
+              "name": "status",
+              "type": {
+                "text": "Status"
+              },
+              "default": "'secondary'",
+              "attribute": "status",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "icon",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "icon"
+            },
+            {
+              "kind": "field",
+              "name": "position",
+              "type": {
+                "text": "'start' | 'end'"
+              },
+              "attribute": "position",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "orientation",
+              "type": {
+                "text": "'vertical' | 'horizontal'"
+              },
+              "default": "'vertical'",
+              "attribute": "orientation",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "last",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "last",
+              "reflects": true
+            }
+          ],
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "Description content."
+            },
+            {
+              "name": "icon",
+              "description": "Marker content; overrides `icon`."
+            },
+            {
+              "name": "time",
+              "description": "Overrides the formatted `time`."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "item",
+              "description": "The item surface."
+            },
+            {
+              "name": "marker",
+              "description": "The marker part."
+            },
+            {
+              "name": "connector",
+              "description": "The connector part."
+            },
+            {
+              "name": "time",
+              "description": "The time part."
+            },
+            {
+              "name": "content",
+              "description": "The content part."
+            }
+          ],
+          "cssProperties": []
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/timeline/timeline.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxTimeline",
+          "tagName": "bx-timeline",
+          "customElement": true,
+          "description": "`<bx-timeline>` — chronological list of events (docs/features/core/timeline.md).\n\n`role=\"list\"` of `bx-timeline-item` children (FR-TIMELINE-01). It stamps each item with its\n`position` (`alternate` layout), `orientation` and `last`, re-running on slot changes. In\n`alternate` layout the items collapse to one side below 32rem of container width\n(FR-TIMELINE-02, handled by each item's container query against this element). For very long\ntimelines compose `bx-data-list` instead (FR-TIMELINE-03); this element renders every item.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "layout",
+              "fieldName": "layout",
+              "type": {
+                "text": "'start' | 'alternate'"
+              },
+              "default": "'start'"
+            },
+            {
+              "name": "orientation",
+              "fieldName": "orientation",
+              "type": {
+                "text": "'vertical' | 'horizontal'"
+              },
+              "default": "'vertical'"
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "layout",
+              "type": {
+                "text": "'start' | 'alternate'"
+              },
+              "default": "'start'",
+              "attribute": "layout",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "orientation",
+              "type": {
+                "text": "'vertical' | 'horizontal'"
+              },
+              "default": "'vertical'",
+              "attribute": "orientation",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'",
+              "attribute": "size",
+              "reflects": true
+            }
+          ],
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "`bx-timeline-item` children."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "base",
+              "description": "The base part."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-timeline-marker-size",
+              "description": "Marker size."
+            },
+            {
+              "name": "--bx-timeline-connector-color",
+              "description": "Line color."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/toggle-button/toggle-button.ts",
       "declarations": [
         {
