@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core`                                   |
 | **Category**        | Form                                                |
 | **Tag**             | `bx-combobox`                                       |
-| **Status**          | Proposed (not implemented)                          |
+| **Status**          | Implemented                                         |
 | **Form-associated** | Yes (ElementInternals)                              |
 | **Depends on**      | `select`, `option`, `popup`, `input`, `virtualizer` |
 
@@ -56,22 +56,21 @@ Text input with a filterable, virtualized listbox; free text or restricted to op
 
 ### CSS parts
 
-| Part           | Description                  |
-| -------------- | ---------------------------- |
-| `form-control` | Field wrapper.               |
-| `input`        | The text field.              |
-| `listbox`      | The popup.                   |
-| `tag`          | A selected token (multiple). |
+| Part      | Description                  |
+| --------- | ---------------------------- |
+| `control` | The input surface.           |
+| `input`   | The native input.            |
+| `listbox` | The listbox.                 |
+| `chip`    | A selection chip (multiple). |
 
 ### CSS custom properties
 
-| Property                           | Description                                                              |
-| ---------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-combobox-listbox-max-height` | Max popup height. Default `20rem`.                                       |
-| `--bx-combobox-min-height`         | Control height.                                                          |
-| `--bx-combobox-focus-ring-width`   | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-combobox-focus-ring-color`   | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-combobox-font-family`        | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                     | Description           |
+| ---------------------------- | --------------------- |
+| `--bx-combobox-bg`           | Control background.   |
+| `--bx-combobox-border-color` | Control border color. |
+| `--bx-combobox-radius`       | Control radius.       |
+| `--bx-combobox-max-height`   | Max listbox height.   |
 
 ### Methods
 

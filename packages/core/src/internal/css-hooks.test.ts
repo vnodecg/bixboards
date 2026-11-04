@@ -209,6 +209,8 @@ const MARKUP: Record<string, string | string[]> = {
   'bx-stepper':
     '<bx-stepper current="1"><bx-step label="A"></bx-step><bx-step label="B"></bx-step><bx-step label="C"></bx-step></bx-stepper>',
   'bx-toast': '<bx-toast open>Saved</bx-toast>',
+  'bx-combobox':
+    '<bx-combobox label="F"><bx-option value="a">A</bx-option></bx-combobox>',
   'bx-input':
     '<bx-input label="Label" hint="Hint" clearable value="x"></bx-input>',
   'bx-number-input':

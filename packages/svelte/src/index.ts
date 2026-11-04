@@ -37,6 +37,8 @@ export { default as BxColorPicker } from './generated/BxColorPicker.svelte';
 export type { BxColorPickerProps, BxColorPickerSlot } from './generated/BxColorPicker.svelte';
 export { default as BxColumn } from './generated/BxColumn.svelte';
 export type { BxColumnProps, BxColumnSlot } from './generated/BxColumn.svelte';
+export { default as BxCombobox } from './generated/BxCombobox.svelte';
+export type { BxComboboxProps, BxComboboxSlot } from './generated/BxCombobox.svelte';
 export { default as BxComparison } from './generated/BxComparison.svelte';
 export type { BxComparisonProps, BxComparisonSlot } from './generated/BxComparison.svelte';
 export { default as BxContextMenu } from './generated/BxContextMenu.svelte';

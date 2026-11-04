@@ -4556,6 +4556,374 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/combobox/combobox.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxCombobox",
+          "tagName": "bx-combobox",
+          "customElement": true,
+          "formAssociated": true,
+          "description": "`<bx-combobox>` — text input with a filterable listbox (docs/features/core/combobox.md).\n\nThe ARIA 1.2 combobox pattern: DOM focus never leaves the `<input role=\"combobox\">`, and the\nhighlighted `bx-option` is exposed through `aria-activedescendant` (set via element reflection,\nsince the options live in the light DOM) (FR-COMBOBOX-04). Options are slotted `bx-option`s,\nfiltered locally by `filter` (hidden, not removed). Free text is accepted with `allow-custom`\non Enter/blur (FR-COMBOBOX-03). `input` is a `CustomEvent` with `detail.query`, debounced by\n`debounce` ms, for driving an async source while `loading` shows a spinner (FR-COMBOBOX-02);\ndiscarding stale responses is the consumer's side of that contract. `multiple` shows each\nselection as a removable `bx-chip` and submits one form entry per value. Form-associated\n(FR-COMBOBOX-01); sharing `bx-select`'s virtualizer is **not** implemented — every option is a\nreal element, which is fine for lists up to a few hundred entries.",
+          "superclass": {
+            "name": "FormAssociatedMixin"
+          },
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "hint",
+              "fieldName": "hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string | string[]"
+              },
+              "default": "''"
+            },
+            {
+              "name": "multiple",
+              "fieldName": "multiple",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "allow-custom",
+              "fieldName": "allowCustom",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "loading",
+              "fieldName": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "placeholder",
+              "fieldName": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "required",
+              "fieldName": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'"
+            },
+            {
+              "name": "open",
+              "fieldName": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "debounce",
+              "fieldName": "debounce",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "hint"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string | string[]"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "multiple",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "multiple",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "allowCustom",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "allow-custom"
+            },
+            {
+              "kind": "field",
+              "name": "filter",
+              "type": {
+                "text": "ComboboxFilter"
+              },
+              "default": "'contains'"
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "required",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "debounce",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "debounce"
+            },
+            {
+              "kind": "method",
+              "name": "focus",
+              "parameters": [
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "FocusOptions"
+                  },
+                  "optional": true
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "blur",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "input",
+              "description": "Query text changed. `detail.query`."
+            },
+            {
+              "name": "change",
+              "description": "Committed selection changed."
+            },
+            {
+              "name": "bx-show",
+              "description": "Listbox is opening. Cancelable."
+            },
+            {
+              "name": "bx-after-show",
+              "description": "Listbox opened."
+            },
+            {
+              "name": "bx-hide",
+              "description": "Listbox is closing. Cancelable."
+            },
+            {
+              "name": "bx-after-hide",
+              "description": "Listbox closed."
+            },
+            {
+              "name": "bx-invalid",
+              "description": "Constraint validation failed."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "`bx-option` children."
+            },
+            {
+              "name": "label",
+              "description": "Label content."
+            },
+            {
+              "name": "hint",
+              "description": "Help text."
+            },
+            {
+              "name": "empty",
+              "description": "Shown when nothing matches."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "control",
+              "description": "The input surface."
+            },
+            {
+              "name": "input",
+              "description": "The native input."
+            },
+            {
+              "name": "listbox",
+              "description": "The listbox."
+            },
+            {
+              "name": "chip",
+              "description": "A selection chip (multiple)."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-combobox-bg",
+              "description": "Control background."
+            },
+            {
+              "name": "--bx-combobox-border-color",
+              "description": "Control border color."
+            },
+            {
+              "name": "--bx-combobox-radius",
+              "description": "Control radius."
+            },
+            {
+              "name": "--bx-combobox-max-height",
+              "description": "Max listbox height."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/comparison/comparison.ts",
       "declarations": [
         {

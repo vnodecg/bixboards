@@ -206,6 +206,14 @@
       "types": "./dist/color-picker/define.d.ts",
       "default": "./dist/color-picker/define.js"
     },
+    "./combobox": {
+      "types": "./dist/combobox/index.d.ts",
+      "default": "./dist/combobox/index.js"
+    },
+    "./combobox/define": {
+      "types": "./dist/combobox/define.d.ts",
+      "default": "./dist/combobox/define.js"
+    },
     "./comparison": {
       "types": "./dist/comparison/index.d.ts",
       "default": "./dist/comparison/index.js"
