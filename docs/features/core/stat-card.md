@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core`                                       |
 | **Category**        | Display                                                 |
 | **Tag**             | `bx-stat-card`                                          |
-| **Status**          | Proposed (not implemented)                              |
+| **Status**          | Implemented                                             |
 | **Form-associated** | No                                                      |
 | **Depends on**      | `card`, `format-number`, `skeleton`, _sparkline_ (soft) |
 
@@ -59,12 +59,11 @@ KPI tile with label, value, delta trend and optional sparkline. Specified for th
 
 ### CSS custom properties
 
-| Property                          | Description                                        |
-| --------------------------------- | -------------------------------------------------- |
-| `--bx-stat-card-value-size`       | Value font size.                                   |
-| `--bx-stat-card-delta-color-good` | -                                                  |
-| `--bx-stat-card-delta-color-bad`  | -                                                  |
-| `--bx-stat-card-font-family`      | Font family. Default `var(--bx-font-family-sans)`. |
+| Property                          | Description                         |
+| --------------------------------- | ----------------------------------- |
+| `--bx-stat-card-value-font-size`  | Value font size.                    |
+| `--bx-stat-card-delta-color-good` | Delta color when the trend is good. |
+| `--bx-stat-card-delta-color-bad`  | Delta color when the trend is bad.  |
 
 ### Methods
 

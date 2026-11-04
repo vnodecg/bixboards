@@ -14523,6 +14523,240 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/stat-card/stat-card.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxStatCard",
+          "tagName": "bx-stat-card",
+          "customElement": true,
+          "description": "`<bx-stat-card>` — KPI tile with label, value, delta trend and optional sparkline\n(docs/features/core/stat-card.md).\n\nComposes `bx-card`. The value is formatted with `Intl.NumberFormat` via the shared formatter\ncache (not a nested `bx-format-number`, which has no `format`-options object). The delta shows\nits direction with an arrow *and* a sign plus screen-reader text, never colour alone\n(FR-STATCARD-02); good/bad colouring follows `trend-is-good`. `count-up` (an addition: the spec\nmakes it implicit) animates a numeric value from 0 only when the card enters view and motion is\nallowed (FR-STATCARD-03). With `href`, the label becomes a link whose hit area stretches over\nthe whole card.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string | number"
+              },
+              "default": "''"
+            },
+            {
+              "name": "delta",
+              "fieldName": "delta",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "delta-format",
+              "fieldName": "deltaFormat",
+              "type": {
+                "text": "'percent' | 'absolute'"
+              },
+              "default": "'percent'"
+            },
+            {
+              "name": "trend",
+              "fieldName": "trend",
+              "type": {
+                "text": "Trend"
+              }
+            },
+            {
+              "name": "trend-is-good",
+              "fieldName": "trendIsGood",
+              "type": {
+                "text": "'up' | 'down'"
+              },
+              "default": "'up'"
+            },
+            {
+              "name": "loading",
+              "fieldName": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "href",
+              "fieldName": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "count-up",
+              "fieldName": "countUp",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string | number"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "format",
+              "type": {
+                "text": "Intl.NumberFormatOptions"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "delta",
+              "type": {
+                "text": "number"
+              },
+              "attribute": "delta"
+            },
+            {
+              "kind": "field",
+              "name": "deltaFormat",
+              "type": {
+                "text": "'percent' | 'absolute'"
+              },
+              "default": "'percent'",
+              "attribute": "delta-format"
+            },
+            {
+              "kind": "field",
+              "name": "trend",
+              "type": {
+                "text": "Trend"
+              },
+              "attribute": "trend",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "trendIsGood",
+              "type": {
+                "text": "'up' | 'down'"
+              },
+              "default": "'up'",
+              "attribute": "trend-is-good"
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "href"
+            },
+            {
+              "kind": "field",
+              "name": "countUp",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "count-up"
+            }
+          ],
+          "events": [
+            {
+              "name": "click",
+              "description": "When `href` is set and the link is activated."
+            }
+          ],
+          "slots": [
+            {
+              "name": "icon",
+              "description": "Leading icon."
+            },
+            {
+              "name": "chart",
+              "description": "Typically `bx-sparkline`."
+            },
+            {
+              "name": "footer",
+              "description": "Period caption."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "base",
+              "description": "The base part."
+            },
+            {
+              "name": "label",
+              "description": "The label part."
+            },
+            {
+              "name": "value",
+              "description": "The value part."
+            },
+            {
+              "name": "delta",
+              "description": "The delta part."
+            },
+            {
+              "name": "chart",
+              "description": "The chart part."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-stat-card-value-font-size",
+              "description": "Value font size."
+            },
+            {
+              "name": "--bx-stat-card-delta-color-good",
+              "description": "Delta color when the trend is good."
+            },
+            {
+              "name": "--bx-stat-card-delta-color-bad",
+              "description": "Delta color when the trend is bad."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/switch/switch.ts",
       "declarations": [
         {

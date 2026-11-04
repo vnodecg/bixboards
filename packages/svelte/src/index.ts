@@ -117,6 +117,8 @@ export { default as BxSparkline } from './generated/BxSparkline.svelte';
 export type { BxSparklineProps, BxSparklineSlot } from './generated/BxSparkline.svelte';
 export { default as BxSpinner } from './generated/BxSpinner.svelte';
 export type { BxSpinnerProps, BxSpinnerSlot } from './generated/BxSpinner.svelte';
+export { default as BxStatCard } from './generated/BxStatCard.svelte';
+export type { BxStatCardProps, BxStatCardSlot } from './generated/BxStatCard.svelte';
 export { default as BxSwitch } from './generated/BxSwitch.svelte';
 export type { BxSwitchProps, BxSwitchSlot } from './generated/BxSwitch.svelte';
 export { default as BxTab } from './generated/BxTab.svelte';
