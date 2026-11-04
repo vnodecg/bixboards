@@ -396,6 +396,12 @@ importers:
       '@bixboards/core':
         specifier: workspace:*
         version: link:../core
+      '@bixboards/data-list':
+        specifier: workspace:*
+        version: link:../data-list
+      '@bixboards/data-table':
+        specifier: workspace:*
+        version: link:../data-table
       '@bixboards/design-system':
         specifier: workspace:*
         version: link:../design-system

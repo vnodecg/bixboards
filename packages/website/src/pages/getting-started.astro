@@ -1,0 +1,115 @@
+---
+import Base from '../layouts/Base.astro';
+import { components, elementCount } from '../data/site.ts';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const pkgs = [
+  ['@bixboards/design-system', 'Design tokens and theming: JSON themes compiled to CSS custom properties.'],
+  ['@bixboards/core', `${components.filter((c) => c.pkg === 'core').length} general-purpose components, the virtualizer and utilities.`],
+  ['@bixboards/data-table', 'Virtualized enterprise data table (bx-data-table).'],
+  ['@bixboards/data-list', 'Virtualized list/grid and tree (bx-data-list, bx-virtual-tree).'],
+  ['@bixboards/react · angular · svelte', 'Generated wrappers over the custom elements.'],
+] as const;
+---
+
+<Base title="Getting started · Bixboards" description="Install Bixboards, register components, theme them and use them in React, Angular or Svelte.">
+  <section class="block">
+    <div class="wrap prose">
+      <h1 class="page-title">Getting started</h1>
+      <p class="lead">
+        Bixboards is {elementCount} custom elements across a few packages. Install what you need,
+        import the components you use, and style them with tokens.
+      </p>
+
+      <h2>1. Install</h2>
+      <pre class="code"><code>pnpm add @bixboards/core @bixboards/design-system
+# optional data modules
+pnpm add @bixboards/data-table @bixboards/data-list</code></pre>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Package</th><th>Purpose</th></tr></thead>
+          <tbody>
+            {pkgs.map(([name, purpose]) => <tr><td><code>{name}</code></td><td>{purpose}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+
+      <h2>2. Add the tokens</h2>
+      <p>
+        Components read colors, spacing and type from CSS custom properties. Generate them from a theme
+        with the design-system CLI and load the stylesheet once. Set <code>data-theme</code> on the
+        root element to pick a theme; this site switches between <code>board</code> and
+        <code>board-dark</code>.
+      </p>
+      <pre class="code"><code>{`pnpm exec bixboards-ds build --theme themes/board.json --theme themes/board-dark.json --out src/styles/generated
+
+/* app.css */
+@import './generated/tokens.css';
+
+<html data-theme="board">`}</code></pre>
+
+      <h2>3. Use a component</h2>
+      <p>Importing a component's path registers its tag. Everything is tree-shakeable, so only what you import ships.</p>
+      <pre class="code"><code>{`<script type="module">
+  import '@bixboards/core/button';
+  import '@bixboards/core/input';
+</script>
+
+<bx-input label="Email" type="email"></bx-input>
+<bx-button>Subscribe</bx-button>`}</code></pre>
+
+      <h3>Custom tag names</h3>
+      <p>
+        Import <code>/define</code> instead to register under your own tag, which avoids collisions
+        and lets two versions coexist. Nothing is registered until you call the function.
+      </p>
+      <pre class="code"><code>{`import { defineButton } from '@bixboards/core/button/define';
+
+defineButton('acme-button');`}</code></pre>
+
+      <h3>Properties and events</h3>
+      <p>
+        Primitive options are attributes. Objects and arrays (<code>columns</code>, <code>data</code>,
+        <code>items</code>) are properties. Custom events are prefixed <code>bx-</code>, bubble and are
+        composed.
+      </p>
+      <pre class="code"><code>{`const table = document.querySelector('bx-data-table');
+table.columns = [{ field: 'name', header: 'Name', sortable: true }];
+table.data = rows;
+document.addEventListener('bx-remove', (event) => console.log(event.target));`}</code></pre>
+
+      <h2>4. Frameworks</h2>
+      <p>Generated wrappers add typed props and events and import the element for you.</p>
+      <pre class="code"><code>{`// React
+import { BxButton } from '@bixboards/react/bx-button';
+<BxButton variant="secondary" onClick={save}>Save</BxButton>
+
+// Angular (standalone components)
+import { BxButton } from '@bixboards/angular/bx-button';
+
+// Svelte
+import BxButton from '@bixboards/svelte/BxButton.svelte';`}</code></pre>
+
+      <h2>5. Scale and theme</h2>
+      <p>
+        One token, <code>--bx-scale</code>, rescales spacing, type and radii. Put it on any element
+        that also has <code>class="bx-scale"</code> to scale a region, such as a dense data grid,
+        independently. Components reflow with container queries, so they adapt to the space they are
+        given rather than the viewport.
+      </p>
+      <div class="stage">
+        <div class="bx-scale" style="--bx-scale: 0.8; display:flex; gap:.5rem; align-items:center; flex-wrap:wrap">
+          <bx-button size="s">Compact</bx-button>
+          <bx-input label="Search" placeholder="Scaled to 0.8" style="max-inline-size:14rem"></bx-input>
+          <bx-badge>0.8×</bx-badge>
+        </div>
+      </div>
+      <pre class="code"><code>{`<div class="bx-scale" style="--bx-scale: 0.8">
+  <bx-button size="s">Compact</bx-button>
+</div>`}</code></pre>
+      <p>
+        Every component also exposes CSS custom properties and parts for styling; they are listed in
+        the API section of each <a href={`${base}/components/`}>component page</a>.
+      </p>
+    </div>
+  </section>
+</Base>

@@ -6,7 +6,8 @@
   "type": "module",
   "sideEffects": [
     "./dist/*/index.js",
-    "./dist/*/presets/*.js"
+    "./dist/*/presets/*.js",
+    "./dist/icon/default-library.js"
   ],
   "engines": {
     "node": ">=20"

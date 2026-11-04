@@ -1,53 +1,137 @@
 ---
 import Base from '../layouts/Base.astro';
-import { features, templates, components } from '../data/site';
+import { features, templates, components, componentsByCategory, elementCount } from '../data/site.ts';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const available = components.filter((c) => c.status === 'available').length;
+const href = (slug: string) => `${base}/components/${slug}/`;
 ---
 
 <Base title="Bixboards">
   <section class="hero wrap">
+    <p class="eyebrow">Web components · Lit · Design tokens</p>
     <h1>Web components for modern dashboards</h1>
     <p>
-      {available}+ accessible, themeable components that work in any framework. Ship dashboards,
-      boards and apps faster.
+      {components.length} accessible, themeable components ({elementCount} elements) that work in any
+      framework. Ship dashboards, boards and apps faster.
     </p>
     <div class="cta">
-      <bx-button href={`${base}/components/`}>Browse components</bx-button>
-      <bx-button appearance="outlined" href={`${base}/templates/`}>View templates</bx-button>
+      <bx-button href={`${base}/getting-started/`}>Get started</bx-button>
+      <bx-button appearance="outlined" href={`${base}/components/`}>Browse components</bx-button>
     </div>
+    <dl class="stats">
+      <div><dt>Components</dt><dd>{components.length}</dd></div>
+      <div><dt>Elements</dt><dd>{elementCount}</dd></div>
+      <div><dt>Categories</dt><dd>{componentsByCategory.length}</dd></div>
+      <div><dt>Frameworks</dt><dd>4</dd></div>
+    </dl>
   </section>
 
   <section class="block">
     <div class="wrap">
       <h2>Live components</h2>
-      <p class="lead">Rendered with the real library.</p>
-      <div class="grid">
-        <bx-card with-header>
-          <span slot="header">Buttons</span>
+      <p class="lead">Rendered with the real library. Every one is interactive; click through to the docs for each.</p>
+      <div class="grid showcase">
+        <bx-card with-header with-footer>
+          <span slot="header">Actions</span>
           <div class="demo">
             <bx-button>Primary</bx-button>
             <bx-button variant="secondary">Secondary</bx-button>
             <bx-button variant="error">Delete</bx-button>
+            <bx-toggle-button>Bold</bx-toggle-button>
+            <bx-icon-button name="copy" label="Copy"></bx-icon-button>
           </div>
+          <a slot="footer" href={href('button')}>Button docs →</a>
         </bx-card>
-        <bx-card with-header>
+        <bx-card with-header with-footer>
           <span slot="header">Form</span>
-          <div class="demo">
-            <bx-input label="Email"></bx-input>
+          <div class="demo stack">
+            <bx-input label="Email" type="email"></bx-input>
+            <bx-select label="Plan" style="inline-size:100%">
+              <bx-option value="free">Free</bx-option>
+              <bx-option value="pro">Pro</bx-option>
+            </bx-select>
             <bx-switch>Notifications</bx-switch>
             <bx-checkbox>Remember me</bx-checkbox>
           </div>
+          <a slot="footer" href={href('input')}>Form docs →</a>
         </bx-card>
-        <bx-card with-header>
+        <bx-card with-header with-footer>
           <span slot="header">Feedback</span>
-          <div class="demo">
-            <bx-badge>New</bx-badge>
+          <div class="demo stack">
+            <div class="demo">
+              <bx-badge>New</bx-badge>
+              <bx-chip removable>Design</bx-chip>
+              <bx-avatar initials="AB" label="Ada B"></bx-avatar>
+            </div>
             <bx-progress-bar value="64" style="width:100%"></bx-progress-bar>
             <bx-callout>Changes saved.</bx-callout>
           </div>
+          <a slot="footer" href={href('callout')}>Feedback docs →</a>
+        </bx-card>
+        <bx-card with-header with-footer>
+          <span slot="header">KPIs</span>
+          <div class="demo stack">
+            <bx-stat-card label="Revenue" value="128400" delta="12.5">
+              <bx-sparkline slot="chart" label="Trend" values="3,5,4,8,6,9,12"></bx-sparkline>
+              <span slot="footer">vs last month</span>
+            </bx-stat-card>
+          </div>
+          <a slot="footer" href={href('stat-card')}>Stat card docs →</a>
+        </bx-card>
+        <bx-card with-header with-footer>
+          <span slot="header">Navigation</span>
+          <div class="demo stack">
+            <bx-breadcrumb label="Breadcrumb">
+              <bx-breadcrumb-item href="#">Home</bx-breadcrumb-item>
+              <bx-breadcrumb-item href="#">Projects</bx-breadcrumb-item>
+              <bx-breadcrumb-item>Nova</bx-breadcrumb-item>
+            </bx-breadcrumb>
+            <bx-segmented-control label="View" value="week">
+              <bx-segment value="day" label="Day"></bx-segment>
+              <bx-segment value="week" label="Week"></bx-segment>
+              <bx-segment value="month" label="Month"></bx-segment>
+            </bx-segmented-control>
+            <bx-pagination compact page="3" page-count="12"></bx-pagination>
+          </div>
+          <a slot="footer" href={href('tab-group')}>Navigation docs →</a>
+        </bx-card>
+        <bx-card with-header with-footer>
+          <span slot="header">Overlays</span>
+          <div class="demo">
+            <bx-dropdown>
+              <bx-button slot="trigger" with-caret>Actions</bx-button>
+              <bx-dropdown-item value="rename">Rename</bx-dropdown-item>
+              <bx-dropdown-item value="delete" variant="error">Delete</bx-dropdown-item>
+            </bx-dropdown>
+            <bx-button id="hero-tip" appearance="outlined">Hover me</bx-button>
+            <bx-tooltip for="hero-tip">A tooltip</bx-tooltip>
+          </div>
+          <a slot="footer" href={href('dialog')}>Overlay docs →</a>
         </bx-card>
       </div>
+    </div>
+  </section>
+
+  <section class="block alt">
+    <div class="wrap">
+      <h2>Everything you need</h2>
+      <p class="lead">All {components.length} components by category.</p>
+      {
+        componentsByCategory.map((g) => (
+          <div class="cat-row">
+            <h3>
+              <a href={`${base}/components/#${g.category.toLowerCase()}`}>{g.category}</a>
+              <span class="muted">{g.items.length}</span>
+            </h3>
+            <div class="chips">
+              {g.items.map((c) => (
+                <a class="chip" href={href(c.slug)}>
+                  {c.name}
+                </a>
+              ))}
+            </div>
+          </div>
+        ))
+      }
     </div>
   </section>
 
@@ -68,6 +152,20 @@ const available = components.filter((c) => c.status === 'available').length;
     </div>
   </section>
 
+  <section class="block alt">
+    <div class="wrap">
+      <h2>Quick start</h2>
+      <p class="lead">Install, import, use.</p>
+      <pre class="code"><code>pnpm add @bixboards/core @bixboards/design-system</code></pre>
+      <pre class="code"><code>{`import '@bixboards/core/button';
+
+<bx-button variant="secondary">Hello</bx-button>`}</code></pre>
+      <p>
+        <a href={`${base}/getting-started/`}>Read the full guide →</a>
+      </p>
+    </div>
+  </section>
+
   <section class="block">
     <div class="wrap">
       <h2>Ready-made templates</h2>
@@ -82,13 +180,6 @@ const available = components.filter((c) => c.status === 'available').length;
           ))
         }
       </div>
-    </div>
-  </section>
-
-  <section class="block">
-    <div class="wrap">
-      <h2>Install</h2>
-      <pre class="code"><code>pnpm add @bixboards/core @bixboards/design-system</code></pre>
     </div>
   </section>
 </Base>

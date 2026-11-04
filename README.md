@@ -8,17 +8,17 @@ A Lit-based web component library that **scales automatically**.
 - **Modular** — a `core` package plus optional data modules, so apps only pay for what they import.
 - **Framework-friendly** — native custom elements with thin React, Angular and Svelte adapters (no reimplementations).
 
-> Status: early. Implemented: the [design system](packages/design-system/README.md) (tokens and theming: TypeScript compiler, themes, contrast checks, runtime API), a Storybook of the tokens, and the first `@bixboards/core` component, [`bx-animated-image`](docs/features/core/animated-image.md). **Components are being built one at a time on top of the design system.** Not started: the other 60 components, `data-table`, `data-list` and the framework wrappers. See the [PRD](docs/PRD.md), the [feature documents](docs/features/README.md) and the [code review](docs/code-review-2026-09-28.md).
+> Status: all planned components are implemented: 98 custom elements (94 in `@bixboards/core`, 2 in `@bixboards/data-table`, 2 in `@bixboards/data-list`), each with a feature spec, a Storybook story and a browser test suite, plus generated React, Angular and Svelte wrappers. The [website](packages/website) documents and demos every one of them. See the [PRD](docs/PRD.md) and the [feature documents](docs/features/README.md).
 
 ## Packages
 
-| Package                                                     | Purpose                                                                                               |
-| ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| [`@bixboards/design-system`](packages/design-system/README.md) | Design tokens and theming: JSON themes and foundation compiled to CSS custom properties (implemented) |
-| `@bixboards/core`                                              | `VirtualizerController`, 58 general components (55 implemented, see the tracker)                      |
-| `@bixboards/data-table`                                        | Virtualized enterprise data table                                                                     |
-| `@bixboards/data-list`                                         | Virtualized list/grid and tree                                                                        |
-| `@bixboards/react` · `@bixboards/angular` · `@bixboards/svelte`      | Generated wrappers over the custom elements                                                           |
+| Package                                                         | Purpose                                                                                               |
+| --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| [`@bixboards/design-system`](packages/design-system/README.md)  | Design tokens and theming: JSON themes and foundation compiled to CSS custom properties (implemented) |
+| `@bixboards/core`                                               | `VirtualizerController` and 94 general-purpose elements (see the tracker)                             |
+| `@bixboards/data-table`                                         | Virtualized enterprise data table (`bx-data-table`, `bx-column`)                                      |
+| `@bixboards/data-list`                                          | Virtualized list/grid and tree (`bx-data-list`, `bx-virtual-tree`)                                    |
+| `@bixboards/react` · `@bixboards/angular` · `@bixboards/svelte` | Generated wrappers over the custom elements                                                           |
 
 Names are provisional (see PRD open questions).
 
@@ -49,6 +49,18 @@ Names are provisional (see PRD open questions).
 - [Shared conventions](docs/features/_conventions.md): fluid tokens, container queries, virtualization, forms, events, wrappers, testing
 
 Components are specified in the feature documents and will be built on the design-system tokens. Implementation must be original; see PRD §10 on licensing.
+
+## Website
+
+`packages/website` is the documentation, demo and landing site (Astro, static). Every component has a page with a live demo, copyable source and its full API (properties, events, slots, CSS parts and custom properties), generated from the Custom Elements Manifests so it cannot drift from the code.
+
+```sh
+pnpm nx run website:dev     # dev server
+pnpm nx run website:build   # static build to packages/website/dist
+pnpm nx run website:test    # coverage tests
+```
+
+Adding a component to the library means adding its demo in `packages/website/src/data/registry.ts` (and its module to `loaders.ts`); the website tests fail if any element in a package's `custom-elements.json` has no page.
 
 ## Storybook
 

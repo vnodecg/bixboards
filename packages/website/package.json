@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@bixboards/core": "workspace:*",
+    "@bixboards/data-list": "workspace:*",
+    "@bixboards/data-table": "workspace:*",
     "@bixboards/design-system": "workspace:*",
     "astro": "^5.14.0"
   },

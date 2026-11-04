@@ -2,7 +2,7 @@
   "name": "website",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "implicitDependencies": ["design-system", "core"],
+  "implicitDependencies": ["design-system", "core", "data-table", "data-list"],
   "targets": {
     "dev": {
       "executor": "nx:run-commands",
