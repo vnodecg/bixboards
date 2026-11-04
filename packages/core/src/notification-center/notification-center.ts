@@ -37,7 +37,7 @@ export function dayLabel(key: string, now: Date, locale?: string): string {
   const startOf = (d: Date) =>
     new Date(d.getFullYear(), d.getMonth(), d.getDate());
   const [y, m, d] = key.split('-').map(Number);
-  const day = new Date(y, m - 1, d);
+  const day = new Date(y!, m! - 1, d!);
   const diff = Math.round((startOf(now).getTime() - day.getTime()) / 86400000);
   if (diff === 0) return 'Today';
   if (diff === 1) return 'Yesterday';

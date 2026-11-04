@@ -285,7 +285,7 @@ export class BxCombobox extends FormAssociatedMixin(BixElement) {
         this.internals.setFormValue(data);
       } else {
         this.internals.setFormValue(
-          this.name && this.values.length ? this.values[0] : null,
+          this.name && this.values.length ? (this.values[0] ?? null) : null,
         );
       }
       const missing = this.required && !this.values.length;
@@ -346,7 +346,7 @@ export class BxCombobox extends FormAssociatedMixin(BixElement) {
     const empty = this.shadowRoot?.querySelector<HTMLElement>('.empty');
     if (empty) empty.hidden = visible > 0 || this.loading;
     const navigable = this.#navigable;
-    if (!navigable.includes(this.#options[this._active])) this._active = -1;
+    if (!navigable.includes(this.#options[this._active]!)) this._active = -1;
   }
 
   get #navigable(): BxOption[] {
@@ -371,7 +371,7 @@ export class BxCombobox extends FormAssociatedMixin(BixElement) {
   #move(delta: number | 'first' | 'last'): void {
     const nav = this.#navigable;
     if (!nav.length) return;
-    const cur = nav.indexOf(this.#options[this._active]);
+    const cur = nav.indexOf(this.#options[this._active]!);
     let next: number;
     if (delta === 'first') next = 0;
     else if (delta === 'last') next = nav.length - 1;
@@ -382,7 +382,7 @@ export class BxCombobox extends FormAssociatedMixin(BixElement) {
             ? 0
             : nav.length - 1
           : (cur + delta + nav.length) % nav.length;
-    this._active = this.#options.indexOf(nav[next]);
+    this._active = this.#options.indexOf(nav[next]!);
   }
 
   // --- open / close ----------------------------------------------------------------------------

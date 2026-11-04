@@ -8,9 +8,11 @@ import {
 import './index.ts';
 
 describe('bx-code-block', () => {
-  it('renders slotted text as lines', async () => {
+  it('renders the source as lines', async () => {
     const el = await fixture<BxCodeBlock>(
-      html`<bx-code-block> const a = 1; const b = 2; </bx-code-block>`,
+      html`<bx-code-block
+        .code=${'const a = 1;\nconst b = 2;'}
+      ></bx-code-block>`,
     );
     await el.updateComplete;
     const lines = el.shadowRoot!.querySelectorAll('.line');
@@ -96,5 +98,18 @@ describe('bx-code-block', () => {
       ></bx-code-block>`,
     );
     await expect(el).to.be.accessible();
+  });
+});
+
+describe('bx-code-block slotted source', () => {
+  it('reads slotted text', async () => {
+    const el = await fixture<BxCodeBlock>(
+      html`<bx-code-block>a b</bx-code-block>`,
+    );
+    await new Promise((r) => setTimeout(r));
+    await el.updateComplete;
+    expect(el.shadowRoot!.querySelector('.line')!.textContent).to.contain(
+      'a b',
+    );
   });
 });

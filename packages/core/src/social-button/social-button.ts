@@ -150,10 +150,9 @@ export class BxSocialButton extends BixElement {
   protected override render() {
     const info = this.#info;
     const brand = this.appearance === 'brand' && info.brandColor;
-    const label = (socialLabels[this.mode] ?? socialLabels['continue']).replace(
-      '{provider}',
-      info.label,
-    );
+    const label = (
+      socialLabels[this.mode] ?? socialLabels['continue']!
+    ).replace('{provider}', info.label);
     const size = { s: 'small', m: 'medium', l: 'large' }[this.size] ?? 'medium';
     return html`<bx-button
       ${ref(this.#baseRef)}

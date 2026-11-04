@@ -230,7 +230,7 @@ export class BxStatCard extends BixElement {
     const n = this._shown ?? this.#numeric;
     return n === undefined
       ? String(this.value)
-      : getNumberFormatter(undefined, this.format).format(n);
+      : getNumberFormatter(undefined, this.format ?? {}).format(n);
   }
 
   #renderDelta() {
@@ -239,7 +239,7 @@ export class BxStatCard extends BixElement {
     const magnitude = Math.abs(this.delta);
     const text =
       this.deltaFormat === 'absolute'
-        ? getNumberFormatter(undefined, this.format).format(magnitude)
+        ? getNumberFormatter(undefined, this.format ?? {}).format(magnitude)
         : `${getNumberFormatter(undefined, { maximumFractionDigits: 1 }).format(magnitude)}%`;
     const sign = direction === 'up' ? '+' : direction === 'down' ? '−' : '';
     const tone =

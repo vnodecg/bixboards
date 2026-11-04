@@ -24,13 +24,13 @@ export function decimate(values: number[], limit = MAX_POINTS): number[] {
     let lo = start;
     let hi = start;
     for (let i = start + 1; i < end; i++) {
-      if (values[i] < values[lo]) lo = i;
-      if (values[i] > values[hi]) hi = i;
+      if (values[i]! < values[lo]!) lo = i;
+      if (values[i]! > values[hi]!) hi = i;
     }
-    if (lo === hi) out.push(values[lo]);
+    if (lo === hi) out.push(values[lo]!);
     else
       out.push(
-        ...(lo < hi ? [values[lo], values[hi]] : [values[hi], values[lo]]),
+        ...(lo < hi ? [values[lo]!, values[hi]!] : [values[hi]!, values[lo]!]),
       );
   }
   return out;
@@ -176,7 +176,7 @@ export class BxSparkline extends BixElement {
     else if (this.highlight === 'min') hl = data.indexOf(Math.min(...data));
     else if (this.highlight === 'max') hl = data.indexOf(Math.max(...data));
 
-    const trendUp = raw[raw.length - 1] >= raw[0];
+    const trendUp = raw[raw.length - 1]! >= raw[0]!;
     const good = !this.trendIsGood
       ? undefined
       : trendUp === (this.trendIsGood === 'up')
@@ -197,7 +197,7 @@ export class BxSparkline extends BixElement {
           }<path class="line" part="line" d=${line}></path>`;
     const dot =
       hl >= 0 && this.type !== 'bar'
-        ? svg`<path class="point" part="point" d=${`M${x(hl)},${y(data[hl])}h0`}></path>`
+        ? svg`<path class="point" part="point" d=${`M${x(hl)},${y(data[hl]!)}h0`}></path>`
         : nothing;
 
     const summary = this.label

@@ -269,7 +269,7 @@ export class BxTagInput extends FormAssociatedMixin(BixElement) {
   }
 
   /** Removes the tag at `index`. */
-  remove(index: number): void {
+  removeAt(index: number): void {
     const tag = this.value[index];
     if (tag === undefined) return;
     this.value = this.value.filter((_, i) => i !== index);
@@ -339,7 +339,7 @@ export class BxTagInput extends FormAssociatedMixin(BixElement) {
     } else if (event.key === 'Backspace' && !this._text) {
       if (!this.value.length) return;
       if (this._marked) {
-        this.remove(this.value.length - 1);
+        this.removeAt(this.value.length - 1);
         this._marked = false;
       } else this._marked = true;
     } else if (this._marked && event.key !== 'Backspace') {
@@ -371,7 +371,7 @@ export class BxTagInput extends FormAssociatedMixin(BixElement) {
               @bx-remove=${(e: Event) => {
                 e.preventDefault();
                 e.stopPropagation();
-                this.remove(i);
+                this.removeAt(i);
                 this.focus();
               }}
               >${tag}</bx-chip

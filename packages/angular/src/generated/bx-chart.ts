@@ -92,11 +92,11 @@ export class BxChartComponent {
   }
 
   @Input()
-  set animate(value: BxChartElement['animate']) {
-    this.element.animate = value;
+  set animated(value: BxChartElement['animated']) {
+    this.element.animated = value;
   }
-  get animate(): BxChartElement['animate'] {
-    return this.element.animate;
+  get animated(): BxChartElement['animated'] {
+    return this.element.animated;
   }
 
   @Input()

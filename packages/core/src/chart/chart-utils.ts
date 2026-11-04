@@ -32,7 +32,8 @@ export function lttb(
 ): [number, number][] {
   const n = points.length;
   if (threshold >= n || threshold < 3) return points;
-  const out: [number, number][] = [points[0]];
+  const P = (i: number): [number, number] => points[i]!;
+  const out: [number, number][] = [P(0)];
   const every = (n - 2) / (threshold - 2);
   let a = 0;
   for (let i = 0; i < threshold - 2; i++) {
@@ -42,8 +43,8 @@ export function lttb(
     let avgY = 0;
     const len = nextEnd - nextStart;
     for (let j = nextStart; j < nextEnd; j++) {
-      avgX += points[j][0];
-      avgY += points[j][1];
+      avgX += P(j)[0];
+      avgY += P(j)[1];
     }
     avgX /= len;
     avgY /= len;
@@ -53,18 +54,18 @@ export function lttb(
     let pick = start;
     for (let j = start; j < end; j++) {
       const area = Math.abs(
-        (points[a][0] - avgX) * (points[j][1] - points[a][1]) -
-          (points[a][0] - points[j][0]) * (avgY - points[a][1]),
+        (P(a)[0] - avgX) * (P(j)[1] - P(a)[1]) -
+          (P(a)[0] - P(j)[0]) * (avgY - P(a)[1]),
       );
       if (area > best) {
         best = area;
         pick = j;
       }
     }
-    out.push(points[pick]);
+    out.push(P(pick));
     a = pick;
   }
-  out.push(points[n - 1]);
+  out.push(P(n - 1));
   return out;
 }
 

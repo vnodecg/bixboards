@@ -3242,7 +3242,7 @@
             },
             {
               "name": "animate",
-              "fieldName": "animate",
+              "fieldName": "animated",
               "type": {
                 "text": "boolean"
               },
@@ -3363,7 +3363,7 @@
             },
             {
               "kind": "field",
-              "name": "animate",
+              "name": "animated",
               "type": {
                 "text": "boolean"
               },
@@ -20742,7 +20742,7 @@
             },
             {
               "kind": "method",
-              "name": "remove",
+              "name": "removeAt",
               "description": "Removes the tag at `index`.",
               "parameters": [
                 {

@@ -136,7 +136,7 @@ Not started. Each depends only on components in earlier tiers or on others in th
 - [x] [`bx-calendar`](core/calendar.md) (plain-ISO date helpers in `dates.ts`; the `day` slot is not implemented; `value` is always a string (`start/end` for range, comma-separated for multiple)) — depends on button — `packages/core/src/calendar`
 - [x] [`bx-date-picker`](core/date-picker.md) (typed entry parses ISO or the locale's numeric day/month/year order only (no month names); popup is a non-modal `bx-popup`; exports `parseTypedDate`) — depends on calendar, popup, input — `packages/core/src/date-picker`
 - [x] [`bx-time-field`](core/time-field.md) (standalone segmented field (no calendar/popup, so not built on `bx-date-picker`); `value` is always 24-hour `HH:mm[:ss]`; exports `parseTime`/`localeIs12h`) — depends on date-picker, soft — `packages/core/src/time-field`
-- [x] [`bx-tag-input`](core/tag-input.md) (typed text is the native input inside the control, not `bx-input`; `add()`/`remove()` are public) — depends on chip, input — `packages/core/src/tag-input`
+- [x] [`bx-tag-input`](core/tag-input.md) (typed text is the native input inside the control, not `bx-input`; `add()`/`removeAt()` are public) — depends on chip, input — `packages/core/src/tag-input`
 
 ### Feedback
 

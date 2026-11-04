@@ -20,12 +20,12 @@
     onBxUnsupported?: (event: CustomEvent) => void;
   }
 
-  export type BxChartProps = Partial<Pick<BxChartElement, 'type' | 'data' | 'x' | 'series' | 'legend' | 'tooltip' | 'stacked' | 'smooth' | 'animate' | 'height' | 'palette' | 'loading' | 'label' | 'adapter'>> &
+  export type BxChartProps = Partial<Pick<BxChartElement, 'type' | 'data' | 'x' | 'series' | 'legend' | 'tooltip' | 'stacked' | 'smooth' | 'animated' | 'height' | 'palette' | 'loading' | 'label' | 'adapter'>> &
     BxChartEvents & {
       /** The underlying custom element (`bind:element`). */
       element?: BxChartElement | undefined;
       children?: Snippet;
-    } & Omit<HTMLAttributes<HTMLElement>, keyof BxChartEvents | 'type' | 'data' | 'x' | 'series' | 'legend' | 'tooltip' | 'stacked' | 'smooth' | 'animate' | 'height' | 'palette' | 'loading' | 'label' | 'adapter' | 'children'>;
+    } & Omit<HTMLAttributes<HTMLElement>, keyof BxChartEvents | 'type' | 'data' | 'x' | 'series' | 'legend' | 'tooltip' | 'stacked' | 'smooth' | 'animated' | 'height' | 'palette' | 'loading' | 'label' | 'adapter' | 'children'>;
 </script>
 
 <script lang="ts">
@@ -48,7 +48,7 @@
     tooltip: _tooltip,
     stacked: _stacked,
     smooth: _smooth,
-    animate: _animate,
+    animated: _animated,
     height: _height,
     palette: _palette,
     loading: _loading,
@@ -58,7 +58,7 @@
   }: BxChartProps = $props();
 
   $effect(() => {
-    if (element) syncProps(element, { 'type': _type, 'data': _data, 'x': _x, 'series': _series, 'legend': _legend, 'tooltip': _tooltip, 'stacked': _stacked, 'smooth': _smooth, 'animate': _animate, 'height': _height, 'palette': _palette, 'loading': _loading, 'label': _label, 'adapter': _adapter });
+    if (element) syncProps(element, { 'type': _type, 'data': _data, 'x': _x, 'series': _series, 'legend': _legend, 'tooltip': _tooltip, 'stacked': _stacked, 'smooth': _smooth, 'animated': _animated, 'height': _height, 'palette': _palette, 'loading': _loading, 'label': _label, 'adapter': _adapter });
   });
 
   $effect(() => {

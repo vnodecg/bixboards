@@ -4,14 +4,6 @@ import { textFamily, textStyle } from '../internal/text-style.ts';
 
 type Status = 'default' | 'secondary' | 'tertiary' | 'warning' | 'error';
 
-const ROLE: Record<Status, string> = {
-  default: 'brand',
-  secondary: 'neutral',
-  tertiary: 'tertiary',
-  warning: 'warning',
-  error: 'danger',
-};
-
 /**
  * `<bx-timeline-item>` — one event in a `bx-timeline` (docs/features/core/timeline.md).
  *

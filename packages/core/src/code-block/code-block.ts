@@ -43,7 +43,7 @@ export function splitLines(tokens: CodeToken[]): CodeToken[][] {
     const parts = token.text.split('\n');
     parts.forEach((text, i) => {
       if (i > 0) lines.push([]);
-      if (text) lines[lines.length - 1].push({ text, type: token.type });
+      if (text) lines[lines.length - 1]!.push({ text, type: token.type });
     });
   }
   return lines;

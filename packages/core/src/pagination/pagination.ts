@@ -30,7 +30,7 @@ export function pageRange(
   );
   const sibEnd = Math.min(
     Math.max(page + siblings, boundary + siblings * 2 + 2),
-    end.length ? end[0] - 2 : count - 1,
+    end.length ? end[0]! - 2 : count - 1,
   );
   return [
     ...start,

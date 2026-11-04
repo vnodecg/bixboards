@@ -1,4 +1,4 @@
-import { css, html, nothing } from 'lit';
+import { css, html } from 'lit';
 import { BixElement } from '../bix-element.ts';
 import { textFamily, textStyle } from '../internal/text-style.ts';
 

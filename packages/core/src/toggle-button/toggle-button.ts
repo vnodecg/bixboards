@@ -7,14 +7,6 @@ import { textFamily, textStyle } from '../internal/text-style.ts';
 type Variant = 'default' | 'secondary' | 'tertiary' | 'error' | 'warning';
 type Appearance = 'filled' | 'outlined' | 'plain';
 
-const ROLE: Record<Variant, string> = {
-  default: 'brand',
-  secondary: 'neutral',
-  tertiary: 'tertiary',
-  warning: 'warning',
-  error: 'danger',
-};
-
 /**
  * `<bx-toggle-button>` — a button with a persistent pressed state
  * (docs/features/core/toggle-button.md).

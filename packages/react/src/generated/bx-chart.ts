@@ -23,7 +23,7 @@ export interface BxChartEvents {
 }
 
 export type BxChartProps = WrapperProps<
-  Partial<Pick<BxChartElement, 'type' | 'data' | 'x' | 'series' | 'legend' | 'tooltip' | 'stacked' | 'smooth' | 'animate' | 'height' | 'palette' | 'loading' | 'label' | 'adapter'>>,
+  Partial<Pick<BxChartElement, 'type' | 'data' | 'x' | 'series' | 'legend' | 'tooltip' | 'stacked' | 'smooth' | 'animated' | 'height' | 'palette' | 'loading' | 'label' | 'adapter'>>,
   BxChartEvents
 >;
 
@@ -33,6 +33,6 @@ export type BxChartProps = WrapperProps<
 export const BxChart = createComponent<BxChartElement, BxChartProps>({
   tagName: 'bx-chart',
   displayName: 'BxChart',
-  properties: [{ name: 'type', attribute: 'type' }, { name: 'data' }, { name: 'x', attribute: 'x' }, { name: 'series' }, { name: 'legend', attribute: 'legend' }, { name: 'tooltip', attribute: 'tooltip' }, { name: 'stacked', attribute: 'stacked' }, { name: 'smooth', attribute: 'smooth' }, { name: 'animate', attribute: 'animate' }, { name: 'height', attribute: 'height' }, { name: 'palette', attribute: 'palette' }, { name: 'loading', attribute: 'loading' }, { name: 'label', attribute: 'label' }, { name: 'adapter', attribute: 'adapter' }],
+  properties: [{ name: 'type', attribute: 'type' }, { name: 'data' }, { name: 'x', attribute: 'x' }, { name: 'series' }, { name: 'legend', attribute: 'legend' }, { name: 'tooltip', attribute: 'tooltip' }, { name: 'stacked', attribute: 'stacked' }, { name: 'smooth', attribute: 'smooth' }, { name: 'animated', attribute: 'animate' }, { name: 'height', attribute: 'height' }, { name: 'palette', attribute: 'palette' }, { name: 'loading', attribute: 'loading' }, { name: 'label', attribute: 'label' }, { name: 'adapter', attribute: 'adapter' }],
   events: { onBxPointClick: 'bx-point-click', onBxPointHover: 'bx-point-hover', onBxLegendToggle: 'bx-legend-toggle', onBxReady: 'bx-ready', onBxUnsupported: 'bx-unsupported' },
 });

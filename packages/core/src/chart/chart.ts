@@ -114,11 +114,11 @@ function drawCartesian(spec: ChartSpec): TemplateResult {
   const lo = Math.min(0, ...finite);
   const hi = Math.max(0, ...finite);
   const ticks = niceTicks(lo, hi, 5);
-  const y0 = ticks[0];
-  const y1 = ticks[ticks.length - 1];
+  const y0 = ticks[0]!;
+  const y1 = ticks[ticks.length - 1]!;
 
   if (horizontal) {
-    const s = spec.series[0];
+    const s = spec.series[0]!;
     const rows = [...data]
       .map((r) => ({ label: String(r[x] ?? ''), v: num(r[s.field]) || 0 }))
       .sort((a, b) => b.v - a.v);
@@ -141,7 +141,7 @@ function drawCartesian(spec: ChartSpec): TemplateResult {
   if (scatter) {
     const xs = data.map((r) => num(r[x])).filter(Number.isFinite);
     const xt = niceTicks(Math.min(...xs), Math.max(...xs), 6);
-    xNum = linear(xt[0], xt[xt.length - 1], m.l, m.l + pw);
+    xNum = linear(xt[0]!, xt[xt.length - 1]!, m.l, m.l + pw);
   }
   const Y = linear(y0, y1, m.t + ph, m.t);
 
@@ -208,14 +208,14 @@ function drawCartesian(spec: ChartSpec): TemplateResult {
       const d = spec.smooth
         ? pts.reduce((acc, [px, py], i) => {
             if (i === 0) return `M${px},${py}`;
-            const [qx] = pts[i - 1];
+            const [qx] = pts[i - 1]!;
             const mx = (qx + px) / 2;
-            return `${acc}C${mx},${pts[i - 1][1]} ${mx},${py} ${px},${py}`;
+            return `${acc}C${mx},${pts[i - 1]![1]} ${mx},${py} ${px},${py}`;
           }, '')
         : `M${pts.map(([px, py]) => `${px},${py}`).join('L')}`;
       if (type === 'area' && pts.length)
         body.push(
-          svg`<path class="area" d=${`${d}L${pts[pts.length - 1][0]},${baseline}L${pts[0][0]},${baseline}Z`} fill=${spec.color(idx)}></path>`,
+          svg`<path class="area" d=${`${d}L${pts[pts.length - 1]![0]},${baseline}L${pts[0]![0]},${baseline}Z`} fill=${spec.color(idx)}></path>`,
         );
       body.push(
         svg`<path class="line" data-series=${s.field} d=${d} stroke=${spec.color(idx)}></path>`,
@@ -233,7 +233,7 @@ function drawCartesian(spec: ChartSpec): TemplateResult {
 }
 
 function drawRadial(spec: ChartSpec): TemplateResult {
-  const s = spec.series[0];
+  const s = spec.series[0]!;
   const rows = spec.data
     .map((r, i) => ({
       label: String(r[spec.x] ?? ''),
@@ -515,7 +515,8 @@ export class BxChart extends BixElement {
     tooltip: { type: Boolean },
     stacked: { type: Boolean },
     smooth: { type: Boolean },
-    animate: { type: Boolean },
+    // `animate` is already an `Element` method, so the property is `animated` (attribute `animate`).
+    animated: { type: Boolean, attribute: 'animate' },
     height: { type: String },
     palette: { type: String },
     loading: { type: Boolean, reflect: true },
@@ -536,7 +537,7 @@ export class BxChart extends BixElement {
   declare tooltip: boolean;
   declare stacked: boolean;
   declare smooth: boolean;
-  declare animate: boolean;
+  declare animated: boolean;
   declare height: string;
   declare palette: string;
   declare loading: boolean;
@@ -576,7 +577,7 @@ export class BxChart extends BixElement {
     this.tooltip = true;
     this.stacked = false;
     this.smooth = false;
-    this.animate = true;
+    this.animated = true;
     this.height = '16rem';
     this.palette = 'categorical';
     this.loading = false;
@@ -748,7 +749,7 @@ export class BxChart extends BixElement {
     }
     const series =
       this.type === 'radial'
-        ? [this.normalizedSeries[0]]
+        ? this.normalizedSeries.slice(0, 1)
         : this.normalizedSeries.filter((s) => !this._hidden.has(s.field));
     this.dispatchEvent(
       new CustomEvent('bx-point-hover', {

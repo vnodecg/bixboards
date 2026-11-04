@@ -102,7 +102,7 @@ describe('bx-command-palette', () => {
     el.show();
     await el.updateComplete;
     const groups = [...el.shadowRoot!.querySelectorAll('.group-label')].map(
-      (g) => g.textContent,
+      (g) => g.textContent!.trim(),
     );
     expect(groups).to.deep.equal(['Recent', 'Navigation', 'File']);
     expect(labels(el)[0]).to.equal('Save');

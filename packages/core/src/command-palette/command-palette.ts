@@ -35,14 +35,15 @@ export function fuzzyScore(query: string, text: string): number {
   let wi = 0;
   let wordStart = true;
   for (const qw of qWords) {
-    while (wi < words.length && !words[wi][0].startsWith(qw)) wi++;
+    while (wi < words.length && !words[wi]![0].startsWith(qw)) wi++;
     if (wi === words.length) {
       wordStart = false;
       break;
     }
     wi++;
   }
-  if (wordStart) return 700 - Math.min(words[0] ? t.indexOf(qWords[0]) : 0, 99);
+  if (wordStart)
+    return 700 - Math.min(words[0] ? t.indexOf(qWords[0]!) : 0, 99);
   const at = t.indexOf(q);
   if (at >= 0) return 500 - Math.min(at, 99);
   // Subsequence: reward consecutive runs and early starts.
@@ -421,7 +422,7 @@ export class BxCommandPalette extends BixElement {
     let i = this._active;
     for (let n = 0; n < flat.length; n++) {
       i = (i + delta + flat.length) % flat.length;
-      if (!flat[i].disabled) break;
+      if (!flat[i]!.disabled) break;
     }
     this._active = i;
   }

@@ -24,7 +24,7 @@ export function parseTypedDate(
   const t = text.trim();
   if (!t) return undefined;
   const iso = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(t);
-  if (iso) return fromParts(+iso[1], +iso[2], +iso[3]);
+  if (iso) return fromParts(+iso[1]!, +iso[2]!, +iso[3]!);
   const nums = t
     .split(/[^\d]+/)
     .filter(Boolean)
@@ -39,9 +39,9 @@ export function parseTypedDate(
     .filter((p) => p.type === 'day' || p.type === 'month' || p.type === 'year')
     .map((p) => p.type);
   const got: Record<string, number> = {};
-  order.forEach((type, i) => (got[type] = nums[i]));
-  if (got['year'] < 100) got['year'] += 2000;
-  return fromParts(got['year'], got['month'], got['day']);
+  order.forEach((type, i) => (got[type] = nums[i]!));
+  if (got['year']! < 100) got['year'] = got['year']! + 2000;
+  return fromParts(got['year']!, got['month']!, got['day']!);
 }
 
 function fromParts(y: number, m: number, d: number): string | undefined {

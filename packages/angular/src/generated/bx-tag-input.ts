@@ -187,8 +187,8 @@ export class BxTagInputComponent implements ControlValueAccessor {
   /**
    * Removes the tag at `index`.
    */
-  remove(...args: Parameters<BxTagInputElement['remove']>): ReturnType<BxTagInputElement['remove']> {
-    return this.element.remove(...args);
+  removeAt(...args: Parameters<BxTagInputElement['removeAt']>): ReturnType<BxTagInputElement['removeAt']> {
+    return this.element.removeAt(...args);
   }
 
   // --- ControlValueAccessor ---
