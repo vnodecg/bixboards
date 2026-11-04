@@ -115,6 +115,8 @@ export { default as BxResizeObserver } from './generated/BxResizeObserver.svelte
 export type { BxResizeObserverProps, BxResizeObserverSlot } from './generated/BxResizeObserver.svelte';
 export { default as BxScroller } from './generated/BxScroller.svelte';
 export type { BxScrollerProps, BxScrollerSlot } from './generated/BxScroller.svelte';
+export { default as BxSearchField } from './generated/BxSearchField.svelte';
+export type { BxSearchFieldProps, BxSearchFieldSlot } from './generated/BxSearchField.svelte';
 export { default as BxSegment } from './generated/BxSegment.svelte';
 export type { BxSegmentProps, BxSegmentSlot } from './generated/BxSegment.svelte';
 export { default as BxSegmentedControl } from './generated/BxSegmentedControl.svelte';

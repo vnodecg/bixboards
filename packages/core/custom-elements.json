@@ -13740,6 +13740,301 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/search-field/search-field.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxSearchField",
+          "tagName": "bx-search-field",
+          "customElement": true,
+          "formAssociated": true,
+          "description": "`<bx-search-field>` — search input (docs/features/core/search-field.md).\n\nComposes `bx-input type=\"search\"` (FR-SEARCHFIELD-01) with a leading search icon, a clear\nbutton and `bx-search`, fired `debounce` ms after typing stops or immediately on Enter.\nEscape clears first, then blurs. `shortcut` (e.g. `mod+k`) opts in to a global focus key,\nignored while any other editable element has focus (FR-SEARCHFIELD-03). Form-associated: the\nvalue is submitted under `name`. The `suggestions` slot (FR-SEARCHFIELD-02, combobox pattern) is\n**not** implemented; use `bx-combobox` when suggestions are needed.",
+          "superclass": {
+            "name": "FormAssociatedMixin"
+          },
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "placeholder",
+              "fieldName": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Search'"
+            },
+            {
+              "name": "debounce",
+              "fieldName": "debounce",
+              "type": {
+                "text": "number"
+              },
+              "default": "250"
+            },
+            {
+              "name": "loading",
+              "fieldName": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "clearable",
+              "fieldName": "clearable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true"
+            },
+            {
+              "name": "shortcut",
+              "fieldName": "shortcut",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'"
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Search'",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "debounce",
+              "type": {
+                "text": "number"
+              },
+              "default": "250",
+              "attribute": "debounce"
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "clearable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "clearable"
+            },
+            {
+              "kind": "field",
+              "name": "shortcut",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "shortcut"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "focus",
+              "parameters": [
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "FocusOptions"
+                  },
+                  "optional": true
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "blur",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "select",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "clear",
+              "description": "Clears the value, fires `bx-clear` and a (non-debounced) `bx-search` with an empty query.",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "input",
+              "description": "Each keystroke."
+            },
+            {
+              "name": "bx-search",
+              "description": "Debounced, or on Enter. `detail.query`."
+            },
+            {
+              "name": "bx-clear",
+              "description": "Clear button (or Escape) used."
+            }
+          ],
+          "slots": [
+            {
+              "name": "start",
+              "description": "Replaces the search icon."
+            },
+            {
+              "name": "end",
+              "description": "Trailing content (e.g. a shortcut hint)."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "form-control",
+              "description": "The form-control part."
+            },
+            {
+              "name": "input",
+              "description": "The input part."
+            },
+            {
+              "name": "clear-button",
+              "description": "The clear-button part."
+            },
+            {
+              "name": "icon",
+              "description": "The icon part."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-search-field-bg",
+              "description": "Background."
+            },
+            {
+              "name": "--bx-search-field-radius",
+              "description": "Corner radius. Default `var(--bx-radius-l)`."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/segment/segment.ts",
       "declarations": [
         {

@@ -502,6 +502,14 @@
       "types": "./dist/scroller/define.d.ts",
       "default": "./dist/scroller/define.js"
     },
+    "./search-field": {
+      "types": "./dist/search-field/index.d.ts",
+      "default": "./dist/search-field/index.js"
+    },
+    "./search-field/define": {
+      "types": "./dist/search-field/define.d.ts",
+      "default": "./dist/search-field/define.js"
+    },
     "./segment": {
       "types": "./dist/segment/index.d.ts",
       "default": "./dist/segment/index.js"

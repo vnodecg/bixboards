@@ -57,6 +57,7 @@ export * from './generated/bx-rating.ts';
 export * from './generated/bx-relative-time.ts';
 export * from './generated/bx-resize-observer.ts';
 export * from './generated/bx-scroller.ts';
+export * from './generated/bx-search-field.ts';
 export * from './generated/bx-segment.ts';
 export * from './generated/bx-segmented-control.ts';
 export * from './generated/bx-select.ts';

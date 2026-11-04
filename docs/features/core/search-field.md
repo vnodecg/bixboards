@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core`          |
 | **Category**        | Form                       |
 | **Tag**             | `bx-search-field`          |
-| **Status**          | Proposed (not implemented) |
+| **Status**          | Implemented                |
 | **Form-associated** | Yes (ElementInternals)     |
 | **Depends on**      | `input`, _combobox_ (soft) |
 
@@ -60,13 +60,10 @@ Search-specific input with leading icon, clear button, debounced search event an
 
 ### CSS custom properties
 
-| Property                             | Description                                                              |
-| ------------------------------------ | ------------------------------------------------------------------------ |
-| `--bx-search-field-bg`               | Background.                                                              |
-| `--bx-search-field-radius`           | Corner radius. Default `var(--bx-radius-l)`.                             |
-| `--bx-search-field-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-search-field-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-search-field-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                   | Description                                  |
+| -------------------------- | -------------------------------------------- |
+| `--bx-search-field-bg`     | Background.                                  |
+| `--bx-search-field-radius` | Corner radius. Default `var(--bx-radius-l)`. |
 
 ### Methods
 

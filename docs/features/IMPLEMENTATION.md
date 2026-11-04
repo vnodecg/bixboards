@@ -2,7 +2,7 @@
 
 Tracks build status for all 90 components across `@bixboards/core`, `@bixboards/data-table` and `@bixboards/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 78 / 90 done.**
+**Progress: 79 / 90 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -131,7 +131,7 @@ Not started. Each depends only on components in earlier tiers or on others in th
 - [x] [`bx-combobox`](core/combobox.md) (not virtualized (every option is a real element; fine up to a few hundred); `bx-select`'s virtualizer is not shared; async mode = debounced `input` event + `loading`, stale-response handling is the consumer's) — depends on select, option, popup, input, virtualizer — `packages/core/src/combobox`
 - [x] [`bx-input-otp`](core/input-otp.md) (one transparent real `<input>` over presentational cells, so caret/paste/autofill are native; adds `name`, not in the spec's property table) — depends on input — `packages/core/src/input-otp`
 - [ ] [`bx-file-upload`](core/file-upload.md) (depends on button, progress-bar, format-bytes, icon)
-- [ ] [`bx-search-field`](core/search-field.md) (depends on input, combobox, soft)
+- [x] [`bx-search-field`](core/search-field.md) (composes `bx-input type=search`; the `suggestions` slot (FR-SEARCHFIELD-02) is not implemented, use `bx-combobox`) — depends on input, combobox, soft — `packages/core/src/search-field`
 - [x] [`bx-segmented-control`](core/segmented-control.md) (adds `bx-segment` (`packages/core/src/segment`); the radiogroup/radio roles live on the hosts; indicator animates `transform` for position and `inline-size` for width) — depends on radio-group, resize-observer — `packages/core/src/segmented-control`
 - [ ] [`bx-calendar`](core/calendar.md) (depends on button)
 - [ ] [`bx-date-picker`](core/date-picker.md) (depends on calendar, popup, input)
