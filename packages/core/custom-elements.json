@@ -18024,6 +18024,282 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/toast-region/toast-region.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxToastRegion",
+          "tagName": "bx-toast-region",
+          "customElement": true,
+          "description": "`<bx-toast-region>` — the fixed stack that hosts `bx-toast`s (FR-TOAST-01).\n\nOne per document, created by the first `BxToast.toast()` / `BxToastRegion.shared()`. Honors\n`--bx-safe-area-inset-*` (FR-TOAST-04) through `--bx-toast-offset`, spans the viewport width\nminus gutters on narrow screens, and caps the visible stack at `max-visible`: when full, the\noldest non-sticky toast is replaced (FR-TOAST-05). New toasts appear nearest the viewport edge.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "position",
+              "fieldName": "position",
+              "type": {
+                "text": "Position"
+              },
+              "default": "'bottom-end'"
+            },
+            {
+              "name": "max-visible",
+              "fieldName": "maxVisible",
+              "type": {
+                "text": "number"
+              },
+              "default": "3"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "position",
+              "type": {
+                "text": "Position"
+              },
+              "default": "'bottom-end'",
+              "attribute": "position",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "maxVisible",
+              "type": {
+                "text": "number"
+              },
+              "default": "3",
+              "attribute": "max-visible"
+            },
+            {
+              "kind": "method",
+              "name": "push",
+              "description": "Creates and shows a toast; evicts the oldest non-sticky one when the stack is full.",
+              "parameters": [
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "ToastOptions"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "Promise<BxToast>"
+                }
+              }
+            }
+          ],
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "`bx-toast` children."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "base",
+              "description": "The stack container."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-toast-offset",
+              "description": "Distance from the viewport edge (adds safe-area insets)."
+            },
+            {
+              "name": "--bx-toast-gap",
+              "description": "Gap between toasts. Default `var(--bx-space-xs)`."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/toast/toast.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxToast",
+          "tagName": "bx-toast",
+          "customElement": true,
+          "description": "`<bx-toast>` — transient, non-blocking message (docs/features/core/toast.md).\n\nDeclarative: a `<bx-toast open>` anywhere; imperative: `BxToast.toast({ message })` creates one\ninside a single `bx-toast-region` appended to the body on first use (FR-TOAST-01) and resolves\nto the element. The auto-dismiss timer pauses on hover, focus-within and while the tab is hidden\n(FR-TOAST-02) and resumes with what was left. Motion is a fade plus a short slide, fade only\nunder reduced motion (FR-TOAST-03). `role` is `status`, or `alert` for errors, so assistive tech\nannounces it without the region having to be a live region of its own.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "variant",
+              "fieldName": "variant",
+              "type": {
+                "text": "Variant"
+              },
+              "default": "'neutral'"
+            },
+            {
+              "name": "duration",
+              "fieldName": "duration",
+              "type": {
+                "text": "number"
+              },
+              "default": "5000"
+            },
+            {
+              "name": "closable",
+              "fieldName": "closable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true"
+            },
+            {
+              "name": "open",
+              "fieldName": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "Variant"
+              },
+              "default": "'neutral'",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "duration",
+              "type": {
+                "text": "number"
+              },
+              "default": "5000",
+              "attribute": "duration"
+            },
+            {
+              "kind": "field",
+              "name": "closable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "closable"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "description": "Shows the toast. Resolves after the show animation.",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "hide",
+              "description": "Hides the toast. Resolves after the hide animation.",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "bx-show",
+              "description": "Before showing. Cancelable."
+            },
+            {
+              "name": "bx-after-show",
+              "description": "After the show animation."
+            },
+            {
+              "name": "bx-hide",
+              "description": "Before hiding. Cancelable."
+            },
+            {
+              "name": "bx-after-hide",
+              "description": "After the hide animation."
+            },
+            {
+              "name": "bx-action",
+              "description": "The action slot was used."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "Message."
+            },
+            {
+              "name": "icon",
+              "description": "Overrides the variant icon."
+            },
+            {
+              "name": "action",
+              "description": "Action button (e.g. Undo)."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "base",
+              "description": "The base part."
+            },
+            {
+              "name": "icon",
+              "description": "The icon part."
+            },
+            {
+              "name": "message",
+              "description": "The message part."
+            },
+            {
+              "name": "action",
+              "description": "The action part."
+            },
+            {
+              "name": "close-button",
+              "description": "The close button."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-toast-width",
+              "description": "Max width."
+            },
+            {
+              "name": "--bx-toast-duration",
+              "description": "Enter/exit transition."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/toggle-button/toggle-button.ts",
       "declarations": [
         {

@@ -630,6 +630,22 @@
       "types": "./dist/timeline/define.d.ts",
       "default": "./dist/timeline/define.js"
     },
+    "./toast": {
+      "types": "./dist/toast/index.d.ts",
+      "default": "./dist/toast/index.js"
+    },
+    "./toast-region": {
+      "types": "./dist/toast-region/index.d.ts",
+      "default": "./dist/toast-region/index.js"
+    },
+    "./toast-region/define": {
+      "types": "./dist/toast-region/define.d.ts",
+      "default": "./dist/toast-region/define.js"
+    },
+    "./toast/define": {
+      "types": "./dist/toast/define.d.ts",
+      "default": "./dist/toast/define.js"
+    },
     "./toggle-button": {
       "types": "./dist/toggle-button/index.d.ts",
       "default": "./dist/toggle-button/index.js"
