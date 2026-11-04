@@ -65,6 +65,8 @@ export * from './generated/bx-social-button.ts';
 export * from './generated/bx-sparkline.ts';
 export * from './generated/bx-spinner.ts';
 export * from './generated/bx-stat-card.ts';
+export * from './generated/bx-step.ts';
+export * from './generated/bx-stepper.ts';
 export * from './generated/bx-switch.ts';
 export * from './generated/bx-tab.ts';
 export * from './generated/bx-tab-group.ts';

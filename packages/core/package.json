@@ -558,6 +558,22 @@
       "types": "./dist/stat-card/define.d.ts",
       "default": "./dist/stat-card/define.js"
     },
+    "./step": {
+      "types": "./dist/step/index.d.ts",
+      "default": "./dist/step/index.js"
+    },
+    "./step/define": {
+      "types": "./dist/step/define.d.ts",
+      "default": "./dist/step/define.js"
+    },
+    "./stepper": {
+      "types": "./dist/stepper/index.d.ts",
+      "default": "./dist/stepper/index.js"
+    },
+    "./stepper/define": {
+      "types": "./dist/stepper/define.d.ts",
+      "default": "./dist/stepper/define.js"
+    },
     "./switch": {
       "types": "./dist/switch/index.d.ts",
       "default": "./dist/switch/index.js"

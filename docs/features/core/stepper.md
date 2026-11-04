@@ -2,14 +2,14 @@
 
 > Multi-step progress indicator and wizard navigation, horizontal or vertical.
 
-|                     |                            |
-| ------------------- | -------------------------- |
-| **Package**         | `@bixboards/core`          |
-| **Category**        | Feedback                   |
-| **Tag**             | `bx-stepper`               |
-| **Status**          | Proposed (not implemented) |
-| **Form-associated** | No                         |
-| **Depends on**      | _tab-group_ (soft)         |
+|                     |                    |
+| ------------------- | ------------------ |
+| **Package**         | `@bixboards/core`  |
+| **Category**        | Feedback           |
+| **Tag**             | `bx-stepper`       |
+| **Status**          | Implemented        |
+| **Form-associated** | No                 |
+| **Depends on**      | _tab-group_ (soft) |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
@@ -43,24 +43,18 @@ Multi-step progress indicator and wizard navigation, horizontal or vertical. Spe
 
 ### CSS parts
 
-| Part        | Description               |
-| ----------- | ------------------------- |
-| `base`      | The base part.            |
-| `step`      | The step part.            |
-| `indicator` | Number/check/error glyph. |
-| `connector` | Line between steps.       |
-| `label`     | The label part.           |
+| Part      | Description                       |
+| --------- | --------------------------------- |
+| `base`    | The base part.                    |
+| `summary` | The collapsed "Step N of M" text. |
 
 ### CSS custom properties
 
-| Property                                | Description                                                              |
-| --------------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-stepper-indicator-size`           | Indicator size.                                                          |
-| `--bx-stepper-connector-color`          | Line color.                                                              |
-| `--bx-stepper-connector-color-complete` | Completed line color.                                                    |
-| `--bx-stepper-focus-ring-width`         | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-stepper-focus-ring-color`         | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-stepper-font-family`              | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                                | Description           |
+| --------------------------------------- | --------------------- |
+| `--bx-stepper-indicator-size`           | Indicator size.       |
+| `--bx-stepper-connector-color`          | Line color.           |
+| `--bx-stepper-connector-color-complete` | Completed line color. |
 
 ### Methods
 

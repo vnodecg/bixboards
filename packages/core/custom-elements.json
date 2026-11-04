@@ -15832,6 +15832,319 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/step/step.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxStep",
+          "tagName": "bx-step",
+          "customElement": true,
+          "description": "`<bx-step>` — one step of a `bx-stepper`.\n\n`bx-stepper` stamps `index`, `status` (derived from `current` unless `status` is set explicitly\non the step), `navigable`, `orientation` and `last`. Status is shown as a glyph *and* spoken text\n(FR-STEPPER-03). Navigable steps render a native `<button>`.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "status",
+              "fieldName": "status",
+              "type": {
+                "text": "StepStatus"
+              },
+              "default": "'upcoming'"
+            },
+            {
+              "name": "index",
+              "fieldName": "index",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "name": "navigable",
+              "fieldName": "navigable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "orientation",
+              "fieldName": "orientation",
+              "type": {
+                "text": "'horizontal' | 'vertical'"
+              },
+              "default": "'horizontal'"
+            },
+            {
+              "name": "last",
+              "fieldName": "last",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "description"
+            },
+            {
+              "kind": "field",
+              "name": "status",
+              "type": {
+                "text": "StepStatus"
+              },
+              "default": "'upcoming'",
+              "attribute": "status",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "index",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "index"
+            },
+            {
+              "kind": "field",
+              "name": "navigable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "navigable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "orientation",
+              "type": {
+                "text": "'horizontal' | 'vertical'"
+              },
+              "default": "'horizontal'",
+              "attribute": "orientation",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "last",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "last",
+              "reflects": true
+            }
+          ],
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "Description content."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "step",
+              "description": "The step part."
+            },
+            {
+              "name": "indicator",
+              "description": "Number/check/error glyph."
+            },
+            {
+              "name": "connector",
+              "description": "Line between steps."
+            },
+            {
+              "name": "label",
+              "description": "The label part."
+            }
+          ],
+          "cssProperties": []
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/stepper/stepper.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxStepper",
+          "tagName": "bx-stepper",
+          "customElement": true,
+          "description": "`<bx-stepper>` — multi-step progress indicator and wizard navigation\n(docs/features/core/stepper.md).\n\nNavigation only (FR-STEPPER-01): it never owns the step content. It stamps each `bx-step` child\nwith its index, derived status (`complete` before `current`, `upcoming` after; an explicit `status`\nattribute on a step, e.g. `error`/`skipped`, wins) and whether it is navigable. Selecting a step\nfires a cancelable `bx-step-change`; if nobody cancels it, `current` moves. In a container\nnarrower than 24rem it collapses to the current step plus a \"Step 2 of 5\" summary\n(FR-STEPPER-02). Status is a glyph and spoken text, not colour alone (FR-STEPPER-03).",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "current",
+              "fieldName": "current",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "name": "orientation",
+              "fieldName": "orientation",
+              "type": {
+                "text": "'horizontal' | 'vertical'"
+              },
+              "default": "'horizontal'"
+            },
+            {
+              "name": "linear",
+              "fieldName": "linear",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "clickable",
+              "fieldName": "clickable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true"
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "current",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "current",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "orientation",
+              "type": {
+                "text": "'horizontal' | 'vertical'"
+              },
+              "default": "'horizontal'",
+              "attribute": "orientation",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "linear",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "linear"
+            },
+            {
+              "kind": "field",
+              "name": "clickable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "clickable"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'s' | 'm' | 'l'"
+              },
+              "default": "'m'",
+              "attribute": "size",
+              "reflects": true
+            }
+          ],
+          "events": [
+            {
+              "name": "bx-step-change",
+              "description": "Cancelable. `detail.from`, `detail.to`."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "`bx-step` children."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "base",
+              "description": "The base part."
+            },
+            {
+              "name": "summary",
+              "description": "The collapsed \"Step N of M\" text."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-stepper-indicator-size",
+              "description": "Indicator size."
+            },
+            {
+              "name": "--bx-stepper-connector-color",
+              "description": "Line color."
+            },
+            {
+              "name": "--bx-stepper-connector-color-complete",
+              "description": "Completed line color."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/switch/switch.ts",
       "declarations": [
         {
