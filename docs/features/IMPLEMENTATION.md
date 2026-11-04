@@ -2,7 +2,7 @@
 
 Tracks build status for all 90 components across `@bixboards/core`, `@bixboards/data-table` and `@bixboards/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 62 / 90 done.**
+**Progress: 63 / 90 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -157,7 +157,7 @@ Not started. Each depends only on components in earlier tiers or on others in th
 ### Display
 
 - [ ] [`bx-stat-card`](core/stat-card.md) (depends on card, format-number, skeleton, sparkline, soft)
-- [ ] [`bx-kbd`](core/kbd.md)
+- [x] [`bx-kbd`](core/kbd.md) (key names are English; the localization registry the spec mentions does not exist yet) — `packages/core/src/kbd`
 - [ ] [`bx-timeline`](core/timeline.md) (depends on relative-time, format-date, icon)
 - [ ] [`bx-code-block`](core/code-block.md) (depends on copy-button, scroller)
 

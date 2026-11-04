@@ -318,6 +318,14 @@
       "types": "./dist/intersection-observer/define.d.ts",
       "default": "./dist/intersection-observer/define.js"
     },
+    "./kbd": {
+      "types": "./dist/kbd/index.d.ts",
+      "default": "./dist/kbd/index.js"
+    },
+    "./kbd/define": {
+      "types": "./dist/kbd/define.d.ts",
+      "default": "./dist/kbd/define.js"
+    },
     "./mutation-observer": {
       "types": "./dist/mutation-observer/index.d.ts",
       "default": "./dist/mutation-observer/index.js"

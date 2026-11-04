@@ -8393,6 +8393,113 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/kbd/kbd.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxKbd",
+          "tagName": "bx-kbd",
+          "customElement": true,
+          "description": "`<bx-kbd>` — keyboard shortcut display (docs/features/core/kbd.md).\n\n`keys=\"mod+shift+k\"` renders one native `<kbd>` per key (FR-KBD-01); `mod` is ⌘ on Apple\nplatforms and Ctrl elsewhere, and named keys (Esc, Enter, arrows, ...) get glyphs. Platform\ndetection runs in `connectedCallback`, never at import (FR-KBD-03). The whole chord is a single\n`role=\"img\"` whose label spells the keys out, so screen readers do not read glyph soup. Without\n`keys`, the default slot is shown as a literal text alternative. Key names are English; the\nlocalization registry the spec mentions does not exist yet.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "keys",
+              "fieldName": "keys",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "platform",
+              "fieldName": "platform",
+              "type": {
+                "text": "Platform"
+              },
+              "default": "'auto'"
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'s' | 'm'"
+              },
+              "default": "'m'"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "keys",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "keys"
+            },
+            {
+              "kind": "field",
+              "name": "platform",
+              "type": {
+                "text": "Platform"
+              },
+              "default": "'auto'",
+              "attribute": "platform"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'s' | 'm'"
+              },
+              "default": "'m'",
+              "attribute": "size",
+              "reflects": true
+            }
+          ],
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "Literal text alternative, used when `keys` is empty."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "base",
+              "description": "The wrapper around the chord."
+            },
+            {
+              "name": "key",
+              "description": "A single key cap."
+            },
+            {
+              "name": "separator",
+              "description": "The separator between key caps."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-kbd-bg",
+              "description": "Key cap background."
+            },
+            {
+              "name": "--bx-kbd-border-color",
+              "description": "Key cap border color."
+            },
+            {
+              "name": "--bx-kbd-gap",
+              "description": "Gap between key caps. Default `var(--bx-space-3xs)`."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/mutation-observer/mutation-observer.ts",
       "declarations": [
         {

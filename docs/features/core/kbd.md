@@ -2,14 +2,14 @@
 
 > Keyboard shortcut display that adapts modifier glyphs to the platform.
 
-|                     |                            |
-| ------------------- | -------------------------- |
-| **Package**         | `@bixboards/core`          |
-| **Category**        | Display                    |
-| **Tag**             | `bx-kbd`                   |
-| **Status**          | Proposed (not implemented) |
-| **Form-associated** | No                         |
-| **Depends on**      | none                       |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Display           |
+| **Tag**             | `bx-kbd`          |
+| **Status**          | Implemented       |
+| **Form-associated** | No                |
+| **Depends on**      | none              |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
@@ -39,19 +39,19 @@ _None._
 
 ### CSS parts
 
-| Part        | Description         |
-| ----------- | ------------------- |
-| `base`      | The base part.      |
-| `key`       | A single key cap.   |
-| `separator` | The separator part. |
+| Part        | Description                     |
+| ----------- | ------------------------------- |
+| `base`      | The wrapper around the chord.   |
+| `key`       | A single key cap.               |
+| `separator` | The separator between key caps. |
 
 ### CSS custom properties
 
-| Property               | Description                                        |
-| ---------------------- | -------------------------------------------------- |
-| `--bx-kbd-bg`          | Key cap background.                                |
-| `--bx-kbd-border`      | Key cap border.                                    |
-| `--bx-kbd-font-family` | Font family. Default `var(--bx-font-family-sans)`. |
+| Property                | Description                                          |
+| ----------------------- | ---------------------------------------------------- |
+| `--bx-kbd-bg`           | Key cap background.                                  |
+| `--bx-kbd-border-color` | Key cap border color.                                |
+| `--bx-kbd-gap`          | Gap between key caps. Default `var(--bx-space-3xs)`. |
 
 ### Methods
 
