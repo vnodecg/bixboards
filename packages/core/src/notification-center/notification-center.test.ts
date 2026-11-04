@@ -155,6 +155,10 @@ describe('bx-notification-center', () => {
     expect(more).to.equal(1);
     el.items = [...el.items, { id: 'n', title: 'Newer', time: iso(0) }];
     await aTimeout(100);
+    const list = el.shadowRoot!.querySelector<HTMLElement>('.list')!;
+    list.scrollTop = list.scrollHeight; // a longer list only asks again once scrolled to its end
+    list.dispatchEvent(new Event('scroll'));
+    await aTimeout(50);
     expect(more).to.equal(2);
   });
 
