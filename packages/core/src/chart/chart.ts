@@ -2,6 +2,7 @@ import {
   css,
   html,
   nothing,
+  render,
   svg,
   type PropertyValues,
   type TemplateResult,
@@ -280,9 +281,7 @@ export const svgAdapter: ChartAdapter = {
     'radial',
   ]),
   create(container) {
-    let svgEl: SVGSVGElement | undefined;
-    const draw = async (spec: ChartSpec) => {
-      const { render } = await import('lit');
+    const draw = (spec: ChartSpec) => {
       const body =
         spec.type === 'radial' ? drawRadial(spec) : drawCartesian(spec);
       render(
@@ -292,7 +291,6 @@ export const svgAdapter: ChartAdapter = {
           width=${spec.width}
           height=${spec.height}
           aria-hidden="true"
-          ${ref((el) => (svgEl = el as SVGSVGElement))}
         >
           ${body}
         </svg>`,
@@ -300,11 +298,8 @@ export const svgAdapter: ChartAdapter = {
       );
     };
     return {
-      update: (spec) => void draw(spec),
-      destroy: () => {
-        svgEl?.remove();
-        container.replaceChildren();
-      },
+      update: draw,
+      destroy: () => render(nothing, container),
     };
   },
 };
