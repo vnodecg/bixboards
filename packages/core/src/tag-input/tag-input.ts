@@ -34,6 +34,21 @@ let nextId = 0;
  * @cssprop --bx-tag-input-border-color - Border color.
  * @cssprop --bx-tag-input-radius - Corner radius.
  * @cssprop --bx-tag-input-gap - Gap between tags.
+ * @cssprop --bx-tag-input-font-family - Font family of the root surface. Default `var(--bx-type-field-family)`.
+ * @cssprop --bx-tag-input-font-size - Font size of the root surface. Default `var(--bx-type-field-size)`.
+ * @cssprop --bx-tag-input-font-weight - Font weight of the root surface. Default `var(--bx-type-field-weight)`.
+ * @cssprop --bx-tag-input-line-height - Line height of the root surface. Default `var(--bx-type-field-leading)`.
+ * @cssprop --bx-tag-input-letter-spacing - Letter spacing of the root surface. Default `var(--bx-type-field-tracking)`.
+ * @cssprop --bx-tag-input-hint-font-family - Font family of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.
+ * @cssprop --bx-tag-input-hint-font-size - Font size of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.
+ * @cssprop --bx-tag-input-hint-font-weight - Font weight of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.
+ * @cssprop --bx-tag-input-hint-line-height - Line height of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.
+ * @cssprop --bx-tag-input-hint-letter-spacing - Letter spacing of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`.
+ * @cssprop --bx-tag-input-label-font-family - Font family of the `label` text (text style `label-m`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-tag-input-label-font-size - Font size of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-size)`.
+ * @cssprop --bx-tag-input-label-font-weight - Font weight of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.
+ * @cssprop --bx-tag-input-label-line-height - Line height of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.
+ * @cssprop --bx-tag-input-label-letter-spacing - Letter spacing of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.
  */
 export class BxTagInput extends FormAssociatedMixin(BixElement) {
   static override tagName = 'bx-tag-input';

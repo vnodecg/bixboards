@@ -56,20 +56,42 @@ Drop zone and picker with file list, validation, progress and removal. Specified
 
 ### CSS parts
 
-| Part        | Description        |
-| ----------- | ------------------ |
-| `dropzone`  | Drop target.       |
-| `trigger`   | Browse button.     |
-| `file-list` | The list of files. |
-| `file`      | One file row.      |
+| Part           | Description                        |
+| -------------- | ---------------------------------- |
+| `dropzone`     | Drop target.                       |
+| `trigger`      | Browse button.                     |
+| `trigger-wrap` | Wrapper around the `trigger` slot. |
+| `file-list`    | The list of files.                 |
+| `file`         | One file row.                      |
 
 ### CSS custom properties
 
-| Property                        | Description             |
-| ------------------------------- | ----------------------- |
-| `--bx-file-upload-bg`           | Drop zone background.   |
-| `--bx-file-upload-border-color` | Drop zone border color. |
-| `--bx-file-upload-radius`       | Drop zone radius.       |
+| Property                                | Description                                                                                              |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `--bx-file-upload-bg`                   | Drop zone background.                                                                                    |
+| `--bx-file-upload-border-color`         | Drop zone border color.                                                                                  |
+| `--bx-file-upload-radius`               | Drop zone radius.                                                                                        |
+| `--bx-file-upload-font-family`          | Font family of the root surface. Default `var(--bx-type-body-family)`.                                   |
+| `--bx-file-upload-hint-font-family`     | Font family of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.        |
+| `--bx-file-upload-hint-font-size`       | Font size of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.          |
+| `--bx-file-upload-hint-font-weight`     | Font weight of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.      |
+| `--bx-file-upload-hint-line-height`     | Line height of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.     |
+| `--bx-file-upload-hint-letter-spacing`  | Letter spacing of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`. |
+| `--bx-file-upload-label-font-family`    | Font family of the `label` text (text style `label-m`). Default `var(--bx-type-label-family)`.           |
+| `--bx-file-upload-label-font-size`      | Font size of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-size)`.             |
+| `--bx-file-upload-label-font-weight`    | Font weight of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.         |
+| `--bx-file-upload-label-line-height`    | Line height of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.        |
+| `--bx-file-upload-label-letter-spacing` | Letter spacing of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.    |
+| `--bx-file-upload-meta-font-family`     | Font family of the `meta` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.        |
+| `--bx-file-upload-meta-font-size`       | Font size of the `meta` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.          |
+| `--bx-file-upload-meta-font-weight`     | Font weight of the `meta` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.      |
+| `--bx-file-upload-meta-line-height`     | Line height of the `meta` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.     |
+| `--bx-file-upload-meta-letter-spacing`  | Letter spacing of the `meta` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`. |
+| `--bx-file-upload-name-font-family`     | Font family of the `name` text (text style `label-m`). Default `var(--bx-type-label-family)`.            |
+| `--bx-file-upload-name-font-size`       | Font size of the `name` text (text style `label-m`). Default `var(--bx-type-label-m-size)`.              |
+| `--bx-file-upload-name-font-weight`     | Font weight of the `name` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.          |
+| `--bx-file-upload-name-line-height`     | Line height of the `name` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.         |
+| `--bx-file-upload-name-letter-spacing`  | Letter spacing of the `name` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.     |
 
 ### Methods
 

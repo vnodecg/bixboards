@@ -20,11 +20,16 @@ import type { BxSegment } from '../segment/segment.ts';
  *
  * @csspart base - Track.
  * @csspart indicator - Sliding thumb.
- * @csspart segment - A segment.
  *
  * @cssprop --bx-segmented-control-bg - Track background.
  * @cssprop --bx-segmented-control-indicator-bg - Thumb color.
  * @cssprop --bx-segmented-control-indicator-duration - Slide duration; 0 under reduced motion.
+ * @cssprop --bx-segmented-control-font-family - Font family of the item text. Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-segmented-control-font-family - Font family of the item text (text style `label-m`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-segmented-control-font-size - Font size of the item text (text style `label-m`). Default `var(--bx-type-label-m-size)`.
+ * @cssprop --bx-segmented-control-font-weight - Font weight of the item text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.
+ * @cssprop --bx-segmented-control-line-height - Line height of the item text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.
+ * @cssprop --bx-segmented-control-letter-spacing - Letter spacing of the item text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.
  */
 export class BxSegmentedControl extends FormAssociatedMixin(BixElement) {
   static override tagName = 'bx-segmented-control';

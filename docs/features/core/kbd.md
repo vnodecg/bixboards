@@ -47,11 +47,16 @@ _None._
 
 ### CSS custom properties
 
-| Property                | Description                                          |
-| ----------------------- | ---------------------------------------------------- |
-| `--bx-kbd-bg`           | Key cap background.                                  |
-| `--bx-kbd-border-color` | Key cap border color.                                |
-| `--bx-kbd-gap`          | Gap between key caps. Default `var(--bx-space-3xs)`. |
+| Property                  | Description                                                                 |
+| ------------------------- | --------------------------------------------------------------------------- |
+| `--bx-kbd-bg`             | Key cap background.                                                         |
+| `--bx-kbd-border-color`   | Key cap border color.                                                       |
+| `--bx-kbd-gap`            | Gap between key caps. Default `var(--bx-space-3xs)`.                        |
+| `--bx-kbd-font-family`    | Font family of the root surface. Default `var(--bx-type-code-family)`.      |
+| `--bx-kbd-font-size`      | Font size of the root surface. Default `var(--bx-type-code-size)`.          |
+| `--bx-kbd-font-weight`    | Font weight of the root surface. Default `var(--bx-type-code-weight)`.      |
+| `--bx-kbd-line-height`    | Line height of the root surface. Default `var(--bx-type-code-leading)`.     |
+| `--bx-kbd-letter-spacing` | Letter spacing of the root surface. Default `var(--bx-type-code-tracking)`. |
 
 ### Methods
 

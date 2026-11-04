@@ -76,7 +76,7 @@ export class BxTimelineItem extends BixElement {
       }
       .connector {
         flex: 1 1 auto;
-        inline-size: 2px;
+        inline-size: var(--bx-border-width-strong);
         min-block-size: var(--bx-space-s);
         background: var(--bx-timeline-connector-color, var(--bx-border-subtle));
       }
@@ -150,7 +150,7 @@ export class BxTimelineItem extends BixElement {
 
       :host([orientation='horizontal']) {
         flex: 1 1 0;
-        min-inline-size: 8rem;
+        min-inline-size: calc(var(--bx-unit) * 8);
       }
       :host([orientation='horizontal']) .item {
         grid-template-columns: 1fr;
@@ -163,7 +163,7 @@ export class BxTimelineItem extends BixElement {
       }
       :host([orientation='horizontal']) .connector {
         inline-size: auto;
-        block-size: 2px;
+        block-size: var(--bx-border-width-strong);
         min-block-size: 0;
       }
       :host([orientation='horizontal']) .content {

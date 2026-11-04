@@ -57,6 +57,17 @@ export const emptyStateCopy: Record<
  *
  * @cssprop --bx-empty-state-max-width - Content width.
  * @cssprop --bx-empty-state-media-size - Illustration size.
+ * @cssprop --bx-empty-state-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-empty-state-description-font-family - Font family of the `description` text (text style `body-m`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-empty-state-description-font-size - Font size of the `description` text (text style `body-m`). Default `var(--bx-type-body-m-size)`.
+ * @cssprop --bx-empty-state-description-font-weight - Font weight of the `description` text (text style `body-m`). Default `var(--bx-type-body-m-weight)`.
+ * @cssprop --bx-empty-state-description-line-height - Line height of the `description` text (text style `body-m`). Default `var(--bx-type-body-m-leading)`.
+ * @cssprop --bx-empty-state-description-letter-spacing - Letter spacing of the `description` text (text style `body-m`). Default `var(--bx-type-body-m-tracking)`.
+ * @cssprop --bx-empty-state-heading-font-family - Font family of the `heading` text (text style `heading-s`). Default `var(--bx-type-heading-family)`.
+ * @cssprop --bx-empty-state-heading-font-size - Font size of the `heading` text (text style `heading-s`). Default `var(--bx-type-heading-s-size)`.
+ * @cssprop --bx-empty-state-heading-font-weight - Font weight of the `heading` text (text style `heading-s`). Default `var(--bx-type-heading-s-weight)`.
+ * @cssprop --bx-empty-state-heading-line-height - Line height of the `heading` text (text style `heading-s`). Default `var(--bx-type-heading-s-leading)`.
+ * @cssprop --bx-empty-state-heading-letter-spacing - Letter spacing of the `heading` text (text style `heading-s`). Default `var(--bx-type-heading-s-tracking)`.
  */
 export class BxEmptyState extends BixElement {
   static override tagName = 'bx-empty-state';
@@ -82,7 +93,10 @@ export class BxEmptyState extends BixElement {
         align-items: center;
         gap: var(--bx-space-s);
         margin-inline: auto;
-        max-inline-size: var(--bx-empty-state-max-width, 28rem);
+        max-inline-size: var(
+          --bx-empty-state-max-width,
+          calc(var(--bx-unit) * 28)
+        );
         padding: var(--bx-space-l);
         text-align: center;
       }

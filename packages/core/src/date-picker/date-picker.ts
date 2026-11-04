@@ -82,6 +82,21 @@ function fromParts(y: number, m: number, d: number): string | undefined {
  * @cssprop --bx-date-picker-bg - Field background.
  * @cssprop --bx-date-picker-border-color - Field border color.
  * @cssprop --bx-date-picker-radius - Field radius.
+ * @cssprop --bx-date-picker-font-family - Font family of the root surface. Default `var(--bx-type-field-family)`.
+ * @cssprop --bx-date-picker-font-size - Font size of the root surface. Default `var(--bx-type-field-size)`.
+ * @cssprop --bx-date-picker-font-weight - Font weight of the root surface. Default `var(--bx-type-field-weight)`.
+ * @cssprop --bx-date-picker-line-height - Line height of the root surface. Default `var(--bx-type-field-leading)`.
+ * @cssprop --bx-date-picker-letter-spacing - Letter spacing of the root surface. Default `var(--bx-type-field-tracking)`.
+ * @cssprop --bx-date-picker-hint-font-family - Font family of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.
+ * @cssprop --bx-date-picker-hint-font-size - Font size of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.
+ * @cssprop --bx-date-picker-hint-font-weight - Font weight of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.
+ * @cssprop --bx-date-picker-hint-line-height - Line height of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.
+ * @cssprop --bx-date-picker-hint-letter-spacing - Letter spacing of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`.
+ * @cssprop --bx-date-picker-label-font-family - Font family of the `label` text (text style `label-m`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-date-picker-label-font-size - Font size of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-size)`.
+ * @cssprop --bx-date-picker-label-font-weight - Font weight of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.
+ * @cssprop --bx-date-picker-label-line-height - Line height of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.
+ * @cssprop --bx-date-picker-label-letter-spacing - Letter spacing of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.
  */
 export class BxDatePicker extends FormAssociatedMixin(BixElement) {
   static override tagName = 'bx-date-picker';

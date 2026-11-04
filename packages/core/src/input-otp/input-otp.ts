@@ -40,6 +40,21 @@ let nextId = 0;
  * @cssprop --bx-input-otp-bg - Cell background.
  * @cssprop --bx-input-otp-border-color - Cell border color.
  * @cssprop --bx-input-otp-radius - Cell radius.
+ * @cssprop --bx-input-otp-font-family - Font family of the root surface. Default `var(--bx-type-field-family)`.
+ * @cssprop --bx-input-otp-font-size - Font size of the root surface. Default `var(--bx-type-field-size)`.
+ * @cssprop --bx-input-otp-font-weight - Font weight of the root surface. Default `var(--bx-type-field-weight)`.
+ * @cssprop --bx-input-otp-line-height - Line height of the root surface. Default `var(--bx-type-field-leading)`.
+ * @cssprop --bx-input-otp-letter-spacing - Letter spacing of the root surface. Default `var(--bx-type-field-tracking)`.
+ * @cssprop --bx-input-otp-hint-font-family - Font family of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.
+ * @cssprop --bx-input-otp-hint-font-size - Font size of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.
+ * @cssprop --bx-input-otp-hint-font-weight - Font weight of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.
+ * @cssprop --bx-input-otp-hint-line-height - Line height of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.
+ * @cssprop --bx-input-otp-hint-letter-spacing - Letter spacing of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`.
+ * @cssprop --bx-input-otp-label-font-family - Font family of the `label` text (text style `label-m`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-input-otp-label-font-size - Font size of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-size)`.
+ * @cssprop --bx-input-otp-label-font-weight - Font weight of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.
+ * @cssprop --bx-input-otp-label-line-height - Line height of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.
+ * @cssprop --bx-input-otp-label-letter-spacing - Letter spacing of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.
  */
 export class BxInputOtp extends FormAssociatedMixin(BixElement) {
   static override tagName = 'bx-input-otp';
@@ -107,7 +122,7 @@ export class BxInputOtp extends FormAssociatedMixin(BixElement) {
         inline-size: 1px;
         block-size: 1.2em;
         background: currentColor;
-        animation: blink 1s steps(2, start) infinite;
+        animation: blink var(--bx-motion-duration-spin) steps(2, start) infinite;
       }
       @keyframes blink {
         to {
@@ -129,7 +144,7 @@ export class BxInputOtp extends FormAssociatedMixin(BixElement) {
         border: 0;
         opacity: 0;
         cursor: text;
-        font-size: 16px; /* prevents iOS zoom-on-focus */
+        font-size: var(--bx-font-floor); /* prevents iOS zoom-on-focus */
       }
       .hint {
         margin-block-start: var(--bx-space-2xs);

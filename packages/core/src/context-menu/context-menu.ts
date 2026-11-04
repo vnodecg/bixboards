@@ -24,7 +24,6 @@ const LONG_PRESS_MS = 500;
  * @slot (default) - `bx-dropdown-item` children, dividers, submenus.
  *
  * @csspart menu - The menu part.
- * @csspart panel - The panel part.
  *
  * @cssprop --bx-context-menu-min-width - Min width.
  */
@@ -44,11 +43,17 @@ export class BxContextMenu extends BixElement {
         pointer-events: none;
       }
       bx-dropdown {
-        --bx-dropdown-menu-min-width: var(--bx-context-menu-min-width, 12rem);
+        --bx-dropdown-menu-min-width: var(
+          --bx-context-menu-min-width,
+          calc(var(--bx-unit) * 12)
+        );
         min-inline-size: var(--bx-context-menu-min-width);
       }
       bx-dropdown::part(menu) {
-        min-inline-size: var(--bx-context-menu-min-width, 12rem);
+        min-inline-size: var(
+          --bx-context-menu-min-width,
+          calc(var(--bx-unit) * 12)
+        );
       }
     `,
   ];

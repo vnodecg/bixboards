@@ -28,7 +28,7 @@ import { observeResize } from '../internal/shared-observers.ts';
  * @csspart panel - Either panel.
  * @csspart divider - The divider.
  *
- * @cssprop --bx-split-panel-divider-width - Divider width. Default `max(var(--bx-space-3xs), 2px)`.
+ * @cssprop --bx-split-panel-divider-width - Divider width. Default `var(--bx-border-width-strong)`.
  * @cssprop --bx-split-panel-min - Minimum start-panel size. Default `0px`.
  * @cssprop --bx-split-panel-max - Maximum start-panel size. Default `100%`.
  */
@@ -41,7 +41,7 @@ export class BxSplitPanel extends BixElement {
       :host {
         --_div: var(
           --bx-split-panel-divider-width,
-          max(var(--bx-space-3xs), 2px)
+          var(--bx-border-width-strong)
         );
         display: grid;
         inline-size: 100%;
@@ -91,11 +91,15 @@ export class BxSplitPanel extends BixElement {
         content: '';
         position: absolute;
         inset-block: 0;
-        inset-inline: calc((max(0.75rem, var(--_div)) - var(--_div)) / -2);
+        inset-inline: calc(
+          (max(var(--bx-space-s), var(--_div)) - var(--_div)) / -2
+        );
       }
       :host([orientation='vertical']) .divider::before {
         inset-inline: 0;
-        inset-block: calc((max(0.75rem, var(--_div)) - var(--_div)) / -2);
+        inset-block: calc(
+          (max(var(--bx-space-s), var(--_div)) - var(--_div)) / -2
+        );
       }
       .divider:hover,
       .divider[data-dragging] {

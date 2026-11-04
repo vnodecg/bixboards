@@ -50,7 +50,11 @@ export interface ToastOptions {
  * @csspart close-button - The close button.
  *
  * @cssprop --bx-toast-width - Max width.
- * @cssprop --bx-toast-duration - Enter/exit transition.
+ * @cssprop --bx-toast-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-toast-font-size - Font size of the root surface. Default `var(--bx-type-body-size)`.
+ * @cssprop --bx-toast-font-weight - Font weight of the root surface. Default `var(--bx-type-body-weight)`.
+ * @cssprop --bx-toast-line-height - Line height of the root surface. Default `var(--bx-type-body-leading)`.
+ * @cssprop --bx-toast-letter-spacing - Letter spacing of the root surface. Default `var(--bx-type-body-tracking)`.
  */
 export class BxToast extends BixElement {
   static override tagName = 'bx-toast';
@@ -84,10 +88,10 @@ export class BxToast extends BixElement {
         --_border: var(--bx-role-brand-border);
       }
       :host([variant='success']) {
-        --_solid: var(--bx-role-success-solid);
-        --_subtle: var(--bx-role-success-subtle);
-        --_fg: var(--bx-role-success-fg);
-        --_border: var(--bx-role-success-border);
+        --_solid: var(--bx-role-neutral-solid);
+        --_subtle: var(--bx-role-neutral-subtle);
+        --_fg: var(--bx-role-neutral-fg);
+        --_border: var(--bx-role-neutral-border);
       }
       :host([variant='warning']) {
         --_solid: var(--bx-role-warning-solid);
@@ -106,13 +110,16 @@ export class BxToast extends BixElement {
         display: flex;
         align-items: flex-start;
         gap: var(--bx-space-xs);
-        inline-size: min(var(--bx-toast-width, 26rem), 100%);
+        inline-size: min(
+          var(--bx-toast-width, calc(var(--bx-unit) * 26)),
+          100%
+        );
         max-inline-size: 100%;
         padding: var(--bx-space-xs) var(--bx-space-s);
         border: var(--bx-border-width) solid var(--_border);
         border-inline-start: var(--bx-space-3xs) solid var(--_solid);
         border-radius: var(--bx-radius-m);
-        background: var(--bx-surface-raised, var(--bx-surface-base));
+        background: var(--bx-surface-base);
         color: var(--bx-text-primary);
         box-shadow: var(--bx-shadow-m);
       }

@@ -343,6 +343,31 @@ let nextId = 0;
  * @cssprop --bx-chart-color-1 - Series color 1 (…8 follow). Default the categorical token ramp.
  * @cssprop --bx-chart-grid-color - Gridlines.
  * @cssprop --bx-chart-height - Height.
+ * @cssprop --bx-chart-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-chart-legend-font-family - Font family of the `legend` text (text style `label-s`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-chart-legend-font-size - Font size of the `legend` text (text style `label-s`). Default `var(--bx-type-label-s-size)`.
+ * @cssprop --bx-chart-legend-font-weight - Font weight of the `legend` text (text style `label-s`). Default `var(--bx-type-label-s-weight)`.
+ * @cssprop --bx-chart-legend-line-height - Line height of the `legend` text (text style `label-s`). Default `var(--bx-type-label-s-leading)`.
+ * @cssprop --bx-chart-legend-letter-spacing - Letter spacing of the `legend` text (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.
+ * @cssprop --bx-chart-title-font-family - Font family of the `title` text (text style `heading-xs`). Default `var(--bx-type-heading-family)`.
+ * @cssprop --bx-chart-title-font-size - Font size of the `title` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-size)`.
+ * @cssprop --bx-chart-title-font-weight - Font weight of the `title` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-weight)`.
+ * @cssprop --bx-chart-title-line-height - Line height of the `title` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-leading)`.
+ * @cssprop --bx-chart-title-letter-spacing - Letter spacing of the `title` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-tracking)`.
+ * @cssprop --bx-chart-tooltip-font-family - Font family of the `tooltip` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.
+ * @cssprop --bx-chart-tooltip-font-size - Font size of the `tooltip` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.
+ * @cssprop --bx-chart-tooltip-font-weight - Font weight of the `tooltip` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.
+ * @cssprop --bx-chart-tooltip-line-height - Line height of the `tooltip` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.
+ * @cssprop --bx-chart-tooltip-letter-spacing - Letter spacing of the `tooltip` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`.
+ * @cssprop --bx-chart-focus-ring-width - Focus ring width of the chart surface (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-chart-focus-ring-color - Focus ring color of the chart surface (focus state). Default `var(--bx-focus-ring)`.
+ * @cssprop --bx-chart-color-2 - Series color 2. Default `var(--bx-role-tertiary-solid)`.
+ * @cssprop --bx-chart-color-3 - Series color 3. Default `var(--bx-role-warning-solid)`.
+ * @cssprop --bx-chart-color-4 - Series color 4. Default `var(--bx-role-danger-solid)`.
+ * @cssprop --bx-chart-color-5 - Series color 5. Default `var(--bx-role-warning-border)`.
+ * @cssprop --bx-chart-color-6 - Series color 6. Default `var(--bx-role-neutral-solid)`.
+ * @cssprop --bx-chart-color-7 - Series color 7. Default `var(--bx-role-brand-border)`.
+ * @cssprop --bx-chart-color-8 - Series color 8. Default `var(--bx-role-tertiary-border)`.
  */
 export class BxChart extends BixElement {
   static override tagName = 'bx-chart';
@@ -357,7 +382,7 @@ export class BxChart extends BixElement {
         --_c2: var(--bx-chart-color-2, var(--bx-role-tertiary-solid));
         --_c3: var(--bx-chart-color-3, var(--bx-role-warning-solid));
         --_c4: var(--bx-chart-color-4, var(--bx-role-danger-solid));
-        --_c5: var(--bx-chart-color-5, var(--bx-role-success-solid));
+        --_c5: var(--bx-chart-color-5, var(--bx-role-warning-border));
         --_c6: var(--bx-chart-color-6, var(--bx-role-neutral-solid));
         --_c7: var(--bx-chart-color-7, var(--bx-role-brand-border));
         --_c8: var(--bx-chart-color-8, var(--bx-role-tertiary-border));
@@ -376,7 +401,10 @@ export class BxChart extends BixElement {
       }
       .plot {
         position: relative;
-        block-size: var(--bx-chart-height, var(--_height, 16rem));
+        block-size: var(
+          --bx-chart-height,
+          var(--_height, calc(var(--bx-unit) * 16))
+        );
         min-inline-size: 0;
       }
       .canvas {
@@ -394,7 +422,7 @@ export class BxChart extends BixElement {
       .canvas .axis,
       .canvas .lbl {
         fill: var(--bx-text-secondary);
-        font-size: 0.75rem;
+        font-size: var(--bx-type-caption-s-size);
         font-family: inherit;
       }
       .canvas .lbl {
@@ -451,7 +479,7 @@ export class BxChart extends BixElement {
       .swatch {
         inline-size: 0.75em;
         block-size: 0.75em;
-        border-radius: 2px;
+        border-radius: var(--bx-radius-s);
         background: var(--_sw);
       }
       .tooltip {

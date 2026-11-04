@@ -50,15 +50,20 @@ Compact single-choice control rendered as connected segments with a sliding indi
 | ----------- | -------------- |
 | `base`      | Track.         |
 | `indicator` | Sliding thumb. |
-| `segment`   | A segment.     |
 
 ### CSS custom properties
 
-| Property                                    | Description                             |
-| ------------------------------------------- | --------------------------------------- |
-| `--bx-segmented-control-bg`                 | Track background.                       |
-| `--bx-segmented-control-indicator-bg`       | Thumb color.                            |
-| `--bx-segmented-control-indicator-duration` | Slide duration; 0 under reduced motion. |
+| Property                                    | Description                                                                                        |
+| ------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `--bx-segmented-control-bg`                 | Track background.                                                                                  |
+| `--bx-segmented-control-indicator-bg`       | Thumb color.                                                                                       |
+| `--bx-segmented-control-indicator-duration` | Slide duration; 0 under reduced motion.                                                            |
+| `--bx-segmented-control-font-family`        | Font family of the item text. Default `var(--bx-type-label-family)`.                               |
+| `--bx-segmented-control-font-family`        | Font family of the item text (text style `label-m`). Default `var(--bx-type-label-family)`.        |
+| `--bx-segmented-control-font-size`          | Font size of the item text (text style `label-m`). Default `var(--bx-type-label-m-size)`.          |
+| `--bx-segmented-control-font-weight`        | Font weight of the item text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.      |
+| `--bx-segmented-control-line-height`        | Line height of the item text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.     |
+| `--bx-segmented-control-letter-spacing`     | Letter spacing of the item text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`. |
 
 ### Methods
 

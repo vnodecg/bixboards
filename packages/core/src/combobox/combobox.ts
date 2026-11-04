@@ -55,6 +55,26 @@ const optionLabel = (o: BxOption): string =>
  * @cssprop --bx-combobox-border-color - Control border color.
  * @cssprop --bx-combobox-radius - Control radius.
  * @cssprop --bx-combobox-max-height - Max listbox height.
+ * @cssprop --bx-combobox-font-family - Font family of the root surface. Default `var(--bx-type-field-family)`.
+ * @cssprop --bx-combobox-font-size - Font size of the root surface. Default `var(--bx-type-field-size)`.
+ * @cssprop --bx-combobox-font-weight - Font weight of the root surface. Default `var(--bx-type-field-weight)`.
+ * @cssprop --bx-combobox-line-height - Line height of the root surface. Default `var(--bx-type-field-leading)`.
+ * @cssprop --bx-combobox-letter-spacing - Letter spacing of the root surface. Default `var(--bx-type-field-tracking)`.
+ * @cssprop --bx-combobox-empty-font-family - Font family of the `empty` text (text style `body-m`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-combobox-empty-font-size - Font size of the `empty` text (text style `body-m`). Default `var(--bx-type-body-m-size)`.
+ * @cssprop --bx-combobox-empty-font-weight - Font weight of the `empty` text (text style `body-m`). Default `var(--bx-type-body-m-weight)`.
+ * @cssprop --bx-combobox-empty-line-height - Line height of the `empty` text (text style `body-m`). Default `var(--bx-type-body-m-leading)`.
+ * @cssprop --bx-combobox-empty-letter-spacing - Letter spacing of the `empty` text (text style `body-m`). Default `var(--bx-type-body-m-tracking)`.
+ * @cssprop --bx-combobox-hint-font-family - Font family of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.
+ * @cssprop --bx-combobox-hint-font-size - Font size of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.
+ * @cssprop --bx-combobox-hint-font-weight - Font weight of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.
+ * @cssprop --bx-combobox-hint-line-height - Line height of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.
+ * @cssprop --bx-combobox-hint-letter-spacing - Letter spacing of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`.
+ * @cssprop --bx-combobox-label-font-family - Font family of the `label` text (text style `label-m`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-combobox-label-font-size - Font size of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-size)`.
+ * @cssprop --bx-combobox-label-font-weight - Font weight of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.
+ * @cssprop --bx-combobox-label-line-height - Line height of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.
+ * @cssprop --bx-combobox-label-letter-spacing - Letter spacing of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.
  */
 export class BxCombobox extends FormAssociatedMixin(BixElement) {
   static override tagName = 'bx-combobox';

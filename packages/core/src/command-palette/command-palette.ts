@@ -110,6 +110,33 @@ let nextId = 0;
  *
  * @cssprop --bx-command-palette-width - Dialog width.
  * @cssprop --bx-command-palette-max-height - List max height.
+ * @cssprop --bx-command-palette-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-command-palette-font-size - Font size of the root surface. Default `var(--bx-type-body-size)`.
+ * @cssprop --bx-command-palette-font-weight - Font weight of the root surface. Default `var(--bx-type-body-weight)`.
+ * @cssprop --bx-command-palette-line-height - Line height of the root surface. Default `var(--bx-type-body-leading)`.
+ * @cssprop --bx-command-palette-letter-spacing - Letter spacing of the root surface. Default `var(--bx-type-body-tracking)`.
+ * @cssprop --bx-command-palette-footer-font-family - Font family of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.
+ * @cssprop --bx-command-palette-footer-font-size - Font size of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.
+ * @cssprop --bx-command-palette-footer-font-weight - Font weight of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.
+ * @cssprop --bx-command-palette-footer-line-height - Line height of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.
+ * @cssprop --bx-command-palette-footer-letter-spacing - Letter spacing of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`.
+ * @cssprop --bx-command-palette-group-font-family - Font family of the `group` text (text style `label-xs`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-command-palette-group-font-size - Font size of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-size)`.
+ * @cssprop --bx-command-palette-group-font-weight - Font weight of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-weight)`.
+ * @cssprop --bx-command-palette-group-line-height - Line height of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-leading)`.
+ * @cssprop --bx-command-palette-group-letter-spacing - Letter spacing of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-tracking)`.
+ * @cssprop --bx-command-palette-item-font-family - Font family of the `item` text (text style `body-m`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-command-palette-item-font-size - Font size of the `item` text (text style `body-m`). Default `var(--bx-type-body-m-size)`.
+ * @cssprop --bx-command-palette-item-font-weight - Font weight of the `item` text (text style `body-m`). Default `var(--bx-type-body-m-weight)`.
+ * @cssprop --bx-command-palette-item-line-height - Line height of the `item` text (text style `body-m`). Default `var(--bx-type-body-m-leading)`.
+ * @cssprop --bx-command-palette-item-letter-spacing - Letter spacing of the `item` text (text style `body-m`). Default `var(--bx-type-body-m-tracking)`.
+ * @cssprop --bx-command-palette-where-font-family - Font family of the `where` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.
+ * @cssprop --bx-command-palette-where-font-size - Font size of the `where` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.
+ * @cssprop --bx-command-palette-where-font-weight - Font weight of the `where` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.
+ * @cssprop --bx-command-palette-where-line-height - Line height of the `where` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.
+ * @cssprop --bx-command-palette-where-letter-spacing - Letter spacing of the `where` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`.
+ * @cssprop --bx-command-palette-focus-ring-width - Focus ring width of the items (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-command-palette-focus-ring-color - Focus ring color of the items (focus state). Default `var(--bx-focus-ring)`.
  */
 export class BxCommandPalette extends BixElement {
   static override tagName = 'bx-command-palette';
@@ -123,7 +150,7 @@ export class BxCommandPalette extends BixElement {
       dialog {
         box-sizing: border-box;
         inline-size: min(
-          var(--bx-command-palette-width, 38rem),
+          var(--bx-command-palette-width, calc(var(--bx-unit) * 38)),
           calc(100vw - var(--bx-space-m) * 2)
         );
         max-inline-size: none;
@@ -137,7 +164,7 @@ export class BxCommandPalette extends BixElement {
         box-shadow: var(--bx-shadow-l);
       }
       dialog::backdrop {
-        background: color-mix(in srgb, black 45%, transparent);
+        background: var(--bx-surface-overlay);
       }
       .search {
         display: flex;
@@ -191,7 +218,7 @@ export class BxCommandPalette extends BixElement {
             var(--bx-border-width-strong)
           )
           solid var(--bx-command-palette-focus-ring-color, var(--bx-focus-ring));
-        outline-offset: -2px;
+        outline-offset: calc(var(--bx-border-width-strong) * -1);
       }
       .item[aria-disabled='true'] {
         opacity: 0.5;
@@ -235,7 +262,7 @@ export class BxCommandPalette extends BixElement {
       }
       @media (forced-colors: active) {
         .item[data-active] {
-          outline: 2px solid Highlight;
+          outline: var(--bx-border-width-strong) solid Highlight;
         }
       }
     `,

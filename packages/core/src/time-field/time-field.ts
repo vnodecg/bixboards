@@ -56,6 +56,21 @@ export function localeIs12h(locale: string): boolean {
  * @cssprop --bx-time-field-bg - Field background.
  * @cssprop --bx-time-field-border-color - Field border color.
  * @cssprop --bx-time-field-radius - Field radius.
+ * @cssprop --bx-time-field-font-family - Font family of the root surface. Default `var(--bx-type-field-family)`.
+ * @cssprop --bx-time-field-font-size - Font size of the root surface. Default `var(--bx-type-field-size)`.
+ * @cssprop --bx-time-field-font-weight - Font weight of the root surface. Default `var(--bx-type-field-weight)`.
+ * @cssprop --bx-time-field-line-height - Line height of the root surface. Default `var(--bx-type-field-leading)`.
+ * @cssprop --bx-time-field-letter-spacing - Letter spacing of the root surface. Default `var(--bx-type-field-tracking)`.
+ * @cssprop --bx-time-field-hint-font-family - Font family of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.
+ * @cssprop --bx-time-field-hint-font-size - Font size of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.
+ * @cssprop --bx-time-field-hint-font-weight - Font weight of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.
+ * @cssprop --bx-time-field-hint-line-height - Line height of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.
+ * @cssprop --bx-time-field-hint-letter-spacing - Letter spacing of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`.
+ * @cssprop --bx-time-field-label-font-family - Font family of the `label` text (text style `label-m`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-time-field-label-font-size - Font size of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-size)`.
+ * @cssprop --bx-time-field-label-font-weight - Font weight of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.
+ * @cssprop --bx-time-field-label-line-height - Line height of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.
+ * @cssprop --bx-time-field-label-letter-spacing - Letter spacing of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.
  */
 export class BxTimeField extends FormAssociatedMixin(BixElement) {
   static override tagName = 'bx-time-field';
@@ -109,7 +124,7 @@ export class BxTimeField extends FormAssociatedMixin(BixElement) {
       }
       .segment {
         min-inline-size: 2ch;
-        padding-inline: 2px;
+        padding-inline: var(--bx-space-3xs);
         border-radius: var(--bx-radius-s);
         text-align: center;
         outline: none;

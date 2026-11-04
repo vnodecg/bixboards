@@ -11,7 +11,7 @@ let region: BxToastRegion | undefined;
  * `<bx-toast-region>` — the fixed stack that hosts `bx-toast`s (FR-TOAST-01).
  *
  * One per document, created by the first `BxToast.toast()` / `BxToastRegion.shared()`. Honors
- * `--bx-safe-area-inset-*` (FR-TOAST-04) through `--bx-toast-offset`, spans the viewport width
+ * `--bx-safe-area-inset-*` (FR-TOAST-04) through `--bx-toast-region-offset`, spans the viewport width
  * minus gutters on narrow screens, and caps the visible stack at `max-visible`: when full, the
  * oldest non-sticky toast is replaced (FR-TOAST-05). New toasts appear nearest the viewport edge.
  *
@@ -19,8 +19,8 @@ let region: BxToastRegion | undefined;
  *
  * @csspart base - The stack container.
  *
- * @cssprop --bx-toast-offset - Distance from the viewport edge (adds safe-area insets).
- * @cssprop --bx-toast-gap - Gap between toasts. Default `var(--bx-space-xs)`.
+ * @cssprop --bx-toast-region-offset - Distance from the viewport edge (adds safe-area insets).
+ * @cssprop --bx-toast-region-gap - Gap between toasts. Default `var(--bx-space-xs)`.
  */
 export class BxToastRegion extends BixElement {
   static override tagName = 'bx-toast-region';
@@ -39,17 +39,17 @@ export class BxToastRegion extends BixElement {
       :host {
         position: fixed;
         inset: 0;
-        z-index: var(--bx-z-toast, 1100);
+        z-index: var(--bx-z-toast);
         pointer-events: none;
-        --_edge: var(--bx-toast-offset, var(--bx-space-m));
+        --_edge: var(--bx-toast-region-offset, var(--bx-space-m));
       }
       .base {
         position: absolute;
         display: flex;
         flex-direction: column;
-        gap: var(--bx-toast-gap, var(--bx-space-xs));
+        gap: var(--bx-toast-region-gap, var(--bx-space-xs));
         inline-size: min(
-          var(--bx-toast-width, 26rem),
+          var(--bx-toast-width, calc(var(--bx-unit) * 26)),
           calc(100% - var(--_edge) * 2)
         );
         padding-block: max(var(--_edge), var(--bx-safe-area-inset-top, 0px))

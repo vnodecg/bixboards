@@ -39,6 +39,26 @@ const ARROW: Record<Trend, string> = {
  * @cssprop --bx-stat-card-value-font-size - Value font size.
  * @cssprop --bx-stat-card-delta-color-good - Delta color when the trend is good.
  * @cssprop --bx-stat-card-delta-color-bad - Delta color when the trend is bad.
+ * @cssprop --bx-stat-card-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-stat-card-delta-font-family - Font family of the `delta` text (text style `label-m`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-stat-card-delta-font-size - Font size of the `delta` text (text style `label-m`). Default `var(--bx-type-label-m-size)`.
+ * @cssprop --bx-stat-card-delta-font-weight - Font weight of the `delta` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.
+ * @cssprop --bx-stat-card-delta-line-height - Line height of the `delta` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.
+ * @cssprop --bx-stat-card-delta-letter-spacing - Letter spacing of the `delta` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.
+ * @cssprop --bx-stat-card-footer-font-family - Font family of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.
+ * @cssprop --bx-stat-card-footer-font-size - Font size of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.
+ * @cssprop --bx-stat-card-footer-font-weight - Font weight of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.
+ * @cssprop --bx-stat-card-footer-line-height - Line height of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.
+ * @cssprop --bx-stat-card-footer-letter-spacing - Letter spacing of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`.
+ * @cssprop --bx-stat-card-label-font-family - Font family of the `label` text (text style `label-m`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-stat-card-label-font-size - Font size of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-size)`.
+ * @cssprop --bx-stat-card-label-font-weight - Font weight of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.
+ * @cssprop --bx-stat-card-label-line-height - Line height of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.
+ * @cssprop --bx-stat-card-label-letter-spacing - Letter spacing of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.
+ * @cssprop --bx-stat-card-value-font-family - Font family of the `value` text (text style `heading-l`). Default `var(--bx-type-heading-family)`.
+ * @cssprop --bx-stat-card-value-font-weight - Font weight of the `value` text (text style `heading-l`). Default `var(--bx-type-heading-l-weight)`.
+ * @cssprop --bx-stat-card-value-line-height - Line height of the `value` text (text style `heading-l`). Default `var(--bx-type-heading-l-leading)`.
+ * @cssprop --bx-stat-card-value-letter-spacing - Letter spacing of the `value` text (text style `heading-l`). Default `var(--bx-type-heading-l-tracking)`.
  */
 export class BxStatCard extends BixElement {
   static override tagName = 'bx-stat-card';

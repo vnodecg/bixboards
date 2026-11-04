@@ -93,7 +93,7 @@ export class BxSocialButton extends BixElement {
         border-radius: 50%;
         border: var(--bx-border-width) solid currentColor;
         font-size: 0.75em;
-        font-weight: 600;
+        font-weight: bolder;
         line-height: 1;
       }
     `,

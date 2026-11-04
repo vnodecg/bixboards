@@ -59,12 +59,17 @@ Compact token for tags, filters and selections; optionally selectable, removable
 
 ### CSS custom properties
 
-| Property           | Description                                       |
-| ------------------ | ------------------------------------------------- |
-| `--bx-chip-bg`     | Background.                                       |
-| `--bx-chip-fg`     | Foreground.                                       |
-| `--bx-chip-radius` | Corner radius.                                    |
-| `--bx-chip-gap`    | Gap between parts. Default `var(--bx-space-2xs)`. |
+| Property                   | Description                                                                  |
+| -------------------------- | ---------------------------------------------------------------------------- |
+| `--bx-chip-bg`             | Background.                                                                  |
+| `--bx-chip-fg`             | Foreground.                                                                  |
+| `--bx-chip-radius`         | Corner radius.                                                               |
+| `--bx-chip-gap`            | Gap between parts. Default `var(--bx-space-2xs)`.                            |
+| `--bx-chip-font-family`    | Font family of the root surface. Default `var(--bx-type-label-family)`.      |
+| `--bx-chip-font-size`      | Font size of the root surface. Default `var(--bx-type-label-size)`.          |
+| `--bx-chip-font-weight`    | Font weight of the root surface. Default `var(--bx-type-label-weight)`.      |
+| `--bx-chip-line-height`    | Line height of the root surface. Default `var(--bx-type-label-leading)`.     |
+| `--bx-chip-letter-spacing` | Letter spacing of the root surface. Default `var(--bx-type-label-tracking)`. |
 
 ### Methods
 

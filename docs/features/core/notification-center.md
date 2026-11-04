@@ -62,10 +62,38 @@ Bell trigger plus panel listing persistent notifications with unread state, grou
 
 ### CSS custom properties
 
-| Property                              | Description       |
-| ------------------------------------- | ----------------- |
-| `--bx-notification-center-width`      | Panel width.      |
-| `--bx-notification-center-max-height` | Panel max height. |
+| Property                                        | Description                                                                                                |
+| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `--bx-notification-center-width`                | Panel width.                                                                                               |
+| `--bx-notification-center-max-height`           | Panel max height.                                                                                          |
+| `--bx-notification-center-font-family`          | Font family of the root surface. Default `var(--bx-type-body-family)`.                                     |
+| `--bx-notification-center-body-font-family`     | Font family of the `body` text (text style `body-s`). Default `var(--bx-type-body-family)`.                |
+| `--bx-notification-center-body-font-size`       | Font size of the `body` text (text style `body-s`). Default `var(--bx-type-body-s-size)`.                  |
+| `--bx-notification-center-body-font-weight`     | Font weight of the `body` text (text style `body-s`). Default `var(--bx-type-body-s-weight)`.              |
+| `--bx-notification-center-body-line-height`     | Line height of the `body` text (text style `body-s`). Default `var(--bx-type-body-s-leading)`.             |
+| `--bx-notification-center-body-letter-spacing`  | Letter spacing of the `body` text (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.         |
+| `--bx-notification-center-group-font-family`    | Font family of the `group` text (text style `label-xs`). Default `var(--bx-type-label-family)`.            |
+| `--bx-notification-center-group-font-size`      | Font size of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-size)`.             |
+| `--bx-notification-center-group-font-weight`    | Font weight of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-weight)`.         |
+| `--bx-notification-center-group-line-height`    | Line height of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-leading)`.        |
+| `--bx-notification-center-group-letter-spacing` | Letter spacing of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-tracking)`.    |
+| `--bx-notification-center-head-font-family`     | Font family of the `head` text (text style `heading-xs`). Default `var(--bx-type-heading-family)`.         |
+| `--bx-notification-center-head-font-size`       | Font size of the `head` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-size)`.          |
+| `--bx-notification-center-head-font-weight`     | Font weight of the `head` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-weight)`.      |
+| `--bx-notification-center-head-line-height`     | Line height of the `head` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-leading)`.     |
+| `--bx-notification-center-head-letter-spacing`  | Letter spacing of the `head` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-tracking)`. |
+| `--bx-notification-center-time-font-family`     | Font family of the `time` text (text style `caption-s`). Default `var(--bx-type-caption-family)`.          |
+| `--bx-notification-center-time-font-size`       | Font size of the `time` text (text style `caption-s`). Default `var(--bx-type-caption-s-size)`.            |
+| `--bx-notification-center-time-font-weight`     | Font weight of the `time` text (text style `caption-s`). Default `var(--bx-type-caption-s-weight)`.        |
+| `--bx-notification-center-time-line-height`     | Line height of the `time` text (text style `caption-s`). Default `var(--bx-type-caption-s-leading)`.       |
+| `--bx-notification-center-time-letter-spacing`  | Letter spacing of the `time` text (text style `caption-s`). Default `var(--bx-type-caption-s-tracking)`.   |
+| `--bx-notification-center-title-font-family`    | Font family of the `title` text (text style `label-m`). Default `var(--bx-type-label-family)`.             |
+| `--bx-notification-center-title-font-size`      | Font size of the `title` text (text style `label-m`). Default `var(--bx-type-label-m-size)`.               |
+| `--bx-notification-center-title-font-weight`    | Font weight of the `title` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.           |
+| `--bx-notification-center-title-line-height`    | Line height of the `title` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.          |
+| `--bx-notification-center-title-letter-spacing` | Letter spacing of the `title` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.      |
+| `--bx-notification-center-focus-ring-width`     | Focus ring width of the items (focus state). Default `var(--bx-border-width-strong)`.                      |
+| `--bx-notification-center-focus-ring-color`     | Focus ring color of the items (focus state). Default `var(--bx-focus-ring)`.                               |
 
 ### Methods
 

@@ -138,7 +138,7 @@ export class BxStep extends BixElement {
         flex: 1 1 auto;
         align-self: center;
         min-inline-size: var(--bx-space-m);
-        block-size: 2px;
+        block-size: var(--bx-border-width-strong);
         margin-inline: var(--bx-space-xs);
         background: var(--bx-stepper-connector-color, var(--bx-border-subtle));
       }
@@ -156,7 +156,7 @@ export class BxStep extends BixElement {
       }
       :host([orientation='vertical']) .connector {
         align-self: flex-start;
-        inline-size: 2px;
+        inline-size: var(--bx-border-width-strong);
         block-size: var(--bx-space-m);
         min-inline-size: 0;
         margin-inline: calc(var(--_size) / 2 - 1px);

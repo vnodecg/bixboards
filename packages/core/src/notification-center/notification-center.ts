@@ -84,6 +84,34 @@ let nextId = 0;
  *
  * @cssprop --bx-notification-center-width - Panel width.
  * @cssprop --bx-notification-center-max-height - Panel max height.
+ * @cssprop --bx-notification-center-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-notification-center-body-font-family - Font family of the `body` text (text style `body-s`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-notification-center-body-font-size - Font size of the `body` text (text style `body-s`). Default `var(--bx-type-body-s-size)`.
+ * @cssprop --bx-notification-center-body-font-weight - Font weight of the `body` text (text style `body-s`). Default `var(--bx-type-body-s-weight)`.
+ * @cssprop --bx-notification-center-body-line-height - Line height of the `body` text (text style `body-s`). Default `var(--bx-type-body-s-leading)`.
+ * @cssprop --bx-notification-center-body-letter-spacing - Letter spacing of the `body` text (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.
+ * @cssprop --bx-notification-center-group-font-family - Font family of the `group` text (text style `label-xs`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-notification-center-group-font-size - Font size of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-size)`.
+ * @cssprop --bx-notification-center-group-font-weight - Font weight of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-weight)`.
+ * @cssprop --bx-notification-center-group-line-height - Line height of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-leading)`.
+ * @cssprop --bx-notification-center-group-letter-spacing - Letter spacing of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-tracking)`.
+ * @cssprop --bx-notification-center-head-font-family - Font family of the `head` text (text style `heading-xs`). Default `var(--bx-type-heading-family)`.
+ * @cssprop --bx-notification-center-head-font-size - Font size of the `head` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-size)`.
+ * @cssprop --bx-notification-center-head-font-weight - Font weight of the `head` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-weight)`.
+ * @cssprop --bx-notification-center-head-line-height - Line height of the `head` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-leading)`.
+ * @cssprop --bx-notification-center-head-letter-spacing - Letter spacing of the `head` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-tracking)`.
+ * @cssprop --bx-notification-center-time-font-family - Font family of the `time` text (text style `caption-s`). Default `var(--bx-type-caption-family)`.
+ * @cssprop --bx-notification-center-time-font-size - Font size of the `time` text (text style `caption-s`). Default `var(--bx-type-caption-s-size)`.
+ * @cssprop --bx-notification-center-time-font-weight - Font weight of the `time` text (text style `caption-s`). Default `var(--bx-type-caption-s-weight)`.
+ * @cssprop --bx-notification-center-time-line-height - Line height of the `time` text (text style `caption-s`). Default `var(--bx-type-caption-s-leading)`.
+ * @cssprop --bx-notification-center-time-letter-spacing - Letter spacing of the `time` text (text style `caption-s`). Default `var(--bx-type-caption-s-tracking)`.
+ * @cssprop --bx-notification-center-title-font-family - Font family of the `title` text (text style `label-m`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-notification-center-title-font-size - Font size of the `title` text (text style `label-m`). Default `var(--bx-type-label-m-size)`.
+ * @cssprop --bx-notification-center-title-font-weight - Font weight of the `title` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.
+ * @cssprop --bx-notification-center-title-line-height - Line height of the `title` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.
+ * @cssprop --bx-notification-center-title-letter-spacing - Letter spacing of the `title` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.
+ * @cssprop --bx-notification-center-focus-ring-width - Focus ring width of the items (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-notification-center-focus-ring-color - Focus ring color of the items (focus state). Default `var(--bx-focus-ring)`.
  */
 export class BxNotificationCenter extends BixElement {
   static override tagName = 'bx-notification-center';
@@ -110,7 +138,10 @@ export class BxNotificationCenter extends BixElement {
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
-        inline-size: var(--bx-notification-center-width, 24rem);
+        inline-size: var(
+          --bx-notification-center-width,
+          calc(var(--bx-unit) * 24)
+        );
         max-inline-size: calc(100vw - var(--bx-space-m) * 2);
         max-block-size: var(--bx-notification-center-max-height, 70vh);
         overflow: hidden;
@@ -161,8 +192,8 @@ export class BxNotificationCenter extends BixElement {
         position: absolute;
         inset-inline-start: var(--bx-space-3xs);
         inset-block-start: 50%;
-        inline-size: 6px;
-        block-size: 6px;
+        inline-size: var(--bx-space-xs);
+        block-size: var(--bx-space-xs);
         border-radius: 50%;
         background: var(--bx-role-brand-solid);
         translate: 0 -50%;
@@ -185,14 +216,14 @@ export class BxNotificationCenter extends BixElement {
           )
           solid
           var(--bx-notification-center-focus-ring-color, var(--bx-focus-ring));
-        outline-offset: 2px;
+        outline-offset: var(--bx-border-width-strong);
       }
       .title {
         display: block;
         ${textStyle('--bx-notification-center-title', 'label-m')}
       }
       .item[data-unread] .title {
-        font-weight: 700;
+        font-weight: bolder;
       }
       .body {
         display: block;
@@ -241,11 +272,6 @@ export class BxNotificationCenter extends BixElement {
         block-size: 1px;
         overflow: hidden;
         clip-path: inset(50%);
-      }
-      @media (max-width: 48rem) {
-        .panel {
-          inline-size: calc(100vw - var(--bx-space-m) * 2);
-        }
       }
     `,
   ];

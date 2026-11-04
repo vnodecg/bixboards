@@ -30,6 +30,11 @@ type Appearance = 'filled' | 'outlined' | 'plain';
  * @cssprop --bx-toggle-button-pressed-fg - Foreground when pressed. Default role on-solid color.
  * @cssprop --bx-toggle-button-bg - Background when not pressed. Default derived from `appearance`.
  * @cssprop --bx-toggle-button-gap - Gap between slots. Default `var(--bx-space-2xs)`.
+ * @cssprop --bx-toggle-button-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-toggle-button-font-size - Font size of the root surface. Default `var(--bx-type-body-size)`.
+ * @cssprop --bx-toggle-button-font-weight - Font weight of the root surface. Default `var(--bx-type-body-weight)`.
+ * @cssprop --bx-toggle-button-line-height - Line height of the root surface. Default `var(--bx-type-body-leading)`.
+ * @cssprop --bx-toggle-button-letter-spacing - Letter spacing of the root surface. Default `var(--bx-type-body-tracking)`.
  */
 export class BxToggleButton extends FormAssociatedMixin(BixElement) {
   static override tagName = 'bx-toggle-button';
@@ -96,7 +101,7 @@ export class BxToggleButton extends FormAssociatedMixin(BixElement) {
         padding-inline: var(--_padding);
         border: var(--bx-border-width) solid transparent;
         border-radius: var(--bx-radius-m);
-        background: var(--bx-toggle-button-bg, transparent);
+        background: var(--bx-toggle-button-bg, var(--_bg, transparent));
         color: var(--_role-fg);
         font: inherit;
         ${textStyle('--bx-toggle-button', 'label-m')}
@@ -111,7 +116,7 @@ export class BxToggleButton extends FormAssociatedMixin(BixElement) {
         border-color: var(--_role-border);
       }
       :host([appearance='filled']) .base {
-        --bx-toggle-button-bg: var(--_role-subtle);
+        --_bg: var(--_role-subtle);
       }
       .base:hover {
         filter: brightness(0.95);

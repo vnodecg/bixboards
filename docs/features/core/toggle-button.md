@@ -54,12 +54,17 @@ Button with a persistent pressed state, standalone or inside a group. Specified 
 
 ### CSS custom properties
 
-| Property                        | Description                                                     |
-| ------------------------------- | --------------------------------------------------------------- |
-| `--bx-toggle-button-pressed-bg` | Background when pressed. Default role solid color.              |
-| `--bx-toggle-button-pressed-fg` | Foreground when pressed. Default role on-solid color.           |
-| `--bx-toggle-button-bg`         | Background when not pressed. Default derived from `appearance`. |
-| `--bx-toggle-button-gap`        | Gap between slots. Default `var(--bx-space-2xs)`.               |
+| Property                            | Description                                                                 |
+| ----------------------------------- | --------------------------------------------------------------------------- |
+| `--bx-toggle-button-pressed-bg`     | Background when pressed. Default role solid color.                          |
+| `--bx-toggle-button-pressed-fg`     | Foreground when pressed. Default role on-solid color.                       |
+| `--bx-toggle-button-bg`             | Background when not pressed. Default derived from `appearance`.             |
+| `--bx-toggle-button-gap`            | Gap between slots. Default `var(--bx-space-2xs)`.                           |
+| `--bx-toggle-button-font-family`    | Font family of the root surface. Default `var(--bx-type-body-family)`.      |
+| `--bx-toggle-button-font-size`      | Font size of the root surface. Default `var(--bx-type-body-size)`.          |
+| `--bx-toggle-button-font-weight`    | Font weight of the root surface. Default `var(--bx-type-body-weight)`.      |
+| `--bx-toggle-button-line-height`    | Line height of the root surface. Default `var(--bx-type-body-leading)`.     |
+| `--bx-toggle-button-letter-spacing` | Letter spacing of the root surface. Default `var(--bx-type-body-tracking)`. |
 
 ### Methods
 

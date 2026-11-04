@@ -67,11 +67,36 @@ Declarative chart element wrapping a charting library: line, area, bar, radial, 
 
 ### CSS custom properties
 
-| Property                | Description                                                     |
-| ----------------------- | --------------------------------------------------------------- |
-| `--bx-chart-color-1`    | Series color 1 (…8 follow). Default the categorical token ramp. |
-| `--bx-chart-grid-color` | Gridlines.                                                      |
-| `--bx-chart-height`     | Height.                                                         |
+| Property                            | Description                                                                                                 |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `--bx-chart-color-1`                | Series color 1 (…8 follow). Default the categorical token ramp.                                             |
+| `--bx-chart-grid-color`             | Gridlines.                                                                                                  |
+| `--bx-chart-height`                 | Height.                                                                                                     |
+| `--bx-chart-font-family`            | Font family of the root surface. Default `var(--bx-type-body-family)`.                                      |
+| `--bx-chart-legend-font-family`     | Font family of the `legend` text (text style `label-s`). Default `var(--bx-type-label-family)`.             |
+| `--bx-chart-legend-font-size`       | Font size of the `legend` text (text style `label-s`). Default `var(--bx-type-label-s-size)`.               |
+| `--bx-chart-legend-font-weight`     | Font weight of the `legend` text (text style `label-s`). Default `var(--bx-type-label-s-weight)`.           |
+| `--bx-chart-legend-line-height`     | Line height of the `legend` text (text style `label-s`). Default `var(--bx-type-label-s-leading)`.          |
+| `--bx-chart-legend-letter-spacing`  | Letter spacing of the `legend` text (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.      |
+| `--bx-chart-title-font-family`      | Font family of the `title` text (text style `heading-xs`). Default `var(--bx-type-heading-family)`.         |
+| `--bx-chart-title-font-size`        | Font size of the `title` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-size)`.          |
+| `--bx-chart-title-font-weight`      | Font weight of the `title` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-weight)`.      |
+| `--bx-chart-title-line-height`      | Line height of the `title` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-leading)`.     |
+| `--bx-chart-title-letter-spacing`   | Letter spacing of the `title` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-tracking)`. |
+| `--bx-chart-tooltip-font-family`    | Font family of the `tooltip` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.        |
+| `--bx-chart-tooltip-font-size`      | Font size of the `tooltip` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.          |
+| `--bx-chart-tooltip-font-weight`    | Font weight of the `tooltip` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.      |
+| `--bx-chart-tooltip-line-height`    | Line height of the `tooltip` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.     |
+| `--bx-chart-tooltip-letter-spacing` | Letter spacing of the `tooltip` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`. |
+| `--bx-chart-focus-ring-width`       | Focus ring width of the chart surface (focus state). Default `var(--bx-border-width-strong)`.               |
+| `--bx-chart-focus-ring-color`       | Focus ring color of the chart surface (focus state). Default `var(--bx-focus-ring)`.                        |
+| `--bx-chart-color-2`                | Series color 2. Default `var(--bx-role-tertiary-solid)`.                                                    |
+| `--bx-chart-color-3`                | Series color 3. Default `var(--bx-role-warning-solid)`.                                                     |
+| `--bx-chart-color-4`                | Series color 4. Default `var(--bx-role-danger-solid)`.                                                      |
+| `--bx-chart-color-5`                | Series color 5. Default `var(--bx-role-warning-border)`.                                                    |
+| `--bx-chart-color-6`                | Series color 6. Default `var(--bx-role-neutral-solid)`.                                                     |
+| `--bx-chart-color-7`                | Series color 7. Default `var(--bx-role-brand-border)`.                                                      |
+| `--bx-chart-color-8`                | Series color 8. Default `var(--bx-role-tertiary-border)`.                                                   |
 
 ### Methods
 

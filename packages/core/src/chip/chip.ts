@@ -33,6 +33,11 @@ type Appearance = 'filled' | 'outlined' | 'subtle';
  * @cssprop --bx-chip-fg - Foreground.
  * @cssprop --bx-chip-radius - Corner radius.
  * @cssprop --bx-chip-gap - Gap between parts. Default `var(--bx-space-2xs)`.
+ * @cssprop --bx-chip-font-family - Font family of the root surface. Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-chip-font-size - Font size of the root surface. Default `var(--bx-type-label-size)`.
+ * @cssprop --bx-chip-font-weight - Font weight of the root surface. Default `var(--bx-type-label-weight)`.
+ * @cssprop --bx-chip-line-height - Line height of the root surface. Default `var(--bx-type-label-leading)`.
+ * @cssprop --bx-chip-letter-spacing - Letter spacing of the root surface. Default `var(--bx-type-label-tracking)`.
  */
 export class BxChip extends BixElement {
   static override tagName = 'bx-chip';

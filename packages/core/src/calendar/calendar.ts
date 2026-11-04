@@ -47,6 +47,29 @@ let nextId = 0;
  * @cssprop --bx-calendar-day-size - Day cell size. Default `var(--bx-target-min)`.
  * @cssprop --bx-calendar-day-bg-selected - Selected day background.
  * @cssprop --bx-calendar-range-bg - In-range band.
+ * @cssprop --bx-calendar-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-calendar-day-font-family - Font family of the `day` text (text style `label-m`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-calendar-day-font-size - Font size of the `day` text (text style `label-m`). Default `var(--bx-type-label-m-size)`.
+ * @cssprop --bx-calendar-day-font-weight - Font weight of the `day` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.
+ * @cssprop --bx-calendar-day-line-height - Line height of the `day` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.
+ * @cssprop --bx-calendar-day-letter-spacing - Letter spacing of the `day` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.
+ * @cssprop --bx-calendar-title-font-family - Font family of the `title` text (text style `label-l`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-calendar-title-font-size - Font size of the `title` text (text style `label-l`). Default `var(--bx-type-label-l-size)`.
+ * @cssprop --bx-calendar-title-font-weight - Font weight of the `title` text (text style `label-l`). Default `var(--bx-type-label-l-weight)`.
+ * @cssprop --bx-calendar-title-line-height - Line height of the `title` text (text style `label-l`). Default `var(--bx-type-label-l-leading)`.
+ * @cssprop --bx-calendar-title-letter-spacing - Letter spacing of the `title` text (text style `label-l`). Default `var(--bx-type-label-l-tracking)`.
+ * @cssprop --bx-calendar-week-font-family - Font family of the `week` text (text style `caption-s`). Default `var(--bx-type-caption-family)`.
+ * @cssprop --bx-calendar-week-font-size - Font size of the `week` text (text style `caption-s`). Default `var(--bx-type-caption-s-size)`.
+ * @cssprop --bx-calendar-week-font-weight - Font weight of the `week` text (text style `caption-s`). Default `var(--bx-type-caption-s-weight)`.
+ * @cssprop --bx-calendar-week-line-height - Line height of the `week` text (text style `caption-s`). Default `var(--bx-type-caption-s-leading)`.
+ * @cssprop --bx-calendar-week-letter-spacing - Letter spacing of the `week` text (text style `caption-s`). Default `var(--bx-type-caption-s-tracking)`.
+ * @cssprop --bx-calendar-weekday-font-family - Font family of the `weekday` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.
+ * @cssprop --bx-calendar-weekday-font-size - Font size of the `weekday` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.
+ * @cssprop --bx-calendar-weekday-font-weight - Font weight of the `weekday` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.
+ * @cssprop --bx-calendar-weekday-line-height - Line height of the `weekday` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.
+ * @cssprop --bx-calendar-weekday-letter-spacing - Letter spacing of the `weekday` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`.
+ * @cssprop --bx-calendar-focus-ring-width - Focus ring width of the day cells (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-calendar-focus-ring-color - Focus ring color of the day cells (focus state). Default `var(--bx-focus-ring)`.
  */
 export class BxCalendar extends BixElement {
   static override tagName = 'bx-calendar';
@@ -133,12 +156,12 @@ export class BxCalendar extends BixElement {
             var(--bx-border-width-strong)
           )
           solid var(--bx-calendar-focus-ring-color, var(--bx-focus-ring));
-        outline-offset: -2px;
+        outline-offset: calc(var(--bx-border-width-strong) * -1);
         z-index: 1;
       }
       .day[aria-current='date'] {
         border-color: var(--bx-role-brand-border);
-        font-weight: 700;
+        font-weight: bolder;
       }
       .day[aria-disabled='true'] {
         color: var(--bx-text-secondary);
@@ -167,10 +190,10 @@ export class BxCalendar extends BixElement {
       }
       .dot {
         position: absolute;
-        inset-block-end: 3px;
+        inset-block-end: var(--bx-space-3xs);
         inset-inline-start: 50%;
-        inline-size: 4px;
-        block-size: 4px;
+        inline-size: var(--bx-space-2xs);
+        block-size: var(--bx-space-2xs);
         border-radius: 50%;
         background: currentColor;
         translate: -50% 0;

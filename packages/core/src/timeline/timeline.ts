@@ -17,6 +17,22 @@ import type { BxTimelineItem } from '../timeline-item/timeline-item.ts';
  *
  * @cssprop --bx-timeline-marker-size - Marker size.
  * @cssprop --bx-timeline-connector-color - Line color.
+ * @cssprop --bx-timeline-font-family - Font family of the item text. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-timeline-time-font-family - Font family of the `time` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.
+ * @cssprop --bx-timeline-time-font-size - Font size of the `time` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.
+ * @cssprop --bx-timeline-time-font-weight - Font weight of the `time` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.
+ * @cssprop --bx-timeline-time-line-height - Line height of the `time` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.
+ * @cssprop --bx-timeline-time-letter-spacing - Letter spacing of the `time` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`.
+ * @cssprop --bx-timeline-heading-font-family - Font family of the `heading` text (text style `label-l`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-timeline-heading-font-size - Font size of the `heading` text (text style `label-l`). Default `var(--bx-type-label-l-size)`.
+ * @cssprop --bx-timeline-heading-font-weight - Font weight of the `heading` text (text style `label-l`). Default `var(--bx-type-label-l-weight)`.
+ * @cssprop --bx-timeline-heading-line-height - Line height of the `heading` text (text style `label-l`). Default `var(--bx-type-label-l-leading)`.
+ * @cssprop --bx-timeline-heading-letter-spacing - Letter spacing of the `heading` text (text style `label-l`). Default `var(--bx-type-label-l-tracking)`.
+ * @cssprop --bx-timeline-description-font-family - Font family of the `description` text (text style `body-m`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-timeline-description-font-size - Font size of the `description` text (text style `body-m`). Default `var(--bx-type-body-m-size)`.
+ * @cssprop --bx-timeline-description-font-weight - Font weight of the `description` text (text style `body-m`). Default `var(--bx-type-body-m-weight)`.
+ * @cssprop --bx-timeline-description-line-height - Line height of the `description` text (text style `body-m`). Default `var(--bx-type-body-m-leading)`.
+ * @cssprop --bx-timeline-description-letter-spacing - Letter spacing of the `description` text (text style `body-m`). Default `var(--bx-type-body-m-tracking)`.
  */
 export class BxTimeline extends BixElement {
   static override tagName = 'bx-timeline';

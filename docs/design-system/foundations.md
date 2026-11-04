@@ -69,6 +69,7 @@ Primitives (used by styles, rarely directly):
 
 | Token                      | ×unit     | Typical use                        |
 | -------------------------- | --------- | ---------------------------------- |
+| `space.3xs`                | 0.125     | Hairline-adjacent accents, dots    |
 | `space.2xs`                | 0.25      | Icon-to-text, tight stacks         |
 | `space.xs`                 | 0.5       | Inline gaps, control padding-block |
 | `space.s`                  | 0.75      | Control padding-inline, list gaps  |
@@ -90,7 +91,7 @@ The default look is elegant and enterprise-grade: an indigo brand (`#4f46e5`) on
 
 ## Elevation
 
-`shadow.s` (resting cards), `shadow.m` (popovers, tooltips, dropdowns), `shadow.l` (dialogs, drawers). Each is two layers, a tight contact shadow plus a wide ambient one, tinted toward the brand hue so they look natural on both light and tinted surfaces. Pair them with a hairline border; use surface tint rather than shadow in dark themes, where shadows read poorly. Stacking order comes from `z.*` tokens (`dropdown` < `sticky` < `overlay` < `modal` < `tooltip`); never hardcode z-index.
+`shadow.s` (resting cards), `shadow.m` (popovers, tooltips, dropdowns), `shadow.l` (dialogs, drawers). Each is two layers, a tight contact shadow plus a wide ambient one, tinted toward the brand hue so they look natural on both light and tinted surfaces. Pair them with a hairline border; use surface tint rather than shadow in dark themes, where shadows read poorly. Stacking order comes from `z.*` tokens (`dropdown` < `sticky` < `overlay` < `drawer` < `modal` < `toast` < `tooltip`); never hardcode z-index.
 
 ## Motion
 

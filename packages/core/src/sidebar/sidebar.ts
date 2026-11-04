@@ -38,6 +38,15 @@ const FOCUSABLE =
  * @cssprop --bx-sidebar-width - Expanded width.
  * @cssprop --bx-sidebar-width-collapsed - Rail width.
  * @cssprop --bx-sidebar-bg - Background.
+ * @cssprop --bx-sidebar-font-family - Font family of the root surface. Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-sidebar-font-family - Font family of the item text. Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-sidebar-font-family - Font family of the item text (text style `label-m`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-sidebar-font-size - Font size of the item text (text style `label-m`). Default `var(--bx-type-label-m-size)`.
+ * @cssprop --bx-sidebar-font-weight - Font weight of the item text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.
+ * @cssprop --bx-sidebar-line-height - Line height of the item text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.
+ * @cssprop --bx-sidebar-letter-spacing - Letter spacing of the item text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.
+ * @cssprop --bx-sidebar-focus-ring-width - Focus ring width of the items (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-sidebar-focus-ring-color - Focus ring color of the items (focus state). Default `var(--bx-focus-ring)`.
  */
 export class BxSidebar extends BixElement {
   static override tagName = 'bx-sidebar';
@@ -104,7 +113,7 @@ export class BxSidebar extends BixElement {
         position: fixed;
         inset-block: 0;
         inset-inline-start: 0;
-        z-index: var(--bx-z-drawer, 1000);
+        z-index: var(--bx-z-drawer);
         pointer-events: none;
       }
       :host([data-overlay]) .base {
@@ -126,12 +135,12 @@ export class BxSidebar extends BixElement {
       :host([data-overlay][open]) .base {
         translate: 0 0;
         visibility: visible;
-        transition-delay: 0s;
+        transition-delay: initial;
       }
       .backdrop {
         position: fixed;
         inset: 0;
-        background: color-mix(in srgb, black 45%, transparent);
+        background: var(--bx-surface-overlay);
         pointer-events: auto;
       }
       @media (prefers-reduced-motion: reduce) {

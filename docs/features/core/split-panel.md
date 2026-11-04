@@ -57,7 +57,7 @@ Two resizable panels with draggable divider. Specified for the Bixboards token s
 
 | Property                         | Description                                             |
 | -------------------------------- | ------------------------------------------------------- |
-| `--bx-split-panel-divider-width` | Divider width. Default `max(var(--bx-space-3xs), 2px)`. |
+| `--bx-split-panel-divider-width` | Divider width. Default `var(--bx-border-width-strong)`. |
 | `--bx-split-panel-min`           | Minimum start-panel size. Default `0px`.                |
 | `--bx-split-panel-max`           | Maximum start-panel size. Default `100%`.               |
 

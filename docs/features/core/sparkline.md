@@ -51,11 +51,12 @@ _None._
 
 ### CSS custom properties
 
-| Property                      | Description                                 |
-| ----------------------------- | ------------------------------------------- |
-| `--bx-sparkline-color`        | Line/bar color. Default `--bx-role-accent`. |
-| `--bx-sparkline-stroke-width` | Line width.                                 |
-| `--bx-sparkline-height`       | Height. Default `1.5em`.                    |
+| Property                      | Description                                                            |
+| ----------------------------- | ---------------------------------------------------------------------- |
+| `--bx-sparkline-color`        | Line/bar color. Default `--bx-role-accent`.                            |
+| `--bx-sparkline-stroke-width` | Line width.                                                            |
+| `--bx-sparkline-height`       | Height. Default `1.5em`.                                               |
+| `--bx-sparkline-font-family`  | Font family of the root surface. Default `var(--bx-type-body-family)`. |
 
 ### Methods
 

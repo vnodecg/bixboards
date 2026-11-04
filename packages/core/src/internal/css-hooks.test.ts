@@ -205,7 +205,8 @@ const MARKUP: Record<string, string | string[]> = {
     '<bx-timeline><bx-timeline-item heading="A" icon="check"></bx-timeline-item><bx-timeline-item heading="B"></bx-timeline-item></bx-timeline>',
   'bx-segmented-control':
     '<bx-segmented-control value="a"><bx-segment value="a" label="A"></bx-segment><bx-segment value="b" label="B"></bx-segment></bx-segmented-control>',
-  'bx-pagination': '<bx-pagination page="3" page-count="9"></bx-pagination>',
+  'bx-pagination':
+    '<bx-pagination page="3" total="90" page-size="10"></bx-pagination>',
   'bx-stepper':
     '<bx-stepper current="1"><bx-step label="A"></bx-step><bx-step label="B"></bx-step><bx-step label="C"></bx-step></bx-stepper>',
   'bx-toast': '<bx-toast open>Saved</bx-toast>',
@@ -214,12 +215,16 @@ const MARKUP: Record<string, string | string[]> = {
   'bx-tag-input': '<bx-tag-input label="T" value="a,b"></bx-tag-input>',
   'bx-file-upload': '<bx-file-upload label="F"></bx-file-upload>',
   'bx-calendar':
-    '<bx-calendar mode="range" month="2024-05" value="2024-05-10/2024-05-14"></bx-calendar>',
+    '<bx-calendar mode="range" month="2024-05" value="2024-05-10/2024-05-14" show-week-numbers></bx-calendar>',
+  'bx-code-block':
+    '<bx-code-block filename="a.ts" line-numbers></bx-code-block>',
+  'bx-stat-card':
+    '<bx-stat-card label="L" value="10" delta="2"></bx-stat-card>',
   'bx-date-picker':
     '<bx-date-picker label="D" value="2024-05-09"></bx-date-picker>',
   'bx-time-field': '<bx-time-field label="T" value="09:30"></bx-time-field>',
   'bx-sidebar':
-    '<bx-sidebar mode="inline"><bx-sidebar-item icon="info" active>A</bx-sidebar-item></bx-sidebar>',
+    '<bx-sidebar mode="inline"><bx-sidebar-item icon="info" active>A</bx-sidebar-item><bx-sidebar-item>B</bx-sidebar-item></bx-sidebar>',
   'bx-command-palette': '<bx-command-palette open></bx-command-palette>',
   'bx-notification-center':
     '<bx-notification-center unread-count="3" open></bx-notification-center>',
@@ -251,8 +256,52 @@ const MARKUP: Record<string, string | string[]> = {
     '<bx-tree selection="multiple"><bx-tree-item expanded with-checkbox>One<bx-tree-item with-checkbox>Two</bx-tree-item></bx-tree-item></bx-tree>',
 };
 
+// Components whose parts render only from data that has no attribute form (properties set from
+// script). Runs after the fixture is created and before any hook is tried.
+const SETUP: Record<string, (el: any) => void> = {
+  'bx-command-palette': (el) => {
+    el.commands = [
+      { id: 'a', label: 'Open', group: 'File', handler: () => {} },
+      { id: 'b', label: 'Save', group: 'File', handler: () => {} },
+    ];
+  },
+  'bx-notification-center': (el) => {
+    el.items = [
+      { id: '1', title: 'T', body: 'B', time: new Date().toISOString() },
+      {
+        id: '2',
+        title: 'U',
+        body: 'C',
+        time: new Date().toISOString(),
+        read: true,
+      },
+    ];
+  },
+  'bx-chart': (el) => {
+    el.series = ['a', 'b'];
+    el.data = [
+      { m: 'x', a: 1, b: 2 },
+      { m: 'y', a: 3, b: 1 },
+    ];
+  },
+  'bx-pagination': (el) => {
+    el.pageSizes = [10, 25];
+  },
+  'bx-file-upload': (el) => {
+    el.files = [new File(['hello'], 'a.txt', { type: 'text/plain' })];
+  },
+};
+
 // Hooks a static fixture cannot exercise. Keep this list short and give a reason for each.
 const NOT_EXERCISED: [RegExp, string][] = [
+  [
+    /^bx-chart --bx-chart-tooltip-/,
+    'the tooltip renders only while the pointer is over a data point',
+  ],
+  [
+    /^bx-command-palette --bx-command-palette-where-/,
+    'the group label beside a result renders only once a search query is typed',
+  ],
   [
     /^bx-chart --bx-chart-grid-color$/,
     'gridlines are drawn asynchronously after the first visibility and resize pass; covered in chart.test.ts',
@@ -385,6 +434,7 @@ describe('component styling API (CSS custom properties)', () => {
             staticHtml`<div style="inline-size: 40rem; --bx-motion-duration-fast: 0s; --bx-motion-duration-base: 0s; --bx-motion-duration-slow: 0s">${markup}</div>`,
           );
           const host = wrapper.firstElementChild as HTMLElement;
+          SETUP[tag]?.(host);
           await (host as unknown as { updateComplete?: Promise<unknown> })
             .updateComplete;
           const scope = [...withShadowTrees(wrapper)];

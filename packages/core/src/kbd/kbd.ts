@@ -69,6 +69,11 @@ export function parseChord(
  * @cssprop --bx-kbd-bg - Key cap background.
  * @cssprop --bx-kbd-border-color - Key cap border color.
  * @cssprop --bx-kbd-gap - Gap between key caps. Default `var(--bx-space-3xs)`.
+ * @cssprop --bx-kbd-font-family - Font family of the root surface. Default `var(--bx-type-code-family)`.
+ * @cssprop --bx-kbd-font-size - Font size of the root surface. Default `var(--bx-type-code-size)`.
+ * @cssprop --bx-kbd-font-weight - Font weight of the root surface. Default `var(--bx-type-code-weight)`.
+ * @cssprop --bx-kbd-line-height - Line height of the root surface. Default `var(--bx-type-code-leading)`.
+ * @cssprop --bx-kbd-letter-spacing - Letter spacing of the root surface. Default `var(--bx-type-code-tracking)`.
  */
 export class BxKbd extends BixElement {
   static override tagName = 'bx-kbd';
@@ -94,7 +99,7 @@ export class BxKbd extends BixElement {
         padding-inline: 0.4em;
         border: var(--bx-border-width) solid
           var(--bx-kbd-border-color, var(--bx-border-subtle));
-        border-block-end-width: 2px;
+        border-block-end-width: var(--bx-border-width-strong);
         border-radius: var(--bx-radius-s);
         background: var(--bx-kbd-bg, var(--bx-surface-subtle));
         color: var(--bx-text-primary);

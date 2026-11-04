@@ -83,6 +83,21 @@ const CHEVRON_RIGHT =
  * @cssprop --bx-pagination-gap - Gap between controls. Default `var(--bx-space-2xs)`.
  * @cssprop --bx-pagination-current-bg - Current page background.
  * @cssprop --bx-pagination-current-fg - Current page text color.
+ * @cssprop --bx-pagination-font-family - Font family of the root surface. Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-pagination-font-size - Font size of the root surface. Default `var(--bx-type-label-size)`.
+ * @cssprop --bx-pagination-font-weight - Font weight of the root surface. Default `var(--bx-type-label-weight)`.
+ * @cssprop --bx-pagination-line-height - Line height of the root surface. Default `var(--bx-type-label-leading)`.
+ * @cssprop --bx-pagination-letter-spacing - Letter spacing of the root surface. Default `var(--bx-type-label-tracking)`.
+ * @cssprop --bx-pagination-size-font-family - Font family of the `size` text (text style `body-s`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-pagination-size-font-size - Font size of the `size` text (text style `body-s`). Default `var(--bx-type-body-s-size)`.
+ * @cssprop --bx-pagination-size-font-weight - Font weight of the `size` text (text style `body-s`). Default `var(--bx-type-body-s-weight)`.
+ * @cssprop --bx-pagination-size-line-height - Line height of the `size` text (text style `body-s`). Default `var(--bx-type-body-s-leading)`.
+ * @cssprop --bx-pagination-size-letter-spacing - Letter spacing of the `size` text (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.
+ * @cssprop --bx-pagination-summary-font-family - Font family of the `summary` text (text style `body-s`). Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-pagination-summary-font-size - Font size of the `summary` text (text style `body-s`). Default `var(--bx-type-body-s-size)`.
+ * @cssprop --bx-pagination-summary-font-weight - Font weight of the `summary` text (text style `body-s`). Default `var(--bx-type-body-s-weight)`.
+ * @cssprop --bx-pagination-summary-line-height - Line height of the `summary` text (text style `body-s`). Default `var(--bx-type-body-s-leading)`.
+ * @cssprop --bx-pagination-summary-letter-spacing - Letter spacing of the `summary` text (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.
  */
 export class BxPagination extends BixElement {
   static override tagName = 'bx-pagination';

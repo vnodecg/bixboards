@@ -73,12 +73,34 @@ let nextId = 0;
  *
  * @csspart dropzone - Drop target.
  * @csspart trigger - Browse button.
+ * @csspart trigger-wrap - Wrapper around the `trigger` slot.
  * @csspart file-list - The list of files.
  * @csspart file - One file row.
  *
  * @cssprop --bx-file-upload-bg - Drop zone background.
  * @cssprop --bx-file-upload-border-color - Drop zone border color.
  * @cssprop --bx-file-upload-radius - Drop zone radius.
+ * @cssprop --bx-file-upload-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
+ * @cssprop --bx-file-upload-hint-font-family - Font family of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.
+ * @cssprop --bx-file-upload-hint-font-size - Font size of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.
+ * @cssprop --bx-file-upload-hint-font-weight - Font weight of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.
+ * @cssprop --bx-file-upload-hint-line-height - Line height of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.
+ * @cssprop --bx-file-upload-hint-letter-spacing - Letter spacing of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`.
+ * @cssprop --bx-file-upload-label-font-family - Font family of the `label` text (text style `label-m`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-file-upload-label-font-size - Font size of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-size)`.
+ * @cssprop --bx-file-upload-label-font-weight - Font weight of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.
+ * @cssprop --bx-file-upload-label-line-height - Line height of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.
+ * @cssprop --bx-file-upload-label-letter-spacing - Letter spacing of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.
+ * @cssprop --bx-file-upload-meta-font-family - Font family of the `meta` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.
+ * @cssprop --bx-file-upload-meta-font-size - Font size of the `meta` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.
+ * @cssprop --bx-file-upload-meta-font-weight - Font weight of the `meta` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.
+ * @cssprop --bx-file-upload-meta-line-height - Line height of the `meta` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.
+ * @cssprop --bx-file-upload-meta-letter-spacing - Letter spacing of the `meta` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`.
+ * @cssprop --bx-file-upload-name-font-family - Font family of the `name` text (text style `label-m`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-file-upload-name-font-size - Font size of the `name` text (text style `label-m`). Default `var(--bx-type-label-m-size)`.
+ * @cssprop --bx-file-upload-name-font-weight - Font weight of the `name` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.
+ * @cssprop --bx-file-upload-name-line-height - Line height of the `name` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.
+ * @cssprop --bx-file-upload-name-letter-spacing - Letter spacing of the `name` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.
  */
 export class BxFileUpload extends FormAssociatedMixin(BixElement) {
   static override tagName = 'bx-file-upload';

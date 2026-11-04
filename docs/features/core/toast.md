@@ -57,10 +57,14 @@ Transient, non-blocking message stack created imperatively or declaratively. Spe
 
 ### CSS custom properties
 
-| Property              | Description            |
-| --------------------- | ---------------------- |
-| `--bx-toast-width`    | Max width.             |
-| `--bx-toast-duration` | Enter/exit transition. |
+| Property                    | Description                                                                 |
+| --------------------------- | --------------------------------------------------------------------------- |
+| `--bx-toast-width`          | Max width.                                                                  |
+| `--bx-toast-font-family`    | Font family of the root surface. Default `var(--bx-type-body-family)`.      |
+| `--bx-toast-font-size`      | Font size of the root surface. Default `var(--bx-type-body-size)`.          |
+| `--bx-toast-font-weight`    | Font weight of the root surface. Default `var(--bx-type-body-weight)`.      |
+| `--bx-toast-line-height`    | Line height of the root surface. Default `var(--bx-type-body-leading)`.     |
+| `--bx-toast-letter-spacing` | Letter spacing of the root surface. Default `var(--bx-type-body-tracking)`. |
 
 ### Methods
 

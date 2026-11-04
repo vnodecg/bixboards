@@ -2191,6 +2191,98 @@
             {
               "name": "--bx-calendar-range-bg",
               "description": "In-range band."
+            },
+            {
+              "name": "--bx-calendar-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-body-family)`."
+            },
+            {
+              "name": "--bx-calendar-day-font-family",
+              "description": "Font family of the `day` text (text style `label-m`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-calendar-day-font-size",
+              "description": "Font size of the `day` text (text style `label-m`). Default `var(--bx-type-label-m-size)`."
+            },
+            {
+              "name": "--bx-calendar-day-font-weight",
+              "description": "Font weight of the `day` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`."
+            },
+            {
+              "name": "--bx-calendar-day-line-height",
+              "description": "Line height of the `day` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`."
+            },
+            {
+              "name": "--bx-calendar-day-letter-spacing",
+              "description": "Letter spacing of the `day` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`."
+            },
+            {
+              "name": "--bx-calendar-title-font-family",
+              "description": "Font family of the `title` text (text style `label-l`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-calendar-title-font-size",
+              "description": "Font size of the `title` text (text style `label-l`). Default `var(--bx-type-label-l-size)`."
+            },
+            {
+              "name": "--bx-calendar-title-font-weight",
+              "description": "Font weight of the `title` text (text style `label-l`). Default `var(--bx-type-label-l-weight)`."
+            },
+            {
+              "name": "--bx-calendar-title-line-height",
+              "description": "Line height of the `title` text (text style `label-l`). Default `var(--bx-type-label-l-leading)`."
+            },
+            {
+              "name": "--bx-calendar-title-letter-spacing",
+              "description": "Letter spacing of the `title` text (text style `label-l`). Default `var(--bx-type-label-l-tracking)`."
+            },
+            {
+              "name": "--bx-calendar-week-font-family",
+              "description": "Font family of the `week` text (text style `caption-s`). Default `var(--bx-type-caption-family)`."
+            },
+            {
+              "name": "--bx-calendar-week-font-size",
+              "description": "Font size of the `week` text (text style `caption-s`). Default `var(--bx-type-caption-s-size)`."
+            },
+            {
+              "name": "--bx-calendar-week-font-weight",
+              "description": "Font weight of the `week` text (text style `caption-s`). Default `var(--bx-type-caption-s-weight)`."
+            },
+            {
+              "name": "--bx-calendar-week-line-height",
+              "description": "Line height of the `week` text (text style `caption-s`). Default `var(--bx-type-caption-s-leading)`."
+            },
+            {
+              "name": "--bx-calendar-week-letter-spacing",
+              "description": "Letter spacing of the `week` text (text style `caption-s`). Default `var(--bx-type-caption-s-tracking)`."
+            },
+            {
+              "name": "--bx-calendar-weekday-font-family",
+              "description": "Font family of the `weekday` text (text style `caption-m`). Default `var(--bx-type-caption-family)`."
+            },
+            {
+              "name": "--bx-calendar-weekday-font-size",
+              "description": "Font size of the `weekday` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`."
+            },
+            {
+              "name": "--bx-calendar-weekday-font-weight",
+              "description": "Font weight of the `weekday` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`."
+            },
+            {
+              "name": "--bx-calendar-weekday-line-height",
+              "description": "Line height of the `weekday` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`."
+            },
+            {
+              "name": "--bx-calendar-weekday-letter-spacing",
+              "description": "Letter spacing of the `weekday` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`."
+            },
+            {
+              "name": "--bx-calendar-focus-ring-width",
+              "description": "Focus ring width of the day cells (focus state). Default `var(--bx-border-width-strong)`."
+            },
+            {
+              "name": "--bx-calendar-focus-ring-color",
+              "description": "Focus ring color of the day cells (focus state). Default `var(--bx-focus-ring)`."
             }
           ]
         }
@@ -3491,6 +3583,106 @@
             {
               "name": "--bx-chart-height",
               "description": "Height."
+            },
+            {
+              "name": "--bx-chart-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-body-family)`."
+            },
+            {
+              "name": "--bx-chart-legend-font-family",
+              "description": "Font family of the `legend` text (text style `label-s`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-chart-legend-font-size",
+              "description": "Font size of the `legend` text (text style `label-s`). Default `var(--bx-type-label-s-size)`."
+            },
+            {
+              "name": "--bx-chart-legend-font-weight",
+              "description": "Font weight of the `legend` text (text style `label-s`). Default `var(--bx-type-label-s-weight)`."
+            },
+            {
+              "name": "--bx-chart-legend-line-height",
+              "description": "Line height of the `legend` text (text style `label-s`). Default `var(--bx-type-label-s-leading)`."
+            },
+            {
+              "name": "--bx-chart-legend-letter-spacing",
+              "description": "Letter spacing of the `legend` text (text style `label-s`). Default `var(--bx-type-label-s-tracking)`."
+            },
+            {
+              "name": "--bx-chart-title-font-family",
+              "description": "Font family of the `title` text (text style `heading-xs`). Default `var(--bx-type-heading-family)`."
+            },
+            {
+              "name": "--bx-chart-title-font-size",
+              "description": "Font size of the `title` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-size)`."
+            },
+            {
+              "name": "--bx-chart-title-font-weight",
+              "description": "Font weight of the `title` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-weight)`."
+            },
+            {
+              "name": "--bx-chart-title-line-height",
+              "description": "Line height of the `title` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-leading)`."
+            },
+            {
+              "name": "--bx-chart-title-letter-spacing",
+              "description": "Letter spacing of the `title` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-tracking)`."
+            },
+            {
+              "name": "--bx-chart-tooltip-font-family",
+              "description": "Font family of the `tooltip` text (text style `caption-m`). Default `var(--bx-type-caption-family)`."
+            },
+            {
+              "name": "--bx-chart-tooltip-font-size",
+              "description": "Font size of the `tooltip` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`."
+            },
+            {
+              "name": "--bx-chart-tooltip-font-weight",
+              "description": "Font weight of the `tooltip` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`."
+            },
+            {
+              "name": "--bx-chart-tooltip-line-height",
+              "description": "Line height of the `tooltip` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`."
+            },
+            {
+              "name": "--bx-chart-tooltip-letter-spacing",
+              "description": "Letter spacing of the `tooltip` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`."
+            },
+            {
+              "name": "--bx-chart-focus-ring-width",
+              "description": "Focus ring width of the chart surface (focus state). Default `var(--bx-border-width-strong)`."
+            },
+            {
+              "name": "--bx-chart-focus-ring-color",
+              "description": "Focus ring color of the chart surface (focus state). Default `var(--bx-focus-ring)`."
+            },
+            {
+              "name": "--bx-chart-color-2",
+              "description": "Series color 2. Default `var(--bx-role-tertiary-solid)`."
+            },
+            {
+              "name": "--bx-chart-color-3",
+              "description": "Series color 3. Default `var(--bx-role-warning-solid)`."
+            },
+            {
+              "name": "--bx-chart-color-4",
+              "description": "Series color 4. Default `var(--bx-role-danger-solid)`."
+            },
+            {
+              "name": "--bx-chart-color-5",
+              "description": "Series color 5. Default `var(--bx-role-warning-border)`."
+            },
+            {
+              "name": "--bx-chart-color-6",
+              "description": "Series color 6. Default `var(--bx-role-neutral-solid)`."
+            },
+            {
+              "name": "--bx-chart-color-7",
+              "description": "Series color 7. Default `var(--bx-role-brand-border)`."
+            },
+            {
+              "name": "--bx-chart-color-8",
+              "description": "Series color 8. Default `var(--bx-role-tertiary-border)`."
             }
           ]
         }
@@ -4101,6 +4293,26 @@
             {
               "name": "--bx-chip-gap",
               "description": "Gap between parts. Default `var(--bx-space-2xs)`."
+            },
+            {
+              "name": "--bx-chip-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-chip-font-size",
+              "description": "Font size of the root surface. Default `var(--bx-type-label-size)`."
+            },
+            {
+              "name": "--bx-chip-font-weight",
+              "description": "Font weight of the root surface. Default `var(--bx-type-label-weight)`."
+            },
+            {
+              "name": "--bx-chip-line-height",
+              "description": "Line height of the root surface. Default `var(--bx-type-label-leading)`."
+            },
+            {
+              "name": "--bx-chip-letter-spacing",
+              "description": "Letter spacing of the root surface. Default `var(--bx-type-label-tracking)`."
             }
           ]
         }
@@ -4444,6 +4656,46 @@
             {
               "name": "--bx-code-block-line-highlight",
               "description": "Highlighted line background."
+            },
+            {
+              "name": "--bx-code-block-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-code-family)`."
+            },
+            {
+              "name": "--bx-code-block-font-size",
+              "description": "Font size of the root surface. Default `var(--bx-type-code-size)`."
+            },
+            {
+              "name": "--bx-code-block-font-weight",
+              "description": "Font weight of the root surface. Default `var(--bx-type-code-weight)`."
+            },
+            {
+              "name": "--bx-code-block-line-height",
+              "description": "Line height of the root surface. Default `var(--bx-type-code-leading)`."
+            },
+            {
+              "name": "--bx-code-block-letter-spacing",
+              "description": "Letter spacing of the root surface. Default `var(--bx-type-code-tracking)`."
+            },
+            {
+              "name": "--bx-code-block-header-font-family",
+              "description": "Font family of the `header` text (text style `caption-m`). Default `var(--bx-type-caption-family)`."
+            },
+            {
+              "name": "--bx-code-block-header-font-size",
+              "description": "Font size of the `header` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`."
+            },
+            {
+              "name": "--bx-code-block-header-font-weight",
+              "description": "Font weight of the `header` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`."
+            },
+            {
+              "name": "--bx-code-block-header-line-height",
+              "description": "Line height of the `header` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`."
+            },
+            {
+              "name": "--bx-code-block-header-letter-spacing",
+              "description": "Letter spacing of the `header` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`."
             }
           ]
         }
@@ -5494,6 +5746,86 @@
             {
               "name": "--bx-combobox-max-height",
               "description": "Max listbox height."
+            },
+            {
+              "name": "--bx-combobox-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-field-family)`."
+            },
+            {
+              "name": "--bx-combobox-font-size",
+              "description": "Font size of the root surface. Default `var(--bx-type-field-size)`."
+            },
+            {
+              "name": "--bx-combobox-font-weight",
+              "description": "Font weight of the root surface. Default `var(--bx-type-field-weight)`."
+            },
+            {
+              "name": "--bx-combobox-line-height",
+              "description": "Line height of the root surface. Default `var(--bx-type-field-leading)`."
+            },
+            {
+              "name": "--bx-combobox-letter-spacing",
+              "description": "Letter spacing of the root surface. Default `var(--bx-type-field-tracking)`."
+            },
+            {
+              "name": "--bx-combobox-empty-font-family",
+              "description": "Font family of the `empty` text (text style `body-m`). Default `var(--bx-type-body-family)`."
+            },
+            {
+              "name": "--bx-combobox-empty-font-size",
+              "description": "Font size of the `empty` text (text style `body-m`). Default `var(--bx-type-body-m-size)`."
+            },
+            {
+              "name": "--bx-combobox-empty-font-weight",
+              "description": "Font weight of the `empty` text (text style `body-m`). Default `var(--bx-type-body-m-weight)`."
+            },
+            {
+              "name": "--bx-combobox-empty-line-height",
+              "description": "Line height of the `empty` text (text style `body-m`). Default `var(--bx-type-body-m-leading)`."
+            },
+            {
+              "name": "--bx-combobox-empty-letter-spacing",
+              "description": "Letter spacing of the `empty` text (text style `body-m`). Default `var(--bx-type-body-m-tracking)`."
+            },
+            {
+              "name": "--bx-combobox-hint-font-family",
+              "description": "Font family of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-family)`."
+            },
+            {
+              "name": "--bx-combobox-hint-font-size",
+              "description": "Font size of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`."
+            },
+            {
+              "name": "--bx-combobox-hint-font-weight",
+              "description": "Font weight of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`."
+            },
+            {
+              "name": "--bx-combobox-hint-line-height",
+              "description": "Line height of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`."
+            },
+            {
+              "name": "--bx-combobox-hint-letter-spacing",
+              "description": "Letter spacing of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`."
+            },
+            {
+              "name": "--bx-combobox-label-font-family",
+              "description": "Font family of the `label` text (text style `label-m`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-combobox-label-font-size",
+              "description": "Font size of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-size)`."
+            },
+            {
+              "name": "--bx-combobox-label-font-weight",
+              "description": "Font weight of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`."
+            },
+            {
+              "name": "--bx-combobox-label-line-height",
+              "description": "Line height of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`."
+            },
+            {
+              "name": "--bx-combobox-label-letter-spacing",
+              "description": "Letter spacing of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`."
             }
           ]
         }
@@ -5720,6 +6052,114 @@
             {
               "name": "--bx-command-palette-max-height",
               "description": "List max height."
+            },
+            {
+              "name": "--bx-command-palette-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-body-family)`."
+            },
+            {
+              "name": "--bx-command-palette-font-size",
+              "description": "Font size of the root surface. Default `var(--bx-type-body-size)`."
+            },
+            {
+              "name": "--bx-command-palette-font-weight",
+              "description": "Font weight of the root surface. Default `var(--bx-type-body-weight)`."
+            },
+            {
+              "name": "--bx-command-palette-line-height",
+              "description": "Line height of the root surface. Default `var(--bx-type-body-leading)`."
+            },
+            {
+              "name": "--bx-command-palette-letter-spacing",
+              "description": "Letter spacing of the root surface. Default `var(--bx-type-body-tracking)`."
+            },
+            {
+              "name": "--bx-command-palette-footer-font-family",
+              "description": "Font family of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-family)`."
+            },
+            {
+              "name": "--bx-command-palette-footer-font-size",
+              "description": "Font size of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`."
+            },
+            {
+              "name": "--bx-command-palette-footer-font-weight",
+              "description": "Font weight of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`."
+            },
+            {
+              "name": "--bx-command-palette-footer-line-height",
+              "description": "Line height of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`."
+            },
+            {
+              "name": "--bx-command-palette-footer-letter-spacing",
+              "description": "Letter spacing of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`."
+            },
+            {
+              "name": "--bx-command-palette-group-font-family",
+              "description": "Font family of the `group` text (text style `label-xs`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-command-palette-group-font-size",
+              "description": "Font size of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-size)`."
+            },
+            {
+              "name": "--bx-command-palette-group-font-weight",
+              "description": "Font weight of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-weight)`."
+            },
+            {
+              "name": "--bx-command-palette-group-line-height",
+              "description": "Line height of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-leading)`."
+            },
+            {
+              "name": "--bx-command-palette-group-letter-spacing",
+              "description": "Letter spacing of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-tracking)`."
+            },
+            {
+              "name": "--bx-command-palette-item-font-family",
+              "description": "Font family of the `item` text (text style `body-m`). Default `var(--bx-type-body-family)`."
+            },
+            {
+              "name": "--bx-command-palette-item-font-size",
+              "description": "Font size of the `item` text (text style `body-m`). Default `var(--bx-type-body-m-size)`."
+            },
+            {
+              "name": "--bx-command-palette-item-font-weight",
+              "description": "Font weight of the `item` text (text style `body-m`). Default `var(--bx-type-body-m-weight)`."
+            },
+            {
+              "name": "--bx-command-palette-item-line-height",
+              "description": "Line height of the `item` text (text style `body-m`). Default `var(--bx-type-body-m-leading)`."
+            },
+            {
+              "name": "--bx-command-palette-item-letter-spacing",
+              "description": "Letter spacing of the `item` text (text style `body-m`). Default `var(--bx-type-body-m-tracking)`."
+            },
+            {
+              "name": "--bx-command-palette-where-font-family",
+              "description": "Font family of the `where` text (text style `caption-m`). Default `var(--bx-type-caption-family)`."
+            },
+            {
+              "name": "--bx-command-palette-where-font-size",
+              "description": "Font size of the `where` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`."
+            },
+            {
+              "name": "--bx-command-palette-where-font-weight",
+              "description": "Font weight of the `where` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`."
+            },
+            {
+              "name": "--bx-command-palette-where-line-height",
+              "description": "Line height of the `where` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`."
+            },
+            {
+              "name": "--bx-command-palette-where-letter-spacing",
+              "description": "Letter spacing of the `where` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`."
+            },
+            {
+              "name": "--bx-command-palette-focus-ring-width",
+              "description": "Focus ring width of the items (focus state). Default `var(--bx-border-width-strong)`."
+            },
+            {
+              "name": "--bx-command-palette-focus-ring-color",
+              "description": "Focus ring color of the items (focus state). Default `var(--bx-focus-ring)`."
             }
           ]
         }
@@ -5995,10 +6435,6 @@
             {
               "name": "menu",
               "description": "The menu part."
-            },
-            {
-              "name": "panel",
-              "description": "The panel part."
             }
           ],
           "cssProperties": [
@@ -6719,6 +7155,66 @@
             {
               "name": "--bx-date-picker-radius",
               "description": "Field radius."
+            },
+            {
+              "name": "--bx-date-picker-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-field-family)`."
+            },
+            {
+              "name": "--bx-date-picker-font-size",
+              "description": "Font size of the root surface. Default `var(--bx-type-field-size)`."
+            },
+            {
+              "name": "--bx-date-picker-font-weight",
+              "description": "Font weight of the root surface. Default `var(--bx-type-field-weight)`."
+            },
+            {
+              "name": "--bx-date-picker-line-height",
+              "description": "Line height of the root surface. Default `var(--bx-type-field-leading)`."
+            },
+            {
+              "name": "--bx-date-picker-letter-spacing",
+              "description": "Letter spacing of the root surface. Default `var(--bx-type-field-tracking)`."
+            },
+            {
+              "name": "--bx-date-picker-hint-font-family",
+              "description": "Font family of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-family)`."
+            },
+            {
+              "name": "--bx-date-picker-hint-font-size",
+              "description": "Font size of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`."
+            },
+            {
+              "name": "--bx-date-picker-hint-font-weight",
+              "description": "Font weight of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`."
+            },
+            {
+              "name": "--bx-date-picker-hint-line-height",
+              "description": "Line height of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`."
+            },
+            {
+              "name": "--bx-date-picker-hint-letter-spacing",
+              "description": "Letter spacing of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`."
+            },
+            {
+              "name": "--bx-date-picker-label-font-family",
+              "description": "Font family of the `label` text (text style `label-m`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-date-picker-label-font-size",
+              "description": "Font size of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-size)`."
+            },
+            {
+              "name": "--bx-date-picker-label-font-weight",
+              "description": "Font weight of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`."
+            },
+            {
+              "name": "--bx-date-picker-label-line-height",
+              "description": "Line height of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`."
+            },
+            {
+              "name": "--bx-date-picker-label-letter-spacing",
+              "description": "Letter spacing of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`."
             }
           ]
         }
@@ -8619,6 +9115,50 @@
             {
               "name": "--bx-empty-state-media-size",
               "description": "Illustration size."
+            },
+            {
+              "name": "--bx-empty-state-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-body-family)`."
+            },
+            {
+              "name": "--bx-empty-state-description-font-family",
+              "description": "Font family of the `description` text (text style `body-m`). Default `var(--bx-type-body-family)`."
+            },
+            {
+              "name": "--bx-empty-state-description-font-size",
+              "description": "Font size of the `description` text (text style `body-m`). Default `var(--bx-type-body-m-size)`."
+            },
+            {
+              "name": "--bx-empty-state-description-font-weight",
+              "description": "Font weight of the `description` text (text style `body-m`). Default `var(--bx-type-body-m-weight)`."
+            },
+            {
+              "name": "--bx-empty-state-description-line-height",
+              "description": "Line height of the `description` text (text style `body-m`). Default `var(--bx-type-body-m-leading)`."
+            },
+            {
+              "name": "--bx-empty-state-description-letter-spacing",
+              "description": "Letter spacing of the `description` text (text style `body-m`). Default `var(--bx-type-body-m-tracking)`."
+            },
+            {
+              "name": "--bx-empty-state-heading-font-family",
+              "description": "Font family of the `heading` text (text style `heading-s`). Default `var(--bx-type-heading-family)`."
+            },
+            {
+              "name": "--bx-empty-state-heading-font-size",
+              "description": "Font size of the `heading` text (text style `heading-s`). Default `var(--bx-type-heading-s-size)`."
+            },
+            {
+              "name": "--bx-empty-state-heading-font-weight",
+              "description": "Font weight of the `heading` text (text style `heading-s`). Default `var(--bx-type-heading-s-weight)`."
+            },
+            {
+              "name": "--bx-empty-state-heading-line-height",
+              "description": "Line height of the `heading` text (text style `heading-s`). Default `var(--bx-type-heading-s-leading)`."
+            },
+            {
+              "name": "--bx-empty-state-heading-letter-spacing",
+              "description": "Letter spacing of the `heading` text (text style `heading-s`). Default `var(--bx-type-heading-s-tracking)`."
             }
           ]
         }
@@ -8884,6 +9424,10 @@
               "description": "Browse button."
             },
             {
+              "name": "trigger-wrap",
+              "description": "Wrapper around the `trigger` slot."
+            },
+            {
               "name": "file-list",
               "description": "The list of files."
             },
@@ -8904,6 +9448,90 @@
             {
               "name": "--bx-file-upload-radius",
               "description": "Drop zone radius."
+            },
+            {
+              "name": "--bx-file-upload-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-body-family)`."
+            },
+            {
+              "name": "--bx-file-upload-hint-font-family",
+              "description": "Font family of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-family)`."
+            },
+            {
+              "name": "--bx-file-upload-hint-font-size",
+              "description": "Font size of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`."
+            },
+            {
+              "name": "--bx-file-upload-hint-font-weight",
+              "description": "Font weight of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`."
+            },
+            {
+              "name": "--bx-file-upload-hint-line-height",
+              "description": "Line height of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`."
+            },
+            {
+              "name": "--bx-file-upload-hint-letter-spacing",
+              "description": "Letter spacing of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`."
+            },
+            {
+              "name": "--bx-file-upload-label-font-family",
+              "description": "Font family of the `label` text (text style `label-m`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-file-upload-label-font-size",
+              "description": "Font size of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-size)`."
+            },
+            {
+              "name": "--bx-file-upload-label-font-weight",
+              "description": "Font weight of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`."
+            },
+            {
+              "name": "--bx-file-upload-label-line-height",
+              "description": "Line height of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`."
+            },
+            {
+              "name": "--bx-file-upload-label-letter-spacing",
+              "description": "Letter spacing of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`."
+            },
+            {
+              "name": "--bx-file-upload-meta-font-family",
+              "description": "Font family of the `meta` text (text style `caption-m`). Default `var(--bx-type-caption-family)`."
+            },
+            {
+              "name": "--bx-file-upload-meta-font-size",
+              "description": "Font size of the `meta` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`."
+            },
+            {
+              "name": "--bx-file-upload-meta-font-weight",
+              "description": "Font weight of the `meta` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`."
+            },
+            {
+              "name": "--bx-file-upload-meta-line-height",
+              "description": "Line height of the `meta` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`."
+            },
+            {
+              "name": "--bx-file-upload-meta-letter-spacing",
+              "description": "Letter spacing of the `meta` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`."
+            },
+            {
+              "name": "--bx-file-upload-name-font-family",
+              "description": "Font family of the `name` text (text style `label-m`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-file-upload-name-font-size",
+              "description": "Font size of the `name` text (text style `label-m`). Default `var(--bx-type-label-m-size)`."
+            },
+            {
+              "name": "--bx-file-upload-name-font-weight",
+              "description": "Font weight of the `name` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`."
+            },
+            {
+              "name": "--bx-file-upload-name-line-height",
+              "description": "Line height of the `name` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`."
+            },
+            {
+              "name": "--bx-file-upload-name-letter-spacing",
+              "description": "Letter spacing of the `name` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`."
             }
           ]
         }
@@ -10317,6 +10945,66 @@
             {
               "name": "--bx-input-otp-radius",
               "description": "Cell radius."
+            },
+            {
+              "name": "--bx-input-otp-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-field-family)`."
+            },
+            {
+              "name": "--bx-input-otp-font-size",
+              "description": "Font size of the root surface. Default `var(--bx-type-field-size)`."
+            },
+            {
+              "name": "--bx-input-otp-font-weight",
+              "description": "Font weight of the root surface. Default `var(--bx-type-field-weight)`."
+            },
+            {
+              "name": "--bx-input-otp-line-height",
+              "description": "Line height of the root surface. Default `var(--bx-type-field-leading)`."
+            },
+            {
+              "name": "--bx-input-otp-letter-spacing",
+              "description": "Letter spacing of the root surface. Default `var(--bx-type-field-tracking)`."
+            },
+            {
+              "name": "--bx-input-otp-hint-font-family",
+              "description": "Font family of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-family)`."
+            },
+            {
+              "name": "--bx-input-otp-hint-font-size",
+              "description": "Font size of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`."
+            },
+            {
+              "name": "--bx-input-otp-hint-font-weight",
+              "description": "Font weight of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`."
+            },
+            {
+              "name": "--bx-input-otp-hint-line-height",
+              "description": "Line height of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`."
+            },
+            {
+              "name": "--bx-input-otp-hint-letter-spacing",
+              "description": "Letter spacing of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`."
+            },
+            {
+              "name": "--bx-input-otp-label-font-family",
+              "description": "Font family of the `label` text (text style `label-m`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-input-otp-label-font-size",
+              "description": "Font size of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-size)`."
+            },
+            {
+              "name": "--bx-input-otp-label-font-weight",
+              "description": "Font weight of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`."
+            },
+            {
+              "name": "--bx-input-otp-label-line-height",
+              "description": "Line height of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`."
+            },
+            {
+              "name": "--bx-input-otp-label-letter-spacing",
+              "description": "Letter spacing of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`."
             }
           ]
         }
@@ -11460,6 +12148,26 @@
             {
               "name": "--bx-kbd-gap",
               "description": "Gap between key caps. Default `var(--bx-space-3xs)`."
+            },
+            {
+              "name": "--bx-kbd-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-code-family)`."
+            },
+            {
+              "name": "--bx-kbd-font-size",
+              "description": "Font size of the root surface. Default `var(--bx-type-code-size)`."
+            },
+            {
+              "name": "--bx-kbd-font-weight",
+              "description": "Font weight of the root surface. Default `var(--bx-type-code-weight)`."
+            },
+            {
+              "name": "--bx-kbd-line-height",
+              "description": "Line height of the root surface. Default `var(--bx-type-code-leading)`."
+            },
+            {
+              "name": "--bx-kbd-letter-spacing",
+              "description": "Letter spacing of the root surface. Default `var(--bx-type-code-tracking)`."
             }
           ]
         }
@@ -11674,6 +12382,46 @@
             {
               "name": "--bx-meter-fill-bad",
               "description": "Color in the worst band."
+            },
+            {
+              "name": "--bx-meter-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-meter-font-size",
+              "description": "Font size of the root surface. Default `var(--bx-type-label-size)`."
+            },
+            {
+              "name": "--bx-meter-font-weight",
+              "description": "Font weight of the root surface. Default `var(--bx-type-label-weight)`."
+            },
+            {
+              "name": "--bx-meter-line-height",
+              "description": "Line height of the root surface. Default `var(--bx-type-label-leading)`."
+            },
+            {
+              "name": "--bx-meter-letter-spacing",
+              "description": "Letter spacing of the root surface. Default `var(--bx-type-label-tracking)`."
+            },
+            {
+              "name": "--bx-meter-value-font-family",
+              "description": "Font family of the `value` text (text style `label-s`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-meter-value-font-size",
+              "description": "Font size of the `value` text (text style `label-s`). Default `var(--bx-type-label-s-size)`."
+            },
+            {
+              "name": "--bx-meter-value-font-weight",
+              "description": "Font weight of the `value` text (text style `label-s`). Default `var(--bx-type-label-s-weight)`."
+            },
+            {
+              "name": "--bx-meter-value-line-height",
+              "description": "Line height of the `value` text (text style `label-s`). Default `var(--bx-type-label-s-leading)`."
+            },
+            {
+              "name": "--bx-meter-value-letter-spacing",
+              "description": "Letter spacing of the `value` text (text style `label-s`). Default `var(--bx-type-label-s-tracking)`."
             }
           ]
         }
@@ -12050,6 +12798,118 @@
             {
               "name": "--bx-notification-center-max-height",
               "description": "Panel max height."
+            },
+            {
+              "name": "--bx-notification-center-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-body-family)`."
+            },
+            {
+              "name": "--bx-notification-center-body-font-family",
+              "description": "Font family of the `body` text (text style `body-s`). Default `var(--bx-type-body-family)`."
+            },
+            {
+              "name": "--bx-notification-center-body-font-size",
+              "description": "Font size of the `body` text (text style `body-s`). Default `var(--bx-type-body-s-size)`."
+            },
+            {
+              "name": "--bx-notification-center-body-font-weight",
+              "description": "Font weight of the `body` text (text style `body-s`). Default `var(--bx-type-body-s-weight)`."
+            },
+            {
+              "name": "--bx-notification-center-body-line-height",
+              "description": "Line height of the `body` text (text style `body-s`). Default `var(--bx-type-body-s-leading)`."
+            },
+            {
+              "name": "--bx-notification-center-body-letter-spacing",
+              "description": "Letter spacing of the `body` text (text style `body-s`). Default `var(--bx-type-body-s-tracking)`."
+            },
+            {
+              "name": "--bx-notification-center-group-font-family",
+              "description": "Font family of the `group` text (text style `label-xs`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-notification-center-group-font-size",
+              "description": "Font size of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-size)`."
+            },
+            {
+              "name": "--bx-notification-center-group-font-weight",
+              "description": "Font weight of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-weight)`."
+            },
+            {
+              "name": "--bx-notification-center-group-line-height",
+              "description": "Line height of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-leading)`."
+            },
+            {
+              "name": "--bx-notification-center-group-letter-spacing",
+              "description": "Letter spacing of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-tracking)`."
+            },
+            {
+              "name": "--bx-notification-center-head-font-family",
+              "description": "Font family of the `head` text (text style `heading-xs`). Default `var(--bx-type-heading-family)`."
+            },
+            {
+              "name": "--bx-notification-center-head-font-size",
+              "description": "Font size of the `head` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-size)`."
+            },
+            {
+              "name": "--bx-notification-center-head-font-weight",
+              "description": "Font weight of the `head` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-weight)`."
+            },
+            {
+              "name": "--bx-notification-center-head-line-height",
+              "description": "Line height of the `head` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-leading)`."
+            },
+            {
+              "name": "--bx-notification-center-head-letter-spacing",
+              "description": "Letter spacing of the `head` text (text style `heading-xs`). Default `var(--bx-type-heading-xs-tracking)`."
+            },
+            {
+              "name": "--bx-notification-center-time-font-family",
+              "description": "Font family of the `time` text (text style `caption-s`). Default `var(--bx-type-caption-family)`."
+            },
+            {
+              "name": "--bx-notification-center-time-font-size",
+              "description": "Font size of the `time` text (text style `caption-s`). Default `var(--bx-type-caption-s-size)`."
+            },
+            {
+              "name": "--bx-notification-center-time-font-weight",
+              "description": "Font weight of the `time` text (text style `caption-s`). Default `var(--bx-type-caption-s-weight)`."
+            },
+            {
+              "name": "--bx-notification-center-time-line-height",
+              "description": "Line height of the `time` text (text style `caption-s`). Default `var(--bx-type-caption-s-leading)`."
+            },
+            {
+              "name": "--bx-notification-center-time-letter-spacing",
+              "description": "Letter spacing of the `time` text (text style `caption-s`). Default `var(--bx-type-caption-s-tracking)`."
+            },
+            {
+              "name": "--bx-notification-center-title-font-family",
+              "description": "Font family of the `title` text (text style `label-m`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-notification-center-title-font-size",
+              "description": "Font size of the `title` text (text style `label-m`). Default `var(--bx-type-label-m-size)`."
+            },
+            {
+              "name": "--bx-notification-center-title-font-weight",
+              "description": "Font weight of the `title` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`."
+            },
+            {
+              "name": "--bx-notification-center-title-line-height",
+              "description": "Line height of the `title` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`."
+            },
+            {
+              "name": "--bx-notification-center-title-letter-spacing",
+              "description": "Letter spacing of the `title` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`."
+            },
+            {
+              "name": "--bx-notification-center-focus-ring-width",
+              "description": "Focus ring width of the items (focus state). Default `var(--bx-border-width-strong)`."
+            },
+            {
+              "name": "--bx-notification-center-focus-ring-color",
+              "description": "Focus ring color of the items (focus state). Default `var(--bx-focus-ring)`."
             }
           ]
         }
@@ -13476,6 +14336,66 @@
             {
               "name": "--bx-pagination-current-fg",
               "description": "Current page text color."
+            },
+            {
+              "name": "--bx-pagination-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-pagination-font-size",
+              "description": "Font size of the root surface. Default `var(--bx-type-label-size)`."
+            },
+            {
+              "name": "--bx-pagination-font-weight",
+              "description": "Font weight of the root surface. Default `var(--bx-type-label-weight)`."
+            },
+            {
+              "name": "--bx-pagination-line-height",
+              "description": "Line height of the root surface. Default `var(--bx-type-label-leading)`."
+            },
+            {
+              "name": "--bx-pagination-letter-spacing",
+              "description": "Letter spacing of the root surface. Default `var(--bx-type-label-tracking)`."
+            },
+            {
+              "name": "--bx-pagination-size-font-family",
+              "description": "Font family of the `size` text (text style `body-s`). Default `var(--bx-type-body-family)`."
+            },
+            {
+              "name": "--bx-pagination-size-font-size",
+              "description": "Font size of the `size` text (text style `body-s`). Default `var(--bx-type-body-s-size)`."
+            },
+            {
+              "name": "--bx-pagination-size-font-weight",
+              "description": "Font weight of the `size` text (text style `body-s`). Default `var(--bx-type-body-s-weight)`."
+            },
+            {
+              "name": "--bx-pagination-size-line-height",
+              "description": "Line height of the `size` text (text style `body-s`). Default `var(--bx-type-body-s-leading)`."
+            },
+            {
+              "name": "--bx-pagination-size-letter-spacing",
+              "description": "Letter spacing of the `size` text (text style `body-s`). Default `var(--bx-type-body-s-tracking)`."
+            },
+            {
+              "name": "--bx-pagination-summary-font-family",
+              "description": "Font family of the `summary` text (text style `body-s`). Default `var(--bx-type-body-family)`."
+            },
+            {
+              "name": "--bx-pagination-summary-font-size",
+              "description": "Font size of the `summary` text (text style `body-s`). Default `var(--bx-type-body-s-size)`."
+            },
+            {
+              "name": "--bx-pagination-summary-font-weight",
+              "description": "Font weight of the `summary` text (text style `body-s`). Default `var(--bx-type-body-s-weight)`."
+            },
+            {
+              "name": "--bx-pagination-summary-line-height",
+              "description": "Line height of the `summary` text (text style `body-s`). Default `var(--bx-type-body-s-leading)`."
+            },
+            {
+              "name": "--bx-pagination-summary-letter-spacing",
+              "description": "Letter spacing of the `summary` text (text style `body-s`). Default `var(--bx-type-body-s-tracking)`."
             }
           ]
         }
@@ -16232,10 +17152,6 @@
             {
               "name": "indicator",
               "description": "Sliding thumb."
-            },
-            {
-              "name": "segment",
-              "description": "A segment."
             }
           ],
           "cssProperties": [
@@ -16250,6 +17166,30 @@
             {
               "name": "--bx-segmented-control-indicator-duration",
               "description": "Slide duration; 0 under reduced motion."
+            },
+            {
+              "name": "--bx-segmented-control-font-family",
+              "description": "Font family of the item text. Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-segmented-control-font-family",
+              "description": "Font family of the item text (text style `label-m`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-segmented-control-font-size",
+              "description": "Font size of the item text (text style `label-m`). Default `var(--bx-type-label-m-size)`."
+            },
+            {
+              "name": "--bx-segmented-control-font-weight",
+              "description": "Font weight of the item text (text style `label-m`). Default `var(--bx-type-label-m-weight)`."
+            },
+            {
+              "name": "--bx-segmented-control-line-height",
+              "description": "Line height of the item text (text style `label-m`). Default `var(--bx-type-label-m-leading)`."
+            },
+            {
+              "name": "--bx-segmented-control-letter-spacing",
+              "description": "Letter spacing of the item text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`."
             }
           ]
         }
@@ -17258,7 +18198,28 @@
               "description": "The group label."
             }
           ],
-          "cssProperties": []
+          "cssProperties": [
+            {
+              "name": "--bx-sidebar-group-label-font-family",
+              "description": "Font family of the `label` text (text style `label-xs`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-sidebar-group-label-font-size",
+              "description": "Font size of the `label` text (text style `label-xs`). Default `var(--bx-type-label-xs-size)`."
+            },
+            {
+              "name": "--bx-sidebar-group-label-font-weight",
+              "description": "Font weight of the `label` text (text style `label-xs`). Default `var(--bx-type-label-xs-weight)`."
+            },
+            {
+              "name": "--bx-sidebar-group-label-line-height",
+              "description": "Line height of the `label` text (text style `label-xs`). Default `var(--bx-type-label-xs-leading)`."
+            },
+            {
+              "name": "--bx-sidebar-group-label-letter-spacing",
+              "description": "Letter spacing of the `label` text (text style `label-xs`). Default `var(--bx-type-label-xs-tracking)`."
+            }
+          ]
         }
       ]
     },
@@ -17716,6 +18677,42 @@
             {
               "name": "--bx-sidebar-bg",
               "description": "Background."
+            },
+            {
+              "name": "--bx-sidebar-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-sidebar-font-family",
+              "description": "Font family of the item text. Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-sidebar-font-family",
+              "description": "Font family of the item text (text style `label-m`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-sidebar-font-size",
+              "description": "Font size of the item text (text style `label-m`). Default `var(--bx-type-label-m-size)`."
+            },
+            {
+              "name": "--bx-sidebar-font-weight",
+              "description": "Font weight of the item text (text style `label-m`). Default `var(--bx-type-label-m-weight)`."
+            },
+            {
+              "name": "--bx-sidebar-line-height",
+              "description": "Line height of the item text (text style `label-m`). Default `var(--bx-type-label-m-leading)`."
+            },
+            {
+              "name": "--bx-sidebar-letter-spacing",
+              "description": "Letter spacing of the item text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`."
+            },
+            {
+              "name": "--bx-sidebar-focus-ring-width",
+              "description": "Focus ring width of the items (focus state). Default `var(--bx-border-width-strong)`."
+            },
+            {
+              "name": "--bx-sidebar-focus-ring-color",
+              "description": "Focus ring color of the items (focus state). Default `var(--bx-focus-ring)`."
             }
           ]
         }
@@ -18777,6 +19774,10 @@
             {
               "name": "--bx-sparkline-height",
               "description": "Height. Default `1.5em`."
+            },
+            {
+              "name": "--bx-sparkline-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-body-family)`."
             }
           ]
         }
@@ -19037,7 +20038,7 @@
           "cssProperties": [
             {
               "name": "--bx-split-panel-divider-width",
-              "description": "Divider width. Default `max(var(--bx-space-3xs), 2px)`."
+              "description": "Divider width. Default `var(--bx-border-width-strong)`."
             },
             {
               "name": "--bx-split-panel-min",
@@ -19280,6 +20281,86 @@
             {
               "name": "--bx-stat-card-delta-color-bad",
               "description": "Delta color when the trend is bad."
+            },
+            {
+              "name": "--bx-stat-card-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-body-family)`."
+            },
+            {
+              "name": "--bx-stat-card-delta-font-family",
+              "description": "Font family of the `delta` text (text style `label-m`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-stat-card-delta-font-size",
+              "description": "Font size of the `delta` text (text style `label-m`). Default `var(--bx-type-label-m-size)`."
+            },
+            {
+              "name": "--bx-stat-card-delta-font-weight",
+              "description": "Font weight of the `delta` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`."
+            },
+            {
+              "name": "--bx-stat-card-delta-line-height",
+              "description": "Line height of the `delta` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`."
+            },
+            {
+              "name": "--bx-stat-card-delta-letter-spacing",
+              "description": "Letter spacing of the `delta` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`."
+            },
+            {
+              "name": "--bx-stat-card-footer-font-family",
+              "description": "Font family of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-family)`."
+            },
+            {
+              "name": "--bx-stat-card-footer-font-size",
+              "description": "Font size of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`."
+            },
+            {
+              "name": "--bx-stat-card-footer-font-weight",
+              "description": "Font weight of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`."
+            },
+            {
+              "name": "--bx-stat-card-footer-line-height",
+              "description": "Line height of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`."
+            },
+            {
+              "name": "--bx-stat-card-footer-letter-spacing",
+              "description": "Letter spacing of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`."
+            },
+            {
+              "name": "--bx-stat-card-label-font-family",
+              "description": "Font family of the `label` text (text style `label-m`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-stat-card-label-font-size",
+              "description": "Font size of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-size)`."
+            },
+            {
+              "name": "--bx-stat-card-label-font-weight",
+              "description": "Font weight of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`."
+            },
+            {
+              "name": "--bx-stat-card-label-line-height",
+              "description": "Line height of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`."
+            },
+            {
+              "name": "--bx-stat-card-label-letter-spacing",
+              "description": "Letter spacing of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`."
+            },
+            {
+              "name": "--bx-stat-card-value-font-family",
+              "description": "Font family of the `value` text (text style `heading-l`). Default `var(--bx-type-heading-family)`."
+            },
+            {
+              "name": "--bx-stat-card-value-font-weight",
+              "description": "Font weight of the `value` text (text style `heading-l`). Default `var(--bx-type-heading-l-weight)`."
+            },
+            {
+              "name": "--bx-stat-card-value-line-height",
+              "description": "Line height of the `value` text (text style `heading-l`). Default `var(--bx-type-heading-l-leading)`."
+            },
+            {
+              "name": "--bx-stat-card-value-letter-spacing",
+              "description": "Letter spacing of the `value` text (text style `heading-l`). Default `var(--bx-type-heading-l-tracking)`."
             }
           ]
         }
@@ -19593,6 +20674,98 @@
             {
               "name": "--bx-stepper-connector-color-complete",
               "description": "Completed line color."
+            },
+            {
+              "name": "--bx-stepper-summary-font-family",
+              "description": "Font family of the `summary` text (text style `caption-m`). Default `var(--bx-type-caption-family)`."
+            },
+            {
+              "name": "--bx-stepper-summary-font-size",
+              "description": "Font size of the `summary` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`."
+            },
+            {
+              "name": "--bx-stepper-summary-font-weight",
+              "description": "Font weight of the `summary` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`."
+            },
+            {
+              "name": "--bx-stepper-summary-line-height",
+              "description": "Line height of the `summary` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`."
+            },
+            {
+              "name": "--bx-stepper-summary-letter-spacing",
+              "description": "Letter spacing of the `summary` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`."
+            },
+            {
+              "name": "--bx-stepper-font-family",
+              "description": "Font family of the item text. Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-stepper-indicator-font-family",
+              "description": "Font family of the `indicator` text (text style `label-s`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-stepper-indicator-font-size",
+              "description": "Font size of the `indicator` text (text style `label-s`). Default `var(--bx-type-label-s-size)`."
+            },
+            {
+              "name": "--bx-stepper-indicator-font-weight",
+              "description": "Font weight of the `indicator` text (text style `label-s`). Default `var(--bx-type-label-s-weight)`."
+            },
+            {
+              "name": "--bx-stepper-indicator-line-height",
+              "description": "Line height of the `indicator` text (text style `label-s`). Default `var(--bx-type-label-s-leading)`."
+            },
+            {
+              "name": "--bx-stepper-indicator-letter-spacing",
+              "description": "Letter spacing of the `indicator` text (text style `label-s`). Default `var(--bx-type-label-s-tracking)`."
+            },
+            {
+              "name": "--bx-stepper-font-family",
+              "description": "Font family of the item text (text style `label-m`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-stepper-font-size",
+              "description": "Font size of the item text (text style `label-m`). Default `var(--bx-type-label-m-size)`."
+            },
+            {
+              "name": "--bx-stepper-font-weight",
+              "description": "Font weight of the item text (text style `label-m`). Default `var(--bx-type-label-m-weight)`."
+            },
+            {
+              "name": "--bx-stepper-line-height",
+              "description": "Line height of the item text (text style `label-m`). Default `var(--bx-type-label-m-leading)`."
+            },
+            {
+              "name": "--bx-stepper-letter-spacing",
+              "description": "Letter spacing of the item text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`."
+            },
+            {
+              "name": "--bx-stepper-description-font-family",
+              "description": "Font family of the `description` text (text style `caption-m`). Default `var(--bx-type-caption-family)`."
+            },
+            {
+              "name": "--bx-stepper-description-font-size",
+              "description": "Font size of the `description` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`."
+            },
+            {
+              "name": "--bx-stepper-description-font-weight",
+              "description": "Font weight of the `description` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`."
+            },
+            {
+              "name": "--bx-stepper-description-line-height",
+              "description": "Line height of the `description` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`."
+            },
+            {
+              "name": "--bx-stepper-description-letter-spacing",
+              "description": "Letter spacing of the `description` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`."
+            },
+            {
+              "name": "--bx-stepper-focus-ring-width",
+              "description": "Focus ring width of the steps (focus state). Default `var(--bx-border-width-strong)`."
+            },
+            {
+              "name": "--bx-stepper-focus-ring-color",
+              "description": "Focus ring color of the steps (focus state). Default `var(--bx-focus-ring)`."
             }
           ]
         }
@@ -20829,6 +22002,66 @@
             {
               "name": "--bx-tag-input-gap",
               "description": "Gap between tags."
+            },
+            {
+              "name": "--bx-tag-input-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-field-family)`."
+            },
+            {
+              "name": "--bx-tag-input-font-size",
+              "description": "Font size of the root surface. Default `var(--bx-type-field-size)`."
+            },
+            {
+              "name": "--bx-tag-input-font-weight",
+              "description": "Font weight of the root surface. Default `var(--bx-type-field-weight)`."
+            },
+            {
+              "name": "--bx-tag-input-line-height",
+              "description": "Line height of the root surface. Default `var(--bx-type-field-leading)`."
+            },
+            {
+              "name": "--bx-tag-input-letter-spacing",
+              "description": "Letter spacing of the root surface. Default `var(--bx-type-field-tracking)`."
+            },
+            {
+              "name": "--bx-tag-input-hint-font-family",
+              "description": "Font family of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-family)`."
+            },
+            {
+              "name": "--bx-tag-input-hint-font-size",
+              "description": "Font size of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`."
+            },
+            {
+              "name": "--bx-tag-input-hint-font-weight",
+              "description": "Font weight of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`."
+            },
+            {
+              "name": "--bx-tag-input-hint-line-height",
+              "description": "Line height of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`."
+            },
+            {
+              "name": "--bx-tag-input-hint-letter-spacing",
+              "description": "Letter spacing of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`."
+            },
+            {
+              "name": "--bx-tag-input-label-font-family",
+              "description": "Font family of the `label` text (text style `label-m`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-tag-input-label-font-size",
+              "description": "Font size of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-size)`."
+            },
+            {
+              "name": "--bx-tag-input-label-font-weight",
+              "description": "Font weight of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`."
+            },
+            {
+              "name": "--bx-tag-input-label-line-height",
+              "description": "Line height of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`."
+            },
+            {
+              "name": "--bx-tag-input-label-letter-spacing",
+              "description": "Letter spacing of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`."
             }
           ]
         }
@@ -21863,6 +23096,66 @@
             {
               "name": "--bx-time-field-radius",
               "description": "Field radius."
+            },
+            {
+              "name": "--bx-time-field-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-field-family)`."
+            },
+            {
+              "name": "--bx-time-field-font-size",
+              "description": "Font size of the root surface. Default `var(--bx-type-field-size)`."
+            },
+            {
+              "name": "--bx-time-field-font-weight",
+              "description": "Font weight of the root surface. Default `var(--bx-type-field-weight)`."
+            },
+            {
+              "name": "--bx-time-field-line-height",
+              "description": "Line height of the root surface. Default `var(--bx-type-field-leading)`."
+            },
+            {
+              "name": "--bx-time-field-letter-spacing",
+              "description": "Letter spacing of the root surface. Default `var(--bx-type-field-tracking)`."
+            },
+            {
+              "name": "--bx-time-field-hint-font-family",
+              "description": "Font family of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-family)`."
+            },
+            {
+              "name": "--bx-time-field-hint-font-size",
+              "description": "Font size of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`."
+            },
+            {
+              "name": "--bx-time-field-hint-font-weight",
+              "description": "Font weight of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`."
+            },
+            {
+              "name": "--bx-time-field-hint-line-height",
+              "description": "Line height of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`."
+            },
+            {
+              "name": "--bx-time-field-hint-letter-spacing",
+              "description": "Letter spacing of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`."
+            },
+            {
+              "name": "--bx-time-field-label-font-family",
+              "description": "Font family of the `label` text (text style `label-m`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-time-field-label-font-size",
+              "description": "Font size of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-size)`."
+            },
+            {
+              "name": "--bx-time-field-label-font-weight",
+              "description": "Font weight of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`."
+            },
+            {
+              "name": "--bx-time-field-label-line-height",
+              "description": "Line height of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`."
+            },
+            {
+              "name": "--bx-time-field-label-letter-spacing",
+              "description": "Letter spacing of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`."
             }
           ]
         }
@@ -22173,6 +23466,70 @@
             {
               "name": "--bx-timeline-connector-color",
               "description": "Line color."
+            },
+            {
+              "name": "--bx-timeline-font-family",
+              "description": "Font family of the item text. Default `var(--bx-type-body-family)`."
+            },
+            {
+              "name": "--bx-timeline-time-font-family",
+              "description": "Font family of the `time` text (text style `caption-m`). Default `var(--bx-type-caption-family)`."
+            },
+            {
+              "name": "--bx-timeline-time-font-size",
+              "description": "Font size of the `time` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`."
+            },
+            {
+              "name": "--bx-timeline-time-font-weight",
+              "description": "Font weight of the `time` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`."
+            },
+            {
+              "name": "--bx-timeline-time-line-height",
+              "description": "Line height of the `time` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`."
+            },
+            {
+              "name": "--bx-timeline-time-letter-spacing",
+              "description": "Letter spacing of the `time` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`."
+            },
+            {
+              "name": "--bx-timeline-heading-font-family",
+              "description": "Font family of the `heading` text (text style `label-l`). Default `var(--bx-type-label-family)`."
+            },
+            {
+              "name": "--bx-timeline-heading-font-size",
+              "description": "Font size of the `heading` text (text style `label-l`). Default `var(--bx-type-label-l-size)`."
+            },
+            {
+              "name": "--bx-timeline-heading-font-weight",
+              "description": "Font weight of the `heading` text (text style `label-l`). Default `var(--bx-type-label-l-weight)`."
+            },
+            {
+              "name": "--bx-timeline-heading-line-height",
+              "description": "Line height of the `heading` text (text style `label-l`). Default `var(--bx-type-label-l-leading)`."
+            },
+            {
+              "name": "--bx-timeline-heading-letter-spacing",
+              "description": "Letter spacing of the `heading` text (text style `label-l`). Default `var(--bx-type-label-l-tracking)`."
+            },
+            {
+              "name": "--bx-timeline-description-font-family",
+              "description": "Font family of the `description` text (text style `body-m`). Default `var(--bx-type-body-family)`."
+            },
+            {
+              "name": "--bx-timeline-description-font-size",
+              "description": "Font size of the `description` text (text style `body-m`). Default `var(--bx-type-body-m-size)`."
+            },
+            {
+              "name": "--bx-timeline-description-font-weight",
+              "description": "Font weight of the `description` text (text style `body-m`). Default `var(--bx-type-body-m-weight)`."
+            },
+            {
+              "name": "--bx-timeline-description-line-height",
+              "description": "Line height of the `description` text (text style `body-m`). Default `var(--bx-type-body-m-leading)`."
+            },
+            {
+              "name": "--bx-timeline-description-letter-spacing",
+              "description": "Letter spacing of the `description` text (text style `body-m`). Default `var(--bx-type-body-m-tracking)`."
             }
           ]
         }
@@ -22187,7 +23544,7 @@
           "name": "BxToastRegion",
           "tagName": "bx-toast-region",
           "customElement": true,
-          "description": "`<bx-toast-region>` — the fixed stack that hosts `bx-toast`s (FR-TOAST-01).\n\nOne per document, created by the first `BxToast.toast()` / `BxToastRegion.shared()`. Honors\n`--bx-safe-area-inset-*` (FR-TOAST-04) through `--bx-toast-offset`, spans the viewport width\nminus gutters on narrow screens, and caps the visible stack at `max-visible`: when full, the\noldest non-sticky toast is replaced (FR-TOAST-05). New toasts appear nearest the viewport edge.",
+          "description": "`<bx-toast-region>` — the fixed stack that hosts `bx-toast`s (FR-TOAST-01).\n\nOne per document, created by the first `BxToast.toast()` / `BxToastRegion.shared()`. Honors\n`--bx-safe-area-inset-*` (FR-TOAST-04) through `--bx-toast-region-offset`, spans the viewport width\nminus gutters on narrow screens, and caps the visible stack at `max-visible`: when full, the\noldest non-sticky toast is replaced (FR-TOAST-05). New toasts appear nearest the viewport edge.",
           "superclass": {
             "name": "BixElement"
           },
@@ -22263,11 +23620,11 @@
           ],
           "cssProperties": [
             {
-              "name": "--bx-toast-offset",
+              "name": "--bx-toast-region-offset",
               "description": "Distance from the viewport edge (adds safe-area insets)."
             },
             {
-              "name": "--bx-toast-gap",
+              "name": "--bx-toast-region-gap",
               "description": "Gap between toasts. Default `var(--bx-space-xs)`."
             }
           ]
@@ -22447,8 +23804,24 @@
               "description": "Max width."
             },
             {
-              "name": "--bx-toast-duration",
-              "description": "Enter/exit transition."
+              "name": "--bx-toast-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-body-family)`."
+            },
+            {
+              "name": "--bx-toast-font-size",
+              "description": "Font size of the root surface. Default `var(--bx-type-body-size)`."
+            },
+            {
+              "name": "--bx-toast-font-weight",
+              "description": "Font weight of the root surface. Default `var(--bx-type-body-weight)`."
+            },
+            {
+              "name": "--bx-toast-line-height",
+              "description": "Line height of the root surface. Default `var(--bx-type-body-leading)`."
+            },
+            {
+              "name": "--bx-toast-letter-spacing",
+              "description": "Letter spacing of the root surface. Default `var(--bx-type-body-tracking)`."
             }
           ]
         }
@@ -22680,6 +24053,26 @@
             {
               "name": "--bx-toggle-button-gap",
               "description": "Gap between slots. Default `var(--bx-space-2xs)`."
+            },
+            {
+              "name": "--bx-toggle-button-font-family",
+              "description": "Font family of the root surface. Default `var(--bx-type-body-family)`."
+            },
+            {
+              "name": "--bx-toggle-button-font-size",
+              "description": "Font size of the root surface. Default `var(--bx-type-body-size)`."
+            },
+            {
+              "name": "--bx-toggle-button-font-weight",
+              "description": "Font weight of the root surface. Default `var(--bx-type-body-weight)`."
+            },
+            {
+              "name": "--bx-toggle-button-line-height",
+              "description": "Line height of the root surface. Default `var(--bx-type-body-leading)`."
+            },
+            {
+              "name": "--bx-toggle-button-letter-spacing",
+              "description": "Letter spacing of the root surface. Default `var(--bx-type-body-tracking)`."
             }
           ]
         }

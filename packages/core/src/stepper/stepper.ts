@@ -24,6 +24,29 @@ import type { BxStep } from '../step/step.ts';
  * @cssprop --bx-stepper-indicator-size - Indicator size.
  * @cssprop --bx-stepper-connector-color - Line color.
  * @cssprop --bx-stepper-connector-color-complete - Completed line color.
+ * @cssprop --bx-stepper-summary-font-family - Font family of the `summary` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.
+ * @cssprop --bx-stepper-summary-font-size - Font size of the `summary` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.
+ * @cssprop --bx-stepper-summary-font-weight - Font weight of the `summary` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.
+ * @cssprop --bx-stepper-summary-line-height - Line height of the `summary` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.
+ * @cssprop --bx-stepper-summary-letter-spacing - Letter spacing of the `summary` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`.
+ * @cssprop --bx-stepper-font-family - Font family of the item text. Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-stepper-indicator-font-family - Font family of the `indicator` text (text style `label-s`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-stepper-indicator-font-size - Font size of the `indicator` text (text style `label-s`). Default `var(--bx-type-label-s-size)`.
+ * @cssprop --bx-stepper-indicator-font-weight - Font weight of the `indicator` text (text style `label-s`). Default `var(--bx-type-label-s-weight)`.
+ * @cssprop --bx-stepper-indicator-line-height - Line height of the `indicator` text (text style `label-s`). Default `var(--bx-type-label-s-leading)`.
+ * @cssprop --bx-stepper-indicator-letter-spacing - Letter spacing of the `indicator` text (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.
+ * @cssprop --bx-stepper-font-family - Font family of the item text (text style `label-m`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-stepper-font-size - Font size of the item text (text style `label-m`). Default `var(--bx-type-label-m-size)`.
+ * @cssprop --bx-stepper-font-weight - Font weight of the item text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.
+ * @cssprop --bx-stepper-line-height - Line height of the item text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.
+ * @cssprop --bx-stepper-letter-spacing - Letter spacing of the item text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.
+ * @cssprop --bx-stepper-description-font-family - Font family of the `description` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.
+ * @cssprop --bx-stepper-description-font-size - Font size of the `description` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.
+ * @cssprop --bx-stepper-description-font-weight - Font weight of the `description` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.
+ * @cssprop --bx-stepper-description-line-height - Line height of the `description` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.
+ * @cssprop --bx-stepper-description-letter-spacing - Letter spacing of the `description` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`.
+ * @cssprop --bx-stepper-focus-ring-width - Focus ring width of the steps (focus state). Default `var(--bx-border-width-strong)`.
+ * @cssprop --bx-stepper-focus-ring-color - Focus ring color of the steps (focus state). Default `var(--bx-focus-ring)`.
  */
 export class BxStepper extends BixElement {
   static override tagName = 'bx-stepper';

@@ -64,12 +64,27 @@ Free-form multi-value entry that turns typed text into removable chips. Specifie
 
 ### CSS custom properties
 
-| Property                      | Description       |
-| ----------------------------- | ----------------- |
-| `--bx-tag-input-bg`           | Background.       |
-| `--bx-tag-input-border-color` | Border color.     |
-| `--bx-tag-input-radius`       | Corner radius.    |
-| `--bx-tag-input-gap`          | Gap between tags. |
+| Property                              | Description                                                                                              |
+| ------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `--bx-tag-input-bg`                   | Background.                                                                                              |
+| `--bx-tag-input-border-color`         | Border color.                                                                                            |
+| `--bx-tag-input-radius`               | Corner radius.                                                                                           |
+| `--bx-tag-input-gap`                  | Gap between tags.                                                                                        |
+| `--bx-tag-input-font-family`          | Font family of the root surface. Default `var(--bx-type-field-family)`.                                  |
+| `--bx-tag-input-font-size`            | Font size of the root surface. Default `var(--bx-type-field-size)`.                                      |
+| `--bx-tag-input-font-weight`          | Font weight of the root surface. Default `var(--bx-type-field-weight)`.                                  |
+| `--bx-tag-input-line-height`          | Line height of the root surface. Default `var(--bx-type-field-leading)`.                                 |
+| `--bx-tag-input-letter-spacing`       | Letter spacing of the root surface. Default `var(--bx-type-field-tracking)`.                             |
+| `--bx-tag-input-hint-font-family`     | Font family of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.        |
+| `--bx-tag-input-hint-font-size`       | Font size of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.          |
+| `--bx-tag-input-hint-font-weight`     | Font weight of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.      |
+| `--bx-tag-input-hint-line-height`     | Line height of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.     |
+| `--bx-tag-input-hint-letter-spacing`  | Letter spacing of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`. |
+| `--bx-tag-input-label-font-family`    | Font family of the `label` text (text style `label-m`). Default `var(--bx-type-label-family)`.           |
+| `--bx-tag-input-label-font-size`      | Font size of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-size)`.             |
+| `--bx-tag-input-label-font-weight`    | Font weight of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.         |
+| `--bx-tag-input-label-line-height`    | Line height of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.        |
+| `--bx-tag-input-label-letter-spacing` | Letter spacing of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.    |
 
 ### Methods
 

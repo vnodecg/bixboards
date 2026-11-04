@@ -56,6 +56,7 @@ export function decimate(values: number[], limit = MAX_POINTS): number[] {
  * @cssprop --bx-sparkline-color - Line/bar color. Default `--bx-role-accent`.
  * @cssprop --bx-sparkline-stroke-width - Line width.
  * @cssprop --bx-sparkline-height - Height. Default `1.5em`.
+ * @cssprop --bx-sparkline-font-family - Font family of the root surface. Default `var(--bx-type-body-family)`.
  */
 export class BxSparkline extends BixElement {
   static override tagName = 'bx-sparkline';

@@ -50,6 +50,16 @@ export function meterBand(
  * @cssprop --bx-meter-fill-good - Color in the optimum band.
  * @cssprop --bx-meter-fill-warning - Color in the middle band.
  * @cssprop --bx-meter-fill-bad - Color in the worst band.
+ * @cssprop --bx-meter-font-family - Font family of the root surface. Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-meter-font-size - Font size of the root surface. Default `var(--bx-type-label-size)`.
+ * @cssprop --bx-meter-font-weight - Font weight of the root surface. Default `var(--bx-type-label-weight)`.
+ * @cssprop --bx-meter-line-height - Line height of the root surface. Default `var(--bx-type-label-leading)`.
+ * @cssprop --bx-meter-letter-spacing - Letter spacing of the root surface. Default `var(--bx-type-label-tracking)`.
+ * @cssprop --bx-meter-value-font-family - Font family of the `value` text (text style `label-s`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-meter-value-font-size - Font size of the `value` text (text style `label-s`). Default `var(--bx-type-label-s-size)`.
+ * @cssprop --bx-meter-value-font-weight - Font weight of the `value` text (text style `label-s`). Default `var(--bx-type-label-s-weight)`.
+ * @cssprop --bx-meter-value-line-height - Line height of the `value` text (text style `label-s`). Default `var(--bx-type-label-s-leading)`.
+ * @cssprop --bx-meter-value-letter-spacing - Letter spacing of the `value` text (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.
  */
 export class BxMeter extends BixElement {
   static override tagName = 'bx-meter';
@@ -98,11 +108,8 @@ export class BxMeter extends BixElement {
           var(--bx-motion-easing-standard);
       }
       .good {
-        --_fill: var(
-          --bx-meter-fill-good,
-          var(--bx-role-success-solid, #2a8a4b)
-        );
-        --_fg: var(--bx-role-success-fg, #1f6b3a);
+        --_fill: var(--bx-meter-fill-good, var(--bx-role-brand-solid));
+        --_fg: var(--bx-role-brand-fg);
       }
       .warning {
         --_fill: var(--bx-meter-fill-warning, var(--bx-role-warning-solid));

@@ -42,10 +42,9 @@ Right-click / long-press menu anchored at the pointer, reusing dropdown items. S
 
 ### CSS parts
 
-| Part    | Description     |
-| ------- | --------------- |
-| `menu`  | The menu part.  |
-| `panel` | The panel part. |
+| Part   | Description    |
+| ------ | -------------- |
+| `menu` | The menu part. |
 
 ### CSS custom properties
 

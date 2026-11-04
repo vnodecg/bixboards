@@ -58,11 +58,20 @@ Application navigation rail with groups, nested items, collapse-to-icons and a m
 
 ### CSS custom properties
 
-| Property                       | Description     |
-| ------------------------------ | --------------- |
-| `--bx-sidebar-width`           | Expanded width. |
-| `--bx-sidebar-width-collapsed` | Rail width.     |
-| `--bx-sidebar-bg`              | Background.     |
+| Property                        | Description                                                                                        |
+| ------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `--bx-sidebar-width`            | Expanded width.                                                                                    |
+| `--bx-sidebar-width-collapsed`  | Rail width.                                                                                        |
+| `--bx-sidebar-bg`               | Background.                                                                                        |
+| `--bx-sidebar-font-family`      | Font family of the root surface. Default `var(--bx-type-label-family)`.                            |
+| `--bx-sidebar-font-family`      | Font family of the item text. Default `var(--bx-type-label-family)`.                               |
+| `--bx-sidebar-font-family`      | Font family of the item text (text style `label-m`). Default `var(--bx-type-label-family)`.        |
+| `--bx-sidebar-font-size`        | Font size of the item text (text style `label-m`). Default `var(--bx-type-label-m-size)`.          |
+| `--bx-sidebar-font-weight`      | Font weight of the item text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.      |
+| `--bx-sidebar-line-height`      | Line height of the item text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.     |
+| `--bx-sidebar-letter-spacing`   | Letter spacing of the item text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`. |
+| `--bx-sidebar-focus-ring-width` | Focus ring width of the items (focus state). Default `var(--bx-border-width-strong)`.              |
+| `--bx-sidebar-focus-ring-color` | Focus ring color of the items (focus state). Default `var(--bx-focus-ring)`.                       |
 
 ### Methods
 

@@ -13,6 +13,12 @@ let nextId = 0;
  * @slot (default) - `bx-sidebar-item` children.
  *
  * @csspart group-label - The group label.
+ *
+ * @cssprop --bx-sidebar-group-label-font-family - Font family of the `label` text (text style `label-xs`). Default `var(--bx-type-label-family)`.
+ * @cssprop --bx-sidebar-group-label-font-size - Font size of the `label` text (text style `label-xs`). Default `var(--bx-type-label-xs-size)`.
+ * @cssprop --bx-sidebar-group-label-font-weight - Font weight of the `label` text (text style `label-xs`). Default `var(--bx-type-label-xs-weight)`.
+ * @cssprop --bx-sidebar-group-label-line-height - Line height of the `label` text (text style `label-xs`). Default `var(--bx-type-label-xs-leading)`.
+ * @cssprop --bx-sidebar-group-label-letter-spacing - Letter spacing of the `label` text (text style `label-xs`). Default `var(--bx-type-label-xs-tracking)`.
  */
 export class BxSidebarGroup extends BixElement {
   static override tagName = 'bx-sidebar-group';

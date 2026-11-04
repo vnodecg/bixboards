@@ -58,11 +58,26 @@ Segmented time entry (hours, minutes, optional seconds, AM/PM) with locale-aware
 
 ### CSS custom properties
 
-| Property                       | Description         |
-| ------------------------------ | ------------------- |
-| `--bx-time-field-bg`           | Field background.   |
-| `--bx-time-field-border-color` | Field border color. |
-| `--bx-time-field-radius`       | Field radius.       |
+| Property                               | Description                                                                                              |
+| -------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `--bx-time-field-bg`                   | Field background.                                                                                        |
+| `--bx-time-field-border-color`         | Field border color.                                                                                      |
+| `--bx-time-field-radius`               | Field radius.                                                                                            |
+| `--bx-time-field-font-family`          | Font family of the root surface. Default `var(--bx-type-field-family)`.                                  |
+| `--bx-time-field-font-size`            | Font size of the root surface. Default `var(--bx-type-field-size)`.                                      |
+| `--bx-time-field-font-weight`          | Font weight of the root surface. Default `var(--bx-type-field-weight)`.                                  |
+| `--bx-time-field-line-height`          | Line height of the root surface. Default `var(--bx-type-field-leading)`.                                 |
+| `--bx-time-field-letter-spacing`       | Letter spacing of the root surface. Default `var(--bx-type-field-tracking)`.                             |
+| `--bx-time-field-hint-font-family`     | Font family of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.        |
+| `--bx-time-field-hint-font-size`       | Font size of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.          |
+| `--bx-time-field-hint-font-weight`     | Font weight of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.      |
+| `--bx-time-field-hint-line-height`     | Line height of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.     |
+| `--bx-time-field-hint-letter-spacing`  | Letter spacing of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`. |
+| `--bx-time-field-label-font-family`    | Font family of the `label` text (text style `label-m`). Default `var(--bx-type-label-family)`.           |
+| `--bx-time-field-label-font-size`      | Font size of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-size)`.             |
+| `--bx-time-field-label-font-weight`    | Font weight of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.         |
+| `--bx-time-field-label-line-height`    | Line height of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.        |
+| `--bx-time-field-label-letter-spacing` | Letter spacing of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.    |
 
 ### Methods
 

@@ -64,7 +64,7 @@ export class BxSidebarItem extends BixElement {
             var(--bx-border-width-strong)
           )
           solid var(--bx-sidebar-focus-ring-color, var(--bx-focus-ring));
-        outline-offset: -2px;
+        outline-offset: calc(var(--bx-border-width-strong) * -1);
       }
       :host([active]) .item {
         background: var(
@@ -72,7 +72,7 @@ export class BxSidebarItem extends BixElement {
           var(--bx-role-brand-subtle)
         );
         color: var(--bx-role-brand-fg);
-        font-weight: 600;
+        font-weight: bolder;
       }
       .item[aria-disabled='true'] {
         opacity: 0.5;
