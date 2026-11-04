@@ -215,8 +215,16 @@ export class BxToggleButton extends FormAssociatedMixin(BixElement) {
       );
   }
 
+  #defaultPressed?: boolean;
+
+  override connectedCallback(): void {
+    super.connectedCallback();
+    // `pressed` reflects, so the attribute stops being the initial value once toggled.
+    this.#defaultPressed ??= this.hasAttribute('pressed');
+  }
+
   formResetCallback(): void {
-    this.pressed = this.hasAttribute('pressed');
+    this.pressed = this.#defaultPressed ?? false;
   }
 
   formStateRestoreCallback(state: string | null): void {
