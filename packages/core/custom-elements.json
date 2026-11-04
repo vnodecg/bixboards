@@ -7410,6 +7410,291 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/file-upload/file-upload.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxFileUpload",
+          "tagName": "bx-file-upload",
+          "customElement": true,
+          "formAssociated": true,
+          "description": "`<bx-file-upload>` — drop zone and picker with a file list (docs/features/core/file-upload.md).\n\nBrowse, drag-and-drop and paste all route through one validation path (FR-FILEUPLOAD-02):\n`accept`, `max-size`, `max-files` and `multiple`; refused files are reported once through\n`bx-reject` (`detail.reasons`) and never enter the list. Form-associated: the files are put in\nthe form's `FormData` under `name` via `ElementInternals` (FR-FILEUPLOAD-01). Nothing is uploaded\nunless the `upload` property is set; then every accepted file starts uploading, shows\n`bx-progress-bar` progress, and removing the row aborts it through an `AbortSignal`\n(FR-FILEUPLOAD-03). Sizes use `bx-format-bytes` (FR-FILEUPLOAD-04). The per-file `file` slot\ntemplate and `directory` selection are limited: `directory` sets `webkitdirectory`, and the\n`file` slot is not implemented.",
+          "superclass": {
+            "name": "FormAssociatedMixin"
+          },
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "accept",
+              "fieldName": "accept",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "multiple",
+              "fieldName": "multiple",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "max-size",
+              "fieldName": "maxSize",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "name": "max-files",
+              "fieldName": "maxFiles",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "name": "directory",
+              "fieldName": "directory",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "required",
+              "fieldName": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "accept",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "accept"
+            },
+            {
+              "kind": "field",
+              "name": "multiple",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "multiple",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "maxSize",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "max-size"
+            },
+            {
+              "kind": "field",
+              "name": "maxFiles",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "max-files"
+            },
+            {
+              "kind": "field",
+              "name": "directory",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "directory"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "required",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "upload",
+              "type": {
+                "text": "Uploader"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "focus",
+              "parameters": [
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "FocusOptions"
+                  },
+                  "optional": true
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "browse",
+              "description": "Opens the native file picker.",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "description": "Selection changed. `detail.files`."
+            },
+            {
+              "name": "bx-reject",
+              "description": "Files failed validation. `detail.reasons`."
+            },
+            {
+              "name": "bx-upload-progress",
+              "description": "`detail.file`, `detail.loaded`, `detail.total`."
+            },
+            {
+              "name": "bx-upload-complete",
+              "description": "A file finished uploading. `detail.file`."
+            },
+            {
+              "name": "bx-upload-error",
+              "description": "A file failed to upload. `detail.file`, `detail.error`."
+            },
+            {
+              "name": "bx-remove",
+              "description": "A file was removed. `detail.file`."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "Drop zone content."
+            },
+            {
+              "name": "trigger",
+              "description": "Replaces the browse button."
+            },
+            {
+              "name": "hint",
+              "description": "Accepted types and limits."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "dropzone",
+              "description": "Drop target."
+            },
+            {
+              "name": "trigger",
+              "description": "Browse button."
+            },
+            {
+              "name": "file-list",
+              "description": "The list of files."
+            },
+            {
+              "name": "file",
+              "description": "One file row."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-file-upload-bg",
+              "description": "Drop zone background."
+            },
+            {
+              "name": "--bx-file-upload-border-color",
+              "description": "Drop zone border color."
+            },
+            {
+              "name": "--bx-file-upload-radius",
+              "description": "Drop zone radius."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/format-bytes/format-bytes.ts",
       "declarations": [
         {

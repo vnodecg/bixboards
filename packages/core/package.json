@@ -294,6 +294,14 @@
       "types": "./dist/empty-state/define.d.ts",
       "default": "./dist/empty-state/define.js"
     },
+    "./file-upload": {
+      "types": "./dist/file-upload/index.d.ts",
+      "default": "./dist/file-upload/index.js"
+    },
+    "./file-upload/define": {
+      "types": "./dist/file-upload/define.d.ts",
+      "default": "./dist/file-upload/define.js"
+    },
     "./format-bytes": {
       "types": "./dist/format-bytes/index.d.ts",
       "default": "./dist/format-bytes/index.js"

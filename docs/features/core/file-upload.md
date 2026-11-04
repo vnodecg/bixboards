@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core`                                |
 | **Category**        | Form                                             |
 | **Tag**             | `bx-file-upload`                                 |
-| **Status**          | Proposed (not implemented)                       |
+| **Status**          | Implemented                                      |
 | **Form-associated** | Yes (ElementInternals)                           |
 | **Depends on**      | `button`, `progress-bar`, `format-bytes`, `icon` |
 
@@ -56,23 +56,20 @@ Drop zone and picker with file list, validation, progress and removal. Specified
 
 ### CSS parts
 
-| Part       | Description       |
-| ---------- | ----------------- |
-| `dropzone` | Drop target.      |
-| `trigger`  | Browse button.    |
-| `list`     | File list.        |
-| `item`     | A file row.       |
-| `progress` | Row progress bar. |
+| Part        | Description        |
+| ----------- | ------------------ |
+| `dropzone`  | Drop target.       |
+| `trigger`   | Browse button.     |
+| `file-list` | The list of files. |
+| `file`      | One file row.      |
 
 ### CSS custom properties
 
-| Property                              | Description                                                              |
-| ------------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-file-upload-dropzone-border`    | Dashed border color. Default `--bx-border-strong`.                       |
-| `--bx-file-upload-dropzone-bg-active` | Background while dragging over.                                          |
-| `--bx-file-upload-focus-ring-width`   | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-file-upload-focus-ring-color`   | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-file-upload-font-family`        | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                        | Description             |
+| ------------------------------- | ----------------------- |
+| `--bx-file-upload-bg`           | Drop zone background.   |
+| `--bx-file-upload-border-color` | Drop zone border color. |
+| `--bx-file-upload-radius`       | Drop zone radius.       |
 
 ### Methods
 

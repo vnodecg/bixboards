@@ -32,6 +32,7 @@ export * from './generated/bx-drawer.ts';
 export * from './generated/bx-dropdown.ts';
 export * from './generated/bx-dropdown-item.ts';
 export * from './generated/bx-empty-state.ts';
+export * from './generated/bx-file-upload.ts';
 export * from './generated/bx-format-bytes.ts';
 export * from './generated/bx-format-date.ts';
 export * from './generated/bx-format-number.ts';

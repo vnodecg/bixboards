@@ -63,6 +63,8 @@ export { default as BxDropdownItem } from './generated/BxDropdownItem.svelte';
 export type { BxDropdownItemProps, BxDropdownItemSlot } from './generated/BxDropdownItem.svelte';
 export { default as BxEmptyState } from './generated/BxEmptyState.svelte';
 export type { BxEmptyStateProps, BxEmptyStateSlot } from './generated/BxEmptyState.svelte';
+export { default as BxFileUpload } from './generated/BxFileUpload.svelte';
+export type { BxFileUploadProps, BxFileUploadSlot } from './generated/BxFileUpload.svelte';
 export { default as BxFormatBytes } from './generated/BxFormatBytes.svelte';
 export type { BxFormatBytesProps, BxFormatBytesSlot } from './generated/BxFormatBytes.svelte';
 export { default as BxFormatDate } from './generated/BxFormatDate.svelte';
