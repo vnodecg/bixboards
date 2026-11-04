@@ -218,6 +218,8 @@ const MARKUP: Record<string, string | string[]> = {
   'bx-date-picker':
     '<bx-date-picker label="D" value="2024-05-09"></bx-date-picker>',
   'bx-time-field': '<bx-time-field label="T" value="09:30"></bx-time-field>',
+  'bx-sidebar':
+    '<bx-sidebar mode="inline"><bx-sidebar-item icon="info" active>A</bx-sidebar-item></bx-sidebar>',
   'bx-input':
     '<bx-input label="Label" hint="Hint" clearable value="x"></bx-input>',
   'bx-number-input':

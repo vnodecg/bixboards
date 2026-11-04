@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core`                            |
 | **Category**        | Navigation                                   |
 | **Tag**             | `bx-sidebar`                                 |
-| **Status**          | Proposed (not implemented)                   |
+| **Status**          | Implemented                                  |
 | **Form-associated** | No                                           |
 | **Depends on**      | `page`, `drawer`, `tooltip`, `badge`, `icon` |
 
@@ -48,27 +48,21 @@ Application navigation rail with groups, nested items, collapse-to-icons and a m
 
 ### CSS parts
 
-| Part          | Description           |
-| ------------- | --------------------- |
-| `base`        | The base part.        |
-| `header`      | The header part.      |
-| `content`     | The content part.     |
-| `footer`      | The footer part.      |
-| `toggle`      | Collapse button.      |
-| `item`        | The item part.        |
-| `group-label` | The group-label part. |
+| Part      | Description       |
+| --------- | ----------------- |
+| `base`    | The base part.    |
+| `header`  | The header part.  |
+| `content` | The content part. |
+| `footer`  | The footer part.  |
+| `toggle`  | Collapse button.  |
 
 ### CSS custom properties
 
-| Property                        | Description                                                              |
-| ------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-sidebar-width`            | Expanded width.                                                          |
-| `--bx-sidebar-width-collapsed`  | Rail width.                                                              |
-| `--bx-sidebar-bg`               | Background.                                                              |
-| `--bx-sidebar-item-bg-active`   | Active item background.                                                  |
-| `--bx-sidebar-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-sidebar-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-sidebar-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                       | Description     |
+| ------------------------------ | --------------- |
+| `--bx-sidebar-width`           | Expanded width. |
+| `--bx-sidebar-width-collapsed` | Rail width.     |
+| `--bx-sidebar-bg`              | Background.     |
 
 ### Methods
 

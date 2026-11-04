@@ -558,6 +558,30 @@
       "types": "./dist/select/define.d.ts",
       "default": "./dist/select/define.js"
     },
+    "./sidebar": {
+      "types": "./dist/sidebar/index.d.ts",
+      "default": "./dist/sidebar/index.js"
+    },
+    "./sidebar-group": {
+      "types": "./dist/sidebar-group/index.d.ts",
+      "default": "./dist/sidebar-group/index.js"
+    },
+    "./sidebar-group/define": {
+      "types": "./dist/sidebar-group/define.d.ts",
+      "default": "./dist/sidebar-group/define.js"
+    },
+    "./sidebar-item": {
+      "types": "./dist/sidebar-item/index.d.ts",
+      "default": "./dist/sidebar-item/index.js"
+    },
+    "./sidebar-item/define": {
+      "types": "./dist/sidebar-item/define.d.ts",
+      "default": "./dist/sidebar-item/define.js"
+    },
+    "./sidebar/define": {
+      "types": "./dist/sidebar/define.d.ts",
+      "default": "./dist/sidebar/define.js"
+    },
     "./skeleton": {
       "types": "./dist/skeleton/index.d.ts",
       "default": "./dist/skeleton/index.js"

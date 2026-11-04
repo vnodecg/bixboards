@@ -16261,6 +16261,534 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/sidebar-group/sidebar-group.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxSidebarGroup",
+          "tagName": "bx-sidebar-group",
+          "customElement": true,
+          "description": "`<bx-sidebar-group>` — a labelled group of `bx-sidebar-item`s inside a `bx-sidebar`.\n\n`role=\"group\"` named by its visible `label`; the label is hidden while the sidebar is collapsed\n(the owning sidebar mirrors `collapsed`).",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "collapsed",
+              "fieldName": "collapsed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "collapsed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "collapsed",
+              "reflects": true
+            }
+          ],
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "`bx-sidebar-item` children."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "group-label",
+              "description": "The group label."
+            }
+          ],
+          "cssProperties": []
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/sidebar-item/sidebar-item.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxSidebarItem",
+          "tagName": "bx-sidebar-item",
+          "customElement": true,
+          "description": "`<bx-sidebar-item>` — one navigation entry of a `bx-sidebar` (FR-SIDEBAR-03).\n\nA link with `href` (a real `<a>`, `aria-current=\"page\"` when `active`), otherwise a button. Items\nin the `children` slot make it a disclosure (`aria-expanded`); nesting is meant for two levels.\nIn a collapsed sidebar only the icon shows and a `bx-tooltip` carries the label (FR-SIDEBAR-02);\na parent item's children are not shown in a flyout there — activating the parent expands the\nsidebar instead. Activation fires a cancelable `bx-navigate` (`detail.href`).",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "href",
+              "fieldName": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "active",
+              "fieldName": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "icon",
+              "fieldName": "icon",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "badge",
+              "fieldName": "badge",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "expanded",
+              "fieldName": "expanded",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "collapsed",
+              "fieldName": "collapsed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Accessible/tooltip label; defaults to the text content."
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "href"
+            },
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "active",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "icon",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "icon"
+            },
+            {
+              "kind": "field",
+              "name": "badge",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "badge"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "expanded",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "expanded",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "collapsed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "collapsed",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Accessible/tooltip label; defaults to the text content.",
+              "attribute": "label"
+            }
+          ],
+          "events": [
+            {
+              "name": "bx-navigate",
+              "description": "Link activated. Cancelable. `detail.href`."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "Label."
+            },
+            {
+              "name": "icon",
+              "description": "Icon; overrides `icon`."
+            },
+            {
+              "name": "children",
+              "description": "Nested `bx-sidebar-item`s."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "item",
+              "description": "The link/button."
+            },
+            {
+              "name": "label",
+              "description": "The label."
+            },
+            {
+              "name": "badge",
+              "description": "The badge."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-sidebar-item-bg-active",
+              "description": "Active item background."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/sidebar/sidebar.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxSidebar",
+          "tagName": "bx-sidebar",
+          "customElement": true,
+          "description": "`<bx-sidebar>` — application navigation rail (docs/features/core/sidebar.md).\n\nA `<nav>` landmark holding `bx-sidebar-group`s and `bx-sidebar-item`s between `header` and\n`footer` slots. `collapsed` shrinks it to an icon-only rail (items then show a tooltip);\n`persist-key` remembers that in `localStorage` (guarded, so private modes still work). In `overlay`\nmode — chosen with `mode`, or automatically when the viewport is under 48rem — it becomes an\noff-canvas panel controlled by `open`, with a backdrop, Escape to close, initial focus inside and\na Tab loop (FR-SIDEBAR-04), returning focus to where it came from. Inside `bx-page`'s navigation\nslot (FR-SIDEBAR-01) use `mode=\"inline\"` so `bx-page`'s own drawer handles narrow widths, rather\nthan nesting two overlays. Collapsed parents do not open a flyout menu: activating one expands\nthe sidebar.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "collapsed",
+              "fieldName": "collapsed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "collapsible",
+              "fieldName": "collapsible",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true"
+            },
+            {
+              "name": "mode",
+              "fieldName": "mode",
+              "type": {
+                "text": "'inline' | 'overlay'"
+              }
+            },
+            {
+              "name": "open",
+              "fieldName": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "width",
+              "fieldName": "width",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "persist-key",
+              "fieldName": "persistKey",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Main navigation'"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "collapsed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "collapsed",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "collapsible",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "collapsible"
+            },
+            {
+              "kind": "field",
+              "name": "mode",
+              "type": {
+                "text": "'inline' | 'overlay'"
+              },
+              "attribute": "mode"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "width"
+            },
+            {
+              "kind": "field",
+              "name": "persistKey",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "persist-key"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Main navigation'",
+              "attribute": "label"
+            },
+            {
+              "kind": "method",
+              "name": "toggle",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "collapse",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "expand",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "hide",
+              "parameters": [],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "bx-collapse-change",
+              "description": "`collapsed` changed. `detail.collapsed`."
+            },
+            {
+              "name": "bx-show",
+              "description": "Overlay is opening. Cancelable."
+            },
+            {
+              "name": "bx-hide",
+              "description": "Overlay is closing. Cancelable."
+            },
+            {
+              "name": "bx-navigate",
+              "description": "From `bx-sidebar-item`. `detail.href`, cancelable."
+            }
+          ],
+          "slots": [
+            {
+              "name": "header",
+              "description": "Brand / workspace switcher."
+            },
+            {
+              "name": "",
+              "description": "`bx-sidebar-group` / `bx-sidebar-item`."
+            },
+            {
+              "name": "footer",
+              "description": "User menu."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "base",
+              "description": "The base part."
+            },
+            {
+              "name": "header",
+              "description": "The header part."
+            },
+            {
+              "name": "content",
+              "description": "The content part."
+            },
+            {
+              "name": "footer",
+              "description": "The footer part."
+            },
+            {
+              "name": "toggle",
+              "description": "Collapse button."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-sidebar-width",
+              "description": "Expanded width."
+            },
+            {
+              "name": "--bx-sidebar-width-collapsed",
+              "description": "Rail width."
+            },
+            {
+              "name": "--bx-sidebar-bg",
+              "description": "Background."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/skeleton/skeleton.ts",
       "declarations": [
         {

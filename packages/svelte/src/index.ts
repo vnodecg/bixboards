@@ -129,6 +129,12 @@ export { default as BxSegmentedControl } from './generated/BxSegmentedControl.sv
 export type { BxSegmentedControlProps, BxSegmentedControlSlot } from './generated/BxSegmentedControl.svelte';
 export { default as BxSelect } from './generated/BxSelect.svelte';
 export type { BxSelectProps, BxSelectSlot } from './generated/BxSelect.svelte';
+export { default as BxSidebar } from './generated/BxSidebar.svelte';
+export type { BxSidebarProps, BxSidebarSlot } from './generated/BxSidebar.svelte';
+export { default as BxSidebarGroup } from './generated/BxSidebarGroup.svelte';
+export type { BxSidebarGroupProps, BxSidebarGroupSlot } from './generated/BxSidebarGroup.svelte';
+export { default as BxSidebarItem } from './generated/BxSidebarItem.svelte';
+export type { BxSidebarItemProps, BxSidebarItemSlot } from './generated/BxSidebarItem.svelte';
 export { default as BxSkeleton } from './generated/BxSkeleton.svelte';
 export type { BxSkeletonProps, BxSkeletonSlot } from './generated/BxSkeleton.svelte';
 export { default as BxSlider } from './generated/BxSlider.svelte';
