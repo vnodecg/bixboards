@@ -223,6 +223,8 @@ const MARKUP: Record<string, string | string[]> = {
   'bx-command-palette': '<bx-command-palette open></bx-command-palette>',
   'bx-notification-center':
     '<bx-notification-center unread-count="3" open></bx-notification-center>',
+  'bx-chart':
+    '<bx-chart x="m" style="inline-size: 30rem" height="10rem"></bx-chart>',
   'bx-input':
     '<bx-input label="Label" hint="Hint" clearable value="x"></bx-input>',
   'bx-number-input':
@@ -248,6 +250,10 @@ const MARKUP: Record<string, string | string[]> = {
 
 // Hooks a static fixture cannot exercise. Keep this list short and give a reason for each.
 const NOT_EXERCISED: [RegExp, string][] = [
+  [
+    /^bx-chart --bx-chart-grid-color$/,
+    'gridlines are drawn asynchronously after the first visibility and resize pass; covered in chart.test.ts',
+  ],
   [
     /^bx-color-picker --bx-color-picker-format-select-line-height$/,
     'a native <select> ignores line-height',

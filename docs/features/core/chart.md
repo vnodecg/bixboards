@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core`                                      |
 | **Category**        | Charts                                                 |
 | **Tag**             | `bx-chart`                                             |
-| **Status**          | Proposed (not implemented)                             |
+| **Status**          | Implemented                                            |
 | **Form-associated** | No                                                     |
 | **Depends on**      | `skeleton`, `resize-observer`, `intersection-observer` |
 
@@ -67,15 +67,11 @@ Declarative chart element wrapping a charting library: line, area, bar, radial, 
 
 ### CSS custom properties
 
-| Property                      | Description                                                              |
-| ----------------------------- | ------------------------------------------------------------------------ |
-| `--bx-chart-color-1…8`        | Series colors. Default the categorical token ramp.                       |
-| `--bx-chart-grid-color`       | Gridlines.                                                               |
-| `--bx-chart-height`           | Height.                                                                  |
-| `--bx-chart-font-family`      | -                                                                        |
-| `--bx-chart-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-chart-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-chart-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                | Description                                                     |
+| ----------------------- | --------------------------------------------------------------- |
+| `--bx-chart-color-1`    | Series color 1 (…8 follow). Default the categorical token ramp. |
+| `--bx-chart-grid-color` | Gridlines.                                                      |
+| `--bx-chart-height`     | Height.                                                         |
 
 ### Methods
 

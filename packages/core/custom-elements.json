@@ -3180,6 +3180,324 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/chart/chart.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "BxChart",
+          "tagName": "bx-chart",
+          "customElement": true,
+          "description": "`<bx-chart>` — declarative chart element (docs/features/core/chart.md).\n\nRows go in `data`, the category/x field in `x`, and value fields in `series`. Drawing is\ndelegated to a  (FR-CHART-01): the built-in dependency-free `svg` adapter\ndraws `line`, `area`, `bar`, `stacked-bar`, `bar-list`, `scatter` and `radial`; the remaining\ntypes (`radar`, `heatmap`, `funnel`, `sankey`, `combo`) need a registered adapter such as an\nECharts wrapper (none ships), and without one the chart shows a message and the data table.\nColours are `--bx-chart-color-1…8` custom properties defaulting to role tokens, so theme and\nlight/dark changes apply with no re-render (FR-CHART-02). Resize goes through the shared\n`ResizeObserver`, and the first draw waits until the element is visible (FR-CHART-03). A visually\nhidden data table is always present (FR-CHART-04); long line/scatter series are down-sampled with\nLTTB past 800 points (FR-CHART-05). The legend toggles series; a hover tooltip reports the\nnearest category. Points are not individually keyboard-focusable — the data table is the\nnon-pointer way to read values.",
+          "superclass": {
+            "name": "BixElement"
+          },
+          "attributes": [
+            {
+              "name": "type",
+              "fieldName": "type",
+              "type": {
+                "text": "ChartType"
+              },
+              "default": "'line'"
+            },
+            {
+              "name": "x",
+              "fieldName": "x",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "legend",
+              "fieldName": "legend",
+              "type": {
+                "text": "'none' | 'top' | 'bottom' | 'start' | 'end'"
+              },
+              "default": "'bottom'"
+            },
+            {
+              "name": "tooltip",
+              "fieldName": "tooltip",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true"
+            },
+            {
+              "name": "stacked",
+              "fieldName": "stacked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "smooth",
+              "fieldName": "smooth",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "animate",
+              "fieldName": "animate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true"
+            },
+            {
+              "name": "height",
+              "fieldName": "height",
+              "type": {
+                "text": "string"
+              },
+              "default": "'16rem'"
+            },
+            {
+              "name": "palette",
+              "fieldName": "palette",
+              "type": {
+                "text": "string"
+              },
+              "default": "'categorical'"
+            },
+            {
+              "name": "loading",
+              "fieldName": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "adapter",
+              "fieldName": "adapter",
+              "type": {
+                "text": "string"
+              },
+              "default": "'svg'"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "ChartType"
+              },
+              "default": "'line'",
+              "attribute": "type",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "data",
+              "type": {
+                "text": "Row[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "x",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "x"
+            },
+            {
+              "kind": "field",
+              "name": "series",
+              "type": {
+                "text": "(string | Series)[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "legend",
+              "type": {
+                "text": "'none' | 'top' | 'bottom' | 'start' | 'end'"
+              },
+              "default": "'bottom'",
+              "attribute": "legend"
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "tooltip"
+            },
+            {
+              "kind": "field",
+              "name": "stacked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "stacked"
+            },
+            {
+              "kind": "field",
+              "name": "smooth",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "smooth"
+            },
+            {
+              "kind": "field",
+              "name": "animate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "animate"
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "string"
+              },
+              "default": "'16rem'",
+              "attribute": "height"
+            },
+            {
+              "kind": "field",
+              "name": "palette",
+              "type": {
+                "text": "string"
+              },
+              "default": "'categorical'",
+              "attribute": "palette"
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "adapter",
+              "type": {
+                "text": "string"
+              },
+              "default": "'svg'",
+              "attribute": "adapter"
+            }
+          ],
+          "events": [
+            {
+              "name": "bx-point-click",
+              "description": "A point/bar/slice was clicked. `detail.series`, `detail.datum`."
+            },
+            {
+              "name": "bx-point-hover",
+              "description": "The pointer moved to a category. `detail.index`, `detail.datum`."
+            },
+            {
+              "name": "bx-legend-toggle",
+              "description": "`detail.series`, `detail.visible`."
+            },
+            {
+              "name": "bx-ready",
+              "description": "The adapter instance was created."
+            },
+            {
+              "name": "bx-unsupported",
+              "description": "The chosen adapter cannot draw `type`. `detail.type`."
+            }
+          ],
+          "slots": [
+            {
+              "name": "title",
+              "description": "Chart title."
+            },
+            {
+              "name": "legend",
+              "description": "Custom legend."
+            },
+            {
+              "name": "empty",
+              "description": "Shown when there is no data."
+            },
+            {
+              "name": "table",
+              "description": "Optional replacement for the generated data table."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "base",
+              "description": "The base part."
+            },
+            {
+              "name": "canvas",
+              "description": "Rendering surface."
+            },
+            {
+              "name": "legend",
+              "description": "The legend part."
+            },
+            {
+              "name": "tooltip",
+              "description": "The tooltip part."
+            },
+            {
+              "name": "title",
+              "description": "The title part."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--bx-chart-color-1",
+              "description": "Series color 1 (…8 follow). Default the categorical token ramp."
+            },
+            {
+              "name": "--bx-chart-grid-color",
+              "description": "Gridlines."
+            },
+            {
+              "name": "--bx-chart-height",
+              "description": "Height."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/checkbox/checkbox.ts",
       "declarations": [
         {

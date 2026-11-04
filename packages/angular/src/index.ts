@@ -13,6 +13,7 @@ export * from './generated/bx-callout.ts';
 export * from './generated/bx-card.ts';
 export * from './generated/bx-carousel.ts';
 export * from './generated/bx-carousel-item.ts';
+export * from './generated/bx-chart.ts';
 export * from './generated/bx-checkbox.ts';
 export * from './generated/bx-chip.ts';
 export * from './generated/bx-close-button.ts';
