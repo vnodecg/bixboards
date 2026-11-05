@@ -1,3 +1,5 @@
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist-mono';
 @import './generated/tokens.css';
 
 *,
@@ -9,6 +11,9 @@ html {
   scroll-behavior: smooth;
 }
 body {
+  /* Decorative hairlines: the subtle border token, softened. Control borders keep --bx-border-base
+     (WCAG 3:1 non-text contrast); only chrome that is not a control uses this. */
+  --line: color-mix(in srgb, var(--bx-border-subtle) 70%, transparent);
   margin: 0;
   background: var(--bx-surface-base);
   color: var(--bx-text-primary);
@@ -34,7 +39,7 @@ header.site {
   z-index: 10;
   background: color-mix(in srgb, var(--bx-surface-base) 85%, transparent);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--bx-border-subtle);
+  border-bottom: 1px solid var(--line);
 }
 header.site .wrap {
   display: flex;
@@ -98,7 +103,7 @@ section.block p.lead {
 }
 .tile {
   display: block;
-  border: 1px solid var(--bx-border-subtle);
+  border: 1px solid var(--line);
   border-radius: var(--bx-radius-l);
   padding: 1.25rem;
   background: var(--bx-surface-subtle);
@@ -127,7 +132,7 @@ pre.code {
   overflow-x: auto;
 }
 footer.site {
-  border-top: 1px solid var(--bx-border-subtle);
+  border-top: 1px solid var(--line);
   padding-block: 2rem;
   color: var(--bx-text-secondary);
 }
@@ -138,7 +143,7 @@ footer.site {
   margin-bottom: 1.5rem;
 }
 .chip {
-  border: 1px solid var(--bx-border-subtle);
+  border: 1px solid var(--line);
   border-radius: 999px;
   padding: 0.25rem 0.75rem;
   font-size: 0.85rem;
@@ -246,7 +251,7 @@ section.block.alt {
   color: var(--bx-text-secondary);
 }
 .tile:hover {
-  border-color: var(--bx-border-strong);
+  border-color: var(--bx-border-subtle);
   text-decoration: none;
 }
 .filter input {
@@ -256,7 +261,7 @@ section.block.alt {
   font: inherit;
   color: var(--bx-text-primary);
   background: var(--bx-surface-base);
-  border: 1px solid var(--bx-border-strong);
+  border: 1px solid var(--bx-border-base);
   border-radius: var(--bx-radius-m);
 }
 .category h2 {
@@ -313,7 +318,7 @@ section.block.alt {
   scroll-margin-top: 4.5rem;
   margin: 2.5rem 0 0.75rem;
   padding-block-start: 1rem;
-  border-top: 1px solid var(--bx-border-subtle);
+  border-top: 1px solid var(--line);
 }
 .doc .lead {
   color: var(--bx-text-secondary);
@@ -329,7 +334,7 @@ section.block.alt {
 }
 .stage {
   padding: 1.5rem;
-  border: 1px solid var(--bx-border-subtle);
+  border: 1px solid var(--line);
   border-radius: var(--bx-radius-l);
   background: var(--bx-surface-base);
   overflow: auto;
@@ -382,7 +387,7 @@ td {
   text-align: start;
   vertical-align: top;
   padding: 0.5rem 0.75rem;
-  border-bottom: 1px solid var(--bx-border-subtle);
+  border-bottom: 1px solid var(--line);
 }
 th {
   color: var(--bx-text-secondary);
@@ -395,7 +400,7 @@ th {
   gap: 1rem;
   margin-block-start: 3rem;
   padding-block-start: 1rem;
-  border-top: 1px solid var(--bx-border-subtle);
+  border-top: 1px solid var(--line);
 }
 .prose {
   max-inline-size: 52rem;
@@ -483,7 +488,7 @@ section.block h2 {
 
 /* Window frame that holds a live template or block. */
 .frame {
-  border: 1px solid var(--bx-border-subtle);
+  border: 1px solid var(--line);
   border-radius: var(--bx-radius-l);
   background: var(--bx-surface-subtle);
   box-shadow: var(--bx-shadow-m);
@@ -494,7 +499,7 @@ section.block h2 {
   align-items: center;
   gap: 0.5rem;
   padding: 0.625rem 1rem;
-  border-bottom: 1px solid var(--bx-border-subtle);
+  border-bottom: 1px solid var(--line);
   background: var(--bx-surface-base);
   font-size: 0.875rem;
   color: var(--bx-text-secondary);
@@ -532,7 +537,7 @@ section.block h2 {
 }
 .panel {
   padding: 1rem;
-  border: 1px solid var(--bx-border-subtle);
+  border: 1px solid var(--line);
   border-radius: var(--bx-radius-m);
   background: var(--bx-surface-base);
   min-inline-size: 0;
@@ -564,7 +569,7 @@ section.block h2 {
 .auth .or::after {
   content: '';
   flex: 1;
-  border-top: 1px solid var(--bx-border-subtle);
+  border-top: 1px solid var(--line);
 }
 .board {
   display: grid;
@@ -676,14 +681,14 @@ header.site .tools {
   gap: 0.5rem;
   margin-block-end: 1.5rem;
   padding: 0.25rem 0.75rem 0.25rem 0.375rem;
-  border: 1px solid var(--bx-border-subtle);
+  border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--bx-surface-base);
   color: var(--bx-text-secondary);
   font-size: 0.875rem;
 }
 .announce:hover {
-  border-color: var(--bx-border-strong);
+  border-color: var(--bx-border-subtle);
   text-decoration: none;
 }
 .install {
@@ -692,7 +697,7 @@ header.site .tools {
   gap: 0.5rem;
   margin-block-start: 1.5rem;
   padding: 0.25rem 0.5rem 0.25rem 1rem;
-  border: 1px solid var(--bx-border-subtle);
+  border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--bx-surface-base);
   color: var(--bx-text-secondary);
@@ -749,7 +754,7 @@ section.block > .wrap > .eyebrow {
   justify-items: center;
   gap: 0.5rem;
   padding: 3rem 1.5rem;
-  border: 1px solid var(--bx-border-subtle);
+  border: 1px solid var(--line);
   border-radius: var(--bx-radius-l);
   text-align: center;
   background:
@@ -794,7 +799,7 @@ footer.site .foot nav a {
 }
 footer.site .legal {
   padding-block-start: 1rem;
-  border-top: 1px solid var(--bx-border-subtle);
+  border-top: 1px solid var(--line);
   font-size: 0.875rem;
 }
 @media (max-width: 40rem) {
