@@ -8,14 +8,14 @@ const href = (slug: string) => `${base}/components/${slug}/`;
 <Base title="Bixboards">
   <section class="hero wrap">
     <p class="eyebrow">Web components · Lit · Design tokens</p>
-    <h1>Web components for modern dashboards</h1>
+    <h1>Web components for <em>modern dashboards</em></h1>
     <p>
       {components.length} accessible, themeable components ({elementCount} elements) that work in any
       framework. Ship dashboards, boards and apps faster.
     </p>
     <div class="cta">
-      <bx-button href={`${base}/getting-started/`}>Get started</bx-button>
-      <bx-button appearance="outlined" href={`${base}/components/`}>Browse components</bx-button>
+      <bx-button pill href={`${base}/getting-started/`}>Get started</bx-button>
+      <bx-button pill appearance="outlined" href={`${base}/components/`}>Browse components</bx-button>
     </div>
     <dl class="stats">
       <div><dt>Components</dt><dd>{components.length}</dd></div>
@@ -173,7 +173,7 @@ const href = (slug: string) => `${base}/components/${slug}/`;
       <div class="grid">
         {
           templates.map((t) => (
-            <a class="tile" href={`${base}/templates/`}>
+            <a class="tile" href={`${base}/templates/#${t.slug}`}>
               <h3>{t.name}</h3>
               <p>{t.blurb}</p>
             </a>
