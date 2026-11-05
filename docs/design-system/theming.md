@@ -44,7 +44,7 @@ From least to most invasive; use the lowest level that does the job.
 | 3. Semantic tokens              | `tokens` (`surface`, `text`, `border`, `focus`, role overrides, …)                          | Different neutrals, elevated surfaces |
 | 4. Shape, type, density, motion | `foundation` (`radius`, `font`, `type` (text styles), `space`, `shadow`, `motion`, `scale`) | Sharp vs. rounded, serif, compact     |
 | 5. Composition                  | `extends: ["brand", "dark"]`                                                                | Any brand × any mode                  |
-| 6. Runtime                      | `@bixboards/design-system` (runtime API)                                                       | Tenant-chosen colors without a build  |
+| 6. Runtime                      | `@bixboards/design-system` (runtime API)                                                    | Tenant-chosen colors without a build  |
 
 | May change                              | May not change                                   |
 | --------------------------------------- | ------------------------------------------------ |

@@ -1,14 +1,44 @@
 ---
 import '../styles/global.css';
+import { manifest } from '../data/manifest.ts';
+import { components } from '../data/site.ts';
 interface Props {
   title: string;
   description?: string;
+  /** Elements the page only uses from script (e.g. `bx-toast`); loaded without being in the DOM. */
+  load?: string[];
 }
 const {
   title,
   description = 'Bixboards: framework-agnostic web components with token-driven theming.',
+  load = [],
 } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const tagKeys = Object.fromEntries(
+  [...manifest().values()].map((e) => [e.tag, `${e.pkg}/${e.dir}`]),
+);
+const nav = [
+  ['Getting started', '/getting-started/', 'rocket'],
+  ['Components', '/components/', 'layers'],
+  ['Templates', '/templates/', 'layout-dashboard'],
+] as const;
+// Everything the ⌘K palette can open.
+const commands = [
+  ...nav.map(([label, href]) => ({
+    id: href,
+    label,
+    group: 'Pages',
+    href: `${base}${href}`,
+  })),
+  ...components.map((c) => ({
+    id: c.tag,
+    label: c.name,
+    group: c.category,
+    keywords: [c.tag, ...c.parts.map((p) => p.tag)],
+    href: `${base}/components/${c.slug}/`,
+  })),
+];
+const path = Astro.url.pathname.replace(base, '');
 ---
 
 <!doctype html>
@@ -18,11 +48,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <title>{title}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
     <script is:inline>
       try {
         var t = localStorage.getItem('theme');
@@ -33,28 +58,80 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       }
     </script>
   </head>
-  <body>
+  <body data-bx-load={load.join(' ')}>
+    <a class="skip" href="#main">Skip to content</a>
     <header class="site">
       <div class="wrap">
-        <a class="logo" href={`${base}/`}>Bixboards</a>
+        <a class="logo" href={`${base}/`}>
+          <bx-icon library="lucide" name="blocks" aria-hidden="true"></bx-icon>
+          Bixboards
+        </a>
         <nav aria-label="Main">
+          {
+            nav.map(([label, href, icon]) => (
+              <a href={`${base}${href}`} aria-current={path.startsWith(href) ? 'page' : undefined}>
+                <bx-icon library="lucide" name={icon} aria-hidden="true"></bx-icon>
+                {label}
+              </a>
+            ))
+          }
+        </nav>
+        <div class="tools">
+          <bx-button id="open-search" appearance="outlined" size="s" pill>
+            <bx-icon slot="start" library="lucide" name="search" aria-hidden="true"></bx-icon>
+            Search
+            <bx-kbd slot="end" keys="mod+k" aria-hidden="true"></bx-kbd>
+          </bx-button>
+          <bx-icon-button id="theme-toggle" label="Toggle theme" appearance="outlined" shape="circle" size="s">
+            <bx-icon class="when-light" library="lucide" name="moon" aria-hidden="true"></bx-icon>
+            <bx-icon class="when-dark" library="lucide" name="sun" aria-hidden="true"></bx-icon>
+          </bx-icon-button>
+        </div>
+      </div>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="site">
+      <div class="wrap foot">
+        <div>
+          <a class="logo" href={`${base}/`}>
+            <bx-icon library="lucide" name="blocks" aria-hidden="true"></bx-icon>
+            Bixboards
+          </a>
+          <p>Framework-agnostic web components with token-driven theming.</p>
+        </div>
+        <nav aria-label="Explore">
+          <strong>Explore</strong>
+          <a href={`${base}/getting-started/`}>Getting started</a>
           <a href={`${base}/components/`}>Components</a>
           <a href={`${base}/templates/`}>Templates</a>
         </nav>
-        <bx-button id="theme-toggle" appearance="outlined" size="s">Toggle theme</bx-button>
+        <nav aria-label="Project">
+          <strong>Project</strong>
+          <a href="https://github.com/vnodecg/bixboards">
+            <bx-icon library="lucide" name="git-branch" aria-hidden="true"></bx-icon>
+            Source
+          </a>
+          <a href="https://lucide.dev">
+            <bx-icon library="lucide" name="external-link" aria-hidden="true"></bx-icon>
+            Icons by Lucide
+          </a>
+        </nav>
       </div>
-    </header>
-    <main><slot /></main>
-    <footer class="site"><div class="wrap">Bixboards. MIT licensed.</div></footer>
+      <div class="wrap legal">Bixboards. MIT licensed.</div>
+    </footer>
+    <bx-command-palette placeholder="Search components and pages…"></bx-command-palette>
+    <script id="bx-commands" type="application/json" set:html={JSON.stringify(commands)} />
+    <script id="bx-tag-keys" type="application/json" set:html={JSON.stringify(tagKeys)} />
     <script>
-      import '@bixboards/core/button/define';
-      import '@bixboards/core/badge/define';
-      import '@bixboards/core/card/define';
-      import '@bixboards/core/callout/define';
-      import '@bixboards/core/switch/define';
-      import '@bixboards/core/input/define';
-      import '@bixboards/core/checkbox/define';
-      import '@bixboards/core/progress-bar/define';
+      import '../scripts/autoload.ts';
+
+      const palette = document.querySelector('bx-command-palette') as
+        | (HTMLElement & { commands: unknown; show(): void })
+        | null;
+      if (palette) {
+        palette.commands = JSON.parse(document.getElementById('bx-commands')!.textContent!);
+        document.getElementById('open-search')?.addEventListener('click', () => palette.show());
+      }
 
       document.getElementById('theme-toggle')?.addEventListener('click', () => {
         const next =

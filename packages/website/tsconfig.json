@@ -1,5 +1,19 @@
 {
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "src/**/*", "tests/**/*"],
-  "exclude": ["dist"]
+  "exclude": ["dist"],
+  "references": [
+    {
+      "path": "../design-system"
+    },
+    {
+      "path": "../data-table"
+    },
+    {
+      "path": "../data-list"
+    },
+    {
+      "path": "../core"
+    }
+  ]
 }

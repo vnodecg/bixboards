@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core`            |
 | **Category**        | Form                         |
 | **Tag**             | `bx-date-picker`             |
-| **Status**          | Proposed (not implemented)   |
+| **Status**          | Implemented                  |
 | **Form-associated** | Yes (ElementInternals)       |
 | **Depends on**      | `calendar`, `popup`, `input` |
 
@@ -58,18 +58,32 @@ Date (or date range) field with typed entry and a `bx-calendar` popup. Specified
 | Part           | Description            |
 | -------------- | ---------------------- |
 | `form-control` | The form-control part. |
-| `input`        | Segmented text entry.  |
-| `trigger`      | Calendar button.       |
-| `popup`        | The popup part.        |
+| `input`        | The text input.        |
+| `trigger`      | The calendar button.   |
+| `calendar`     | The `bx-calendar`.     |
 
 ### CSS custom properties
 
-| Property                            | Description                                                              |
-| ----------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-date-picker-popup-width`      | Popup width.                                                             |
-| `--bx-date-picker-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-date-picker-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-date-picker-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                                | Description                                                                                              |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `--bx-date-picker-bg`                   | Field background.                                                                                        |
+| `--bx-date-picker-border-color`         | Field border color.                                                                                      |
+| `--bx-date-picker-radius`               | Field radius.                                                                                            |
+| `--bx-date-picker-font-family`          | Font family of the root surface. Default `var(--bx-type-field-family)`.                                  |
+| `--bx-date-picker-font-size`            | Font size of the root surface. Default `var(--bx-type-field-size)`.                                      |
+| `--bx-date-picker-font-weight`          | Font weight of the root surface. Default `var(--bx-type-field-weight)`.                                  |
+| `--bx-date-picker-line-height`          | Line height of the root surface. Default `var(--bx-type-field-leading)`.                                 |
+| `--bx-date-picker-letter-spacing`       | Letter spacing of the root surface. Default `var(--bx-type-field-tracking)`.                             |
+| `--bx-date-picker-hint-font-family`     | Font family of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.        |
+| `--bx-date-picker-hint-font-size`       | Font size of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.          |
+| `--bx-date-picker-hint-font-weight`     | Font weight of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.      |
+| `--bx-date-picker-hint-line-height`     | Line height of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.     |
+| `--bx-date-picker-hint-letter-spacing`  | Letter spacing of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`. |
+| `--bx-date-picker-label-font-family`    | Font family of the `label` text (text style `label-m`). Default `var(--bx-type-label-family)`.           |
+| `--bx-date-picker-label-font-size`      | Font size of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-size)`.             |
+| `--bx-date-picker-label-font-weight`    | Font weight of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.         |
+| `--bx-date-picker-label-line-height`    | Line height of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.        |
+| `--bx-date-picker-label-letter-spacing` | Letter spacing of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.    |
 
 ### Methods
 

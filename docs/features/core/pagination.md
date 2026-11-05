@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core`                       |
 | **Category**        | Navigation                              |
 | **Tag**             | `bx-pagination`                         |
-| **Status**          | Proposed (not implemented)              |
+| **Status**          | Implemented                             |
 | **Form-associated** | No                                      |
 | **Depends on**      | `button`, `select`, _data-table_ (soft) |
 
@@ -51,25 +51,38 @@ Page navigation with numbered pages, ellipsis collapsing, page size selector and
 
 ### CSS parts
 
-| Part           | Description            |
-| -------------- | ---------------------- |
-| `base`         | `nav` element.         |
-| `page`         | A page button.         |
-| `page-current` | The page-current part. |
-| `ellipsis`     | The ellipsis part.     |
-| `prev`         | The prev part.         |
-| `next`         | The next part.         |
-| `size-select`  | The size-select part.  |
+| Part           | Description              |
+| -------------- | ------------------------ |
+| `base`         | `nav` element.           |
+| `page`         | A page button.           |
+| `page-current` | The current page button. |
+| `ellipsis`     | The ellipsis part.       |
+| `prev`         | The previous button.     |
+| `next`         | The next button.         |
+| `size-select`  | The page-size select.    |
 
 ### CSS custom properties
 
-| Property                           | Description                                                              |
-| ---------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-pagination-gap`              | Gap between items.                                                       |
-| `--bx-pagination-page-size`        | Button size.                                                             |
-| `--bx-pagination-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-pagination-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-pagination-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                                 | Description                                                                                           |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `--bx-pagination-gap`                    | Gap between controls. Default `var(--bx-space-2xs)`.                                                  |
+| `--bx-pagination-current-bg`             | Current page background.                                                                              |
+| `--bx-pagination-current-fg`             | Current page text color.                                                                              |
+| `--bx-pagination-font-family`            | Font family of the root surface. Default `var(--bx-type-label-family)`.                               |
+| `--bx-pagination-font-size`              | Font size of the root surface. Default `var(--bx-type-label-size)`.                                   |
+| `--bx-pagination-font-weight`            | Font weight of the root surface. Default `var(--bx-type-label-weight)`.                               |
+| `--bx-pagination-line-height`            | Line height of the root surface. Default `var(--bx-type-label-leading)`.                              |
+| `--bx-pagination-letter-spacing`         | Letter spacing of the root surface. Default `var(--bx-type-label-tracking)`.                          |
+| `--bx-pagination-size-font-family`       | Font family of the `size` text (text style `body-s`). Default `var(--bx-type-body-family)`.           |
+| `--bx-pagination-size-font-size`         | Font size of the `size` text (text style `body-s`). Default `var(--bx-type-body-s-size)`.             |
+| `--bx-pagination-size-font-weight`       | Font weight of the `size` text (text style `body-s`). Default `var(--bx-type-body-s-weight)`.         |
+| `--bx-pagination-size-line-height`       | Line height of the `size` text (text style `body-s`). Default `var(--bx-type-body-s-leading)`.        |
+| `--bx-pagination-size-letter-spacing`    | Letter spacing of the `size` text (text style `body-s`). Default `var(--bx-type-body-s-tracking)`.    |
+| `--bx-pagination-summary-font-family`    | Font family of the `summary` text (text style `body-s`). Default `var(--bx-type-body-family)`.        |
+| `--bx-pagination-summary-font-size`      | Font size of the `summary` text (text style `body-s`). Default `var(--bx-type-body-s-size)`.          |
+| `--bx-pagination-summary-font-weight`    | Font weight of the `summary` text (text style `body-s`). Default `var(--bx-type-body-s-weight)`.      |
+| `--bx-pagination-summary-line-height`    | Line height of the `summary` text (text style `body-s`). Default `var(--bx-type-body-s-leading)`.     |
+| `--bx-pagination-summary-letter-spacing` | Letter spacing of the `summary` text (text style `body-s`). Default `var(--bx-type-body-s-tracking)`. |
 
 ### Methods
 

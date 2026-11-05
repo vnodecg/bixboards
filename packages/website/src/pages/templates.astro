@@ -1,23 +1,174 @@
 ---
 import Base from '../layouts/Base.astro';
-import { templates } from '../data/site';
+import { templates } from '../data/site.ts';
+
+const dashboardJs = `
+const TEAMS = ['Platform', 'Design', 'Growth', 'Support'];
+const STATUS = ['Paid', 'Pending', 'Failed'];
+const table = stage.querySelector('bx-data-table');
+table.columns = [
+  { field: 'id', header: 'Invoice', width: 96, sortable: true },
+  { field: 'customer', header: 'Customer', flex: 1, sortable: true, filter: true },
+  { field: 'amount', header: 'Amount', width: 100, align: 'end', sortable: true, render: (r) => '$' + r.amount.toFixed(2) },
+  { field: 'status', header: 'Status', width: 90, sortable: true },
+];
+table.data = Array.from({ length: 5000 }, (_, i) => ({
+  id: 'INV-' + (1000 + i),
+  customer: 'Customer ' + (i + 1),
+  team: TEAMS[i % TEAMS.length],
+  amount: ((i * 7919) % 100000) / 100,
+  status: STATUS[(i * 7) % STATUS.length],
+}));
+const chart = stage.querySelector('bx-chart');
+chart.series = ['revenue', 'cost'];
+chart.data = [
+  { month: 'Jan', revenue: 32, cost: 18 }, { month: 'Feb', revenue: 41, cost: 22 },
+  { month: 'Mar', revenue: 38, cost: 24 }, { month: 'Apr', revenue: 52, cost: 27 },
+  { month: 'May', revenue: 61, cost: 30 }, { month: 'Jun', revenue: 68, cost: 33 },
+];
+const fmt = { style: 'currency', currency: 'USD', maximumFractionDigits: 0 };
+for (const card of stage.querySelectorAll('bx-stat-card[data-money]')) card.format = fmt;
+`.trim();
+
 ---
 
-<Base title="Templates · Bixboards">
+<Base title="Templates · Bixboards" description="Complete screens built from Bixboards components: dashboard, auth, landing page and project board.">
   <section class="block">
     <div class="wrap">
-      <h2>Templates</h2>
-      <p class="lead">Complete screens built from Bixboards components. Coming soon.</p>
-      <div class="grid">
-        {
-          templates.map((t) => (
-            <div class="tile">
-              <h3>{t.name}</h3>
-              <p>{t.blurb}</p>
+      <h1 class="page-title">Templates</h1>
+      <p class="lead">
+        Complete screens built from Bixboards components, rendered live. Each one reflows with its
+        own width, so resize the window or use a narrow phone to see them adapt.
+      </p>
+      <nav class="template-nav" aria-label="Templates">
+        {templates.map((t) => <a class="chip" href={`#${t.slug}`}>{t.name}</a>)}
+      </nav>
+
+      <section class="template" id="dashboard">
+        <h2>Dashboard</h2>
+        <p class="lead">KPI tiles, a trend chart and a virtualized table.</p>
+        <div class="frame">
+          <header><i></i><i></i><i></i><span>Revenue · Overview</span></header>
+          <div class="canvas" data-demo-js={dashboardJs}>
+            <div class="dash-kpis">
+              <bx-stat-card data-money label="Revenue" value="128400" delta="12.5">
+                <bx-sparkline slot="chart" label="Trend" values="3,5,4,8,6,9,12"></bx-sparkline>
+                <span slot="footer">vs last month</span>
+              </bx-stat-card>
+              <bx-stat-card label="Active users" value="8421" delta="4.1">
+                <bx-sparkline slot="chart" label="Trend" type="area" values="5,4,6,7,6,8,9"></bx-sparkline>
+              </bx-stat-card>
+              <bx-stat-card label="Churn %" value="3.2" delta="-0.4" trend-is-good="down"></bx-stat-card>
             </div>
-          ))
-        }
-      </div>
+            <div class="dash-body">
+              <div class="panel">
+                <h3>Revenue vs cost</h3>
+                <bx-chart label="Revenue vs cost" x="month" height="14rem"></bx-chart>
+              </div>
+              <div class="panel">
+                <h3>Recent invoices</h3>
+                <bx-data-table aria-label="Invoices" style="block-size: 17rem"></bx-data-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="template" id="auth">
+        <h2>Auth &amp; settings</h2>
+        <p class="lead">Sign in with social providers or email.</p>
+        <div class="frame">
+          <header><i></i><i></i><i></i><span>Sign in</span></header>
+          <div class="canvas auth">
+            <bx-card with-header with-footer>
+              <strong slot="header">Welcome back</strong>
+              <div class="stack">
+                <bx-social-button provider="github" style="inline-size:100%"></bx-social-button>
+                <bx-social-button provider="google" style="inline-size:100%"></bx-social-button>
+                <div class="or">or continue with email</div>
+                <bx-input label="Email" type="email" placeholder="you@example.com"></bx-input>
+                <bx-input label="Password" type="password" password-toggle></bx-input>
+                <bx-checkbox>Keep me signed in</bx-checkbox>
+              </div>
+              <div slot="footer" style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap">
+                <a href="#auth">Forgot password?</a>
+                <bx-button pill>Sign in</bx-button>
+              </div>
+            </bx-card>
+          </div>
+        </div>
+      </section>
+
+      <section class="template" id="landing">
+        <h2>Landing page</h2>
+        <p class="lead">Hero, call to action and pricing.</p>
+        <div class="frame">
+          <header><i></i><i></i><i></i><span>acme.example</span></header>
+          <div class="canvas">
+            <div class="land-hero">
+              <bx-badge pill appearance="accent">New · v2.0</bx-badge>
+              <h3>Ship faster with fewer meetings</h3>
+              <p>Plan, track and review work in one calm place your whole team will actually use.</p>
+              <div class="demo" style="justify-content:center">
+                <bx-button pill>Start free</bx-button>
+                <bx-button pill appearance="outlined">Book a demo</bx-button>
+              </div>
+            </div>
+            <div class="pricing">
+              <bx-card with-header>
+                <strong slot="header">Starter</strong>
+                <div class="price">$0 <small>/ month</small></div>
+                <ul><li>3 projects</li><li>Community support</li></ul>
+                <bx-button appearance="outlined" style="inline-size:100%">Choose Starter</bx-button>
+              </bx-card>
+              <bx-card with-header>
+                <strong slot="header">Pro <bx-badge size="small" pill>Popular</bx-badge></strong>
+                <div class="price">$19 <small>/ month</small></div>
+                <ul><li>Unlimited projects</li><li>Priority support</li><li>Advanced reports</li></ul>
+                <bx-button style="inline-size:100%">Choose Pro</bx-button>
+              </bx-card>
+              <bx-card with-header>
+                <strong slot="header">Team</strong>
+                <div class="price">$49 <small>/ month</small></div>
+                <ul><li>Everything in Pro</li><li>SSO and audit log</li></ul>
+                <bx-button appearance="outlined" style="inline-size:100%">Choose Team</bx-button>
+              </bx-card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="template" id="board">
+        <h2>Project board</h2>
+        <p class="lead">Kanban columns with task cards.</p>
+        <div class="frame">
+          <header><i></i><i></i><i></i><span>Nova · Sprint 14</span></header>
+          <div class="canvas">
+            <div class="board">
+              {
+                [
+                  ['To do', [['Design empty states', 'Design', 'AB'], ['Audit color contrast', 'A11y', 'CD']]],
+                  ['In progress', [['Build settings page', 'Frontend', 'EF'], ['Migrate billing webhook', 'Backend', 'AB'], ['Write release notes', 'Docs', 'CD']]],
+                  ['Done', [['Set up CI', 'Infra', 'EF']]],
+                ].map(([title, tasks]) => (
+                  <div class="column">
+                    <h3>{title} <bx-badge size="small" pill>{(tasks as unknown[]).length}</bx-badge></h3>
+                    {(tasks as string[][]).map(([name, tag, who]) => (
+                      <bx-card class="task">
+                        <p>{name}</p>
+                        <footer>
+                          <bx-chip>{tag}</bx-chip>
+                          <bx-avatar initials={who} label={who} style="font-size:1.75rem"></bx-avatar>
+                        </footer>
+                      </bx-card>
+                    ))}
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </section>
 </Base>

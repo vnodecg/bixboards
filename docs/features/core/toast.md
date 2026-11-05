@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core`                  |
 | **Category**        | Feedback                           |
 | **Tag**             | `bx-toast`                         |
-| **Status**          | Proposed (not implemented)         |
+| **Status**          | Implemented                        |
 | **Form-associated** | No                                 |
 | **Depends on**      | `callout`, `close-button`, `popup` |
 
@@ -47,24 +47,24 @@ Transient, non-blocking message stack created imperatively or declaratively. Spe
 
 ### CSS parts
 
-| Part           | Description            |
-| -------------- | ---------------------- |
-| `base`         | The base part.         |
-| `icon`         | The icon part.         |
-| `message`      | The message part.      |
-| `action`       | The action part.       |
-| `close-button` | The close-button part. |
+| Part           | Description       |
+| -------------- | ----------------- |
+| `base`         | The base part.    |
+| `icon`         | The icon part.    |
+| `message`      | The message part. |
+| `action`       | The action part.  |
+| `close-button` | The close button. |
 
 ### CSS custom properties
 
-| Property                      | Description                                                              |
-| ----------------------------- | ------------------------------------------------------------------------ |
-| `--bx-toast-width`            | Max width.                                                               |
-| `--bx-toast-offset`           | Distance from the viewport edge (adds safe-area insets).                 |
-| `--bx-toast-duration`         | Enter/exit transition.                                                   |
-| `--bx-toast-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-toast-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-toast-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                    | Description                                                                 |
+| --------------------------- | --------------------------------------------------------------------------- |
+| `--bx-toast-width`          | Max width.                                                                  |
+| `--bx-toast-font-family`    | Font family of the root surface. Default `var(--bx-type-body-family)`.      |
+| `--bx-toast-font-size`      | Font size of the root surface. Default `var(--bx-type-body-size)`.          |
+| `--bx-toast-font-weight`    | Font weight of the root surface. Default `var(--bx-type-body-weight)`.      |
+| `--bx-toast-line-height`    | Line height of the root surface. Default `var(--bx-type-body-leading)`.     |
+| `--bx-toast-letter-spacing` | Letter spacing of the root surface. Default `var(--bx-type-body-tracking)`. |
 
 ### Methods
 

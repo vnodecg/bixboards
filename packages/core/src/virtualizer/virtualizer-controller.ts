@@ -13,6 +13,12 @@ export interface VirtualItem {
   end: number;
   /** True for indexes listed in `stickyIndexes`. */
   sticky: boolean;
+  /**
+   * Where to place the item inside the scroll spacer, in px. Equal to `start` unless the list is
+   * taller than `maxScrollSize`, in which case the spacer is compressed and positions are relative
+   * to the scrolled window. Always place items with this, not with `start`.
+   */
+  position: number;
 }
 
 export interface VirtualizerOptions {
@@ -51,6 +57,13 @@ export interface VirtualizerOptions {
   enabled?: boolean;
   /** Added to `aria-rowindex` so header rows outside the list are accounted for. */
   ariaIndexOffset?: number;
+  /**
+   * Browsers cap the height of an element (Firefox near 17.9M px, Chromium near 33.5M), and a
+   * taller scroll spacer silently stops scrolling or collapses. Content taller than this is
+   * compressed: the spacer stays at this size and scroll position maps to the content offset by
+   * the ratio. Default 16,000,000. Lists below it behave exactly as before.
+   */
+  maxScrollSize?: number;
 }
 
 export interface ScrollToOptions {
@@ -64,6 +77,8 @@ const DEFAULT_OVERSCAN = 4;
 /** An adaptive estimate is only re-applied when it has drifted this far, to bound O(n) rebuilds. */
 const ESTIMATE_DRIFT = 1;
 const SCROLL_RETRIES = 4;
+/** Below every engine's element-height cap (Firefox is the lowest, near 17.9M px). */
+const DEFAULT_MAX_SCROLL_SIZE = 16_000_000;
 
 /**
  * Windowed rendering shared by `select`, `dropdown`, `virtual-tree`, `data-list` and
@@ -71,7 +86,7 @@ const SCROLL_RETRIES = 4;
  *
  * The controller owns *geometry*, not DOM: it computes which indexes are inside the viewport plus
  * overscan, where each one starts, and how tall the whole list is. The host renders `items`
- * itself — typically a relatively positioned spacer of `totalSize` px with each item placed at
+ * itself — typically a relatively positioned spacer of `spacerSize` px with each item placed at
  * `translateY(item.start)` — using `repeat(items, (i) => i.key, ...)` so Lit recycles the DOM
  * nodes by key as the window moves.
  *
@@ -160,12 +175,21 @@ export class VirtualizerController implements ReactiveController {
     return this.#items;
   }
 
-  /** Full scrollable extent of the list content, including padding. */
+  /** Full extent of the list content, including padding: the real height, however tall. */
   get totalSize(): number {
     this.#ensureIndex();
     return this.#paddingStart + this.#contentSize() + this.#paddingEnd;
   }
 
+  /**
+   * Height to give the scroll spacer: `totalSize`, capped at `maxScrollSize` (see that option).
+   * Use this, not `totalSize`, for the spacer's size.
+   */
+  get spacerSize(): number {
+    return Math.min(this.totalSize, this.#cap);
+  }
+
+  /** Scroll position in content coordinates (not the element's raw `scrollTop` when compressed). */
   get scrollOffset(): number {
     return this.#offset;
   }
@@ -281,8 +305,8 @@ export class VirtualizerController implements ReactiveController {
     const el = this.#options.getScrollElement();
     if (el !== this.#scrollEl) this.#attach(el);
     if (!el) return;
+    this.#viewport = this.#readViewport(el); // the scale depends on it, so read it first
     this.#offset = this.#readOffset(el);
-    this.#viewport = this.#readViewport(el);
     this.#recompute(true);
   }
 
@@ -344,6 +368,22 @@ export class VirtualizerController implements ReactiveController {
   get #fixedSize(): number | null {
     const { itemSize, dynamic } = this.#options;
     return typeof itemSize === 'number' && !dynamic ? itemSize : null;
+  }
+
+  get #cap(): number {
+    return this.#options.maxScrollSize ?? DEFAULT_MAX_SCROLL_SIZE;
+  }
+
+  /**
+   * Content px per scroll-element px: 1 unless the content is taller than the spacer cap. Maps
+   * the scrollable range [0, spacer - viewport] onto [0, total - viewport].
+   */
+  get #scale(): number {
+    this.#ensureIndex();
+    const total = this.#paddingStart + this.#contentSize() + this.#paddingEnd;
+    if (total <= this.#cap) return 1;
+    const viewport = Math.min(this.#viewport, this.#cap - 1);
+    return (total - viewport) / (this.#cap - viewport);
   }
 
   #key(index: number): string | number {
@@ -438,7 +478,9 @@ export class VirtualizerController implements ReactiveController {
       activeSticky = sticky;
     }
 
-    const signature = `${start}:${end}:${activeSticky}:${pinned.join(',')}:${this.#sums ? this.#sums.total : count}`;
+    // When compressed, placement depends on the exact scroll offset, so it joins the signature.
+    const scale = this.#scale;
+    const signature = `${start}:${end}:${activeSticky}:${pinned.join(',')}:${this.#sums ? this.#sums.total : count}:${scale === 1 ? '' : Math.round(this.#offset)}`;
     if (signature === this.#signature) return;
     this.#signature = signature;
     this.#activeSticky = activeSticky;
@@ -461,6 +503,12 @@ export class VirtualizerController implements ReactiveController {
           size,
           end: itemStart + size,
           sticky: stickySet.has(index),
+          // Compressed: place relative to the scrolled window so the item at the content offset
+          // lands exactly at the element's raw scroll position.
+          position:
+            scale === 1
+              ? itemStart
+              : itemStart - this.#offset + this.#offset / scale,
         };
       });
   }
@@ -496,7 +544,8 @@ export class VirtualizerController implements ReactiveController {
 
   #readOffset(el: Element): number {
     // `scrollLeft` is negative in RTL; the distance from the start edge is what matters.
-    return Math.abs(this.#horizontal ? el.scrollLeft : el.scrollTop);
+    const raw = Math.abs(this.#horizontal ? el.scrollLeft : el.scrollTop);
+    return raw * this.#scale;
   }
 
   #readViewport(el: Element): number {
@@ -512,8 +561,8 @@ export class VirtualizerController implements ReactiveController {
       this.#viewport = this.#readViewport(el);
       this.#requestRender();
     });
-    this.#offset = this.#readOffset(el);
     this.#viewport = this.#readViewport(el);
+    this.#offset = this.#readOffset(el);
   }
 
   #detach(): void {
@@ -568,7 +617,11 @@ export class VirtualizerController implements ReactiveController {
     behavior: ScrollBehavior,
   ): void {
     const max = Math.max(0, this.totalSize - this.#viewport);
-    const target = Math.min(Math.max(this.#targetOffset(index, align), 0), max);
+    const content = Math.min(
+      Math.max(this.#targetOffset(index, align), 0),
+      max,
+    );
+    const target = content / this.#scale;
     if (this.#horizontal) {
       const rtl = getComputedStyle(el).direction === 'rtl';
       el.scrollTo({ left: rtl ? -target : target, behavior });
@@ -631,11 +684,12 @@ export class VirtualizerController implements ReactiveController {
       this.#pendingAnchor = 0;
       const el = this.#scrollEl;
       if (!el || this.#disposed || delta === 0) return;
+      const raw = delta / this.#scale; // content px -> scroll-element px
       if (this.#horizontal) {
         const rtl = getComputedStyle(el).direction === 'rtl';
-        el.scrollLeft += rtl ? -delta : delta;
+        el.scrollLeft += rtl ? -raw : raw;
       } else {
-        el.scrollTop += delta;
+        el.scrollTop += raw;
       }
       this.#offset = this.#readOffset(el);
       this.#requestRender();

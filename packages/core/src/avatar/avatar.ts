@@ -44,6 +44,9 @@ export class BxAvatar extends BixElement {
         inline-size: var(--bx-avatar-size, calc(var(--bx-unit) * 2.5));
         block-size: var(--bx-avatar-size, calc(var(--bx-unit) * 2.5));
         flex-shrink: 0;
+        /* The container must be an ancestor of whatever uses cqi: an element cannot be its own
+           query container, so the inner base sizing its text in cqi would resolve against the page. */
+        container-type: inline-size;
       }
 
       .base {
@@ -59,7 +62,6 @@ export class BxAvatar extends BixElement {
         ${textStyle('--bx-avatar', 'heading-xs', { size: '40cqi', leading: '1' })}
 
         text-transform: uppercase;
-        container-type: inline-size;
         border: var(--bx-avatar-border-width, var(--bx-border-width)) solid
           var(--bx-avatar-border-color, var(--bx-border-subtle));
       }

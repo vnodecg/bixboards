@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core`                                   |
 | **Category**        | Form                                                |
 | **Tag**             | `bx-combobox`                                       |
-| **Status**          | Proposed (not implemented)                          |
+| **Status**          | Implemented                                         |
 | **Form-associated** | Yes (ElementInternals)                              |
 | **Depends on**      | `select`, `option`, `popup`, `input`, `virtualizer` |
 
@@ -56,22 +56,41 @@ Text input with a filterable, virtualized listbox; free text or restricted to op
 
 ### CSS parts
 
-| Part           | Description                  |
-| -------------- | ---------------------------- |
-| `form-control` | Field wrapper.               |
-| `input`        | The text field.              |
-| `listbox`      | The popup.                   |
-| `tag`          | A selected token (multiple). |
+| Part      | Description                  |
+| --------- | ---------------------------- |
+| `control` | The input surface.           |
+| `input`   | The native input.            |
+| `listbox` | The listbox.                 |
+| `chip`    | A selection chip (multiple). |
 
 ### CSS custom properties
 
-| Property                           | Description                                                              |
-| ---------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-combobox-listbox-max-height` | Max popup height. Default `20rem`.                                       |
-| `--bx-combobox-min-height`         | Control height.                                                          |
-| `--bx-combobox-focus-ring-width`   | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-combobox-focus-ring-color`   | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-combobox-font-family`        | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                             | Description                                                                                              |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------- |
+| `--bx-combobox-bg`                   | Control background.                                                                                      |
+| `--bx-combobox-border-color`         | Control border color.                                                                                    |
+| `--bx-combobox-radius`               | Control radius.                                                                                          |
+| `--bx-combobox-max-height`           | Max listbox height.                                                                                      |
+| `--bx-combobox-font-family`          | Font family of the root surface. Default `var(--bx-type-field-family)`.                                  |
+| `--bx-combobox-font-size`            | Font size of the root surface. Default `var(--bx-type-field-size)`.                                      |
+| `--bx-combobox-font-weight`          | Font weight of the root surface. Default `var(--bx-type-field-weight)`.                                  |
+| `--bx-combobox-line-height`          | Line height of the root surface. Default `var(--bx-type-field-leading)`.                                 |
+| `--bx-combobox-letter-spacing`       | Letter spacing of the root surface. Default `var(--bx-type-field-tracking)`.                             |
+| `--bx-combobox-empty-font-family`    | Font family of the `empty` text (text style `body-m`). Default `var(--bx-type-body-family)`.             |
+| `--bx-combobox-empty-font-size`      | Font size of the `empty` text (text style `body-m`). Default `var(--bx-type-body-m-size)`.               |
+| `--bx-combobox-empty-font-weight`    | Font weight of the `empty` text (text style `body-m`). Default `var(--bx-type-body-m-weight)`.           |
+| `--bx-combobox-empty-line-height`    | Line height of the `empty` text (text style `body-m`). Default `var(--bx-type-body-m-leading)`.          |
+| `--bx-combobox-empty-letter-spacing` | Letter spacing of the `empty` text (text style `body-m`). Default `var(--bx-type-body-m-tracking)`.      |
+| `--bx-combobox-hint-font-family`     | Font family of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.        |
+| `--bx-combobox-hint-font-size`       | Font size of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.          |
+| `--bx-combobox-hint-font-weight`     | Font weight of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.      |
+| `--bx-combobox-hint-line-height`     | Line height of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.     |
+| `--bx-combobox-hint-letter-spacing`  | Letter spacing of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`. |
+| `--bx-combobox-label-font-family`    | Font family of the `label` text (text style `label-m`). Default `var(--bx-type-label-family)`.           |
+| `--bx-combobox-label-font-size`      | Font size of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-size)`.             |
+| `--bx-combobox-label-font-weight`    | Font weight of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.         |
+| `--bx-combobox-label-line-height`    | Line height of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.        |
+| `--bx-combobox-label-letter-spacing` | Letter spacing of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.    |
 
 ### Methods
 

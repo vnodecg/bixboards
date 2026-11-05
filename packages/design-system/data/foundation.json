@@ -11,6 +11,7 @@
     "min": "1.5rem"
   },
   "space": {
+    "3xs": "calc({unit} * 0.125)",
     "2xs": "calc({unit} * 0.25)",
     "xs": "calc({unit} * 0.5)",
     "s": "calc({unit} * 0.75)",
@@ -235,7 +236,9 @@
     "dropdown": "1000",
     "sticky": "1100",
     "overlay": "1200",
+    "drawer": "1250",
     "modal": "1300",
+    "toast": "1350",
     "tooltip": "1400"
   },
   "safe-area": {

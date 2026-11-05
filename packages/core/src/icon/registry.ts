@@ -46,6 +46,22 @@ function sanitizeAndSerialize(
     throw new Error('Invalid icon markup: expected a root <svg> element.');
   for (const node of svg.querySelectorAll('script, foreignObject'))
     node.remove();
+  for (const el of [svg, ...svg.querySelectorAll('*')])
+    for (const attr of [...el.attributes]) {
+      const n = attr.name.toLowerCase();
+      if (
+        n.startsWith('on') ||
+        ((n === 'href' || n === 'xlink:href') &&
+          /^\s*javascript:/i.test(attr.value))
+      )
+        el.removeAttribute(attr.name);
+    }
+  // Icons with only width/height can't scale to `--bx-icon-size`; derive a viewBox.
+  if (!svg.hasAttribute('viewBox')) {
+    const w = parseFloat(svg.getAttribute('width') ?? '');
+    const h = parseFloat(svg.getAttribute('height') ?? '');
+    if (w > 0 && h > 0) svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+  }
   mutator?.(svg as unknown as SVGElement);
   return new XMLSerializer().serializeToString(svg);
 }

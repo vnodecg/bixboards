@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core`           |
 | **Category**        | Actions                     |
 | **Tag**             | `bx-icon-button`            |
-| **Status**          | Proposed (not implemented)  |
+| **Status**          | Implemented                 |
 | **Form-associated** | No                          |
 | **Depends on**      | `button`, `icon`, `spinner` |
 
@@ -48,22 +48,18 @@ Square or round button that shows only an icon, with a required accessible label
 
 ### CSS parts
 
-| Part      | Description              |
-| --------- | ------------------------ |
-| `base`    | The interactive surface. |
-| `icon`    | The `bx-icon`.           |
-| `spinner` | Loading spinner.         |
+| Part   | Description                                      |
+| ------ | ------------------------------------------------ |
+| `base` | The interactive surface (the inner `bx-button`). |
+| `icon` | The `bx-icon`, present when `name`/`src` is set. |
 
 ### CSS custom properties
 
-| Property                            | Description                                                              |
-| ----------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-icon-button-size`             | Width and height. Default derived from `size`.                           |
-| `--bx-icon-button-bg`               | Background. Default role/appearance combination.                         |
-| `--bx-icon-button-icon-size`        | Icon size. Default `1.25em`.                                             |
-| `--bx-icon-button-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-icon-button-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-icon-button-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                     | Description                                      |
+| ---------------------------- | ------------------------------------------------ |
+| `--bx-icon-button-size`      | Width and height. Default derived from `size`.   |
+| `--bx-icon-button-bg`        | Background. Default role/appearance combination. |
+| `--bx-icon-button-icon-size` | Icon size. Default `1.25em`.                     |
 
 ### Methods
 

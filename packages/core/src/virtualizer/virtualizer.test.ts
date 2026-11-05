@@ -11,6 +11,7 @@ class TestHost extends LitElement {
     dynamic: { type: Boolean },
     overscan: { type: Number },
     enabled: { type: Boolean },
+    maxScrollSize: { type: Number },
   };
 
   declare count: number;
@@ -18,6 +19,7 @@ class TestHost extends LitElement {
   declare dynamic: boolean;
   declare overscan: number;
   declare enabled: boolean;
+  declare maxScrollSize: number | undefined;
 
   heights = new Map<number, number>();
   sticky: number[] = [];
@@ -60,6 +62,7 @@ class TestHost extends LitElement {
       dynamic: this.dynamic,
       overscan: this.overscan,
       enabled: this.enabled,
+      maxScrollSize: this.maxScrollSize,
       getItemKey: this.getItemKey,
       stickyIndexes: this.sticky,
       pinnedIndexes: this.pinned,
@@ -82,7 +85,10 @@ class TestHost extends LitElement {
         }
       </style>
       <div class="scroller">
-        <div class="spacer" style="block-size: ${this.virtualizer.totalSize}px">
+        <div
+          class="spacer"
+          style="block-size: ${this.virtualizer.spacerSize}px"
+        >
           ${repeat(
             items,
             (item) => item.key,
@@ -92,7 +98,7 @@ class TestHost extends LitElement {
                 data-index=${item.index}
                 style="block-size: ${this.rowHeight(
                   item.index,
-                )}px; transform: translateY(${item.start}px)"
+                )}px; transform: translateY(${item.position}px)"
               >
                 ${item.index}
               </div>`,
@@ -372,5 +378,96 @@ describe('VirtualizerController — lifecycle', () => {
     await nextFrame();
     await scrollTo(el, 4000);
     expect(indexes(el)).to.include(100);
+  });
+});
+
+describe('VirtualizerController — content taller than the spacer cap', () => {
+  // 100,000 × 40px = 4,000,000px of content in a 100,000px spacer: a 40× compression, standing in
+  // for the ~17.9M px element-height limit that Firefox enforces.
+  const CAP = 100_000;
+  const big = (): Promise<TestHost> =>
+    setup({ count: 100_000, maxScrollSize: CAP });
+  const viewport = (el: TestHost): number => scroller(el).clientHeight;
+  const rowTop = (el: TestHost, index: number): number =>
+    rows(el)
+      .find((r) => r.dataset['index'] === String(index))!
+      .getBoundingClientRect().top - scroller(el).getBoundingClientRect().top;
+
+  it('caps the spacer but keeps the real content size', async () => {
+    const el = await big();
+    expect(el.virtualizer.totalSize).to.equal(4_000_000);
+    expect(el.virtualizer.spacerSize).to.equal(CAP);
+    expect(
+      el.shadowRoot!.querySelector<HTMLElement>('.spacer')!.offsetHeight,
+    ).to.equal(CAP);
+  });
+
+  it('leaves lists under the cap untouched (position equals start)', async () => {
+    const el = await setup({ count: 1000, maxScrollSize: CAP });
+    await scrollTo(el, 4000);
+    for (const item of el.virtualizer.items)
+      expect(item.position).to.equal(item.start);
+    expect(el.virtualizer.spacerSize).to.equal(el.virtualizer.totalSize);
+  });
+
+  it('maps the scroll range onto the content so the middle shows the middle', async () => {
+    const el = await big();
+    await scrollTo(el, (CAP - viewport(el)) / 2);
+    const expected = (4_000_000 - viewport(el)) / 2;
+    expect(el.virtualizer.scrollOffset).to.be.closeTo(expected, 1);
+    const first = Math.floor(expected / 40);
+    expect(indexes(el)).to.include(first);
+    // The row at the content offset sits where the content offset says it should.
+    expect(rowTop(el, first)).to.be.closeTo(first * 40 - expected, 1);
+  });
+
+  it('can reach the very last item at the end of the scroll range', async () => {
+    const el = await big();
+    await scrollTo(el, CAP); // clamps to the maximum
+    expect(indexes(el).at(-1)).to.equal(99_999);
+    const bottom = rows(el)
+      .find((r) => r.dataset['index'] === '99999')!
+      .getBoundingClientRect().bottom;
+    expect(bottom).to.be.closeTo(
+      scroller(el).getBoundingClientRect().bottom,
+      1,
+    );
+  });
+
+  it('starts at the first item at the top', async () => {
+    const el = await big();
+    expect(indexes(el)[0]).to.equal(0);
+    expect(rowTop(el, 0)).to.be.closeTo(0, 1);
+  });
+
+  it('scrollToIndex lands the item at the top, far past the cap', async () => {
+    const el = await big();
+    el.virtualizer.scrollToIndex(70_000, { align: 'start' });
+    await nextFrame();
+    await nextFrame();
+    await el.updateComplete;
+    expect(indexes(el)).to.include(70_000);
+    // One scroll-element pixel is ~40 content pixels here, so the target can only land within one
+    // step of the top; what matters is that placement matches the real scroll offset.
+    const scale = (4_000_000 - viewport(el)) / (CAP - viewport(el));
+    const top = rowTop(el, 70_000);
+    expect(Math.abs(top)).to.be.at.most(scale);
+    expect(top).to.be.closeTo(70_000 * 40 - el.virtualizer.scrollOffset, 1);
+    el.virtualizer.scrollToIndex(99_999, { align: 'end' });
+    await nextFrame();
+    await nextFrame();
+    await el.updateComplete;
+    expect(indexes(el).at(-1)).to.equal(99_999);
+  });
+
+  it('keeps aria metadata on the data index while compressed', async () => {
+    const el = await big();
+    await scrollTo(el, CAP / 2);
+    for (const index of indexes(el)) {
+      expect(el.virtualizer.getAria(index)['aria-posinset']).to.equal(
+        index + 1,
+      );
+      expect(el.virtualizer.getAria(index)['aria-setsize']).to.equal(100_000);
+    }
   });
 });

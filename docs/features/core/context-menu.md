@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core`                    |
 | **Category**        | Navigation                           |
 | **Tag**             | `bx-context-menu`                    |
-| **Status**          | Proposed (not implemented)           |
+| **Status**          | Implemented                          |
 | **Form-associated** | No                                   |
 | **Depends on**      | `dropdown`, `dropdown-item`, `popup` |
 
@@ -42,19 +42,15 @@ Right-click / long-press menu anchored at the pointer, reusing dropdown items. S
 
 ### CSS parts
 
-| Part    | Description     |
-| ------- | --------------- |
-| `menu`  | The menu part.  |
-| `panel` | The panel part. |
+| Part   | Description    |
+| ------ | -------------- |
+| `menu` | The menu part. |
 
 ### CSS custom properties
 
-| Property                             | Description                                                              |
-| ------------------------------------ | ------------------------------------------------------------------------ |
-| `--bx-context-menu-min-width`        | Min width.                                                               |
-| `--bx-context-menu-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-context-menu-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-context-menu-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                      | Description |
+| ----------------------------- | ----------- |
+| `--bx-context-menu-min-width` | Min width.  |
 
 ### Methods
 

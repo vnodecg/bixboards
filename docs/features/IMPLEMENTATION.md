@@ -2,7 +2,7 @@
 
 Tracks build status for all 90 components across `@bixboards/core`, `@bixboards/data-table` and `@bixboards/data-list` (see [README](README.md) for the spec index, [_conventions.md](_conventions.md) for shared rules). Ordered into dependency tiers — build each tier before the ones that depend on it. Within a tier, order is arbitrary.
 
-**Progress: 59 / 90 done.**
+**Progress: 90 / 90 done.**
 
 Legend: `[x]` implemented and tested, `[ ]` not started. "Depends on" lists hard dependencies (the component composes or requires the other) and, in parentheses, soft ones (shared pattern/reuse, not a hard blocker).
 
@@ -121,55 +121,60 @@ Not started. Each depends only on components in earlier tiers or on others in th
 
 ### Actions
 
-- [ ] [`bx-icon-button`](core/icon-button.md) (depends on button, icon, spinner)
-- [ ] [`bx-close-button`](core/close-button.md) (depends on icon-button)
-- [ ] [`bx-social-button`](core/social-button.md) (depends on button, icon)
-- [ ] [`bx-toggle-button`](core/toggle-button.md) (depends on button, button-group, soft)
+- [x] [`bx-icon-button`](core/icon-button.md) (composes `bx-button`; `primary` maps to bx-button's `default` variant) — depends on button, icon, spinner — `packages/core/src/icon-button`
+- [x] [`bx-close-button`](core/close-button.md) (specialisation of `bx-icon-button`; Escape handling stays in the owning overlay. Existing ad-hoc close buttons in dialog/drawer/callout are not migrated yet) — depends on icon-button — `packages/core/src/close-button`
+- [x] [`bx-social-button`](core/social-button.md) (no brand artwork is bundled; apps register marks via `registerSocialProvider`, unregistered providers fall back to a letter monogram) — depends on button, icon — `packages/core/src/social-button`
+- [x] [`bx-toggle-button`](core/toggle-button.md) (native `<button aria-pressed>` with a check glyph when pressed; `bx-button-group` selection modes (FR-TOGGLEBUTTON-02) not implemented since the group has no selection mode) — depends on button, button-group, soft — `packages/core/src/toggle-button`
 
 ### Form
 
-- [ ] [`bx-combobox`](core/combobox.md) (depends on select, option, popup, input, virtualizer)
-- [ ] [`bx-input-otp`](core/input-otp.md) (depends on input)
-- [ ] [`bx-file-upload`](core/file-upload.md) (depends on button, progress-bar, format-bytes, icon)
-- [ ] [`bx-search-field`](core/search-field.md) (depends on input, combobox, soft)
-- [ ] [`bx-segmented-control`](core/segmented-control.md) (depends on radio-group, resize-observer)
-- [ ] [`bx-calendar`](core/calendar.md) (depends on button)
-- [ ] [`bx-date-picker`](core/date-picker.md) (depends on calendar, popup, input)
-- [ ] [`bx-time-field`](core/time-field.md) (depends on date-picker, soft)
-- [ ] [`bx-tag-input`](core/tag-input.md) (depends on chip, input)
+- [x] [`bx-combobox`](core/combobox.md) (not virtualized (every option is a real element; fine up to a few hundred); `bx-select`'s virtualizer is not shared; async mode = debounced `input` event + `loading`, stale-response handling is the consumer's) — depends on select, option, popup, input, virtualizer — `packages/core/src/combobox`
+- [x] [`bx-input-otp`](core/input-otp.md) (one transparent real `<input>` over presentational cells, so caret/paste/autofill are native; adds `name`, not in the spec's property table) — depends on input — `packages/core/src/input-otp`
+- [x] [`bx-file-upload`](core/file-upload.md) (`directory` sets `webkitdirectory`; the per-file `file` slot template is not implemented; adds `name`) — depends on button, progress-bar, format-bytes, icon — `packages/core/src/file-upload`
+- [x] [`bx-search-field`](core/search-field.md) (composes `bx-input type=search`; the `suggestions` slot (FR-SEARCHFIELD-02) is not implemented, use `bx-combobox`) — depends on input, combobox, soft — `packages/core/src/search-field`
+- [x] [`bx-segmented-control`](core/segmented-control.md) (adds `bx-segment` (`packages/core/src/segment`); the radiogroup/radio roles live on the hosts; indicator animates `transform` for position and `inline-size` for width) — depends on radio-group, resize-observer — `packages/core/src/segmented-control`
+- [x] [`bx-calendar`](core/calendar.md) (plain-ISO date helpers in `dates.ts`; the `day` slot is not implemented; `value` is always a string (`start/end` for range, comma-separated for multiple)) — depends on button — `packages/core/src/calendar`
+- [x] [`bx-date-picker`](core/date-picker.md) (typed entry parses ISO or the locale's numeric day/month/year order only (no month names); popup is a non-modal `bx-popup`; exports `parseTypedDate`) — depends on calendar, popup, input — `packages/core/src/date-picker`
+- [x] [`bx-time-field`](core/time-field.md) (standalone segmented field (no calendar/popup, so not built on `bx-date-picker`); `value` is always 24-hour `HH:mm[:ss]`; exports `parseTime`/`localeIs12h`) — depends on date-picker, soft — `packages/core/src/time-field`
+- [x] [`bx-tag-input`](core/tag-input.md) (typed text is the native input inside the control, not `bx-input`; `add()`/`removeAt()` are public) — depends on chip, input — `packages/core/src/tag-input`
 
 ### Feedback
 
-- [ ] [`bx-chip`](core/chip.md) (depends on close-button, badge, soft)
-- [ ] [`bx-meter`](core/meter.md) (depends on progress-bar, soft)
-- [ ] [`bx-toast`](core/toast.md) (depends on callout, close-button, popup)
-- [ ] [`bx-notification-center`](core/notification-center.md) (depends on popover, drawer, badge, relative-time, data-list, icon-button)
-- [ ] [`bx-empty-state`](core/empty-state.md) (depends on icon, button)
-- [ ] [`bx-stepper`](core/stepper.md) (depends on tab-group, soft)
+- [x] [`bx-chip`](core/chip.md) (`bx-chip-group` (optional, FR-CHIP-01) not implemented; adds `clickable` and `remove-label`, not in the spec's property table) — depends on close-button, badge, soft — `packages/core/src/chip`
+- [x] [`bx-meter`](core/meter.md) (own `role=meter` track (not native `<meter>`); band logic is exported as `meterBand`) — depends on progress-bar, soft — `packages/core/src/meter`
+- [x] [`bx-toast`](core/toast.md) (adds `bx-toast-region` (`packages/core/src/toast-region`); `BxToast.toast()` is async (lazy-imports the region); the region is not itself an `aria-live` region, each toast carries `role=status|alert`) — depends on callout, close-button, popup — `packages/core/src/toast`
+- [x] [`bx-notification-center`](core/notification-center.md) (plain `bx-popup` panel (a CSS sheet on narrow screens, not `bx-drawer`/`bx-popover`); not built on `bx-data-list`; the `item` slot template is not implemented; controlled via cancelable events but also applies changes locally) — depends on popover, drawer, badge, relative-time, data-list, icon-button — `packages/core/src/notification-center`
+- [x] [`bx-empty-state`](core/empty-state.md) (not yet wired into `bx-data-table`/`bx-data-list`; default copy is English in `emptyStateCopy`) — depends on icon, button — `packages/core/src/empty-state`
+- [x] [`bx-stepper`](core/stepper.md) (adds a `bx-step` child (`packages/core/src/step`); `error`/`skipped` are set on the step, the rest derived from `current`; does not build on `bx-tab-group`) — depends on tab-group, soft — `packages/core/src/stepper`
 
 ### Navigation
 
-- [ ] [`bx-pagination`](core/pagination.md) (depends on button, select, data-table, soft)
-- [ ] [`bx-sidebar`](core/sidebar.md) (depends on page, drawer, tooltip, badge, icon)
-- [ ] [`bx-command-palette`](core/command-palette.md) (depends on dialog, combobox, kbd, virtualizer)
-- [ ] [`bx-context-menu`](core/context-menu.md) (depends on dropdown, dropdown-item, popup)
+- [x] [`bx-pagination`](core/pagination.md) (page-size selector is a native `<select>`, not `bx-select`; exports the pure `pageRange`) — depends on button, select, data-table, soft — `packages/core/src/pagination`
+- [x] [`bx-sidebar`](core/sidebar.md) (adds `bx-sidebar-item`/`bx-sidebar-group`; collapsed parents expand the sidebar instead of showing a flyout; overlay mode is standalone (`matchMedia` under 48rem, or `mode`), not wired to `bx-page`'s drawer; focus loop is a Tab handler, not `bx-drawer`'s dialog) — depends on page, drawer, tooltip, badge, icon — `packages/core/src/sidebar`
+- [x] [`bx-command-palette`](core/command-palette.md) (native `<dialog>`, not `bx-dialog`; own listbox (not `bx-combobox`); renders at most 200 results, no virtualization yet; exports `fuzzyScore`) — depends on dialog, combobox, kbd, virtualizer — `packages/core/src/command-palette`
+- [x] [`bx-context-menu`](core/context-menu.md) (composes `bx-dropdown` with a zero-size virtual trigger at the pointer) — depends on dropdown, dropdown-item, popup — `packages/core/src/context-menu`
 
 ### Display
 
-- [ ] [`bx-stat-card`](core/stat-card.md) (depends on card, format-number, skeleton, sparkline, soft)
-- [ ] [`bx-kbd`](core/kbd.md)
-- [ ] [`bx-timeline`](core/timeline.md) (depends on relative-time, format-date, icon)
-- [ ] [`bx-code-block`](core/code-block.md) (depends on copy-button, scroller)
+- [x] [`bx-stat-card`](core/stat-card.md) (composes `bx-card`; formats with the shared `Intl.NumberFormat` cache instead of a nested `bx-format-number`; `count-up` is opt-in, not implicit) — depends on card, format-number, skeleton, sparkline, soft — `packages/core/src/stat-card`
+- [x] [`bx-kbd`](core/kbd.md) (key names are English; the localization registry the spec mentions does not exist yet) — `packages/core/src/kbd`
+- [x] [`bx-timeline`](core/timeline.md) (adds a `bx-timeline-item` child (`packages/core/src/timeline-item`, no spec of its own); horizontal orientation is basic and has no alternate layout; items are all rendered, long timelines should compose `bx-data-list`) — depends on relative-time, format-date, icon — `packages/core/src/timeline`
+- [x] [`bx-code-block`](core/code-block.md) (token-based highlighter API (`registerHighlighter` returns `CodeToken[]`, not HTML, so output is injection-safe); no grammars bundled; scrolls in its own `<pre>` rather than `bx-scroller`) — depends on copy-button, scroller — `packages/core/src/code-block`
 
 ### Charts
 
-- [ ] [`bx-chart`](core/chart.md) (depends on skeleton, resize-observer, intersection-observer)
-- [ ] [`bx-sparkline`](core/sparkline.md)
+- [x] [`bx-chart`](core/chart.md) (dependency-free `svg` adapter draws line/area/bar/stacked-bar/bar-list/scatter/radial; radar/heatmap/funnel/sankey/combo need a registered `ChartAdapter` (no ECharts adapter ships); points are not individually keyboard-focusable (the data table is the non-pointer reading path)) — depends on skeleton, resize-observer, intersection-observer — `packages/core/src/chart`
+- [x] [`bx-sparkline`](core/sparkline.md) (exports `decimate`; `trend-is-good` has no default (the spec's `up` would colour every sparkline); highlight is a zero-length round-capped stroke so it stays circular under non-uniform scaling) — `packages/core/src/sparkline`
+
+### Specified, previously untracked
+
+- [x] [`bx-qr-code`](core/qr-code.md) (encoding by the `qrcode-generator` library, not an own encoder; drawn as one SVG path rather than a canvas) — `packages/core/src/qr-code`
+- [x] [`bx-split-panel`](core/split-panel.md) — `packages/core/src/split-panel`
 
 ## Framework wrappers (after the above)
 
 Not per-component tasks — generated once from the Custom Elements Manifest, per conventions §8:
 
-- [ ] `@bixboards/react`
-- [ ] `@bixboards/angular`
-- [ ] `@bixboards/svelte`
+- [x] `@bixboards/react` (generated for all 98 elements; its smoke tests pass in Chromium and it typechecks)
+- [x] `@bixboards/angular` (generated for all 98 elements; its smoke tests pass in Chromium and it typechecks)
+- [x] `@bixboards/svelte` (generated for all 98 elements; its smoke tests pass in Chromium and it typechecks)

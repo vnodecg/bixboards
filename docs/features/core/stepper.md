@@ -2,14 +2,14 @@
 
 > Multi-step progress indicator and wizard navigation, horizontal or vertical.
 
-|                     |                            |
-| ------------------- | -------------------------- |
-| **Package**         | `@bixboards/core`          |
-| **Category**        | Feedback                   |
-| **Tag**             | `bx-stepper`               |
-| **Status**          | Proposed (not implemented) |
-| **Form-associated** | No                         |
-| **Depends on**      | _tab-group_ (soft)         |
+|                     |                    |
+| ------------------- | ------------------ |
+| **Package**         | `@bixboards/core`  |
+| **Category**        | Feedback           |
+| **Tag**             | `bx-stepper`       |
+| **Status**          | Implemented        |
+| **Form-associated** | No                 |
+| **Depends on**      | _tab-group_ (soft) |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
@@ -43,24 +43,41 @@ Multi-step progress indicator and wizard navigation, horizontal or vertical. Spe
 
 ### CSS parts
 
-| Part        | Description               |
-| ----------- | ------------------------- |
-| `base`      | The base part.            |
-| `step`      | The step part.            |
-| `indicator` | Number/check/error glyph. |
-| `connector` | Line between steps.       |
-| `label`     | The label part.           |
+| Part      | Description                       |
+| --------- | --------------------------------- |
+| `base`    | The base part.                    |
+| `summary` | The collapsed "Step N of M" text. |
 
 ### CSS custom properties
 
-| Property                                | Description                                                              |
-| --------------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-stepper-indicator-size`           | Indicator size.                                                          |
-| `--bx-stepper-connector-color`          | Line color.                                                              |
-| `--bx-stepper-connector-color-complete` | Completed line color.                                                    |
-| `--bx-stepper-focus-ring-width`         | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-stepper-focus-ring-color`         | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-stepper-font-family`              | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                                  | Description                                                                                                     |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `--bx-stepper-indicator-size`             | Indicator size.                                                                                                 |
+| `--bx-stepper-connector-color`            | Line color.                                                                                                     |
+| `--bx-stepper-connector-color-complete`   | Completed line color.                                                                                           |
+| `--bx-stepper-summary-font-family`        | Font family of the `summary` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.            |
+| `--bx-stepper-summary-font-size`          | Font size of the `summary` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.              |
+| `--bx-stepper-summary-font-weight`        | Font weight of the `summary` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.          |
+| `--bx-stepper-summary-line-height`        | Line height of the `summary` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.         |
+| `--bx-stepper-summary-letter-spacing`     | Letter spacing of the `summary` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`.     |
+| `--bx-stepper-font-family`                | Font family of the item text. Default `var(--bx-type-label-family)`.                                            |
+| `--bx-stepper-indicator-font-family`      | Font family of the `indicator` text (text style `label-s`). Default `var(--bx-type-label-family)`.              |
+| `--bx-stepper-indicator-font-size`        | Font size of the `indicator` text (text style `label-s`). Default `var(--bx-type-label-s-size)`.                |
+| `--bx-stepper-indicator-font-weight`      | Font weight of the `indicator` text (text style `label-s`). Default `var(--bx-type-label-s-weight)`.            |
+| `--bx-stepper-indicator-line-height`      | Line height of the `indicator` text (text style `label-s`). Default `var(--bx-type-label-s-leading)`.           |
+| `--bx-stepper-indicator-letter-spacing`   | Letter spacing of the `indicator` text (text style `label-s`). Default `var(--bx-type-label-s-tracking)`.       |
+| `--bx-stepper-font-family`                | Font family of the item text (text style `label-m`). Default `var(--bx-type-label-family)`.                     |
+| `--bx-stepper-font-size`                  | Font size of the item text (text style `label-m`). Default `var(--bx-type-label-m-size)`.                       |
+| `--bx-stepper-font-weight`                | Font weight of the item text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.                   |
+| `--bx-stepper-line-height`                | Line height of the item text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.                  |
+| `--bx-stepper-letter-spacing`             | Letter spacing of the item text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.              |
+| `--bx-stepper-description-font-family`    | Font family of the `description` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.        |
+| `--bx-stepper-description-font-size`      | Font size of the `description` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.          |
+| `--bx-stepper-description-font-weight`    | Font weight of the `description` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.      |
+| `--bx-stepper-description-line-height`    | Line height of the `description` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.     |
+| `--bx-stepper-description-letter-spacing` | Letter spacing of the `description` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`. |
+| `--bx-stepper-focus-ring-width`           | Focus ring width of the steps (focus state). Default `var(--bx-border-width-strong)`.                           |
+| `--bx-stepper-focus-ring-color`           | Focus ring color of the steps (focus state). Default `var(--bx-focus-ring)`.                                    |
 
 ### Methods
 

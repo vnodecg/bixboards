@@ -2,14 +2,14 @@
 
 > Syntax-highlighted code with line numbers, highlighting, wrapping and a built-in copy button.
 
-|                     |                            |
-| ------------------- | -------------------------- |
-| **Package**         | `@bixboards/core`          |
-| **Category**        | Display                    |
-| **Tag**             | `bx-code-block`            |
-| **Status**          | Proposed (not implemented) |
-| **Form-associated** | No                         |
-| **Depends on**      | `copy-button`, `scroller`  |
+|                     |                           |
+| ------------------- | ------------------------- |
+| **Package**         | `@bixboards/core`         |
+| **Category**        | Display                   |
+| **Tag**             | `bx-code-block`           |
+| **Status**          | Implemented               |
+| **Form-associated** | No                        |
+| **Depends on**      | `copy-button`, `scroller` |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
@@ -57,14 +57,20 @@ Syntax-highlighted code with line numbers, highlighting, wrapping and a built-in
 
 ### CSS custom properties
 
-| Property                           | Description                                                              |
-| ---------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-code-block-bg`               | Background.                                                              |
-| `--bx-code-block-font-family`      | Monospace stack.                                                         |
-| `--bx-code-block-line-highlight`   | Highlighted line background.                                             |
-| `--bx-code-block-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-code-block-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-code-block-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                                | Description                                                                                                |
+| --------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `--bx-code-block-bg`                    | Background.                                                                                                |
+| `--bx-code-block-line-highlight`        | Highlighted line background.                                                                               |
+| `--bx-code-block-font-family`           | Font family of the root surface. Default `var(--bx-type-code-family)`.                                     |
+| `--bx-code-block-font-size`             | Font size of the root surface. Default `var(--bx-type-code-size)`.                                         |
+| `--bx-code-block-font-weight`           | Font weight of the root surface. Default `var(--bx-type-code-weight)`.                                     |
+| `--bx-code-block-line-height`           | Line height of the root surface. Default `var(--bx-type-code-leading)`.                                    |
+| `--bx-code-block-letter-spacing`        | Letter spacing of the root surface. Default `var(--bx-type-code-tracking)`.                                |
+| `--bx-code-block-header-font-family`    | Font family of the `header` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.        |
+| `--bx-code-block-header-font-size`      | Font size of the `header` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.          |
+| `--bx-code-block-header-font-weight`    | Font weight of the `header` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.      |
+| `--bx-code-block-header-line-height`    | Line height of the `header` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.     |
+| `--bx-code-block-header-letter-spacing` | Letter spacing of the `header` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`. |
 
 ### Methods
 

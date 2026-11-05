@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core`                      |
 | **Category**        | Display                                |
 | **Tag**             | `bx-timeline`                          |
-| **Status**          | Proposed (not implemented)             |
+| **Status**          | Implemented                            |
 | **Form-associated** | No                                     |
 | **Depends on**      | `relative-time`, `format-date`, `icon` |
 
@@ -39,22 +39,32 @@ _None._
 
 ### CSS parts
 
-| Part        | Description         |
-| ----------- | ------------------- |
-| `base`      | The base part.      |
-| `item`      | The item part.      |
-| `marker`    | The marker part.    |
-| `connector` | The connector part. |
-| `time`      | The time part.      |
-| `content`   | The content part.   |
+| Part   | Description    |
+| ------ | -------------- |
+| `base` | The base part. |
 
 ### CSS custom properties
 
-| Property                        | Description                                        |
-| ------------------------------- | -------------------------------------------------- |
-| `--bx-timeline-marker-size`     | Marker size.                                       |
-| `--bx-timeline-connector-color` | Line color.                                        |
-| `--bx-timeline-font-family`     | Font family. Default `var(--bx-font-family-sans)`. |
+| Property                                   | Description                                                                                               |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------------- |
+| `--bx-timeline-marker-size`                | Marker size.                                                                                              |
+| `--bx-timeline-connector-color`            | Line color.                                                                                               |
+| `--bx-timeline-font-family`                | Font family of the item text. Default `var(--bx-type-body-family)`.                                       |
+| `--bx-timeline-time-font-family`           | Font family of the `time` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.         |
+| `--bx-timeline-time-font-size`             | Font size of the `time` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.           |
+| `--bx-timeline-time-font-weight`           | Font weight of the `time` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.       |
+| `--bx-timeline-time-line-height`           | Line height of the `time` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.      |
+| `--bx-timeline-time-letter-spacing`        | Letter spacing of the `time` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`.  |
+| `--bx-timeline-heading-font-family`        | Font family of the `heading` text (text style `label-l`). Default `var(--bx-type-label-family)`.          |
+| `--bx-timeline-heading-font-size`          | Font size of the `heading` text (text style `label-l`). Default `var(--bx-type-label-l-size)`.            |
+| `--bx-timeline-heading-font-weight`        | Font weight of the `heading` text (text style `label-l`). Default `var(--bx-type-label-l-weight)`.        |
+| `--bx-timeline-heading-line-height`        | Line height of the `heading` text (text style `label-l`). Default `var(--bx-type-label-l-leading)`.       |
+| `--bx-timeline-heading-letter-spacing`     | Letter spacing of the `heading` text (text style `label-l`). Default `var(--bx-type-label-l-tracking)`.   |
+| `--bx-timeline-description-font-family`    | Font family of the `description` text (text style `body-m`). Default `var(--bx-type-body-family)`.        |
+| `--bx-timeline-description-font-size`      | Font size of the `description` text (text style `body-m`). Default `var(--bx-type-body-m-size)`.          |
+| `--bx-timeline-description-font-weight`    | Font weight of the `description` text (text style `body-m`). Default `var(--bx-type-body-m-weight)`.      |
+| `--bx-timeline-description-line-height`    | Line height of the `description` text (text style `body-m`). Default `var(--bx-type-body-m-leading)`.     |
+| `--bx-timeline-description-letter-spacing` | Letter spacing of the `description` text (text style `body-m`). Default `var(--bx-type-body-m-tracking)`. |
 
 ### Methods
 

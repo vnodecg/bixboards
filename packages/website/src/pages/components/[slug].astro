@@ -1,0 +1,222 @@
+---
+import Base from '../../layouts/Base.astro';
+import { components, componentsByCategory } from '../../data/site.ts';
+import type { ElementApi, Named } from '../../data/manifest.ts';
+
+export function getStaticPaths() {
+  return components.map((c) => ({ params: { slug: c.slug }, props: { c } }));
+}
+const { c } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const index = components.findIndex((x) => x.tag === c.tag);
+const prev = components[index - 1];
+const next = components[index + 1];
+const importPath = `@bixboards/${c.pkg}/${c.api.dir}`;
+const specDir = c.pkg === 'core' ? 'core' : c.pkg;
+const specFile = c.api.dir;
+const spec = `https://github.com/vnodecg/bixboards/blob/main/docs/features/${specDir}/${specFile}.md`;
+const elements: ElementApi[] = [c.api, ...c.parts];
+// Only the tags the demo uses, but those that are scripted-only (toast) must still load.
+const scriptOnly = [c.tag, ...c.parts.map((p) => p.tag)];
+
+const show = (rows: Named[]) => rows.length > 0;
+const hasDescriptions = (el: ElementApi) => el.props.some((p) => p.description);
+---
+
+<Base title={`${c.name} · Bixboards`} description={c.summary} load={scriptOnly}>
+  <div class="wrap docs">
+    <aside class="side" aria-label="Components">
+      <details id="side-details">
+        <summary>All components</summary>
+        {
+          componentsByCategory.map((g) => (
+            <div class="side-group">
+              <strong>{g.category}</strong>
+              <ul>
+                {g.items.map((x) => (
+                  <li>
+                    <a
+                      href={`${base}/components/${x.slug}/`}
+                      aria-current={x.tag === c.tag ? 'page' : undefined}
+                    >
+                      {x.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </details>
+    </aside>
+
+    <article class="doc">
+      <p class="crumb">
+        <a href={`${base}/components/`}>Components</a> / {c.category}
+      </p>
+      <h1 class="page-title">{c.name}</h1>
+      <p class="lead">
+        <code>&lt;{c.tag}&gt;</code> — {c.summary}
+      </p>
+      <h2 id="demo">Demo</h2>
+      <div class="stage" data-demo-js={c.demo.js}><Fragment set:html={c.demo.html} /></div>
+      <details class="source">
+        <summary>Source</summary>
+        <div class="code-wrap">
+          <bx-copy-button value={c.demo.html} class="copy" copy-label="Copy HTML"></bx-copy-button>
+          <pre class="code"><code>{c.demo.html}</code></pre>
+        </div>
+        {
+          c.demo.js && (
+            <p>Script (for properties that attributes cannot express):</p>
+            <div class="code-wrap">
+              <bx-copy-button value={c.demo.js} class="copy" copy-label="Copy script"></bx-copy-button>
+              <pre class="code"><code>{c.demo.js}</code></pre>
+            </div>
+          )
+        }
+      </details>
+
+      <h2 id="usage">Usage</h2>
+      <p>Importing the package path registers the tag; <code>/define</code> lets you choose the tag name.</p>
+      <pre class="code"><code>{`import '${importPath}';
+
+// or, to pick the tag name yourself:
+import { define${c.api.dir
+          .split('-')
+          .map((w) => w[0]!.toUpperCase() + w.slice(1))
+          .join('')} } from '${importPath}/define';`}</code></pre>
+      <p>
+        Full specification: <a href={spec}>docs/features/{specDir}/{specFile}.md</a>
+      </p>
+
+      <h2 id="api">API</h2>
+      {
+        elements.map((el) => (
+          <section class="api" aria-labelledby={`api-${el.tag}`}>
+            <h3 id={`api-${el.tag}`}>
+              <code>&lt;{el.tag}&gt;</code>
+              {el.tag !== c.tag && <span class="muted"> — {el.summary}</span>}
+            </h3>
+
+            {show(el.props) && (
+              <>
+                <h4>Properties</h4>
+                <div class="table-scroll">
+                  <table>
+                    <thead>
+                      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th>{hasDescriptions(el) && <th>Description</th>}</tr>
+                    </thead>
+                    <tbody>
+                      {el.props.map((p) => (
+                        <tr>
+                          <td><code>{p.name}</code></td>
+                          <td>{p.attribute ? <code>{p.attribute}</code> : '—'}</td>
+                          <td><code>{p.type ?? ''}</code></td>
+                          <td>{p.default ? <code>{p.default}</code> : '—'}</td>
+                          {hasDescriptions(el) && <td>{p.description ?? ''}</td>}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )}
+
+            {show(el.methods) && (
+              <>
+                <h4>Methods</h4>
+                <div class="table-scroll">
+                  <table>
+                    <thead><tr><th>Method</th><th>Description</th></tr></thead>
+                    <tbody>
+                      {el.methods.map((m) => (
+                        <tr><td><code>{m.name}()</code></td><td>{m.description ?? ''}</td></tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )}
+
+            {show(el.events) && (
+              <>
+                <h4>Events</h4>
+                <div class="table-scroll">
+                  <table>
+                    <thead><tr><th>Event</th><th>Description</th></tr></thead>
+                    <tbody>
+                      {el.events.map((e) => (
+                        <tr><td><code>{e.name}</code></td><td>{e.description ?? ''}</td></tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )}
+
+            {show(el.slots) && (
+              <>
+                <h4>Slots</h4>
+                <div class="table-scroll">
+                  <table>
+                    <thead><tr><th>Slot</th><th>Description</th></tr></thead>
+                    <tbody>
+                      {el.slots.map((s) => (
+                        <tr><td>{s.name ? <code>{s.name}</code> : <em>default</em>}</td><td>{s.description ?? ''}</td></tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )}
+
+            {show(el.cssParts) && (
+              <>
+                <h4>CSS parts</h4>
+                <div class="table-scroll">
+                  <table>
+                    <thead><tr><th>Part</th><th>Description</th></tr></thead>
+                    <tbody>
+                      {el.cssParts.map((p) => (
+                        <tr><td><code>::part({p.name})</code></td><td>{p.description ?? ''}</td></tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )}
+
+            {show(el.cssProps) && (
+              <>
+                <h4>CSS custom properties</h4>
+                <div class="table-scroll">
+                  <table>
+                    <thead><tr><th>Property</th><th>Description</th></tr></thead>
+                    <tbody>
+                      {el.cssProps.map((p) => (
+                        <tr><td><code>{p.name}</code></td><td>{p.description ?? ''}</td></tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )}
+          </section>
+        ))
+      }
+
+      <nav class="pager" aria-label="Next and previous component">
+        {prev ? <a href={`${base}/components/${prev.slug}/`}>← {prev.name}</a> : <span />}
+        {next ? <a href={`${base}/components/${next.slug}/`}>{next.name} →</a> : <span />}
+      </nav>
+    </article>
+  </div>
+  <script>
+    // Open the component list beside the content on wide screens; keep it collapsed on phones so
+    // the demo is not pushed below 80 links.
+    if (matchMedia('(min-width: 52rem)').matches) {
+      document.getElementById('side-details')?.setAttribute('open', '');
+    }
+  </script>
+</Base>

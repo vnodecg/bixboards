@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+import { componentsByCategory, components, elementCount } from '../../data/site.ts';
+import { categoryIcons } from '../../data/icons.ts';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<Base
+  title="Components · Bixboards"
+  description={`Live demos and API reference for all ${elementCount} Bixboards elements.`}
+>
+  <section class="block">
+    <div class="wrap">
+      <h1 class="page-title">Components</h1>
+      <p class="lead">
+        {components.length} components ({elementCount} elements including their parts). Every page has a
+        live demo, copyable source and the full API generated from the code.
+      </p>
+
+      <label class="filter">
+        <span class="visually-hidden">Filter components</span>
+        <input type="search" id="filter" placeholder="Filter components…" autocomplete="off" />
+      </label>
+      <p id="filter-empty" class="lead" hidden>No components match.</p>
+
+      {
+        componentsByCategory.map((g) => (
+          <section class="category" data-category>
+            <h2 id={g.category.toLowerCase()}>
+              <span class="icon-badge small"><bx-icon library="lucide" name={categoryIcons[g.category]} aria-hidden="true" /></span>
+              {g.category}
+            </h2>
+            <div class="grid">
+              {g.items.map((c) => (
+                <a
+                  class="tile"
+                  href={`${base}/components/${c.slug}/`}
+                  data-search={`${c.name} ${c.tag} ${c.summary} ${c.parts.map((p) => p.tag).join(' ')}`.toLowerCase()}
+                >
+                  <h3>{c.name}</h3>
+                  <code>{c.tag}</code>
+                  <p>{c.summary}</p>
+                </a>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </section>
+
+  <script>
+    const input = document.getElementById('filter') as HTMLInputElement;
+    const empty = document.getElementById('filter-empty')!;
+    input.addEventListener('input', () => {
+      const q = input.value.trim().toLowerCase();
+      let shown = 0;
+      for (const cat of document.querySelectorAll<HTMLElement>('[data-category]')) {
+        let any = false;
+        for (const tile of cat.querySelectorAll<HTMLElement>('[data-search]')) {
+          const hit = !q || tile.dataset.search!.includes(q);
+          tile.hidden = !hit;
+          any ||= hit;
+        }
+        cat.hidden = !any;
+        if (any) shown++;
+      }
+      empty.hidden = shown > 0;
+    });
+  </script>
+</Base>

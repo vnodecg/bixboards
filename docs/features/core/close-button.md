@@ -2,14 +2,14 @@
 
 > Standard dismiss control (×) used by dialogs, drawers, callouts, toasts and chips.
 
-|                     |                            |
-| ------------------- | -------------------------- |
-| **Package**         | `@bixboards/core`          |
-| **Category**        | Actions                    |
-| **Tag**             | `bx-close-button`          |
-| **Status**          | Proposed (not implemented) |
-| **Form-associated** | No                         |
-| **Depends on**      | `icon-button`              |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Actions           |
+| **Tag**             | `bx-close-button` |
+| **Status**          | Implemented       |
+| **Form-associated** | No                |
+| **Depends on**      | `icon-button`     |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
@@ -48,13 +48,10 @@ _None._
 
 ### CSS custom properties
 
-| Property                             | Description                                                              |
-| ------------------------------------ | ------------------------------------------------------------------------ |
-| `--bx-close-button-size`             | Hit target size. Default `var(--bx-target-min)`.                         |
-| `--bx-close-button-icon-size`        | Glyph size. Default `0.875em`.                                           |
-| `--bx-close-button-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-close-button-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-close-button-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                      | Description                                      |
+| ----------------------------- | ------------------------------------------------ |
+| `--bx-close-button-size`      | Hit target size. Default `var(--bx-target-min)`. |
+| `--bx-close-button-icon-size` | Glyph size. Default `0.875em`.                   |
 
 ### Methods
 

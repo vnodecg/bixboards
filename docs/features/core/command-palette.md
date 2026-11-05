@@ -7,7 +7,7 @@
 | **Package**         | `@bixboards/core`                          |
 | **Category**        | Navigation                                 |
 | **Tag**             | `bx-command-palette`                       |
-| **Status**          | Proposed (not implemented)                 |
+| **Status**          | Implemented                                |
 | **Form-associated** | No                                         |
 | **Depends on**      | `dialog`, `combobox`, `kbd`, `virtualizer` |
 
@@ -60,13 +60,37 @@ Global ⌘K-style launcher: fuzzy search over commands, pages and recent items w
 
 ### CSS custom properties
 
-| Property                                | Description                                                              |
-| --------------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-command-palette-width`            | Dialog width.                                                            |
-| `--bx-command-palette-max-height`       | List max height.                                                         |
-| `--bx-command-palette-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-command-palette-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-command-palette-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                                     | Description                                                                                                |
+| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `--bx-command-palette-width`                 | Dialog width.                                                                                              |
+| `--bx-command-palette-max-height`            | List max height.                                                                                           |
+| `--bx-command-palette-font-family`           | Font family of the root surface. Default `var(--bx-type-body-family)`.                                     |
+| `--bx-command-palette-font-size`             | Font size of the root surface. Default `var(--bx-type-body-size)`.                                         |
+| `--bx-command-palette-font-weight`           | Font weight of the root surface. Default `var(--bx-type-body-weight)`.                                     |
+| `--bx-command-palette-line-height`           | Line height of the root surface. Default `var(--bx-type-body-leading)`.                                    |
+| `--bx-command-palette-letter-spacing`        | Letter spacing of the root surface. Default `var(--bx-type-body-tracking)`.                                |
+| `--bx-command-palette-footer-font-family`    | Font family of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.        |
+| `--bx-command-palette-footer-font-size`      | Font size of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.          |
+| `--bx-command-palette-footer-font-weight`    | Font weight of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.      |
+| `--bx-command-palette-footer-line-height`    | Line height of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.     |
+| `--bx-command-palette-footer-letter-spacing` | Letter spacing of the `footer` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`. |
+| `--bx-command-palette-group-font-family`     | Font family of the `group` text (text style `label-xs`). Default `var(--bx-type-label-family)`.            |
+| `--bx-command-palette-group-font-size`       | Font size of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-size)`.             |
+| `--bx-command-palette-group-font-weight`     | Font weight of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-weight)`.         |
+| `--bx-command-palette-group-line-height`     | Line height of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-leading)`.        |
+| `--bx-command-palette-group-letter-spacing`  | Letter spacing of the `group` text (text style `label-xs`). Default `var(--bx-type-label-xs-tracking)`.    |
+| `--bx-command-palette-item-font-family`      | Font family of the `item` text (text style `body-m`). Default `var(--bx-type-body-family)`.                |
+| `--bx-command-palette-item-font-size`        | Font size of the `item` text (text style `body-m`). Default `var(--bx-type-body-m-size)`.                  |
+| `--bx-command-palette-item-font-weight`      | Font weight of the `item` text (text style `body-m`). Default `var(--bx-type-body-m-weight)`.              |
+| `--bx-command-palette-item-line-height`      | Line height of the `item` text (text style `body-m`). Default `var(--bx-type-body-m-leading)`.             |
+| `--bx-command-palette-item-letter-spacing`   | Letter spacing of the `item` text (text style `body-m`). Default `var(--bx-type-body-m-tracking)`.         |
+| `--bx-command-palette-where-font-family`     | Font family of the `where` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.         |
+| `--bx-command-palette-where-font-size`       | Font size of the `where` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.           |
+| `--bx-command-palette-where-font-weight`     | Font weight of the `where` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.       |
+| `--bx-command-palette-where-line-height`     | Line height of the `where` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.      |
+| `--bx-command-palette-where-letter-spacing`  | Letter spacing of the `where` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`.  |
+| `--bx-command-palette-focus-ring-width`      | Focus ring width of the items (focus state). Default `var(--bx-border-width-strong)`.                      |
+| `--bx-command-palette-focus-ring-color`      | Focus ring color of the items (focus state). Default `var(--bx-focus-ring)`.                               |
 
 ### Methods
 

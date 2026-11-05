@@ -68,7 +68,13 @@ describe('bx-data-list', () => {
     const el = await setup({ items: make(500_000), itemHeight: 40 });
     expect(items(el).length).to.be.lessThan(40);
     expect(items(el)[0]!.getAttribute('aria-setsize')).to.equal('500000');
-    viewport(el).scrollTop = 4_000_000;
+    // 500k × 40px exceeds the spacer cap, so scrollTop is compressed: scale it to reach the
+    // content offset 4,000,000 (item 100,000).
+    const host = viewport(el);
+    const scale =
+      (500_000 * 40 - host.clientHeight) /
+      (host.scrollHeight - host.clientHeight);
+    host.scrollTop = 4_000_000 / scale;
     await settle(el);
     const first = idx(items(el)[0]!);
     expect(first).to.be.within(99_990, 100_000);

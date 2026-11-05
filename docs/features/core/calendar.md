@@ -2,14 +2,14 @@
 
 > Month grid for navigating and picking a date, range or multiple dates.
 
-|                     |                            |
-| ------------------- | -------------------------- |
-| **Package**         | `@bixboards/core`          |
-| **Category**        | Form                       |
-| **Tag**             | `bx-calendar`              |
-| **Status**          | Proposed (not implemented) |
-| **Form-associated** | No                         |
-| **Depends on**      | `button`                   |
+|                     |                   |
+| ------------------- | ----------------- |
+| **Package**         | `@bixboards/core` |
+| **Category**        | Form              |
+| **Tag**             | `bx-calendar`     |
+| **Status**          | Implemented       |
+| **Form-associated** | No                |
+| **Depends on**      | `button`          |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
@@ -62,14 +62,34 @@ Month grid for navigating and picking a date, range or multiple dates. Specified
 
 ### CSS custom properties
 
-| Property                         | Description                                                              |
-| -------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-calendar-day-size`         | Day cell size. Default `var(--bx-target-min)`.                           |
-| `--bx-calendar-day-bg-selected`  | Selected day background.                                                 |
-| `--bx-calendar-range-bg`         | In-range band.                                                           |
-| `--bx-calendar-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-calendar-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-calendar-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                               | Description                                                                                                 |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `--bx-calendar-day-size`               | Day cell size. Default `var(--bx-target-min)`.                                                              |
+| `--bx-calendar-day-bg-selected`        | Selected day background.                                                                                    |
+| `--bx-calendar-range-bg`               | In-range band.                                                                                              |
+| `--bx-calendar-font-family`            | Font family of the root surface. Default `var(--bx-type-body-family)`.                                      |
+| `--bx-calendar-day-font-family`        | Font family of the `day` text (text style `label-m`). Default `var(--bx-type-label-family)`.                |
+| `--bx-calendar-day-font-size`          | Font size of the `day` text (text style `label-m`). Default `var(--bx-type-label-m-size)`.                  |
+| `--bx-calendar-day-font-weight`        | Font weight of the `day` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.              |
+| `--bx-calendar-day-line-height`        | Line height of the `day` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.             |
+| `--bx-calendar-day-letter-spacing`     | Letter spacing of the `day` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.         |
+| `--bx-calendar-title-font-family`      | Font family of the `title` text (text style `label-l`). Default `var(--bx-type-label-family)`.              |
+| `--bx-calendar-title-font-size`        | Font size of the `title` text (text style `label-l`). Default `var(--bx-type-label-l-size)`.                |
+| `--bx-calendar-title-font-weight`      | Font weight of the `title` text (text style `label-l`). Default `var(--bx-type-label-l-weight)`.            |
+| `--bx-calendar-title-line-height`      | Line height of the `title` text (text style `label-l`). Default `var(--bx-type-label-l-leading)`.           |
+| `--bx-calendar-title-letter-spacing`   | Letter spacing of the `title` text (text style `label-l`). Default `var(--bx-type-label-l-tracking)`.       |
+| `--bx-calendar-week-font-family`       | Font family of the `week` text (text style `caption-s`). Default `var(--bx-type-caption-family)`.           |
+| `--bx-calendar-week-font-size`         | Font size of the `week` text (text style `caption-s`). Default `var(--bx-type-caption-s-size)`.             |
+| `--bx-calendar-week-font-weight`       | Font weight of the `week` text (text style `caption-s`). Default `var(--bx-type-caption-s-weight)`.         |
+| `--bx-calendar-week-line-height`       | Line height of the `week` text (text style `caption-s`). Default `var(--bx-type-caption-s-leading)`.        |
+| `--bx-calendar-week-letter-spacing`    | Letter spacing of the `week` text (text style `caption-s`). Default `var(--bx-type-caption-s-tracking)`.    |
+| `--bx-calendar-weekday-font-family`    | Font family of the `weekday` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.        |
+| `--bx-calendar-weekday-font-size`      | Font size of the `weekday` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.          |
+| `--bx-calendar-weekday-font-weight`    | Font weight of the `weekday` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.      |
+| `--bx-calendar-weekday-line-height`    | Line height of the `weekday` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.     |
+| `--bx-calendar-weekday-letter-spacing` | Letter spacing of the `weekday` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`. |
+| `--bx-calendar-focus-ring-width`       | Focus ring width of the day cells (focus state). Default `var(--bx-border-width-strong)`.                   |
+| `--bx-calendar-focus-ring-color`       | Focus ring color of the day cells (focus state). Default `var(--bx-focus-ring)`.                            |
 
 ### Methods
 

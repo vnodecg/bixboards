@@ -197,6 +197,42 @@ const MARKUP: Record<string, string | string[]> = {
   'bx-dropdown':
     '<bx-dropdown><bx-button slot="trigger">T</bx-button><bx-dropdown-item>A</bx-dropdown-item></bx-dropdown>',
   'bx-dropdown-item': '<bx-dropdown-item>Item</bx-dropdown-item>',
+  'bx-icon-button': '<bx-icon-button label="Go" name="check"></bx-icon-button>',
+  'bx-kbd': '<bx-kbd keys="mod+k"></bx-kbd>',
+  'bx-chip': '<bx-chip selectable removable>Tag</bx-chip>',
+  'bx-sparkline': '<bx-sparkline values="1,3,2,5"></bx-sparkline>',
+  'bx-timeline':
+    '<bx-timeline><bx-timeline-item heading="A" icon="check"></bx-timeline-item><bx-timeline-item heading="B"></bx-timeline-item></bx-timeline>',
+  'bx-segmented-control':
+    '<bx-segmented-control value="a"><bx-segment value="a" label="A"></bx-segment><bx-segment value="b" label="B"></bx-segment></bx-segmented-control>',
+  'bx-pagination':
+    '<bx-pagination page="3" total="90" page-size="10"></bx-pagination>',
+  'bx-stepper':
+    '<bx-stepper current="1"><bx-step label="A"></bx-step><bx-step label="B"></bx-step><bx-step label="C"></bx-step></bx-stepper>',
+  'bx-toast': '<bx-toast open>Saved</bx-toast>',
+  'bx-combobox':
+    '<bx-combobox label="F"><bx-option value="a">A</bx-option></bx-combobox>',
+  'bx-tag-input': '<bx-tag-input label="T" value="a,b"></bx-tag-input>',
+  'bx-file-upload': '<bx-file-upload label="F"></bx-file-upload>',
+  'bx-calendar':
+    '<bx-calendar mode="range" month="2024-05" value="2024-05-10/2024-05-14" show-week-numbers></bx-calendar>',
+  'bx-code-block':
+    '<bx-code-block filename="a.ts" line-numbers></bx-code-block>',
+  'bx-stat-card':
+    '<bx-stat-card label="L" value="10" delta="2"></bx-stat-card>',
+  'bx-date-picker':
+    '<bx-date-picker label="D" value="2024-05-09"></bx-date-picker>',
+  'bx-time-field': '<bx-time-field label="T" value="09:30"></bx-time-field>',
+  'bx-sidebar':
+    '<bx-sidebar mode="inline"><bx-sidebar-item icon="info" active>A</bx-sidebar-item><bx-sidebar-item>B</bx-sidebar-item></bx-sidebar>',
+  'bx-command-palette': '<bx-command-palette open></bx-command-palette>',
+  'bx-notification-center':
+    '<bx-notification-center unread-count="3" open></bx-notification-center>',
+  'bx-chart':
+    '<bx-chart x="m" style="inline-size: 30rem" height="10rem"></bx-chart>',
+  'bx-qr-code': '<bx-qr-code value="x"></bx-qr-code>',
+  'bx-split-panel':
+    '<bx-split-panel><div slot="start">A</div><div slot="end">B</div></bx-split-panel>',
   'bx-input':
     '<bx-input label="Label" hint="Hint" clearable value="x"></bx-input>',
   'bx-number-input':
@@ -220,8 +256,56 @@ const MARKUP: Record<string, string | string[]> = {
     '<bx-tree selection="multiple"><bx-tree-item expanded with-checkbox>One<bx-tree-item with-checkbox>Two</bx-tree-item></bx-tree-item></bx-tree>',
 };
 
+// Components whose parts render only from data that has no attribute form (properties set from
+// script). Runs after the fixture is created and before any hook is tried.
+const SETUP: Record<string, (el: any) => void> = {
+  'bx-command-palette': (el) => {
+    el.commands = [
+      { id: 'a', label: 'Open', group: 'File', handler: () => {} },
+      { id: 'b', label: 'Save', group: 'File', handler: () => {} },
+    ];
+  },
+  'bx-notification-center': (el) => {
+    el.items = [
+      { id: '1', title: 'T', body: 'B', time: new Date().toISOString() },
+      {
+        id: '2',
+        title: 'U',
+        body: 'C',
+        time: new Date().toISOString(),
+        read: true,
+      },
+    ];
+  },
+  'bx-chart': (el) => {
+    el.series = ['a', 'b'];
+    el.data = [
+      { m: 'x', a: 1, b: 2 },
+      { m: 'y', a: 3, b: 1 },
+    ];
+  },
+  'bx-pagination': (el) => {
+    el.pageSizes = [10, 25];
+  },
+  'bx-file-upload': (el) => {
+    el.files = [new File(['hello'], 'a.txt', { type: 'text/plain' })];
+  },
+};
+
 // Hooks a static fixture cannot exercise. Keep this list short and give a reason for each.
 const NOT_EXERCISED: [RegExp, string][] = [
+  [
+    /^bx-chart --bx-chart-tooltip-/,
+    'the tooltip renders only while the pointer is over a data point',
+  ],
+  [
+    /^bx-command-palette --bx-command-palette-where-/,
+    'the group label beside a result renders only once a search query is typed',
+  ],
+  [
+    /^bx-chart --bx-chart-grid-color$/,
+    'gridlines are drawn asynchronously after the first visibility and resize pass; covered in chart.test.ts',
+  ],
   [
     /^bx-color-picker --bx-color-picker-format-select-line-height$/,
     'a native <select> ignores line-height',
@@ -305,7 +389,8 @@ const cssName = (p: string) =>
 describe('component styling API (CSS custom properties)', () => {
   let modules: Module[] = [];
 
-  before(async () => {
+  before(async function () {
+    this.timeout(60_000); // imports every component module
     const manifest = (await (await fetch('/custom-elements.json')).json()) as {
       modules: Module[];
     };
@@ -332,6 +417,8 @@ describe('component styling API (CSS custom properties)', () => {
           (name) =>
             name.startsWith(`--${tag}-`) &&
             !NEEDS_STATE.test(name) &&
+            // The eyedropper button renders only where the EyeDropper API exists (Chromium).
+            !(name.includes('-eyedropper-') && !('EyeDropper' in window)) &&
             !NOT_EXERCISED.some(([re]) => re.test(`${tag} ${name}`)) &&
             KINDS.some((k) => k.suffix.test(name)),
         );
@@ -350,6 +437,7 @@ describe('component styling API (CSS custom properties)', () => {
             staticHtml`<div style="inline-size: 40rem; --bx-motion-duration-fast: 0s; --bx-motion-duration-base: 0s; --bx-motion-duration-slow: 0s">${markup}</div>`,
           );
           const host = wrapper.firstElementChild as HTMLElement;
+          SETUP[tag]?.(host);
           await (host as unknown as { updateComplete?: Promise<unknown> })
             .updateComplete;
           const scope = [...withShadowTrees(wrapper)];

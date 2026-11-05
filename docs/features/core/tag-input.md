@@ -2,14 +2,14 @@
 
 > Free-form multi-value entry that turns typed text into removable chips.
 
-|                     |                            |
-| ------------------- | -------------------------- |
-| **Package**         | `@bixboards/core`          |
-| **Category**        | Form                       |
-| **Tag**             | `bx-tag-input`             |
-| **Status**          | Proposed (not implemented) |
-| **Form-associated** | Yes (ElementInternals)     |
-| **Depends on**      | `chip`, `input`            |
+|                     |                        |
+| ------------------- | ---------------------- |
+| **Package**         | `@bixboards/core`      |
+| **Category**        | Form                   |
+| **Tag**             | `bx-tag-input`         |
+| **Status**          | Implemented            |
+| **Form-associated** | Yes (ElementInternals) |
+| **Depends on**      | `chip`, `input`        |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
@@ -55,20 +55,36 @@ Free-form multi-value entry that turns typed text into removable chips. Specifie
 
 ### CSS parts
 
-| Part           | Description            |
-| -------------- | ---------------------- |
-| `form-control` | The form-control part. |
-| `tag`          | A chip.                |
-| `input`        | The text field.        |
+| Part           | Description              |
+| -------------- | ------------------------ |
+| `form-control` | The form-control part.   |
+| `base`         | The tag + input surface. |
+| `input`        | The text input.          |
+| `tag`          | A tag chip.              |
 
 ### CSS custom properties
 
-| Property                          | Description                                                              |
-| --------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-tag-input-gap`              | Gap between chips.                                                       |
-| `--bx-tag-input-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-tag-input-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-tag-input-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                              | Description                                                                                              |
+| ------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `--bx-tag-input-bg`                   | Background.                                                                                              |
+| `--bx-tag-input-border-color`         | Border color.                                                                                            |
+| `--bx-tag-input-radius`               | Corner radius.                                                                                           |
+| `--bx-tag-input-gap`                  | Gap between tags.                                                                                        |
+| `--bx-tag-input-font-family`          | Font family of the root surface. Default `var(--bx-type-field-family)`.                                  |
+| `--bx-tag-input-font-size`            | Font size of the root surface. Default `var(--bx-type-field-size)`.                                      |
+| `--bx-tag-input-font-weight`          | Font weight of the root surface. Default `var(--bx-type-field-weight)`.                                  |
+| `--bx-tag-input-line-height`          | Line height of the root surface. Default `var(--bx-type-field-leading)`.                                 |
+| `--bx-tag-input-letter-spacing`       | Letter spacing of the root surface. Default `var(--bx-type-field-tracking)`.                             |
+| `--bx-tag-input-hint-font-family`     | Font family of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.        |
+| `--bx-tag-input-hint-font-size`       | Font size of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.          |
+| `--bx-tag-input-hint-font-weight`     | Font weight of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.      |
+| `--bx-tag-input-hint-line-height`     | Line height of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.     |
+| `--bx-tag-input-hint-letter-spacing`  | Letter spacing of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`. |
+| `--bx-tag-input-label-font-family`    | Font family of the `label` text (text style `label-m`). Default `var(--bx-type-label-family)`.           |
+| `--bx-tag-input-label-font-size`      | Font size of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-size)`.             |
+| `--bx-tag-input-label-font-weight`    | Font weight of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.         |
+| `--bx-tag-input-label-line-height`    | Line height of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.        |
+| `--bx-tag-input-label-letter-spacing` | Letter spacing of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.    |
 
 ### Methods
 

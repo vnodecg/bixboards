@@ -2,14 +2,14 @@
 
 > Segmented one-time-code entry with paste, autofill and auto-advance.
 
-|                     |                            |
-| ------------------- | -------------------------- |
-| **Package**         | `@bixboards/core`          |
-| **Category**        | Form                       |
-| **Tag**             | `bx-input-otp`             |
-| **Status**          | Proposed (not implemented) |
-| **Form-associated** | Yes (ElementInternals)     |
-| **Depends on**      | `input`                    |
+|                     |                        |
+| ------------------- | ---------------------- |
+| **Package**         | `@bixboards/core`      |
+| **Category**        | Form                   |
+| **Tag**             | `bx-input-otp`         |
+| **Status**          | Implemented            |
+| **Form-associated** | Yes (ElementInternals) |
+| **Depends on**      | `input`                |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
@@ -60,13 +60,27 @@ Segmented one-time-code entry with paste, autofill and auto-advance. Specified f
 
 ### CSS custom properties
 
-| Property                          | Description                                                              |
-| --------------------------------- | ------------------------------------------------------------------------ |
-| `--bx-input-otp-cell-size`        | Cell width and height. Default `calc(var(--bx-unit) * 2.75)`.            |
-| `--bx-input-otp-gap`              | Gap between cells.                                                       |
-| `--bx-input-otp-focus-ring-width` | Focus ring width (focus state). Default `var(--bx-border-width-strong)`. |
-| `--bx-input-otp-focus-ring-color` | Focus ring color (focus state). Default `var(--bx-focus-ring)`.          |
-| `--bx-input-otp-font-family`      | Font family. Default `var(--bx-font-family-sans)`.                       |
+| Property                              | Description                                                                                              |
+| ------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `--bx-input-otp-gap`                  | Gap between cells. Default `var(--bx-space-2xs)`.                                                        |
+| `--bx-input-otp-bg`                   | Cell background.                                                                                         |
+| `--bx-input-otp-border-color`         | Cell border color.                                                                                       |
+| `--bx-input-otp-radius`               | Cell radius.                                                                                             |
+| `--bx-input-otp-font-family`          | Font family of the root surface. Default `var(--bx-type-field-family)`.                                  |
+| `--bx-input-otp-font-size`            | Font size of the root surface. Default `var(--bx-type-field-size)`.                                      |
+| `--bx-input-otp-font-weight`          | Font weight of the root surface. Default `var(--bx-type-field-weight)`.                                  |
+| `--bx-input-otp-line-height`          | Line height of the root surface. Default `var(--bx-type-field-leading)`.                                 |
+| `--bx-input-otp-letter-spacing`       | Letter spacing of the root surface. Default `var(--bx-type-field-tracking)`.                             |
+| `--bx-input-otp-hint-font-family`     | Font family of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-family)`.        |
+| `--bx-input-otp-hint-font-size`       | Font size of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-size)`.          |
+| `--bx-input-otp-hint-font-weight`     | Font weight of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-weight)`.      |
+| `--bx-input-otp-hint-line-height`     | Line height of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-leading)`.     |
+| `--bx-input-otp-hint-letter-spacing`  | Letter spacing of the `hint` text (text style `caption-m`). Default `var(--bx-type-caption-m-tracking)`. |
+| `--bx-input-otp-label-font-family`    | Font family of the `label` text (text style `label-m`). Default `var(--bx-type-label-family)`.           |
+| `--bx-input-otp-label-font-size`      | Font size of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-size)`.             |
+| `--bx-input-otp-label-font-weight`    | Font weight of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-weight)`.         |
+| `--bx-input-otp-label-line-height`    | Line height of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-leading)`.        |
+| `--bx-input-otp-label-letter-spacing` | Letter spacing of the `label` text (text style `label-m`). Default `var(--bx-type-label-m-tracking)`.    |
 
 ### Methods
 

@@ -1,97 +1,138 @@
-export type ComponentStatus = 'available' | 'planned';
+import { categories, registry, type Category, type Demo } from './registry.ts';
+import type { IconName } from './icons.ts';
+import { manifest, type ElementApi, type PackageName } from './manifest.ts';
+
+export { categories };
+export type { Category };
 
 export interface ComponentEntry {
+  /** Display name, e.g. "Button Group". */
   name: string;
   tag: string;
-  category: string;
-  status: ComponentStatus;
+  /** URL segment under /components/. */
+  slug: string;
+  category: Category;
+  pkg: PackageName;
+  summary: string;
+  demo: Demo;
+  api: ElementApi;
+  /** Sub-elements documented on the same page (e.g. `bx-tab` under `bx-tab-group`). */
+  parts: ElementApi[];
 }
 
-const mk = (category: string, status: ComponentStatus, names: string[]): ComponentEntry[] =>
-  names.map((name) => ({
-    name,
-    tag: `bx-${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
-    category,
-    status,
-  }));
+const title = (tag: string) =>
+  tag
+    .replace(/^bx-/, '')
+    .split('-')
+    .map((w) => w[0]!.toUpperCase() + w.slice(1))
+    .join(' ');
 
-export const components: ComponentEntry[] = [
-  ...mk('Actions', 'available', ['Button', 'Button Group', 'Copy Button']),
-  ...mk('Actions', 'planned', ['Icon Button', 'Close Button', 'Link Button', 'Social Button']),
-  ...mk('Forms', 'available', [
-    'Input',
-    'Number Input',
-    'Textarea',
-    'Checkbox',
-    'Radio',
-    'Radio Group',
-    'Switch',
-    'Select',
-    'Slider',
-    'Rating',
-    'Color Picker',
-  ]),
-  ...mk('Forms', 'planned', [
-    'Combobox',
-    'Input OTP',
-    'File Upload',
-    'Search Field',
-    'Segmented Control',
-    'Date Picker',
-    'Time Field',
-  ]),
-  ...mk('Display', 'available', [
-    'Avatar',
-    'Badge',
-    'Card',
-    'Callout',
-    'Carousel',
-    'Divider',
-    'Skeleton',
-    'Spinner',
-    'Progress Bar',
-    'Progress Ring',
-    'Tree',
-    'Details',
-    'Comparison',
-  ]),
-  ...mk('Display', 'planned', ['Chip', 'Meter']),
-  ...mk('Overlays', 'available', ['Dialog', 'Drawer', 'Dropdown', 'Popover', 'Tooltip']),
-  ...mk('Overlays', 'planned', ['Toast', 'Notification', 'Command Palette', 'Context Menu']),
-  ...mk('Navigation', 'available', ['Breadcrumb', 'Tab Group']),
-  ...mk('Navigation', 'planned', ['Pagination', 'Sidebar']),
-];
+function build(): ComponentEntry[] {
+  const api = manifest();
+  const get = (tag: string): ElementApi => {
+    const found = api.get(tag);
+    if (!found)
+      throw new Error(`registry lists ${tag}, which no manifest declares`);
+    return found;
+  };
+  return registry.map((e) => {
+    const main = get(e.tag);
+    return {
+      name: title(e.tag),
+      tag: e.tag,
+      slug: e.tag.replace(/^bx-/, ''),
+      category: e.category,
+      pkg: main.pkg,
+      summary: main.summary,
+      demo: e.demo,
+      api: main,
+      parts: e.parts.map(get),
+    };
+  });
+}
+
+/** Every documented component, in registry (category) order. */
+export const components: ComponentEntry[] = build();
+
+export const componentsByCategory = categories
+  .map((category) => ({
+    category,
+    items: components.filter((c) => c.category === category),
+  }))
+  .filter((g) => g.items.length > 0);
+
+/** Elements including sub-parts: what "coverage" counts. */
+export const elementCount = components.reduce(
+  (n, c) => n + 1 + c.parts.length,
+  0,
+);
 
 export const templates = [
-  { slug: 'dashboard', name: 'Dashboard', blurb: 'KPI tiles, activity feed and a data table.' },
-  { slug: 'auth', name: 'Auth & settings', blurb: 'Sign in, sign up and account settings.' },
-  { slug: 'landing', name: 'Landing page', blurb: 'Hero, features, pricing and call to action.' },
-  { slug: 'board', name: 'Project board', blurb: 'Kanban columns with task cards.' },
+  {
+    slug: 'dashboard',
+    icon: 'layout-dashboard' as IconName,
+    name: 'Dashboard',
+    blurb: 'KPI tiles, activity feed and a data table.',
+  },
+  {
+    slug: 'auth',
+    icon: 'shield-check' as IconName,
+    name: 'Auth & settings',
+    blurb: 'Sign in, sign up and account settings.',
+  },
+  {
+    slug: 'landing',
+    icon: 'rocket' as IconName,
+    name: 'Landing page',
+    blurb: 'Hero, features, pricing and call to action.',
+  },
+  {
+    slug: 'board',
+    icon: 'rows-3' as IconName,
+    name: 'Project board',
+    blurb: 'Kanban columns with task cards.',
+  },
 ] as const;
 
 export const features = [
   {
     title: 'Framework agnostic',
-    body: 'Standards-based web components with wrappers for React, Angular and Svelte.',
+    icon: 'blocks' as IconName,
+    body: 'Standards-based custom elements built on Lit, with generated wrappers for React, Angular and Svelte.',
   },
   {
     title: 'Token driven theming',
-    body: 'Semantic tokens compiled from JSON. Switch light, dark or your brand with one attribute.',
+    icon: 'palette' as IconName,
+    body: 'Semantic tokens compiled from JSON. Switch light, dark or your own brand with one attribute.',
+  },
+  {
+    title: 'Fluid by default',
+    icon: 'ruler' as IconName,
+    body: 'One --bx-scale token drives spacing, type and radii. Components reflow with container queries, not breakpoints.',
   },
   {
     title: 'Accessible by default',
+    icon: 'accessibility' as IconName,
     body: 'Every component is tested with axe and keyboard navigation in a real browser.',
   },
   {
     title: 'Tree-shakeable',
-    body: 'Import only the components you use, register under any tag prefix.',
+    icon: 'zap' as IconName,
+    body: 'Import only the components you use, and register them under any tag prefix.',
   },
   {
-    title: 'Data heavy ready',
-    body: 'Virtualized data table and data list for large datasets.',
+    title: 'Built for big data',
+    icon: 'database' as IconName,
+    body: 'Virtualized data table, data list and tree stay fast with hundreds of thousands of rows.',
+  },
+  {
+    title: 'Forms that behave',
+    icon: 'text-cursor-input' as IconName,
+    body: 'Form-associated elements with native constraint validation, reset and restore.',
   },
   {
     title: 'Fully specified',
-    body: 'Each component has a written feature spec and a test suite.',
+    icon: 'shield-check' as IconName,
+    body: 'Each component has a written feature spec, a Storybook story and a browser test suite.',
   },
 ] as const;

@@ -1359,13 +1359,21 @@ export class BxSelect extends FormAssociatedMixin(BixElement) {
 
   /**
    * A single searchable select shows the selected label in the input. The first edit after
-   * opening starts a fresh query rather than editing the label text, so the field is cleared just
-   * before the browser applies the keystroke, paste or composition.
+   * opening starts a fresh query rather than editing the label text, so the label is selected just
+   * before the browser applies the keystroke, paste or composition, which then replaces it.
    */
   #handleBeforeInput = (event: InputEvent): void => {
     if (!this.searchable || this.multiple || this.#searching) return;
     this.#searching = true;
-    (event.target as HTMLInputElement).value = '';
+    // Select the label so this keystroke, paste or composition replaces it. Clearing `value`
+    // here instead loses the keystroke in WebKit.
+    (event.target as HTMLInputElement).select();
+  };
+
+  /** Focusing a single searchable select selects its label, so typing replaces it (all engines). */
+  #handleInputFocus = (event: FocusEvent): void => {
+    if (!this.searchable || this.multiple || this.#searching) return;
+    (event.target as HTMLInputElement).select();
   };
 
   #handleSearchInput = (event: Event): void => {
@@ -1721,7 +1729,7 @@ export class BxSelect extends FormAssociatedMixin(BixElement) {
       return html`<div
         class="rows"
         data-windowed
-        style="block-size: ${this.#virtualizer.totalSize}px"
+        style="block-size: ${this.#virtualizer.spacerSize}px"
       >
         ${repeat(
           items,
@@ -1731,7 +1739,7 @@ export class BxSelect extends FormAssociatedMixin(BixElement) {
               ? this.#renderRow(
                   this.#visible[item.index]!,
                   item.index,
-                  item.start,
+                  item.position,
                 )
               : nothing,
         )}
@@ -1817,6 +1825,7 @@ export class BxSelect extends FormAssociatedMixin(BixElement) {
               aria-describedby=${showHint ? this.#hintId : nothing}
               aria-label=${!showLabel && ariaLabel ? ariaLabel : nothing}
               @beforeinput=${this.#handleBeforeInput}
+              @focus=${this.#handleInputFocus}
               @input=${this.#handleSearchInput}
               @change=${(event: Event) => event.stopPropagation()}
               @keydown=${this.#handleKeydown}

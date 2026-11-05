@@ -2,14 +2,14 @@
 
 > Scalar measurement within a known range (disk usage, score) with low/high/optimum bands.
 
-|                     |                            |
-| ------------------- | -------------------------- |
-| **Package**         | `@bixboards/core`          |
-| **Category**        | Feedback                   |
-| **Tag**             | `bx-meter`                 |
-| **Status**          | Proposed (not implemented) |
-| **Form-associated** | No                         |
-| **Depends on**      | _progress-bar_ (soft)      |
+|                     |                       |
+| ------------------- | --------------------- |
+| **Package**         | `@bixboards/core`     |
+| **Category**        | Feedback              |
+| **Tag**             | `bx-meter`            |
+| **Status**          | Implemented           |
+| **Form-associated** | No                    |
+| **Depends on**      | _progress-bar_ (soft) |
 
 See [conventions](../_conventions.md) for shared rules (tokens, container queries, events, wrappers, virtualization).
 
@@ -54,13 +54,22 @@ _None._
 
 ### CSS custom properties
 
-| Property                  | Description                                        |
-| ------------------------- | -------------------------------------------------- |
-| `--bx-meter-height`       | Track height.                                      |
-| `--bx-meter-fill-good`    | Color in the optimum band.                         |
-| `--bx-meter-fill-warning` | Color in the middle band.                          |
-| `--bx-meter-fill-bad`     | Color in the worst band.                           |
-| `--bx-meter-font-family`  | Font family. Default `var(--bx-font-family-sans)`. |
+| Property                          | Description                                                                                           |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `--bx-meter-height`               | Track height.                                                                                         |
+| `--bx-meter-fill-good`            | Color in the optimum band.                                                                            |
+| `--bx-meter-fill-warning`         | Color in the middle band.                                                                             |
+| `--bx-meter-fill-bad`             | Color in the worst band.                                                                              |
+| `--bx-meter-font-family`          | Font family of the root surface. Default `var(--bx-type-label-family)`.                               |
+| `--bx-meter-font-size`            | Font size of the root surface. Default `var(--bx-type-label-size)`.                                   |
+| `--bx-meter-font-weight`          | Font weight of the root surface. Default `var(--bx-type-label-weight)`.                               |
+| `--bx-meter-line-height`          | Line height of the root surface. Default `var(--bx-type-label-leading)`.                              |
+| `--bx-meter-letter-spacing`       | Letter spacing of the root surface. Default `var(--bx-type-label-tracking)`.                          |
+| `--bx-meter-value-font-family`    | Font family of the `value` text (text style `label-s`). Default `var(--bx-type-label-family)`.        |
+| `--bx-meter-value-font-size`      | Font size of the `value` text (text style `label-s`). Default `var(--bx-type-label-s-size)`.          |
+| `--bx-meter-value-font-weight`    | Font weight of the `value` text (text style `label-s`). Default `var(--bx-type-label-s-weight)`.      |
+| `--bx-meter-value-line-height`    | Line height of the `value` text (text style `label-s`). Default `var(--bx-type-label-s-leading)`.     |
+| `--bx-meter-value-letter-spacing` | Letter spacing of the `value` text (text style `label-s`). Default `var(--bx-type-label-s-tracking)`. |
 
 ### Methods
 

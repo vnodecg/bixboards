@@ -6,7 +6,8 @@
   "type": "module",
   "sideEffects": [
     "./dist/*/index.js",
-    "./dist/*/presets/*.js"
+    "./dist/*/presets/*.js",
+    "./dist/icon/default-library.js"
   ],
   "engines": {
     "node": ">=20"
@@ -46,6 +47,10 @@
       "types": "./dist/animation/presets/fade-out.d.ts",
       "default": "./dist/animation/presets/fade-out.js"
     },
+    "./animation/presets/flip": {
+      "types": "./dist/animation/presets/flip.d.ts",
+      "default": "./dist/animation/presets/flip.js"
+    },
     "./animation/presets/pulse": {
       "types": "./dist/animation/presets/pulse.d.ts",
       "default": "./dist/animation/presets/pulse.js"
@@ -53,22 +58,6 @@
     "./animation/presets/shake": {
       "types": "./dist/animation/presets/shake.d.ts",
       "default": "./dist/animation/presets/shake.js"
-    },
-    "./animation/presets/spin": {
-      "types": "./dist/animation/presets/spin.d.ts",
-      "default": "./dist/animation/presets/spin.js"
-    },
-    "./animation/presets/zoom-in": {
-      "types": "./dist/animation/presets/zoom-in.d.ts",
-      "default": "./dist/animation/presets/zoom-in.js"
-    },
-    "./animation/presets/zoom-out": {
-      "types": "./dist/animation/presets/zoom-out.d.ts",
-      "default": "./dist/animation/presets/zoom-out.js"
-    },
-    "./animation/presets/slide-in-up": {
-      "types": "./dist/animation/presets/slide-in-up.d.ts",
-      "default": "./dist/animation/presets/slide-in-up.js"
     },
     "./animation/presets/slide-in-down": {
       "types": "./dist/animation/presets/slide-in-down.d.ts",
@@ -82,33 +71,21 @@
       "types": "./dist/animation/presets/slide-in-right.d.ts",
       "default": "./dist/animation/presets/slide-in-right.js"
     },
-    "./animation/presets/flip": {
-      "types": "./dist/animation/presets/flip.d.ts",
-      "default": "./dist/animation/presets/flip.js"
+    "./animation/presets/slide-in-up": {
+      "types": "./dist/animation/presets/slide-in-up.d.ts",
+      "default": "./dist/animation/presets/slide-in-up.js"
     },
-    "./icon": {
-      "types": "./dist/icon/index.d.ts",
-      "default": "./dist/icon/index.js"
+    "./animation/presets/spin": {
+      "types": "./dist/animation/presets/spin.d.ts",
+      "default": "./dist/animation/presets/spin.js"
     },
-    "./icon/define": {
-      "types": "./dist/icon/define.d.ts",
-      "default": "./dist/icon/define.js"
+    "./animation/presets/zoom-in": {
+      "types": "./dist/animation/presets/zoom-in.d.ts",
+      "default": "./dist/animation/presets/zoom-in.js"
     },
-    "./divider": {
-      "types": "./dist/divider/index.d.ts",
-      "default": "./dist/divider/index.js"
-    },
-    "./divider/define": {
-      "types": "./dist/divider/define.d.ts",
-      "default": "./dist/divider/define.js"
-    },
-    "./badge": {
-      "types": "./dist/badge/index.d.ts",
-      "default": "./dist/badge/index.js"
-    },
-    "./badge/define": {
-      "types": "./dist/badge/define.d.ts",
-      "default": "./dist/badge/define.js"
+    "./animation/presets/zoom-out": {
+      "types": "./dist/animation/presets/zoom-out.d.ts",
+      "default": "./dist/animation/presets/zoom-out.js"
     },
     "./avatar": {
       "types": "./dist/avatar/index.d.ts",
@@ -118,37 +95,53 @@
       "types": "./dist/avatar/define.d.ts",
       "default": "./dist/avatar/define.js"
     },
-    "./progress-bar": {
-      "types": "./dist/progress-bar/index.d.ts",
-      "default": "./dist/progress-bar/index.js"
+    "./badge": {
+      "types": "./dist/badge/index.d.ts",
+      "default": "./dist/badge/index.js"
     },
-    "./progress-bar/define": {
-      "types": "./dist/progress-bar/define.d.ts",
-      "default": "./dist/progress-bar/define.js"
+    "./badge/define": {
+      "types": "./dist/badge/define.d.ts",
+      "default": "./dist/badge/define.js"
     },
-    "./progress-ring": {
-      "types": "./dist/progress-ring/index.d.ts",
-      "default": "./dist/progress-ring/index.js"
+    "./breadcrumb": {
+      "types": "./dist/breadcrumb/index.d.ts",
+      "default": "./dist/breadcrumb/index.js"
     },
-    "./progress-ring/define": {
-      "types": "./dist/progress-ring/define.d.ts",
-      "default": "./dist/progress-ring/define.js"
+    "./breadcrumb-item": {
+      "types": "./dist/breadcrumb-item/index.d.ts",
+      "default": "./dist/breadcrumb-item/index.js"
     },
-    "./skeleton": {
-      "types": "./dist/skeleton/index.d.ts",
-      "default": "./dist/skeleton/index.js"
+    "./breadcrumb-item/define": {
+      "types": "./dist/breadcrumb-item/define.d.ts",
+      "default": "./dist/breadcrumb-item/define.js"
     },
-    "./skeleton/define": {
-      "types": "./dist/skeleton/define.d.ts",
-      "default": "./dist/skeleton/define.js"
+    "./breadcrumb/define": {
+      "types": "./dist/breadcrumb/define.d.ts",
+      "default": "./dist/breadcrumb/define.js"
     },
-    "./spinner": {
-      "types": "./dist/spinner/index.d.ts",
-      "default": "./dist/spinner/index.js"
+    "./button": {
+      "types": "./dist/button/index.d.ts",
+      "default": "./dist/button/index.js"
     },
-    "./spinner/define": {
-      "types": "./dist/spinner/define.d.ts",
-      "default": "./dist/spinner/define.js"
+    "./button-group": {
+      "types": "./dist/button-group/index.d.ts",
+      "default": "./dist/button-group/index.js"
+    },
+    "./button-group/define": {
+      "types": "./dist/button-group/define.d.ts",
+      "default": "./dist/button-group/define.js"
+    },
+    "./button/define": {
+      "types": "./dist/button/define.d.ts",
+      "default": "./dist/button/define.js"
+    },
+    "./calendar": {
+      "types": "./dist/calendar/index.d.ts",
+      "default": "./dist/calendar/index.js"
+    },
+    "./calendar/define": {
+      "types": "./dist/calendar/define.d.ts",
+      "default": "./dist/calendar/define.js"
     },
     "./callout": {
       "types": "./dist/callout/index.d.ts",
@@ -166,13 +159,117 @@
       "types": "./dist/card/define.d.ts",
       "default": "./dist/card/define.js"
     },
-    "./scroller": {
-      "types": "./dist/scroller/index.d.ts",
-      "default": "./dist/scroller/index.js"
+    "./carousel": {
+      "types": "./dist/carousel/index.d.ts",
+      "default": "./dist/carousel/index.js"
     },
-    "./scroller/define": {
-      "types": "./dist/scroller/define.d.ts",
-      "default": "./dist/scroller/define.js"
+    "./carousel-item": {
+      "types": "./dist/carousel-item/index.d.ts",
+      "default": "./dist/carousel-item/index.js"
+    },
+    "./carousel-item/define": {
+      "types": "./dist/carousel-item/define.d.ts",
+      "default": "./dist/carousel-item/define.js"
+    },
+    "./carousel/define": {
+      "types": "./dist/carousel/define.d.ts",
+      "default": "./dist/carousel/define.js"
+    },
+    "./chart": {
+      "types": "./dist/chart/index.d.ts",
+      "default": "./dist/chart/index.js"
+    },
+    "./chart/define": {
+      "types": "./dist/chart/define.d.ts",
+      "default": "./dist/chart/define.js"
+    },
+    "./checkbox": {
+      "types": "./dist/checkbox/index.d.ts",
+      "default": "./dist/checkbox/index.js"
+    },
+    "./checkbox/define": {
+      "types": "./dist/checkbox/define.d.ts",
+      "default": "./dist/checkbox/define.js"
+    },
+    "./chip": {
+      "types": "./dist/chip/index.d.ts",
+      "default": "./dist/chip/index.js"
+    },
+    "./chip/define": {
+      "types": "./dist/chip/define.d.ts",
+      "default": "./dist/chip/define.js"
+    },
+    "./close-button": {
+      "types": "./dist/close-button/index.d.ts",
+      "default": "./dist/close-button/index.js"
+    },
+    "./close-button/define": {
+      "types": "./dist/close-button/define.d.ts",
+      "default": "./dist/close-button/define.js"
+    },
+    "./code-block": {
+      "types": "./dist/code-block/index.d.ts",
+      "default": "./dist/code-block/index.js"
+    },
+    "./code-block/define": {
+      "types": "./dist/code-block/define.d.ts",
+      "default": "./dist/code-block/define.js"
+    },
+    "./color-picker": {
+      "types": "./dist/color-picker/index.d.ts",
+      "default": "./dist/color-picker/index.js"
+    },
+    "./color-picker/define": {
+      "types": "./dist/color-picker/define.d.ts",
+      "default": "./dist/color-picker/define.js"
+    },
+    "./combobox": {
+      "types": "./dist/combobox/index.d.ts",
+      "default": "./dist/combobox/index.js"
+    },
+    "./combobox/define": {
+      "types": "./dist/combobox/define.d.ts",
+      "default": "./dist/combobox/define.js"
+    },
+    "./command-palette": {
+      "types": "./dist/command-palette/index.d.ts",
+      "default": "./dist/command-palette/index.js"
+    },
+    "./command-palette/define": {
+      "types": "./dist/command-palette/define.d.ts",
+      "default": "./dist/command-palette/define.js"
+    },
+    "./comparison": {
+      "types": "./dist/comparison/index.d.ts",
+      "default": "./dist/comparison/index.js"
+    },
+    "./comparison/define": {
+      "types": "./dist/comparison/define.d.ts",
+      "default": "./dist/comparison/define.js"
+    },
+    "./context-menu": {
+      "types": "./dist/context-menu/index.d.ts",
+      "default": "./dist/context-menu/index.js"
+    },
+    "./context-menu/define": {
+      "types": "./dist/context-menu/define.d.ts",
+      "default": "./dist/context-menu/define.js"
+    },
+    "./copy-button": {
+      "types": "./dist/copy-button/index.d.ts",
+      "default": "./dist/copy-button/index.js"
+    },
+    "./copy-button/define": {
+      "types": "./dist/copy-button/define.d.ts",
+      "default": "./dist/copy-button/define.js"
+    },
+    "./date-picker": {
+      "types": "./dist/date-picker/index.d.ts",
+      "default": "./dist/date-picker/index.js"
+    },
+    "./date-picker/define": {
+      "types": "./dist/date-picker/define.d.ts",
+      "default": "./dist/date-picker/define.js"
     },
     "./details": {
       "types": "./dist/details/index.d.ts",
@@ -190,157 +287,25 @@
       "types": "./dist/dialog/define.d.ts",
       "default": "./dist/dialog/define.js"
     },
-    "./input": {
-      "types": "./dist/input/index.d.ts",
-      "default": "./dist/input/index.js"
+    "./divider": {
+      "types": "./dist/divider/index.d.ts",
+      "default": "./dist/divider/index.js"
     },
-    "./input/define": {
-      "types": "./dist/input/define.d.ts",
-      "default": "./dist/input/define.js"
+    "./divider/define": {
+      "types": "./dist/divider/define.d.ts",
+      "default": "./dist/divider/define.js"
     },
-    "./number-input": {
-      "types": "./dist/number-input/index.d.ts",
-      "default": "./dist/number-input/index.js"
+    "./drawer": {
+      "types": "./dist/drawer/index.d.ts",
+      "default": "./dist/drawer/index.js"
     },
-    "./number-input/define": {
-      "types": "./dist/number-input/define.d.ts",
-      "default": "./dist/number-input/define.js"
+    "./drawer/define": {
+      "types": "./dist/drawer/define.d.ts",
+      "default": "./dist/drawer/define.js"
     },
-    "./checkbox": {
-      "types": "./dist/checkbox/index.d.ts",
-      "default": "./dist/checkbox/index.js"
-    },
-    "./checkbox/define": {
-      "types": "./dist/checkbox/define.d.ts",
-      "default": "./dist/checkbox/define.js"
-    },
-    "./color-picker": {
-      "types": "./dist/color-picker/index.d.ts",
-      "default": "./dist/color-picker/index.js"
-    },
-    "./color-picker/define": {
-      "types": "./dist/color-picker/define.d.ts",
-      "default": "./dist/color-picker/define.js"
-    },
-    "./switch": {
-      "types": "./dist/switch/index.d.ts",
-      "default": "./dist/switch/index.js"
-    },
-    "./switch/define": {
-      "types": "./dist/switch/define.d.ts",
-      "default": "./dist/switch/define.js"
-    },
-    "./textarea": {
-      "types": "./dist/textarea/index.d.ts",
-      "default": "./dist/textarea/index.js"
-    },
-    "./textarea/define": {
-      "types": "./dist/textarea/define.d.ts",
-      "default": "./dist/textarea/define.js"
-    },
-    "./radio": {
-      "types": "./dist/radio/index.d.ts",
-      "default": "./dist/radio/index.js"
-    },
-    "./radio/define": {
-      "types": "./dist/radio/define.d.ts",
-      "default": "./dist/radio/define.js"
-    },
-    "./radio-group": {
-      "types": "./dist/radio-group/index.d.ts",
-      "default": "./dist/radio-group/index.js"
-    },
-    "./radio-group/define": {
-      "types": "./dist/radio-group/define.d.ts",
-      "default": "./dist/radio-group/define.js"
-    },
-    "./slider": {
-      "types": "./dist/slider/index.d.ts",
-      "default": "./dist/slider/index.js"
-    },
-    "./slider/define": {
-      "types": "./dist/slider/define.d.ts",
-      "default": "./dist/slider/define.js"
-    },
-    "./rating": {
-      "types": "./dist/rating/index.d.ts",
-      "default": "./dist/rating/index.js"
-    },
-    "./rating/define": {
-      "types": "./dist/rating/define.d.ts",
-      "default": "./dist/rating/define.js"
-    },
-    "./zoomable-frame": {
-      "types": "./dist/zoomable-frame/index.d.ts",
-      "default": "./dist/zoomable-frame/index.js"
-    },
-    "./zoomable-frame/define": {
-      "types": "./dist/zoomable-frame/define.d.ts",
-      "default": "./dist/zoomable-frame/define.js"
-    },
-    "./comparison": {
-      "types": "./dist/comparison/index.d.ts",
-      "default": "./dist/comparison/index.js"
-    },
-    "./comparison/define": {
-      "types": "./dist/comparison/define.d.ts",
-      "default": "./dist/comparison/define.js"
-    },
-    "./popup": {
-      "types": "./dist/popup/index.d.ts",
-      "default": "./dist/popup/index.js"
-    },
-    "./popup/define": {
-      "types": "./dist/popup/define.d.ts",
-      "default": "./dist/popup/define.js"
-    },
-    "./tooltip": {
-      "types": "./dist/tooltip/index.d.ts",
-      "default": "./dist/tooltip/index.js"
-    },
-    "./tooltip/define": {
-      "types": "./dist/tooltip/define.d.ts",
-      "default": "./dist/tooltip/define.js"
-    },
-    "./breadcrumb-item": {
-      "types": "./dist/breadcrumb-item/index.d.ts",
-      "default": "./dist/breadcrumb-item/index.js"
-    },
-    "./breadcrumb-item/define": {
-      "types": "./dist/breadcrumb-item/define.d.ts",
-      "default": "./dist/breadcrumb-item/define.js"
-    },
-    "./breadcrumb": {
-      "types": "./dist/breadcrumb/index.d.ts",
-      "default": "./dist/breadcrumb/index.js"
-    },
-    "./breadcrumb/define": {
-      "types": "./dist/breadcrumb/define.d.ts",
-      "default": "./dist/breadcrumb/define.js"
-    },
-    "./button": {
-      "types": "./dist/button/index.d.ts",
-      "default": "./dist/button/index.js"
-    },
-    "./button/define": {
-      "types": "./dist/button/define.d.ts",
-      "default": "./dist/button/define.js"
-    },
-    "./carousel": {
-      "types": "./dist/carousel/index.d.ts",
-      "default": "./dist/carousel/index.js"
-    },
-    "./carousel/define": {
-      "types": "./dist/carousel/define.d.ts",
-      "default": "./dist/carousel/define.js"
-    },
-    "./carousel-item": {
-      "types": "./dist/carousel-item/index.d.ts",
-      "default": "./dist/carousel-item/index.js"
-    },
-    "./carousel-item/define": {
-      "types": "./dist/carousel-item/define.d.ts",
-      "default": "./dist/carousel-item/define.js"
+    "./dropdown": {
+      "types": "./dist/dropdown/index.d.ts",
+      "default": "./dist/dropdown/index.js"
     },
     "./dropdown-item": {
       "types": "./dist/dropdown-item/index.d.ts",
@@ -350,81 +315,25 @@
       "types": "./dist/dropdown-item/define.d.ts",
       "default": "./dist/dropdown-item/define.js"
     },
-    "./tab": {
-      "types": "./dist/tab/index.d.ts",
-      "default": "./dist/tab/index.js"
-    },
-    "./tab/define": {
-      "types": "./dist/tab/define.d.ts",
-      "default": "./dist/tab/define.js"
-    },
-    "./tab-panel": {
-      "types": "./dist/tab-panel/index.d.ts",
-      "default": "./dist/tab-panel/index.js"
-    },
-    "./tab-group": {
-      "types": "./dist/tab-group/index.d.ts",
-      "default": "./dist/tab-group/index.js"
-    },
-    "./tab-group/define": {
-      "types": "./dist/tab-group/define.d.ts",
-      "default": "./dist/tab-group/define.js"
-    },
-    "./tab-panel/define": {
-      "types": "./dist/tab-panel/define.d.ts",
-      "default": "./dist/tab-panel/define.js"
-    },
-    "./tree-item": {
-      "types": "./dist/tree-item/index.d.ts",
-      "default": "./dist/tree-item/index.js"
-    },
-    "./tree-item/define": {
-      "types": "./dist/tree-item/define.d.ts",
-      "default": "./dist/tree-item/define.js"
-    },
-    "./tree": {
-      "types": "./dist/tree/index.d.ts",
-      "default": "./dist/tree/index.js"
-    },
-    "./tree/define": {
-      "types": "./dist/tree/define.d.ts",
-      "default": "./dist/tree/define.js"
-    },
-    "./virtualizer": {
-      "types": "./dist/virtualizer/index.d.ts",
-      "default": "./dist/virtualizer/index.js"
-    },
-    "./select": {
-      "types": "./dist/select/index.d.ts",
-      "default": "./dist/select/index.js"
-    },
-    "./select/define": {
-      "types": "./dist/select/define.d.ts",
-      "default": "./dist/select/define.js"
-    },
-    "./dropdown": {
-      "types": "./dist/dropdown/index.d.ts",
-      "default": "./dist/dropdown/index.js"
-    },
     "./dropdown/define": {
       "types": "./dist/dropdown/define.d.ts",
       "default": "./dist/dropdown/define.js"
     },
-    "./page": {
-      "types": "./dist/page/index.d.ts",
-      "default": "./dist/page/index.js"
+    "./empty-state": {
+      "types": "./dist/empty-state/index.d.ts",
+      "default": "./dist/empty-state/index.js"
     },
-    "./page/define": {
-      "types": "./dist/page/define.d.ts",
-      "default": "./dist/page/define.js"
+    "./empty-state/define": {
+      "types": "./dist/empty-state/define.d.ts",
+      "default": "./dist/empty-state/define.js"
     },
-    "./option": {
-      "types": "./dist/option/index.d.ts",
-      "default": "./dist/option/index.js"
+    "./file-upload": {
+      "types": "./dist/file-upload/index.d.ts",
+      "default": "./dist/file-upload/index.js"
     },
-    "./option/define": {
-      "types": "./dist/option/define.d.ts",
-      "default": "./dist/option/define.js"
+    "./file-upload/define": {
+      "types": "./dist/file-upload/define.d.ts",
+      "default": "./dist/file-upload/define.js"
     },
     "./format-bytes": {
       "types": "./dist/format-bytes/index.d.ts",
@@ -450,13 +359,21 @@
       "types": "./dist/format-number/define.d.ts",
       "default": "./dist/format-number/define.js"
     },
-    "./relative-time": {
-      "types": "./dist/relative-time/index.d.ts",
-      "default": "./dist/relative-time/index.js"
+    "./icon": {
+      "types": "./dist/icon/index.d.ts",
+      "default": "./dist/icon/index.js"
     },
-    "./relative-time/define": {
-      "types": "./dist/relative-time/define.d.ts",
-      "default": "./dist/relative-time/define.js"
+    "./icon-button": {
+      "types": "./dist/icon-button/index.d.ts",
+      "default": "./dist/icon-button/index.js"
+    },
+    "./icon-button/define": {
+      "types": "./dist/icon-button/define.d.ts",
+      "default": "./dist/icon-button/define.js"
+    },
+    "./icon/define": {
+      "types": "./dist/icon/define.d.ts",
+      "default": "./dist/icon/define.js"
     },
     "./include": {
       "types": "./dist/include/index.d.ts",
@@ -466,6 +383,22 @@
       "types": "./dist/include/define.d.ts",
       "default": "./dist/include/define.js"
     },
+    "./input": {
+      "types": "./dist/input/index.d.ts",
+      "default": "./dist/input/index.js"
+    },
+    "./input-otp": {
+      "types": "./dist/input-otp/index.d.ts",
+      "default": "./dist/input-otp/index.js"
+    },
+    "./input-otp/define": {
+      "types": "./dist/input-otp/define.d.ts",
+      "default": "./dist/input-otp/define.js"
+    },
+    "./input/define": {
+      "types": "./dist/input/define.d.ts",
+      "default": "./dist/input/define.js"
+    },
     "./intersection-observer": {
       "types": "./dist/intersection-observer/index.d.ts",
       "default": "./dist/intersection-observer/index.js"
@@ -473,6 +406,22 @@
     "./intersection-observer/define": {
       "types": "./dist/intersection-observer/define.d.ts",
       "default": "./dist/intersection-observer/define.js"
+    },
+    "./kbd": {
+      "types": "./dist/kbd/index.d.ts",
+      "default": "./dist/kbd/index.js"
+    },
+    "./kbd/define": {
+      "types": "./dist/kbd/define.d.ts",
+      "default": "./dist/kbd/define.js"
+    },
+    "./meter": {
+      "types": "./dist/meter/index.d.ts",
+      "default": "./dist/meter/index.js"
+    },
+    "./meter/define": {
+      "types": "./dist/meter/define.d.ts",
+      "default": "./dist/meter/define.js"
     },
     "./mutation-observer": {
       "types": "./dist/mutation-observer/index.d.ts",
@@ -482,13 +431,45 @@
       "types": "./dist/mutation-observer/define.d.ts",
       "default": "./dist/mutation-observer/define.js"
     },
-    "./resize-observer": {
-      "types": "./dist/resize-observer/index.d.ts",
-      "default": "./dist/resize-observer/index.js"
+    "./notification-center": {
+      "types": "./dist/notification-center/index.d.ts",
+      "default": "./dist/notification-center/index.js"
     },
-    "./resize-observer/define": {
-      "types": "./dist/resize-observer/define.d.ts",
-      "default": "./dist/resize-observer/define.js"
+    "./notification-center/define": {
+      "types": "./dist/notification-center/define.d.ts",
+      "default": "./dist/notification-center/define.js"
+    },
+    "./number-input": {
+      "types": "./dist/number-input/index.d.ts",
+      "default": "./dist/number-input/index.js"
+    },
+    "./number-input/define": {
+      "types": "./dist/number-input/define.d.ts",
+      "default": "./dist/number-input/define.js"
+    },
+    "./option": {
+      "types": "./dist/option/index.d.ts",
+      "default": "./dist/option/index.js"
+    },
+    "./option/define": {
+      "types": "./dist/option/define.d.ts",
+      "default": "./dist/option/define.js"
+    },
+    "./page": {
+      "types": "./dist/page/index.d.ts",
+      "default": "./dist/page/index.js"
+    },
+    "./page/define": {
+      "types": "./dist/page/define.d.ts",
+      "default": "./dist/page/define.js"
+    },
+    "./pagination": {
+      "types": "./dist/pagination/index.d.ts",
+      "default": "./dist/pagination/index.js"
+    },
+    "./pagination/define": {
+      "types": "./dist/pagination/define.d.ts",
+      "default": "./dist/pagination/define.js"
     },
     "./popover": {
       "types": "./dist/popover/index.d.ts",
@@ -498,36 +479,353 @@
       "types": "./dist/popover/define.d.ts",
       "default": "./dist/popover/define.js"
     },
-    "./drawer": {
-      "types": "./dist/drawer/index.d.ts",
-      "default": "./dist/drawer/index.js"
+    "./popup": {
+      "types": "./dist/popup/index.d.ts",
+      "default": "./dist/popup/index.js"
     },
-    "./drawer/define": {
-      "types": "./dist/drawer/define.d.ts",
-      "default": "./dist/drawer/define.js"
+    "./popup/define": {
+      "types": "./dist/popup/define.d.ts",
+      "default": "./dist/popup/define.js"
     },
-    "./copy-button": {
-      "types": "./dist/copy-button/index.d.ts",
-      "default": "./dist/copy-button/index.js"
+    "./progress-bar": {
+      "types": "./dist/progress-bar/index.d.ts",
+      "default": "./dist/progress-bar/index.js"
     },
-    "./copy-button/define": {
-      "types": "./dist/copy-button/define.d.ts",
-      "default": "./dist/copy-button/define.js"
+    "./progress-bar/define": {
+      "types": "./dist/progress-bar/define.d.ts",
+      "default": "./dist/progress-bar/define.js"
     },
-    "./button-group": {
-      "types": "./dist/button-group/index.d.ts",
-      "default": "./dist/button-group/index.js"
+    "./progress-ring": {
+      "types": "./dist/progress-ring/index.d.ts",
+      "default": "./dist/progress-ring/index.js"
     },
-    "./button-group/define": {
-      "types": "./dist/button-group/define.d.ts",
-      "default": "./dist/button-group/define.js"
+    "./progress-ring/define": {
+      "types": "./dist/progress-ring/define.d.ts",
+      "default": "./dist/progress-ring/define.js"
+    },
+    "./qr-code": {
+      "types": "./dist/qr-code/index.d.ts",
+      "default": "./dist/qr-code/index.js"
+    },
+    "./qr-code/define": {
+      "types": "./dist/qr-code/define.d.ts",
+      "default": "./dist/qr-code/define.js"
+    },
+    "./radio": {
+      "types": "./dist/radio/index.d.ts",
+      "default": "./dist/radio/index.js"
+    },
+    "./radio-group": {
+      "types": "./dist/radio-group/index.d.ts",
+      "default": "./dist/radio-group/index.js"
+    },
+    "./radio-group/define": {
+      "types": "./dist/radio-group/define.d.ts",
+      "default": "./dist/radio-group/define.js"
+    },
+    "./radio/define": {
+      "types": "./dist/radio/define.d.ts",
+      "default": "./dist/radio/define.js"
+    },
+    "./rating": {
+      "types": "./dist/rating/index.d.ts",
+      "default": "./dist/rating/index.js"
+    },
+    "./rating/define": {
+      "types": "./dist/rating/define.d.ts",
+      "default": "./dist/rating/define.js"
+    },
+    "./relative-time": {
+      "types": "./dist/relative-time/index.d.ts",
+      "default": "./dist/relative-time/index.js"
+    },
+    "./relative-time/define": {
+      "types": "./dist/relative-time/define.d.ts",
+      "default": "./dist/relative-time/define.js"
+    },
+    "./resize-observer": {
+      "types": "./dist/resize-observer/index.d.ts",
+      "default": "./dist/resize-observer/index.js"
+    },
+    "./resize-observer/define": {
+      "types": "./dist/resize-observer/define.d.ts",
+      "default": "./dist/resize-observer/define.js"
+    },
+    "./scroller": {
+      "types": "./dist/scroller/index.d.ts",
+      "default": "./dist/scroller/index.js"
+    },
+    "./scroller/define": {
+      "types": "./dist/scroller/define.d.ts",
+      "default": "./dist/scroller/define.js"
+    },
+    "./search-field": {
+      "types": "./dist/search-field/index.d.ts",
+      "default": "./dist/search-field/index.js"
+    },
+    "./search-field/define": {
+      "types": "./dist/search-field/define.d.ts",
+      "default": "./dist/search-field/define.js"
+    },
+    "./segment": {
+      "types": "./dist/segment/index.d.ts",
+      "default": "./dist/segment/index.js"
+    },
+    "./segment/define": {
+      "types": "./dist/segment/define.d.ts",
+      "default": "./dist/segment/define.js"
+    },
+    "./segmented-control": {
+      "types": "./dist/segmented-control/index.d.ts",
+      "default": "./dist/segmented-control/index.js"
+    },
+    "./segmented-control/define": {
+      "types": "./dist/segmented-control/define.d.ts",
+      "default": "./dist/segmented-control/define.js"
+    },
+    "./select": {
+      "types": "./dist/select/index.d.ts",
+      "default": "./dist/select/index.js"
+    },
+    "./select/define": {
+      "types": "./dist/select/define.d.ts",
+      "default": "./dist/select/define.js"
+    },
+    "./sidebar": {
+      "types": "./dist/sidebar/index.d.ts",
+      "default": "./dist/sidebar/index.js"
+    },
+    "./sidebar-group": {
+      "types": "./dist/sidebar-group/index.d.ts",
+      "default": "./dist/sidebar-group/index.js"
+    },
+    "./sidebar-group/define": {
+      "types": "./dist/sidebar-group/define.d.ts",
+      "default": "./dist/sidebar-group/define.js"
+    },
+    "./sidebar-item": {
+      "types": "./dist/sidebar-item/index.d.ts",
+      "default": "./dist/sidebar-item/index.js"
+    },
+    "./sidebar-item/define": {
+      "types": "./dist/sidebar-item/define.d.ts",
+      "default": "./dist/sidebar-item/define.js"
+    },
+    "./sidebar/define": {
+      "types": "./dist/sidebar/define.d.ts",
+      "default": "./dist/sidebar/define.js"
+    },
+    "./skeleton": {
+      "types": "./dist/skeleton/index.d.ts",
+      "default": "./dist/skeleton/index.js"
+    },
+    "./skeleton/define": {
+      "types": "./dist/skeleton/define.d.ts",
+      "default": "./dist/skeleton/define.js"
+    },
+    "./slider": {
+      "types": "./dist/slider/index.d.ts",
+      "default": "./dist/slider/index.js"
+    },
+    "./slider/define": {
+      "types": "./dist/slider/define.d.ts",
+      "default": "./dist/slider/define.js"
+    },
+    "./social-button": {
+      "types": "./dist/social-button/index.d.ts",
+      "default": "./dist/social-button/index.js"
+    },
+    "./social-button/define": {
+      "types": "./dist/social-button/define.d.ts",
+      "default": "./dist/social-button/define.js"
+    },
+    "./sparkline": {
+      "types": "./dist/sparkline/index.d.ts",
+      "default": "./dist/sparkline/index.js"
+    },
+    "./sparkline/define": {
+      "types": "./dist/sparkline/define.d.ts",
+      "default": "./dist/sparkline/define.js"
+    },
+    "./spinner": {
+      "types": "./dist/spinner/index.d.ts",
+      "default": "./dist/spinner/index.js"
+    },
+    "./spinner/define": {
+      "types": "./dist/spinner/define.d.ts",
+      "default": "./dist/spinner/define.js"
+    },
+    "./split-panel": {
+      "types": "./dist/split-panel/index.d.ts",
+      "default": "./dist/split-panel/index.js"
+    },
+    "./split-panel/define": {
+      "types": "./dist/split-panel/define.d.ts",
+      "default": "./dist/split-panel/define.js"
+    },
+    "./stat-card": {
+      "types": "./dist/stat-card/index.d.ts",
+      "default": "./dist/stat-card/index.js"
+    },
+    "./stat-card/define": {
+      "types": "./dist/stat-card/define.d.ts",
+      "default": "./dist/stat-card/define.js"
+    },
+    "./step": {
+      "types": "./dist/step/index.d.ts",
+      "default": "./dist/step/index.js"
+    },
+    "./step/define": {
+      "types": "./dist/step/define.d.ts",
+      "default": "./dist/step/define.js"
+    },
+    "./stepper": {
+      "types": "./dist/stepper/index.d.ts",
+      "default": "./dist/stepper/index.js"
+    },
+    "./stepper/define": {
+      "types": "./dist/stepper/define.d.ts",
+      "default": "./dist/stepper/define.js"
+    },
+    "./switch": {
+      "types": "./dist/switch/index.d.ts",
+      "default": "./dist/switch/index.js"
+    },
+    "./switch/define": {
+      "types": "./dist/switch/define.d.ts",
+      "default": "./dist/switch/define.js"
+    },
+    "./tab": {
+      "types": "./dist/tab/index.d.ts",
+      "default": "./dist/tab/index.js"
+    },
+    "./tab-group": {
+      "types": "./dist/tab-group/index.d.ts",
+      "default": "./dist/tab-group/index.js"
+    },
+    "./tab-group/define": {
+      "types": "./dist/tab-group/define.d.ts",
+      "default": "./dist/tab-group/define.js"
+    },
+    "./tab-panel": {
+      "types": "./dist/tab-panel/index.d.ts",
+      "default": "./dist/tab-panel/index.js"
+    },
+    "./tab-panel/define": {
+      "types": "./dist/tab-panel/define.d.ts",
+      "default": "./dist/tab-panel/define.js"
+    },
+    "./tab/define": {
+      "types": "./dist/tab/define.d.ts",
+      "default": "./dist/tab/define.js"
+    },
+    "./tag-input": {
+      "types": "./dist/tag-input/index.d.ts",
+      "default": "./dist/tag-input/index.js"
+    },
+    "./tag-input/define": {
+      "types": "./dist/tag-input/define.d.ts",
+      "default": "./dist/tag-input/define.js"
+    },
+    "./textarea": {
+      "types": "./dist/textarea/index.d.ts",
+      "default": "./dist/textarea/index.js"
+    },
+    "./textarea/define": {
+      "types": "./dist/textarea/define.d.ts",
+      "default": "./dist/textarea/define.js"
+    },
+    "./time-field": {
+      "types": "./dist/time-field/index.d.ts",
+      "default": "./dist/time-field/index.js"
+    },
+    "./time-field/define": {
+      "types": "./dist/time-field/define.d.ts",
+      "default": "./dist/time-field/define.js"
+    },
+    "./timeline": {
+      "types": "./dist/timeline/index.d.ts",
+      "default": "./dist/timeline/index.js"
+    },
+    "./timeline-item": {
+      "types": "./dist/timeline-item/index.d.ts",
+      "default": "./dist/timeline-item/index.js"
+    },
+    "./timeline-item/define": {
+      "types": "./dist/timeline-item/define.d.ts",
+      "default": "./dist/timeline-item/define.js"
+    },
+    "./timeline/define": {
+      "types": "./dist/timeline/define.d.ts",
+      "default": "./dist/timeline/define.js"
+    },
+    "./toast": {
+      "types": "./dist/toast/index.d.ts",
+      "default": "./dist/toast/index.js"
+    },
+    "./toast-region": {
+      "types": "./dist/toast-region/index.d.ts",
+      "default": "./dist/toast-region/index.js"
+    },
+    "./toast-region/define": {
+      "types": "./dist/toast-region/define.d.ts",
+      "default": "./dist/toast-region/define.js"
+    },
+    "./toast/define": {
+      "types": "./dist/toast/define.d.ts",
+      "default": "./dist/toast/define.js"
+    },
+    "./toggle-button": {
+      "types": "./dist/toggle-button/index.d.ts",
+      "default": "./dist/toggle-button/index.js"
+    },
+    "./toggle-button/define": {
+      "types": "./dist/toggle-button/define.d.ts",
+      "default": "./dist/toggle-button/define.js"
+    },
+    "./tooltip": {
+      "types": "./dist/tooltip/index.d.ts",
+      "default": "./dist/tooltip/index.js"
+    },
+    "./tooltip/define": {
+      "types": "./dist/tooltip/define.d.ts",
+      "default": "./dist/tooltip/define.js"
+    },
+    "./tree": {
+      "types": "./dist/tree/index.d.ts",
+      "default": "./dist/tree/index.js"
+    },
+    "./tree-item": {
+      "types": "./dist/tree-item/index.d.ts",
+      "default": "./dist/tree-item/index.js"
+    },
+    "./tree-item/define": {
+      "types": "./dist/tree-item/define.d.ts",
+      "default": "./dist/tree-item/define.js"
+    },
+    "./tree/define": {
+      "types": "./dist/tree/define.d.ts",
+      "default": "./dist/tree/define.js"
+    },
+    "./virtualizer": {
+      "types": "./dist/virtualizer/index.d.ts",
+      "default": "./dist/virtualizer/index.js"
+    },
+    "./zoomable-frame": {
+      "types": "./dist/zoomable-frame/index.d.ts",
+      "default": "./dist/zoomable-frame/index.js"
+    },
+    "./zoomable-frame/define": {
+      "types": "./dist/zoomable-frame/define.d.ts",
+      "default": "./dist/zoomable-frame/define.js"
     }
   },
   "files": [
     "dist"
   ],
   "dependencies": {
-    "lit": "^3.3.3"
+    "lit": "^3.3.3",
+    "qrcode-generator": "^2.0.4"
   },
   "devDependencies": {
     "@bixboards/design-system": "workspace:*"
