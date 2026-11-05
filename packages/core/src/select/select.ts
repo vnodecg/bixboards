@@ -1370,6 +1370,12 @@ export class BxSelect extends FormAssociatedMixin(BixElement) {
     (event.target as HTMLInputElement).select();
   };
 
+  /** Focusing a single searchable select selects its label, so typing replaces it (all engines). */
+  #handleInputFocus = (event: FocusEvent): void => {
+    if (!this.searchable || this.multiple || this.#searching) return;
+    (event.target as HTMLInputElement).select();
+  };
+
   #handleSearchInput = (event: Event): void => {
     event.stopPropagation(); // The native `input` is composed; ours is `#commit`'s.
     const query = (event.target as HTMLInputElement).value;
@@ -1819,6 +1825,7 @@ export class BxSelect extends FormAssociatedMixin(BixElement) {
               aria-describedby=${showHint ? this.#hintId : nothing}
               aria-label=${!showLabel && ariaLabel ? ariaLabel : nothing}
               @beforeinput=${this.#handleBeforeInput}
+              @focus=${this.#handleInputFocus}
               @input=${this.#handleSearchInput}
               @change=${(event: Event) => event.stopPropagation()}
               @keydown=${this.#handleKeydown}

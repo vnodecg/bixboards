@@ -21,15 +21,14 @@ const tags = (el: BxTagInput) =>
     c.textContent!.trim(),
   );
 
-// Firefox ignores `clipboardData` in the ClipboardEvent constructor, so attach it explicitly.
+// Firefox ignores `clipboardData` in the ClipboardEvent constructor (it yields an empty
+// DataTransfer, not null), so always attach the data explicitly.
 const pasteEvent = (data: DataTransfer): ClipboardEvent => {
   const event = new ClipboardEvent('paste', {
-    clipboardData: data,
     bubbles: true,
     cancelable: true,
   });
-  if (!event.clipboardData)
-    Object.defineProperty(event, 'clipboardData', { value: data });
+  Object.defineProperty(event, 'clipboardData', { value: data });
   return event;
 };
 

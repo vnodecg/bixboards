@@ -389,7 +389,8 @@ const cssName = (p: string) =>
 describe('component styling API (CSS custom properties)', () => {
   let modules: Module[] = [];
 
-  before(async () => {
+  before(async function () {
+    this.timeout(60_000); // imports every component module
     const manifest = (await (await fetch('/custom-elements.json')).json()) as {
       modules: Module[];
     };
