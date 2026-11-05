@@ -1,3 +1,4 @@
+import { registerLucide } from './icons.ts';
 import { loaders } from '../data/loaders.ts';
 
 /**
@@ -8,33 +9,42 @@ import { loaders } from '../data/loaders.ts';
 const keys: Record<string, string> = JSON.parse(
   document.getElementById('bx-tag-keys')?.textContent ?? '{}',
 );
+/**
+ * Deliberately not top-level await: component chunks import shared code that the bundler may hoist
+ * into this entry chunk, so an entry that awaits them before finishing would wait on itself.
+ */
+void (async () => {
+  await registerLucide();
 
-const needed = new Set<string>();
-for (const el of document.querySelectorAll('*')) {
-  const tag = el.localName;
-  if (!tag.startsWith('bx-') || customElements.get(tag)) continue;
-  const key = keys[tag];
-  if (key) needed.add(key);
-}
-// Demos that only touch an element imperatively (bx-toast) declare it here.
-for (const tag of (document.body.dataset.bxLoad ?? '').split(/\s+/)) {
-  const key = keys[tag];
-  if (key) needed.add(key);
-}
-
-await Promise.all([...needed].map((key) => loaders[key]!()));
-
-/** Runs every demo's script once its elements are defined. */
-for (const stage of document.querySelectorAll<HTMLElement>('[data-demo-js]')) {
-  const tags = new Set(
-    [...stage.querySelectorAll('*')]
-      .map((el) => el.localName)
-      .filter((t) => t.startsWith('bx-')),
-  );
-  await Promise.all([...tags].map((t) => customElements.whenDefined(t)));
-  try {
-    new Function('stage', stage.dataset.demoJs!)(stage);
-  } catch (error) {
-    console.error('demo script failed', stage.dataset.demoJs, error);
+  const needed = new Set<string>();
+  for (const el of document.querySelectorAll('*')) {
+    const tag = el.localName;
+    if (!tag.startsWith('bx-') || customElements.get(tag)) continue;
+    const key = keys[tag];
+    if (key) needed.add(key);
   }
-}
+  // Demos that only touch an element imperatively (bx-toast) declare it here.
+  for (const tag of (document.body.dataset.bxLoad ?? '').split(/\s+/)) {
+    const key = keys[tag];
+    if (key) needed.add(key);
+  }
+
+  await Promise.all([...needed].map((key) => loaders[key]!()));
+
+  /** Runs every demo's script once its elements are defined. */
+  for (const stage of document.querySelectorAll<HTMLElement>(
+    '[data-demo-js]',
+  )) {
+    const tags = new Set(
+      [...stage.querySelectorAll('*')]
+        .map((el) => el.localName)
+        .filter((t) => t.startsWith('bx-')),
+    );
+    await Promise.all([...tags].map((t) => customElements.whenDefined(t)));
+    try {
+      new Function('stage', stage.dataset.demoJs!)(stage);
+    } catch (error) {
+      console.error('demo script failed', stage.dataset.demoJs, error);
+    }
+  }
+})();

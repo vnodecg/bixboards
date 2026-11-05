@@ -9,6 +9,10 @@ import {
 } from '../src/data/site.ts';
 import { manifest } from '../src/data/manifest.ts';
 import { loaders } from '../src/data/loaders.ts';
+import { iconNames, categoryIcons } from '../src/data/icons.ts';
+import { categories } from '../src/data/registry.ts';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { join } from 'node:path';
 
 test('component tags are unique and prefixed', () => {
   const tags = components.map((c) => c.tag);
@@ -133,4 +137,38 @@ test('templates have unique slugs', () => {
 
 test('features are non-empty', () => {
   assert.ok(features.length >= 4);
+});
+
+function sources(dir: string, out: string[] = []): string[] {
+  for (const e of readdirSync(dir)) {
+    const p = join(dir, e);
+    if (statSync(p).isDirectory()) sources(p, out);
+    else if (/\.(astro|ts)$/.test(p)) out.push(p);
+  }
+  return out;
+}
+
+test('every Lucide icon the site uses is listed and bundled', () => {
+  const listed = new Set<string>(iconNames);
+  const bundle = readFileSync('src/scripts/icons.ts', 'utf8');
+  for (const n of listed)
+    assert.ok(
+      bundle.includes(`lucide-static/icons/${n}.svg?raw`),
+      `${n} is listed in data/icons.ts but not bundled in scripts/icons.ts`,
+    );
+  const used = new Set<string>();
+  for (const f of sources('src'))
+    for (const m of readFileSync(f, 'utf8').matchAll(
+      /library="lucide"\s+name="([a-z0-9-]+)"/g,
+    ))
+      used.add(m[1]!);
+  for (const n of used)
+    assert.ok(listed.has(n), `page uses unlisted Lucide icon "${n}"`);
+  for (const c of categories)
+    assert.ok(listed.has(categoryIcons[c]!), `no icon for ${c}`);
+  for (const x of [...features, ...templates])
+    assert.ok(
+      listed.has(x.icon),
+      `${'title' in x ? x.title : x.name}: unlisted icon ${x.icon}`,
+    );
 });

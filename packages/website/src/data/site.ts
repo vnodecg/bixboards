@@ -1,4 +1,5 @@
 import { categories, registry, type Category, type Demo } from './registry.ts';
+import type { IconName } from './icons.ts';
 import { manifest, type ElementApi, type PackageName } from './manifest.ts';
 
 export { categories };
@@ -69,21 +70,25 @@ export const elementCount = components.reduce(
 export const templates = [
   {
     slug: 'dashboard',
+    icon: 'layout-dashboard' as IconName,
     name: 'Dashboard',
     blurb: 'KPI tiles, activity feed and a data table.',
   },
   {
     slug: 'auth',
+    icon: 'shield-check' as IconName,
     name: 'Auth & settings',
     blurb: 'Sign in, sign up and account settings.',
   },
   {
     slug: 'landing',
+    icon: 'rocket' as IconName,
     name: 'Landing page',
     blurb: 'Hero, features, pricing and call to action.',
   },
   {
     slug: 'board',
+    icon: 'rows-3' as IconName,
     name: 'Project board',
     blurb: 'Kanban columns with task cards.',
   },
@@ -92,34 +97,42 @@ export const templates = [
 export const features = [
   {
     title: 'Framework agnostic',
+    icon: 'blocks' as IconName,
     body: 'Standards-based custom elements built on Lit, with generated wrappers for React, Angular and Svelte.',
   },
   {
     title: 'Token driven theming',
+    icon: 'palette' as IconName,
     body: 'Semantic tokens compiled from JSON. Switch light, dark or your own brand with one attribute.',
   },
   {
     title: 'Fluid by default',
+    icon: 'ruler' as IconName,
     body: 'One --bx-scale token drives spacing, type and radii. Components reflow with container queries, not breakpoints.',
   },
   {
     title: 'Accessible by default',
+    icon: 'accessibility' as IconName,
     body: 'Every component is tested with axe and keyboard navigation in a real browser.',
   },
   {
     title: 'Tree-shakeable',
+    icon: 'zap' as IconName,
     body: 'Import only the components you use, and register them under any tag prefix.',
   },
   {
     title: 'Built for big data',
+    icon: 'database' as IconName,
     body: 'Virtualized data table, data list and tree stay fast with hundreds of thousands of rows.',
   },
   {
     title: 'Forms that behave',
+    icon: 'text-cursor-input' as IconName,
     body: 'Form-associated elements with native constraint validation, reset and restore.',
   },
   {
     title: 'Fully specified',
+    icon: 'shield-check' as IconName,
     body: 'Each component has a written feature spec, a Storybook story and a browser test suite.',
   },
 ] as const;

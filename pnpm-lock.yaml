@@ -412,6 +412,9 @@ importers:
       '@astrojs/check':
         specifier: ^0.9.4
         version: 0.9.12(@emnapi/runtime@1.11.2)(prettier@3.9.9)(typescript@6.0.3)
+      lucide-static:
+        specifier: 1.57.0
+        version: 1.57.0
 
 packages:
 
@@ -4485,6 +4488,9 @@ packages:
   lru-cache@8.0.5:
     resolution: {integrity: sha512-MhWWlVnuab1RG5/zMRRcVGXZLCXrZTgfwMikgzCegsPnG62yDQo5JnqKkrK4jO5iKqDAZGItAqN5CtKBCBWRUA==}
     engines: {node: '>=16.14'}
+
+  lucide-static@1.57.0:
+    resolution: {integrity: sha512-nuf4YoaKt3Pq9scXVQ71SLr0Q1/UZiTcfBBivFsCVL6biAzPplTikVWXLetBmK3oFEJS6f2L1rzgEsoJN/Ce0Q==}
 
   lz-string@1.5.0:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
@@ -10244,6 +10250,8 @@ snapshots:
       yallist: 3.1.1
 
   lru-cache@8.0.5: {}
+
+  lucide-static@1.57.0: {}
 
   lz-string@1.5.0: {}
 

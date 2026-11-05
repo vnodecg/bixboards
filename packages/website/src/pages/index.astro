@@ -1,21 +1,56 @@
 ---
 import Base from '../layouts/Base.astro';
 import { features, templates, components, componentsByCategory, elementCount } from '../data/site.ts';
+import { categoryIcons } from '../data/icons.ts';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const href = (slug: string) => `${base}/components/${slug}/`;
+
+const snippets = [
+  ['HTML', `<script type="module">\n  import '@bixboards/core/button';\n  import '@bixboards/core/input';\n</script>\n\n<bx-input label="Email" type="email"></bx-input>\n<bx-button pill>Subscribe</bx-button>`],
+  ['React', `import { BxButton } from '@bixboards/react/bx-button';\nimport { BxInput } from '@bixboards/react/bx-input';\n\nexport const Signup = () => (\n  <>\n    <BxInput label="Email" type="email" />\n    <BxButton pill onClick={subscribe}>Subscribe</BxButton>\n  </>\n);`],
+  ['Angular', `import { BxButton } from '@bixboards/angular/bx-button';\nimport { BxInput } from '@bixboards/angular/bx-input';\n\n@Component({\n  standalone: true,\n  imports: [BxButton, BxInput],\n  template: \`\n    <bx-input label="Email" type="email"></bx-input>\n    <bx-button pill (click)="subscribe()">Subscribe</bx-button>\n  \`,\n})\nexport class Signup {}`],
+  ['Svelte', `<script>\n  import BxButton from '@bixboards/svelte/BxButton.svelte';\n  import BxInput from '@bixboards/svelte/BxInput.svelte';\n</script>\n\n<BxInput label="Email" type="email" />\n<BxButton pill onclick={subscribe}>Subscribe</BxButton>`],
+] as const;
+
+const dashJs = `
+const chart = stage.querySelector('bx-chart');
+chart.series = ['revenue', 'cost'];
+chart.data = [
+  { month: 'Jan', revenue: 32, cost: 18 }, { month: 'Feb', revenue: 41, cost: 22 },
+  { month: 'Mar', revenue: 38, cost: 24 }, { month: 'Apr', revenue: 52, cost: 27 },
+  { month: 'May', revenue: 61, cost: 30 }, { month: 'Jun', revenue: 68, cost: 33 },
+];
+for (const card of stage.querySelectorAll('bx-stat-card[data-money]')) {
+  card.format = { style: 'currency', currency: 'USD', maximumFractionDigits: 0 };
+}`.trim();
 ---
 
-<Base title="Bixboards">
+<Base title="Bixboards" load={['bx-toast']}>
   <section class="hero wrap">
-    <p class="eyebrow">Web components · Lit · Design tokens</p>
+    <a class="announce" href={`${base}/templates/`}>
+      <bx-badge pill appearance="accent" size="small">New</bx-badge>
+      Live dashboard, auth, landing and board templates
+      <bx-icon library="lucide" name="arrow-right" aria-hidden="true"></bx-icon>
+    </a>
     <h1>Web components for <em>modern dashboards</em></h1>
     <p>
       {components.length} accessible, themeable components ({elementCount} elements) that work in any
       framework. Ship dashboards, boards and apps faster.
     </p>
     <div class="cta">
-      <bx-button pill href={`${base}/getting-started/`}>Get started</bx-button>
-      <bx-button pill appearance="outlined" href={`${base}/components/`}>Browse components</bx-button>
+      <bx-button pill href={`${base}/getting-started/`}>
+        Get started
+        <bx-icon slot="end" library="lucide" name="arrow-right" aria-hidden="true"></bx-icon>
+      </bx-button>
+      <bx-button pill appearance="outlined" href={`${base}/components/`}>
+        <bx-icon slot="start" library="lucide" name="layers" aria-hidden="true"></bx-icon>
+        Browse components
+      </bx-button>
+    </div>
+    <div class="install">
+      <bx-icon library="lucide" name="terminal" aria-hidden="true"></bx-icon>
+      <code id="install-cmd">pnpm add @bixboards/core @bixboards/design-system</code>
+      <bx-copy-button from="install-cmd"></bx-copy-button>
     </div>
     <dl class="stats">
       <div><dt>Components</dt><dd>{components.length}</dd></div>
@@ -27,11 +62,39 @@ const href = (slug: string) => `${base}/components/${slug}/`;
 
   <section class="block">
     <div class="wrap">
+      <p class="eyebrow">Blocks</p>
+      <h2>A dashboard in one screenful</h2>
+      <p class="lead">Stat cards, sparklines and a chart, all live custom elements.</p>
+      <div class="frame">
+        <header><i></i><i></i><i></i><span>Revenue · Overview</span></header>
+        <div class="canvas" data-demo-js={dashJs}>
+          <div class="dash-kpis">
+            <bx-stat-card data-money label="Revenue" value="128400" delta="12.5">
+              <bx-sparkline slot="chart" label="Trend" values="3,5,4,8,6,9,12"></bx-sparkline>
+              <span slot="footer">vs last month</span>
+            </bx-stat-card>
+            <bx-stat-card label="Active users" value="8421" delta="4.1">
+              <bx-sparkline slot="chart" label="Trend" type="area" values="5,4,6,7,6,8,9"></bx-sparkline>
+            </bx-stat-card>
+            <bx-stat-card label="Churn %" value="3.2" delta="-0.4" trend-is-good="down"></bx-stat-card>
+          </div>
+          <div class="panel" style="margin-block-start:1rem">
+            <h3>Revenue vs cost</h3>
+            <bx-chart label="Revenue vs cost" x="month" height="12rem"></bx-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block alt">
+    <div class="wrap">
+      <p class="eyebrow">Playground</p>
       <h2>Live components</h2>
-      <p class="lead">Rendered with the real library. Every one is interactive; click through to the docs for each.</p>
+      <p class="lead">Rendered with the real library. Click, type and tab through them.</p>
       <div class="grid showcase">
         <bx-card with-header with-footer>
-          <span slot="header">Actions</span>
+          <span slot="header" class="card-title"><bx-icon library="lucide" name="mouse-pointer-click" aria-hidden="true"></bx-icon>Actions</span>
           <div class="demo">
             <bx-button>Primary</bx-button>
             <bx-button variant="secondary">Secondary</bx-button>
@@ -42,7 +105,7 @@ const href = (slug: string) => `${base}/components/${slug}/`;
           <a slot="footer" href={href('button')}>Button docs →</a>
         </bx-card>
         <bx-card with-header with-footer>
-          <span slot="header">Form</span>
+          <span slot="header" class="card-title"><bx-icon library="lucide" name="text-cursor-input" aria-hidden="true"></bx-icon>Form</span>
           <div class="demo stack">
             <bx-input label="Email" type="email"></bx-input>
             <bx-select label="Plan" style="inline-size:100%">
@@ -55,7 +118,7 @@ const href = (slug: string) => `${base}/components/${slug}/`;
           <a slot="footer" href={href('input')}>Form docs →</a>
         </bx-card>
         <bx-card with-header with-footer>
-          <span slot="header">Feedback</span>
+          <span slot="header" class="card-title"><bx-icon library="lucide" name="bell" aria-hidden="true"></bx-icon>Feedback</span>
           <div class="demo stack">
             <div class="demo">
               <bx-badge>New</bx-badge>
@@ -64,21 +127,12 @@ const href = (slug: string) => `${base}/components/${slug}/`;
             </div>
             <bx-progress-bar value="64" style="width:100%"></bx-progress-bar>
             <bx-callout>Changes saved.</bx-callout>
+            <bx-button id="try-toast" size="s" appearance="outlined">Show a toast</bx-button>
           </div>
           <a slot="footer" href={href('callout')}>Feedback docs →</a>
         </bx-card>
         <bx-card with-header with-footer>
-          <span slot="header">KPIs</span>
-          <div class="demo stack">
-            <bx-stat-card label="Revenue" value="128400" delta="12.5">
-              <bx-sparkline slot="chart" label="Trend" values="3,5,4,8,6,9,12"></bx-sparkline>
-              <span slot="footer">vs last month</span>
-            </bx-stat-card>
-          </div>
-          <a slot="footer" href={href('stat-card')}>Stat card docs →</a>
-        </bx-card>
-        <bx-card with-header with-footer>
-          <span slot="header">Navigation</span>
+          <span slot="header" class="card-title"><bx-icon library="lucide" name="compass" aria-hidden="true"></bx-icon>Navigation</span>
           <div class="demo stack">
             <bx-breadcrumb label="Breadcrumb">
               <bx-breadcrumb-item href="#">Home</bx-breadcrumb-item>
@@ -95,7 +149,7 @@ const href = (slug: string) => `${base}/components/${slug}/`;
           <a slot="footer" href={href('tab-group')}>Navigation docs →</a>
         </bx-card>
         <bx-card with-header with-footer>
-          <span slot="header">Overlays</span>
+          <span slot="header" class="card-title"><bx-icon library="lucide" name="layers" aria-hidden="true"></bx-icon>Overlays</span>
           <div class="demo">
             <bx-dropdown>
               <bx-button slot="trigger" with-caret>Actions</bx-button>
@@ -107,42 +161,46 @@ const href = (slug: string) => `${base}/components/${slug}/`;
           </div>
           <a slot="footer" href={href('dialog')}>Overlay docs →</a>
         </bx-card>
+        <bx-card with-header with-footer>
+          <span slot="header" class="card-title"><bx-icon library="lucide" name="sparkles" aria-hidden="true"></bx-icon>Press ⌘K</span>
+          <p style="margin:0">Jump to any of the {components.length} components from the command palette, built with <code>bx-command-palette</code>.</p>
+          <bx-button slot="footer" id="palette-cta" size="s" pill>
+            <bx-icon slot="start" library="lucide" name="search" aria-hidden="true"></bx-icon>
+            Open search
+          </bx-button>
+        </bx-card>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <p class="eyebrow">Explore</p>
+      <h2>Everything you need</h2>
+      <p class="lead">All {components.length} components in {componentsByCategory.length} categories.</p>
+      <div class="grid cats">
+        {
+          componentsByCategory.map((g) => (
+            <a class="tile cat" href={`${base}/components/#${g.category.toLowerCase()}`}>
+              <span class="icon-badge"><bx-icon library="lucide" name={categoryIcons[g.category]} aria-hidden="true"></bx-icon></span>
+              <h3>{g.category} <span class="muted">{g.items.length}</span></h3>
+              <p>{g.items.slice(0, 4).map((c) => c.name).join(', ')}{g.items.length > 4 ? '…' : ''}</p>
+            </a>
+          ))
+        }
       </div>
     </div>
   </section>
 
   <section class="block alt">
     <div class="wrap">
-      <h2>Everything you need</h2>
-      <p class="lead">All {components.length} components by category.</p>
-      {
-        componentsByCategory.map((g) => (
-          <div class="cat-row">
-            <h3>
-              <a href={`${base}/components/#${g.category.toLowerCase()}`}>{g.category}</a>
-              <span class="muted">{g.items.length}</span>
-            </h3>
-            <div class="chips">
-              {g.items.map((c) => (
-                <a class="chip" href={href(c.slug)}>
-                  {c.name}
-                </a>
-              ))}
-            </div>
-          </div>
-        ))
-      }
-    </div>
-  </section>
-
-  <section class="block">
-    <div class="wrap">
-      <h2>Why Bixboards</h2>
-      <p class="lead">Built for teams that outgrow copy-paste UI.</p>
-      <div class="grid">
+      <p class="eyebrow">Why Bixboards</p>
+      <h2>Built for teams that outgrow copy-paste UI</h2>
+      <div class="grid feats">
         {
           features.map((f) => (
-            <div class="tile">
+            <div class="tile feat">
+              <span class="icon-badge"><bx-icon library="lucide" name={f.icon} aria-hidden="true"></bx-icon></span>
               <h3>{f.title}</h3>
               <p>{f.body}</p>
             </div>
@@ -152,28 +210,34 @@ const href = (slug: string) => `${base}/components/${slug}/`;
     </div>
   </section>
 
-  <section class="block alt">
+  <section class="block">
     <div class="wrap">
-      <h2>Quick start</h2>
-      <p class="lead">Install, import, use.</p>
-      <pre class="code"><code>pnpm add @bixboards/core @bixboards/design-system</code></pre>
-      <pre class="code"><code>{`import '@bixboards/core/button';
-
-<bx-button variant="secondary">Hello</bx-button>`}</code></pre>
-      <p>
-        <a href={`${base}/getting-started/`}>Read the full guide →</a>
-      </p>
+      <p class="eyebrow">Quick start</p>
+      <h2>Use it in any framework</h2>
+      <p class="lead">Same elements everywhere; the wrappers add typed props and events.</p>
+      <bx-tab-group>
+        {snippets.map(([label]) => <bx-tab slot="nav" panel={label.toLowerCase()}>{label}</bx-tab>)}
+        {
+          snippets.map(([label, code]) => (
+            <bx-tab-panel name={label.toLowerCase()}>
+              <bx-code-block filename={label === 'HTML' ? 'index.html' : label} code={code}></bx-code-block>
+            </bx-tab-panel>
+          ))
+        }
+      </bx-tab-group>
+      <p><a href={`${base}/getting-started/`}>Read the full guide →</a></p>
     </div>
   </section>
 
-  <section class="block">
+  <section class="block alt">
     <div class="wrap">
-      <h2>Ready-made templates</h2>
-      <p class="lead">Start from a complete screen.</p>
+      <p class="eyebrow">Templates</p>
+      <h2>Start from a complete screen</h2>
       <div class="grid">
         {
           templates.map((t) => (
-            <a class="tile" href={`${base}/templates/#${t.slug}`}>
+            <a class="tile feat" href={`${base}/templates/#${t.slug}`}>
+              <span class="icon-badge"><bx-icon library="lucide" name={t.icon} aria-hidden="true"></bx-icon></span>
               <h3>{t.name}</h3>
               <p>{t.blurb}</p>
             </a>
@@ -182,4 +246,30 @@ const href = (slug: string) => `${base}/components/${slug}/`;
       </div>
     </div>
   </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="cta-band">
+        <h2>Ready to build?</h2>
+        <p>Install the packages, import what you use, and theme it with tokens.</p>
+        <div class="cta">
+          <bx-button pill href={`${base}/getting-started/`}>Get started</bx-button>
+          <bx-button pill appearance="outlined" href={`${base}/components/`}>Browse components</bx-button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const toast = document.getElementById('try-toast');
+    toast?.addEventListener('click', () => {
+      const Toast = customElements.get('bx-toast') as unknown as {
+        toast(o: { message: string; variant: string }): void;
+      };
+      Toast.toast({ message: 'Saved. This is a live bx-toast.', variant: 'success' });
+    });
+    document.getElementById('palette-cta')?.addEventListener('click', () => {
+      (document.querySelector('bx-command-palette') as unknown as { show(): void }).show();
+    });
+  </script>
 </Base>
