@@ -1,4 +1,4 @@
-import { expect, fixture, html, aTimeout } from '@open-wc/testing';
+import { aTimeout, expect, fixture, html, waitUntil } from '@open-wc/testing';
 import type { BxChart } from './chart.ts';
 import { registerChartAdapter } from './chart.ts';
 import { compactNumber, lttb, niceTicks } from './chart-utils.ts';
@@ -66,7 +66,12 @@ describe('bx-chart', () => {
     const count = async (type: string, sel: string) => {
       el.type = type as BxChart['type'];
       await ready(el);
-      return el.shadowRoot!.querySelectorAll(`.canvas svg ${sel}`).length;
+      const query = () => el.shadowRoot!.querySelectorAll(`.canvas svg ${sel}`);
+      // The chart draws after its first visibility/resize pass, which is slower on some engines.
+      await waitUntil(() => query().length > 0, `${type} should draw ${sel}`, {
+        timeout: 3000,
+      });
+      return query().length;
     };
     expect(await count('area', 'path.area')).to.equal(2);
     expect(await count('bar', 'rect.bar')).to.equal(8);

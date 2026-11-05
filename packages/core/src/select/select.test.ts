@@ -722,11 +722,16 @@ describe('bx-select', () => {
       await shown;
       await aTimeout(120); // let the open-time scroll-to-active retries finish
       expect(loads).to.equal(0);
-      listbox(el).scrollTop = listbox(el).scrollHeight;
-      // Scroll handling runs on animation frames; poll instead of racing a fixed sleep.
-      await waitUntil(() => loads === 1, 'bx-load-more should fire', {
-        timeout: 3000,
-      });
+      // Scroll handling runs on animation frames and the listbox may not be laid out yet, so keep
+      // scrolling to the end until the event fires instead of racing a fixed sleep.
+      await waitUntil(
+        () => {
+          listbox(el).scrollTop = listbox(el).scrollHeight;
+          return loads === 1;
+        },
+        'bx-load-more should fire',
+        { timeout: 3000 },
+      );
       await settle(el);
       expect(loads).to.equal(1);
       listbox(el).scrollTop = listbox(el).scrollHeight;
@@ -734,10 +739,14 @@ describe('bx-select', () => {
       expect(loads).to.equal(1);
       el.options = big(80); // next page arrived
       await settle(el);
-      listbox(el).scrollTop = listbox(el).scrollHeight;
-      await waitUntil(() => loads === 2, 'bx-load-more should fire again', {
-        timeout: 3000,
-      });
+      await waitUntil(
+        () => {
+          listbox(el).scrollTop = listbox(el).scrollHeight;
+          return loads === 2;
+        },
+        'bx-load-more should fire again',
+        { timeout: 3000 },
+      );
       expect(loads).to.equal(2);
     });
 
