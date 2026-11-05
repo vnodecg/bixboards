@@ -2601,7 +2601,7 @@ export class BxDataTable<T = unknown> extends BixElement {
             class="spacer"
             part="body"
             role="presentation"
-            style="block-size: ${this.#virtualizer.totalSize}px"
+            style="block-size: ${this.#virtualizer.spacerSize}px"
           >
             ${repeat(
               items,
@@ -2613,9 +2613,9 @@ export class BxDataTable<T = unknown> extends BixElement {
                   ? this.#renderGroupRow(
                       item.index,
                       this.#groups[-ref - 1]!,
-                      item.start,
+                      item.position,
                     )
-                  : this.#renderDataRow(item.index, ref, item.start);
+                  : this.#renderDataRow(item.index, ref, item.position);
               },
             )}
           </div>

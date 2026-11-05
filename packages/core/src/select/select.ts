@@ -1729,7 +1729,7 @@ export class BxSelect extends FormAssociatedMixin(BixElement) {
       return html`<div
         class="rows"
         data-windowed
-        style="block-size: ${this.#virtualizer.totalSize}px"
+        style="block-size: ${this.#virtualizer.spacerSize}px"
       >
         ${repeat(
           items,
@@ -1739,7 +1739,7 @@ export class BxSelect extends FormAssociatedMixin(BixElement) {
               ? this.#renderRow(
                   this.#visible[item.index]!,
                   item.index,
-                  item.start,
+                  item.position,
                 )
               : nothing,
         )}

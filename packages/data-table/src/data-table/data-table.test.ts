@@ -238,7 +238,13 @@ describe('bx-data-table', () => {
   it('keeps the DOM small for 1M rows and aria-rowindex tracks the data index', async () => {
     const el = await setup({ data: people(1_000_000) });
     expect(rows(el).length).to.be.lessThan(40);
-    scroller(el).scrollTop = 36 * 500_000;
+    // 1M × 36px exceeds the spacer cap, so scrollTop is compressed: scale it to reach the
+    // content offset of row 500,000.
+    const host = scroller(el);
+    const scale =
+      (36 * 1_000_000 - host.clientHeight) /
+      (host.scrollHeight - host.clientHeight);
+    host.scrollTop = (36 * 500_000) / scale;
     await settle(el);
     const first = rows(el)[0]!;
     const index = Number(first.dataset['row']);
@@ -889,10 +895,16 @@ describe('bx-data-table', () => {
       expect(scroller(el).getAttribute('aria-rowcount')).to.equal('1000001');
       expect(text(cell(el, 0, 0))).to.equal('Person 0000');
       expect(log.map((l) => l.start)).to.deep.equal([0]);
-      scroller(el).scrollTop = 36 * 300_000;
+      // 1M × 36px exceeds the spacer cap: scale scrollTop to reach the content offset of row 300,000.
+      const host = scroller(el);
+      const scale =
+        (36 * 1_000_000 - host.clientHeight) /
+        (host.scrollHeight - host.clientHeight);
+      host.scrollTop = (36 * 300_000) / scale;
       await aTimeout(120);
       await settle(el);
-      expect(log.some((l) => l.start >= 299_900)).to.be.true;
+      expect(log.some((l) => l.start >= 299_900 && l.start <= 300_100)).to.be
+        .true;
       expect(log.length).to.be.lessThan(6);
       expect(requests.length).to.equal(log.length);
     });

@@ -1185,7 +1185,7 @@ export class BxVirtualTree<T = unknown> extends BixElement {
           <div
             class="spacer"
             role="presentation"
-            style="block-size: ${this.#virtualizer.totalSize}px"
+            style="block-size: ${this.#virtualizer.spacerSize}px"
           >
             ${repeat(
               items,
@@ -1193,7 +1193,7 @@ export class BxVirtualTree<T = unknown> extends BixElement {
               (item) =>
                 rows[item.index] === undefined
                   ? nothing
-                  : this.#renderRow(item.index, item.start),
+                  : this.#renderRow(item.index, item.position),
             )}
           </div>
           ${empty ? html`<div class="empty"><slot name="empty">No items</slot></div>` : nothing}

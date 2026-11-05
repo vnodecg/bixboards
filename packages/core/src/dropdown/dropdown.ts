@@ -853,14 +853,18 @@ export class BxDropdown extends BixElement {
     if (this.#windowed)
       return html`<div
         class="rows"
-        style="block-size: ${this.#virtualizer.totalSize}px"
+        style="block-size: ${this.#virtualizer.spacerSize}px"
       >
         ${repeat(
           this.#virtualizer.items,
           (item) => item.key,
           (item) =>
             rows[item.index]
-              ? this.#renderDataRow(rows[item.index]!, item.index, item.start)
+              ? this.#renderDataRow(
+                  rows[item.index]!,
+                  item.index,
+                  item.position,
+                )
               : nothing,
         )}
       </div>`;

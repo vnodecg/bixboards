@@ -1302,7 +1302,7 @@ export class BxDataList<T = unknown> extends BixElement {
           <div
             class="spacer"
             role="presentation"
-            style="block-size: ${this.#virtualizer.totalSize}px"
+            style="block-size: ${this.#virtualizer.spacerSize}px"
           >
             ${repeat(
               items,
@@ -1312,7 +1312,7 @@ export class BxDataList<T = unknown> extends BixElement {
                 if (!row) return nothing;
                 const stuck =
                   item.index === activeSticky && row.kind === 'group';
-                return this.#renderRow(row, item.index, item.start, stuck);
+                return this.#renderRow(row, item.index, item.position, stuck);
               },
             )}
           </div>
