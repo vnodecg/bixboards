@@ -1359,13 +1359,15 @@ export class BxSelect extends FormAssociatedMixin(BixElement) {
 
   /**
    * A single searchable select shows the selected label in the input. The first edit after
-   * opening starts a fresh query rather than editing the label text, so the field is cleared just
-   * before the browser applies the keystroke, paste or composition.
+   * opening starts a fresh query rather than editing the label text, so the label is selected just
+   * before the browser applies the keystroke, paste or composition, which then replaces it.
    */
   #handleBeforeInput = (event: InputEvent): void => {
     if (!this.searchable || this.multiple || this.#searching) return;
     this.#searching = true;
-    (event.target as HTMLInputElement).value = '';
+    // Select the label so this keystroke, paste or composition replaces it. Clearing `value`
+    // here instead loses the keystroke in WebKit.
+    (event.target as HTMLInputElement).select();
   };
 
   #handleSearchInput = (event: Event): void => {

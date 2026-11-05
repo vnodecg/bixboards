@@ -416,6 +416,8 @@ describe('component styling API (CSS custom properties)', () => {
           (name) =>
             name.startsWith(`--${tag}-`) &&
             !NEEDS_STATE.test(name) &&
+            // The eyedropper button renders only where the EyeDropper API exists (Chromium).
+            !(name.includes('-eyedropper-') && !('EyeDropper' in window)) &&
             !NOT_EXERCISED.some(([re]) => re.test(`${tag} ${name}`)) &&
             KINDS.some((k) => k.suffix.test(name)),
         );

@@ -5,6 +5,7 @@ import {
   html,
   nextFrame,
   oneEvent,
+  waitUntil,
 } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import type { BxSelect } from './select.ts';
@@ -722,16 +723,21 @@ describe('bx-select', () => {
       await aTimeout(120); // let the open-time scroll-to-active retries finish
       expect(loads).to.equal(0);
       listbox(el).scrollTop = listbox(el).scrollHeight;
-      await aTimeout(80);
+      // Scroll handling runs on animation frames; poll instead of racing a fixed sleep.
+      await waitUntil(() => loads === 1, 'bx-load-more should fire', {
+        timeout: 3000,
+      });
       await settle(el);
       expect(loads).to.equal(1);
       listbox(el).scrollTop = listbox(el).scrollHeight;
-      await aTimeout(60);
+      await aTimeout(60); // a negative check: it must not fire a second time for this length
       expect(loads).to.equal(1);
       el.options = big(80); // next page arrived
       await settle(el);
       listbox(el).scrollTop = listbox(el).scrollHeight;
-      await aTimeout(80);
+      await waitUntil(() => loads === 2, 'bx-load-more should fire again', {
+        timeout: 3000,
+      });
       expect(loads).to.equal(2);
     });
 

@@ -21,6 +21,18 @@ const tags = (el: BxTagInput) =>
     c.textContent!.trim(),
   );
 
+// Firefox ignores `clipboardData` in the ClipboardEvent constructor, so attach it explicitly.
+const pasteEvent = (data: DataTransfer): ClipboardEvent => {
+  const event = new ClipboardEvent('paste', {
+    clipboardData: data,
+    bubbles: true,
+    cancelable: true,
+  });
+  if (!event.clipboardData)
+    Object.defineProperty(event, 'clipboardData', { value: data });
+  return event;
+};
+
 describe('bx-tag-input', () => {
   it('turns text into tags on a comma and on Enter', async () => {
     const el = await fixture<BxTagInput>(
@@ -47,13 +59,7 @@ describe('bx-tag-input', () => {
     const el = await fixture<BxTagInput>(html`<bx-tag-input></bx-tag-input>`);
     const data = new DataTransfer();
     data.setData('text', 'a,b,c');
-    input(el).dispatchEvent(
-      new ClipboardEvent('paste', {
-        clipboardData: data,
-        bubbles: true,
-        cancelable: true,
-      }),
-    );
+    input(el).dispatchEvent(pasteEvent(data));
     await el.updateComplete;
     expect(el.value).to.deep.equal(['a', 'b']);
     expect(input(el).value).to.equal('c');

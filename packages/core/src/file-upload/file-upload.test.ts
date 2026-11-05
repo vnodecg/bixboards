@@ -18,6 +18,18 @@ const drop = (el: BxFileUpload, files: File[]) => {
 };
 const rows = (el: BxFileUpload) => el.shadowRoot!.querySelectorAll('.file');
 
+// Firefox ignores `clipboardData` in the ClipboardEvent constructor, so attach it explicitly.
+const pasteEvent = (data: DataTransfer): ClipboardEvent => {
+  const event = new ClipboardEvent('paste', {
+    clipboardData: data,
+    bubbles: true,
+    cancelable: true,
+  });
+  if (!event.clipboardData)
+    Object.defineProperty(event, 'clipboardData', { value: data });
+  return event;
+};
+
 describe('matchesAccept', () => {
   it('follows native accept grammar', () => {
     expect(matchesAccept(file('a.pdf', 'application/pdf'), '.pdf')).to.be.true;
@@ -92,13 +104,7 @@ describe('bx-file-upload', () => {
     );
     const dt = new DataTransfer();
     dt.items.add(file('p.txt'));
-    el.shadowRoot!.querySelector('.dropzone')!.dispatchEvent(
-      new ClipboardEvent('paste', {
-        clipboardData: dt,
-        bubbles: true,
-        cancelable: true,
-      }),
-    );
+    el.shadowRoot!.querySelector('.dropzone')!.dispatchEvent(pasteEvent(dt));
     await el.updateComplete;
     expect(el.files).to.have.length(1);
   });

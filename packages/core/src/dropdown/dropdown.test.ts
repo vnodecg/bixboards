@@ -628,7 +628,11 @@ describe('bx-dropdown', () => {
         expect(rows.length).to.be.lessThan(50);
         const first = rows[0]!.shadowRoot!.querySelector('.base')!;
         expect(first.getAttribute('aria-setsize')).to.equal('5000');
-        expect(first.getAttribute('aria-posinset')).to.equal('1');
+        // posinset comes from the data index, wherever the window starts (opening can scroll the
+        // menu by a row or two in some engines), never from the DOM position.
+        const index = Number(rows[0]!.dataset['index']);
+        expect(index).to.be.lessThan(10);
+        expect(first.getAttribute('aria-posinset')).to.equal(String(index + 1));
       });
 
       it('does not virtualize at or below the threshold', async () => {
